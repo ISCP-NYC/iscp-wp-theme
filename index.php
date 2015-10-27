@@ -1,69 +1,58 @@
 <?php
 /**
- * The main template file.
+ * The main template file
  *
  * This is the most generic template file in a WordPress theme
  * and one of the two required files for a theme (the other being style.css).
  * It is used to display a page when nothing more specific matches a query.
- * For example, it puts together the home page when no home.php file exists.
+ * e.g., it puts together the home page when no home.php file exists.
  *
- * Learn more: http://codex.wordpress.org/Template_Hierarchy
+ * Learn more: {@link https://codex.wordpress.org/Template_Hierarchy}
+ *
  */
-	get_header();
-?>
 
-	<div class="page-width">
-		<div id="primary" class="site-content">
-			<div id="content" role="main">
-			<?php if ( have_posts() ) : ?>
+get_header(); ?>
 
-				<?php /* Start the Loop */ ?>
-				<?php while ( have_posts() ) : the_post(); ?>
-					<div class="content-list">
-						<?php get_template_part( 'content', get_post_format() ); ?>
-					</div>
-				<?php endwhile; ?>
+	<div id="primary" class="content-area">
+		<main id="main" class="site-main" role="main">
 
-				<?php liftoff_content_nav( 'nav-below' ); ?>
+		<?php if ( have_posts() ) : ?>
 
-			<?php else : ?>
+			<?php if ( is_home() && ! is_front_page() ) : ?>
+				<header>
+					<h1 class="page-title screen-reader-text"><?php single_post_title(); ?></h1>
+				</header>
+			<?php endif; ?>
 
-				<article id="post-0" class="post no-results not-found">
+			<?php
+			// Start the loop.
+			while ( have_posts() ) : the_post();
 
-				<?php if ( current_user_can( 'edit_posts' ) ) :
-					// Show a different message to a logged-in user who can add posts.
-				?>
-					<header class="entry-header">
-						<h1 class="entry-title"><?php _e( 'No posts to display', 'liftoff' ); ?></h1>
-					</header>
+				/*
+				 * Include the Post-Format-specific template for the content.
+				 * If you want to override this in a child theme, then include a file
+				 * called content-___.php (where ___ is the Post Format name) and that will be used instead.
+				 */
+				get_template_part( 'content', get_post_format() );
 
-					<div class="entry-content">
-						<p><?php printf( __( 'Ready to publish your first post? <a href="%s">Get started here</a>.', 'liftoff' ), admin_url( 'post-new.php' ) ); ?></p>
-					</div><!-- .entry-content -->
+			// End the loop.
+			endwhile;
 
-				<?php else :
-					// Show the default message to everyone else.
-				?>
-					<header class="entry-header">
-						<h1 class="entry-title"><?php _e( 'Nothing Found', 'liftoff' ); ?></h1>
-					</header>
+			// Previous/next page navigation.
+			the_posts_pagination( array(
+				'prev_text'          => __( 'Previous page', 'twentyfifteen' ),
+				'next_text'          => __( 'Next page', 'twentyfifteen' ),
+				'before_page_number' => '<span class="meta-nav screen-reader-text">' . __( 'Page', 'twentyfifteen' ) . ' </span>',
+			) );
 
-					<div class="entry-content">
-						<p><?php _e( 'Apologies, but no results were found. Perhaps searching will help find a related post.', 'liftoff' ); ?></p>
-						<?php get_search_form(); ?>
-					</div><!-- .entry-content -->
-				<?php endif; // end current_user_can() check ?>
+		// If no content, include the "No posts found" template.
+		else :
+			get_template_part( 'content', 'none' );
 
-				</article><!-- #post-0 -->
+		endif;
+		?>
 
-			<?php endif; // end have_posts() check ?>
+		</main><!-- .site-main -->
+	</div><!-- .content-area -->
 
-			</div><!-- #content -->
-		</div><!-- #primary -->
-
-		<?php get_sidebar(); ?>
-	</div>
-	
-<?php 	
-	get_footer();
-?>
+<?php get_footer(); ?>

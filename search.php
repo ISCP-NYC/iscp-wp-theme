@@ -1,52 +1,44 @@
-<?php
-/**
- * The template for displaying Search Results pages.
- */
-	get_header();
-?>
+<?php get_header(); ?>
 
-	<div class="page-width">
-		<section id="primary" class="site-content">
-			<div id="content" role="main">
-			
-			<?php if ( have_posts() ) : ?>
+	<section id="primary" class="content-area">
+		<main id="main" class="site-main" role="main">
 
-				<header class="page-header">
-					<h1 class="page-title"><?php printf( __( 'Search Results for: %s', 'liftoff' ), '<span>' . get_search_query() . '</span>' ); ?></h1>
-				</header>
+		<?php if ( have_posts() ) : ?>
 
-				<?php liftoff_content_nav( 'nav-above' ); ?>
+			<header class="page-header">
+				<h1 class="page-title"><?php printf( __( 'Search Results for: %s', 'twentyfifteen' ), get_search_query() ); ?></h1>
+			</header><!-- .page-header -->
 
-				<?php /* Start the Loop */ ?>
-				<?php while ( have_posts() ) : the_post(); ?>
-					<div class="content-list">
-						<?php get_template_part( 'content', get_post_format() ); ?>
-					</div>
-				<?php endwhile; ?>
+			<?php
+			// Start the loop.
+			while ( have_posts() ) : the_post(); ?>
 
-				<?php liftoff_content_nav( 'nav-below' ); ?>
+				<?php
+				/*
+				 * Run the loop for the search to output the results.
+				 * If you want to overload this in a child theme then include a file
+				 * called content-search.php and that will be used instead.
+				 */
+				get_template_part( 'content', 'search' );
 
-			<?php else : ?>
+			// End the loop.
+			endwhile;
 
-				<article id="post-0" class="post no-results not-found">
-					<header class="entry-header">
-						<h1 class="entry-title"><?php _e( 'Nothing Found', 'liftoff' ); ?></h1>
-					</header>
+			// Previous/next page navigation.
+			the_posts_pagination( array(
+				'prev_text'          => __( 'Previous page', 'twentyfifteen' ),
+				'next_text'          => __( 'Next page', 'twentyfifteen' ),
+				'before_page_number' => '<span class="meta-nav screen-reader-text">' . __( 'Page', 'twentyfifteen' ) . ' </span>',
+			) );
 
-					<div class="entry-content">
-						<p><?php _e( 'Sorry, but nothing matched your search criteria. Please try again with some different keywords.', 'liftoff' ); ?></p>
-						<?php get_search_form(); ?>
-					</div><!-- .entry-content -->
-				</article><!-- #post-0 -->
+		// If no content, include the "No posts found" template.
+		else :
+			get_template_part( 'content', 'none' );
 
-			<?php endif; ?>
+		endif;
+		?>
 
-			</div><!-- #content -->
-		</section><!-- #primary -->
+		</main><!-- .site-main -->
+	</section><!-- .content-area -->
 
-		<?php get_sidebar(); ?>
-	</div>
-	
-<?php 	
-	get_footer();
-?>
+<?php get_footer(); ?>

@@ -1,34 +1,41 @@
 <?php
-/**
- * The Template for displaying all single posts.
- */
-	get_header();
-?>
 
-	<div class="page-width">
-		<div id="primary" class="site-content">
-			<div id="content" role="main">
+get_header(); ?>
 
-				<?php while ( have_posts() ) : the_post(); ?>
+	<div id="primary" class="content-area">
+		<main id="main" class="site-main" role="main">
 
-					<?php get_template_part( 'content', get_post_format() ); ?>
+		<?php
+		// Start the loop.
+		while ( have_posts() ) : the_post();
 
-					<nav class="nav-single">
-						<h3 class="assistive-text"><?php _e( 'Post navigation', 'liftoff' ); ?></h3>
-						<span class="nav-previous"><?php previous_post_link( '%link', '<span class="meta-nav">' . _x( '&larr;', 'Previous post link', 'liftoff' ) . '</span> %title' ); ?></span>
-						<span class="nav-next"><?php next_post_link( '%link', '%title <span class="meta-nav">' . _x( '&rarr;', 'Next post link', 'liftoff' ) . '</span>' ); ?></span>
-					</nav><!-- .nav-single -->
+			/*
+			 * Include the post format-specific template for the content. If you want to
+			 * use this in a child theme, then include a file called called content-___.php
+			 * (where ___ is the post format) and that will be used instead.
+			 */
+			get_template_part( 'content', get_post_format() );
 
-					<?php comments_template( '', true ); ?>
+			// If comments are open or we have at least one comment, load up the comment template.
+			if ( comments_open() || get_comments_number() ) :
+				comments_template();
+			endif;
 
-				<?php endwhile; // end of the loop. ?>
+			// Previous/next post navigation.
+			the_post_navigation( array(
+				'next_text' => '<span class="meta-nav" aria-hidden="true">' . __( 'Next', 'twentyfifteen' ) . '</span> ' .
+					'<span class="screen-reader-text">' . __( 'Next post:', 'twentyfifteen' ) . '</span> ' .
+					'<span class="post-title">%title</span>',
+				'prev_text' => '<span class="meta-nav" aria-hidden="true">' . __( 'Previous', 'twentyfifteen' ) . '</span> ' .
+					'<span class="screen-reader-text">' . __( 'Previous post:', 'twentyfifteen' ) . '</span> ' .
+					'<span class="post-title">%title</span>',
+			) );
 
-			</div><!-- #content -->
-		</div><!-- #primary -->
+		// End the loop.
+		endwhile;
+		?>
 
-		<?php get_sidebar(); ?>
-	</div>
-	
-<?php 
-	get_footer();
-?>
+		</main><!-- .site-main -->
+	</div><!-- .content-area -->
+
+<?php get_footer(); ?>
