@@ -1,0 +1,12 @@
+@mixin width($calc) {
+	width: -webkit-calc(#{$calc});
+	width: -moz-calc(#{$calc});
+	width: -ms-calc(#{$calc});
+	width: calc(#{$calc});
+}
+@mixin height($calc) {
+	height: -webkit-calc(#{$calc});
+	height: -moz-calc(#{$calc});
+	height: -ms-calc(#{$calc});
+	height: calc(#{$calc});
+}

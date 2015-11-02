@@ -1,0 +1,33 @@
+/*
+Theme Name: ISCPT
+*/
+@import 'compass';
+@import 'compass/reset';
+@import 'mixins';
+@import 'extends';
+@import 'vars';
+
+html,
+body {
+	height: 100%;
+	overflow-x: hidden;
+}
+a {
+	text-decoration: none;
+	color: $black;
+}
+main {
+	height: 100%;
+	overflow-x: hidden;
+}
+.page {
+	@include height('100% - 100px');
+	position: relative;
+	left: 100px;
+	padding-top: 100px;
+}
+.page.center {
+
+}
+
+@import '_partials/header';
