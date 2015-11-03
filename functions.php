@@ -346,3 +346,69 @@ require get_template_directory() . '/inc/customizer.php';
 
 
 show_admin_bar(false);
+
+
+
+// http://www.paulund.co.uk/add-custom-post-meta-data-to-list-post-table
+// add_filter( 'manage_${post_type}_posts_columns', 'add_new_columns');
+
+function add_event_columns($columns) {
+	unset(
+		$columns['date']
+	);
+    return array_merge($columns, array(
+		'start_date' => __('Start Date'),
+	    'end_date' =>__( 'End Date')
+    ));
+}
+add_filter('manage_event_posts_columns' , 'add_event_columns');
+
+
+
+function custom_event_column( $column, $post_id ) {
+    switch ( $column ) {
+      case 'start_date':
+        $start_date = get_post_meta( $post_id , 'start_date' , true );
+        if($start_date && $start_date != '-') { 
+        	$start_date = new DateTime($start_date);
+        	echo $start_date->format('Y/m/d');
+        } else {
+        	echo '';
+        }
+        break;
+
+      case 'end_date':
+        $end_date = get_post_meta( $post_id , 'end_date' , true );
+        if($end_date && $end_date != '-') {  
+        	$end_date = new DateTime($end_date);
+        	echo $end_date->format('Y/m/d');
+        } else {
+        	echo '';
+        }
+        break;
+    }
+}
+add_action( 'manage_event_posts_custom_column' , 'custom_event_column', 10, 2 );
+
+
+function register_sortable_columns( $columns ) {
+    $columns['start_date'] = 'Start Date';
+    $columns['end_date'] = 'End Date';
+
+    return $columns;
+}
+add_filter( 'manage_edit-event_sortable_columns', 'register_sortable_columns' );
+
+
+
+function event_column_orderby( $vars ) {
+	if ( isset( $vars['orderby'] ) && 'StartDate' == $vars['orderby'] ) {
+		$vars = array_merge( $vars, array(
+			'meta_key' => 'start_date',
+			'orderby' => 'meta_value',
+			'order' => 'desc'
+		) );
+	}
+	return $vars;
+}
+add_filter( 'request', 'event_column_orderby' );

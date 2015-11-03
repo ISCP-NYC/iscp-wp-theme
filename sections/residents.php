@@ -1,4 +1,4 @@
-<div class="page" id="residents">
+<section id="residents">
 	<?php get_template_part('nav') ?>
 
 	<?php 
@@ -10,4 +10,4 @@
 		  echo '</div>';
 		endwhile;
 	?>
-</div>
+</section>

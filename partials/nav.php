@@ -19,7 +19,7 @@
 			    foreach ( (array) $menu_items as $key => $child_menu_item ) {
 			    	$child_title = $child_menu_item->title;
 			    	$child_url = $child_menu_item->url;
-			    	$child_slug = basename($child_url);
+			    	$child_slug = str_replace('#','-',basename($child_url));
 			    	$parent_id = $child_menu_item->menu_item_parent;
 			    	if ($parent_id == $id ) : 
 			    		$child_item_html = '
@@ -36,7 +36,6 @@
 			   	echo $menu_item_html;
 			endif;
 		} ?>
-
 		<div class="cell search">
 			<div class="inner">
 				<a class="overlay" href="#">
