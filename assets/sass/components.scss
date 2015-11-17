@@ -1,0 +1,93 @@
+.shelves {
+    width: 100%;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-flex-wrap: wrap;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    &.grid {
+        .shelf-item {
+            @extend .noselect;
+            .name {
+                @extend .yesselect;
+                a {
+                    display: table;
+                    margin: 0 auto 10px auto;
+                }
+            }
+            @include width('100% / 3');
+            display: -webkit-flex;
+            display: -ms-flexbox;
+            display: flex;
+            float: left;
+            padding-bottom: 50px;
+            margin-bot-tom: 50px;
+            .inner {
+                @include width('100% - 20px');
+                span {
+                    margin-top: 5px;
+                    display: block;
+                }
+                .details {
+                    font-size: $xsmall-fs;
+                    line-height: $xsmall-lh;
+                }
+            }
+            &:nth-child(3n+1) .inner {
+                margin: 0 20px 0 0;
+            }
+            &:nth-child(3n+2) .inner {
+                margin: 0 10px;
+            }
+            &:nth-child(3n+3) .inner {
+                margin: 0 0 0 20px;
+            }
+            @include laptop {
+                width: 50%;
+                &:nth-child(even) .inner {
+                    margin: 0 0 0 20px;
+                }
+                &:nth-child(odd) .inner {
+                    margin: 0 20px 0 0;
+                }
+            }
+            @include mobile {
+                width: 100%;
+                .inner {
+                    width: 100%;
+                    margin: 0 !important;
+                }
+            }
+        }
+    }
+    &.list {
+        .shelf-item {
+            width: 100%;
+            text-align: left;
+            padding: 20px 0;
+            .inner {
+                display: -webkit-flex;
+                display: -ms-flexbox;
+                display: flex;
+                .image {display: none;}
+                .value {
+                    float:left;
+                    text-align: left;
+                    font-size: $small-fs;
+                    display: -webkit-flex;
+                    display: -ms-flexbox;
+                    display: flex;
+                    -webkit-box-align: center;
+                    -webkit-align-items: center;
+                    -ms-flex-align: center;
+                    align-items: center;
+                    span, a {
+                        display: table-cell;
+                        vertical-align: middle;
+                    }
+                }
+            }
+        }
+    }
+}

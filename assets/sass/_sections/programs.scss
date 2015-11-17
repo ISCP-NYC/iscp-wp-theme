@@ -1,0 +1,111 @@
+section.programs {
+	.program-links {
+		margin-top: 30px;
+	}
+	.program {
+		margin-top: 30px;
+		h3.title {
+			padding: 20px 0;
+		}
+		.description {
+			font-size: $medium-fs;
+			line-height: $medium-lh;
+		}
+		.apply {
+			margin: 20px 0;
+			display: block;
+		}
+		.deadline-notes {
+			font-size: $small-fs;
+			line-height: $small-lh;
+		}
+		.columns {
+			width: 100%;
+			margin: 50px 0;
+			display: table;
+			display: -webkit-flex;
+		    display: -ms-flexbox;
+		    display: flex;
+		    -webkit-flex-wrap: wrap;
+		    -ms-flex-wrap: wrap;
+		    flex-wrap: wrap;
+			.column {
+		        display: -webkit-flex;
+		        display: -ms-flexbox;
+		        display: flex;
+		        float: left;
+		        .inner {
+					.image {
+						width: 100%;
+						background-color: $orange;
+						display: table;
+						img {
+							width: 100%;
+							-webkit-filter: grayscale(100%);
+							-moz-filter: grayscale(100%);
+							-ms-filter: grayscale(100%);
+							-o-filter: grayscale(100%);
+							filter: grayscale(100%);
+							mix-blend-mode: screen;
+							vertical-align: bottom;
+						}
+					}
+					h3.title {
+						width: 100%;
+						text-transform: uppercase;
+						padding: 20px 0;
+						text-align: center;
+					}
+					.description  {
+
+					}
+					.links {
+						padding: 20px 0;
+						a {
+							font-size: $medium-fs;
+							display: block;
+						}
+					}
+				}
+				@include desktop {
+	                width: 25%;
+	                .inner {
+	                	@include width('100% - 40px');
+		            	margin: 0 25px;
+	                }
+	            }
+			  	@include laptop {
+	                @include width('100% / 3');
+	                &:nth-child(3n+1) .inner {
+		                margin: 0 40px 0 0;
+		            }
+		            &:nth-child(3n+2) .inner {
+		                margin: 0 20px;
+		            }
+		            &:nth-child(3n+3) .inner {
+		                margin: 0 0 0 40px;
+		            }
+	            }
+	            @include tablet {
+	                width: 50%;
+	                .inner {
+	                	@include width('100% - 20px');
+	                }
+	                &:nth-child(odd) .inner {
+		                margin: 0 20px 0 0;
+		            }
+		            &:nth-child(even) .inner {
+		                margin: 0 0 0 20px;
+		            }
+	            }
+	            @include mobile {
+	                width: 100%;
+	                .inner {
+	                    width: 100%;
+	                    margin: 0 !important;
+	                }
+	            }
+			}
+		}
+	}
+}

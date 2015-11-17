@@ -45,7 +45,7 @@
 		opacity: 0.5;
 	}
 
-	.tagline {
+	.residency_program {
 		padding: 35px 0;
 		margin: 35px 0;
 		p {
@@ -71,7 +71,7 @@
 				.body {
 					@include width('100% - 20px');
 					padding-left: 20px;
-					background-image: url(../images/bullet_black.svg);
+					background-image: url(../images/bullet-black.svg);
 					background-position: left 8px;
 					background-size: 15px;
 					background-repeat: no-repeat;

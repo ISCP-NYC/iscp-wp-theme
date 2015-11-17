@@ -23,186 +23,6 @@
  */
 
 /**
- * Set the content width based on the theme's design and stylesheet.
- *
- * @since Twenty Fifteen 1.0
- */
-if ( ! isset( $content_width ) ) {
-	$content_width = 660;
-}
-
-/**
- * Twenty Fifteen only works in WordPress 4.1 or later.
- */
-if ( version_compare( $GLOBALS['wp_version'], '4.1-alpha', '<' ) ) {
-	require get_template_directory() . '/inc/back-compat.php';
-}
-
-if ( ! function_exists( 'twentyfifteen_setup' ) ) :
-/**
- * Sets up theme defaults and registers support for various WordPress features.
- *
- * Note that this function is hooked into the after_setup_theme hook, which
- * runs before the init hook. The init hook is too late for some features, such
- * as indicating support for post thumbnails.
- *
- * @since Twenty Fifteen 1.0
- */
-function twentyfifteen_setup() {
-
-	/*
-	 * Make theme available for translation.
-	 * Translations can be filed in the /languages/ directory.
-	 * If you're building a theme based on twentyfifteen, use a find and replace
-	 * to change 'twentyfifteen' to the name of your theme in all the template files
-	 */
-	load_theme_textdomain( 'twentyfifteen', get_template_directory() . '/languages' );
-
-	// Add default posts and comments RSS feed links to head.
-	add_theme_support( 'automatic-feed-links' );
-
-	/*
-	 * Let WordPress manage the document title.
-	 * By adding theme support, we declare that this theme does not use a
-	 * hard-coded <title> tag in the document head, and expect WordPress to
-	 * provide it for us.
-	 */
-	add_theme_support( 'title-tag' );
-
-	/*
-	 * Enable support for Post Thumbnails on posts and pages.
-	 *
-	 * See: https://codex.wordpress.org/Function_Reference/add_theme_support#Post_Thumbnails
-	 */
-	add_theme_support( 'post-thumbnails' );
-	set_post_thumbnail_size( 825, 510, true );
-
-	// This theme uses wp_nav_menu() in two locations.
-	register_nav_menus( array(
-		'primary' => __( 'Primary Menu',      'twentyfifteen' ),
-		'social'  => __( 'Social Links Menu', 'twentyfifteen' ),
-	) );
-
-	/*
-	 * Switch default core markup for search form, comment form, and comments
-	 * to output valid HTML5.
-	 */
-	add_theme_support( 'html5', array(
-		'search-form', 'comment-form', 'comment-list', 'gallery', 'caption'
-	) );
-
-	/*
-	 * Enable support for Post Formats.
-	 *
-	 * See: https://codex.wordpress.org/Post_Formats
-	 */
-	add_theme_support( 'post-formats', array(
-		'aside', 'image', 'video', 'quote', 'link', 'gallery', 'status', 'audio', 'chat'
-	) );
-
-	$color_scheme  = twentyfifteen_get_color_scheme();
-	$default_color = trim( $color_scheme[0], '#' );
-
-	// Setup the WordPress core custom background feature.
-	add_theme_support( 'custom-background', apply_filters( 'twentyfifteen_custom_background_args', array(
-		'default-color'      => $default_color,
-		'default-attachment' => 'fixed',
-	) ) );
-
-	/*
-	 * This theme styles the visual editor to resemble the theme style,
-	 * specifically font, colors, icons, and column width.
-	 */
-	add_editor_style( array( 'assets/css/editor-style.css', 'assets/genericons/genericons.css', twentyfifteen_fonts_url() ) );
-}
-endif; // twentyfifteen_setup
-add_action( 'after_setup_theme', 'twentyfifteen_setup' );
-
-/**
- * Register widget area.
- *
- * @since Twenty Fifteen 1.0
- *
- * @link https://codex.wordpress.org/Function_Reference/register_sidebar
- */
-function twentyfifteen_widgets_init() {
-	register_sidebar( array(
-		'name'          => __( 'Widget Area', 'twentyfifteen' ),
-		'id'            => 'sidebar-1',
-		'description'   => __( 'Add widgets here to appear in your sidebar.', 'twentyfifteen' ),
-		'before_widget' => '<aside id="%1$s" class="widget %2$s">',
-		'after_widget'  => '</aside>',
-		'before_title'  => '<h2 class="widget-title">',
-		'after_title'   => '</h2>',
-	) );
-}
-add_action( 'widgets_init', 'twentyfifteen_widgets_init' );
-
-if ( ! function_exists( 'twentyfifteen_fonts_url' ) ) :
-/**
- * Register Google fonts for Twenty Fifteen.
- *
- * @since Twenty Fifteen 1.0
- *
- * @return string Google fonts URL for the theme.
- */
-function twentyfifteen_fonts_url() {
-	$fonts_url = '';
-	$fonts     = array();
-	$subsets   = 'latin,latin-ext';
-
-	/*
-	 * Translators: If there are characters in your language that are not supported
-	 * by Noto Sans, translate this to 'off'. Do not translate into your own language.
-	 */
-	if ( 'off' !== _x( 'on', 'Noto Sans font: on or off', 'twentyfifteen' ) ) {
-		$fonts[] = 'Noto Sans:400italic,700italic,400,700';
-	}
-
-	/*
-	 * Translators: If there are characters in your language that are not supported
-	 * by Noto Serif, translate this to 'off'. Do not translate into your own language.
-	 */
-	if ( 'off' !== _x( 'on', 'Noto Serif font: on or off', 'twentyfifteen' ) ) {
-		$fonts[] = 'Noto Serif:400italic,700italic,400,700';
-	}
-
-	/*
-	 * Translators: If there are characters in your language that are not supported
-	 * by Inconsolata, translate this to 'off'. Do not translate into your own language.
-	 */
-	if ( 'off' !== _x( 'on', 'Inconsolata font: on or off', 'twentyfifteen' ) ) {
-		$fonts[] = 'Inconsolata:400,700';
-	}
-
-	/*
-	 * Translators: To add an additional character subset specific to your language,
-	 * translate this to 'greek', 'cyrillic', 'devanagari' or 'vietnamese'. Do not translate into your own language.
-	 */
-	$subset = _x( 'no-subset', 'Add new subset (greek, cyrillic, devanagari, vietnamese)', 'twentyfifteen' );
-
-	if ( 'cyrillic' == $subset ) {
-		$subsets .= ',cyrillic,cyrillic-ext';
-	} elseif ( 'greek' == $subset ) {
-		$subsets .= ',greek,greek-ext';
-	} elseif ( 'devanagari' == $subset ) {
-		$subsets .= ',devanagari';
-	} elseif ( 'vietnamese' == $subset ) {
-		$subsets .= ',vietnamese';
-	}
-
-	if ( $fonts ) {
-		$fonts_url = add_query_arg( array(
-			'family' => urlencode( implode( '|', $fonts ) ),
-			'subset' => urlencode( $subsets ),
-		), 'https://fonts.googleapis.com/css' );
-	}
-
-	return $fonts_url;
-}
-endif;
-
-/**
  * JavaScript Detection.
  *
  * Adds a `js` class to the root `<html>` element when JavaScript is detected.
@@ -219,134 +39,23 @@ add_action( 'wp_head', 'twentyfifteen_javascript_detection', 0 );
  *
  * @since Twenty Fifteen 1.0
  */
-function twentyfifteen_scripts() {
-	// Add custom fonts, used in the main stylesheet.
-	wp_enqueue_style( 'twentyfifteen-fonts', twentyfifteen_fonts_url(), array(), null );
-
-	// Add Genericons, used in the main stylesheet.
-	wp_enqueue_style( 'genericons', get_template_directory_uri() . '/assets/genericons/genericons.css', array(), '3.2' );
-
-	// Load our main stylesheet.
-	wp_enqueue_style( 'twentyfifteen-style', get_stylesheet_uri() );
-
-	wp_enqueue_script( 'twentyfifteen-skip-link-focus-fix', get_template_directory_uri() . '/assets/js/skip-link-focus-fix.js', array(), '20141010', true );
-
-	if ( is_singular() && comments_open() && get_option( 'thread_comments' ) ) {
-		wp_enqueue_script( 'comment-reply' );
-	}
-
-	if ( is_singular() && wp_attachment_is_image() ) {
-		wp_enqueue_script( 'twentyfifteen-keyboard-image-navigation', get_template_directory_uri() . '/assets/js/keyboard-image-navigation.js', array( 'jquery' ), '20141010' );
-	}
-
-	wp_enqueue_script( 'twentyfifteen-script', get_template_directory_uri() . '/assets/js/functions.js', array( 'jquery' ), '20150330', true );
-	wp_localize_script( 'twentyfifteen-script', 'screenReaderText', array(
-		'expand'   => '<span class="screen-reader-text">' . __( 'expand child menu', 'twentyfifteen' ) . '</span>',
-		'collapse' => '<span class="screen-reader-text">' . __( 'collapse child menu', 'twentyfifteen' ) . '</span>',
-	) );
+function iscp_scripts() {
+	wp_enqueue_style( 'style', get_template_directory_uri() . '/assets/css/styles.css' );
+	
+	wp_register_script( 'main', get_template_directory_uri() . '/assets/js/main.js', array( 'jquery' ) );
+	wp_enqueue_script( 'main' );
 }
-add_action( 'wp_enqueue_scripts', 'twentyfifteen_scripts' );
-
-/**
- * Add featured image as background image to post navigation elements.
- *
- * @since Twenty Fifteen 1.0
- *
- * @see wp_add_inline_style()
- */
-function twentyfifteen_post_nav_background() {
-	if ( ! is_single() ) {
-		return;
-	}
-
-	$previous = ( is_attachment() ) ? get_post( get_post()->post_parent ) : get_adjacent_post( false, '', true );
-	$next     = get_adjacent_post( false, '', false );
-	$css      = '';
-
-	if ( is_attachment() && 'attachment' == $previous->post_type ) {
-		return;
-	}
-
-	if ( $previous &&  has_post_thumbnail( $previous->ID ) ) {
-		$prevthumb = wp_get_attachment_image_src( get_post_thumbnail_id( $previous->ID ), 'post-thumbnail' );
-		$css .= '
-			.post-navigation .nav-previous { background-image: url(' . esc_url( $prevthumb[0] ) . '); }
-			.post-navigation .nav-previous .post-title, .post-navigation .nav-previous a:hover .post-title, .post-navigation .nav-previous .meta-nav { color: #fff; }
-			.post-navigation .nav-previous a:before { background-color: rgba(0, 0, 0, 0.4); }
-		';
-	}
-
-	if ( $next && has_post_thumbnail( $next->ID ) ) {
-		$nextthumb = wp_get_attachment_image_src( get_post_thumbnail_id( $next->ID ), 'post-thumbnail' );
-		$css .= '
-			.post-navigation .nav-next { background-image: url(' . esc_url( $nextthumb[0] ) . '); border-top: 0; }
-			.post-navigation .nav-next .post-title, .post-navigation .nav-next a:hover .post-title, .post-navigation .nav-next .meta-nav { color: #fff; }
-			.post-navigation .nav-next a:before { background-color: rgba(0, 0, 0, 0.4); }
-		';
-	}
-
-	wp_add_inline_style( 'twentyfifteen-style', $css );
-}
-add_action( 'wp_enqueue_scripts', 'twentyfifteen_post_nav_background' );
-
-/**
- * Display descriptions in main navigation.
- *
- * @since Twenty Fifteen 1.0
- *
- * @param string  $item_output The menu item output.
- * @param WP_Post $item        Menu item object.
- * @param int     $depth       Depth of the menu.
- * @param array   $args        wp_nav_menu() arguments.
- * @return string Menu item with possible description.
- */
-function twentyfifteen_nav_description( $item_output, $item, $depth, $args ) {
-	if ( 'primary' == $args->theme_location && $item->description ) {
-		$item_output = str_replace( $args->link_after . '</a>', '<div class="menu-item-description">' . $item->description . '</div>' . $args->link_after . '</a>', $item_output );
-	}
-
-	return $item_output;
-}
-add_filter( 'walker_nav_menu_start_el', 'twentyfifteen_nav_description', 10, 4 );
-
-/**
- * Add a `screen-reader-text` class to the search form's submit button.
- *
- * @since Twenty Fifteen 1.0
- *
- * @param string $html Search form HTML.
- * @return string Modified search form HTML.
- */
-function twentyfifteen_search_form_modify( $html ) {
-	return str_replace( 'class="search-submit"', 'class="search-submit screen-reader-text"', $html );
-}
-add_filter( 'get_search_form', 'twentyfifteen_search_form_modify' );
-
-/**
- * Implement the Custom Header feature.
- *
- * @since Twenty Fifteen 1.0
- */
-require get_template_directory() . '/inc/custom-header.php';
-
-/**
- * Custom template tags for this theme.
- *
- * @since Twenty Fifteen 1.0
- */
-require get_template_directory() . '/inc/template-tags.php';
-
-/**
- * Customizer additions.
- *
- * @since Twenty Fifteen 1.0
- */
-require get_template_directory() . '/inc/customizer.php';
-
+add_action( 'wp_enqueue_scripts', 'iscp_scripts' );
 
 
 show_admin_bar(false);
+add_theme_support( 'post-thumbnails' ); 
 
+/////////////////////////////////////
+/////////////////////////////////////
+//////////EVENT FILTERING////////////
+/////////////////////////////////////
+/////////////////////////////////////
 
 
 // http://www.paulund.co.uk/add-custom-post-meta-data-to-list-post-table
@@ -357,8 +66,8 @@ function add_event_columns($columns) {
 		$columns['date']
 	);
     return array_merge($columns, array(
-		'start_date' => __('Start Date'),
-	    'end_date' =>__( 'End Date')
+		'event_type' => __( 'Event Type' ),
+		'event_date' => __( 'Date' )
     ));
 }
 add_filter('manage_event_posts_columns' , 'add_event_columns');
@@ -367,21 +76,24 @@ add_filter('manage_event_posts_columns' , 'add_event_columns');
 
 function custom_event_column( $column, $post_id ) {
     switch ( $column ) {
-      case 'start_date':
-        $start_date = get_post_meta( $post_id , 'start_date' , true );
-        if($start_date && $start_date != '-') { 
-        	$start_date = new DateTime($start_date);
-        	echo $start_date->format('Y/m/d');
+      case 'event_type':
+        $event_type = get_post_meta( $post_id , 'event_type' , true );
+        if($event_type && $event_type != '') { 
+        	echo $event_type;
         } else {
         	echo '';
         }
         break;
 
-      case 'end_date':
-        $end_date = get_post_meta( $post_id , 'end_date' , true );
-        if($end_date && $end_date != '-') {  
-        	$end_date = new DateTime($end_date);
-        	echo $end_date->format('Y/m/d');
+      case 'event_date':
+        $start_date = get_post_meta( $post_id , 'start_date' , true );
+        $event_date = get_post_meta( $post_id , 'date' , true );
+        if($start_date && $start_date != '-' && $start_date != 'Invalid date') {  
+        	$start_date = new DateTime($start_date);
+        	echo $start_date->format('Y/m/d');
+        } else if($event_date && $event_date != '-' && $event_date != 'Invalid date') {  
+        	$event_date = new DateTime($event_date);
+        	echo $event_date->format('Y/m/d');
         } else {
         	echo '';
         }
@@ -391,24 +103,309 @@ function custom_event_column( $column, $post_id ) {
 add_action( 'manage_event_posts_custom_column' , 'custom_event_column', 10, 2 );
 
 
-function register_sortable_columns( $columns ) {
-    $columns['start_date'] = 'Start Date';
-    $columns['end_date'] = 'End Date';
+function register_event_sortable_columns( $columns ) {
+    $columns['event_date'] = 'Event Date';
+    $columns['event_type'] = 'Event Type';
 
     return $columns;
 }
-add_filter( 'manage_edit-event_sortable_columns', 'register_sortable_columns' );
+add_filter( 'manage_edit-event_sortable_columns', 'register_event_sortable_columns' );
 
 
 
 function event_column_orderby( $vars ) {
-	if ( isset( $vars['orderby'] ) && 'StartDate' == $vars['orderby'] ) {
+	if ( isset( $vars['orderby'] ) && 'EventDate' == $vars['orderby'] ) {
 		$vars = array_merge( $vars, array(
-			'meta_key' => 'start_date',
+			'meta_key' => 'date',
 			'orderby' => 'meta_value',
 			'order' => 'desc'
+		) );
+	} else if ( isset( $vars['orderby'] ) && 'EventType' == $vars['orderby'] ) {
+		$vars = array_merge( $vars, array(
+			'meta_key' => 'event_type',
+			'orderby' => 'meta_value',
+			'order' => 'asc'
 		) );
 	}
 	return $vars;
 }
 add_filter( 'request', 'event_column_orderby' );
+
+/////////////////////////////////////
+/////////////////////////////////////
+////////RESIDENT FILTERING///////////
+/////////////////////////////////////
+/////////////////////////////////////
+function add_resident_columns($columns) {
+	unset(
+		$columns['date']
+	);
+    return array_merge($columns, array(
+    	'country' =>__( 'Country'),
+    	'sponsor' =>__( 'Sponsor'),
+		'start_date' => __('Start Date'),
+	    'end_date' =>__( 'End Date'),
+	    'old_id' =>__( 'Reference ID')
+    ));
+}
+add_filter('manage_resident_posts_columns' , 'add_resident_columns');
+
+
+
+function custom_resident_column( $column, $post_id ) {
+    switch ( $column ) {
+      case 'country':
+        $country = get_post_meta( $post_id , 'country_temp' , true );
+        echo $country;
+        break;
+
+      case 'sponsor':
+        $sponsor = get_post_meta( $post_id , 'sponsor_temp' , true );
+        echo $sponsor;
+        break;
+
+      case 'start_date':
+        $start_date = get_post_meta( $post_id , 'residency_dates_0_start_date' , true );
+        if($start_date && $start_date != '' && $start_date != 'Invalid date') { 
+        	$start_date = new DateTime($start_date);
+        	echo $start_date->format('Y/m/d');
+        } else {
+        	echo '';
+        }
+        break;
+
+      case 'end_date':
+        $end_date = get_post_meta( $post_id , 'residency_dates_0_end_date' , true );
+        if($end_date && $end_date != '' && $end_date != 'Invalid date') {  
+        	$end_date = new DateTime($end_date);
+        	echo $end_date->format('Y/m/d');
+        } else {
+        	echo '';
+        }
+        break;
+
+      case 'old_id':
+        $old_id = get_post_meta( $post_id , 'old_id' , true );
+        echo $old_id;
+        break;
+    }
+}
+add_action( 'manage_resident_posts_custom_column' , 'custom_resident_column', 10, 2 );
+
+
+function register_residents_sortable_columns( $columns ) {
+    $columns['country'] = 'Country';
+    $columns['sponsor'] = 'Sponsor';
+    $columns['start_date'] = 'Start Date';
+    $columns['end_date'] = 'End Date';
+    $columns['old_id'] = 'Reference ID';
+
+    return $columns;
+}
+add_filter( 'manage_edit-resident_sortable_columns', 'register_residents_sortable_columns' );
+
+
+
+function resident_column_orderby( $vars ) {
+	if ( isset( $vars['orderby'] ) && 'Country' == $vars['orderby'] ) {
+		$vars = array_merge( $vars, array(
+			'meta_key' => 'country_temp',
+			'orderby' => 'meta_value',
+			'order' => 'asc'
+		) );
+	} else if ( isset( $vars['orderby'] ) && 'Sponsor' == $vars['orderby'] ) {
+		$vars = array_merge( $vars, array(
+			'meta_key' => 'sponsor_temp',
+			'orderby' => 'meta_value',
+			'order' => 'asc'
+		) );
+	} else if ( isset( $vars['orderby'] ) && 'StartDate' == $vars['orderby'] ) {
+		$vars = array_merge( $vars, array(
+			'meta_key' => 'start_date',
+			'orderby' => 'meta_value',
+			'order' => 'desc'
+		) );
+	} else if ( isset( $vars['orderby'] ) && 'EndDate' == $vars['orderby'] ) {
+		$vars = array_merge( $vars, array(
+			'meta_key' => 'end_date',
+			'orderby' => 'meta_value',
+			'order' => 'desc'
+		) );
+	} else if ( isset( $vars['orderby'] ) && 'ReferenceID' == $vars['orderby'] ) {
+		$vars = array_merge( $vars, array(
+			'meta_key' => 'old_id',
+			'orderby' => 'meta_value_num',
+			'order' => 'asc'
+		) );
+	}
+	return $vars;
+}
+add_filter( 'request', 'resident_column_orderby' );
+
+
+
+/////////////////////////////////////
+/////////////////////////////////////
+///////QUERY FILTER VARIABLES////////
+/////////////////////////////////////
+/////////////////////////////////////
+function add_query_vars_filter( $vars ){
+  $vars[] = 'when';
+  $vars[] .= 'country_temp';
+  return $vars;
+}
+add_filter( 'query_vars', 'add_query_vars_filter' );
+
+
+/////////////////////////////////////
+/////////////////////////////////////
+//////////HELPER QUESTIONS///////////
+/////////////////////////////////////
+/////////////////////////////////////
+function is_alumni( $id ) {
+	$today = new DateTime();
+	$today = $today->format('Ymd');
+	$residents = get_post( $id );
+	$end_date = get_field('residency_dates_0_end_date', $id);
+	if($end_date > $today) {
+		return false;
+	} else {
+		return true;
+	}
+}
+
+function is_current( $id ) {
+	$today = new DateTime();
+	$today = $today->format('Ymd');
+	$residents = get_post( $id );
+
+	$ed = get_end_date_value( $id );
+
+	$end_date = get_field($ed, $id);
+	if($end_date < $today) {
+		return true;
+	} else {
+		return false;
+	}
+}
+function is_ground_floor( $id ) {
+	return false;
+}	
+
+/////////////////////////////////////
+/////////////////////////////////////
+///////////HELPER METHODS////////////
+/////////////////////////////////////
+/////////////////////////////////////
+function format_date( $id ) {
+	$sd = get_start_date_value( $id );
+	$ed = get_end_date_value( $id );
+	$start_date_dt = new DateTime(get_field($sd, $id));
+	$start_date = $start_date_dt->format('M d, Y');
+
+	if($ed != '') {
+		$end_date_dt = new DateTime(get_field($ed, $id));
+		$end_date = $end_date_dt->format('M d, Y');
+		$date = $start_date . ' — ' . $end_date;
+	} else {
+		$date = $start_date;
+	}
+
+	return $date;
+}
+
+function get_start_date_value( $id ) {
+	$post_type = get_field('post_type', $id);
+	if($post_type == 'resident') {
+		return 'residency_dates_0_start_date';
+	} else {
+		return 'start_date';
+	}
+}
+
+function get_end_date_value( $id ) {
+	$post_type = get_field('post_type', $id);
+	if($post_type == 'resident') {
+		return 'residency_dates_0_end_date';
+	} else {
+		return 'end_date';
+	}
+}
+
+function get_display_image( $id ) {
+	if( has_post_thumbnail( $id ) ) {
+		$thumb_id = get_post_thumbnail_id( $id );
+		$thumb_url_array = wp_get_attachment_image_src($thumb_id, '', true);
+		$thumb_url = $thumb_url_array[0];
+		return $thumb_url;
+	} elseif( have_rows('gallery') ) {
+		return get_sub_field( 'image', $id )['url'];
+	} else {
+		return '';
+	}
+}
+
+function get_next_residents( $count ) {
+	$country = get_query_var( 'country_temp' );
+	$year = get_query_var( 'when' );
+
+	if( $country ) {
+		$filter_key = 'country_temp';
+		$filter_query = array(
+			'key' => 'country_temp',
+			'type' => 'CHAR',
+			'value' => $country,
+			'compare' => 'LIKE'
+		);
+		$append_query = '?country_temp=' . $country;
+	} elseif( $year ) {
+		$year_begin = $year . '0101';
+		$year_end = $year . '1231';
+		$year_range = array( $year_begin, $year_end );
+		$filter_query = array(
+			'key' => 'start_date',
+			'type' => 'DATE',
+			'value' => $year_range,
+			'compare' => 'BETWEEN'
+		);
+		$append_query = '?when=' . $year;
+	}
+
+	$today = new DateTime();
+	$today = $today->format( 'Ymd' );
+
+	$resident_id = get_the_ID();
+
+	if ( is_current( $resident_id ) ) {
+		$page_query = array(
+			'key' => 'residency_dates_0_end_date',
+			'type' => 'DATE',
+			'value' => $today,
+			'compare' => '>='
+		);
+	} else if ( is_alumni($resident_id ) ) {
+		$page_query = array(
+			'key' => 'residency_dates_0_end_date',
+			'type' => 'DATE',
+			'value' => $today,
+			'compare' => '<='
+		);
+	} else if ( is_ground_floor( $resident_id ) ) {
+		$page_query = array(
+			'key' => 'ground_floor',
+			'type' => 'BINARY',
+			'value' => 1,
+			'compare' => '='
+		);
+	}
+
+	
+	$args = array(
+		'post_type' => 'resident',
+		'posts_per_page' => $count,
+		'meta_query' => array( $page_query, $filter_query )
+	);
+
+	$next_residents = new WP_Query( $args );
+	return $next_residents;
+}

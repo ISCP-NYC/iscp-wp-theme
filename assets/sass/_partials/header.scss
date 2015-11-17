@@ -1,11 +1,11 @@
-.toggle {
+.nav-toggle {
 	width: 30px;
 	height: 30px;
 	position: absolute;
 	left: 175px;
 	top: 35px;
 	z-index: 101;
-	background-image: url(../images/toggle.svg);
+	background-image: url(../images/toggle-orange.svg);
 	background-size: 30px;
 	background-position: top;
 	background-repeat: no-repeat;
@@ -72,14 +72,6 @@ header.main {
 			.sub-menu {
 				@extend .vertical-align;
 				padding-left: 3px;
-				.child-item {
-					font-size: 25px;
-					padding: 1px 0 1px 25px;
-					background-image: url(../images/bullet_orange.svg);
-					background-position: left center;
-					background-size: 15px;
-					background-repeat: no-repeat;
-				}
 			}
 			&:last-child .inner,
 			&:nth-last-child(2) .inner {
@@ -101,7 +93,6 @@ header.main {
 					border: 5px solid $orange;
 					outline: none; 
 				}
-				
 			}
 		}
 	}
@@ -114,7 +105,7 @@ header.main {
 			transform: translateY(0);
 		}
 	}
-	.toggle {
+	.nav-toggle {
 		background-position: bottom;
 	}
 }
@@ -123,7 +114,7 @@ header.main {
 	header.main {
 		transform: translateY(calc(-100% - 50px));
 	}
-	.toggle {
+	.nav-toggle {
 		transform: translateY(-250px);
 	}
 }

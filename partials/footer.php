@@ -5,7 +5,9 @@
 	$address = get_field( 'address', $about_id );
 ?> 
 <footer>
-	<aside class="left footer"><div class="logo"></div></aside>
+	<aside class="left footer">
+		<a href="<?php echo site_url() ?>" class="logo"></a>
+	</aside>
 	<div class="content">
 		<h3 class="title black">
 			International Studio &amp; Curatorial Program
@@ -101,5 +103,7 @@
 	    	</div>
     	</nav>
 	</div>
-	<aside class="right footer"><div class="logo"></div></aside>
+	<aside class="right footer">
+		<a href="<?php echo site_url() ?>" class="logo"></a>
+	</aside>
 </footer>

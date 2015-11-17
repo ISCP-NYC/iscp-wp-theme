@@ -2,14 +2,15 @@
 	get_header();
 	global $post;
 	$slug = get_post( $post )->post_name;
-?>
-	
-	<section id="<?php echo $slug ?>">
-		<?php get_template_part('partials/nav') ?>
-		<?php get_template_part('partials/side') ?>
-		<div class="content">
-			<?php the_title( '<h3 class="title">', '</h1>' ); ?>
-		</div>
-	</section>
+	$parent = $post->post_parent;
+	$parent_slug = get_post( $parent )->post_name;
 
-<?php get_footer(); ?>
+	$resident_types = array( 'current-residents', 'alumni' );
+
+	if( in_array( $slug, $resident_types ) ):
+		get_template_part('sections/residents');
+	elseif( $parent_slug == 'residency-programs' ):
+		get_template_part('sections/programs');
+	endif;
+
+get_footer(); ?>

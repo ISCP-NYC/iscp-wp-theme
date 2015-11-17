@@ -4,25 +4,31 @@ Theme Name: ISCPT
 @import 'compass';
 @import 'compass/reset';
 @import 'mixins';
-@import 'extends';
 @import 'vars';
+@import 'extends';
+@import 'components';
 
 html,
 body {
 	height: 100%;
 	overflow: hidden;
 }
+
 a {
 	text-decoration: none;
 	color: $orange;
 }
 main {
 	height: 100%;
+	position: absolute;
+	left: 0;
+	top: 0;
 	overflow: hidden;
+	transition: left 800ms cubic-bezier(0.645, 0.045, 0.355, 1);
 }
 section {
 	@include height('100%');
-	position: relative;
+	position: absolute;
 	left: 100px;
 	overflow: hidden;
 	@import '_partials/header';
@@ -47,6 +53,16 @@ section {
 		}
 	}
 }
+em {
+	display: inline;
+    font-style: italic;
+}
+p {
+	text-indent: 60px;
+}
+p:first-child {
+	text-indent: 0;
+}
 h1, .xlarge {
 	font-size: $xlarge-fs;
 	line-height: $xlarge-lh;
@@ -66,6 +82,14 @@ h3, .medium {
 h4, .small {
 	font-size: $small-fs;
 	line-height: $small-lh;
+	&.title {
+		text-align: center;
+		padding: 3px 0;
+	}
+}
+h5, .xsmall {
+	font-size: $xsmall-fs;
+	line-height: $xsmall-lh;
 }
 .orange {color: $orange;}
 .black {color: $black;}
@@ -89,7 +113,18 @@ h4, .small {
 	border-left: 5px solid $orange;
 }
 
+.load-more {
+	font-size: $large-fs;
+	color: $orange;
+	display: table;
+	margin: auto;
+}
+
 @import '_sections/home';
+@import '_sections/residents';
+@import '_sections/resident';
+@import '_sections/programs';
+@import '_sections/alumni';
 ::-webkit-scrollbar {display:none;}
 ::-moz-scrollbar {display:none;}
 ::-o-scrollbar {display:none;}

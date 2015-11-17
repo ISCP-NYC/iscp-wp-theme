@@ -1,0 +1,30 @@
+body.alumni {
+	background-color: $black;
+	* {
+		border-color: $white !important;
+		color: $white !important;
+	}
+	header.main,
+	header.main nav,
+	header.main nav a.overlay {
+		background-color: $black !important;
+	}
+	section aside.main .logo {
+		background-image: url(../images/logo-white.svg) !important;
+	}
+	section .nav-toggle {
+		background-image: url(../images/toggle-white.svg) !important;
+	}
+	section header.main nav .cell .sub-menu .child-item {
+		background-image: url(../images/bullet-white.svg) !important;
+	}
+	.content .filter .bar .select.dropdown {
+		background-image: url(../images/dropdown-white.svg) !important;
+	}
+	.content .filter .bar .select.view.toggle {
+		background-image: url(../images/view-toggle-white.svg) !important;
+	}
+	.content .residents .resident .image {
+		background-color: white;
+	}
+}

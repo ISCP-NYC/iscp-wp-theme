@@ -4,9 +4,9 @@
 ?>
 
 <aside id="<?php echo $slug ?>" class="left main">
-	<div class="logo"></div>
+	<a href="<?php echo site_url() ?>" class="logo"></a>
 </aside>
 
 <aside id="<?php echo $slug ?>" class="right main">
-	<div class="logo"></div>
+	<a href="<?php echo site_url() ?>" class="logo"></a>
 </aside>

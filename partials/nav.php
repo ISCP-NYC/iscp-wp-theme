@@ -23,7 +23,7 @@
 			    	$parent_id = $child_menu_item->menu_item_parent;
 			    	if ($parent_id == $id ) : 
 			    		$child_item_html = '
-			    			<div class="child-item ' . $child_slug . '">
+			    			<div class="child-item bullet ' . $child_slug . '">
 			    				<a href="' . $child_url . '">' .
 			    					$child_title .
 			    				'</a>
@@ -45,4 +45,4 @@
     	</div>
 	</nav>
 </header>
-<div class="toggle"></div>
+<div class="nav-toggle"></div>

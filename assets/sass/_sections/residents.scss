@@ -1,0 +1,122 @@
+.content {
+	.filter {
+		width: 100%;
+		display: table;
+		margin: 25px 0;
+		@extend .noselect;
+		.bar {
+			width: 100%;
+			display: table;
+			.select {
+				font-size: $small-fs;
+				float: left;
+				display: table;
+				color: $orange;
+				padding-right: 25px;
+				margin-right: 20px;
+				background-size: 20px 40px;
+				background-position: right top;
+				background-repeat: no-repeat;
+				cursor: pointer;
+				&.view.toggle {
+					span.grid{display: none;}
+					background-image: url(../images/view-toggle-orange.svg);
+					&.grid {
+						span.grid{display: block;}
+						span.list{display: none;}
+						background-position: right bottom;
+					}
+				}
+				&.dropdown {
+					background-image: url(../images/dropdown-orange.svg);
+					&.dropped {
+						background-position: right bottom;
+					}
+				}
+			}
+		}
+		.sub {
+			display: none;
+			margin-top: 20px;
+			font-size: $xsmall-fs;
+			line-height: $xsmall-lh;
+			//  display: flex;
+	  		// 	flex-flow: row wrap;
+	  		// 	justify-content: space-between;
+	  		&.show {
+	  			display: block;
+	  		}
+			.option {
+				float: left;
+				margin: 0 0 20px 0;
+			}
+			&.country .option {
+				width: 25%;
+			}
+			&.year .option {
+				width: 10%;
+			}
+		}
+	}
+	.residents {
+		margin-top: 50px;
+		.resident {
+			.image {
+				width: 100%;
+				background: $orange;
+				img {
+					width: 100%;
+					height: 100%;
+					min-height: 100px;
+					vertical-align: bottom;
+				}
+			}
+			.details {
+				display: flex;
+				.left {
+					width: 100%;
+					// display: inline-flex;
+				}
+	            .country {
+	            	// width: 100%;
+	            }
+	            .sponsor {
+	            	// width: 100%;
+	            }
+	            .studio-number {
+	            	padding-left: 7px;
+	            	display: inline-flex;
+	            	text-align: right;
+	            	white-space: nowrap;
+	            }
+			}
+		}
+	}
+	.residents.list {
+		.resident {
+			.name {
+				width: 20%;
+			}
+			.details {
+				width: 80%;
+				display: flex;
+				.left {
+					width: 100%;
+					display: flex;
+					.country {
+						width: 30%;
+						padding-left: 15px;
+					}
+					.sponsor {
+						width: 60%;
+						padding-left: 15px;
+					}
+					.studio-number {
+						width: 10%;
+					}
+				}
+			}
+			
+		}
+	}
+}

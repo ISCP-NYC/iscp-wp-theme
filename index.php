@@ -4,7 +4,7 @@
 	<?php get_template_part('partials/nav') ?>
 	<?php get_template_part('partials/side') ?>
 	<div class="content">
-		<h3 class="title">International Studio &amp; Curitorial Program</h1>
+		<h3 class="title">International Studio &amp; Curitorial Program</h3>
 
 		<h3 class="title">
 			<a href="/events">
@@ -39,25 +39,34 @@
 					$end_day_word = $end_date->format('l');
 					$end_day = $end_date->format('d');
 
-					$type = get_field('event_type', $id);
+					$event_date = new DateTime(get_field('date', $id));
+					$event_year = $event_date->format('Y');
+					$event_month = $event_date->format('F');
+					$event_day_word = $event_date->format('l');
+					$event_day = $event_date->format('d');
 
+					$type = get_field('event_type', $id);
 					switch ($type) {
+						case 'event':
+					    	$type_name = 'Event';
+					    	$date_format = $event_date = $event_month . ' ' . $event_day . ' ' . $event_year;
+					    	break;
 					    case 'iscp-talk':
 					    	$type_name = 'ISCP Talk';
-					    	$date_format = '';
+					    	$date_format = $event_date;
 					    	break;
 					    case 'exhibition':
 					    	$type_name = 'Exhibition';
 					    	$date_format = 'Thru ' . $end_month . ' ' . $end_day;
 					    	$date_format .= '</br>' . $end_year;
 					    	break;
-					    case 'open-studio':
+					    case 'open-studios':
 					    	$type_name = 'Open Studio';
-					    	$date_format = '';
+					    	$date_format = $start_date = $start_month . ' ' . $start_day . '</br>' . $start_year;
 					    	break;
 					    case 'off-site-project':
 					    	$type_name = 'Off-Site Project';
-					    	$date_format = '';
+					    	$date_format = $event_date = $event_month . ' ' . $event_day . '</br>' . $event_year;
 					    	break;
 					}
 			
@@ -92,49 +101,16 @@
 
 
 		<?php
-			$residencies = get_page_by_path( 'residencies' );
-			$residencies_id = $residencies->ID;
-			$tagline = get_field('tagline', $residencies_id);
-			$tagline .= ' <a href="#">Learn more.</a>';
+			$residency_program = get_field('residency_program', $about_id);
+			$residency_program .= ' <a href="#">Learn more.</a>';
 		?>
 
-		<div class="tagline border-top border-bottom">
+		<div class="residency_program border-top border-bottom">
 			<h3 class="title orange">Residency Program</h3>
-			<p class="xlarge"><?php echo $tagline ?></p>
+			<p class="xlarge"><?php echo $residency_program ?></p>
 		</div>
 
-		<?php
-			$twitter_handle = str_replace( '@', '', get_field( 'twitter', $about_id ) );
-			$twitter_url = 'http://twitter.com/' . $twitter_handle;
-		?>
-
-		<div class="twitter module">
-			<h3 class="title orange">
-				<a href="<?php echo $twitter_url ?>" target="_blank">
-					Follow us on Twitter @iscp_nyc
-				</a>
-			</h3>
-			<div class="tweets">
-				<div class="tweet">
-					<div class="body medium">
-						Resident So Yoon Lym solo exhibition opening 10/20 @Bumble @winsorandnewton @MStudio_Asbury
-					</div>
-					<div class="orange time small">5h</div>
-				</div>
-				<div class="tweet">
-					<div class="body medium">
-						Resident So Yoon Lym solo exhibition opening 10/20 @Bumble @winsorandnewton @MStudio_Asbury
-					</div>
-					<div class="orange time small">5h</div>
-				</div>
-				<div class="tweet">
-					<div class="body medium">
-						Resident So Yoon Lym solo exhibition opening 10/20 @Bumble @winsorandnewton @MStudio_Asbury
-					</div>
-					<div class="orange time small">5h</div>
-				</div>
-			</div>
-		</div>
+		<?php get_template_part('partials/twitter') ?>
 
 
 		<?php
