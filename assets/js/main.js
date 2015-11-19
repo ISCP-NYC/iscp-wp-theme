@@ -44,7 +44,7 @@ jQuery(document).ready(function($) {
 				if(scrollTop > lastScrollTop + 10) {
 					$(section).addClass('hide-header');
 					$(section).removeClass('open-nav');
-				} else if(scrollTop < lastScrollTop - 5) {
+				} else if(scrollTop < lastScrollTop - 5 || scrollTop <= 50) {
 					$(section).removeClass('hide-header');
 				}
 				lastScrollTop = scrollTop;
@@ -89,24 +89,27 @@ jQuery(document).ready(function($) {
 
 	function filterResidents() {
 		$('.filter').on('click', '.select', function() {
-			var residents = $('.residents.shelves');
+			var slug = $(this).attr('data-slug');
+			var filterThis = $('.filter-this.'+slug);
+			console.log(slug);
 			if($(this).hasClass('view toggle')) {
 				//toggle view style
-				$(residents).toggleClass('list').toggleClass('grid');
+				$(filterThis).toggleClass('list').toggleClass('grid');
 				$(this).toggleClass('list').toggleClass('grid');
 			} else if($(this).hasClass('dropdown')) {
 				var property = $(this).attr('data-filter');
+				var filterList = $('.filter-list.'+property+'.'+slug);
 				if($(this).hasClass('dropped')) {
 					//toggle to hide this list
 					$(this).removeClass('dropped');
-					$('.sub.'+property).removeClass('show');
+					$(filterList).removeClass('show');
 				} else {
 					//hide already opened filter list
 					$('.dropdown').removeClass('dropped');
-					$('.sub.show').removeClass('show');
+					$('.filter-list.show'+'.'+slug).removeClass('show');
 					//open this filter list
 					$(this).addClass('dropped');
-					$('.sub.'+property).addClass('show');
+					$(filterList).addClass('show');
 				}
 				
 			}

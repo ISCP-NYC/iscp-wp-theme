@@ -8,31 +8,7 @@
 			width: 100%;
 			display: table;
 			.select {
-				font-size: $small-fs;
 				float: left;
-				display: table;
-				color: $orange;
-				padding-right: 25px;
-				margin-right: 20px;
-				background-size: 20px 40px;
-				background-position: right top;
-				background-repeat: no-repeat;
-				cursor: pointer;
-				&.view.toggle {
-					span.grid{display: none;}
-					background-image: url(../images/view-toggle-orange.svg);
-					&.grid {
-						span.grid{display: block;}
-						span.list{display: none;}
-						background-position: right bottom;
-					}
-				}
-				&.dropdown {
-					background-image: url(../images/dropdown-orange.svg);
-					&.dropped {
-						background-position: right bottom;
-					}
-				}
 			}
 		}
 		.sub {
@@ -40,9 +16,6 @@
 			margin-top: 20px;
 			font-size: $xsmall-fs;
 			line-height: $xsmall-lh;
-			//  display: flex;
-	  		// 	flex-flow: row wrap;
-	  		// 	justify-content: space-between;
 	  		&.show {
 	  			display: block;
 	  		}

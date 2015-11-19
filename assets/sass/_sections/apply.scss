@@ -1,0 +1,135 @@
+section.apply {
+	.program-links {
+		margin-top: 30px;
+	}
+	.program {
+		display: table;
+		margin-top: 30px;
+		padding-top: 20px;
+		position: relative;
+		.title {
+			width: 140px;
+			position: absolute;
+			top: 20px;
+			left: 0;
+			@include tablet {
+				width: 100% !important;
+				text-align: center;
+				position: static;
+			}
+		}
+		.links {
+			width: 140px;
+			position: absolute;
+			top: 20px;
+			right: 0;
+			.bullet {
+				font-size: $xsmall-fs;
+				line-height: $xsmall-lh;
+				background-size: 11px;
+				padding-left: 15px;
+				display: inline;
+				a {
+					margin-bottom: 5px;
+				}
+			}
+			@include tablet {
+				width: 100% !important;
+				position: static;
+				margin: 20px 0;
+				.bullet {
+					width: 100%;
+					display: block;
+				}
+			}
+		}
+		.inner {
+			@include width('100% - 300px');
+			margin: 0 150px;
+			@include tablet {
+				width: 100%;
+				margin: 0;
+			}
+			.intro {
+				p {
+					text-indent: 0;
+					font-size: $medium-fs;
+				}
+				h3 {
+					width: 100%;
+				    text-transform: uppercase;
+				    padding: 20px 0;
+				    text-align: center;
+				}
+			}
+			h5 {
+				margin-bottom: 20px;
+			}
+			.deadlines {
+				width: 100%;
+				.deadline.row {
+					width: 100%;
+					display: table;
+					padding: 0 0 20px 0;
+					font-size: $xsmall-fs;
+					line-height: $xsmall-lh;
+					color: $orange;
+					.cell {
+						float: left;
+						&.date {
+							width: 25%;
+							@include tablet {
+								width: 50%;
+							}
+						}
+						&.country {
+							width: 25%;
+							@include tablet {
+								width: 50%;
+							}
+						}
+						&.brief {
+							width: 50%;
+							@include tablet {
+								margin-top: 10px;
+								width: 100%;
+							}
+							.sponsor {
+								a {
+
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+		.select {
+			color: $orange;
+			cursor: pointer;
+			display: inline;
+		}
+		.filter {
+			font-size: $medium-fs;
+			.select {
+				font-size: $medium-fs;
+				padding-right: 40px;
+			    margin-right: 20px;
+			    background-size: 29px 58px;
+			}
+		}
+		.filter-list {
+			display: none;
+			margin-top: 20px;
+			font-size: $xsmall-fs;
+			line-height: $xsmall-lh;
+	  		&.show {
+	  			display: block;
+	  		}
+			.option {
+				float: left;
+				margin: 0 10px 10px 0;
+			}
+		}
+	}
+}

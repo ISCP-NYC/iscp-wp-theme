@@ -120,10 +120,40 @@ h5, .xsmall {
 	margin: auto;
 }
 
+.filter {
+	.select {
+		font-size: $small-fs;
+		display: table;
+		color: $orange;
+		padding-right: 25px;
+		margin-right: 20px;
+		background-size: 20px 40px;
+		background-position: right top;
+		background-repeat: no-repeat;
+		cursor: pointer;
+		&.view.toggle {
+			span.grid{display: none;}
+			background-image: url(../images/view-toggle-orange.svg);
+			&.grid {
+				span.grid{display: block;}
+				span.list{display: none;}
+				background-position: right bottom;
+			}
+		}
+		&.dropdown {
+			background-image: url(../images/dropdown-orange.svg);
+			&.dropped {
+				background-position: right bottom;
+			}
+		}
+	}
+}
+
 @import '_sections/home';
 @import '_sections/residents';
 @import '_sections/resident';
 @import '_sections/programs';
+@import '_sections/apply';
 @import '_sections/alumni';
 ::-webkit-scrollbar {display:none;}
 ::-moz-scrollbar {display:none;}

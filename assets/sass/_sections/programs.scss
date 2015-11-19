@@ -35,20 +35,25 @@ section.programs {
 		        display: flex;
 		        float: left;
 		        .inner {
+		        	.background {
+		        		width: 100%;
+						height: 300px;
+						display: table;
+						background-color: $orange;
+		        	}
 					.image {
 						width: 100%;
-						background-color: $orange;
-						display: table;
-						img {
-							width: 100%;
-							-webkit-filter: grayscale(100%);
-							-moz-filter: grayscale(100%);
-							-ms-filter: grayscale(100%);
-							-o-filter: grayscale(100%);
-							filter: grayscale(100%);
-							mix-blend-mode: screen;
-							vertical-align: bottom;
-						}
+						height: 100%;
+						//auto size and crop image so bg is not needed
+						background-position: center;
+						background-repeat: no-repeat;
+						background-size: cover;
+						-webkit-filter: grayscale(100%);
+						-moz-filter: grayscale(100%);
+						-ms-filter: grayscale(100%);
+						-o-filter: grayscale(100%);
+						filter: grayscale(100%);
+						mix-blend-mode: screen;
 					}
 					h3.title {
 						width: 100%;
@@ -64,26 +69,34 @@ section.programs {
 						a {
 							font-size: $medium-fs;
 							display: block;
+							margin-bottom: 5px;
 						}
 					}
 				}
+				@include large-desktop {
+	                width: 25%;
+	                .inner {
+	                	@include width('100% - 40px');
+		            	margin: 0 20px;
+	                }
+	            }
 				@include desktop {
 	                width: 25%;
 	                .inner {
 	                	@include width('100% - 40px');
-		            	margin: 0 25px;
+		            	margin: 0 20px;
 	                }
 	            }
 			  	@include laptop {
-	                @include width('100% / 3');
-	                &:nth-child(3n+1) .inner {
-		                margin: 0 40px 0 0;
+			  		width: 50%;
+	                .inner {
+	                	@include width('100% - 20px');
+	                }
+	                &:nth-child(odd) .inner {
+		                margin: 0 20px 0 0;
 		            }
-		            &:nth-child(3n+2) .inner {
-		                margin: 0 20px;
-		            }
-		            &:nth-child(3n+3) .inner {
-		                margin: 0 0 0 40px;
+		            &:nth-child(even) .inner {
+		                margin: 0 0 0 20px;
 		            }
 	            }
 	            @include tablet {

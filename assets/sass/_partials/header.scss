@@ -100,9 +100,9 @@ header.main {
 
 &.open-nav {
 	header.main {
-		transform: translateY(0);
+		transform: translateY(0) !important;
 		nav {
-			transform: translateY(0);
+			transform: translateY(0) !important;
 		}
 	}
 	.nav-toggle {
@@ -112,9 +112,9 @@ header.main {
 
 &.hide-header {
 	header.main {
-		transform: translateY(calc(-100% - 50px));
+		transform: translateY(calc(-100% - 50px)) !important;
 	}
 	.nav-toggle {
-		transform: translateY(-250px);
+		transform: translateY(-250px) !important;
 	}
 }

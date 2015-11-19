@@ -1,3 +1,10 @@
+<?php 
+	global $post;
+	$title = get_post( $post )->post_title;
+	$slug = get_post( $post )->post_name;
+
+?>
+
 <section id="<?php echo $slug ?>">
 	<?php get_template_part('partials/nav') ?>
 	<?php get_template_part('partials/side') ?>
@@ -5,14 +12,14 @@
 		<h4 class="title orange"><?php the_title() ?></h4>
 		<div class="filter">
 			<div class="bar">
-				<div class="select dropdown country" data-filter="country">Country</div>
-				<div class="select dropdown year" data-filter="year">Year</div>
-				<div class="select view toggle">
+				<div class="select dropdown country" data-filter="country" data-slug="<?php echo $slug ?>">Country</div>
+				<div class="select dropdown year" data-filter="year" data-slug="<?php echo $slug ?>">Year</div>
+				<div class="select view toggle" data-slug="<?php echo $slug ?>">
 					<span class="list">List</span>
 					<span class="grid">Grid</span>
 				</div>
 			</div>
-			<div class="sub country">
+			<div class="filter-list sub country <? echo $slug ?>">
 				<?php
 					$page_url = get_the_permalink();
 					$countries = get_posts( array(
@@ -35,7 +42,7 @@
 				?>
 			</div>
 
-			<div class="sub year">
+			<div class="filter-list sub year <? echo $slug ?>">
 				<?php
 					$page_url = get_the_permalink();
 					$start_date = 1994;
@@ -53,7 +60,7 @@
 			</div>
 		</div>
 
-		<div class="residents shelves grid">
+		<div class="residents shelves filter-this grid <? echo $slug ?>">
 			<?php
 				$country = get_query_var( 'country_temp' );
 				$year = get_query_var( 'when' );
