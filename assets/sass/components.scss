@@ -113,6 +113,9 @@
         &.view.toggle {
             span.grid{display: none;}
             background-image: url(../images/view-toggle-orange.svg);
+            &:hover {
+                background-image: url(../images/view-toggle-black.svg);
+            }
             &.grid {
                 span.grid{display: block;}
                 span.list{display: none;}
@@ -123,6 +126,9 @@
             background-image: url(../images/dropdown-orange.svg);
             &.dropped {
                 background-position: right bottom;
+            }
+            &:hover {
+                background-image: url(../images/dropdown-black.svg);
             }
         }
     }

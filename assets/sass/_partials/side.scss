@@ -40,11 +40,17 @@ aside {
 	&.main .logo {
 		top: 0;
 		background-image: url(../images/logo-orange.svg);
+		&:hover {
+			background-image: url(../images/logo-black.svg);
+		}
 	}
 	&.footer .logo {
 		border: none;
 		bottom: -35px;
 		background-image: url(../images/logo-white.svg);
+		&:hover {
+			background-image: url(../images/logo-black.svg);
+		}
 	}
 	@include xsmall {
 		display: none !important;

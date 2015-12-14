@@ -11,9 +11,9 @@
 		<h4 class="title orange"><?php the_title() ?></h4>
 		<div class="filter">
 			<div class="bar">
-				<div class="select dropdown event-type" data-filter="event-type" data-slug="<?php echo $slug ?>">Event Type</div>
-				<div class="select dropdown year" data-filter="year" data-slug="<?php echo $slug ?>">Year</div>
-				<div class="select view toggle" data-slug="<?php echo $slug ?>">
+				<div class="select link dropdown event-type" data-filter="event-type" data-slug="<?php echo $slug ?>">Event Type</div>
+				<div class="select link dropdown year" data-filter="year" data-slug="<?php echo $slug ?>">Year</div>
+				<div class="select link view toggle" data-slug="<?php echo $slug ?>">
 					<span class="list">List</span>
 					<span class="grid">Grid</span>
 				</div>

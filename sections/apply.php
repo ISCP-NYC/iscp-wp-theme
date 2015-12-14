@@ -112,7 +112,7 @@
 
 					<div class="filter">
 						Or choose a sponsor by
-						<div class="select dropdown country" data-filter="country" data-slug="<?php echo $slug ?>">Country</div>
+						<div class="select link dropdown country" data-filter="country" data-slug="<?php echo $slug ?>">Country</div>
 					</div>
 					<div class="filter-list sub country <? echo $slug ?>">
 						<?php

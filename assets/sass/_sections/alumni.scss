@@ -4,6 +4,9 @@ section.alumni {
 		color: $black !important;
 		border-color: $black !important;
 	}
+	a:hover, .link:hover, .link *:hover {
+		color: $orange !important;
+	}
 	nav,
 	header.main nav a.overlay {
 		background-color: $white !important;
@@ -12,19 +15,34 @@ section.alumni {
 		border-color: $black !important;
 	 	.logo {
 			background-image: url(../images/logo-black.svg) !important;
+			&:hover {
+				background-image: url(../images/logo-orange.svg) !important;
+			}
 		}
 	}
 	.nav-toggle {
 		background-image: url(../images/toggle-black.svg) !important;
+		&:hover {
+			background-image: url(../images/toggle-orange.svg) !important;
+		}
 	}
 	header.main nav .cell .sub-menu .child-item {
 		background-image: url(../images/bullet-black.svg) !important;
+		&:hover {
+			background-image: url(../images/bullet-orange.svg) !important;
+		}
 	}
 	.content .filter .bar .select.dropdown {
 		background-image: url(../images/dropdown-black.svg) !important;
+		&:hover {
+			background-image: url(../images/dropdown-orange.svg) !important;
+		}
 	}
 	.content .filter .bar .select.view.toggle {
 		background-image: url(../images/view-toggle-black.svg) !important;
+		&:hover {
+			background-image: url(../images/view-toggle-orange.svg) !important;
+		}
 	}
 	.content .residents .resident .image {
 		background-color: white;
@@ -35,6 +53,15 @@ section.alumni {
 			background-color: $black !important;		
 			color: $white !important;
 			border-color: $white !important;	
+		}
+		a:hover {
+			color: $white;
+		}
+		aside.footer {
+			border-color: $white !important;
+		 	.logo:hover {
+				background-image: url(../images/logo-orange.svg) !important;
+			}
 		}
 	}
 }
