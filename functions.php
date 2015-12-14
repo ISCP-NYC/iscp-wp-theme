@@ -662,14 +662,11 @@ function add_parent_class( $items ) {
 }
 add_filter( 'wp_nav_menu_objects', 'add_parent_class' );
 
-
-// First, create a function that includes the path to your favicon
 function add_favicon() {
   	$favicon_url = get_template_directory_uri( ). '/assets/images/favicons/favicon.ico';
 	echo '<link rel="shortcut icon" href="' . $favicon_url . '" />';
 }
   
-// Now, just make sure that function runs when you're on the login page and admin pages  
 add_action('login_head', 'add_favicon');
 add_action('admin_head', 'add_favicon');
 

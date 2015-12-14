@@ -627,7 +627,7 @@ section {
             outline: none;
             border: solid #fff;
             border-width: 0 0 0 2px;
-            background-color: #ff5000;
+            background-color: transparent;
             color: #fff;
             font-size: 20px;
             line-height: 23px; }
@@ -1920,35 +1920,45 @@ section.apply .program {
       margin: 0 10px 10px 0; }
 
 /* line 1, ../sass/_sections/alumni.scss */
-body.alumni {
-  background-color: #1a1919; }
+section.alumni {
+  background-color: #fff !important; }
   /* line 3, ../sass/_sections/alumni.scss */
-  body.alumni * {
-    border-color: #fff !important;
-    color: #fff !important; }
+  section.alumni * {
+    color: #1a1919 !important;
+    border-color: #1a1919 !important; }
   /* line 7, ../sass/_sections/alumni.scss */
-  body.alumni header.main,
-  body.alumni header.main nav,
-  body.alumni header.main nav a.overlay {
-    background-color: #1a1919 !important; }
-  /* line 12, ../sass/_sections/alumni.scss */
-  body.alumni section aside.main .logo {
-    background-image: url(../images/logo-white.svg) !important; }
-  /* line 15, ../sass/_sections/alumni.scss */
-  body.alumni section .nav-toggle {
-    background-image: url(../images/toggle-white.svg) !important; }
-  /* line 18, ../sass/_sections/alumni.scss */
-  body.alumni section header.main nav .cell .sub-menu .child-item {
-    background-image: url(../images/bullet-white.svg) !important; }
-  /* line 21, ../sass/_sections/alumni.scss */
-  body.alumni .content .filter .bar .select.dropdown {
-    background-image: url(../images/dropdown-white.svg) !important; }
-  /* line 24, ../sass/_sections/alumni.scss */
-  body.alumni .content .filter .bar .select.view.toggle {
-    background-image: url(../images/view-toggle-white.svg) !important; }
-  /* line 27, ../sass/_sections/alumni.scss */
-  body.alumni .content .residents .resident .image {
+  section.alumni nav,
+  section.alumni header.main nav a.overlay {
+    background-color: #fff !important; }
+  /* line 11, ../sass/_sections/alumni.scss */
+  section.alumni aside.main {
+    border-color: #1a1919 !important; }
+    /* line 13, ../sass/_sections/alumni.scss */
+    section.alumni aside.main .logo {
+      background-image: url(../images/logo-black.svg) !important; }
+  /* line 17, ../sass/_sections/alumni.scss */
+  section.alumni .nav-toggle {
+    background-image: url(../images/toggle-black.svg) !important; }
+  /* line 20, ../sass/_sections/alumni.scss */
+  section.alumni header.main nav .cell .sub-menu .child-item {
+    background-image: url(../images/bullet-black.svg) !important; }
+  /* line 23, ../sass/_sections/alumni.scss */
+  section.alumni .content .filter .bar .select.dropdown {
+    background-image: url(../images/dropdown-black.svg) !important; }
+  /* line 26, ../sass/_sections/alumni.scss */
+  section.alumni .content .filter .bar .select.view.toggle {
+    background-image: url(../images/view-toggle-black.svg) !important; }
+  /* line 29, ../sass/_sections/alumni.scss */
+  section.alumni .content .residents .resident .image {
     background-color: white; }
+  /* line 32, ../sass/_sections/alumni.scss */
+  section.alumni footer {
+    background-color: #1a1919 !important; }
+    /* line 34, ../sass/_sections/alumni.scss */
+    section.alumni footer * {
+      background-color: #1a1919 !important;
+      color: #fff !important;
+      border-color: #fff !important; }
 
 /* line 2, ../sass/_sections/about.scss */
 section#about .module {

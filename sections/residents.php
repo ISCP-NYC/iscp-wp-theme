@@ -5,7 +5,7 @@
 
 ?>
 
-<section id="<?php echo $slug ?>" class="residents">
+<section class="<?php echo $slug ?> residents">
 	<?php get_template_part('partials/nav') ?>
 	<?php get_template_part('partials/side') ?>
 	<div class="content">

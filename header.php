@@ -87,5 +87,5 @@
 
 
 ?>
-<body <?php body_class($classes); ?>>
+<body <?php body_class(); ?>>
 	<main>

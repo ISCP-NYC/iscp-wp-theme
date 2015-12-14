@@ -164,56 +164,57 @@
 
 			</div>
 		<?php endif; ?>
+		
+		<?php 
+		$residents = get_field( 'residents' );
+		if( $residents ):
+			echo '<div class="residents shelves grid">';
+			echo '<h4>Participating Residents</h4>';
+			echo '<div class="inner">';
+			foreach( $residents as $resident ): 
+				$resident_id = $resident->ID;
+				$resident_name = get_the_title( $resident_id );
+				$resident_country = ucwords( get_field('country_temp', $resident_id ) );
+				$resident_sponsor = ucwords( get_field('sponsor_temp', $resident_id ) );
+				$resident_start_date = get_field('residency_dates_0_start_date', $resident_id );
+				$resident_year = new DateTime($resident_start_date);
+				$resident_year = $resident_year->format('Y');
+				$resident_url =  get_the_permalink( $resident_id );
+				$thumb = get_thumb( $resident_id );
+				if( is_alumni( $id ) ) {
+					$resident_status = 'Current';
+					$resident_studio = get_field('studio_number', $resident_id );
+				} else {
+					$resident_status = 'Alumni';
+				}
 
-		<div class="residents shelves grid">
-			<h4>Participating Residents</h4>
-			<div class="inner">
-				<?php 
-					$residents = get_field( 'residents' );
-					print_r( $residents );
-					foreach( $residents as $resident ): 
-						$resident_id = $resident->ID;
-						$resident_name = get_the_title( $resident_id );
-						$resident_country = ucwords( get_field('country_temp', $resident_id ) );
-						$resident_sponsor = ucwords( get_field('sponsor_temp', $resident_id ) );
-						$resident_start_date = get_field('residency_dates_0_start_date', $resident_id );
-						$resident_year = new DateTime($resident_start_date);
-						$resident_year = $resident_year->format('Y');
-						$resident_url =  get_the_permalink( $resident_id );
-						$thumb = get_thumb( $resident_id );
-						if( is_alumni( $id ) ) {
-							$resident_status = 'Current';
-							$resident_studio = get_field('studio_number', $resident_id );
-						} else {
-							$resident_status = 'Alumni';
-						}
+				echo '<div class="resident shelf-item event"><div class="inner">';
+				echo '<a href="' . $resident_url . '">';
+				echo '<h3 class="name">' . $resident_name . '</h3>';
+				echo '<div class="image">';
+				echo '<img src="' . $thumb . '"/>';
+				echo '</div>';
+				echo '</a>';
+				echo '<div class="details">';
+				echo '<div class="left half">';
+				echo '<div class="detail country">' . $resident_country . '</div>';
+				echo '<div class="detail sponsor">' . $resident_sponsor . '</div>';
+				echo '</div>';
+				echo '<div class="right half">';
+				echo '<div class="detail status">' . $resident_status . ' Resident</div>';
+				if( $resident_studio ) {
+					echo '<div class="detail studio">Studio #' . $resident_studio . ' Resident</div>';
+				}
+				echo '</div></div></div></div>';
 
-						echo '<div class="resident shelf-item event"><div class="inner">';
-						echo '<a href="' . $resident_url . '">';
-						echo '<h3 class="name">' . $resident_name . '</h3>';
-						echo '<div class="image">';
-						echo '<img src="' . $thumb . '"/>';
-						echo '</div>';
-						echo '</a>';
-						echo '<div class="details">';
-						echo '<div class="left half">';
-						echo '<div class="detail country">' . $resident_country . '</div>';
-						echo '<div class="detail sponsor">' . $resident_sponsor . '</div>';
-						echo '</div>';
-						echo '<div class="right half">';
-						echo '<div class="detail status">' . $resident_status . ' Resident</div>';
-						if( $resident_studio ) {
-							echo '<div class="detail studio">Studio #' . $resident_studio . ' Resident</div>';
-						}
-						echo '</div></div></div></div>';
-
-					endforeach;
-				?>
-			</div>
-		</div>
+			endforeach;
+			echo '</div>';
+			echo '</div>';
+		endif;
+		?>
 
 		<div class="upcoming shelves grid">
-			<h4>Upcoming <?php echo $event_type_pretty ?></h4>
+			<h4>Upcoming Events &amp; Exhibitions</h4>
 			<div class="inner">
 				<?php 
 					$today = new DateTime();
@@ -241,21 +242,22 @@
 							)
 						),
 						'orderby' => 'meta_value',
-					    'order' => 'ASC'
+					    'order' => 'ASC',
+					    'post__not_in' => array($id)
 					);
 
 					$loop = new WP_Query( $args );
 					while ( $loop->have_posts() ) : $loop->the_post();
 						$upcoming_id = $the_ID;
 						$upcoming_title = get_the_title( $upcoming_id );
-						$upcoming_url = get_permalink();
+						$upcoming_url = get_permalink( $upcoming_id );
 						$upcoming_type = get_field('event_type', $upcoming_id);
-						$upcoming_dates = get_event_date( $id );
+						$upcoming_dates = get_event_date( $upcoming_id );
 						$upcoming_dates = preg_replace("~</br>~", ' ', $dates);
 						$upcoming_thumb = get_thumb( $upcoming_id );
 						echo '<div class="event shelf-item event' . $upcoming_type . '"><div class="inner">';
 						echo '<a href="' . $upcoming_url . '">';
-						echo '<h3 class="name">' . $upcoming_name . '</h3>';
+						echo '<h3 class="name">' . $upcoming_title . '</h3>';
 						echo '<div class="image">';
 						echo '<img src="' . $upcoming_thumb . '"/>';
 						echo '</div>';

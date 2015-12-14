@@ -51,7 +51,7 @@ footer {
 					outline: none;
 					border: solid $white;
 					border-width: 0 0 0 2px;
-					background-color: $orange;
+					background-color: transparent;
 					color: $white;
 					@include small-fs;
 					@include placeholder {

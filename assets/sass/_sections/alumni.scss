@@ -1,30 +1,40 @@
-body.alumni {
-	background-color: $black;
+section.alumni {
+	background-color: $white !important;
 	* {
-		border-color: $white !important;
-		color: $white !important;
+		color: $black !important;
+		border-color: $black !important;
 	}
-	header.main,
-	header.main nav,
+	nav,
 	header.main nav a.overlay {
-		background-color: $black !important;
+		background-color: $white !important;
 	}
-	section aside.main .logo {
-		background-image: url(../images/logo-white.svg) !important;
+	aside.main {
+		border-color: $black !important;
+	 	.logo {
+			background-image: url(../images/logo-black.svg) !important;
+		}
 	}
-	section .nav-toggle {
-		background-image: url(../images/toggle-white.svg) !important;
+	.nav-toggle {
+		background-image: url(../images/toggle-black.svg) !important;
 	}
-	section header.main nav .cell .sub-menu .child-item {
-		background-image: url(../images/bullet-white.svg) !important;
+	header.main nav .cell .sub-menu .child-item {
+		background-image: url(../images/bullet-black.svg) !important;
 	}
 	.content .filter .bar .select.dropdown {
-		background-image: url(../images/dropdown-white.svg) !important;
+		background-image: url(../images/dropdown-black.svg) !important;
 	}
 	.content .filter .bar .select.view.toggle {
-		background-image: url(../images/view-toggle-white.svg) !important;
+		background-image: url(../images/view-toggle-black.svg) !important;
 	}
 	.content .residents .resident .image {
 		background-color: white;
+	}
+	footer {
+		background-color: $black !important;
+		* {
+			background-color: $black !important;		
+			color: $white !important;
+			border-color: $white !important;	
+		}
 	}
 }
