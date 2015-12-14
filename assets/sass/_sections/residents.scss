@@ -1,36 +1,4 @@
-.content {
-	.filter {
-		width: 100%;
-		display: table;
-		margin: 25px 0;
-		@extend .noselect;
-		.bar {
-			width: 100%;
-			display: table;
-			.select {
-				float: left;
-			}
-		}
-		.sub {
-			display: none;
-			margin-top: 20px;
-			font-size: $xsmall-fs;
-			line-height: $xsmall-lh;
-	  		&.show {
-	  			display: block;
-	  		}
-			.option {
-				float: left;
-				margin: 0 0 20px 0;
-			}
-			&.country .option {
-				width: 25%;
-			}
-			&.year .option {
-				width: 10%;
-			}
-		}
-	}
+section.residents .content {
 	.residents {
 		margin-top: 50px;
 		.resident {

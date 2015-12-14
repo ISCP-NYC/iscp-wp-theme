@@ -22,7 +22,7 @@
             display: flex;
             float: left;
             padding-bottom: 50px;
-            margin-bot-tom: 50px;
+            margin-bottom: 50px;
             .inner {
                 @include width('100% - 20px');
                 span {
@@ -30,8 +30,8 @@
                     display: block;
                 }
                 .details {
-                    font-size: $xsmall-fs;
-                    line-height: $xsmall-lh;
+                    margin-top: 15px;
+                    @include xsmall-fs;
                 }
             }
             &:nth-child(3n+1) .inner {
@@ -43,7 +43,7 @@
             &:nth-child(3n+3) .inner {
                 margin: 0 0 0 20px;
             }
-            @include laptop {
+            @include medium {
                 width: 50%;
                 &:nth-child(even) .inner {
                     margin: 0 0 0 20px;
@@ -52,7 +52,7 @@
                     margin: 0 20px 0 0;
                 }
             }
-            @include mobile {
+            @include xsmall {
                 width: 100%;
                 .inner {
                     width: 100%;
@@ -74,7 +74,7 @@
                 .value {
                     float:left;
                     text-align: left;
-                    font-size: $small-fs;
+                    @include small-fs;
                     display: -webkit-flex;
                     display: -ms-flexbox;
                     display: flex;
@@ -88,6 +88,61 @@
                     }
                 }
             }
+        }
+    }
+}
+
+
+
+
+.filter {
+    width: 100%;
+    display: table;
+    margin: 25px 0;
+    @extend .noselect;
+    .select {
+        @include small-fs;
+        display: table;
+        color: $orange;
+        padding-right: 25px;
+        margin-right: 20px;
+        background-size: 20px 40px;
+        background-position: right top;
+        background-repeat: no-repeat;
+        cursor: pointer;
+        &.view.toggle {
+            span.grid{display: none;}
+            background-image: url(../images/view-toggle-orange.svg);
+            &.grid {
+                span.grid{display: block;}
+                span.list{display: none;}
+                background-position: right bottom;
+            }
+        }
+        &.dropdown {
+            background-image: url(../images/dropdown-orange.svg);
+            &.dropped {
+                background-position: right bottom;
+            }
+        }
+    }
+    .bar {
+        width: 100%;
+        display: table;
+        .select {
+            float: left;
+        }
+    }
+    .sub {
+        display: none;
+        margin-top: 20px;
+        @include xsmall-fs;
+        &.show {
+            display: block;
+        }
+        .option {
+            float: left;
+            margin: 0 25px 20px 0;
         }
     }
 }

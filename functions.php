@@ -50,6 +50,7 @@ add_action( 'wp_enqueue_scripts', 'iscp_scripts' );
 
 show_admin_bar(false);
 add_theme_support( 'post-thumbnails' ); 
+add_image_size( 'thumb', 500, 350, true );
 
 /////////////////////////////////////
 /////////////////////////////////////
@@ -262,30 +263,30 @@ add_filter( 'query_vars', 'add_query_vars_filter' );
 //////////HELPER QUESTIONS///////////
 /////////////////////////////////////
 /////////////////////////////////////
-function is_alumni( $id ) {
-	$today = new DateTime();
-	$today = $today->format('Ymd');
-	$residents = get_post( $id );
-	$end_date = get_field('residency_dates_0_end_date', $id);
-	if($end_date > $today) {
-		return false;
-	} else {
-		return true;
-	}
-}
-
 function is_current( $id ) {
 	$today = new DateTime();
 	$today = $today->format('Ymd');
-	$residents = get_post( $id );
-
-	$ed = get_end_date_value( $id );
-
-	$end_date = get_field($ed, $id);
-	if($end_date < $today) {
-		return true;
-	} else {
-		return false;
+	$resident = get_post( $id );
+	$end_date = get_resident_end_date( $id );
+	if($end_date) {
+		if($end_date > $today) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+}
+function is_alumni( $id ) {
+	$today = new DateTime();
+	$today = $today->format('Ymd');
+	$resident = get_post( $id );
+	$end_date = get_resident_end_date( $id );
+	if($end_date) {
+		if($end_date < $today) {
+			return true;
+		} else {
+			return false;
+		}
 	}
 }
 function is_ground_floor( $id ) {
@@ -297,6 +298,7 @@ function is_ground_floor( $id ) {
 ///////////HELPER METHODS////////////
 /////////////////////////////////////
 /////////////////////////////////////
+
 function format_date( $id ) {
 	$sd = get_start_date_value( $id );
 	$ed = get_end_date_value( $id );
@@ -315,7 +317,7 @@ function format_date( $id ) {
 }
 
 function get_start_date_value( $id ) {
-	$post_type = get_field('post_type', $id);
+	$post_type = get_post_type( $id );
 	if($post_type == 'resident') {
 		return 'residency_dates_0_start_date';
 	} else {
@@ -324,12 +326,20 @@ function get_start_date_value( $id ) {
 }
 
 function get_end_date_value( $id ) {
-	$post_type = get_field('post_type', $id);
+	$post_type = get_post_type( $id );
 	if($post_type == 'resident') {
 		return 'residency_dates_0_end_date';
 	} else {
 		return 'end_date';
 	}
+}
+
+function get_resident_end_date( $id ) {
+	while( has_sub_field( 'residency_dates', $id ) ):
+		$end_date = get_sub_field( 'end_date', $id );
+	endwhile;
+	$last_end_date = new DateTime( $end_date );
+	return $last_end_date->format('Ymd');
 }
 
 function get_display_image( $id ) {
@@ -345,7 +355,7 @@ function get_display_image( $id ) {
 	}
 }
 
-function get_next_residents( $count ) {
+function get_residents( $center_id, $direction, $count ) {
 	$country = get_query_var( 'country_temp' );
 	$year = get_query_var( 'when' );
 
@@ -369,7 +379,7 @@ function get_next_residents( $count ) {
 			'compare' => 'BETWEEN'
 		);
 		$append_query = '?when=' . $year;
-	}
+	} 
 
 	$today = new DateTime();
 	$today = $today->format( 'Ymd' );
@@ -399,13 +409,267 @@ function get_next_residents( $count ) {
 		);
 	}
 
+	if($direction == 'next') {
+		$compare = '>=';
+	} else if($direction == 'prev') {
+		$compare = '<=';
+	}
+
+	$center_date = get_field('residency_dates_0_end_date', $center_id);
+
+	$direction_query = array(
+		'key' => 'residency_dates_0_end_date',
+		'type' => 'DATE',
+		'value' => $center_date,
+		'compare' => $compare
+	);
 	
 	$args = array(
 		'post_type' => 'resident',
 		'posts_per_page' => $count,
-		'meta_query' => array( $page_query, $filter_query )
+		'meta_query' => array( $page_query, $filter_query, $direction_query )
 	);
 
 	$next_residents = new WP_Query( $args );
 	return $next_residents;
 }
+
+//http://stackoverflow.com/questions/2915864/php-how-to-find-the-time-elapsed-since-a-date-time
+function humanTiming ($time)
+{
+
+    $time = time() - $time;
+    $time = ($time<1)? 1 : $time;
+    $tokens = array (
+        31536000 => 'y',
+        2592000 => 'm',
+        604800 => 'wk',
+        86400 => 'day',
+        3600 => 'hr',
+        60 => 'min',
+        1 => 'sec'
+    );
+
+    foreach ($tokens as $unit => $text) {
+        if ($time < $unit) continue;
+        $numberOfUnits = floor($time / $unit);
+        return $numberOfUnits.$text.(($numberOfUnits>1)?'s':'');
+    }
+
+}
+
+
+function makeClickableLinks($s) {
+  return preg_replace('@(https?://([-\w\.]+[-\w])+(:\d+)?(/([\w/_\.#-]*(\?\S+)?[^\.\s])?)?)@', '<a target="blank" rel="nofollow" href="$1" target="_blank">$1</a>', $s);
+}
+
+function get_tweets( $count ) {
+	$about = get_page_by_path( 'about' );
+	$handle = get_field( 'twitter', $about );
+
+	include_once( get_template_directory() . '/libraries/twitteroauth/twitteroauth.php' );
+
+	$twitter_customer_key           = 'w6jdx2IiW59vScHvUyYR6LJ5i';
+	$twitter_customer_secret        = '4kYwLxdDXyIPi5ndLAht3Ln1oFX3iRTHxYqakghmeAGEVglTpY';
+	$twitter_access_token           = '4343711140-4bb6E3bLjnIChxGwtD71disJm3C6H3Oo2u4qXFX';
+	$twitter_access_token_secret    = '7NVIEwXODgcK6hB46UheZG9bPkFT63Ck8Fbwi4UaKzl1T';
+
+	$connection = new TwitterOAuth($twitter_customer_key, $twitter_customer_secret, $twitter_access_token, $twitter_access_token_secret);
+
+	$raw_tweets = $connection->get('statuses/user_timeline', array('screen_name' => $handle, 'count' => $count ) );
+	$tweets = new ArrayObject();
+	$twitter_url = 'http://twitter.com/'.$handle;
+	echo '<div class="twitter">';
+	echo '<div class="follow">';
+	echo '<a href="'.$twitter_url.'" target="_blank">';
+	echo 'Follow us on Twitter @'.$handle;
+	echo '</a>';
+	echo '</div>';
+	echo '<div class="tweets">';
+
+	$counter = 0;
+	foreach ($raw_tweets as $tweet) {
+		if(isset($tweet->errors)) {           
+		    // $tweet = 'Error :'. $raw_tweets[$counter]->errors[0]->code. ' - '. $raw_tweets[$counter]->errors[0]->message;
+		} else {
+		    $text = makeClickableLinks($tweet->text);
+		    $timestamp = strtotime($tweet->created_at);
+		    $elapsed = humanTiming($timestamp);
+		    $id = $tweet->id;
+		    $url = 'http://twitter.com/'.$handle.'/status/'.$id;
+		    echo '<div class="tweet">';
+		    echo '<div class="text">';
+			echo $text;
+			echo '</div>';
+			echo '<a href="'.$url.'" target="_blank" class="timestamp">';
+			echo $elapsed;
+			echo '</a>';
+			echo '</div>';
+		}
+	}
+
+	echo '</div>';
+	echo '</div>';
+}
+
+function get_event_date( $id ) {
+	$today = new DateTime();
+	$today = $today->format('Y-m-d H:i:s');
+	if ( get_field('start_date', $id) ):
+		$start_date = new DateTime(get_field('start_date', $id));
+		$start_month = $start_date->format('M');
+		$start_day_word = $start_date->format('l');
+		$start_day = $start_date->format('d');
+		$start_year = $start_date->format('Y');
+	endif;
+
+	if ( get_field('end_date', $id) ):
+		$end_date = new DateTime(get_field('end_date', $id));
+		$end_month = $end_date->format('M');
+		$end_day_word = $end_date->format('l');
+		$end_day = $end_date->format('d');
+		$end_year = $end_date->format('Y');
+	endif;
+
+	if ( get_field('date', $id) ):
+		$event_date = new DateTime(get_field('date', $id));
+		$event_month = $event_date->format('M');
+		$event_day_word = $event_date->format('l');
+		$event_day = $event_date->format('d');
+		$event_year = $event_date->format('Y');
+	endif;
+
+	$start_time = get_field('start_time', $id);
+	$end_time = get_field('end_time', $id);
+
+	$type = get_field('event_type', $id);
+	switch ($type) {
+		case 'event':
+	    	$type_name = 'Event';
+	    	$date_format = $event_month . ' ' . $event_day . ' ' . $event_year;
+	    	if( $start_time ):
+	    		$date_format .= '</br>' . $start_time;
+	    		if( $end_time ):
+	    			$date_format .= ' - ' . $end_time;
+	    		endif;
+			endif;
+	    	break;
+	    case 'iscp-talk':
+	    	$type_name = 'ISCP Talk';
+	    	$date_format = $event_month . ' ' . $event_day . ' ' . $event_year;
+	    	if( $start_time ):
+	    		$date_format .= '</br>' . $start_time;
+	    		if( $end_time ):
+	    			$date_format .= ' - ' . $end_time;
+	    		endif;
+			endif;
+	    	break;
+	    case 'exhibition':
+	    	$type_name = 'Exhibition';
+	    	if ( $today > $start_date ):
+				$date_format = 'Thru ' . $end_month . ' ' . $end_day. ' ' . $end_year;;
+			else:
+				$date_format = $start_month . ' ' . $start_day . ' - ' . $end_month . ' ' . $end_day;
+				$date_format .= '</br>' . $start_year;
+			endif;
+	    	break;
+	    case 'open-studios':
+	    	$type_name = 'Open Studio';
+	    	if ( $today > $start_date ):
+				$date_format = 'Thru ' . $end_month . ' ' . $end_day. ' ' . $end_year;;
+			else:
+				$date_format = $start_month . ' ' . $start_day . ' - ' . $end_month . ' ' . $end_day;
+				$date_format .= '</br>' . $start_year;
+			endif;
+	    	break;
+	    case 'off-site-project':
+	    	$type_name = 'Off-Site Project';
+	    	if ( $today > $start_date ):
+				$date_format = 'Thru ' . $end_month . ' ' . $end_day;
+			else:
+				$date_format = $start_month . ' ' . $start_day . ' - ' . $end_month . ' ' . $end_day;
+				$date_format .= '</br>' . $start_year;
+			endif;
+	    	break;
+	}
+	return $date_format;
+}
+
+function get_thumb( $id ) {
+	$thumbnail = get_display_image( $id );
+	if( !$thumbnail ) {
+		$thumbnail = get_field( 'gallery', $id )[0]['image']['sizes']['thumb'];
+	}
+	if( !$thumbnail ) {
+		$thumbnail = get_template_directory_uri() . '/assets/images/placeholder.svg';
+	}
+	return $thumbnail;
+}
+
+function pretty($string) {
+	switch ($string) {
+		case 'event':
+			return 'Event';
+			break;
+		case 'iscp-talk':
+			return 'ISCP Talk';
+			break;
+		case 'exhibition':
+			return 'Exhibition';
+			break;
+		case 'open-studios':
+			return 'Open Studios';
+			break;
+		case 'off-site-project':
+			return 'Off-Site Project';
+			break;
+	}
+}
+
+
+
+$result = add_role( 'resident', __( 'Resident' ),
+	array(
+		'read' => true,
+		'edit_posts' => false,
+		'edit_pages' => false,
+		'edit_others_posts' => false,
+		'create_posts' => false,
+		'manage_categories' => false,
+		'publish_posts' => false,
+		'install_plugins' => false,
+		'update_plugin' => false,
+		'update_core'
+	)
+);
+
+function user_is_resident() {
+	$user = wp_get_current_user();
+	$allowed_roles = array('editor', 'administrator', 'author', 'resident');
+	if( array_intersect($allowed_roles, $user->roles ) ) {
+		return true;
+	} else {
+		return false;
+	}
+}
+
+
+function add_parent_class( $items ) {
+    $parents = wp_list_pluck( $items, 'menu_item_parent');
+    foreach ( $items as $item )
+        in_array( $item->ID, $parents ) && $item->classes[] = 'parent';
+    return $items;
+}
+add_filter( 'wp_nav_menu_objects', 'add_parent_class' );
+
+
+// First, create a function that includes the path to your favicon
+function add_favicon() {
+  	$favicon_url = get_template_directory_uri( ). '/assets/images/favicons/favicon.ico';
+	echo '<link rel="shortcut icon" href="' . $favicon_url . '" />';
+}
+  
+// Now, just make sure that function runs when you're on the login page and admin pages  
+add_action('login_head', 'add_favicon');
+add_action('admin_head', 'add_favicon');
+

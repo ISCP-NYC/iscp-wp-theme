@@ -11,6 +11,9 @@
 	background-repeat: no-repeat;
 	cursor: pointer;
 	transition: transform 600ms cubic-bezier(0.645, 0.045, 0.355, 1);
+	@include xsmall {
+		left: 35px;
+	}
 }
 header.main {
 	@include width('100% - 280px');
@@ -23,6 +26,10 @@ header.main {
 	border-bottom: 10px solid $orange;
 	transform: translateY(calc(-100% + 100px));
 	transition: transform 600ms cubic-bezier(0.645, 0.045, 0.355, 1);
+	@include xsmall {
+		width: 100% !important;
+		left: 0;
+	}
 	nav {
 		width: 100%;
 		@include height('100% - 20px');
@@ -61,12 +68,14 @@ header.main {
 					background-color: $white;
 					h1 {
 						@extend .vertical-align;
-						font-size: 44px;
+						@include xlarge-fs;
 						text-align: center;
 					}
 				}
 			}
-			&:hover .inner a.overlay {
+			&.parent:hover .inner a.overlay,
+			&.search:hover .inner a.overlay,
+			 {
 				display: none;
 			}
 			.sub-menu {
@@ -88,7 +97,7 @@ header.main {
 					display: table;
 					margin: auto;
 					color: $orange;
-					font-size: 25px;
+					@include xlarge-fs;
 					padding: 10px;
 					border: 5px solid $orange;
 					outline: none; 

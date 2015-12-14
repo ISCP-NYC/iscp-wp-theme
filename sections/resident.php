@@ -1,35 +1,66 @@
-<h4 class="title orange"><?php the_title() ?></h4>
 <section class="resident single" id="<?php echo $slug ?>">
 	<?php get_template_part('partials/nav') ?>
 	<?php get_template_part('partials/side') ?>
 
 	<?php 
 		$id = get_the_ID();
-		$sponsor = get_field('sponsor_temp', $id);
-		$country = ucwords(get_field('country_temp', $id));
+		$country = ucwords( get_field( 'country_temp', $id ) );
 		$name = get_the_title();
-		$bio = get_field('bio', $id);
-		$website = get_field('website', $id);
-		$wbst = implode('/', array_slice(explode('/', preg_replace('/https?:\/\/|www./', '', $website)), 0, 1));
-		$studio_number = get_field('studio_number', $id);
-		$resident_type = ucfirst(get_field('resident_type', $id));
+		$bio = get_field( 'bio', $id );
+		$website = get_field( 'website', $id );
+		$wbst = implode( '/', array_slice(explode('/', preg_replace('/https?:\/\/|www./', '', $website ) ), 0, 1));
+		$studio_number = get_field( 'studio_number', $id );
+		$resident_type = ucfirst( get_field( 'resident_type', $id ) );
+		$residencies = array();
 
-		$start_date_dt = new DateTime(get_field('residency_dates_0_start_date', $id));
-		$end_date_dt = new DateTime(get_field('residency_dates_0_end_date', $id));
-		$start_date = $start_date_dt->format('M d, Y');
-		$end_date = $end_date_dt->format('M d, Y');
-		$dates = $start_date . ' — ' . $end_date;
+		while( has_sub_field( 'residency_dates', $residency ) ):
+			$start_date_dt = new DateTime( get_sub_field( 'start_date', $residency ) );
+			$end_date_dt = new DateTime( get_sub_field( 'end_date', $residency ) );
+			$start_date = $start_date_dt->format( 'M d, Y' );
+			$end_date = $end_date_dt->format( 'M d, Y' );
+			$sponsors = get_sub_field( 'sponsors', $residency );
+			$residency_object = (object) array(
+				'start_date_dt' => $start_date_dt,
+				'end_date_dt'   => $end_date_dt,
+				'start_date'    => $start_date,
+				'end_date'      => $end_date,
+				'date_range'    => $start_date . ' — ' . $end_date,
+				'sponsors'		=> $sponsors
+			);
+			array_push( $residencies, $residency_object );
+		endwhile;
 	?>
 
 	<div class="content">
+		<h4 class="title orange"><?php the_title() ?></h4>	
 		<header class="sub">
 			<div class="left">
 				<h4 class="country"><?php echo $country ?></h4>
 			</div>
 
 			<div class="center">
-				<h4 class="dates"><?php echo $dates ?></h4>
-				<h4 class="sponsor"><?php echo $sponsor ?></h4>
+
+				<?php foreach( $residencies as $residency ):
+					$date_range = $residency->date_range;
+					echo '<h4 class="dates">' . $date_range . '</h4>';	
+					$sponsors = $residency->sponsors;
+					if( is_array( $sponsors ) ):
+					echo '<h4 class="sponsors">';
+					foreach( $sponsors as $index=>$sponsor ):
+						$sponsor_name = get_the_title( $sponsor );
+						$sponsor_url = get_field( 'website', $sponsor );
+						echo '<a href="' . $sponsor_url . '">';
+						echo $sponsor_name;
+						echo '</a>';
+
+						if( $index != count( $sponsors ) - 1 ):
+							echo ',&nbsp;&nbsp;';
+						endif;
+					endforeach;
+					echo '</h4>';
+					endif;
+				endforeach; ?>
+				
 			</div>
 
 			<div class="right">
@@ -81,9 +112,8 @@
 
 		<div class="gallery">
 		<?php
-			if( have_rows('gallery') ):
-			    while ( have_rows('gallery') ) : the_row();
-
+			if( have_rows( 'gallery' ) ):
+			    while ( have_rows( 'gallery' ) ) : the_row();
 			        $gallery_image = get_sub_field( 'image' )['url'];
 			        $image_artist = get_sub_field( 'artist' );
 			        if( !$image_artist || $image_artist == '' ) {

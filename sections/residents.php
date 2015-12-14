@@ -5,7 +5,7 @@
 
 ?>
 
-<section id="<?php echo $slug ?>">
+<section id="<?php echo $slug ?>" class="residents">
 	<?php get_template_part('partials/nav') ?>
 	<?php get_template_part('partials/side') ?>
 	<div class="content">
@@ -23,7 +23,7 @@
 				<?php
 					$page_url = get_the_permalink();
 					$countries = get_posts( array(
-						'posts_per_page'	=> 1000,
+						'posts_per_page'	=> 20,
 						'post_type'			=> 'country',
 						'orderby' 			=> 'title',
 						'order' 			=> 'ASC'
@@ -117,14 +117,24 @@
 						);
 						break;
 				}
+
 				
 				$args = array(
 					'post_type' => 'resident',
 					'posts_per_page' => 30,
+					'orderby' => 'residency_dates_0_end_date',
+					'order' => 'DESC',
 					'meta_query' => array( $page_query, $filter_query )
 				);
 
 				$loop = new WP_Query( $args );
+
+				usort($loop->posts, function($a, $b) {
+				   return strcasecmp( 
+		                $a->post_title, 
+		                $b->post_title 
+		            );
+				});
 
 				while ( $loop->have_posts() ) : $loop->the_post();
 
@@ -134,15 +144,19 @@
 					$sponsor = get_field( 'sponsor_temp', $id );
 					$studio_number = get_field( 'studio_number', $id );
 					$url = get_permalink();
-					if($append_query && is_alumni( $id )) {
+					if( $append_query && is_alumni( $id ) ) {
 						$url .= $append_query;
+					}
+					$thumbnail = get_display_image( $id );
+					if( !$featured_image ) {
+						$thumbnail = get_field( 'gallery' )[0]['image']['sizes']['event_thumb'];
 					}
 
 					echo '<div class="resident orange shelf-item border-bottom"><div class="inner">';
 					echo '<h3 class="value name"><a href="' . $url . '">' . $title . '</a></h3>';
 					echo '<a href="' . $url . '">';
 					echo '<div class="image">';
-					echo '<img src="' . get_display_image( $id ) . '"/>';
+					echo '<img src="' . $thumbnail . '"/>';
 					echo '</div>';
 					echo '</a>';
 					echo '<div class="details">';
@@ -150,7 +164,7 @@
 					echo '<div class="value country"><a href="#">' . $country . '</a></div>';
 					echo '<div class="value sponsor"><a href="#">' . $sponsor . '</a></div>';
 					echo '</div>';
-					echo '<div class="value studio-number"><span>Studio 0' . $studio_number . '</span></div>';
+					echo '<div class="value studio-number">Studio 0' . $studio_number . '</div>';
 					echo '</div></div></div>';
 
 				endwhile;

@@ -2,58 +2,68 @@ section.programs {
 	.program-links {
 		margin-top: 30px;
 	}
+	.images {
+		margin-top: 50px;	
+		@extend .wrap-parent;
+		.image {
+			@extend .wrap-child;
+			@include width('50% - 15px');
+			float: left;
+			&:first-child {
+				margin-right: 15px;
+			}
+			&:last-child {
+				margin-left: 15px;
+			}
+			img {
+				width: 100%;
+			}
+		}
+		.caption {
+			margin-top: 10px;
+			@include small-fs;
+			text-align: center;
+		}
+	}
 	.program {
 		margin-top: 30px;
 		h3.title {
 			padding: 20px 0;
 		}
 		.description {
-			font-size: $medium-fs;
-			line-height: $medium-lh;
+			@include medium-fs;
 		}
 		.apply {
 			margin: 20px 0;
-			display: block;
+			display: table;
 		}
 		.deadline-notes {
-			font-size: $small-fs;
-			line-height: $small-lh;
+			@include small-fs;
 		}
 		.columns {
 			width: 100%;
 			margin: 50px 0;
-			display: table;
-			display: -webkit-flex;
-		    display: -ms-flexbox;
-		    display: flex;
-		    -webkit-flex-wrap: wrap;
-		    -ms-flex-wrap: wrap;
-		    flex-wrap: wrap;
+			@extend .wrap-parent;
 			.column {
-		        display: -webkit-flex;
-		        display: -ms-flexbox;
-		        display: flex;
+		        @extend .wrap-child;
 		        float: left;
 		        .inner {
 		        	.background {
 		        		width: 100%;
-						height: 300px;
 						display: table;
-						background-color: $orange;
 		        	}
 					.image {
-						width: 100%;
-						height: 100%;
-						//auto size and crop image so bg is not needed
-						background-position: center;
-						background-repeat: no-repeat;
-						background-size: cover;
-						-webkit-filter: grayscale(100%);
-						-moz-filter: grayscale(100%);
-						-ms-filter: grayscale(100%);
-						-o-filter: grayscale(100%);
-						filter: grayscale(100%);
-						mix-blend-mode: screen;
+						background-color: $orange;
+						img {
+							width: 100%;
+							display: table;
+							-webkit-filter: grayscale(100%);
+							-moz-filter: grayscale(100%);
+							-ms-filter: grayscale(100%);
+							-o-filter: grayscale(100%);
+							filter: grayscale(100%);
+							mix-blend-mode: screen;
+						}
 					}
 					h3.title {
 						width: 100%;
@@ -67,51 +77,35 @@ section.programs {
 					.links {
 						padding: 20px 0;
 						a {
-							font-size: $medium-fs;
+							@include medium-fs;
 							display: block;
 							margin-bottom: 5px;
 						}
 					}
 				}
-				@include large-desktop {
-	                width: 25%;
-	                .inner {
-	                	@include width('100% - 40px');
-		            	margin: 0 20px;
-	                }
-	            }
-				@include desktop {
-	                width: 25%;
-	                .inner {
-	                	@include width('100% - 40px');
-		            	margin: 0 20px;
-	                }
-	            }
-			  	@include laptop {
-			  		width: 50%;
-	                .inner {
-	                	@include width('100% - 20px');
-	                }
-	                &:nth-child(odd) .inner {
+				@include width('25% - 15px');
+				&:first-child {
+					margin: 0 15px 0 0;
+				}
+				&:nth-child(2) {
+					margin: 0 10px 0 5px;
+				}
+				&:nth-child(3) {
+					margin: 0 5px 0 10px;
+				}
+				&:last-child {
+					margin: 0 0 0 15px;
+				}
+			  	@include large {
+			  		@include width('50% - 20px');
+	                &:nth-child(odd) {
 		                margin: 0 20px 0 0;
 		            }
-		            &:nth-child(even) .inner {
+		            &:nth-child(even) {
 		                margin: 0 0 0 20px;
 		            }
 	            }
-	            @include tablet {
-	                width: 50%;
-	                .inner {
-	                	@include width('100% - 20px');
-	                }
-	                &:nth-child(odd) .inner {
-		                margin: 0 20px 0 0;
-		            }
-		            &:nth-child(even) .inner {
-		                margin: 0 0 0 20px;
-		            }
-	            }
-	            @include mobile {
+	            @include xsmall {
 	                width: 100%;
 	                .inner {
 	                    width: 100%;

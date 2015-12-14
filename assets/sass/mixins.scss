@@ -11,38 +11,45 @@
 	height: calc(#{$calc});
 }
 
-$mobile-width: 480px;
-$tablet-width: 768px;
-$laptop-width: 1024px;
-$desktop-width: 1824px;
-$large-desktop-width: 2560px;
+$xsmall-width: 480px;
+$small-width: 768px;
+$medium-width: 900px;
+$large-width: 1280px;
+$xlarge-width: 1824px;
+$xxlarge-width: 2560px;
 
-@mixin large-desktop {
-  @media (min-width: #{$large-desktop-width}) {
+@mixin xxlarge {
+  @media (max-width: #{$xxlarge-width}) {
     @content;
   }
 }
 
-@mixin desktop {
-  @media (min-width: #{$desktop-width}) and (max-width: #{$large-desktop-width - 1px}) {
+@mixin xlarge {
+  @media (max-width: #{$xlarge-width}) {
     @content;
   }
 }
 
-@mixin laptop {
-  @media (min-width: #{$laptop-width}) and (max-width: #{$desktop-width - 1px}) {
+@mixin large {
+  @media (max-width: #{$large-width}) {
     @content;
   }
 }
 
-@mixin tablet {
-  @media (min-width: #{$tablet-width}) and (max-width: #{$laptop-width - 1px}) {
+@mixin medium {
+  @media (max-width: #{$medium-width}) {
     @content;
   }
 }
 
-@mixin mobile {
-  @media (max-width: #{$mobile-width - 1px}) {
+@mixin small {
+  @media (max-width: #{$small-width}) {
+    @content;
+  }
+}
+
+@mixin xsmall {
+  @media (max-width: #{$xsmall-width}) {
     @content;
   }
 }
@@ -57,4 +64,73 @@ $large-desktop-width: 2560px;
     only screen and (min-resolution: 2dppx) {
     @content;
   }
+}
+
+@mixin xsmall-fs {
+  font-size: $xsmall-fs;
+  line-height: $xsmall-lh;
+  @include medium {
+    font-size: $xxsmall-fs;
+    line-height: $xxsmall-lh;
+  }
+}
+
+@mixin small-fs {
+  font-size: $small-fs;
+  line-height: $small-lh;
+  @include medium {
+    font-size: $xsmall-fs;
+    line-height: $xsmall-lh;
+  }
+}
+
+@mixin medium-fs {
+  font-size: $medium-fs;
+  line-height: $medium-lh;
+  @include medium {
+    font-size: $small-fs;
+    line-height: $small-lh;
+  }
+}
+
+@mixin large-fs {
+  font-size: $large-fs;
+  line-height: $large-lh;
+  @include medium {
+    font-size: $medium-fs;
+    line-height: $medium-lh;
+  }
+}
+
+@mixin xlarge-fs {
+  font-size: $xlarge-fs;
+  line-height: $xlarge-lh;
+  @include medium {
+    font-size: $large-fs;
+    line-height: $large-lh;
+  }
+}
+
+@mixin xxlarge-fs {
+  font-size: $xxlarge-fs;
+  line-height: $xxlarge-lh;
+  @include medium {
+    font-size: $xlarge-fs;
+    line-height: $xlarge-lh;
+  }
+}
+
+@mixin placeholder {
+  &::-webkit-input-placeholder {
+     @content;
+  }
+  &:-moz-placeholder {
+     @content; 
+  }
+  &::-moz-placeholder {
+     @content; 
+  }
+  &:-ms-input-placeholder {  
+     @content; 
+  } 
 }

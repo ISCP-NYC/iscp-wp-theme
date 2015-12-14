@@ -12,11 +12,17 @@ html,
 body {
 	height: 100%;
 	overflow: hidden;
+	font-family: 'Life Rounded';
 }
-
+#mfPreviewBar {
+	display: none;
+}
 a {
 	text-decoration: none;
 	color: $orange;
+}
+input {
+	outline: none;
 }
 main {
 	height: 100%;
@@ -34,12 +40,18 @@ section {
 	@import '_partials/header';
 	@import '_partials/side';
 	@import '_partials/footer';
+	@import '_partials/slider';
+	@import '_partials/twitter';
 	.content {
 		@include width('100% - 80px - '$side_width*2);
 		@include height('100% - 260px');
 		padding: 130px 30px;
 		margin-left: 130px;
-		overflow-y: scroll
+		overflow-y: scroll;
+		@include xsmall {
+			@include width('100% - 60px');
+			margin-left: 0;
+		}
 	}
 	&.center {
 	}
@@ -53,9 +65,10 @@ section {
 		}
 	}
 }
-em {
+
+em, i {
 	display: inline;
-    font-style: italic;
+    font-family: 'Life Italic';
 }
 p {
 	text-indent: 60px;
@@ -64,32 +77,30 @@ p:first-child {
 	text-indent: 0;
 }
 h1, .xlarge {
-	font-size: $xlarge-fs;
-	line-height: $xlarge-lh;
+	@include xlarge-fs;
 }
 h2, .large {
-	font-size: $large-fs;	
-	line-height: $large-lh;	
+	@include large-fs;
 }
 h3, .medium {
-	font-size: $medium-fs;
-	line-height: $medium-lh;
+	@include medium-fs;
 	&.title {
 		text-align: center;
 		padding: 3px 0;
 	}
 }
+.content h4.title:first-child {
+	margin-bottom: 50px;
+}
 h4, .small {
-	font-size: $small-fs;
-	line-height: $small-lh;
+	@include small-fs;
 	&.title {
 		text-align: center;
 		padding: 3px 0;
 	}
 }
 h5, .xsmall {
-	font-size: $xsmall-fs;
-	line-height: $xsmall-lh;
+	@include xsmall-fs;
 }
 .orange {color: $orange;}
 .black {color: $black;}
@@ -114,47 +125,47 @@ h5, .xsmall {
 }
 
 .load-more {
-	font-size: $large-fs;
+	@include large-fs;
 	color: $orange;
 	display: table;
 	margin: auto;
 }
-
-.filter {
-	.select {
-		font-size: $small-fs;
+body.login {
+	background-color: $orange;
+	color: $white;
+	main {
+		width: 100% !important;
 		display: table;
-		color: $orange;
-		padding-right: 25px;
-		margin-right: 20px;
-		background-size: 20px 40px;
-		background-position: right top;
-		background-repeat: no-repeat;
-		cursor: pointer;
-		&.view.toggle {
-			span.grid{display: none;}
-			background-image: url(../images/view-toggle-orange.svg);
-			&.grid {
-				span.grid{display: block;}
-				span.list{display: none;}
-				background-position: right bottom;
+		.login {
+			width: 100%;
+			display: table-cell;
+			vertical-align: middle;
+			text-align: center;
+			
+			h1 {
+				font-size: 90px;
+				line-height: 110px;
+				margin-bottom: 25px;
 			}
-		}
-		&.dropdown {
-			background-image: url(../images/dropdown-orange.svg);
-			&.dropped {
-				background-position: right bottom;
+			a {
+				@include small-fs;
+				color: $white;
+				margin: 0 25px;
 			}
 		}
 	}
 }
-
 @import '_sections/home';
 @import '_sections/residents';
 @import '_sections/resident';
+@import '_sections/events';
+@import '_sections/event';
 @import '_sections/programs';
 @import '_sections/apply';
 @import '_sections/alumni';
+@import '_sections/about';
+@import '_sections/visit';
+@import '_sections/resources';
 ::-webkit-scrollbar {display:none;}
 ::-moz-scrollbar {display:none;}
 ::-o-scrollbar {display:none;}

@@ -7,31 +7,57 @@ footer {
 	a {
 		color: $white;
 	}
-	.content {
+	.inner {
 		display: table;
+		width: -ms-calc(100% - 80px - 240px);
+	    width: calc(100% - 80px - 240px);
+	    height: -ms-calc(100% - 260px);
+	    height: calc(100% - 260px);
+	    margin-left: 130px;
+	    overflow-y: scroll;
 		padding: 30px 30px 50px 30px;
-		.cell {
-			width: 20%;
-			margin-top: 50px;
-			float: left;
-			h3.title {
-				padding: 25px 0;
-				text-transform: uppercase;
-				line-height: $large-lh - 5;
-			}
-			.sub-menu {
-				.child-item {
-					font-size: $small-fs;
-					margin: 2px 0;
-					padding-left: 20px;
-					background-image: url(../images/bullet-white.svg);
-					background-position: left center;
-					background-size: 10px;
-					background-repeat: no-repeat;
+	    nav {
+	    	display: -webkit-flex;
+	    	display: -ms-flexbox;
+		    display: flex;
+		    -webkit-flex-wrap: wrap;
+		    -ms-flex-wrap: wrap;
+		    flex-wrap: wrap;
+			.cell {
+				width: 20%;
+				margin-top: 50px;
+				display: -webkit-flex;
+			    display: -ms-flexbox;
+			    display: -webkit-box;
+			    display: flex;
+				float: left;
+				h3.title {
+					padding: 0 0 10px 0;
+					text-align: left;
+					text-transform: uppercase;
+					@include large-fs;
 				}
-			}
-			&:nth-child(6) {
-				clear: both;
+				.sub-menu {
+					.child-item {
+						@include small-fs;
+						margin: 2px 0;
+					}
+				}
+				&:nth-child(6) {
+					clear: both;
+				}
+				input[type="text"] {
+					padding-left: 10px;
+					outline: none;
+					border: solid $white;
+					border-width: 0 0 0 2px;
+					background-color: $orange;
+					color: $white;
+					@include small-fs;
+					@include placeholder {
+						color: $white;
+					}
+				}
 			}
 		}
 	}

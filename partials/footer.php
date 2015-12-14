@@ -8,7 +8,7 @@
 	<aside class="left footer">
 		<a href="<?php echo site_url() ?>" class="logo"></a>
 	</aside>
-	<div class="content">
+	<div class="inner">
 		<h3 class="title black">
 			International Studio &amp; Curatorial Program
 		</h3>
@@ -24,7 +24,7 @@
 					$slug = basename($url);
 				    $menu_item_html = '
 				    	<div class="cell ' . $slug . '">
-				    		<div class="inner">
+				    		<div class="cell-inner">
 				    			<a href="' . $url . '">
 				    				<h3 class="title">' . $title . '</h3>
 				    			</a>
@@ -53,7 +53,7 @@
 			} ?>
 
 			<div class="cell search">
-	    		<div class="inner">
+	    		<div class="cell-inner">
 	    			<a href="">
 	    				<h3 class="title">Search</h3>
 	    			</a>
@@ -73,7 +73,7 @@
 			?>
 
 	    	<div class="cell connect">
-	    		<div class="inner">
+	    		<div class="cell-inner">
 	    			<a href="">
 	    				<h3 class="title">Connect</h3>
 	    			</a>
@@ -92,7 +92,7 @@
 	    	</div>
 
 	    	<div class="cell newsletter">
-	    		<div class="inner">
+	    		<div class="cell-inner">
 	    			<a href="<?php echo $newsletter_url ?>">
 	    				<h3 class="title">Newsletter</h3>
 	    			</a>

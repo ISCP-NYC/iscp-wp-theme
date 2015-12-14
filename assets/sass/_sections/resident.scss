@@ -30,8 +30,7 @@ section.single.resident {
 		width: 100%;
 		margin: 50px 0;
 		color: $orange;
-		font-size: $xxlarge-fs;
-		line-height: $xxlarge-lh;
+		@include xxlarge-fs;
 		text-align: center;
 	}
 	.info {
@@ -39,14 +38,12 @@ section.single.resident {
 		padding-right: 20px;
 		float: left;
 		.bio {
-			font-size: $medium-fs;
-			line-height: $medium-lh;
+			@include medium-fs;
 			.website {
 				display: block;
 				margin: 30px 0;
 				padding-left: 25px;
-				font-size: $medium-fs;
-				line-height: $medium-lh;
+				@include medium-fs;
 				background-image: url(../images/bullet-orange.svg);
 				background-position: left 9px;
 				background-size: 15px;
@@ -59,8 +56,7 @@ section.single.resident {
 				margin: 40px 0;
 			}
 			a.event {
-				font-size: $medium-fs;
-				line-height: $medium-fs;
+				@include medium-fs;
 				display: table;
 				margin-bottom: 40px;
 				div {
@@ -68,10 +64,10 @@ section.single.resident {
 				}
 			}
 		}
-		@include mobile {
+		@include xsmall {
 			width: 100%;
 		}
-		@include tablet {
+		@include small {
 			width: 100%;
 		}
 
@@ -92,15 +88,14 @@ section.single.resident {
 			.description {
 				text-align: center;
 				margin: 5px 0 0 0;
-				font-size: $small-fs;
-				line-height: $small-lh;
+				@include small-fs;
 				color: $orange;
 			}
 		}
-		@include mobile {
+		@include xsmall {
 			width: 100%;
 		}
-		@include tablet {
+		@include small {
 			width: 100%;
 		}
 
@@ -131,8 +126,7 @@ section.single.resident {
 			}
 			.details {
 				display: flex;
-				font-size: $small-fs;
-				line-height: $small-lh;
+				@include small-fs;
 				.sponsor, .year {
 					display: inline-flex;
 				}

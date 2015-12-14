@@ -9,11 +9,11 @@ Error: Undefined mixin 'width'.
 5: 		padding: 100px 0 30px 0;
 6: 		.event {
 7: 			@include width('100% / 3 - 20px');
-8: 			a {
-9: 				width: 100%;
-10: 			}
-11: 			float: left;
-12: 			h2.date {
+8: 			float: left;
+9: 			h2.date {
+10: 				text-align: center;
+11: 				padding: 10px 0;
+12: 			}
 
 Backtrace:
 /Users/coreytegeler/Sites/iscp/wordpress/wp-content/themes/iscpt/assets/sass/_sections/home.scss:7:in `width'
@@ -95,4 +95,4 @@ Backtrace:
 body:before {
   white-space: pre;
   font-family: monospace;
-  content: "Error: Undefined mixin 'width'.\A         on line 7 of /Users/coreytegeler/Sites/iscp/wordpress/wp-content/themes/iscpt/assets/sass/_sections/home.scss, in `width'\A         from line 7 of /Users/coreytegeler/Sites/iscp/wordpress/wp-content/themes/iscpt/assets/sass/_sections/home.scss\A \A 2: 	.events.upcoming {\A 3: 		width: 100%;\A 4: 		display: table;\A 5: 		padding: 100px 0 30px 0;\A 6: 		.event {\A 7: 			@include width('100% / 3 - 20px');\A 8: 			a {\A 9: 				width: 100%;\A 10: 			}\A 11: 			float: left;\A 12: 			h2.date {"; }
+  content: "Error: Undefined mixin 'width'.\A         on line 7 of /Users/coreytegeler/Sites/iscp/wordpress/wp-content/themes/iscpt/assets/sass/_sections/home.scss, in `width'\A         from line 7 of /Users/coreytegeler/Sites/iscp/wordpress/wp-content/themes/iscpt/assets/sass/_sections/home.scss\A \A 2: 	.events.upcoming {\A 3: 		width: 100%;\A 4: 		display: table;\A 5: 		padding: 100px 0 30px 0;\A 6: 		.event {\A 7: 			@include width('100% / 3 - 20px');\A 8: 			float: left;\A 9: 			h2.date {\A 10: 				text-align: center;\A 11: 				padding: 10px 0;\A 12: 			}"; }

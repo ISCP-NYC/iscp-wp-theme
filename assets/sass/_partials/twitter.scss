@@ -1,0 +1,32 @@
+.twitter {
+	.follow {
+		width: 100%;
+		text-align: center;
+	    font-size: 20px;
+	    line-height: 23px;
+	    a {
+	    	color: $orange;
+	    }
+	}
+	.tweets {
+		display: table;
+		padding: 20px 0;
+		.tweet {
+			.text {
+				@include medium-fs;
+			    padding: 1px 0 1px 25px;
+			    background-image: url(../images/bullet-black.svg);
+			    background-position: left 8px;
+			    background-size: 15px;
+			    background-repeat: no-repeat;
+			    word-wrap: break-word;
+			}
+			.timestamp {
+				display: block;
+				padding: 8px 0 0 25px;
+				@include small-fs;
+				color: $orange;
+			}
+		}
+	}
+}

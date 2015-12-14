@@ -8,7 +8,7 @@
 		'child_of' => get_page_by_path('apply')->ID,
 		'post_status' => 'publish',
 		'orderby' => 'menu_order',
-		'sort_order' => 'asc'
+		'sort_order' => 'desc'
 	); 
 	$residency_programs = get_pages( $residency_programs_query ); 
 ?>
@@ -40,7 +40,7 @@
 			$title = get_post( $program )->post_title; 
 			$slug = get_post( $program )->post_name; 
 		?>
-			<div class="program border-top">
+			<div class="program border-top" id="<?php echo $slug ?>">
 				<div class="title">
 					<?php echo $title ?>
 				</div>
@@ -58,44 +58,55 @@
 						<?php echo $intro ?>
 					</div>
 
-					<h5>Upcoming deadlines</h5>
-					<div class="deadlines">
+					<h5>Upcoming Application Deadlines</h5>
+					<div class="applications">
 						<?php
-						while( has_sub_field( 'deadlines', $program ) ):
-						setup_postdata($deadline);
-							$datetime = new DateTime( get_sub_field( 'date', $program ) );
-							$date = $datetime->format('M d, Y');
-							$countries = get_sub_field( 'country', $program );
-							$country = $countries[0]->post_title;
-							$sponsors = get_sub_field( 'sponsor', $program );
-							$sponsor = $sponsors[0]->post_title;
-							$sponsor_link = get_field('link', $sponsors[0]);
-							$brief = get_sub_field( 'brief', $program );
-							
-							if ($country && $date):
-								echo '<div class="deadline row">';
+						$sponsors = get_posts( array(
+							'posts_per_page' => 20,
+							'post_type' => 'sponsor',
+							'post_status' => 'publish',
+							'orderby' => 'title',
+							'sort_order' => 'asc',
+							'meta_query' => array( array(
+								'key' => 'deadlines',
+								'value' => array(''),
+								'compare' => 'NOT IN'
+							) )
+						) ); 
+						foreach( $sponsors as $sponsor ): 
+							setup_postdata($sponsor);
+							$country = get_field( 'country', $sponsor )[0]->post_title;
+							$sponsor_id = $sponsor->ID;
+							$sponsor_title = get_the_title( $sponsor );
+							$sponsor_website = get_field( 'website', $sponsor_id );
+							if( have_rows( 'applications', $sponsor ) ):
+						    while ( have_rows( 'applications', $sponsor ) ) : the_row();
+						        $deadline_date = new DateTime( get_sub_field( 'deadline' ) );
+								$deadline = $deadline_date->format( 'M d, Y' );
+								$brief = get_sub_field( 'brief' );
+								echo '<div class="application row">';
 									echo '<div class="cell date">';
-										echo $date;
+										echo $deadline;
 									echo '</div>';
 									echo '<div class="cell country">';
 										echo $country;
 									echo '</div>';
 									echo '<div class="cell brief">';
-									if($sponsor):
-										echo '<a href="' . $sponsor_link . '">';
-											echo $sponsor;
+									if( $sponsor_title ):
+										echo '<a href="' . $sponsor_website . '">';
+											echo $sponsor_title;
 										echo '</a>';
 									endif;
-									if($brief):
+									if( $brief ):
 										echo ' – ';
 										echo $brief;
 									endif;
-									
 									echo '</div>';
 								echo '</div>';
+							endwhile;
 							endif;
-						wp_reset_postdata();
-						endwhile;
+							wp_reset_postdata();
+						endforeach;
 						?>
 					</div>
 

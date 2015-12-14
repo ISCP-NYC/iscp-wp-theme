@@ -12,7 +12,7 @@ section.apply {
 			position: absolute;
 			top: 20px;
 			left: 0;
-			@include tablet {
+			@include small {
 				width: 100% !important;
 				text-align: center;
 				position: static;
@@ -24,8 +24,7 @@ section.apply {
 			top: 20px;
 			right: 0;
 			.bullet {
-				font-size: $xsmall-fs;
-				line-height: $xsmall-lh;
+				@include xsmall-fs;
 				background-size: 11px;
 				padding-left: 15px;
 				display: inline;
@@ -33,7 +32,7 @@ section.apply {
 					margin-bottom: 5px;
 				}
 			}
-			@include tablet {
+			@include small {
 				width: 100% !important;
 				position: static;
 				margin: 20px 0;
@@ -46,14 +45,14 @@ section.apply {
 		.inner {
 			@include width('100% - 300px');
 			margin: 0 150px;
-			@include tablet {
+			@include small {
 				width: 100%;
 				margin: 0;
 			}
 			.intro {
 				p {
 					text-indent: 0;
-					font-size: $medium-fs;
+					@include medium-fs;
 				}
 				h3 {
 					width: 100%;
@@ -65,32 +64,31 @@ section.apply {
 			h5 {
 				margin-bottom: 20px;
 			}
-			.deadlines {
+			.applications {
 				width: 100%;
-				.deadline.row {
+				.application.row {
 					width: 100%;
 					display: table;
 					padding: 0 0 20px 0;
-					font-size: $xsmall-fs;
-					line-height: $xsmall-lh;
+					@include xsmall-fs;
 					color: $orange;
 					.cell {
 						float: left;
 						&.date {
 							width: 25%;
-							@include tablet {
+							@include small {
 								width: 50%;
 							}
 						}
 						&.country {
 							width: 25%;
-							@include tablet {
+							@include small {
 								width: 50%;
 							}
 						}
 						&.brief {
 							width: 50%;
-							@include tablet {
+							@include small {
 								margin-top: 10px;
 								width: 100%;
 							}
@@ -110,9 +108,9 @@ section.apply {
 			display: inline;
 		}
 		.filter {
-			font-size: $medium-fs;
+			@include medium-fs;
 			.select {
-				font-size: $medium-fs;
+				@include medium-fs;
 				padding-right: 40px;
 			    margin-right: 20px;
 			    background-size: 29px 58px;
@@ -121,8 +119,7 @@ section.apply {
 		.filter-list {
 			display: none;
 			margin-top: 20px;
-			font-size: $xsmall-fs;
-			line-height: $xsmall-lh;
+			@include small-fs;
 	  		&.show {
 	  			display: block;
 	  		}

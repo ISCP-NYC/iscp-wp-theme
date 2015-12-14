@@ -14,68 +14,53 @@
 
 		<div class="events upcoming">
 			<?php 
+				$today = new DateTime();
+				$today = $today->format('Y-m-d H:i:s');
 				$args = array(
 					'post_type' => 'event',
 					'posts_per_page' => 3,
-					'meta_key' => 'start_date',
-				    'orderby' => 'meta_value_date',
-				    'order' => 'DESC'
+					'meta_query' => array(
+						'relation' => 'OR',
+						array(
+							'key' => 'end_date',
+							'compare' => '>=',
+							'value' => $today,
+							'type' => 'DATE',
+							'orderby' => 'meta_value',
+							'order' => 'DESC'
+						),
+						array(
+							'key' => 'date',
+							'compare' => '>=',
+							'value' => $today,
+							'type' => 'DATE',
+							'orderby' => 'meta_value',
+							'order' => 'DESC'
+						)
+					),
+					'orderby' => 'meta_value',
+				    'order' => 'ASC'
 				);
+
 				$loop = new WP_Query( $args );
 				while ( $loop->have_posts() ) : $loop->the_post();
 					$id = $the_ID;
-					$title = get_the_title($id);
+					$slug = get_post( $id )->post_name;
+					$title = get_the_title( $id );
 					$url = get_permalink();
-
-					$start_date = new DateTime(get_field('start_date', $id));
-					$start_year = $start_date->format('Y');
-					$start_month = $start_date->format('F');
-					$start_day_word = $start_date->format('l');
-					$start_day = $start_date->format('d');
-
-					$end_date = new DateTime(get_field('end_date', $id));
-					$end_year = $end_date->format('Y');
-					$end_month = $end_date->format('F');
-					$end_day_word = $end_date->format('l');
-					$end_day = $end_date->format('d');
-
-					$event_date = new DateTime(get_field('date', $id));
-					$event_year = $event_date->format('Y');
-					$event_month = $event_date->format('F');
-					$event_day_word = $event_date->format('l');
-					$event_day = $event_date->format('d');
-
 					$type = get_field('event_type', $id);
-					switch ($type) {
-						case 'event':
-					    	$type_name = 'Event';
-					    	$date_format = $event_date = $event_month . ' ' . $event_day . ' ' . $event_year;
-					    	break;
-					    case 'iscp-talk':
-					    	$type_name = 'ISCP Talk';
-					    	$date_format = $event_date;
-					    	break;
-					    case 'exhibition':
-					    	$type_name = 'Exhibition';
-					    	$date_format = 'Thru ' . $end_month . ' ' . $end_day;
-					    	$date_format .= '</br>' . $end_year;
-					    	break;
-					    case 'open-studios':
-					    	$type_name = 'Open Studio';
-					    	$date_format = $start_date = $start_month . ' ' . $start_day . '</br>' . $start_year;
-					    	break;
-					    case 'off-site-project':
-					    	$type_name = 'Off-Site Project';
-					    	$date_format = $event_date = $event_month . ' ' . $event_day . '</br>' . $event_year;
-					    	break;
-					}
-			
-					echo '<div class="event">';
+					$date_format = get_event_date( $id );
+
+					$thumb = get_thumb( $id );
+
+					echo '<div class="event ' . $type . '" id="' . $slug . '">';
 						echo '<a href="' . $url . '">';
 					  		echo '<h2 class="date">';
 					  			echo $date_format;
 					  		echo '</h2>';
-					  		echo '<div class="thumb"></div>';
+					  		echo '<div class="thumb">';
+					  		echo '<img src="' . $thumb . '"/>';
+					  		echo '</div>';
 					  		echo '<h4 class="type">' . $type_name . '</h4>';
 					  		echo '<h4 class="title">' . $title . '</h4>';
 					  	echo '</a>';
@@ -97,21 +82,42 @@
 		</div>
 
 
-		<div class="slider"></div>
+		<?php
+		$home = get_page_by_path( 'home' );
+		if( get_field( 'image_slider', $home ) ):
+			echo '<div class="image_slider module">';
+			echo '<div class="left arrow"></div>';
+			echo '<div class="right arrow"></div>';
+			echo '<div class="slides">';
+			while( has_sub_field( 'image_slider', $home ) ):
+				$image = get_sub_field( 'image', $home );
+				$image_url = $image['url'];
+				echo '<div class="slide">';
+				echo '<div class="vert">';
+				echo '<div class="image">';
+				echo '<img src="' . $image_url . '" alt=""/>';
+				echo '</div>';
+				echo '</div>';
+				echo '</div>';
+			endwhile;
+			echo '</div>';
+			echo '</div>';
+		endif;
+		?>
 
 
 		<?php
-			$residency_program = get_field('residency_program', $about_id);
-			$residency_program .= ' <a href="#">Learn more.</a>';
+			$residency_program = get_page_by_path( 'residency-programs' );
+			$residency_tagline = get_field('tagline', $residency_program);
+			$residency_tagline .= ' <a href="#">Learn more.</a>';
 		?>
 
 		<div class="residency_program border-top border-bottom">
 			<h3 class="title orange">Residency Program</h3>
-			<p class="xlarge"><?php echo $residency_program ?></p>
+			<p class="xlarge"><?php echo $residency_tagline ?></p>
 		</div>
 
-		<?php get_template_part('partials/twitter') ?>
-
+		<? get_tweets( 3 ); ?>
 
 		<?php
 			$facebook_url = get_field( 'facebook', $about_id );

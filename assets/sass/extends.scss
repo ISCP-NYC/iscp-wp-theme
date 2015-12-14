@@ -34,3 +34,27 @@
     background-size: 15px;
     background-repeat: no-repeat;
 }
+.wrap-parent {
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-flex-wrap: wrap;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+}
+.wrap-child {
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+}
+.vert {
+    width: 100%;
+    display: table-cell;
+    vertical-align: middle;
+}
+.static {
+    transition-duration: 0ms !important;
+}
+.italic  {
+    font-family: 'Life Italic';
+}

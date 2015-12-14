@@ -1,0 +1,61 @@
+.image_slider {
+	overflow: hidden;
+	display: block;
+	position: relative;
+	.arrow {
+		width: 30px;
+		height: 50px;
+		position: absolute;
+		top: calc(50% - 25px);
+		z-index: 20;
+		cursor: pointer;
+		background-position: center;
+		background-size: contain;
+		background-repeat: no-repeat;
+		&.left {
+			left: 20px;
+			background-image: url(../images/arrow-left-orange.svg);
+		}
+		&.right {
+			right: 20px;
+			background-image: url(../images/arrow-right-orange.svg);
+		}
+	}
+	.slides {
+		height: 100%;
+		display: block;
+		overflow: hidden;
+		position: absolute;
+		top: 0;
+		left: 0;
+		transition: left 500ms cubic-bezier(0.645, 0.045, 0.355, 1);
+		@extend .noselect;
+		.slide {
+			width: 100%;
+			height: 100%;
+			display: table;
+			position: relative;
+			float: left;
+			.image {
+				width: auto;
+				max-width: 100%;
+				display: table;
+				margin: auto;
+				img {
+					width: auto;
+					height: auto;
+					max-width: 100%;
+					max-height: 500px;
+					display: table;
+					margin: auto;
+				}
+			}
+			.caption {
+				width: 100%;
+				@include small-fs;
+				text-align: center;
+				padding-top: 10px;
+			}
+		}
+	}
+}
