@@ -12,12 +12,8 @@ section#events .content {
 			}
 		}
 		.sub {
-			display: none;
 			margin-top: 20px;
 			@include xsmall-fs;
-	  		&.show {
-	  			display: block;
-	  		}
 			.option {
 				float: left;
 				margin: 0 0 20px 0;

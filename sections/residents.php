@@ -20,6 +20,7 @@
 				</div>
 			</div>
 			<div class="filter-list sub country <? echo $slug ?>">
+				<div class="options">
 				<?php
 					$page_url = get_the_permalink();
 					$countries = get_posts( array(
@@ -47,9 +48,11 @@
 						echo '</div>';
 					endforeach;
 				?>
+				</div>
 			</div>
 
 			<div class="filter-list sub year <? echo $slug ?>">
+				<div class="options">
 				<?php
 					$page_url = get_the_permalink();
 					$start_date = 1994;
@@ -64,9 +67,11 @@
 						echo '</div>';
 					endforeach;
 				?>
+				</div>
 			</div>
 
 			<div class="filter-list sub program <? echo $slug ?>">
+				<div class="options">
 				<?php
 					$residency_programs = array(
 						'International Artist & Curator Program',
@@ -81,6 +86,7 @@
 						echo '</div>';
 					endforeach;
 				?>
+				</div>
 			</div>
 		</div>
 

@@ -1,7 +1,7 @@
 jQuery(document).ready(function($) {
 	headerView();
 	footerView();
-	filterResidents();
+	filter();
 	loadMore();
 	paginate();
 
@@ -34,6 +34,10 @@ jQuery(document).ready(function($) {
 		$('section').on('click', '.nav-toggle', function() {
 			var section = $(this).parent('section');
 			$(section).toggleClass('open-nav');
+		});
+
+		$('section').on('hover', '.nav-toggle', function() {
+			$(this).parent('section').toggleClass('tease-header');
 		});
 
 		//toggle header visibility with scroll behavior
@@ -89,7 +93,7 @@ jQuery(document).ready(function($) {
 	}
 
 
-	function filterResidents() {
+	function filter() {
 		$('.filter').on('click', '.select', function() {
 			var slug = $(this).attr('data-slug');
 			var filterThis = $('.filter-this.'+slug);
@@ -100,17 +104,20 @@ jQuery(document).ready(function($) {
 			} else if($(this).hasClass('dropdown')) {
 				var property = $(this).attr('data-filter');
 				var filterList = $('.filter-list.'+property+'.'+slug);
+				var filterListOptions = $(filterList).children('.options');
+				var filterListOptionsHeight = $(filterListOptions)[0].clientHeight;
 				if($(this).hasClass('dropped')) {
 					//toggle to hide this list
 					$(this).removeClass('dropped');
-					$(filterList).removeClass('show');
+					$(filterList).removeClass('show').css({height : 0});
 				} else {
 					//hide already opened filter list
 					$('.dropdown').removeClass('dropped');
-					$('.filter-list.show'+'.'+slug).removeClass('show');
+					$('.filter-list.show'+'.'+slug).removeClass('show').css({height : 0});
 					//open this filter list
 					$(this).addClass('dropped');
-					$(filterList).addClass('show');
+					$(filterList).addClass('show').css({height : filterListOptionsHeight});
+					console.log(filterListOptions);
 				}
 				
 			}
