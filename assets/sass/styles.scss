@@ -20,6 +20,7 @@ body {
 a, .link {
 	text-decoration: none;
 	color: $orange;
+	transition: color 200ms ease-in-out;
 	&:hover {
 		color: $black !important;
 	}
@@ -165,7 +166,7 @@ body.login {
 @import '_sections/event';
 @import '_sections/programs';
 @import '_sections/apply';
-@import '_sections/alumni';
+@import '_sections/past';
 @import '_sections/about';
 @import '_sections/visit';
 @import '_sections/resources';

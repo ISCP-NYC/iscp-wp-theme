@@ -2,7 +2,6 @@
 	global $post;
 	$title = get_post( $post )->post_title;
 	$slug = get_post( $post )->post_name;
-
 ?>
 
 <section class="<?php echo $slug ?> residents">
@@ -14,6 +13,7 @@
 			<div class="bar">
 				<div class="select link dropdown country" data-filter="country" data-slug="<?php echo $slug ?>">Country</div>
 				<div class="select link dropdown year" data-filter="year" data-slug="<?php echo $slug ?>">Year</div>
+				<div class="select link dropdown program" data-filter="program" data-slug="<?php echo $slug ?>">Residency Program</div>
 				<div class="select link view toggle" data-slug="<?php echo $slug ?>">
 					<span class="list">List</span>
 					<span class="grid">Grid</span>
@@ -23,7 +23,7 @@
 				<?php
 					$page_url = get_the_permalink();
 					$countries = get_posts( array(
-						'posts_per_page'	=> 20,
+						'posts_per_page'	=> 999,
 						'post_type'			=> 'country',
 						'orderby' 			=> 'title',
 						'order' 			=> 'ASC'
@@ -31,11 +31,18 @@
 					foreach( $countries as $country ): 
 						$id = $country->ID;
 						$country_name = get_the_title( $id );
-						//need to rewrite this with relationship
-						$filter_url =  $page_url . '?country_temp=' . $country_name;
+						// $year_query_array = array(
+						// 	'key' => 'country_temp',
+						// 	'type' => 'CHAR',
+						// 	'value' => $country_name,
+						// 	'compare' => 'LIKE'
+						// );
+						// $country_query = new WP_Query( $country_query );
+						// $country_count = $country_query->found_posts;
 						echo '<div class="option">';
 						echo '<a href="' . $filter_url . '">';
 						echo ucwords( $country_name );
+						# echo ' (' . $country_count . ')';
 						echo '</a>';
 						echo '</div>';
 					endforeach;
@@ -58,12 +65,30 @@
 					endforeach;
 				?>
 			</div>
+
+			<div class="filter-list sub program <? echo $slug ?>">
+				<?php
+					$residency_programs = array(
+						'International Artist & Curator Program',
+						'Ground Floor Residencies for New York City Artists'
+					);
+					foreach( $residency_programs as $program ): 
+						$filter_url = $page_url . '?residency_program=' . $program;
+						echo '<div class="option">';
+						echo '<a href="' . $filter_url . '">';
+						echo $program;
+						echo '</a>';
+						echo '</div>';
+					endforeach;
+				?>
+			</div>
 		</div>
 
 		<div class="residents shelves filter-this grid <? echo $slug ?>">
 			<?php
 				$country = get_query_var( 'country_temp' );
 				$year = get_query_var( 'when' );
+				$residency_program = get_query_var( 'residency_program' );
 
 				if( $country ) {
 					$filter_key = 'country_temp';
@@ -85,6 +110,14 @@
 						'compare' => 'BETWEEN'
 					);
 					$append_query = '?when=' . $year;
+				} elseif( $residency_program ) {
+					$filter_query = array(
+						'key' => 'residency_program',
+						'type' => 'CHAR',
+						'value' => $residency_program,
+						'compare' => 'LIKE'
+					);
+					$append_query = '?residency_program=' . $year;
 				}
 				$today = new DateTime();
 				$today = $today->format( 'Ymd' );
