@@ -333,8 +333,8 @@ body {
 a, .link {
   text-decoration: none;
   color: #ff5000;
-  -webkit-transition: color 200ms ease-in-out;
-          transition: color 200ms ease-in-out; }
+  -webkit-transition: color 150ms ease-in-out;
+          transition: color 150ms ease-in-out; }
   /* line 24, ../sass/styles.scss */
   a:hover, .link:hover {
     color: #1a1919 !important; }
@@ -1477,7 +1477,6 @@ section.single.event .info {
       padding-left: 25px;
       font-size: 25px;
       line-height: 30px;
-      background-image: url(../images/bullet-orange.svg);
       background-position: left 9px;
       background-size: 15px;
       background-repeat: no-repeat; }
@@ -1486,22 +1485,22 @@ section.single.event .info {
         section.single.event .info .links a {
           font-size: 20px;
           line-height: 23px; } }
-  /* line 57, ../sass/_sections/event.scss */
+  /* line 56, ../sass/_sections/event.scss */
   section.single.event .info .events h3.title {
     color: #ff5000;
     margin: 40px 0; }
-  /* line 61, ../sass/_sections/event.scss */
+  /* line 60, ../sass/_sections/event.scss */
   section.single.event .info .events a.event {
     font-size: 25px;
     line-height: 30px;
     display: table;
     margin-bottom: 40px; }
     @media (max-width: 900px) {
-      /* line 61, ../sass/_sections/event.scss */
+      /* line 60, ../sass/_sections/event.scss */
       section.single.event .info .events a.event {
         font-size: 20px;
         line-height: 23px; } }
-    /* line 65, ../sass/_sections/event.scss */
+    /* line 64, ../sass/_sections/event.scss */
     section.single.event .info .events a.event div {
       margin-bottom: 5px; }
   @media (max-width: 768px) {
@@ -1512,78 +1511,78 @@ section.single.event .info {
     /* line 36, ../sass/_sections/event.scss */
     section.single.event .info {
       width: 100%; } }
-/* line 78, ../sass/_sections/event.scss */
+/* line 77, ../sass/_sections/event.scss */
 section.single.event .image_slider {
   width: 100%;
   height: 500px; }
-/* line 82, ../sass/_sections/event.scss */
+/* line 81, ../sass/_sections/event.scss */
 section.single.event .gallery {
   width: 40%;
   float: left; }
-  /* line 85, ../sass/_sections/event.scss */
+  /* line 84, ../sass/_sections/event.scss */
   section.single.event .gallery .piece {
     margin-bottom: 20px; }
-    /* line 87, ../sass/_sections/event.scss */
+    /* line 86, ../sass/_sections/event.scss */
     section.single.event .gallery .piece .image {
       width: 100%; }
-      /* line 89, ../sass/_sections/event.scss */
+      /* line 88, ../sass/_sections/event.scss */
       section.single.event .gallery .piece .image img {
         width: 100%;
         height: auto; }
-    /* line 94, ../sass/_sections/event.scss */
+    /* line 93, ../sass/_sections/event.scss */
     section.single.event .gallery .piece .caption {
       text-align: center;
       margin: 5px 0 0 0;
       font-size: 20px;
       line-height: 23px; }
       @media (max-width: 900px) {
-        /* line 94, ../sass/_sections/event.scss */
+        /* line 93, ../sass/_sections/event.scss */
         section.single.event .gallery .piece .caption {
           font-size: 17px;
           line-height: 19px; } }
   @media (max-width: 480px) {
-    /* line 82, ../sass/_sections/event.scss */
+    /* line 81, ../sass/_sections/event.scss */
     section.single.event .gallery {
       width: 100%; } }
   @media (max-width: 768px) {
-    /* line 82, ../sass/_sections/event.scss */
+    /* line 81, ../sass/_sections/event.scss */
     section.single.event .gallery {
       width: 100%; } }
-/* line 109, ../sass/_sections/event.scss */
+/* line 108, ../sass/_sections/event.scss */
 section.single.event .residents {
   width: 100%;
   display: table;
   color: #ff5000; }
-  /* line 114, ../sass/_sections/event.scss */
+  /* line 113, ../sass/_sections/event.scss */
   section.single.event .residents h4 {
     text-align: center;
     margin: 20px 0; }
-  /* line 118, ../sass/_sections/event.scss */
+  /* line 117, ../sass/_sections/event.scss */
   section.single.event .residents .resident {
     float: left; }
-    /* line 120, ../sass/_sections/event.scss */
+    /* line 119, ../sass/_sections/event.scss */
     section.single.event .residents .resident h3.name {
       display: table;
       margin: 0 auto 10px auto; }
-    /* line 124, ../sass/_sections/event.scss */
+    /* line 123, ../sass/_sections/event.scss */
     section.single.event .residents .resident .image {
       width: 100%; }
-      /* line 126, ../sass/_sections/event.scss */
+      /* line 125, ../sass/_sections/event.scss */
       section.single.event .residents .resident .image img {
         width: 100%;
         min-height: 100px;
         max-height: 500px;
         vertical-align: bottom; }
-    /* line 133, ../sass/_sections/event.scss */
+    /* line 132, ../sass/_sections/event.scss */
     section.single.event .residents .resident .half {
       float: left; }
-      /* line 135, ../sass/_sections/event.scss */
+      /* line 134, ../sass/_sections/event.scss */
       section.single.event .residents .resident .half.left {
         width: 60%; }
-      /* line 138, ../sass/_sections/event.scss */
+      /* line 137, ../sass/_sections/event.scss */
       section.single.event .residents .resident .half.right {
         width: 40%; }
-      /* line 141, ../sass/_sections/event.scss */
+      /* line 140, ../sass/_sections/event.scss */
       section.single.event .residents .resident .half .details {
         display: -webkit-box;
         display: -webkit-flex;
@@ -1592,62 +1591,62 @@ section.single.event .residents {
         font-size: 20px;
         line-height: 23px; }
         @media (max-width: 900px) {
-          /* line 141, ../sass/_sections/event.scss */
+          /* line 140, ../sass/_sections/event.scss */
           section.single.event .residents .resident .half .details {
             font-size: 17px;
             line-height: 19px; } }
-        /* line 144, ../sass/_sections/event.scss */
+        /* line 143, ../sass/_sections/event.scss */
         section.single.event .residents .resident .half .details .sponsor, section.single.event .residents .resident .half .details .year {
           display: -webkit-inline-box;
           display: -webkit-inline-flex;
           display: -ms-inline-flexbox;
           display: inline-flex; }
-        /* line 147, ../sass/_sections/event.scss */
+        /* line 146, ../sass/_sections/event.scss */
         section.single.event .residents .resident .half .details .sponsor {
           width: 100%; }
-        /* line 150, ../sass/_sections/event.scss */
+        /* line 149, ../sass/_sections/event.scss */
         section.single.event .residents .resident .half .details .year {
           text-align: right;
           padding-left: 7px; }
-/* line 159, ../sass/_sections/event.scss */
+/* line 158, ../sass/_sections/event.scss */
 section.single.event .upcoming {
   width: 100%;
   display: table;
   color: #ff5000; }
-  /* line 164, ../sass/_sections/event.scss */
+  /* line 163, ../sass/_sections/event.scss */
   section.single.event .upcoming h4 {
     text-align: center;
     margin: 20px 0; }
-  /* line 168, ../sass/_sections/event.scss */
+  /* line 167, ../sass/_sections/event.scss */
   section.single.event .upcoming .event {
     float: left; }
-    /* line 170, ../sass/_sections/event.scss */
+    /* line 169, ../sass/_sections/event.scss */
     section.single.event .upcoming .event h3.name {
       display: table;
       margin: 0 auto 10px auto; }
-    /* line 174, ../sass/_sections/event.scss */
+    /* line 173, ../sass/_sections/event.scss */
     section.single.event .upcoming .event .image {
       width: 100%; }
-      /* line 176, ../sass/_sections/event.scss */
+      /* line 175, ../sass/_sections/event.scss */
       section.single.event .upcoming .event .image img {
         width: 100%;
         min-height: 100px;
         max-height: 500px;
         vertical-align: bottom; }
-    /* line 183, ../sass/_sections/event.scss */
+    /* line 182, ../sass/_sections/event.scss */
     section.single.event .upcoming .event .details {
       width: 100%;
       font-size: 20px;
       line-height: 23px; }
       @media (max-width: 900px) {
-        /* line 183, ../sass/_sections/event.scss */
+        /* line 182, ../sass/_sections/event.scss */
         section.single.event .upcoming .event .details {
           font-size: 17px;
           line-height: 19px; } }
-      /* line 186, ../sass/_sections/event.scss */
+      /* line 185, ../sass/_sections/event.scss */
       section.single.event .upcoming .event .details .detail {
         width: 100%; }
-/* line 194, ../sass/_sections/event.scss */
+/* line 193, ../sass/_sections/event.scss */
 section.single.event.one_col .info {
   width: 100%;
   padding: 0; }
@@ -1965,10 +1964,11 @@ section.alumni {
     color: #1a1919 !important;
     border-color: #1a1919 !important; }
   /* line 8, ../sass/_sections/past.scss */
-  section.past a:hover, section.past .link:hover, section.past .link *:hover,
+  section.past a:hover, section.past a:hover *, section.past .link:hover, section.past .link:hover *,
   section.alumni a:hover,
+  section.alumni a:hover *,
   section.alumni .link:hover,
-  section.alumni .link *:hover {
+  section.alumni .link:hover * {
     color: #ff5000 !important; }
   /* line 11, ../sass/_sections/past.scss */
   section.past nav,
@@ -2025,24 +2025,36 @@ section.alumni {
   section.alumni .content .residents .resident .image {
     background-color: white; }
   /* line 51, ../sass/_sections/past.scss */
+  section.past .bullet, section.past body.resident-resources section#resident-resources ul li, body.resident-resources section#resident-resources ul section.past li,
+  section.alumni .bullet,
+  section.alumni body.resident-resources section#resident-resources ul li,
+  body.resident-resources section#resident-resources ul section.alumni li {
+    background-image: url(../images/bullet-black.svg) !important; }
+    /* line 53, ../sass/_sections/past.scss */
+    section.past .bullet:hover, section.past body.resident-resources section#resident-resources ul li:hover, body.resident-resources section#resident-resources ul section.past li:hover,
+    section.alumni .bullet:hover,
+    section.alumni body.resident-resources section#resident-resources ul li:hover,
+    body.resident-resources section#resident-resources ul section.alumni li:hover {
+      background-image: url(../images/bullet-orange.svg) !important; }
+  /* line 57, ../sass/_sections/past.scss */
   section.past footer,
   section.alumni footer {
     background-color: #1a1919 !important; }
-    /* line 53, ../sass/_sections/past.scss */
+    /* line 59, ../sass/_sections/past.scss */
     section.past footer *,
     section.alumni footer * {
       background-color: #1a1919 !important;
       color: #fff !important;
       border-color: #fff !important; }
-    /* line 58, ../sass/_sections/past.scss */
+    /* line 64, ../sass/_sections/past.scss */
     section.past footer a:hover,
     section.alumni footer a:hover {
       color: #fff; }
-    /* line 61, ../sass/_sections/past.scss */
+    /* line 67, ../sass/_sections/past.scss */
     section.past footer aside.footer,
     section.alumni footer aside.footer {
       border-color: #fff !important; }
-      /* line 63, ../sass/_sections/past.scss */
+      /* line 69, ../sass/_sections/past.scss */
       section.past footer aside.footer .logo:hover,
       section.alumni footer aside.footer .logo:hover {
         background-image: url(../images/logo-orange.svg) !important; }

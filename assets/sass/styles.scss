@@ -20,7 +20,7 @@ body {
 a, .link {
 	text-decoration: none;
 	color: $orange;
-	transition: color 200ms ease-in-out;
+	transition: color 150ms ease-in-out;
 	&:hover {
 		color: $black !important;
 	}

@@ -95,9 +95,9 @@
 				<?php echo $description ?>
 			</div>
 			<div class="links">
-				<a href="#">RSVP</a>
-				<a href="#">Add to calendar</a>
-				<a href="#">Share</a>
+				<a href="#" class="link bullet">RSVP</a>
+				<a href="#" class="link bullet">Add to calendar</a>
+				<a href="#" class="link bullet">Share</a>
 			</div>
 
 			<?php

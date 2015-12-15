@@ -5,7 +5,7 @@ section.alumni {
 		color: $black !important;
 		border-color: $black !important;
 	}
-	a:hover, .link:hover, .link *:hover {
+	a:hover, a:hover *, .link:hover, .link:hover * {
 		color: $orange !important;
 	}
 	nav,
@@ -47,6 +47,12 @@ section.alumni {
 	}
 	.content .residents .resident .image {
 		background-color: white;
+	}
+	.bullet {
+		background-image: url(../images/bullet-black.svg) !important;
+		&:hover {
+			background-image: url(../images/bullet-orange.svg) !important;
+		}
 	}
 	footer {
 		background-color: $black !important;
