@@ -51,6 +51,7 @@ add_action( 'wp_enqueue_scripts', 'iscp_scripts' );
 show_admin_bar(false);
 add_theme_support( 'post-thumbnails' ); 
 add_image_size( 'thumb', 500, 350, true );
+add_image_size( 'slider', 9999, 500, false );
 
 /////////////////////////////////////
 /////////////////////////////////////
@@ -143,15 +144,13 @@ function add_resident_columns($columns) {
 	);
     return array_merge($columns, array(
     	'country' =>__( 'Country'),
+    	'residency_program' =>__( 'Program'),
     	'sponsor' =>__( 'Sponsor'),
-		'start_date' => __('Start Date'),
-	    'end_date' =>__( 'End Date'),
-	    'old_id' =>__( 'Reference ID')
+		'start_date' => __('Start'),
+	    'end_date' =>__( 'End'),
     ));
 }
 add_filter('manage_resident_posts_columns' , 'add_resident_columns');
-
-
 
 function custom_resident_column( $column, $post_id ) {
     switch ( $column ) {
@@ -163,6 +162,11 @@ function custom_resident_column( $column, $post_id ) {
       case 'sponsor':
         $sponsor = get_post_meta( $post_id , 'sponsor_temp' , true );
         echo $sponsor;
+        break;
+
+      case 'residency_program':
+        $program = get_post_meta( $post_id , 'residency_program' , true );
+        echo pretty($program);
         break;
 
       case 'start_date':
@@ -197,9 +201,9 @@ add_action( 'manage_resident_posts_custom_column' , 'custom_resident_column', 10
 function register_residents_sortable_columns( $columns ) {
     $columns['country'] = 'Country';
     $columns['sponsor'] = 'Sponsor';
+    $columns['residency_program'] = 'Program';
     $columns['start_date'] = 'Start Date';
     $columns['end_date'] = 'End Date';
-    $columns['old_id'] = 'Reference ID';
 
     return $columns;
 }
@@ -211,32 +215,27 @@ function resident_column_orderby( $vars ) {
 	if ( isset( $vars['orderby'] ) && 'Country' == $vars['orderby'] ) {
 		$vars = array_merge( $vars, array(
 			'meta_key' => 'country_temp',
-			'orderby' => 'meta_value',
-			'order' => 'asc'
+			'orderby' => 'meta_value'
 		) );
 	} else if ( isset( $vars['orderby'] ) && 'Sponsor' == $vars['orderby'] ) {
 		$vars = array_merge( $vars, array(
 			'meta_key' => 'sponsor_temp',
-			'orderby' => 'meta_value',
-			'order' => 'asc'
+			'orderby' => 'meta_value'
+		) );
+	} else if ( isset( $vars['orderby'] ) && 'Program' == $vars['orderby'] ) {
+		$vars = array_merge( $vars, array(
+			'meta_key' => 'residency_program',
+			'orderby' => 'meta_value'
 		) );
 	} else if ( isset( $vars['orderby'] ) && 'StartDate' == $vars['orderby'] ) {
 		$vars = array_merge( $vars, array(
 			'meta_key' => 'start_date',
-			'orderby' => 'meta_value',
-			'order' => 'desc'
+			'orderby' => 'meta_value'
 		) );
 	} else if ( isset( $vars['orderby'] ) && 'EndDate' == $vars['orderby'] ) {
 		$vars = array_merge( $vars, array(
 			'meta_key' => 'end_date',
-			'orderby' => 'meta_value',
-			'order' => 'desc'
-		) );
-	} else if ( isset( $vars['orderby'] ) && 'ReferenceID' == $vars['orderby'] ) {
-		$vars = array_merge( $vars, array(
-			'meta_key' => 'old_id',
-			'orderby' => 'meta_value_num',
-			'order' => 'asc'
+			'orderby' => 'meta_value'
 		) );
 	}
 	return $vars;
@@ -253,7 +252,8 @@ add_filter( 'request', 'resident_column_orderby' );
 function add_query_vars_filter( $vars ){
   $vars[] = 'when';
   $vars[] = 'date';
-  $vars[] .= 'country_temp';
+  $vars[] .= 'country';
+  $vars[] .= 'from';
   $vars[] .= 'residency_program';
   $vars[] .= 'type';
   return $vars;
@@ -364,7 +364,7 @@ function get_display_image( $id ) {
 }
 
 function get_residents( $center_id, $direction, $count ) {
-	$country = get_query_var( 'country_temp' );
+	$country = get_query_var( 'country' );
 	$year = get_query_var( 'when' );
 
 	if( $country ) {
@@ -375,7 +375,7 @@ function get_residents( $center_id, $direction, $count ) {
 			'value' => $country,
 			'compare' => 'LIKE'
 		);
-		$append_query = '?country_temp=' . $country;
+		$append_query = '?country=' . $country;
 	} elseif( $year ) {
 		$year_begin = $year . '0101';
 		$year_end = $year . '1231';
@@ -646,9 +646,25 @@ function pretty($string) {
 		case 'off-site-project':
 			return 'Off-Site Project';
 			break;
+		case 'international':
+			return 'International Artist & Curator Program';
+			break;
+		case 'ground_floor':
+			return 'Ground Floor Residencies for New York City Artists';
+			break;
 	}
 }
 
+function pretty_short($string) {
+	switch ($string) {
+		case 'international':
+			return 'International';
+			break;
+		case 'ground_floor':
+			return 'Ground Floor';
+			break;
+	}
+}
 
 
 $result = add_role( 'resident', __( 'Resident' ),
@@ -674,6 +690,57 @@ function user_is_resident() {
 	} else {
 		return false;
 	}
+}
+
+function resident_count_by_country( $country, $page_query ) {	
+	$country_meta_query = array(
+		'key' => 'country_temp',
+		'type' => 'CHAR',
+		'value' => $country,
+		'compare' => 'LIKE'
+	);
+	$country_query_args = array(
+		'post_type' => 'resident',
+		'meta_query' => array( $country_meta_query, $page_query )
+	);
+	$country_query = new WP_Query( $country_query_args );
+	$country_count = $country_query->found_posts;
+	return $country_count;
+}
+
+function resident_count_by_year( $year, $page_query ) {
+	$year_begin = $year . '0101';
+	$year_end = $year . '1231';
+	$year_range = array( $year_begin, $year_end );
+	$year_meta_query = array(
+		'key' => 'residency_dates_0_start_date',
+		'type' => 'DATE',
+		'value' => $year_range,
+		'compare' => 'BETWEEN'
+	);
+	$year_query_args = array(
+		'post_type' => 'resident',
+		'meta_query' => array( $year_meta_query, $page_query )
+	);
+	$year_query = new WP_Query( $year_query_args );
+	$year_count = $year_query->found_posts;
+	return $year_count;
+}
+
+function resident_count_by_program( $program, $page_query ) {
+	$program_meta_query = array(
+		'key' => 'residency_program',
+		'type' => 'CHAR',
+		'value' => $program,
+		'compare' => $compare
+	);
+	$program_query_args = array(
+		'post_type' => 'resident',
+		'meta_query' => array( $program_meta_query, $page_query )
+	);
+	$program_query = new WP_Query( $program_query_args );
+	$program_count = $program_query->found_posts;
+	return $program_count;
 }
 
 function event_count_by_type( $event_type ) {

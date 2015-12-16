@@ -24,11 +24,17 @@ section.residents .content {
 	            .sponsor {
 	            	// width: 100%;
 	            }
-	            .studio-number {
+	            .right {
+	            	display: block;
 	            	padding-left: 7px;
-	            	display: inline-flex;
 	            	text-align: right;
-	            	white-space: nowrap;
+	            	.value {
+	            		float: right;
+	            		&.studio-number {
+	            			white-space: nowrap;
+	            		}
+	            		display: block;
+	            	}
 	            }
 			}
 		}

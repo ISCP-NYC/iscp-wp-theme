@@ -167,45 +167,55 @@
 		</div>
 
 		<div class="relations border-top shelves grid">
-			<h4>Residents from <?php echo $country ?></h4>
+			<?php
+			$id = get_the_ID();
+			if( is_ground_floor( $id ) ):
+				echo '<h4>Ground Floor Residents</h4>';
+				$meta_query = array(
+					'key' => 'residency_program',
+					'value' => 'ground_floor',
+					'compare' => 'LIKE'
+				);
+			else:
+				echo '<h4>Residents from ' . $country . '</h4>';
+				$meta_query = array(
+					'key' => 'country_temp',
+					'value' => $country,
+					'compare' => 'LIKE'
+				);
+			endif;
+			?>
 			<div class="inner">
 				<?php 
+				$residents = get_posts(array(
+					'posts_per_page' => 3,
+					'post__not_in' => array($id),
+					'post_type'	=> 'resident',
+					'meta_query' => array( $meta_query )
+				));
+				foreach( $residents as $related ): 
+					$related_id = $related->ID;
+					$related_name = get_the_title( $related_id );
+					$related_sponsor = get_field('sponsor_temp', $related_id );
+					$related_start_date = get_field('residency_dates_0_start_date', $related_id );
+					$related_year = new DateTime($related_start_date);
+					$related_year = $related_year->format('Y');
+					$related_url =  get_the_permalink( $related_id );
+					$related_thumb = get_thumb( $related_id );
 
-					$residents = get_posts(array(
-						'posts_per_page'	=> 3,
-						'post__not_in' => array($id),
-						'post_type'			=> 'resident',
-						'meta_query' => array(
-							array(
-								'key' => 'country_temp',
-								'value' => $country,
-								'compare' => 'LIKE'
-							)
-						)
-					));
-					foreach( $residents as $related ): 
-						$related_id = $related->ID;
-						$related_name = get_the_title( $related_id );
-						$related_sponsor = get_field('sponsor_temp', $related_id );
-						$related_start_date = get_field('residency_dates_0_start_date', $related_id );
-						$related_year = new DateTime($related_start_date);
-						$related_year = $related_year->format('Y');
-						$related_url =  get_the_permalink( $related_id );
-						$related_image = get_display_image( $related_id );
+					echo '<div class="related shelf-item resident"><div class="inner">';
+					echo '<a href="' . $related_url . '">';
+					echo '<h3 class="name">' . $related_name . '</h3>';
+					echo '<div class="image">';
+					echo '<img src="' . $related_thumb . '"/>';
+					echo '</div>';
+					echo '</a>';
+					echo '<div class="details">';
+					echo '<div class="sponsor">' . $related_sponsor . '</div>';
+					echo '<div class="year">' . $related_year . '</div>';
+					echo '</div></div></div>';
 
-						echo '<div class="related shelf-item resident"><div class="inner">';
-						echo '<a href="' . $related_url . '">';
-						echo '<h3 class="name">' . $related_name . '</h3>';
-						echo '<div class="image">';
-						echo '<img src="' . get_display_image( $related_id ) . '"/>';
-						echo '</div>';
-						echo '</a>';
-						echo '<div class="details">';
-						echo '<div class="sponsor">' . $related_sponsor . '</div>';
-						echo '<div class="year">' . $related_year . '</div>';
-						echo '</div></div></div>';
-
-					endforeach;
+				endforeach;
 				?>
 			</div>
 		</div>

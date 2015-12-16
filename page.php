@@ -7,7 +7,7 @@
 
 	$resident_types = array( 'current-residents', 'alumni' );
 	$event_types = array( 'events', 'exhbitions', 'iscp-talks', 'off-site-projects', 'open-studios' );
-
+	
 	if( in_array( $slug, $resident_types ) ):
 		get_template_part( 'sections/residents' );
 	elseif( in_array( $slug, $event_types ) ):

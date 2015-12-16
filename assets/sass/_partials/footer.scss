@@ -7,55 +7,78 @@ footer {
 	a {
 		color: $white;
 	}
-	.inner {
+	.wrapper {	
 		display: table;
-		width: -ms-calc(100% - 80px - 240px);
-	    width: calc(100% - 80px - 240px);
-	    height: -ms-calc(100% - 260px);
+	    width: calc(100% - 40px - 240px);
 	    height: calc(100% - 260px);
-	    margin-left: 130px;
+	    margin-left: 110px;
 	    overflow-y: scroll;
-		padding: 30px 30px 50px 30px;
-	    nav {
-	    	display: -webkit-flex;
-	    	display: -ms-flexbox;
-		    display: flex;
-		    -webkit-flex-wrap: wrap;
-		    -ms-flex-wrap: wrap;
-		    flex-wrap: wrap;
-			.cell {
-				width: 20%;
-				margin-top: 50px;
-				display: -webkit-flex;
-			    display: -ms-flexbox;
-			    display: -webkit-box;
+		padding: 30px 30px 0px 30px;
+		.inner {
+			padding: 0 20px;
+		    nav {
+		    	display: -webkit-flex;
+		    	display: -ms-flexbox;
 			    display: flex;
-				float: left;
-				h3.title {
-					padding: 0 0 10px 0;
-					text-align: left;
-					text-transform: uppercase;
-					@include large-fs;
-				}
-				.sub-menu {
-					.child-item {
+			    -webkit-flex-wrap: wrap;
+			    -ms-flex-wrap: wrap;
+			    flex-wrap: wrap;
+			    padding-bottom: 100px;
+				.cell {
+					width: 20%;
+					margin-top: 50px;
+					display: -webkit-flex;
+				    display: -ms-flexbox;
+				    display: -webkit-box;
+				    display: flex;
+					float: left;
+					h3.title {
+						padding: 0 0 10px 0;
+						text-align: left;
+						text-transform: uppercase;
+						@include large-fs;
+					}
+					.sub-menu {
+						.child-item {
+							@include small-fs;
+							margin: 2px 0;
+						}
+					}
+					&:nth-child(6) {
+						clear: both;
+					}
+					input[type="text"] {
+						padding-left: 10px;
+						outline: none;
+						border: solid $white;
+						border-width: 0 0 0 2px;
+						background-color: transparent;
+						color: $white;
 						@include small-fs;
-						margin: 2px 0;
+						@include placeholder {
+							color: $white;
+						}
 					}
 				}
-				&:nth-child(6) {
-					clear: both;
-				}
-				input[type="text"] {
-					padding-left: 10px;
-					outline: none;
-					border: solid $white;
-					border-width: 0 0 0 2px;
-					background-color: transparent;
-					color: $white;
-					@include small-fs;
-					@include placeholder {
-						color: $white;
+			}
+		}
+		.bottom {
+			width: 100%;
+			height: 100px;
+			border-top: 10px solid $white;
+			.half {
+				width: 50%;
+				height: 100%;
+				float: left;
+				display: table;
+				h3 {
+					width: 100%;
+					display: table-cell;
+					vertical-align: middle;
+					a {
+						display: table;
+						margin: auto;
+						text-align: center;
 					}
 				}
 			}

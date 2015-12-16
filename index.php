@@ -96,17 +96,17 @@
 			echo '<div class="slides">';
 			while( has_sub_field( 'image_slider', $home ) ):
 				$image = get_sub_field( 'image', $home );
-				$image_url = $image['url'];
+				$image_url = $image['sizes']['slider'];
 				$image_caption = get_sub_field( 'caption', $home );
 				echo '<div class="slide">';
-				echo '<div class="vert">';
-				echo '<div class="image">';
-				echo '<img src="' . $image_url . '" alt=""/>';
+				// echo '<div class="vert">';
+				echo '<div class="image" style="background-image:url(' . $image_url . ')">';
+				// echo '<img src="' . $image_url . '" alt=""/>';
 				echo '</div>';
 				echo '<div class="caption">';
 				echo $image_caption;
 				echo '</div>';
-				echo '</div>';
+				// echo '</div>';
 				echo '</div>';
 			endwhile;
 			echo '</div>';

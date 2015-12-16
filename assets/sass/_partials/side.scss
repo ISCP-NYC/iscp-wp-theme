@@ -8,8 +8,18 @@ aside {
 	}
 	&.footer {
 		top: 30px;
-		@include height('100% - 80px');
-		border-color: $white;	
+		@include height('100% - 30px');
+		border-color: $white;
+		.logo {
+			border-bottom: none;
+			border-top-width: 10px;
+			border-top-style: solid;
+			bottom: 0px;
+			background-image: url(../images/logo-white.svg);
+			&:hover {
+				background-image: url(../images/logo-black.svg);
+			}	
+		}
 	}
 	&.left {
 		left: 0;
@@ -29,7 +39,7 @@ aside {
 	}
 	.logo {
 		width: $side_width - 10;
-		height: $side_width - 30;
+		height: $side_width - 20;
 		position: absolute;
 	    background-size: 60px;
 	    background-position: center;
@@ -40,14 +50,6 @@ aside {
 	&.main .logo {
 		top: 0;
 		background-image: url(../images/logo-orange.svg);
-		&:hover {
-			background-image: url(../images/logo-black.svg);
-		}
-	}
-	&.footer .logo {
-		border: none;
-		bottom: -35px;
-		background-image: url(../images/logo-white.svg);
 		&:hover {
 			background-image: url(../images/logo-black.svg);
 		}

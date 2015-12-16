@@ -16,6 +16,7 @@ header.main {
 	nav {
 		width: 100%;
 		@include height('100% - 20px');
+		min-height: 500px;
 		padding: 10px 0 !important;
 		background-color: $white;
 		transform: translateY(-150px);

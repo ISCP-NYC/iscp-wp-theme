@@ -136,6 +136,7 @@
     .bar {
         width: 100%;
         display: table;
+        margin-bottom: 20px;
         .select {
             float: left;
         }
@@ -143,7 +144,6 @@
     .sub {
         height: 0px;
         display: block;
-        margin-top: 20px;
         overflow: hidden;
         @include xsmall-fs;
         transition: height 500ms cubic-bezier(0.645, 0.045, 0.355, 1);
@@ -157,13 +157,13 @@
             &.selected a {
                 color: $black;
                 padding-right: 25px;
-                background-image: url(../images/close-black.svg);
+                background-image: url(../images/close-thin-black.svg);
                 background-size: contain;
                 background-repeat: no-repeat;
                 background-position: right center; 
                 &:hover {
                     color: $orange !important;
-                    background-image: url(../images/close-orange.svg);
+                    background-image: url(../images/close-thin-orange.svg);
                 }
             }
         }
