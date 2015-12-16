@@ -37,6 +37,11 @@
         background-image: url(../images/bullet-black.svg);
     }
 }
+.clear {
+    width: 100%;
+    float: none;
+    clear: both;
+}
 .wrap-parent {
     display: -webkit-flex;
     display: -ms-flexbox;

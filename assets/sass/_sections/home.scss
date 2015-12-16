@@ -6,9 +6,8 @@
 		.event {
 			@include width('100% / 3 - 20px');
 			float: left;
-			h2.date {
+			h3 {
 				text-align: center;
-				padding: 10px 0;
 			}
 			h4 {
 				display: table;

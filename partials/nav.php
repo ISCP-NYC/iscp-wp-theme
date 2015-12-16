@@ -1,5 +1,5 @@
 <?php $menu_items = wp_get_nav_menu_items( 'blueprint' ); ?> 
-<header class="main">
+<header class="main nav-hover">
 	<nav>
 		<?php 
 		$menu_items = add_parent_class( $menu_items );
@@ -47,4 +47,4 @@
     	</div>
 	</nav>
 </header>
-<div class="nav-toggle"></div>
+<div class="nav-toggle nav-hover"></div>

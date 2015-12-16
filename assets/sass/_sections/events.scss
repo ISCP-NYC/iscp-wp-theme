@@ -63,24 +63,26 @@ section#events .content {
 	.events.list {
 		.event {
 			.name {
-				width: 20%;
+				width: 50%;
 			}
 			.details {
-				width: 80%;
+				width: 50%;
 				display: flex;
 				.left {
-					width: 100%;
+					width: 60%;
 					display: flex;
-					.country {
-						width: 30%;
-						padding-left: 15px;
+					.date {
+						margin-left: 30px;
+						width: 100%;
 					}
-					.sponsor {
-						width: 60%;
-						padding-left: 15px;
-					}
-					.studio-number {
-						width: 10%;
+				}
+				.right {
+					width: 40%;
+					display: flex;
+					.event-type {
+						margin-left: 30px;
+						width: 100%;
+						text-align: right;
 					}
 				}
 			}

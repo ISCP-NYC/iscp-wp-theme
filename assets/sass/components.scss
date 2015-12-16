@@ -101,11 +101,12 @@
     margin: 25px 0;
     @extend .noselect;
     .select {
-        @include small-fs;
+        font-size: $small-fs;
+        line-height: $small-fs;
         display: table;
         color: $orange;
-        padding-right: 25px;
-        margin-right: 20px;
+        padding: 0 25px 0 0;
+        margin: 0 20px 0 0;
         background-size: 20px 40px;
         background-position: right top;
         background-repeat: no-repeat;
@@ -153,6 +154,18 @@
             width: 200px;
             margin: 0 0 10px 0;
             float: left;
+            &.selected a {
+                color: $black;
+                padding-right: 25px;
+                background-image: url(../images/close-black.svg);
+                background-size: contain;
+                background-repeat: no-repeat;
+                background-position: right center; 
+                &:hover {
+                    color: $orange !important;
+                    background-image: url(../images/close-orange.svg);
+                }
+            }
         }
     }
 }

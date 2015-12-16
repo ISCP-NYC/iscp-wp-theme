@@ -252,7 +252,10 @@ add_filter( 'request', 'resident_column_orderby' );
 /////////////////////////////////////
 function add_query_vars_filter( $vars ){
   $vars[] = 'when';
+  $vars[] = 'date';
   $vars[] .= 'country_temp';
+  $vars[] .= 'residency_program';
+  $vars[] .= 'type';
   return $vars;
 }
 add_filter( 'query_vars', 'add_query_vars_filter' );
@@ -290,7 +293,12 @@ function is_alumni( $id ) {
 	}
 }
 function is_ground_floor( $id ) {
-	return false;
+	$residency_program = get_field( 'residency_program', $id );
+	if( $residency_program == 'ground_floor' ) {
+		return true;
+	} else {
+		return false;
+	}
 }	
 
 /////////////////////////////////////
@@ -517,7 +525,7 @@ function get_event_date( $id ) {
 	$today = $today->format('Y-m-d H:i:s');
 	if ( get_field('start_date', $id) ):
 		$start_date = new DateTime(get_field('start_date', $id));
-		$start_month = $start_date->format('M');
+		$start_month = $start_date->format('F');
 		$start_day_word = $start_date->format('l');
 		$start_day = $start_date->format('d');
 		$start_year = $start_date->format('Y');
@@ -525,7 +533,7 @@ function get_event_date( $id ) {
 
 	if ( get_field('end_date', $id) ):
 		$end_date = new DateTime(get_field('end_date', $id));
-		$end_month = $end_date->format('M');
+		$end_month = $end_date->format('F');
 		$end_day_word = $end_date->format('l');
 		$end_day = $end_date->format('d');
 		$end_year = $end_date->format('Y');
@@ -533,7 +541,7 @@ function get_event_date( $id ) {
 
 	if ( get_field('date', $id) ):
 		$event_date = new DateTime(get_field('date', $id));
-		$event_month = $event_date->format('M');
+		$event_month = $event_date->format('F');
 		$event_day_word = $event_date->format('l');
 		$event_day = $event_date->format('d');
 		$event_year = $event_date->format('Y');
@@ -546,7 +554,7 @@ function get_event_date( $id ) {
 	switch ($type) {
 		case 'event':
 	    	$type_name = 'Event';
-	    	$date_format = $event_month . ' ' . $event_day . ' ' . $event_year;
+	    	$date_format = $event_month . ' ' . $event_day . ', ' . $event_year;
 	    	if( $start_time ):
 	    		$date_format .= '</br>' . $start_time;
 	    		if( $end_time ):
@@ -556,7 +564,7 @@ function get_event_date( $id ) {
 	    	break;
 	    case 'iscp-talk':
 	    	$type_name = 'ISCP Talk';
-	    	$date_format = $event_month . ' ' . $event_day . ' ' . $event_year;
+	    	$date_format = $event_month . ' ' . $event_day . ', ' . $event_year;
 	    	if( $start_time ):
 	    		$date_format .= '</br>' . $start_time;
 	    		if( $end_time ):
@@ -567,28 +575,43 @@ function get_event_date( $id ) {
 	    case 'exhibition':
 	    	$type_name = 'Exhibition';
 	    	if ( $today > $start_date ):
-				$date_format = 'Thru ' . $end_month . ' ' . $end_day. ' ' . $end_year;;
+				$date_format = 'Through ' . $end_month . ' ' . $end_day. ', ' . $end_year;
 			else:
-				$date_format = $start_month . ' ' . $start_day . ' - ' . $end_month . ' ' . $end_day;
-				$date_format .= '</br>' . $start_year;
+				$date_format = $start_month . ' ' . $start_day;
+				if ( $start_year != $end_year ):
+					$date_format .= ', ' . $start_year;
+				endif;
+				if ($end_date):
+					$date_format .= ' &ndash; ' . $end_month . ' ' . $end_day . ', ' . $end_year;
+				endif;
 			endif;
 	    	break;
 	    case 'open-studios':
 	    	$type_name = 'Open Studio';
 	    	if ( $today > $start_date ):
-				$date_format = 'Thru ' . $end_month . ' ' . $end_day. ' ' . $end_year;;
+				$date_format = 'Through ' . $end_month . ' ' . $end_day. ', ' . $end_year;
 			else:
-				$date_format = $start_month . ' ' . $start_day . ' - ' . $end_month . ' ' . $end_day;
-				$date_format .= '</br>' . $start_year;
+				$date_format = $start_month . ' ' . $start_day;
+				if ( $start_year != $end_year ):
+					$date_format .= ', ' . $start_year;
+				endif;
+				if ($end_date):
+					$date_format .= ' &ndash; ' . $end_month . ' ' . $end_day . ', ' . $end_year;
+				endif;
 			endif;
 	    	break;
 	    case 'off-site-project':
 	    	$type_name = 'Off-Site Project';
 	    	if ( $today > $start_date ):
-				$date_format = 'Thru ' . $end_month . ' ' . $end_day;
+				$date_format = 'Through ' . $end_month . ' ' . $end_day;
 			else:
-				$date_format = $start_month . ' ' . $start_day . ' - ' . $end_month . ' ' . $end_day;
-				$date_format .= '</br>' . $start_year;
+				$date_format = $start_month . ' ' . $start_day;
+				if ( $start_year != $end_year ):
+					$date_format .= ', ' . $start_year;
+				endif;
+				if ($end_date):
+					$date_format .= ' &ndash; ' . $end_month . ' ' . $end_day . ', ' . $end_year;
+				endif;
 			endif;
 	    	break;
 	}
@@ -652,6 +675,70 @@ function user_is_resident() {
 		return false;
 	}
 }
+
+function event_count_by_type( $event_type ) {
+	$event_type_meta_query = array(
+		'key' => 'event_type',
+		'type' => 'CHAR',
+		'value' => $event_type,
+		'compare' => 'LIKE'
+	);
+	$event_type_query_args = array(
+		'post_type' => 'event',
+		'meta_query' => array( $event_type_meta_query )
+	);
+	$event_type_query = new WP_Query( $event_type_query_args );
+	$event_type_count = $event_type_query->found_posts;
+	return $event_type_count;
+}
+
+
+function event_count_by_year( $year ) {
+	$year_begin = $year . '0101';
+	$year_end = $year . '1231';
+	$year_range = array( $year_begin, $year_end );
+	$year_meta_query = array(
+		'relation' => 'OR',
+		array(
+			'key' => 'start_date',
+			'type' => 'DATE',
+			'value' => $year_range,
+			'compare' => 'BETWEEN'
+		),
+		array(
+			'key' => 'end_date',
+			'type' => 'DATE',
+			'value' => $year_range,
+			'compare' => 'BETWEEN'
+		),
+		array(
+			'key' => 'date',
+			'type' => 'DATE',
+			'value' => $year_range,
+			'compare' => 'BETWEEN'
+		)
+	);
+
+	$year_query_args = array(
+		'post_type' => 'event',
+		'meta_query' => $year_meta_query
+	);
+	$year_query = new WP_Query( $year_query_args );
+	$year_count = $year_query->found_posts;
+	return $year_count;
+}
+
+add_filter( 'posts_orderby', function( $orderby, \WP_Query $q ) {
+    if( 'last_name' === $q->get( 'orderby' ) && $get_order =  $q->get( 'order' ) )
+    {
+        if( in_array( strtoupper( $get_order ), ['ASC', 'DESC'] ) )
+        {
+            global $wpdb;
+            $orderby = " SUBSTRING_INDEX( {$wpdb->posts}.post_title, ' ', -1 ) " . $get_order;
+        }
+    }
+    return $orderby;
+}, PHP_INT_MAX, 2 );
 
 
 function add_parent_class( $items ) {

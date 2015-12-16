@@ -48,16 +48,19 @@
 					$slug = get_post( $id )->post_name;
 					$title = get_the_title( $id );
 					$url = get_permalink();
-					$type = get_field('event_type', $id);
+					$type = pretty( get_field( 'event_type', $id ) );
 					$date_format = get_event_date( $id );
 
 					$thumb = get_thumb( $id );
 
 					echo '<div class="event ' . $type . '" id="' . $slug . '">';
 						echo '<a href="' . $url . '">';
-					  		echo '<h2 class="date">';
-					  			echo $date_format;
-					  		echo '</h2>';
+							echo '<h3 class="type">';
+					  		echo $type;
+					  		echo '</h3>';
+					  		echo '<h3 class="date">';
+					  		echo $date_format;
+					  		echo '</h3>';
 					  		echo '<div class="thumb">';
 					  		echo '<img src="' . $thumb . '"/>';
 					  		echo '</div>';
@@ -78,7 +81,9 @@
 
 		<div class="mission border-top border-bottom">
 			<h3 class="title orange"><?php echo $address ?></h3>
-			<p class="large"><?php echo $mission ?></p>
+			<div class="large">
+				<?php echo $mission ?>
+			</div>
 		</div>
 
 
@@ -92,10 +97,14 @@
 			while( has_sub_field( 'image_slider', $home ) ):
 				$image = get_sub_field( 'image', $home );
 				$image_url = $image['url'];
+				$image_caption = get_sub_field( 'caption', $home );
 				echo '<div class="slide">';
 				echo '<div class="vert">';
 				echo '<div class="image">';
 				echo '<img src="' . $image_url . '" alt=""/>';
+				echo '</div>';
+				echo '<div class="caption">';
+				echo $image_caption;
 				echo '</div>';
 				echo '</div>';
 				echo '</div>';
@@ -114,7 +123,9 @@
 
 		<div class="residency_program border-top border-bottom">
 			<h3 class="title orange">Residency Program</h3>
-			<p class="xlarge"><?php echo $residency_tagline ?></p>
+			<div class="text xlarge">
+				<?php echo $residency_tagline ?>
+			</div>
 		</div>
 
 		<? get_tweets( 3 ); ?>

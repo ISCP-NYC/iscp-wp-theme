@@ -30,14 +30,25 @@ jQuery(document).ready(function($) {
 	}
 
 	function headerView() {
-		//toggle nav visibility with button
-		$('section').on('click', '.nav-toggle', function() {
+		
+		$('body').on('mouseenter', 'section:not(.open-nav) .nav-hover', function() {
 			var section = $(this).parent('section');
-			$(section).toggleClass('open-nav');
+			$(section).addClass('tease-nav');
+		}).on('mouseleave', 'section:not(.open-nav) .nav-hover', function() {
+			var section = $(this).parent('section');
+			$(section).removeClass('tease-nav');
 		});
 
-		$('section').on('hover', '.nav-toggle', function() {
-			$(this).parent('section').toggleClass('tease-header');
+		//toggle nav visibility with button
+		$('body').on('click', 'section:not(.open-nav) .nav-hover', function() {
+			var section = $(this).parent('section');
+			$(section).addClass('open-nav').removeClass('tease-nav');
+		});
+
+		$('body').on('click', '.open-nav .nav-toggle', function() {
+			var section = $(this).parent('section');
+			console.log(section);
+			$(section).removeClass('open-nav');
 		});
 
 		//toggle header visibility with scroll behavior
@@ -50,7 +61,9 @@ jQuery(document).ready(function($) {
 				if(scrollTop > lastScrollTop + 10) {
 					$(section).addClass('hide-header');
 					$(section).removeClass('open-nav');
+					$(section).removeClass('tease-nav');
 				} else if(scrollTop < lastScrollTop - 5 || scrollTop <= 50) {
+					$(section).removeClass('tease-nav');
 					$(section).removeClass('hide-header');
 				}
 				lastScrollTop = scrollTop;

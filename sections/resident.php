@@ -1,18 +1,25 @@
-<section class="resident single" id="<?php echo $slug ?>">
+<?php 
+	$id = get_the_ID();
+	$country = ucwords( get_field( 'country_temp', $id ) );
+	$name = get_the_title();
+	$bio = get_field( 'bio', $id );
+	$website = get_field( 'website', $id );
+	$wbst = implode( '/', array_slice(explode('/', preg_replace('/https?:\/\/|www./', '', $website ) ), 0, 1));
+	$studio_number = get_field( 'studio_number', $id );
+	$resident_type = ucfirst( get_field( 'resident_type', $id ) );
+	$residencies = array();
+ 
+	$event_classes = array('resident', 'single');
+	if( is_alumni( $id ) ):
+		$event_classes[] = 'alumni';
+	endif;
+?>
+
+<section <?php post_class( $event_classes ) ?> id="<?php echo $slug ?>">
 	<?php get_template_part('partials/nav') ?>
 	<?php get_template_part('partials/side') ?>
 
 	<?php 
-		$id = get_the_ID();
-		$country = ucwords( get_field( 'country_temp', $id ) );
-		$name = get_the_title();
-		$bio = get_field( 'bio', $id );
-		$website = get_field( 'website', $id );
-		$wbst = implode( '/', array_slice(explode('/', preg_replace('/https?:\/\/|www./', '', $website ) ), 0, 1));
-		$studio_number = get_field( 'studio_number', $id );
-		$resident_type = ucfirst( get_field( 'resident_type', $id ) );
-		$residencies = array();
-
 		while( has_sub_field( 'residency_dates', $residency ) ):
 			$start_date_dt = new DateTime( get_sub_field( 'start_date', $residency ) );
 			$end_date_dt = new DateTime( get_sub_field( 'end_date', $residency ) );
