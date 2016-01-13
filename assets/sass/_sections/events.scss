@@ -1,4 +1,7 @@
 section#events .content {
+	h4.title {
+		margin-bottom: 20px;
+	}
 	.filter {
 		width: 100%;
 		display: table;
@@ -29,6 +32,14 @@ section#events .content {
 	.events {
 		margin-top: 50px;
 		.event {
+			h3 {
+				margin-bottom: 5px;
+				a {
+					width: 100%;
+					display: block;
+					text-align: center;
+				}
+			}
 			.image {
 				width: 100%;
 				background: $orange;
@@ -40,23 +51,7 @@ section#events .content {
 				}
 			}
 			.details {
-				display: flex;
-				.left {
-					width: 100%;
-					// display: inline-flex;
-				}
-	            .country {
-	            	// width: 100%;
-	            }
-	            .sponsor {
-	            	// width: 100%;
-	            }
-	            .studio-number {
-	            	padding-left: 7px;
-	            	display: inline-flex;
-	            	text-align: right;
-	            	white-space: nowrap;
-	            }
+				@include small-fs;
 			}
 		}
 	}

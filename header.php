@@ -45,13 +45,6 @@
 <?php 
 
 	$user = wp_get_current_user();
-	$om = array(
-		get_userdatabylogin('corey'),
-		get_userdatabylogin('phil')
-	);
-	if( !in_array( $user, $om ) ) {
-		exit;
-	}
 
 	$classes;
 

@@ -1,131 +1,131 @@
-$light: #facab4;
-body.resident-resources {
-	background-color: $light;
+section#resident-resources {
 	@include medium-fs;
-	section#resident-resources {
-		.content {
-			position: relative;
-			
-		}
-		.user-info {
-			width: 150px;
-			position: absolute;
-			right: 0;
-			top: 130px;
-			color: white;
-			@include small-fs;
-		}
-		header.main {
+	background-color: $light;
+	aside.main {
+		background-color: $light;
+	}
+	.content {
+		position: relative;
+		
+	}
+	.user-info {
+		width: 150px;
+		position: absolute;
+		right: 0;
+		top: 130px;
+		color: white;
+		@include small-fs;
+	}
+	header.main {
+		background-color: $light;
+		nav {
 			background-color: $light;
-			nav {
+			.overlay {
 				background-color: $light;
-				.overlay {
-					background-color: $light;
-				}	
-			}
+			}	
 		}
-		.hello {
-			@include xxlarge-fs;
-			margin-bottom: 50px;
+	}
+	.hello {
+		@include xxlarge-fs;
+		margin-bottom: 50px;
+	}
+	.half {
+		float: left;
+		width: calc(50% - 15px);
+		&.left {
+			margin-right: 15px;
 		}
-		.half {
-			float: left;
-			width: calc(50% - 15px);
-			&.left {
-				margin-right: 15px;
-			}
-			&.right {
-				margin-left: 15px;
-			}
+		&.right {
+			margin-left: 15px;
 		}
-		ul {
-			li {
-				@extend .bullet;
-				background-position: left 7px;
-				padding: 0;
-				text-indent: 25px;
-			}
+	}
+	ul {
+		li {
+			@extend .bullet;
+			background-position: left 7px;
+			padding: 0;
+			text-indent: 25px;
 		}
-		.dashboard {
-			width: 100%;
-			display: table;
-			padding-bottom: 50px;
-		}
-		h4 {
-			width: 100%;
-		    padding: 20px 0;
-		    font-size: 20px;
-		    text-align: center;
-		    @include small-fs;
-		}
-		.welcome {
-			width: 100%;
-			@extend .border-top; 
-			padding-bottom: 30px;
-			display: table;
-		}
-		.contact {
-			width: 100%;
-			@extend .border-top;
-			padding-bottom: 30px;
-			display: table;	
-		}
-		.staff {
-			width: 100%;
-			@extend .border-top;
-			padding-bottom: 30px;
-			.members {
+	}
+	.dashboard {
+		width: 100%;
+		display: table;
+		padding-bottom: 50px;
+	}
+	h4 {
+		width: 100%;
+	    padding: 20px 0;
+	    font-size: 20px;
+	    text-align: center;
+	    @include small-fs;
+	}
+	.welcome {
+		width: 100%;
+		@extend .border-top; 
+		padding-bottom: 30px;
+		display: table;
+	}
+	.contact {
+		width: 100%;
+		@extend .border-top;
+		padding-bottom: 30px;
+		display: table;	
+	}
+	.staff {
+		width: 100%;
+		@extend .border-top;
+		padding-bottom: 30px;
+		.members {
+			display: -webkit-flex;
+		    display: -ms-flexbox;
+		    display: flex;
+		    -webkit-flex-wrap: wrap;
+		    -ms-flex-wrap: wrap;
+		    flex-wrap: wrap;
+			.staff-member {
+				@include width('100% / 3 - 20px');
 				display: -webkit-flex;
 			    display: -ms-flexbox;
+			    display: -webkit-box;
 			    display: flex;
-			    -webkit-flex-wrap: wrap;
-			    -ms-flex-wrap: wrap;
-			    flex-wrap: wrap;
-				.staff-member {
-					@include width('100% / 3 - 20px');
-					display: -webkit-flex;
-				    display: -ms-flexbox;
-				    display: -webkit-box;
-				    display: flex;
-					float: left;
-					margin-bottom: 20px;
-					.name {
-						padding: 10px 0;
-						text-align: center;
-					}
-					.image {
+				float: left;
+				margin-bottom: 20px;
+				.name {
+					padding: 10px 0;
+					text-align: center;
+				}
+				.image {
+					width: 100%;
+					img {
 						width: 100%;
-						img {
-							width: 100%;
-							vertical-align: bottom;
-						}
-					}
-					&:nth-child(3n+2) {
-						margin: 0 30px;
-					}
-					@include medium {
-						@include width('50% - 20px');
-						&:nth-child(odd) {
-							margin: 0 20px 0 0;
-						}
-						&:nth-child(even) {
-							margin: 0 0 0 20px;
-						}
-					}
-					.info {
-						@include small-fs;
-						padding-top: 10px;
-						.role {
-							width: 100%;
-						}
-						.email {
-						}
-						.description {
-							padding-top: 10px;
-						}
+						vertical-align: bottom;
 					}
 				}
-			}			
-		}
+				&:nth-child(3n+2) {
+					margin: 0 30px;
+				}
+				@include medium {
+					@include width('50% - 20px');
+					&:nth-child(odd) {
+						margin: 0 20px 0 0;
+					}
+					&:nth-child(even) {
+						margin: 0 0 0 20px;
+					}
+				}
+				.info {
+					@include small-fs;
+					padding-top: 10px;
+					.role {
+						width: 100%;
+					}
+					.email {
+					}
+					.description {
+						padding-top: 10px;
+					}
+				}
+			}
+		}			
 	}
 }

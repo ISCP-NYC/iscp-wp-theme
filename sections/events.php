@@ -44,7 +44,7 @@
 					<span class="grid">Grid</span>
 				</div>
 			</div>
-			<div class="filter-list sub event-type <? echo $slug ?>">
+			<div class="filter-list sub event-type <?php echo $slug ?>">
 				<div class="options">
 					<?php
 					$event_types = array( 'event', 'exhibition', 'off-site-project', 'iscp-talk', 'open-studios' );
@@ -71,7 +71,7 @@
 				</div>
 			</div>
 
-			<div class="filter-list sub year <? echo $slug ?>">
+			<div class="filter-list sub year <?php echo $slug ?>">
 				<div class="options">
 					<?php
 					$page_url = get_the_permalink();
@@ -99,7 +99,7 @@
 			</div>
 		</div>
 
-		<div class="events shelves filter-this grid <? echo $slug ?>">
+		<div class="events shelves filter-this grid <?php echo $slug ?>">
 			<?php
 				if( $event_type_param ) {
 					$filter_key = 'event_type';
@@ -141,6 +141,8 @@
 				$args = array(
 					'post_type' => 'event',
 					'posts_per_page' => 30,
+					'orderby' => array('date', 'end_date'),
+					'order' => 'DESC',
 					'meta_query' => array( $filter_query )
 				);
 
@@ -151,7 +153,8 @@
 					$id = $the_ID;
 					$title = get_the_title( $id );
 					$url = get_permalink();
-					$type = pretty( get_field( 'event_type', $id ) );
+					$type = get_field( 'event_type', $id );
+					$type_name = pretty( $type );
 					$date_format = get_event_date( $id );
 					if( $append_query && is_alumni( $id ) ) {
 						$url .= $append_query;
@@ -159,18 +162,18 @@
 					$thumb = get_thumb( $resident_id );
 
 					echo '<div class="event orange shelf-item border-bottom"><div class="inner">';
-					echo '<h3 class="value name"><a href="' . $url . '">' . $title . '</a></h3>';
+					echo '<h3 class="value date"><a href="' . $url . '">' . $date_format . '</a></h3>';
 					echo '<a href="' . $url . '">';
 					echo '<div class="image">';
 					echo '<img src="' . $thumb . '"/>';
 					echo '</div>';
 					echo '</a>';
 					echo '<div class="details">';
-					echo '<div class="left">';
-					echo '<div class="value date"><a href="#">' . $date_format . '</a></div>';
-					echo '</div>';
-					echo '<div class="right">';
-					echo '<div class="value event-type">' . $type . '</div>';
+					echo '<div class="value title"><a href="' . $url . '">' . $title . '</a></div>';
+					echo '<div class="value event-type">';
+					echo '<a href="' . site_url() . '/events?type=' . $type . '">';
+					echo $type_name;
+					echo '</a>';
 					echo '</div></div></div></div>';
 
 				endwhile;

@@ -13,6 +13,7 @@ body {
 	height: 100%;
 	overflow: hidden;
 	font-family: 'Life Rounded Regular';
+	@include small-fs;
 }
 #mfPreviewBar {
 	display: none;

@@ -89,7 +89,7 @@ function custom_event_column( $column, $post_id ) {
 
       case 'event_date':
         $start_date = get_post_meta( $post_id , 'start_date' , true );
-        $event_date = get_post_meta( $post_id , 'date' , true );
+        // $event_date = get_post_meta( $post_id , 'date' , true );
         if($start_date && $start_date != '-' && $start_date != 'Invalid date') {  
         	$start_date = new DateTime($start_date);
         	echo $start_date->format('Y/m/d');
@@ -381,7 +381,7 @@ function get_residents( $center_id, $direction, $count ) {
 		$year_end = $year . '1231';
 		$year_range = array( $year_begin, $year_end );
 		$filter_query = array(
-			'key' => 'start_date',
+			'key' => 'residency_dates_0_start_date',
 			'type' => 'DATE',
 			'value' => $year_range,
 			'compare' => 'BETWEEN'
@@ -392,50 +392,43 @@ function get_residents( $center_id, $direction, $count ) {
 	$today = new DateTime();
 	$today = $today->format( 'Ymd' );
 
-	$resident_id = get_the_ID();
+	// $resident_id = get_the_ID();
 
-	if ( is_current( $resident_id ) ) {
+	if ( is_current( $center_id ) ) {
 		$page_query = array(
 			'key' => 'residency_dates_0_end_date',
 			'type' => 'DATE',
 			'value' => $today,
 			'compare' => '>='
 		);
-	} else if ( is_alumni($resident_id ) ) {
+	} else if ( is_alumni( $center_id ) ) {
 		$page_query = array(
 			'key' => 'residency_dates_0_end_date',
 			'type' => 'DATE',
 			'value' => $today,
 			'compare' => '<='
 		);
-	} else if ( is_ground_floor( $resident_id ) ) {
-		$page_query = array(
-			'key' => 'ground_floor',
-			'type' => 'BINARY',
-			'value' => 1,
-			'compare' => '='
-		);
 	}
 
-	if($direction == 'next') {
-		$compare = '>=';
-	} else if($direction == 'prev') {
-		$compare = '<=';
-	}
+	// if($direction == 'next') {
+	// 	$compare = '>=';
+	// } else if($direction == 'prev') {
+	// 	$compare = '<=';
+	// }
 
-	$center_date = get_field('residency_dates_0_end_date', $center_id);
+	// $center_date = get_field('residency_dates_0_end_date', $center_id);
 
-	$direction_query = array(
-		'key' => 'residency_dates_0_end_date',
-		'type' => 'DATE',
-		'value' => $center_date,
-		'compare' => $compare
-	);
+	// $direction_query = array(
+	// 	'key' => 'residency_dates_0_end_date',
+	// 	'type' => 'DATE',
+	// 	'value' => $center_date,
+	// 	'compare' => $compare
+	// );
 	
 	$args = array(
 		'post_type' => 'resident',
 		'posts_per_page' => $count,
-		'meta_query' => array( $page_query, $filter_query, $direction_query )
+		'meta_query' => array( $page_query, $filter_query )
 	);
 
 	$next_residents = new WP_Query( $args );
@@ -522,99 +515,118 @@ function get_tweets( $count ) {
 
 function get_event_date( $id ) {
 	$today = new DateTime();
-	$today = $today->format('Y-m-d H:i:s');
-	if ( get_field('start_date', $id) ):
-		$start_date = new DateTime(get_field('start_date', $id));
+	$today = $today->format( 'Y-m-d H:i:s' );
+	$_start_date = get_field( 'start_date', $id );
+	$_end_date = get_field( 'end_date', $id );
+
+	if ( $_start_date && $_start_date != '-' ):
+		$start_date = new DateTime( $_start_date );
 		$start_month = $start_date->format('F');
 		$start_day_word = $start_date->format('l');
 		$start_day = $start_date->format('d');
 		$start_year = $start_date->format('Y');
 	endif;
 
-	if ( get_field('end_date', $id) ):
-		$end_date = new DateTime(get_field('end_date', $id));
+	if ( $_end_date && $_end_date != '-' ):
+		$end_date = new DateTime( $_end_date );
 		$end_month = $end_date->format('F');
 		$end_day_word = $end_date->format('l');
 		$end_day = $end_date->format('d');
 		$end_year = $end_date->format('Y');
 	endif;
 
-	if ( get_field('date', $id) ):
-		$event_date = new DateTime(get_field('date', $id));
-		$event_month = $event_date->format('F');
-		$event_day_word = $event_date->format('l');
-		$event_day = $event_date->format('d');
-		$event_year = $event_date->format('Y');
-	endif;
+	// if ( get_field('date', $id) ):
+	// 	$event_date = new DateTime(get_field('date', $id));
+	// 	$event_month = $event_date->format('F');
+	// 	$event_day_word = $event_date->format('l');
+	// 	$event_day = $event_date->format('d');
+	// 	$event_year = $event_date->format('Y');
+	// endif;
 
 	$start_time = get_field('start_time', $id);
 	$end_time = get_field('end_time', $id);
 
+	if ( $end_date ):
+		if ( $today > $start_date ):
+			$date_format = 'Through ' . $end_month . ' ' . $end_day;
+		else:
+			$date_format = $start_month . ' ' . $start_day;
+			if ( $start_year != $end_year ):
+				$date_format .= ', ' . $start_year;
+			endif;
+			if ($end_date):
+				$date_format .= ' &ndash; ' . $end_month . ' ' . $end_day . ', ' . $end_year;
+			endif;
+		endif;
+	else:
+		$date_format = $start_month . ' ' . $start_day . ', ' . $start_year;
+	endif;
+
 	$type = get_field('event_type', $id);
-	switch ($type) {
-		case 'event':
-	    	$type_name = 'Event';
-	    	$date_format = $event_month . ' ' . $event_day . ', ' . $event_year;
-	    	if( $start_time ):
-	    		$date_format .= '</br>' . $start_time;
-	    		if( $end_time ):
-	    			$date_format .= ' - ' . $end_time;
-	    		endif;
-			endif;
-	    	break;
-	    case 'iscp-talk':
-	    	$type_name = 'ISCP Talk';
-	    	$date_format = $event_month . ' ' . $event_day . ', ' . $event_year;
-	    	if( $start_time ):
-	    		$date_format .= '</br>' . $start_time;
-	    		if( $end_time ):
-	    			$date_format .= ' - ' . $end_time;
-	    		endif;
-			endif;
-	    	break;
-	    case 'exhibition':
-	    	$type_name = 'Exhibition';
-	    	if ( $today > $start_date ):
-				$date_format = 'Through ' . $end_month . ' ' . $end_day. ', ' . $end_year;
-			else:
-				$date_format = $start_month . ' ' . $start_day;
-				if ( $start_year != $end_year ):
-					$date_format .= ', ' . $start_year;
-				endif;
-				if ($end_date):
-					$date_format .= ' &ndash; ' . $end_month . ' ' . $end_day . ', ' . $end_year;
-				endif;
-			endif;
-	    	break;
-	    case 'open-studios':
-	    	$type_name = 'Open Studio';
-	    	if ( $today > $start_date ):
-				$date_format = 'Through ' . $end_month . ' ' . $end_day. ', ' . $end_year;
-			else:
-				$date_format = $start_month . ' ' . $start_day;
-				if ( $start_year != $end_year ):
-					$date_format .= ', ' . $start_year;
-				endif;
-				if ($end_date):
-					$date_format .= ' &ndash; ' . $end_month . ' ' . $end_day . ', ' . $end_year;
-				endif;
-			endif;
-	    	break;
-	    case 'off-site-project':
-	    	$type_name = 'Off-Site Project';
-	    	if ( $today > $start_date ):
-				$date_format = 'Through ' . $end_month . ' ' . $end_day;
-			else:
-				$date_format = $start_month . ' ' . $start_day;
-				if ( $start_year != $end_year ):
-					$date_format .= ', ' . $start_year;
-				endif;
-				if ($end_date):
-					$date_format .= ' &ndash; ' . $end_month . ' ' . $end_day . ', ' . $end_year;
-				endif;
-			endif;
-	    	break;
-	}
+	// switch ($type) {
+	// 	case 'event':
+	//     	$type_name = 'Event';
+	//     	$date_format = $event_month . ' ' . $event_day . ', ' . $event_year;
+	//     	if( $start_time ):
+	//     		$date_format .= '</br>' . $start_time;
+	//     		if( $end_time ):
+	//     			$date_format .= ' - ' . $end_time;
+	//     		endif;
+	// 		endif;
+	//     	break;
+	//     case 'iscp-talk':
+	//     	$type_name = 'ISCP Talk';
+	//     	$date_format = $event_month . ' ' . $event_day . ', ' . $event_year;
+	//     	if( $start_time ):
+	//     		$date_format .= '</br>' . $start_time;
+	//     		if( $end_time ):
+	//     			$date_format .= ' - ' . $end_time;
+	//     		endif;
+	// 		endif;
+	//     	break;
+	//     case 'exhibition':
+	//     	$type_name = 'Exhibition';
+	//     	if ( $today > $start_date ):
+	// 			$date_format = 'Through ' . $end_month . ' ' . $end_day. ', ' . $end_year;
+	// 		else:
+	// 			$date_format = $start_month . ' ' . $start_day;
+	// 			if ( $start_year != $end_year ):
+	// 				$date_format .= ', ' . $start_year;
+	// 			endif;
+	// 			if ($end_date):
+	// 				$date_format .= ' &ndash; ' . $end_month . ' ' . $end_day . ', ' . $end_year;
+	// 			endif;
+	// 		endif;
+	//     	break;
+	//     case 'open-studios':
+	//     	$type_name = 'Open Studio';
+	//     	if ( $today > $start_date ):
+	// 			$date_format = 'Through ' . $end_month . ' ' . $end_day. ', ' . $end_year;
+	// 		else:
+	// 			$date_format = $start_month . ' ' . $start_day;
+	// 			if ( $start_year != $end_year ):
+	// 				$date_format .= ', ' . $start_year;
+	// 			endif;
+	// 			if ($end_date):
+	// 				$date_format .= ' &ndash; ' . $end_month . ' ' . $end_day . ', ' . $end_year;
+	// 			endif;
+	// 		endif;
+	//     	break;
+	//     case 'off-site-project':
+	//     	$type_name = 'Off-Site Project';
+	//     	if ( $today > $start_date ):
+	// 			$date_format = 'Through ' . $end_month . ' ' . $end_day;
+	// 		else:
+	// 			$date_format = $start_month . ' ' . $start_day;
+	// 			if ( $start_year != $end_year ):
+	// 				$date_format .= ', ' . $start_year;
+	// 			endif;
+	// 			if ($end_date):
+	// 				$date_format .= ' &ndash; ' . $end_month . ' ' . $end_day . ', ' . $end_year;
+	// 			endif;
+	// 		endif;
+	//     	break;
+	// }
 	return $date_format;
 }
 
@@ -664,6 +676,40 @@ function pretty_short($string) {
 			return 'Ground Floor';
 			break;
 	}
+}
+
+function label_art($id) {
+	$artist = get_sub_field( 'artist' );
+	$title = get_sub_field( 'title' );
+    $year = get_sub_field( 'year' );
+    $medium = get_sub_field( 'medium' );
+    $dimensions = get_sub_field( 'dimensions' );
+    $credit = get_sub_field( 'credit' );
+	$post_type = get_post_type( get_the_ID() );
+
+	if ( $post_type == 'resident' && !$image_artist ) {
+		$artist = get_the_title();
+	}
+    $caption = $artist;
+    if( $title && $title != ' ' ) {
+    	$caption .= ', <em>' . $title . '</em>';
+    }
+    if( $year && $year != ' ' ) {
+    	$caption .= ', ' . $year;
+    }
+    if( $medium && $medium != ' ' ) {
+    	$caption .= ', ' . $medium;
+    }
+    if( $dimensions && $dimensions != ' ' ) {
+    	$caption .= ', ' . $dimensions;
+    }
+    if( $credit && $credit != ' ' ) {
+    	$caption .= '. Courtesy of ' . $credit;
+    }
+    if( $photo_credit && $photo_credit != ' ' ) {
+    	$caption .= '. Photo courtesy of ' . $photo_credit;
+    }
+    return $caption;
 }
 
 

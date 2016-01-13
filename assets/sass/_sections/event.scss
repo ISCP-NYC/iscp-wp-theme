@@ -154,7 +154,6 @@ section.single.event {
 			}
 		}
 	}
-
 	.upcoming {
 		width: 100%;
 		display: table;
@@ -191,8 +190,8 @@ section.single.event {
 	}
 	&.one_col {
 		.info {
-			width: 100%;
-			padding: 0;
+			width: 100% !important;
+			padding: 0 !important;
 		}
 	}
 }

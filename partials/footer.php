@@ -10,12 +10,6 @@
 	</aside>
 	<div class="wrapper">
 		<div class="inner">
-			<h3 class="title black">
-				International Studio &amp; Curatorial Program
-			</h3>
-			<h3 class="title white address">
-				<?php echo $address ?>
-			</h3>
 			<nav>
 				<?php foreach ( (array) $menu_items as $key => $menu_item ) {
 					if ( $menu_item->menu_item_parent == 0 ) :
@@ -27,7 +21,7 @@
 					    	<div class="cell ' . $slug . '">
 					    		<div class="cell-inner">
 					    			<a href="' . $url . '">
-					    				<h3 class="title">' . $title . '</h3>
+					    				<div class="title">' . $title . '</div>
 					    			</a>
 					    			<div class="sub-menu">';
 
@@ -56,7 +50,7 @@
 				<div class="cell search">
 		    		<div class="cell-inner">
 		    			<a href="">
-		    				<h3 class="title">Search</h3>
+		    				<div class="title">Search</div>
 		    			</a>
 		    			<div class="sub-menu">
 		    				<input type="text"/>
@@ -76,7 +70,7 @@
 		    	<div class="cell connect">
 		    		<div class="cell-inner">
 		    			<a href="">
-		    				<h3 class="title">Connect</h3>
+		    				<div class="title">Connect</div>
 		    			</a>
 		    			<div class="sub-menu">
 		    				<div class="child-item twitter">
@@ -95,7 +89,7 @@
 		    	<div class="cell newsletter">
 		    		<div class="cell-inner">
 		    			<a href="<?php echo $newsletter_url ?>">
-		    				<h3 class="title">Newsletter</h3>
+		    				<div class="title">Newsletter</div>
 		    			</a>
 		    			<div class="sub-menu">
 		    				<input type="text" placeholder="Subscribe">
@@ -107,7 +101,7 @@
 		<div class="bottom">
 			<div class="half">
 				<h3>
-					<a href="<?php echo site_url() ?>">International Studio &amp; Curitorial Program</a>
+					<a href="<?php echo site_url() ?>">International Studio &amp; Curatorial Program</a>
 				</h3>
 			</div>
 			<div class="half">

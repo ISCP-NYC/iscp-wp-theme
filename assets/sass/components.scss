@@ -1,3 +1,53 @@
+.gallery {
+    .close {
+        width: 30px;
+        height: 30px;
+        position: absolute;
+        right: 175px;
+        top: 35px;
+        background-image: url(../images/close-white.svg);
+        background-size: 30px;
+        background-position: center;
+        background-repeat: no-repeat;
+        cursor: pointer;
+        display: none;
+    }
+    &.full {
+        width: 100% !important;
+        height: 100% !important;
+        position: fixed;
+        top: 0;
+        left: 0; 
+        background-color: black;
+        z-index: 1000;
+        .piece {
+            width: 100% !important;
+            height: 100% !important;
+            margin: 0 !important;
+            display: table;
+            .inner {
+                width: 100%;
+                display: table-cell;
+                vertical-align: middle;
+                .image {
+                    width: 50% !important;
+                    display: table;
+                    margin: 0 auto 20px auto;
+                }
+                .description {
+                    width: 50% !important;
+                    display: table;
+                    margin: auto !important;
+                    text-align: center !important;
+                    color: white !important;
+                }
+            }
+        }
+        .close {
+            display: block;
+        }
+    }
+}
 .shelves {
     width: 100%;
     display: -webkit-flex;
@@ -30,7 +80,7 @@
                     display: block;
                 }
                 .details {
-                    margin-top: 15px;
+                    margin-top: 10px;
                     @include xsmall-fs;
                 }
             }
@@ -97,8 +147,7 @@
 
 .filter {
     width: 100%;
-    display: table;
-    margin: 25px 0;
+    margin: 0 0 25px 0;
     @extend .noselect;
     .select {
         font-size: $small-fs;

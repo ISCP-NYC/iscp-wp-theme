@@ -5,6 +5,7 @@ aside {
 		top: 0;	
 		height: 100%;
 		border-color: $orange;
+		background: $white;
 	}
 	&.footer {
 		top: 30px;
@@ -56,5 +57,24 @@ aside {
 	}
 	@include xsmall {
 		display: none !important;
+	}
+	.label {
+		position: absolute;
+		@include medium-fs;
+		transform: rotate(90deg);
+	}
+}
+
+aside.main:hover {
+	cursor: pointer;
+} 
+&:first-child {
+	aside.main.left:hover {
+		cursor: default;
+	}
+}
+&:last-child {
+	aside.main.right:hover {
+		cursor: default;
 	}
 }

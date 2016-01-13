@@ -1,5 +1,11 @@
 .home {
-	.events.upcoming {
+	h4 {
+		a {
+			display: block;
+			width: 100%;
+		}
+	}
+		.events.upcoming {
 		width: 100%;
 		display: table;
 		padding: 100px 0 30px 0;
@@ -15,6 +21,7 @@
 				text-align: left;
 			}
 			.thumb {
+				margin-top: 10px;
 				width: 100%;
 				img {
 					width: 100%;
@@ -23,6 +30,10 @@
 			a {
 				width: 100%;
 				display: table;
+				color: $black;
+				&:hover {
+					color: $orange !important;
+				}
 			}
 			&:nth-child(2) {
 				margin: 0 30px;

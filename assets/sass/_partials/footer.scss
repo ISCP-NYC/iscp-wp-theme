@@ -25,22 +25,20 @@ footer {
 			    flex-wrap: wrap;
 			    padding-bottom: 100px;
 				.cell {
-					width: 20%;
-					margin-top: 50px;
+					width: calc( (100%/6) - 30px);
+					margin: 0 30px 30px 0;
 					display: -webkit-flex;
 				    display: -ms-flexbox;
 				    display: -webkit-box;
 				    display: flex;
 					float: left;
-					h3.title {
-						padding: 0 0 10px 0;
+					.title {
+						letter-spacing: 1px;
 						text-align: left;
 						text-transform: uppercase;
-						@include large-fs;
 					}
 					.sub-menu {
 						.child-item {
-							@include small-fs;
 							margin: 2px 0;
 						}
 					}
@@ -49,6 +47,7 @@ footer {
 					}
 					input[type="text"] {
 						padding-left: 10px;
+						margin-top: 5px;
 						outline: none;
 						border: solid $white;
 						border-width: 0 0 0 2px;

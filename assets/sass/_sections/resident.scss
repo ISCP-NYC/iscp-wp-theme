@@ -79,14 +79,15 @@ section.single.resident {
 		.piece {
 			margin-bottom: 20px;
 			.image {
-				width: 100%;
+				width: 100%;				
 				img {
 					width: 100%;
 					height: auto;
+					display: table;
 				}
 			}
 			.description {
-				text-align: center;
+				text-align: left;
 				margin: 5px 0 0 0;
 				@include small-fs;
 				color: $orange;
@@ -139,5 +140,18 @@ section.single.resident {
 				}
 			}
 		}
+	}
+	&.one_col {
+		.info {
+			width: 100%;
+			padding: 0;
+		}
+	}
+	.center {
+		z-index: 0;
+	}
+	&:not(.center) {
+		// transform: translateX(-110px);
+		// transition: transform 600ms cubic-bezier(0.645, 0.045, 0.355, 1);
 	}
 }

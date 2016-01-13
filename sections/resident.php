@@ -1,77 +1,92 @@
 <?php 
-	$id = get_the_ID();
-	$country = ucwords( get_field( 'country_temp', $id ) );
+	$resident_id = get_the_ID();
+	$resident = get_post( $resident_id );
+	$country = ucwords( get_field( 'country_temp', $resident_id ) );
 	$name = get_the_title();
-	$bio = get_field( 'bio', $id );
-	$website = get_field( 'website', $id );
+	$bio = get_field( 'bio', $resident_id );
+	$website = get_field( 'website', $resident_id );
 	$wbst = implode( '/', array_slice(explode('/', preg_replace('/https?:\/\/|www./', '', $website ) ), 0, 1));
-	$studio_number = get_field( 'studio_number', $id );
-	$resident_type = ucfirst( get_field( 'resident_type', $id ) );
+	$studio_number = get_field( 'studio_number', $resident_id );
+	$resident_type = ucfirst( get_field( 'resident_type', $resident_id ) );
 	$residencies = array();
  
-	$event_classes = array('resident', 'single');
-	if( is_alumni( $id ) ):
-		$event_classes[] = 'alumni';
+	$resident_classes = array('resident', 'single');
+	if( is_alumni( $resident_id ) ):
+		$resident_classes[] = 'alumni';
+	endif;
+	if( have_rows( 'gallery' ) == false ):
+		$resident_classes[] = 'one_col';
 	endif;
 ?>
 
-<section <?php post_class( $event_classes ) ?> id="<?php echo $slug ?>">
+<section <?php post_class( $resident_classes ) ?> id="<?php echo $slug ?>">
 	<?php get_template_part('partials/nav') ?>
 	<?php get_template_part('partials/side') ?>
-
-	<?php 
-		while( has_sub_field( 'residency_dates', $residency ) ):
-			$start_date_dt = new DateTime( get_sub_field( 'start_date', $residency ) );
-			$end_date_dt = new DateTime( get_sub_field( 'end_date', $residency ) );
-			$start_date = $start_date_dt->format( 'M d, Y' );
-			$end_date = $end_date_dt->format( 'M d, Y' );
-			$sponsors = get_sub_field( 'sponsors', $residency );
-			$residency_object = (object) array(
-				'start_date_dt' => $start_date_dt,
-				'end_date_dt'   => $end_date_dt,
-				'start_date'    => $start_date,
-				'end_date'      => $end_date,
-				'date_range'    => $start_date . ' — ' . $end_date,
-				'sponsors'		=> $sponsors
-			);
-			array_push( $residencies, $residency_object );
-		endwhile;
-	?>
-
 	<div class="content">
-		<h4 class="title orange"><?php the_title() ?></h4>	
+<!-- 		<h4 class="title orange"><?php the_title() ?></h4> -->	
 		<header class="sub">
 			<div class="left">
 				<h4 class="country"><?php echo $country ?></h4>
 			</div>
 
 			<div class="center">
+				<?php 
+				// if( have_rows( 'residency_dates', $resident_id ) ):
+			 //    	while ( have_rows( 'residency_dates', $resident_id ) ) :
+				// 		$start_date_dt = new DateTime( get_sub_field( 'start_date', $resident ) );
+				// 		$end_date_dt = new DateTime( get_sub_field( 'end_date', $resident ) );
+				// 		$start_date = $start_date_dt->format( 'M d, Y' );
+				// 		$end_date = $end_date_dt->format( 'M d, Y' );
+				// 		$sponsors = get_sub_field( 'sponsors', $resident );
+				// 		$residency_object = (object) array(
+				// 			'start_date_dt' => $start_date_dt,
+				// 			'end_date_dt'   => $end_date_dt,
+				// 			'start_date'    => $start_date,
+				// 			'end_date'      => $end_date,
+				// 			'date_range'    => $start_date . ' — ' . $end_date,
+				// 			'sponsors'		=> $sponsors
+				// 		);
+				// 		print_r($residency_object);
+				// 		array_push( $residencies, $residency_object );
+				// 	endwhile;
+				// endif;
+				$resident_start_date = ( new DateTime( get_field( get_start_date_value( $resident_id ), $resident_id ) ) )->format('M d, Y');
+				$resident_end_date = ( new DateTime( get_field( get_end_date_value( $resident_id ), $resident_id) ) )->format('M d, Y');
+				$date_range = $resident_start_date . ' — ' . $resident_end_date;
+				// if( is_current( $resident_id ) ):
+				// 	echo 'Current Resident: ';
+				// else:
+				// 	echo 'Alumni: ';
+				// endif;
+				echo $date_range;
+				?>
+				<?php 
+				// foreach( $residencies as $residency ):
+				// 	$date_range = $residency->date_range;
+				// 	echo '<h4 class="dates">' . $date_range . '</h4>';	
+				// 	$sponsors = $residency->sponsors;
+				// 	if( is_array( $sponsors ) ):
+				// 	echo '<h4 class="sponsors">';
+				// 	foreach( $sponsors as $index=>$sponsor ):
+				// 		$sponsor_name = get_the_title( $sponsor );
+				// 		$sponsor_url = get_field( 'website', $sponsor );
+				// 		echo '<a href="' . $sponsor_url . '">';
+				// 		echo $sponsor_name;
+				// 		echo '</a>';
 
-				<?php foreach( $residencies as $residency ):
-					$date_range = $residency->date_range;
-					echo '<h4 class="dates">' . $date_range . '</h4>';	
-					$sponsors = $residency->sponsors;
-					if( is_array( $sponsors ) ):
-					echo '<h4 class="sponsors">';
-					foreach( $sponsors as $index=>$sponsor ):
-						$sponsor_name = get_the_title( $sponsor );
-						$sponsor_url = get_field( 'website', $sponsor );
-						echo '<a href="' . $sponsor_url . '">';
-						echo $sponsor_name;
-						echo '</a>';
-
-						if( $index != count( $sponsors ) - 1 ):
-							echo ',&nbsp;&nbsp;';
-						endif;
-					endforeach;
-					echo '</h4>';
-					endif;
-				endforeach; ?>
+				// 		if( $index != count( $sponsors ) - 1 ):
+				// 			echo ',&nbsp;&nbsp;';
+				// 		endif;
+				// 	endforeach;
+				// 	echo '</h4>';
+				// 	endif;
+				// endforeach;
+				 ?>
 				
 			</div>
 
 			<div class="right">
-				<h4 class="studio-number">Studio <?php echo $studio_number ?></h4>
+				<h4 class="studio-number">Studio 000<?php echo $studio_number ?></h4>
 				<h4 class="resident-type"><?php echo $resident_type ?></h4>
 			</div>
 		</header>
@@ -94,7 +109,7 @@
 					'meta_query' => array(
 						array(
 							'key' => 'residents',
-							'value' => '"' . $id . '"',
+							'value' => '"' . $resident_id . '"',
 							'compare' => 'LIKE'
 						)
 					)
@@ -117,59 +132,32 @@
 			?>
 		</div>
 
-		<div class="gallery">
 		<?php
-			if( have_rows( 'gallery' ) ):
-			    while ( have_rows( 'gallery' ) ) : the_row();
-			        $gallery_image = get_sub_field( 'image' )['url'];
-			        $image_artist = get_sub_field( 'artist' );
-			        if( !$image_artist || $image_artist == '' ) {
-			        	$image_artist = $name;
-			        }
-			        $image_title = get_sub_field( 'title' );
-			        $image_year = get_sub_field( 'year' );
-			        $image_medium = get_sub_field( 'medium' );
-			        $image_dimensions = get_sub_field( 'dimensions' );
-			        $image_credit = get_sub_field( 'credit' );
+		if( have_rows( 'gallery' ) ):
+			echo '<div class="gallery">';
+			echo '<div class="close"></div>';
+		    while ( have_rows( 'gallery' ) ) : the_row();
+		        $gallery_image = get_sub_field( 'image' )['url'];
+		        $caption = label_art( $the_ID );
+		        echo '<div class="piece">';
+		        echo '<div class="inner">';
+		        echo '<div class="image">';
+		        echo '<img src="' . $gallery_image . '"/>';
+		        echo '</div>';
+		        echo '<div class="description">';
+		        echo $caption;
+		        echo '</div>';
+		        echo '</div>';
+		        echo '</div>';
 
-			        $caption = $image_artist;
-			        if( $image_title ) {
-			        	$caption .= ', <em>' . $image_title . ',</em>';
-			        }
-			        if( $image_year ) {
-			        	$caption .= ' ' . $image_year;
-			        }
-			        if( $image_medium ) {
-			        	$caption .= ', ' . $image_medium;
-			        }
-			        if( $image_dimensions ) {
-			        	$caption .= ', ' . $image_dimensions;
-			        }
-
-			        echo '<div class="piece">';
-			        echo '<div class="image">';
-			        echo '<img src="' . $gallery_image . '"/>';
-			        echo '</div>';
-			        echo '<div class="description">';
-			        echo $caption;
-			        echo '</div>';
-			        echo '</div>';
-
-			    endwhile;
-
-			else :
-
-			    // no rows found
-
-			endif;
+		    endwhile;
+		    echo '</div>';
+		endif;
 		?>
-
-		</div>
 
 		<div class="relations border-top shelves grid">
 			<?php
-			$id = get_the_ID();
-			if( is_ground_floor( $id ) ):
+			if( is_ground_floor( $resident_id ) ):
 				echo '<h4>Ground Floor Residents</h4>';
 				$meta_query = array(
 					'key' => 'residency_program',
@@ -189,7 +177,7 @@
 				<?php 
 				$residents = get_posts(array(
 					'posts_per_page' => 3,
-					'post__not_in' => array($id),
+					'post__not_in' => array($resident_id),
 					'post_type'	=> 'resident',
 					'meta_query' => array( $meta_query )
 				));

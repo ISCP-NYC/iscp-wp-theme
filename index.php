@@ -4,13 +4,12 @@
 	<?php get_template_part('partials/nav') ?>
 	<?php get_template_part('partials/side') ?>
 	<div class="content">
-		<h3 class="title">International Studio &amp; Curitorial Program</h3>
-
-		<h3 class="title">
-			<a href="/events">
+		<h4 class="title">
+			International Studio &amp; Curatorial Program
+			<a href="<?php echo site_url(); ?>/events">
 				Events &amp; Exhibitions
 			</a>
-		</h3>
+		</h4>
 
 		<div class="events upcoming">
 			<?php 
@@ -48,25 +47,30 @@
 					$slug = get_post( $id )->post_name;
 					$title = get_the_title( $id );
 					$url = get_permalink();
-					$type = pretty( get_field( 'event_type', $id ) );
+					$type = get_field( 'event_type', $id );
+					$type_name = pretty( $type );
 					$date_format = get_event_date( $id );
 
 					$thumb = get_thumb( $id );
 
 					echo '<div class="event ' . $type . '" id="' . $slug . '">';
 						echo '<a href="' . $url . '">';
-							echo '<h3 class="type">';
-					  		echo $type;
-					  		echo '</h3>';
 					  		echo '<h3 class="date">';
 					  		echo $date_format;
 					  		echo '</h3>';
 					  		echo '<div class="thumb">';
 					  		echo '<img src="' . $thumb . '"/>';
 					  		echo '</div>';
-					  		echo '<h4 class="type">' . $type_name . '</h4>';
-					  		echo '<h4 class="title">' . $title . '</h4>';
 					  	echo '</a>';
+					  	echo '<h4 class="type">';
+					  	echo '<a href="' . site_url() . '/events?type=' . $type . '">';
+					  	echo $type_name;
+					  	echo '</h4>';
+					  	echo '<h4 class="title">';
+					  	echo '<a href="' . $url . '">';
+					  	echo $title;
+					  	echo '</a>';
+					  	echo '</h4>';
 					echo '</div>';
 				endwhile;
 			?>

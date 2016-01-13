@@ -22,7 +22,11 @@
 	if( $page_columns ):
 		$event_classes[] = $page_columns;
 	else:
-		$event_classes[] = 'two-col';
+		if( have_rows('gallery') ):
+			$event_classes[] = 'two_col';
+		else:
+			$event_classes[] = 'one_col';
+		endif;		
 	endif;
 
 ?>

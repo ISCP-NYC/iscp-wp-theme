@@ -1,69 +1,99 @@
-section.residents .content {
-	.residents {
-		margin-top: 50px;
-		.resident {
-			.image {
-				width: 100%;
-				background: $orange;
-				img {
+section.residents {
+	.content {
+		h4.title {
+			margin-bottom: 20px;
+		}
+		.top {
+			display: -webkit-box;
+		    display: -webkit-flex;
+		    display: -ms-flexbox;
+		    display: flex;
+		    .alt {
+		    	white-space: nowrap;
+		    	&.alumni {
+		    		a {
+		    			color: $black !important;
+		    			&:hover {
+		    				color: $orange !important;
+		    			}
+		    		}
+		    	}
+		    	&.current-residents {
+		    		a {
+		    			color: $orange !important;
+		    			&:hover {
+		    				color: $black !important;
+		    			}
+		    		}
+		    	}
+		    }
+		}
+		.residents {
+			margin-top: 50px;
+			.resident {
+				.image {
 					width: 100%;
-					height: 100%;
-					min-height: 100px;
-					vertical-align: bottom;
+					background: $orange;
+					img {
+						width: 100%;
+						height: 100%;
+						min-height: 100px;
+						vertical-align: bottom;
+					}
 				}
-			}
-			.details {
-				display: flex;
-				.left {
-					width: 100%;
-					// display: inline-flex;
+				.details {
+					display: flex;
+					.left {
+						width: 100%;
+						// display: inline-flex;
+					}
+		            .country {
+		            	// width: 100%;
+		            }
+		            .sponsor {
+		            	// width: 100%;
+		            }
+		            .right {
+		            	display: block;
+		            	padding-left: 7px;
+		            	text-align: right;
+		            	.value {
+		            		float: right;
+		            		&.studio-number {
+		            			white-space: nowrap;
+		            		}
+		            		display: block;
+		            	}
+		            }
 				}
-	            .country {
-	            	// width: 100%;
-	            }
-	            .sponsor {
-	            	// width: 100%;
-	            }
-	            .right {
-	            	display: block;
-	            	padding-left: 7px;
-	            	text-align: right;
-	            	.value {
-	            		float: right;
-	            		&.studio-number {
-	            			white-space: nowrap;
-	            		}
-	            		display: block;
-	            	}
-	            }
 			}
 		}
-	}
-	.residents.list {
-		.resident {
-			.name {
-				width: 20%;
-			}
-			.details {
-				width: 80%;
-				display: flex;
-				.left {
-					width: 100%;
+		.residents.list {
+			.resident {
+				.name {
+					width: 20%;
+				}
+				.details {
+					width: 80%;
 					display: flex;
-					.country {
-						width: 30%;
-						padding-left: 15px;
-					}
-					.sponsor {
-						width: 60%;
-						padding-left: 15px;
-					}
-					.studio-number {
-						width: 10%;
+					.left {
+						width: 100%;
+						display: flex;
+						.country {
+							width: 30%;
+							padding-left: 15px;
+						}
+						.sponsor {
+							width: 60%;
+							padding-left: 15px;
+						}
+						.studio-number {
+							width: 10%;
+						}
 					}
 				}
+				
 			}
-			
 		}
 	}
 }

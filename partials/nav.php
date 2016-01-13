@@ -5,17 +5,17 @@
 		$menu_items = add_parent_class( $menu_items );
 		foreach ( (array) $menu_items as $key => $menu_item ) {
 			if ( $menu_item->menu_item_parent == 0 ) :
-				$title = $menu_item->title;
-				$id = $menu_item->ID;
-				$url = $menu_item->url;
-				$slug = basename($url);
+				$item_title = $menu_item->title;
+				$item_id = $menu_item->ID;
+				$item_url = $menu_item->url;
+				$item_slug = basename($item_url);
 				$classes_array = $menu_item->classes;
 				array_push($classes_array, $slug);
 				$classes = implode(' ', $classes_array);
 			   	echo '<div class="cell ' . $classes . ' ">';
 				echo '<div class="inner">';
-				echo '<a class="overlay" href="' . $url . '">';
-			    echo '<h1>' . $title . '</h1>';
+				echo '<a class="overlay" href="' . $item_url . '">';
+			    echo '<h1>' . $item_title . '</h1>';
 			    echo '</a>';
 			    echo '<div class="sub-menu">';
 
@@ -24,7 +24,7 @@
 			    	$child_url = $child_menu_item->url;
 			    	$child_slug = str_replace('#','-',basename($child_url));
 			    	$parent_id = $child_menu_item->menu_item_parent;
-			    	if ($parent_id == $id ) : 
+			    	if ($parent_id == $item_id ) : 
 			    		$child_item_html = '
 			    			<div class="child-item bullet ' . $child_slug . '">
 			    				<a href="' . $child_url . '">' .

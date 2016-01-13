@@ -22,6 +22,9 @@ jQuery(document).ready(function($) {
 		$(main).css({width:fullWidth+130});
 
 		$(sections).each(function(i) {
+			if(i==0) {
+				$(this).addClass('center');
+			}
 			$(this).css({
 				left: i * pageWidth,
 				width: pageWidth
@@ -235,8 +238,17 @@ jQuery(document).ready(function($) {
 		var showIndex = $(showingSlide).index();
 		$(slideWrapper).css({
 			'left' : -sliderWidth * showIndex
-		});
+		}, 600);
 	}
+
+	$('.gallery .piece .image').click(function() {
+		var image = $(this).parents('.image');
+		var gallery = $(this).parents('.gallery');
+		$(gallery).addClass('full');
+	});
+	$('.close').click(function() {
+		$(this).parent('.gallery').removeClass('full');
+	});
 
 	function winW() {
 		return window.innerWidth;
