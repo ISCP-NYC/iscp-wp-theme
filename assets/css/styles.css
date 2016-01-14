@@ -140,7 +140,11 @@ article, aside, details, figcaption, figure, footer, header, hgroup, main, menu,
 .italic {
   font-family: 'Life Italic'; }
 
-/* line 2, ../sass/components.scss */
+/* line 3, ../sass/components.scss */
+.gallery .piece .image {
+  cursor: -webkit-zoom-in;
+  cursor: zoom-in; }
+/* line 9, ../sass/components.scss */
 .gallery .close {
   width: 30px;
   height: 30px;
@@ -153,7 +157,7 @@ article, aside, details, figcaption, figure, footer, header, hgroup, main, menu,
   background-repeat: no-repeat;
   cursor: pointer;
   display: none; }
-/* line 15, ../sass/components.scss */
+/* line 22, ../sass/components.scss */
 .gallery.full {
   width: 100% !important;
   height: 100% !important;
@@ -162,34 +166,36 @@ article, aside, details, figcaption, figure, footer, header, hgroup, main, menu,
   left: 0;
   background-color: black;
   z-index: 1000; }
-  /* line 23, ../sass/components.scss */
+  /* line 30, ../sass/components.scss */
   .gallery.full .piece {
     width: 100% !important;
     height: 100% !important;
     margin: 0 !important;
     display: table; }
-    /* line 28, ../sass/components.scss */
+    /* line 35, ../sass/components.scss */
     .gallery.full .piece .inner {
       width: 100%;
       display: table-cell;
       vertical-align: middle; }
-      /* line 32, ../sass/components.scss */
+      /* line 39, ../sass/components.scss */
       .gallery.full .piece .inner .image {
         width: 50% !important;
         display: table;
-        margin: 0 auto 20px auto; }
-      /* line 37, ../sass/components.scss */
+        margin: 0 auto 20px auto;
+        cursor: -webkit-zoom-out;
+        cursor: zoom-out; }
+      /* line 47, ../sass/components.scss */
       .gallery.full .piece .inner .description {
         width: 50% !important;
         display: table;
         margin: auto !important;
         text-align: center !important;
         color: white !important; }
-  /* line 46, ../sass/components.scss */
+  /* line 56, ../sass/components.scss */
   .gallery.full .close {
     display: block; }
 
-/* line 51, ../sass/components.scss */
+/* line 61, ../sass/components.scss */
 .shelves {
   width: 100%;
   display: -webkit-flex;
@@ -199,7 +205,7 @@ article, aside, details, figcaption, figure, footer, header, hgroup, main, menu,
   -webkit-flex-wrap: wrap;
   -ms-flex-wrap: wrap;
   flex-wrap: wrap; }
-  /* line 60, ../sass/components.scss */
+  /* line 70, ../sass/components.scss */
   .shelves.grid .shelf-item {
     width: -ms-calc(100% / 3);
     width: calc(100% / 3);
@@ -210,70 +216,70 @@ article, aside, details, figcaption, figure, footer, header, hgroup, main, menu,
     float: left;
     padding-bottom: 50px;
     margin-bottom: 50px; }
-    /* line 64, ../sass/components.scss */
+    /* line 74, ../sass/components.scss */
     .shelves.grid .shelf-item .name a {
       display: table;
       margin: 0 auto 10px auto; }
-    /* line 76, ../sass/components.scss */
+    /* line 86, ../sass/components.scss */
     .shelves.grid .shelf-item .inner {
       width: -ms-calc(100% - 20px);
       width: calc(100% - 20px); }
-      /* line 78, ../sass/components.scss */
+      /* line 88, ../sass/components.scss */
       .shelves.grid .shelf-item .inner span {
         margin-top: 5px;
         display: block; }
-      /* line 82, ../sass/components.scss */
+      /* line 92, ../sass/components.scss */
       .shelves.grid .shelf-item .inner .details {
         margin-top: 10px;
         font-size: 17px;
         line-height: 19px; }
         @media (max-width: 900px) {
-          /* line 82, ../sass/components.scss */
+          /* line 92, ../sass/components.scss */
           .shelves.grid .shelf-item .inner .details {
             font-size: 15px;
             line-height: 17px; } }
-    /* line 87, ../sass/components.scss */
+    /* line 97, ../sass/components.scss */
     .shelves.grid .shelf-item:nth-child(3n+1) .inner {
       margin: 0 20px 0 0; }
-    /* line 90, ../sass/components.scss */
+    /* line 100, ../sass/components.scss */
     .shelves.grid .shelf-item:nth-child(3n+2) .inner {
       margin: 0 10px; }
-    /* line 93, ../sass/components.scss */
+    /* line 103, ../sass/components.scss */
     .shelves.grid .shelf-item:nth-child(3n+3) .inner {
       margin: 0 0 0 20px; }
     @media (max-width: 900px) {
-      /* line 60, ../sass/components.scss */
+      /* line 70, ../sass/components.scss */
       .shelves.grid .shelf-item {
         width: 50%; }
-        /* line 98, ../sass/components.scss */
+        /* line 108, ../sass/components.scss */
         .shelves.grid .shelf-item:nth-child(even) .inner {
           margin: 0 0 0 20px; }
-        /* line 101, ../sass/components.scss */
+        /* line 111, ../sass/components.scss */
         .shelves.grid .shelf-item:nth-child(odd) .inner {
           margin: 0 20px 0 0; } }
     @media (max-width: 480px) {
-      /* line 60, ../sass/components.scss */
+      /* line 70, ../sass/components.scss */
       .shelves.grid .shelf-item {
         width: 100%; }
-        /* line 107, ../sass/components.scss */
+        /* line 117, ../sass/components.scss */
         .shelves.grid .shelf-item .inner {
           width: 100%;
           margin: 0 !important; } }
-  /* line 115, ../sass/components.scss */
+  /* line 125, ../sass/components.scss */
   .shelves.list .shelf-item {
     width: 100%;
     text-align: left;
     padding: 20px 0; }
-    /* line 119, ../sass/components.scss */
+    /* line 129, ../sass/components.scss */
     .shelves.list .shelf-item .inner {
       display: -webkit-flex;
       display: -ms-flexbox;
       display: -webkit-box;
       display: flex; }
-      /* line 123, ../sass/components.scss */
+      /* line 133, ../sass/components.scss */
       .shelves.list .shelf-item .inner .image {
         display: none; }
-      /* line 124, ../sass/components.scss */
+      /* line 134, ../sass/components.scss */
       .shelves.list .shelf-item .inner .value {
         float: left;
         text-align: left;
@@ -288,67 +294,66 @@ article, aside, details, figcaption, figure, footer, header, hgroup, main, menu,
         -ms-flex-align: center;
         align-items: center; }
         @media (max-width: 900px) {
-          /* line 124, ../sass/components.scss */
+          /* line 134, ../sass/components.scss */
           .shelves.list .shelf-item .inner .value {
             font-size: 17px;
             line-height: 19px; } }
-        /* line 135, ../sass/components.scss */
+        /* line 145, ../sass/components.scss */
         .shelves.list .shelf-item .inner .value span, .shelves.list .shelf-item .inner .value a {
           display: table-cell;
           vertical-align: middle; }
 
-/* line 148, ../sass/components.scss */
+/* line 155, ../sass/components.scss */
 .filter {
-  width: 100%;
-  margin: 0 0 25px 0; }
-  /* line 152, ../sass/components.scss */
+  width: 100%; }
+  /* line 158, ../sass/components.scss */
   .filter .select {
     font-size: 20px;
     line-height: 20px;
     display: table;
     color: #ff5000;
     padding: 0 25px 0 0;
-    margin: 0 20px 0 0;
+    margin: 0 20px 5px 0;
     background-size: 20px 40px;
     background-position: right top;
     background-repeat: no-repeat;
     cursor: pointer; }
-    /* line 163, ../sass/components.scss */
+    /* line 169, ../sass/components.scss */
     .filter .select.view.toggle {
       background-image: url(../images/view-toggle-orange.svg); }
-      /* line 164, ../sass/components.scss */
+      /* line 170, ../sass/components.scss */
       .filter .select.view.toggle span.grid {
         display: none; }
-      /* line 166, ../sass/components.scss */
+      /* line 172, ../sass/components.scss */
       .filter .select.view.toggle:hover {
         background-image: url(../images/view-toggle-black.svg); }
-      /* line 169, ../sass/components.scss */
+      /* line 175, ../sass/components.scss */
       .filter .select.view.toggle.grid {
         background-position: right bottom; }
-        /* line 170, ../sass/components.scss */
+        /* line 176, ../sass/components.scss */
         .filter .select.view.toggle.grid span.grid {
           display: block; }
-        /* line 171, ../sass/components.scss */
+        /* line 177, ../sass/components.scss */
         .filter .select.view.toggle.grid span.list {
           display: none; }
-    /* line 175, ../sass/components.scss */
+    /* line 181, ../sass/components.scss */
     .filter .select.dropdown {
       background-image: url(../images/dropdown-orange.svg); }
-      /* line 177, ../sass/components.scss */
+      /* line 183, ../sass/components.scss */
       .filter .select.dropdown.dropped {
         background-position: right bottom; }
-      /* line 180, ../sass/components.scss */
+      /* line 186, ../sass/components.scss */
       .filter .select.dropdown:hover {
         background-image: url(../images/dropdown-black.svg); }
-  /* line 185, ../sass/components.scss */
+  /* line 191, ../sass/components.scss */
   .filter .bar {
     width: 100%;
     display: table;
     margin-bottom: 20px; }
-    /* line 189, ../sass/components.scss */
+    /* line 195, ../sass/components.scss */
     .filter .bar .select {
       float: left; }
-  /* line 193, ../sass/components.scss */
+  /* line 199, ../sass/components.scss */
   .filter .sub {
     height: 0px;
     display: block;
@@ -358,19 +363,19 @@ article, aside, details, figcaption, figure, footer, header, hgroup, main, menu,
     -webkit-transition: height 500ms cubic-bezier(0.645, 0.045, 0.355, 1);
             transition: height 500ms cubic-bezier(0.645, 0.045, 0.355, 1); }
     @media (max-width: 900px) {
-      /* line 193, ../sass/components.scss */
+      /* line 199, ../sass/components.scss */
       .filter .sub {
         font-size: 15px;
         line-height: 17px; } }
-    /* line 199, ../sass/components.scss */
+    /* line 205, ../sass/components.scss */
     .filter .sub .options {
       display: table; }
-    /* line 202, ../sass/components.scss */
+    /* line 208, ../sass/components.scss */
     .filter .sub .option {
       width: 200px;
       margin: 0 0 10px 0;
       float: left; }
-      /* line 206, ../sass/components.scss */
+      /* line 212, ../sass/components.scss */
       .filter .sub .option.selected a {
         color: #1a1919;
         padding-right: 25px;
@@ -378,7 +383,7 @@ article, aside, details, figcaption, figure, footer, header, hgroup, main, menu,
         background-size: contain;
         background-repeat: no-repeat;
         background-position: right center; }
-        /* line 213, ../sass/components.scss */
+        /* line 219, ../sass/components.scss */
         .filter .sub .option.selected a:hover {
           color: #ff5000 !important;
           background-image: url(../images/close-thin-orange.svg); }
@@ -422,9 +427,7 @@ main {
   position: absolute;
   left: 0;
   top: 0;
-  overflow: hidden;
-  -webkit-transition: left 800ms cubic-bezier(0.645, 0.045, 0.355, 1);
-          transition: left 800ms cubic-bezier(0.645, 0.045, 0.355, 1); }
+  overflow: hidden; }
 
 /* line 40, ../sass/styles.scss */
 section {
@@ -1221,80 +1224,89 @@ section.residents .content .top {
   display: -ms-flexbox;
   display: flex; }
   /* line 11, ../sass/_sections/residents.scss */
+  section.residents .content .top .filter {
+    width: 70%;
+    float: left; }
+  /* line 15, ../sass/_sections/residents.scss */
   section.residents .content .top .alt {
+    width: 30%;
+    float: left;
     white-space: nowrap; }
-    /* line 14, ../sass/_sections/residents.scss */
+    /* line 19, ../sass/_sections/residents.scss */
+    section.residents .content .top .alt a {
+      float: right; }
+    /* line 23, ../sass/_sections/residents.scss */
     section.residents .content .top .alt.alumni a {
       color: #1a1919 !important; }
-      /* line 16, ../sass/_sections/residents.scss */
+      /* line 25, ../sass/_sections/residents.scss */
       section.residents .content .top .alt.alumni a:hover {
         color: #ff5000 !important; }
-    /* line 22, ../sass/_sections/residents.scss */
+    /* line 31, ../sass/_sections/residents.scss */
     section.residents .content .top .alt.current-residents a {
       color: #ff5000 !important; }
-      /* line 24, ../sass/_sections/residents.scss */
+      /* line 33, ../sass/_sections/residents.scss */
       section.residents .content .top .alt.current-residents a:hover {
         color: #1a1919 !important; }
-/* line 31, ../sass/_sections/residents.scss */
+/* line 40, ../sass/_sections/residents.scss */
 section.residents .content .residents {
   margin-top: 50px; }
-  /* line 34, ../sass/_sections/residents.scss */
+  /* line 43, ../sass/_sections/residents.scss */
   section.residents .content .residents .resident .image {
     width: 100%;
     background: #ff5000; }
-    /* line 37, ../sass/_sections/residents.scss */
+    /* line 46, ../sass/_sections/residents.scss */
     section.residents .content .residents .resident .image img {
       width: 100%;
       height: 100%;
       min-height: 100px;
       vertical-align: bottom; }
-  /* line 44, ../sass/_sections/residents.scss */
+  /* line 53, ../sass/_sections/residents.scss */
   section.residents .content .residents .resident .details {
     display: -webkit-box;
     display: -webkit-flex;
     display: -ms-flexbox;
     display: flex; }
-    /* line 46, ../sass/_sections/residents.scss */
+    /* line 55, ../sass/_sections/residents.scss */
     section.residents .content .residents .resident .details .left {
       width: 100%; }
-    /* line 56, ../sass/_sections/residents.scss */
+    /* line 65, ../sass/_sections/residents.scss */
     section.residents .content .residents .resident .details .right {
       display: block;
       padding-left: 7px;
       text-align: right; }
-      /* line 60, ../sass/_sections/residents.scss */
+      /* line 69, ../sass/_sections/residents.scss */
       section.residents .content .residents .resident .details .right .value {
         float: right;
         display: block; }
-        /* line 62, ../sass/_sections/residents.scss */
+        /* line 71, ../sass/_sections/residents.scss */
         section.residents .content .residents .resident .details .right .value.studio-number {
           white-space: nowrap; }
-/* line 73, ../sass/_sections/residents.scss */
+/* line 82, ../sass/_sections/residents.scss */
 section.residents .content .residents.list .resident .name {
   width: 20%; }
-/* line 76, ../sass/_sections/residents.scss */
+/* line 85, ../sass/_sections/residents.scss */
 section.residents .content .residents.list .resident .details {
   width: 80%;
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex; }
-  /* line 79, ../sass/_sections/residents.scss */
+  /* line 88, ../sass/_sections/residents.scss */
   section.residents .content .residents.list .resident .details .left {
     width: 100%;
     display: -webkit-box;
     display: -webkit-flex;
     display: -ms-flexbox;
     display: flex; }
-    /* line 82, ../sass/_sections/residents.scss */
+    /* line 91, ../sass/_sections/residents.scss */
     section.residents .content .residents.list .resident .details .left .country {
       width: 30%;
       padding-left: 15px; }
-    /* line 86, ../sass/_sections/residents.scss */
+    /* line 95, ../sass/_sections/residents.scss */
     section.residents .content .residents.list .resident .details .left .sponsor {
       width: 60%;
       padding-left: 15px; }
-    /* line 90, ../sass/_sections/residents.scss */
+    /* line 99, ../sass/_sections/residents.scss */
     section.residents .content .residents.list .resident .details .left .studio-number {
       width: 10%; }
 

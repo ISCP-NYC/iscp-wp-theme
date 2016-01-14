@@ -43,7 +43,9 @@ function iscp_scripts() {
 	wp_enqueue_style( 'style', get_template_directory_uri() . '/assets/css/styles.css' );
 	
 	wp_register_script( 'main', get_template_directory_uri() . '/assets/js/main.js', array( 'jquery' ) );
+	wp_register_script( 'transit', get_template_directory_uri() . '/assets/js/jquery.transit.min.js', array( 'jquery' ) );
 	wp_enqueue_script( 'main' );
+	wp_enqueue_script( 'transit' );
 }
 add_action( 'wp_enqueue_scripts', 'iscp_scripts' );
 
@@ -89,7 +91,7 @@ function custom_event_column( $column, $post_id ) {
 
       case 'event_date':
         $start_date = get_post_meta( $post_id , 'start_date' , true );
-        // $event_date = get_post_meta( $post_id , 'date' , true );
+        $event_date = get_post_meta( $post_id , 'date' , true );
         if($start_date && $start_date != '-' && $start_date != 'Invalid date') {  
         	$start_date = new DateTime($start_date);
         	echo $start_date->format('Y/m/d');
@@ -118,17 +120,18 @@ add_filter( 'manage_edit-event_sortable_columns', 'register_event_sortable_colum
 function event_column_orderby( $vars ) {
 	if ( isset( $vars['orderby'] ) && 'EventDate' == $vars['orderby'] ) {
 		$vars = array_merge( $vars, array(
-			'meta_key' => 'date',
-			'orderby' => 'meta_value',
-			'order' => 'desc'
+			'meta_key' => 'event_date',
+			'orderby' => 'meta_value_num'
 		) );
 	} else if ( isset( $vars['orderby'] ) && 'EventType' == $vars['orderby'] ) {
 		$vars = array_merge( $vars, array(
 			'meta_key' => 'event_type',
-			'orderby' => 'meta_value',
-			'order' => 'asc'
+			'orderby' => 'meta_value'
 		) );
 	}
+	$vars = array_merge( $vars, array (
+		'order' => $vars['order']
+	) );
 	return $vars;
 }
 add_filter( 'request', 'event_column_orderby' );
@@ -188,11 +191,6 @@ function custom_resident_column( $column, $post_id ) {
         	echo '';
         }
         break;
-
-      case 'old_id':
-        $old_id = get_post_meta( $post_id , 'old_id' , true );
-        echo $old_id;
-        break;
     }
 }
 add_action( 'manage_resident_posts_custom_column' , 'custom_resident_column', 10, 2 );
@@ -230,14 +228,17 @@ function resident_column_orderby( $vars ) {
 	} else if ( isset( $vars['orderby'] ) && 'StartDate' == $vars['orderby'] ) {
 		$vars = array_merge( $vars, array(
 			'meta_key' => 'start_date',
-			'orderby' => 'meta_value'
+			'orderby' => 'meta_value_num',
 		) );
 	} else if ( isset( $vars['orderby'] ) && 'EndDate' == $vars['orderby'] ) {
 		$vars = array_merge( $vars, array(
 			'meta_key' => 'end_date',
-			'orderby' => 'meta_value'
+			'orderby' => 'meta_value_num'
 		) );
 	}
+	$vars = array_merge( $vars, array (
+		'order' => $vars['order']
+	) );
 	return $vars;
 }
 add_filter( 'request', 'resident_column_orderby' );
@@ -343,11 +344,13 @@ function get_end_date_value( $id ) {
 }
 
 function get_resident_end_date( $id ) {
-	while( has_sub_field( 'residency_dates', $id ) ):
-		$end_date = get_sub_field( 'end_date', $id );
-	endwhile;
-	$last_end_date = new DateTime( $end_date );
-	return $last_end_date->format('Ymd');
+	$residency_dates = get_field( 'residency_dates', $id );
+	if( is_array( $residency_dates ) ):
+		$end_date = $residency_dates[0]['end_date'];
+		return $end_date;
+	else:
+		return null;
+	endif;
 }
 
 function get_display_image( $id ) {
@@ -363,76 +366,61 @@ function get_display_image( $id ) {
 	}
 }
 
-function get_residents( $center_id, $direction, $count ) {
-	$country = get_query_var( 'country' );
-	$year = get_query_var( 'when' );
-
-	if( $country ) {
-		$filter_key = 'country_temp';
-		$filter_query = array(
-			'key' => 'country_temp',
-			'type' => 'CHAR',
-			'value' => $country,
-			'compare' => 'LIKE'
-		);
-		$append_query = '?country=' . $country;
-	} elseif( $year ) {
-		$year_begin = $year . '0101';
-		$year_end = $year . '1231';
-		$year_range = array( $year_begin, $year_end );
-		$filter_query = array(
-			'key' => 'residency_dates_0_start_date',
-			'type' => 'DATE',
-			'value' => $year_range,
-			'compare' => 'BETWEEN'
-		);
-		$append_query = '?when=' . $year;
-	} 
-
+function get_residents( $resident_id, $direction, $count ) {
+	$resident_end_date = get_resident_end_date( $resident_id );
+	$resident_studio = get_field( 'studio_number', $resident_id );
 	$today = new DateTime();
 	$today = $today->format( 'Ymd' );
 
-	// $resident_id = get_the_ID();
+	if( is_current( $resident_id ) ):
+		$date_compare = '>=';
+		$direction_key = 'studio_number';
+		$direction_value = $resident_studio;
+		$resident_orderby = 'meta_value_num';
+		$resident_meta_key = 'studio_number';
+	else:
+		$date_compare = '<=';
+	endif;
 
-	if ( is_current( $center_id ) ) {
-		$page_query = array(
-			'key' => 'residency_dates_0_end_date',
-			'type' => 'DATE',
-			'value' => $today,
-			'compare' => '>='
-		);
-	} else if ( is_alumni( $center_id ) ) {
-		$page_query = array(
-			'key' => 'residency_dates_0_end_date',
-			'type' => 'DATE',
-			'value' => $today,
-			'compare' => '<='
-		);
-	}
-
-	// if($direction == 'next') {
-	// 	$compare = '>=';
-	// } else if($direction == 'prev') {
-	// 	$compare = '<=';
-	// }
-
-	// $center_date = get_field('residency_dates_0_end_date', $center_id);
-
-	// $direction_query = array(
-	// 	'key' => 'residency_dates_0_end_date',
-	// 	'type' => 'DATE',
-	// 	'value' => $center_date,
-	// 	'compare' => $compare
-	// );
-	
-	$args = array(
-		'post_type' => 'resident',
-		'posts_per_page' => $count,
-		'meta_query' => array( $page_query, $filter_query )
+	$date_args = array(
+		'type' => 'DATE',
+		'key' => 'residency_dates_0_end_date',
+		'compare' => $date_compare,
+		'value' => $today
 	);
 
-	$next_residents = new WP_Query( $args );
-	return $next_residents;
+	if( $direction == 'prev' ):
+		$direction_compare = '<';
+	elseif ( $direction == 'next' ):
+		$direction_compare = '>';
+	endif;
+
+	$direction_args = array(
+		'type' => 'NUMERIC',
+		'key' => $direction_key,
+		'compare' => $direction_compare,
+		'value' => $direction_value
+	);
+
+	$resident_args = array(
+		'post_type' => 'resident',
+		'posts_per_page' => $count,
+		'order' => 'DESC',
+		'orderby' => $resident_orderby,
+		'meta_key' => $resident_meta_key,
+		'meta_query' => array( $date_args, $direction_args )
+	);
+
+	$residents = new WP_Query( $resident_args );
+	$reverse_residents = array_reverse($residents->posts);
+	$residents->posts = $reverse_residents;
+
+    while ( $residents->have_posts() ) : $residents->the_post();
+		global $post;
+		setup_postdata( $post );
+		get_template_part('sections/resident');
+		wp_reset_postdata();
+	endwhile;
 }
 
 //http://stackoverflow.com/questions/2915864/php-how-to-find-the-time-elapsed-since-a-date-time
@@ -639,6 +627,28 @@ function get_thumb( $id ) {
 		$thumbnail = get_template_directory_uri() . '/assets/images/placeholder.svg';
 	}
 	return $thumbnail;
+}
+
+function get_sponsors( $id ) {
+	$sponsor_list = '';
+	if( have_rows( 'residency_dates', $resident_id ) ):
+		$sponsors = get_field( 'residency_dates', $resident_id )[0]['sponsors'];
+		if( $sponsors ):
+			foreach ($sponsors as $index=>$sponsor):
+				if( $index != 0 ):
+					$sponsor_list .= ', ';
+				endif;
+				$sponsor_name = $sponsor->post_title;
+				$website = $sponsor->website;
+				if($website):
+					$sponsor_list .= '<a href="' . $website . '" target="_blank">' . $sponsor_name . '</a>';
+				else:
+					$sponsor_list .= $sponsor_name;
+				endif;
+			endforeach;
+		endif;
+	endif;
+	return $sponsor_list;
 }
 
 function pretty($string) {

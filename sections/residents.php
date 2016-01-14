@@ -147,14 +147,14 @@
 					</div>
 				</div>
 			</div>
-			<!-- <div class="alt <?php echo $alt_slug ?>"> -->
+			<div class="alt <?php echo $alt_slug ?>">
 				<?php
-				// $alt_page = get_page_by_path( $alt_slug );
-				// $alt_url = get_the_permalink( $alt_page );
-				// $alt_title = get_the_title( $alt_page );
+				$alt_page = get_page_by_path( $alt_slug );
+				$alt_url = get_the_permalink( $alt_page );
+				$alt_title = get_the_title( $alt_page );
 				?>
-				<!-- <a href="<?php echo $alt_url; ?>"><?php echo $alt_title ?></a> -->
-			<!-- </div> -->
+				<a href="<?php echo $alt_url; ?>">View <?php echo $alt_title ?></a>
+			</div>
 		</div>	
 
 		<div class="residents shelves filter-this grid <?php echo $slug ?>">
@@ -207,7 +207,6 @@
 					$resident_id = $the_ID;
 					$title = get_the_title( $resident_id );
 					$country = ucwords( get_field('country_temp', $resident_id ) );
-					$sponsor = get_field( 'sponsor_temp', $resident_id );
 					$studio_number = get_field( 'studio_number', $resident_id );
 					$residency_program = get_field( 'residency_program', $resident_id );
 					$url = get_permalink();
@@ -228,11 +227,13 @@
 					echo '<div class="details">';
 					echo '<div class="left">';
 					echo '<div class="value country"><a href="#">' . $country . '</a></div>';
-					echo '<div class="value sponsor"><a href="#">' . $sponsor . '</a></div>';
+					echo '<div class="value sponsors">';
+					echo get_sponsors( $resident_id );
+					echo '</div>';
 					echo '</div>';
 					echo '<div class="right">';
 					if( $slug == 'current-residents' ) {
-						echo '<div class="value studio-number">Studio 0' . $studio_number . '</div>';
+						echo '<div class="value studio-number">Studio ' . $studio_number . '</div>';
 					} elseif( $slug == 'alumni' ) {
 						echo '<div class="value year">' . $residency_year . '</div>';
 					}

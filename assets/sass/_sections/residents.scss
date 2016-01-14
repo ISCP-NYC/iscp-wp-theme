@@ -8,8 +8,17 @@ section.residents {
 		    display: -webkit-flex;
 		    display: -ms-flexbox;
 		    display: flex;
+		    .filter {
+		    	width: 70%;
+		    	float: left;
+		    }
 		    .alt {
+		    	width: 30%;
+		    	float: left;
 		    	white-space: nowrap;
+		    	a {
+		    		float: right;
+		    	}
 		    	&.alumni {
 		    		a {
 		    			color: $black !important;

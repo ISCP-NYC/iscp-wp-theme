@@ -1,5 +1,7 @@
 <?php 
 	$resident_id = get_the_ID();
+	$resident_slug = $post->post_name;
+	$resident_permalink = get_the_permalink( $resident_id );
 	$resident = get_post( $resident_id );
 	$country = ucwords( get_field( 'country_temp', $resident_id ) );
 	$name = get_the_title();
@@ -17,76 +19,64 @@
 	if( have_rows( 'gallery' ) == false ):
 		$resident_classes[] = 'one_col';
 	endif;
+	print_r($center_resident);
 ?>
 
-<section <?php post_class( $resident_classes ) ?> id="<?php echo $slug ?>">
+<section <?php post_class( $resident_classes ) ?> id="<?php echo $resident_slug ?>" data-slug="<?php echo $resident_slug ?>" data-id="<?php echo $resident_id ?>" data-permalink="<?php echo $resident_permalink ?>">
 	<?php get_template_part('partials/nav') ?>
 	<?php get_template_part('partials/side') ?>
 	<div class="content">
-<!-- 		<h4 class="title orange"><?php the_title() ?></h4> -->	
 		<header class="sub">
 			<div class="left">
 				<h4 class="country"><?php echo $country ?></h4>
 			</div>
 
 			<div class="center">
-				<?php 
-				// if( have_rows( 'residency_dates', $resident_id ) ):
-			 //    	while ( have_rows( 'residency_dates', $resident_id ) ) :
-				// 		$start_date_dt = new DateTime( get_sub_field( 'start_date', $resident ) );
-				// 		$end_date_dt = new DateTime( get_sub_field( 'end_date', $resident ) );
-				// 		$start_date = $start_date_dt->format( 'M d, Y' );
-				// 		$end_date = $end_date_dt->format( 'M d, Y' );
-				// 		$sponsors = get_sub_field( 'sponsors', $resident );
-				// 		$residency_object = (object) array(
-				// 			'start_date_dt' => $start_date_dt,
-				// 			'end_date_dt'   => $end_date_dt,
-				// 			'start_date'    => $start_date,
-				// 			'end_date'      => $end_date,
-				// 			'date_range'    => $start_date . ' — ' . $end_date,
-				// 			'sponsors'		=> $sponsors
-				// 		);
-				// 		print_r($residency_object);
-				// 		array_push( $residencies, $residency_object );
-				// 	endwhile;
-				// endif;
-				$resident_start_date = ( new DateTime( get_field( get_start_date_value( $resident_id ), $resident_id ) ) )->format('M d, Y');
-				$resident_end_date = ( new DateTime( get_field( get_end_date_value( $resident_id ), $resident_id) ) )->format('M d, Y');
-				$date_range = $resident_start_date . ' — ' . $resident_end_date;
-				// if( is_current( $resident_id ) ):
-				// 	echo 'Current Resident: ';
-				// else:
-				// 	echo 'Alumni: ';
-				// endif;
-				echo $date_range;
-				?>
-				<?php 
-				// foreach( $residencies as $residency ):
-				// 	$date_range = $residency->date_range;
-				// 	echo '<h4 class="dates">' . $date_range . '</h4>';	
-				// 	$sponsors = $residency->sponsors;
-				// 	if( is_array( $sponsors ) ):
-				// 	echo '<h4 class="sponsors">';
-				// 	foreach( $sponsors as $index=>$sponsor ):
-				// 		$sponsor_name = get_the_title( $sponsor );
-				// 		$sponsor_url = get_field( 'website', $sponsor );
-				// 		echo '<a href="' . $sponsor_url . '">';
-				// 		echo $sponsor_name;
-				// 		echo '</a>';
-
-				// 		if( $index != count( $sponsors ) - 1 ):
-				// 			echo ',&nbsp;&nbsp;';
-				// 		endif;
-				// 	endforeach;
-				// 	echo '</h4>';
-				// 	endif;
-				// endforeach;
-				 ?>
-				
+				<?php
+				if( have_rows( 'residency_dates', $resident_id ) ):
+			    	while ( have_rows( 'residency_dates' ) ) : the_row();
+						$start_date_dt = new DateTime( get_sub_field( 'start_date', $resident_id ) );
+						$end_date_dt = new DateTime( get_sub_field( 'end_date', $resident_id ) );
+						$start_date = $start_date_dt->format( 'M d, Y' );
+						$end_date = $end_date_dt->format( 'M d, Y' );
+						$year = $start_date_dt->format( 'Y' );
+						$sponsors = get_sub_field( 'sponsors', $resident_id );
+						$residency_object = (object) array(
+							'start_date_dt' => $start_date_dt,
+							'end_date_dt'   => $end_date_dt,
+							'start_date'    => $start_date,
+							'end_date'      => $end_date,
+							'date_range'    => $start_date . ' — ' . $end_date,
+							'sponsors'		=> $sponsors,
+							'year'			=> $year
+						);
+						array_push( $residencies, $residency_object );
+					endwhile;
+				endif;
+				if( is_alumni( $resident_id ) ):
+					echo 'Alumni ';
+					foreach ($residencies as $index=>$residency):
+						if( $index != 0 ):
+							echo ', ';
+						endif;
+						$year = $residency->year;
+						echo $year;
+						echo '</br>';
+						echo get_sponsors( $resident_id );
+					endforeach;
+				elseif( is_current( $resident_id ) ):
+					$current_residency = $residencies[0];
+					$date_range = $current_residency->date_range;
+					echo 'Current Resident: ' . $date_range;
+					echo '</br>';
+					echo get_sponsors( $resident_id );
+				endif; ?>
 			</div>
 
 			<div class="right">
-				<h4 class="studio-number">Studio 000<?php echo $studio_number ?></h4>
+				<?php if( is_current( $resident_id ) ): 
+					echo '<h4 class="studio-number">Studio ' . $studio_number . '</h4>';
+				endif; ?>
 				<h4 class="resident-type"><?php echo $resident_type ?></h4>
 			</div>
 		</header>

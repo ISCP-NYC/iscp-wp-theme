@@ -35,7 +35,7 @@ main {
 	left: 0;
 	top: 0;
 	overflow: hidden;
-	transition: left 800ms cubic-bezier(0.645, 0.045, 0.355, 1);
+	// transition: left 800ms cubic-bezier(0.645, 0.045, 0.355, 1);
 }
 section {
 	@include height('100%');
