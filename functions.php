@@ -307,7 +307,13 @@ function is_ground_floor( $id ) {
 ///////////HELPER METHODS////////////
 /////////////////////////////////////
 /////////////////////////////////////
+function section_data( $id, $slug ) {
+	$permalink = get_the_permalink( $id );
+	echo 'data-id="' . $id . '" ';
+	echo 'data-slug="' . $slug . '" ';
+	echo 'data-permalink="' . $permalink . '"';
 
+}
 function format_date( $id ) {
 	$sd = get_start_date_value( $id );
 	$ed = get_end_date_value( $id );

@@ -1,8 +1,6 @@
 <?php 
-	global $post;
-	$title = get_post( $post )->post_title;
-	$slug = get_post( $post )->post_name;
-
+	$title = get_the_title();
+	$slug = $post->post_name;
 	$today = new DateTime();
 	$today = $today->format( 'Ymd' );
 	switch( $slug ) {
@@ -32,7 +30,7 @@
 	$page_url = get_the_permalink();
 ?>
 
-<section class="<?php echo $slug ?> residents">
+<section class="<?php echo $slug ?> residents" <?php section_data( $resident_id, $resident_slug ); ?>>
 	<?php get_template_part('partials/nav') ?>
 	<?php get_template_part('partials/side') ?>
 	<div class="content">

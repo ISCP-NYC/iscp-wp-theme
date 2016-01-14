@@ -1,7 +1,6 @@
 <?php 
 	$resident_id = get_the_ID();
 	$resident_slug = $post->post_name;
-	$resident_permalink = get_the_permalink( $resident_id );
 	$resident = get_post( $resident_id );
 	$country = ucwords( get_field( 'country_temp', $resident_id ) );
 	$name = get_the_title();
@@ -22,7 +21,7 @@
 	print_r($center_resident);
 ?>
 
-<section <?php post_class( $resident_classes ) ?> id="<?php echo $resident_slug ?>" data-slug="<?php echo $resident_slug ?>" data-id="<?php echo $resident_id ?>" data-permalink="<?php echo $resident_permalink ?>">
+<section <?php post_class( $resident_classes ) ?> id="<?php echo $resident_slug ?>" <?php section_data( $resident_id, $resident_slug ); ?>>
 	<?php get_template_part('partials/nav') ?>
 	<?php get_template_part('partials/side') ?>
 	<div class="content">
