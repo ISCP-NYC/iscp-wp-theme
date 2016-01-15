@@ -274,48 +274,51 @@ article, aside, details, figcaption, figure, footer, header, hgroup, main, menu,
         .shelves.grid .shelf-item .inner {
           width: 100%;
           margin: 0 !important; } }
-  /* line 134, ../sass/components.scss */
-  .shelves.list .shelf-item {
-    width: 100%;
-    text-align: left;
-    padding: 20px 0; }
-    /* line 138, ../sass/components.scss */
-    .shelves.list .shelf-item .inner {
-      display: -webkit-flex;
-      display: -ms-flexbox;
-      display: -webkit-box;
-      display: flex; }
-      /* line 142, ../sass/components.scss */
-      .shelves.list .shelf-item .inner .image {
-        display: none; }
-      /* line 143, ../sass/components.scss */
-      .shelves.list .shelf-item .inner .value {
-        float: left;
-        text-align: left;
-        font-size: 20px;
-        line-height: 23px;
+  /* line 133, ../sass/components.scss */
+  .shelves.list {
+    margin-bottom: 50px; }
+    /* line 135, ../sass/components.scss */
+    .shelves.list .shelf-item {
+      width: 100%;
+      text-align: left;
+      padding: 20px 0; }
+      /* line 139, ../sass/components.scss */
+      .shelves.list .shelf-item .inner {
         display: -webkit-flex;
         display: -ms-flexbox;
         display: -webkit-box;
-        display: flex;
-        -webkit-box-align: center;
-        -webkit-align-items: center;
-        -ms-flex-align: center;
-        align-items: center; }
-        @media (max-width: 900px) {
-          /* line 143, ../sass/components.scss */
-          .shelves.list .shelf-item .inner .value {
-            font-size: 17px;
-            line-height: 19px; } }
-        /* line 154, ../sass/components.scss */
-        .shelves.list .shelf-item .inner .value span, .shelves.list .shelf-item .inner .value a {
-          display: table-cell;
-          vertical-align: middle; }
+        display: flex; }
+        /* line 143, ../sass/components.scss */
+        .shelves.list .shelf-item .inner .image {
+          display: none; }
+        /* line 144, ../sass/components.scss */
+        .shelves.list .shelf-item .inner .value {
+          float: left;
+          text-align: left;
+          font-size: 20px;
+          line-height: 23px;
+          display: -webkit-flex;
+          display: -ms-flexbox;
+          display: -webkit-box;
+          display: flex;
+          -webkit-box-align: center;
+          -webkit-align-items: center;
+          -ms-flex-align: center;
+          align-items: center; }
+          @media (max-width: 900px) {
+            /* line 144, ../sass/components.scss */
+            .shelves.list .shelf-item .inner .value {
+              font-size: 17px;
+              line-height: 19px; } }
+          /* line 155, ../sass/components.scss */
+          .shelves.list .shelf-item .inner .value span, .shelves.list .shelf-item .inner .value a {
+            display: table-cell;
+            vertical-align: middle; }
 
-/* line 164, ../sass/components.scss */
+/* line 165, ../sass/components.scss */
 .filter {
   width: 100%; }
-  /* line 167, ../sass/components.scss */
+  /* line 168, ../sass/components.scss */
   .filter .select {
     font-size: 20px;
     line-height: 20px;
@@ -327,47 +330,47 @@ article, aside, details, figcaption, figure, footer, header, hgroup, main, menu,
     background-position: right top;
     background-repeat: no-repeat;
     cursor: pointer; }
-    /* line 178, ../sass/components.scss */
+    /* line 179, ../sass/components.scss */
     .filter .select.view.toggle {
       background-image: url(../images/view-toggle-orange.svg); }
-      /* line 179, ../sass/components.scss */
+      /* line 180, ../sass/components.scss */
       .filter .select.view.toggle span.grid {
         display: none; }
-      /* line 181, ../sass/components.scss */
+      /* line 182, ../sass/components.scss */
       .filter .select.view.toggle:hover {
         background-image: url(../images/view-toggle-black.svg); }
-      /* line 184, ../sass/components.scss */
+      /* line 185, ../sass/components.scss */
       .filter .select.view.toggle.grid {
         background-position: right bottom; }
-        /* line 185, ../sass/components.scss */
+        /* line 186, ../sass/components.scss */
         .filter .select.view.toggle.grid span.grid {
           display: block; }
-        /* line 186, ../sass/components.scss */
+        /* line 187, ../sass/components.scss */
         .filter .select.view.toggle.grid span.list {
           display: none; }
-    /* line 190, ../sass/components.scss */
+    /* line 191, ../sass/components.scss */
     .filter .select.dropdown {
       background-image: url(../images/dropdown-orange.svg); }
-      /* line 192, ../sass/components.scss */
+      /* line 193, ../sass/components.scss */
       .filter .select.dropdown.dropped {
         background-position: right bottom; }
-      /* line 195, ../sass/components.scss */
+      /* line 196, ../sass/components.scss */
       .filter .select.dropdown:hover {
         background-image: url(../images/dropdown-black.svg); }
-  /* line 200, ../sass/components.scss */
+  /* line 201, ../sass/components.scss */
   .filter .bar {
     width: 100%;
     display: table;
     margin-bottom: 20px; }
-    /* line 204, ../sass/components.scss */
+    /* line 205, ../sass/components.scss */
     .filter .bar .select {
       float: left; }
 
-/* line 209, ../sass/components.scss */
+/* line 210, ../sass/components.scss */
 .filter-lists {
   width: 100%;
   display: block; }
-  /* line 212, ../sass/components.scss */
+  /* line 213, ../sass/components.scss */
   .filter-lists .filter-list {
     height: 0px;
     display: block;
@@ -377,19 +380,19 @@ article, aside, details, figcaption, figure, footer, header, hgroup, main, menu,
     -webkit-transition: height 500ms cubic-bezier(0.645, 0.045, 0.355, 1);
             transition: height 500ms cubic-bezier(0.645, 0.045, 0.355, 1); }
     @media (max-width: 900px) {
-      /* line 212, ../sass/components.scss */
+      /* line 213, ../sass/components.scss */
       .filter-lists .filter-list {
         font-size: 15px;
         line-height: 17px; } }
-    /* line 218, ../sass/components.scss */
+    /* line 219, ../sass/components.scss */
     .filter-lists .filter-list .options {
       display: table; }
-    /* line 221, ../sass/components.scss */
+    /* line 222, ../sass/components.scss */
     .filter-lists .filter-list .option {
       width: 200px;
       margin: 0 0 10px 0;
       float: left; }
-      /* line 225, ../sass/components.scss */
+      /* line 226, ../sass/components.scss */
       .filter-lists .filter-list .option.selected a {
         color: #1a1919;
         padding-right: 25px;
@@ -397,7 +400,7 @@ article, aside, details, figcaption, figure, footer, header, hgroup, main, menu,
         background-size: contain;
         background-repeat: no-repeat;
         background-position: right center; }
-        /* line 232, ../sass/components.scss */
+        /* line 233, ../sass/components.scss */
         .filter-lists .filter-list .option.selected a:hover {
           color: #ff5000 !important;
           background-image: url(../images/close-thin-orange.svg); }
@@ -1067,7 +1070,7 @@ h5, .xsmall {
   border-top: 10px solid #ff5000; }
 
 /* line 116, ../sass/styles.scss */
-.border-bottom, section#about .module, section#visit .directions, section#visit .newsletter {
+.border-bottom, section.residents .content .info, section#about .module, section#visit .directions, section#visit .newsletter {
   border-bottom: 10px solid #ff5000; }
 
 /* line 119, ../sass/styles.scss */
@@ -2014,6 +2017,26 @@ section.residents .content .top .right.type {
   float: left;
   white-space: nowrap;
   text-align: right; }
+/* line 18, ../sass/_sections/sponsors.scss */
+section.residents .content .info {
+  width: 100%;
+  display: table;
+  padding: 20px 0 40px 0; }
+  /* line 23, ../sass/_sections/sponsors.scss */
+  section.residents .content .info .block {
+    width: calc(100%/3 - 6px);
+    float: left;
+    text-align: center;
+    font-size: 25px;
+    line-height: 30px; }
+    @media (max-width: 900px) {
+      /* line 23, ../sass/_sections/sponsors.scss */
+      section.residents .content .info .block {
+        font-size: 20px;
+        line-height: 23px; } }
+/* line 30, ../sass/_sections/sponsors.scss */
+section.residents .content .residents.shelves.list {
+  margin-top: 0; }
 
 /* line 2, ../sass/_sections/apply.scss */
 section.apply .program-links {

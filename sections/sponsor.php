@@ -1,51 +1,61 @@
 <?php
-// echo $the_page->post_name;
 $sponsor_title = get_the_title();
 $sponsor_slug = $post->post_name;
 $sponsor_id = $post->ID;
+$sponsor_country = get_field( 'country', $sponsor_id )[0]->post_title;
+$sponsor_website = get_field( 'website', $sponsor_id );
+$sponsor_type = get_field( 'type', $sponsor_id );
 $today = new DateTime();
 $today = $today->format( 'Ymd' );
 
 $country_param = get_query_var( 'from' );
+$country_param_obj = get_page_by_path( $country_param, OBJECT, 'country' );
+$country_param_title = $country_param_obj->post_title;
+$country_param_id = $country_param_obj->ID;
 $year_param = get_query_var( 'date' );
 $program_param = get_query_var( 'residency_program' );
 $page_url = get_the_permalink();
+$sponsor_query = array(
+	'key' => 'residency_dates_0_sponsors',
+	'value' => '"' . $sponsor_id . '"',
+	'compare' => 'LIKE'
+);
 ?>
 
 <section <?php section_attr( $sponsor_id, $sponsor_slug, 'residents' ); ?>>
-	<?php get_template_part('partials/nav') ?>
-	<?php get_template_part('partials/side') ?>
+	<?php get_template_part( 'partials/nav' ) ?>
+	<?php get_template_part( 'partials/side' ) ?>
 	<div class="content">
-		<h4 class="title orange"><?php echo $sponsor_title ?></h4>
+		<h4 class="title orange">
+			Sponsor</br>
+			<?php echo $sponsor_country; ?>
+		</h4>
+
 		<div class="top">
 			<div class="filter">
 				<div class="bar">
 					<div class="select link dropdown country" data-filter="country" data-slug="<?php echo $sponsor_slug ?>">
 						<?php
-						if($country_param):
-							$country_count = ': ' . $country_param . ' (' . resident_count_by_country( $country_param, $page_query ) . ')';
-						else:
-							$country_count = null;
+						echo 'Country';
+						if( $country_param ):
+							echo ': ' . $country_param_title . ' (' . resident_count_by_country( $country_param_id, $sponsor_query ) . ')';
 						endif;
-						echo 'Country' . $country_count;
 						?>
 					</div>
-					<?php if($slug == 'alumni'): ?>
 					<div class="select link dropdown year" data-filter="year" data-slug="<?php echo $sponsor_slug ?>">
 						<?php
-						if($year_param):
-							$year_count = ': ' . $year_param . ' (' . resident_count_by_year( $year_param, $page_query ) . ')';
+						if( $year_param ):
+							$year_count = ': ' . $year_param . ' (' . resident_count_by_year( $year_param, $sponsor_query ) . ')';
 						else:
 							$year_count = null;
 						endif;
 						echo 'Year' . $year_count;
 						?>
 					</div>
-					<?php endif; ?>
-					<div class="select link dropdown program" data-filter="program" data-slug="<?php echo $sponsor_sponsor_slug ?>">
+					<div class="select link dropdown program" data-filter="program" data-slug="<?php echo $sponsor_slug ?>">
 						<?php
-						if($program_param):
-							$program_count = ': ' . pretty_short( $program_param ) . ' (' . resident_count_by_program( $program_param, $page_query ) . ')';
+						if( $program_param ):
+							$program_count = ': ' . pretty_short( $program_param ) . ' (' . resident_count_by_program( $program_param, $sponsor_query ) . ')';
 						else:
 							$program_count = null;
 						endif;
@@ -59,11 +69,11 @@ $page_url = get_the_permalink();
 				</div>
 			</div>
 			<div class="right type">
-				Sponsor Type
+				<?php echo ucwords( $sponsor_type ) ?>
 			</div>
 		</div>	
 		<div class="filter-lists">
-			<div class="filter-list sub country <?php echo $sponsor_slug ?>">
+			<div class="filter-list country <?php echo $sponsor_slug ?>">
 				<div class="options">
 					<?php
 					$page_url = get_the_permalink();
@@ -74,11 +84,11 @@ $page_url = get_the_permalink();
 						'order' 			=> 'ASC'
 					) );
 					foreach( $countries as $country ): 
-						$filter_url = $page_url . '?from=' . $country_slug;
 						$country_id = $country->ID;
 						$country_slug = $country->post_name;
 						$country_title = $country->post_title;
-						$country_count = resident_count_by_country( $country_slug, $page_query );
+						$country_count = resident_count_by_country( $country_id, $sponsor_query );
+						$filter_url = $page_url . '?from=' . $country_slug;
 						echo '<div class="option">';
 						echo '<a href="' . $filter_url . '">';
 						echo ucwords( $country_title );
@@ -89,8 +99,7 @@ $page_url = get_the_permalink();
 					?>
 				</div>
 			</div>
-			<?php if($slug == 'alumni'): ?>
-			<div class="filter-list sub year <?php echo $sponsor_slug ?>">
+			<div class="filter-list year <?php echo $sponsor_slug ?>">
 				<div class="options">
 					<?php
 					$page_url = get_the_permalink();
@@ -99,7 +108,7 @@ $page_url = get_the_permalink();
 					$years = array_reverse( range( $start_date,$end_date ) );
 					foreach( $years as $year ): 
 						$filter_url = $page_url . '?date=' . $year;
-						$year_count = resident_count_by_year( $year, $page_query );
+						$year_count = resident_count_by_year( $year, $sponsor_query );
 						echo '<div class="option">';
 						echo '<a href="' . $filter_url . '">';
 						echo $year;
@@ -110,9 +119,8 @@ $page_url = get_the_permalink();
 					?>
 				</div>
 			</div>
-			<?php endif; ?>
 
-			<div class="filter-list sub program <?php echo $sponsor_slug ?>">
+			<div class="filter-list program <?php echo $sponsor_slug ?>">
 				<div class="options">
 				<?php
 				$residency_programs = array(
@@ -121,7 +129,7 @@ $page_url = get_the_permalink();
 				);
 				foreach( $residency_programs as $program ): 
 					$filter_url = $page_url . '?residency_program=' . $program;
-					$program_count = resident_count_by_program( $program, $page_query );
+					$program_count = resident_count_by_program( $program, $sponsor_query );
 					echo '<div class="option">';
 					echo '<a href="' . $filter_url . '">';
 					echo pretty( $program );
@@ -134,24 +142,31 @@ $page_url = get_the_permalink();
 			</div>
 		</div>
 
-		<div class="residents shelves filter-this grid <?php echo $slug ?>">
-			<?php
-			$country = get_query_var( 'country_temp' );
-			$year = get_query_var( 'date' );
-			$residency_program = get_query_var( 'residency_program' );
+		<div class="info">
+			<div class="block name">
+				<?php echo $sponsor_title ?>
+			</div>
+			<div class="block website">
+				<a href="<?php echo $sponsor_website ?>">
+					<?php echo pretty_url( $sponsor_website ) ?>
+				</a>
+			</div>
+			<div class="block deadline">
+			</div>
+		</div>
 
-			if( $country ) {
-				$filter_key = 'country_temp';
+		<div class="residents shelves filter-this grid <?php echo $sponsor_slug ?>">
+			<?php
+			if( $country_param ):
 				$filter_query = array(
-					'key' => 'country_temp',
-					'type' => 'CHAR',
-					'value' => $country,
+					'key' => 'country',
+					'value' => '"' . $country_param_id . '"',
 					'compare' => 'LIKE'
 				);
-				$append_query = '?country_temp=' . $country;
-			} elseif( $year ) {
-				$year_begin = $year . '0101';
-				$year_end = $year . '1231';
+				$append_query = '?from=' . $country_param;
+			elseif( $year_param ):
+				$year_begin = $year_param . '0101';
+				$year_end = $year_param . '1231';
 				$year_range = array( $year_begin, $year_end );
 				$filter_query = array(
 					'key' => 'residency_dates_0_start_date',
@@ -160,40 +175,38 @@ $page_url = get_the_permalink();
 					'compare' => 'BETWEEN'
 				);
 				$append_query = '?date=' . $year;
-			} elseif( $residency_program ) {
+			elseif( $program_param ):
 				$filter_query = array(
 					'key' => 'residency_program',
 					'type' => 'CHAR',
-					'value' => $residency_program,
+					'value' => $program_param,
 					'compare' => 'LIKE'
 				);
 				$append_query = '?residency_program=' . $year;
-			}
-			$sponsor_query = array(
-				'key' => 'residency_dates_0_sponsors',
-				'value' => '"' . $sponsor_id . '"',
-				'compare' => 'LIKE'
-			);
-			$query = array(
+			endif;
+
+			if( $filter_query ):
+				$sponsor_query = array_merge( $sponsor_query, $filter_query );
+			endif;
+			
+			$residents_query = array(
 				'post_type' => 'resident',
+				'posts_per_page' => 18,
 				'orderby' => 'last_name',
 				'order' => 'ASC',
-				'meta_query' => array($sponsor_query, $filter_query)
+				'post_status' => 'publish',
+				'meta_query' => array( $sponsor_query )
 			);
-
-			$loop = new WP_Query( $query );
+			$loop = new WP_Query( $residents_query );
 			while ( $loop->have_posts() ) : $loop->the_post();
 				$resident_id = $the_ID;
 				$title = get_the_title( $resident_id );
-				$country = ucwords( get_field('country_temp', $resident_id ) );
+				$country = get_field('country', $resident_id )[0]->post_title;
 				$studio_number = get_field( 'studio_number', $resident_id );
 				$residency_program = get_field( 'residency_program', $resident_id );
 				$url = get_permalink();
 				$residency_date = get_field( get_end_date_value( $resident_id ), $resident_id );
 				$residency_year = ( new DateTime( $residency_date ) )->format('Y');
-				if( $append_query && is_alumni( $resident_id ) ) {
-					$url .= $append_query;
-				}
 				$thumb = get_thumb( $resident_id );
 
 				echo '<div class="resident orange shelf-item border-bottom"><div class="inner">';

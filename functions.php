@@ -652,7 +652,7 @@ function get_sponsors( $id ) {
 				$sponsor_name = $sponsor->post_title;
 				$url = get_permalink( $sponsor->ID );
 				if($url):
-					$sponsor_list .= '<a href="' . $url . '" target="_blank">' . $sponsor_name . '</a>';
+					$sponsor_list .= '<a href="' . $url . '">' . $sponsor_name . '</a>';
 				else:
 					$sponsor_list .= $sponsor_name;
 				endif;
@@ -697,6 +697,13 @@ function pretty_short($string) {
 			return 'Ground Floor';
 			break;
 	}
+}
+
+function pretty_url( $url ) {
+	$url = preg_replace( '#^https?://#', '', $url );
+	$url = preg_replace( '#^www\.(.+\.)#i', '$1', $url );
+	$url = preg_replace( '{/$}', '', $url );
+	return $url;
 }
 
 function label_art($id) {
@@ -759,15 +766,16 @@ function user_is_resident() {
 	}
 }
 
-function resident_count_by_country( $country, $page_query ) {	
+function resident_count_by_country( $country_id, $page_query ) {	
 	$country_meta_query = array(
-		'key' => 'country_temp',
-		'type' => 'CHAR',
-		'value' => $country,
+		'key' => 'country',
+		'value' => '"' . $country_id . '"',
 		'compare' => 'LIKE'
 	);
 	$country_query_args = array(
 		'post_type' => 'resident',
+		'posts_per_page' => -1,
+		'post_status' => 'publish',
 		'meta_query' => array( $country_meta_query, $page_query )
 	);
 	$country_query = new WP_Query( $country_query_args );

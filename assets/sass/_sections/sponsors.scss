@@ -15,5 +15,20 @@ section.residents {
 				text-align: right;
 			}
 		}
+		.info {
+			width: 100%;
+			display: table;
+			padding: 20px 0 40px 0;
+            @extend .border-bottom;
+			.block {
+				width: calc(100%/3 - 6px);
+				float: left;
+				text-align: center;
+				@include medium-fs;
+			}
+		}
+		.residents.shelves.list {
+			margin-top: 0;
+		}
 	}
 }
