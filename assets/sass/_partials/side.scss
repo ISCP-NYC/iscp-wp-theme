@@ -58,23 +58,23 @@ aside {
 	@include xsmall {
 		display: none !important;
 	}
-	.label {
+	.slide {
+		width: auto;
+		height: 120px;
 		position: absolute;
-		@include medium-fs;
-		transform: rotate(90deg);
+	    display: table;
+		transform-origin: left top 0;
+		@include large-fs;
+		text-align: center;
 	}
-}
-
-aside.main:hover {
-	cursor: pointer;
-} 
-&:first-child {
-	aside.main.left:hover {
-		cursor: default;
+	&.left .slide {
+		bottom: -120px;
+    	left: 0px;
+		transform: rotate(-90deg); 
 	}
-}
-&:last-child {
-	aside.main.right:hover {
-		cursor: default;
+	&.right .slide {
+		top: 110px;
+	    left: 120px;
+		transform: rotate(90deg); 
 	}
 }

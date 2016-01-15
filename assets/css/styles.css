@@ -694,27 +694,36 @@ section {
       section aside {
         display: none !important; } }
     /* line 61, ../sass/_partials/side.scss */
-    section aside .label {
+    section aside .slide {
+      width: auto;
+      height: 120px;
       position: absolute;
-      font-size: 25px;
-      line-height: 30px;
+      display: table;
+      -webkit-transform-origin: left top 0;
+          -ms-transform-origin: left top 0;
+              transform-origin: left top 0;
+      font-size: 30px;
+      line-height: 35px;
+      text-align: center; }
+      @media (max-width: 900px) {
+        /* line 61, ../sass/_partials/side.scss */
+        section aside .slide {
+          font-size: 25px;
+          line-height: 30px; } }
+    /* line 70, ../sass/_partials/side.scss */
+    section aside.left .slide {
+      bottom: -120px;
+      left: 0px;
+      -webkit-transform: rotate(-90deg);
+          -ms-transform: rotate(-90deg);
+              transform: rotate(-90deg); }
+    /* line 75, ../sass/_partials/side.scss */
+    section aside.right .slide {
+      top: 110px;
+      left: 120px;
       -webkit-transform: rotate(90deg);
           -ms-transform: rotate(90deg);
               transform: rotate(90deg); }
-      @media (max-width: 900px) {
-        /* line 61, ../sass/_partials/side.scss */
-        section aside .label {
-          font-size: 20px;
-          line-height: 23px; } }
-  /* line 68, ../sass/_partials/side.scss */
-  section aside.main:hover {
-    cursor: pointer; }
-  /* line 72, ../sass/_partials/side.scss */
-  section:first-child aside.main.left:hover {
-    cursor: default; }
-  /* line 77, ../sass/_partials/side.scss */
-  section:last-child aside.main.right:hover {
-    cursor: default; }
   /* line 1, ../sass/_partials/footer.scss */
   section footer {
     width: 100%;

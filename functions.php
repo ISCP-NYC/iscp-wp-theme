@@ -41,11 +41,14 @@ add_action( 'wp_head', 'twentyfifteen_javascript_detection', 0 );
  */
 function iscp_scripts() {
 	wp_enqueue_style( 'style', get_template_directory_uri() . '/assets/css/styles.css' );
-	
 	wp_register_script( 'main', get_template_directory_uri() . '/assets/js/main.js', array( 'jquery' ) );
 	wp_register_script( 'transit', get_template_directory_uri() . '/assets/js/jquery.transit.min.js', array( 'jquery' ) );
 	wp_enqueue_script( 'main' );
 	wp_enqueue_script( 'transit' );
+
+	wp_localize_script( 'main', 'ajaxpagination', array(
+		'ajaxurl' => admin_url( 'admin-ajax.php' )
+	));
 }
 add_action( 'wp_enqueue_scripts', 'iscp_scripts' );
 
@@ -309,10 +312,11 @@ function is_ground_floor( $id ) {
 /////////////////////////////////////
 function section_data( $id, $slug ) {
 	$permalink = get_the_permalink( $id );
+	$title = get_the_title( $id ); 
 	echo 'data-id="' . $id . '" ';
 	echo 'data-slug="' . $slug . '" ';
-	echo 'data-permalink="' . $permalink . '"';
-
+	echo 'data-permalink="' . $permalink . '" ';
+	echo 'data-title="' . $title . '"';
 }
 function format_date( $id ) {
 	$sd = get_start_date_value( $id );
@@ -429,10 +433,17 @@ function get_residents( $resident_id, $direction, $count ) {
 	endwhile;
 }
 
-//http://stackoverflow.com/questions/2915864/php-how-to-find-the-time-elapsed-since-a-date-time
-function humanTiming ($time)
-{
+function setup_page($slug, $template) {
+	$page_id = get_page_by_path( $slug )->ID;
+	$the_page = get_post( $page_id, OBJECT );
+	global $the_page;
+	setup_postdata( $the_page );
+	get_template_part( $template );
+	wp_reset_postdata();
+}
 
+//http://stackoverflow.com/questions/2915864/php-how-to-find-the-time-elapsed-since-a-date-time
+function humanTiming($time) {
     $time = time() - $time;
     $time = ($time<1)? 1 : $time;
     $tokens = array (
@@ -450,7 +461,6 @@ function humanTiming ($time)
         $numberOfUnits = floor($time / $unit);
         return $numberOfUnits.$text.(($numberOfUnits>1)?'s':'');
     }
-
 }
 
 

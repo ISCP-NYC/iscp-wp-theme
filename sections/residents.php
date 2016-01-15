@@ -1,36 +1,41 @@
-<?php 
-	$title = get_the_title();
-	$slug = $post->post_name;
-	$today = new DateTime();
-	$today = $today->format( 'Ymd' );
-	switch( $slug ) {
-		case 'current-residents':
-			$page_query = array(
-				'key' => 'residency_dates_0_end_date',
-				'type' => 'DATE',
-				'value' => $today,
+<?php
+// echo $the_page->post_name;
+$title = get_the_title();
+$slug = $post->post_name;
+$id = $post->ID;
+$today = new DateTime();
+$today = $today->format( 'Ymd' );
+$page_query = array(
+	'key' => 'residency_dates_0_end_date',
+	'type' => 'DATE',
+	'value' => $today,
+);
+switch( $slug ) {
+	case 'current-residents':
+		$page_query = array_merge(
+			$page_query, array(
 				'compare' => '>='
-			);
-			$alt_slug = 'alumni';
-			break;
-		case 'alumni':
-			$page_query = array(
-				'key' => 'residency_dates_0_end_date',
-				'type' => 'DATE',
-				'value' => $today,
+			)
+		);
+		$alt_slug = 'alumni';
+		break;
+	case 'alumni':
+		$page_query = array_merge(
+			$page_query, array(
 				'compare' => '<='
-			);
-			$alt_slug = 'current-residents';
-			break;
-	}
+			)
+		);
+		$alt_slug = 'current-residents';
+		break;
+}
 
-	$country_param = get_query_var( 'from' );
-	$year_param = get_query_var( 'date' );
-	$program_param = get_query_var( 'residency_program' );
-	$page_url = get_the_permalink();
+$country_param = get_query_var( 'from' );
+$year_param = get_query_var( 'date' );
+$program_param = get_query_var( 'residency_program' );
+$page_url = get_the_permalink();
 ?>
 
-<section class="<?php echo $slug ?> residents" <?php section_data( $resident_id, $resident_slug ); ?>>
+<section class="<?php echo $slug ?> residents" <?php section_data( $id, $slug ); ?>>
 	<?php get_template_part('partials/nav') ?>
 	<?php get_template_part('partials/side') ?>
 	<div class="content">
@@ -193,14 +198,13 @@
 								
 				$args = array(
 					'post_type' => 'resident',
-					'posts_per_page' => 30,
+					'posts_per_page' => 18,
 					'orderby' => 'last_name',
     				'order' => 'ASC',
 					'meta_query' => array( $page_query, $filter_query )
 				);
 
 				$loop = new WP_Query( $args );
-
 				while ( $loop->have_posts() ) : $loop->the_post();
 					$resident_id = $the_ID;
 					$title = get_the_title( $resident_id );
@@ -241,6 +245,7 @@
 					echo '</div>';
 					echo '</div></div></div>';
 				endwhile;
+				wp_reset_query(); 
 
 			?>
 			<div class="clear">
@@ -248,5 +253,5 @@
 			</div>
 		</div>
 	</div>
-	<?php get_template_part('partials/footer') ?>
+	<?php get_template_part('partials/footer'); ?>
 </section>
