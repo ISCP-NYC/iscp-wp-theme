@@ -43,13 +43,22 @@
                     cursor: -webkit-zoom-out;
                     cursor: -moz-zoom-out;
                     cursor: zoom-out;
+                    img {
+                        display: table;
+                        max-width: 70%;
+                        max-height: 70%;
+                        margin: auto;
+                    }
                 }
                 .description {
                     width: 50% !important;
                     display: table;
                     margin: auto !important;
                     text-align: center !important;
-                    color: white !important;
+                    color: $white !important;
+                    * {
+                        color: $white !important;
+                    }
                 }
             }
         }
@@ -196,7 +205,11 @@
             float: left;
         }
     }
-    .sub {
+}
+.filter-lists {
+    width: 100%;
+    display: block;
+    .filter-list {
         height: 0px;
         display: block;
         overflow: hidden;

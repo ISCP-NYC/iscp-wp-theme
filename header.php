@@ -48,10 +48,15 @@
 
 	$classes;
 
-	$page_slug = get_post( $post )->post_name;
-	$page_id = get_the_ID();
+	if( is_home() ):
+		$page_slug = 'home';
+		$page_id = null;
+	else:
+		$page_slug = get_post( $post )->post_name;
+		$page_id = get_the_ID();
+	endif;
 	$post_type = get_post_type();
-
+	
 	switch($page_slug) {
 		case 'current_residents':
 			$classes = 'current_residents residents';

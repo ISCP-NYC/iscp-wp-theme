@@ -1,27 +1,28 @@
 <?php 
-	global $post;
-	$slug = get_post( $post )->post_name;
-	$parent = $post->post_parent;
-	if( $parent != 0 ) {
-		$parent_title = get_post( $parent )->post_title;
-		$parent_slug = get_post( $parent )->post_name;	
-		$parent_id = get_post( $parent )->ID;
-		$programs_id = $parent_id;
-	} else {
-		$programs_id = $post->ID;
-	}
+global $post;
+$id = $post->ID;
+$slug = $post->post_name;
+$parent = $post->post_parent;
+if( $parent != 0 ) {
+	$parent_title = get_post( $parent )->post_title;
+	$parent_slug = get_post( $parent )->post_name;	
+	$parent_id = get_post( $parent )->ID;
+	$programs_id = $parent_id;
+} else {
+	$programs_id = $post->ID;
+}
 
-	$programs_query = array(
-		'sort_order' => 'asc',
-		'sort_column' => 'post_title',
-		'post_type' => 'page',
-		'child_of' => $programs_id,
-		'post_status' => 'publish'
-	); 
-	$programs = get_pages( $programs_query ); 
+$programs_query = array(
+	'sort_order' => 'asc',
+	'sort_column' => 'post_title',
+	'post_type' => 'page',
+	'child_of' => $programs_id,
+	'post_status' => 'publish'
+); 
+$programs = get_pages( $programs_query ); 
 ?>
 
-<section class="programs" id="<?php echo $parent_slug ?>">
+<section <?php section_attr( $id, $slug, 'programs' ); ?>>
 	<?php get_template_part( 'partials/nav' ) ?>
 	<?php get_template_part( 'partials/side' ) ?>
 	<div class="content">

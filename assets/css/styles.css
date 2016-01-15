@@ -184,18 +184,27 @@ article, aside, details, figcaption, figure, footer, header, hgroup, main, menu,
         margin: 0 auto 20px auto;
         cursor: -webkit-zoom-out;
         cursor: zoom-out; }
-      /* line 47, ../sass/components.scss */
+        /* line 46, ../sass/components.scss */
+        .gallery.full .piece .inner .image img {
+          display: table;
+          max-width: 70%;
+          max-height: 70%;
+          margin: auto; }
+      /* line 53, ../sass/components.scss */
       .gallery.full .piece .inner .description {
         width: 50% !important;
         display: table;
         margin: auto !important;
         text-align: center !important;
-        color: white !important; }
-  /* line 56, ../sass/components.scss */
+        color: #fff !important; }
+        /* line 59, ../sass/components.scss */
+        .gallery.full .piece .inner .description * {
+          color: #fff !important; }
+  /* line 65, ../sass/components.scss */
   .gallery.full .close {
     display: block; }
 
-/* line 61, ../sass/components.scss */
+/* line 70, ../sass/components.scss */
 .shelves {
   width: 100%;
   display: -webkit-flex;
@@ -205,7 +214,7 @@ article, aside, details, figcaption, figure, footer, header, hgroup, main, menu,
   -webkit-flex-wrap: wrap;
   -ms-flex-wrap: wrap;
   flex-wrap: wrap; }
-  /* line 70, ../sass/components.scss */
+  /* line 79, ../sass/components.scss */
   .shelves.grid .shelf-item {
     width: -ms-calc(100% / 3);
     width: calc(100% / 3);
@@ -216,70 +225,70 @@ article, aside, details, figcaption, figure, footer, header, hgroup, main, menu,
     float: left;
     padding-bottom: 50px;
     margin-bottom: 50px; }
-    /* line 74, ../sass/components.scss */
+    /* line 83, ../sass/components.scss */
     .shelves.grid .shelf-item .name a {
       display: table;
       margin: 0 auto 10px auto; }
-    /* line 86, ../sass/components.scss */
+    /* line 95, ../sass/components.scss */
     .shelves.grid .shelf-item .inner {
       width: -ms-calc(100% - 20px);
       width: calc(100% - 20px); }
-      /* line 88, ../sass/components.scss */
+      /* line 97, ../sass/components.scss */
       .shelves.grid .shelf-item .inner span {
         margin-top: 5px;
         display: block; }
-      /* line 92, ../sass/components.scss */
+      /* line 101, ../sass/components.scss */
       .shelves.grid .shelf-item .inner .details {
         margin-top: 10px;
         font-size: 17px;
         line-height: 19px; }
         @media (max-width: 900px) {
-          /* line 92, ../sass/components.scss */
+          /* line 101, ../sass/components.scss */
           .shelves.grid .shelf-item .inner .details {
             font-size: 15px;
             line-height: 17px; } }
-    /* line 97, ../sass/components.scss */
+    /* line 106, ../sass/components.scss */
     .shelves.grid .shelf-item:nth-child(3n+1) .inner {
       margin: 0 20px 0 0; }
-    /* line 100, ../sass/components.scss */
+    /* line 109, ../sass/components.scss */
     .shelves.grid .shelf-item:nth-child(3n+2) .inner {
       margin: 0 10px; }
-    /* line 103, ../sass/components.scss */
+    /* line 112, ../sass/components.scss */
     .shelves.grid .shelf-item:nth-child(3n+3) .inner {
       margin: 0 0 0 20px; }
     @media (max-width: 900px) {
-      /* line 70, ../sass/components.scss */
+      /* line 79, ../sass/components.scss */
       .shelves.grid .shelf-item {
         width: 50%; }
-        /* line 108, ../sass/components.scss */
+        /* line 117, ../sass/components.scss */
         .shelves.grid .shelf-item:nth-child(even) .inner {
           margin: 0 0 0 20px; }
-        /* line 111, ../sass/components.scss */
+        /* line 120, ../sass/components.scss */
         .shelves.grid .shelf-item:nth-child(odd) .inner {
           margin: 0 20px 0 0; } }
     @media (max-width: 480px) {
-      /* line 70, ../sass/components.scss */
+      /* line 79, ../sass/components.scss */
       .shelves.grid .shelf-item {
         width: 100%; }
-        /* line 117, ../sass/components.scss */
+        /* line 126, ../sass/components.scss */
         .shelves.grid .shelf-item .inner {
           width: 100%;
           margin: 0 !important; } }
-  /* line 125, ../sass/components.scss */
+  /* line 134, ../sass/components.scss */
   .shelves.list .shelf-item {
     width: 100%;
     text-align: left;
     padding: 20px 0; }
-    /* line 129, ../sass/components.scss */
+    /* line 138, ../sass/components.scss */
     .shelves.list .shelf-item .inner {
       display: -webkit-flex;
       display: -ms-flexbox;
       display: -webkit-box;
       display: flex; }
-      /* line 133, ../sass/components.scss */
+      /* line 142, ../sass/components.scss */
       .shelves.list .shelf-item .inner .image {
         display: none; }
-      /* line 134, ../sass/components.scss */
+      /* line 143, ../sass/components.scss */
       .shelves.list .shelf-item .inner .value {
         float: left;
         text-align: left;
@@ -294,19 +303,19 @@ article, aside, details, figcaption, figure, footer, header, hgroup, main, menu,
         -ms-flex-align: center;
         align-items: center; }
         @media (max-width: 900px) {
-          /* line 134, ../sass/components.scss */
+          /* line 143, ../sass/components.scss */
           .shelves.list .shelf-item .inner .value {
             font-size: 17px;
             line-height: 19px; } }
-        /* line 145, ../sass/components.scss */
+        /* line 154, ../sass/components.scss */
         .shelves.list .shelf-item .inner .value span, .shelves.list .shelf-item .inner .value a {
           display: table-cell;
           vertical-align: middle; }
 
-/* line 155, ../sass/components.scss */
+/* line 164, ../sass/components.scss */
 .filter {
   width: 100%; }
-  /* line 158, ../sass/components.scss */
+  /* line 167, ../sass/components.scss */
   .filter .select {
     font-size: 20px;
     line-height: 20px;
@@ -318,43 +327,48 @@ article, aside, details, figcaption, figure, footer, header, hgroup, main, menu,
     background-position: right top;
     background-repeat: no-repeat;
     cursor: pointer; }
-    /* line 169, ../sass/components.scss */
+    /* line 178, ../sass/components.scss */
     .filter .select.view.toggle {
       background-image: url(../images/view-toggle-orange.svg); }
-      /* line 170, ../sass/components.scss */
+      /* line 179, ../sass/components.scss */
       .filter .select.view.toggle span.grid {
         display: none; }
-      /* line 172, ../sass/components.scss */
+      /* line 181, ../sass/components.scss */
       .filter .select.view.toggle:hover {
         background-image: url(../images/view-toggle-black.svg); }
-      /* line 175, ../sass/components.scss */
+      /* line 184, ../sass/components.scss */
       .filter .select.view.toggle.grid {
         background-position: right bottom; }
-        /* line 176, ../sass/components.scss */
+        /* line 185, ../sass/components.scss */
         .filter .select.view.toggle.grid span.grid {
           display: block; }
-        /* line 177, ../sass/components.scss */
+        /* line 186, ../sass/components.scss */
         .filter .select.view.toggle.grid span.list {
           display: none; }
-    /* line 181, ../sass/components.scss */
+    /* line 190, ../sass/components.scss */
     .filter .select.dropdown {
       background-image: url(../images/dropdown-orange.svg); }
-      /* line 183, ../sass/components.scss */
+      /* line 192, ../sass/components.scss */
       .filter .select.dropdown.dropped {
         background-position: right bottom; }
-      /* line 186, ../sass/components.scss */
+      /* line 195, ../sass/components.scss */
       .filter .select.dropdown:hover {
         background-image: url(../images/dropdown-black.svg); }
-  /* line 191, ../sass/components.scss */
+  /* line 200, ../sass/components.scss */
   .filter .bar {
     width: 100%;
     display: table;
     margin-bottom: 20px; }
-    /* line 195, ../sass/components.scss */
+    /* line 204, ../sass/components.scss */
     .filter .bar .select {
       float: left; }
-  /* line 199, ../sass/components.scss */
-  .filter .sub {
+
+/* line 209, ../sass/components.scss */
+.filter-lists {
+  width: 100%;
+  display: block; }
+  /* line 212, ../sass/components.scss */
+  .filter-lists .filter-list {
     height: 0px;
     display: block;
     overflow: hidden;
@@ -363,28 +377,28 @@ article, aside, details, figcaption, figure, footer, header, hgroup, main, menu,
     -webkit-transition: height 500ms cubic-bezier(0.645, 0.045, 0.355, 1);
             transition: height 500ms cubic-bezier(0.645, 0.045, 0.355, 1); }
     @media (max-width: 900px) {
-      /* line 199, ../sass/components.scss */
-      .filter .sub {
+      /* line 212, ../sass/components.scss */
+      .filter-lists .filter-list {
         font-size: 15px;
         line-height: 17px; } }
-    /* line 205, ../sass/components.scss */
-    .filter .sub .options {
+    /* line 218, ../sass/components.scss */
+    .filter-lists .filter-list .options {
       display: table; }
-    /* line 208, ../sass/components.scss */
-    .filter .sub .option {
+    /* line 221, ../sass/components.scss */
+    .filter-lists .filter-list .option {
       width: 200px;
       margin: 0 0 10px 0;
       float: left; }
-      /* line 212, ../sass/components.scss */
-      .filter .sub .option.selected a {
+      /* line 225, ../sass/components.scss */
+      .filter-lists .filter-list .option.selected a {
         color: #1a1919;
         padding-right: 25px;
         background-image: url(../images/close-thin-black.svg);
         background-size: contain;
         background-repeat: no-repeat;
         background-position: right center; }
-        /* line 219, ../sass/components.scss */
-        .filter .sub .option.selected a:hover {
+        /* line 232, ../sass/components.scss */
+        .filter-lists .filter-list .option.selected a:hover {
           color: #ff5000 !important;
           background-image: url(../images/close-thin-orange.svg); }
 
@@ -1237,24 +1251,24 @@ section.residents .content .top {
     width: 70%;
     float: left; }
   /* line 15, ../sass/_sections/residents.scss */
-  section.residents .content .top .alt {
+  section.residents .content .top .right.alt {
     width: 30%;
     float: left;
     white-space: nowrap; }
     /* line 19, ../sass/_sections/residents.scss */
-    section.residents .content .top .alt a {
+    section.residents .content .top .right.alt a {
       float: right; }
     /* line 23, ../sass/_sections/residents.scss */
-    section.residents .content .top .alt.alumni a {
+    section.residents .content .top .right.alt.alumni a {
       color: #1a1919 !important; }
       /* line 25, ../sass/_sections/residents.scss */
-      section.residents .content .top .alt.alumni a:hover {
+      section.residents .content .top .right.alt.alumni a:hover {
         color: #ff5000 !important; }
     /* line 31, ../sass/_sections/residents.scss */
-    section.residents .content .top .alt.current-residents a {
+    section.residents .content .top .right.alt.current-residents a {
       color: #ff5000 !important; }
       /* line 33, ../sass/_sections/residents.scss */
-      section.residents .content .top .alt.current-residents a:hover {
+      section.residents .content .top .right.alt.current-residents a:hover {
         color: #1a1919 !important; }
 /* line 40, ../sass/_sections/residents.scss */
 section.residents .content .residents {
@@ -1987,6 +2001,20 @@ section.programs .program {
             width: 100%;
             margin: 0 !important; } }
 
+/* line 3, ../sass/_sections/sponsors.scss */
+section.residents .content h4.title {
+  margin-bottom: 20px; }
+/* line 7, ../sass/_sections/sponsors.scss */
+section.residents .content .top .filter {
+  width: 70%;
+  float: left; }
+/* line 11, ../sass/_sections/sponsors.scss */
+section.residents .content .top .right.type {
+  width: 30%;
+  float: left;
+  white-space: nowrap;
+  text-align: right; }
+
 /* line 2, ../sass/_sections/apply.scss */
 section.apply .program-links {
   margin-top: 30px; }
@@ -2635,22 +2663,22 @@ section#resident-resources {
           section#resident-resources .staff .members .staff-member .info .description {
             padding-top: 10px; }
 
-/* line 174, ../sass/styles.scss */
+/* line 175, ../sass/styles.scss */
 ::-webkit-scrollbar {
   display: none; }
 
-/* line 175, ../sass/styles.scss */
+/* line 176, ../sass/styles.scss */
 ::-moz-scrollbar {
   display: none; }
 
-/* line 176, ../sass/styles.scss */
+/* line 177, ../sass/styles.scss */
 ::-o-scrollbar {
   display: none; }
 
-/* line 177, ../sass/styles.scss */
+/* line 178, ../sass/styles.scss */
 ::-google-ms-scrollbar {
   display: none; }
 
-/* line 178, ../sass/styles.scss */
+/* line 179, ../sass/styles.scss */
 ::-khtml-scrollbar {
   display: none; }

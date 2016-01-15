@@ -2,16 +2,17 @@
 	global $post;
 	$title = get_post( $post )->post_title;
 	$slug = get_post( $post )->post_name;
-
+	$id = get_post( $post )->ID;
 	$today = new DateTime();
 	$today = $today->format( 'Ymd' );
 
 	$event_type_param = get_query_var( 'type' );
 	$year_param = get_query_var( 'date' );
+	$event_classes = $event_type_param . ' ' . $year_param;
 	$page_url = get_the_permalink();
 ?>
 
-<section id="<?php echo $slug ?>" class="<?php echo $slug ?>">
+<section <?php section_attr( $id, $slug, $events_classes ); ?>>
 	<?php get_template_part('partials/nav') ?>
 	<?php get_template_part('partials/side') ?>
 	<div class="content">

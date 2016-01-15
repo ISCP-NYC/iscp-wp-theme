@@ -1,0 +1,19 @@
+section.residents {
+	.content {
+		h4.title {
+			margin-bottom: 20px;
+		}
+		.top {
+			.filter {
+				width: 70%;
+				float: left;
+			}
+			.right.type {
+				width: 30%;
+				float: left;
+				white-space: nowrap;
+				text-align: right;
+			}
+		}
+	}
+}

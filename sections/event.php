@@ -8,29 +8,29 @@
 	$event_type_pretty = pretty( $event_type );
 	$dates = get_event_date( $id );
 	$dates = preg_replace("~</br>~", ' ', $dates);
-	$event_classes = array('event', 'single');
+	$event_classes = 'event single';
 	
 	$end_date_key = get_end_date_value( $id );
 	$end_date = get_field( $end_date_key, $id );
 	$today = new DateTime();
 	$today = $today->format( 'Ymd' );
 	if($today > $end_date):
-		$event_classes[] = 'past';
+		$event_classes .= ' past';
 	endif;
 
 	$page_columns = get_field( 'page_columns', $id );
 	if( $page_columns ):
-		$event_classes[] = $page_columns;
+		$event_classes .= ' ' . $page_columns;
 	else:
 		if( have_rows('gallery') ):
-			$event_classes[] = 'two_col';
+			$event_classes .= ' two_col';
 		else:
-			$event_classes[] = 'one_col';
+			$event_classes .= ' one_col';
 		endif;		
 	endif;
 
 ?>
-<section <?php post_class( $event_classes ) ?> id="<?php echo $slug ?>">
+<section <?php section_attr( $id, $slug, $event_classes ); ?>>
 	<?php get_template_part('partials/nav') ?>
 	<?php get_template_part('partials/side') ?>
 

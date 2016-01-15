@@ -35,7 +35,7 @@ $program_param = get_query_var( 'residency_program' );
 $page_url = get_the_permalink();
 ?>
 
-<section class="<?php echo $slug ?> residents" <?php section_data( $id, $slug ); ?>>
+<section <?php section_attr( $id, $slug, 'residents' ); ?>>
 	<?php get_template_part('partials/nav') ?>
 	<?php get_template_part('partials/side') ?>
 	<div class="content">
@@ -80,77 +80,8 @@ $page_url = get_the_permalink();
 						<span class="grid">Grid</span>
 					</div>
 				</div>
-				<div class="filter-list sub country <?php echo $slug ?>">
-					<div class="options">
-					<?php
-						$page_url = get_the_permalink();
-						$countries = get_posts( array(
-							'posts_per_page'	=> -1,
-							'post_type'			=> 'country',
-							'orderby' 			=> 'title',
-							'order' 			=> 'ASC'
-						) );
-						foreach( $countries as $country ): 
-							$filter_url = $page_url . '?from=' . $country_slug;
-							$country_id = $country->ID;
-							$country_slug = $country->post_name;
-							$country_title = $country->post_title;
-							$country_count = resident_count_by_country( $country_slug, $page_query );
-							echo '<div class="option">';
-							echo '<a href="' . $filter_url . '">';
-							echo ucwords( $country_title );
-							echo ' (' . $country_count . ')';
-							echo '</a>';
-							echo '</div>';
-						endforeach;
-					?>
-					</div>
-				</div>
-				<?php if($slug == 'alumni'): ?>
-				<div class="filter-list sub year <?php echo $slug ?>">
-					<div class="options">
-					<?php
-						$page_url = get_the_permalink();
-						$start_date = 1994;
-						$end_date = date( "Y" );
-						$years = array_reverse( range( $start_date,$end_date ) );
-						foreach( $years as $year ): 
-							$filter_url = $page_url . '?date=' . $year;
-							$year_count = resident_count_by_year( $year, $page_query );
-							echo '<div class="option">';
-							echo '<a href="' . $filter_url . '">';
-							echo $year;
-							echo ' (' . $year_count . ')';
-							echo '</a>';
-							echo '</div>';
-						endforeach;
-					?>
-					</div>
-				</div>
-				<?php endif; ?>
-
-				<div class="filter-list sub program <?php echo $slug ?>">
-					<div class="options">
-					<?php
-						$residency_programs = array(
-							'international',
-							'ground_floor'
-						);
-						foreach( $residency_programs as $program ): 
-							$filter_url = $page_url . '?residency_program=' . $program;
-							$program_count = resident_count_by_program( $program, $page_query );
-							echo '<div class="option">';
-							echo '<a href="' . $filter_url . '">';
-							echo pretty( $program );
-							echo ' (' . $program_count . ')';
-							echo '</a>';
-							echo '</div>';
-						endforeach;
-					?>
-					</div>
-				</div>
 			</div>
-			<div class="alt <?php echo $alt_slug ?>">
+			<div class="right alt <?php echo $alt_slug ?>">
 				<?php
 				$alt_page = get_page_by_path( $alt_slug );
 				$alt_url = get_the_permalink( $alt_page );
@@ -158,7 +89,79 @@ $page_url = get_the_permalink();
 				?>
 				<a href="<?php echo $alt_url; ?>">View <?php echo $alt_title ?></a>
 			</div>
-		</div>	
+		</div>
+
+		<div class="filter-lists">
+			<div class="filter-list country <?php echo $slug ?>">
+				<div class="options">
+				<?php
+					$page_url = get_the_permalink();
+					$countries = get_posts( array(
+						'posts_per_page'	=> -1,
+						'post_type'			=> 'country',
+						'orderby' 			=> 'title',
+						'order' 			=> 'ASC'
+					) );
+					foreach( $countries as $country ): 
+						$filter_url = $page_url . '?from=' . $country_slug;
+						$country_id = $country->ID;
+						$country_slug = $country->post_name;
+						$country_title = $country->post_title;
+						$country_count = resident_count_by_country( $country_slug, $page_query );
+						echo '<div class="option">';
+						echo '<a href="' . $filter_url . '">';
+						echo ucwords( $country_title );
+						echo ' (' . $country_count . ')';
+						echo '</a>';
+						echo '</div>';
+					endforeach;
+				?>
+				</div>
+			</div>
+			<?php if($slug == 'alumni'): ?>
+			<div class="filter-list year <?php echo $slug ?>">
+				<div class="options">
+				<?php
+					$page_url = get_the_permalink();
+					$start_date = 1994;
+					$end_date = date( "Y" );
+					$years = array_reverse( range( $start_date,$end_date ) );
+					foreach( $years as $year ): 
+						$filter_url = $page_url . '?date=' . $year;
+						$year_count = resident_count_by_year( $year, $page_query );
+						echo '<div class="option">';
+						echo '<a href="' . $filter_url . '">';
+						echo $year;
+						echo ' (' . $year_count . ')';
+						echo '</a>';
+						echo '</div>';
+					endforeach;
+				?>
+				</div>
+			</div>
+			<?php endif; ?>
+
+			<div class="filter-list program <?php echo $slug ?>">
+				<div class="options">
+				<?php
+					$residency_programs = array(
+						'international',
+						'ground_floor'
+					);
+					foreach( $residency_programs as $program ): 
+						$filter_url = $page_url . '?residency_program=' . $program;
+						$program_count = resident_count_by_program( $program, $page_query );
+						echo '<div class="option">';
+						echo '<a href="' . $filter_url . '">';
+						echo pretty( $program );
+						echo ' (' . $program_count . ')';
+						echo '</a>';
+						echo '</div>';
+					endforeach;
+				?>
+				</div>
+			</div>
+		</div>
 
 		<div class="residents shelves filter-this grid <?php echo $slug ?>">
 			<?php

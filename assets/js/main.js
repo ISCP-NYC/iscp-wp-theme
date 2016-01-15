@@ -3,8 +3,7 @@ jQuery(document).ready(function($) {
 	footerView();
 	filter();
 	loadMore();
-	var slug = $('body').data('center-slug');
-	// window.history.pushState({page:slug}, null, null);
+
 	$(window).load(function() {
 		if($('.image_slider')) {
 			setUpSlider();
@@ -50,10 +49,12 @@ jQuery(document).ready(function($) {
 				$(prevSlide).attr('href', prevLink);
 			}
 		});
-		var centerIndex = $('body').index();
+		var centerSlug = $('body').data('center-slug');
+		var centerIndex = $('section[data-slug="' + centerSlug + '"').index();
 		slideTo(centerIndex, false);
 	}
 
+	var firstSlide = true;
 	function slideTo(index, animate) {
 		// var centerSection = $('section[data-slug="' + centerSlug + '"');
 		var section = $('section').eq(index);
@@ -77,7 +78,12 @@ jQuery(document).ready(function($) {
 		event.preventDefault();
 		var side = $(this).parents('aside');
 		var index = $(side).parents('section').index();
-		var pageWidth = $(window).innerWidth();
+
+		// if(firstSlide) {
+			var currentUrl = $('section').eq(index).data('permalink');
+			window.history.pushState({page: index}, null, currentUrl);
+			// firstSlide = false;
+		// }	
 		if($(side).hasClass('right')) {
 			var shift = index + 1;
 		} else {
@@ -94,7 +100,7 @@ jQuery(document).ready(function($) {
 		var id = $(nextUp).data('id');
 		var slug = $(nextUp).data('slug');
 		$('body').attr('data-center-id', id).attr('data-center-slug', slug)
-		window.history.pushState({page:slug}, null, url);
+		window.history.replaceState({page: shift}, null, url);
 	});
 
 	// $('a').on('click', function(event) {
@@ -116,8 +122,9 @@ jQuery(document).ready(function($) {
 	window.addEventListener('popstate', function(e) {
 	    var state = e.state;
 	    if(state) {
-		    var slug = state.page;
-		    slideTo(slug, true);
+	    	console.log(state);
+		    var index = state.page;
+		    slideTo(index, true);
 		}
 	});
 
@@ -222,7 +229,7 @@ jQuery(document).ready(function($) {
 					$(this).addClass('dropped');
 					$(filterList).addClass('show').css({height : filterListOptionsHeight});
 				}
-				
+			
 			}
 		});
 	}

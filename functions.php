@@ -307,16 +307,20 @@ function is_ground_floor( $id ) {
 
 /////////////////////////////////////
 /////////////////////////////////////
-///////////HELPER METHODS////////////
+///////////OUTPUT METHODS////////////
 /////////////////////////////////////
 /////////////////////////////////////
-function section_data( $id, $slug ) {
-	$permalink = get_the_permalink( $id );
-	$title = get_the_title( $id ); 
-	echo 'data-id="' . $id . '" ';
+function section_attr( $id, $slug, $classes ) {
+	echo 'class="' . $slug . ' ' . $classes . '"';
+	echo 'id="' . $slug . '" '; 
 	echo 'data-slug="' . $slug . '" ';
-	echo 'data-permalink="' . $permalink . '" ';
-	echo 'data-title="' . $title . '"';
+	if( $id ):
+		echo 'data-id="' . $id . '" ';
+		$permalink = get_the_permalink( $id );
+		$title = get_the_title( $id );
+		echo 'data-permalink="' . $permalink . '" ';
+		echo 'data-title="' . $title . '"';
+	endif;
 }
 function format_date( $id ) {
 	$sd = get_start_date_value( $id );
@@ -431,15 +435,6 @@ function get_residents( $resident_id, $direction, $count ) {
 		get_template_part('sections/resident');
 		wp_reset_postdata();
 	endwhile;
-}
-
-function setup_page($slug, $template) {
-	$page_id = get_page_by_path( $slug )->ID;
-	$the_page = get_post( $page_id, OBJECT );
-	global $the_page;
-	setup_postdata( $the_page );
-	get_template_part( $template );
-	wp_reset_postdata();
 }
 
 //http://stackoverflow.com/questions/2915864/php-how-to-find-the-time-elapsed-since-a-date-time
@@ -655,9 +650,9 @@ function get_sponsors( $id ) {
 					$sponsor_list .= ', ';
 				endif;
 				$sponsor_name = $sponsor->post_title;
-				$website = $sponsor->website;
-				if($website):
-					$sponsor_list .= '<a href="' . $website . '" target="_blank">' . $sponsor_name . '</a>';
+				$url = get_permalink( $sponsor->ID );
+				if($url):
+					$sponsor_list .= '<a href="' . $url . '" target="_blank">' . $sponsor_name . '</a>';
 				else:
 					$sponsor_list .= $sponsor_name;
 				endif;

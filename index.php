@@ -1,6 +1,10 @@
-<?php get_header(); ?>
-
-<section id="<?php echo $slug ?>">
+<?php
+get_header();
+$title = get_the_title();
+$slug = $post->post_name;
+$id = $post->ID;
+?>
+<section <?php section_attr( null, 'home', null ); ?>>
 	<?php get_template_part('partials/nav') ?>
 	<?php get_template_part('partials/side') ?>
 	<div class="content">

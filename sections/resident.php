@@ -11,17 +11,16 @@
 	$resident_type = ucfirst( get_field( 'resident_type', $resident_id ) );
 	$residencies = array();
  
-	$resident_classes = array('resident', 'single');
+	$resident_classes = 'resident single';
 	if( is_alumni( $resident_id ) ):
-		$resident_classes[] = 'alumni';
+		$resident_classes .= ' alumni';
 	endif;
 	if( have_rows( 'gallery' ) == false ):
-		$resident_classes[] = 'one_col';
+		$resident_classes .= ' one_col';
 	endif;
-	print_r($center_resident);
 ?>
 
-<section <?php post_class( $resident_classes ) ?> id="<?php echo $resident_slug ?>" <?php section_data( $resident_id, $resident_slug ); ?>>
+<section <?php section_attr( $resident_id, $resident_slug, $resident_classes ); ?>>
 	<?php get_template_part('partials/nav') ?>
 	<?php get_template_part('partials/side') ?>
 	<div class="content">

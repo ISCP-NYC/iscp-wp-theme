@@ -8,29 +8,44 @@
 	$resident_types = array( 'current-residents', 'alumni' );
 	$event_types = array( 'events', 'exhbitions', 'iscp-talks', 'off-site-projects', 'open-studios' );
 	
-	if( in_array( $slug, $resident_types ) ):
-		switch( $slug ) {
-			case 'current-residents':
-				get_template_part( 'sections/residents' );
-				$alumni_page_id = get_page_by_path( 'alumni' )->ID;
-				$post = get_post( $alumni_page_id, OBJECT );
-				setup_postdata( $post );
-				get_template_part( 'sections/residents' );
-				wp_reset_postdata();
-				break;
-			case 'alumni':
-				$alumni_page_id = get_page_by_path( 'current-residents' )->ID;
-				$post = get_post( $alumni_page_id, OBJECT );
-				setup_postdata( $post );
-				get_template_part( 'sections/residents' );
-				wp_reset_postdata();
-				get_template_part( 'sections/residents' );
-				break;
-		}
+	if( $slug == 'current-residents' ):
+
+		$alumni_page_id = get_page_by_path( 'residency-programs' )->ID;
+		$post = get_post( $alumni_page_id, OBJECT );
+		setup_postdata( $post );
+		get_template_part( 'sections/programs' );
+		wp_reset_postdata();
+
+		get_template_part( 'sections/residents' );
+
+		$alumni_page_id = get_page_by_path( 'alumni' )->ID;
+		$post = get_post( $alumni_page_id, OBJECT );
+		setup_postdata( $post );
+		get_template_part( 'sections/residents' );
+		wp_reset_postdata();
+
+	elseif ( $slug == 'alumni' ):
+
+		$alumni_page_id = get_page_by_path( 'current-residents' )->ID;
+		$post = get_post( $alumni_page_id, OBJECT );
+		setup_postdata( $post );
+		get_template_part( 'sections/residents' );
+		wp_reset_postdata();
+
+		get_template_part( 'sections/residents' );
+
 	elseif( in_array( $slug, $event_types ) ):
 		get_template_part( 'sections/events' );
 	elseif( $parent_slug == 'residency-programs' ):
+
 		get_template_part( 'sections/programs' );
+
+		$alumni_page_id = get_page_by_path( 'current-residents' )->ID;
+		$post = get_post( $alumni_page_id, OBJECT );
+		setup_postdata( $post );
+		get_template_part( 'sections/residents' );
+		wp_reset_postdata();
+
 	elseif( $slug == 'apply' ):
 		get_template_part( 'sections/apply' );
 	elseif( $slug == 'about' ):

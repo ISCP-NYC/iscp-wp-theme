@@ -50,6 +50,9 @@
 		case 'event':
 			get_template_part('sections/event');
 			break;
+		case 'sponsor':
+			get_template_part('sections/sponsor');
+			break;
 	}
 	get_footer();
 ?>
