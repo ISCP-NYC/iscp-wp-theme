@@ -1,16 +1,62 @@
 aside {
 	width: $side_width;
 	position: absolute;
+	transition: border-color 150ms ease-in-out;
+	.logo {
+		width: $side_width - 10;
+		height: $side_width - 20;
+		position: absolute;
+		transition: border-color 150ms ease-in-out;
+		border-bottom: 10px solid;
+		&:hover {
+			border-color: $orange;
+		}
+		.icon {
+		    background-size: 60px;
+		    background-position: center;
+		    background-repeat: no-repeat;
+		}
+	    &:hover {
+			border-color: $black;
+		}
+	}
 	&.main {
 		top: 0;	
 		height: 100%;
 		border-color: $orange;
 		background: $white;
+		&.hover {
+			border-color: $black;
+			.logo {
+				border-color: $black;
+				.icon.default {
+					opacity: 0 !important;
+				}
+				.icon.hover {
+					opacity: 1 !important;
+				}
+			}
+		}
+		.logo {
+			top: 0;
+			.icon {
+				&.default {
+					background-image: url(../images/logo-orange.svg);
+				}
+				&.hover {
+					background-image: url(../images/logo-black.svg);
+				}
+			}
+			
+		}
 	}
 	&.footer {
 		top: 30px;
 		@include height('100% - 30px');
 		border-color: $white;
+		&.hover {
+			border-color: $black;
+		}
 		.logo {
 			bottom: 0;
 			border-bottom: none;
@@ -22,17 +68,6 @@ aside {
 				&.hover {
 					background-image: url(../images/logo-black.svg);
 				}
-			}
-		}
-	}
-	&.main .logo {
-		top: 0;
-		.icon {
-			&.default {
-				background-image: url(../images/logo-orange.svg);
-			}
-			&.hover {
-				background-image: url(../images/logo-black.svg);
 			}
 		}
 	}
@@ -51,17 +86,6 @@ aside {
 		.logo {
 			right: 0;
 		}
-	}
-	.logo {
-		width: $side_width - 10;
-		height: $side_width - 20;
-		position: absolute;
-		.icon {
-		    background-size: 60px;
-		    background-position: center;
-		    background-repeat: no-repeat;
-		}
-	    border-bottom: 10px solid $orange;
 	}
 	@include xsmall {
 		display: none !important;

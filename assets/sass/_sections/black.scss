@@ -18,6 +18,9 @@ section.alumni {
 			color: $black;
 		}
 	}
+	aside .logo:hover {
+		border-color: $orange !important;
+	}
 	aside.main {
 		border-color: $black !important;
 	 	.icon.default {
@@ -25,6 +28,12 @@ section.alumni {
 		}
 		.icon.hover {
 			background-image: url(../images/logo-orange.svg) !important;
+		}
+		&.hover {
+			border-color: $orange !important;
+			.logo {
+				border-color: $orange !important;
+			}
 		}
 	}
 	.nav-toggle {

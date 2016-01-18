@@ -710,71 +710,96 @@ section {
   /* line 1, ../sass/_partials/side.scss */
   section aside {
     width: 120px;
-    position: absolute; }
-    /* line 4, ../sass/_partials/side.scss */
+    position: absolute;
+    -webkit-transition: border-color 150ms ease-in-out;
+            transition: border-color 150ms ease-in-out; }
+    /* line 5, ../sass/_partials/side.scss */
+    section aside .logo {
+      width: 110px;
+      height: 100px;
+      position: absolute;
+      -webkit-transition: border-color 150ms ease-in-out;
+              transition: border-color 150ms ease-in-out;
+      border-bottom: 10px solid; }
+      /* line 11, ../sass/_partials/side.scss */
+      section aside .logo:hover {
+        border-color: #ff5000; }
+      /* line 14, ../sass/_partials/side.scss */
+      section aside .logo .icon {
+        background-size: 60px;
+        background-position: center;
+        background-repeat: no-repeat; }
+      /* line 19, ../sass/_partials/side.scss */
+      section aside .logo:hover {
+        border-color: #1a1919; }
+    /* line 23, ../sass/_partials/side.scss */
     section aside.main {
       top: 0;
       height: 100%;
       border-color: #ff5000;
       background: #fff; }
-    /* line 10, ../sass/_partials/side.scss */
+      /* line 28, ../sass/_partials/side.scss */
+      section aside.main.hover {
+        border-color: #1a1919; }
+        /* line 30, ../sass/_partials/side.scss */
+        section aside.main.hover .logo {
+          border-color: #1a1919; }
+          /* line 32, ../sass/_partials/side.scss */
+          section aside.main.hover .logo .icon.default {
+            opacity: 0 !important; }
+          /* line 35, ../sass/_partials/side.scss */
+          section aside.main.hover .logo .icon.hover {
+            opacity: 1 !important; }
+      /* line 40, ../sass/_partials/side.scss */
+      section aside.main .logo {
+        top: 0; }
+        /* line 43, ../sass/_partials/side.scss */
+        section aside.main .logo .icon.default {
+          background-image: url(../images/logo-orange.svg); }
+        /* line 46, ../sass/_partials/side.scss */
+        section aside.main .logo .icon.hover {
+          background-image: url(../images/logo-black.svg); }
+    /* line 53, ../sass/_partials/side.scss */
     section aside.footer {
       top: 30px;
       height: -ms-calc(100% - 30px);
       height: calc(100% - 30px);
       border-color: #fff; }
-      /* line 14, ../sass/_partials/side.scss */
+      /* line 57, ../sass/_partials/side.scss */
+      section aside.footer.hover {
+        border-color: #1a1919; }
+      /* line 60, ../sass/_partials/side.scss */
       section aside.footer .logo {
         bottom: 0;
         border-bottom: none;
         border-top: 10px solid #fff; }
-        /* line 19, ../sass/_partials/side.scss */
+        /* line 65, ../sass/_partials/side.scss */
         section aside.footer .logo .icon.default {
           background-image: url(../images/logo-white.svg); }
-        /* line 22, ../sass/_partials/side.scss */
+        /* line 68, ../sass/_partials/side.scss */
         section aside.footer .logo .icon.hover {
           background-image: url(../images/logo-black.svg); }
-    /* line 28, ../sass/_partials/side.scss */
-    section aside.main .logo {
-      top: 0; }
-      /* line 31, ../sass/_partials/side.scss */
-      section aside.main .logo .icon.default {
-        background-image: url(../images/logo-orange.svg); }
-      /* line 34, ../sass/_partials/side.scss */
-      section aside.main .logo .icon.hover {
-        background-image: url(../images/logo-black.svg); }
-    /* line 39, ../sass/_partials/side.scss */
+    /* line 74, ../sass/_partials/side.scss */
     section aside.left {
       left: 0;
       border-right-width: 10px;
       border-right-style: solid; }
-      /* line 43, ../sass/_partials/side.scss */
+      /* line 78, ../sass/_partials/side.scss */
       section aside.left .logo {
         left: 0; }
-    /* line 47, ../sass/_partials/side.scss */
+    /* line 82, ../sass/_partials/side.scss */
     section aside.right {
       right: 0;
       border-left-width: 10px;
       border-left-style: solid; }
-      /* line 51, ../sass/_partials/side.scss */
+      /* line 86, ../sass/_partials/side.scss */
       section aside.right .logo {
         right: 0; }
-    /* line 55, ../sass/_partials/side.scss */
-    section aside .logo {
-      width: 110px;
-      height: 100px;
-      position: absolute;
-      border-bottom: 10px solid #ff5000; }
-      /* line 59, ../sass/_partials/side.scss */
-      section aside .logo .icon {
-        background-size: 60px;
-        background-position: center;
-        background-repeat: no-repeat; }
     @media (max-width: 480px) {
       /* line 1, ../sass/_partials/side.scss */
       section aside {
         display: none !important; } }
-    /* line 69, ../sass/_partials/side.scss */
+    /* line 93, ../sass/_partials/side.scss */
     section aside .slide {
       width: auto;
       height: 120px;
@@ -787,18 +812,18 @@ section {
       line-height: 35px;
       text-align: center; }
       @media (max-width: 900px) {
-        /* line 69, ../sass/_partials/side.scss */
+        /* line 93, ../sass/_partials/side.scss */
         section aside .slide {
           font-size: 25px;
           line-height: 30px; } }
-    /* line 78, ../sass/_partials/side.scss */
+    /* line 102, ../sass/_partials/side.scss */
     section aside.left .slide {
       bottom: -120px;
       left: 0px;
       -webkit-transform: rotate(-90deg);
           -ms-transform: rotate(-90deg);
               transform: rotate(-90deg); }
-    /* line 83, ../sass/_partials/side.scss */
+    /* line 107, ../sass/_partials/side.scss */
     section aside.right .slide {
       top: 110px;
       left: 120px;
@@ -2285,66 +2310,81 @@ section.alumni {
     section.alumni header.main nav a.overlay * {
       color: #1a1919; }
   /* line 21, ../sass/_sections/black.scss */
+  section.sponsor aside .logo:hover,
+  section.past aside .logo:hover,
+  section.alumni aside .logo:hover {
+    border-color: #ff5000 !important; }
+  /* line 24, ../sass/_sections/black.scss */
   section.sponsor aside.main,
   section.past aside.main,
   section.alumni aside.main {
     border-color: #1a1919 !important; }
-    /* line 23, ../sass/_sections/black.scss */
+    /* line 26, ../sass/_sections/black.scss */
     section.sponsor aside.main .icon.default,
     section.past aside.main .icon.default,
     section.alumni aside.main .icon.default {
       background-image: url(../images/logo-black.svg) !important; }
-    /* line 26, ../sass/_sections/black.scss */
+    /* line 29, ../sass/_sections/black.scss */
     section.sponsor aside.main .icon.hover,
     section.past aside.main .icon.hover,
     section.alumni aside.main .icon.hover {
       background-image: url(../images/logo-orange.svg) !important; }
-  /* line 31, ../sass/_sections/black.scss */
+    /* line 32, ../sass/_sections/black.scss */
+    section.sponsor aside.main.hover,
+    section.past aside.main.hover,
+    section.alumni aside.main.hover {
+      border-color: #ff5000 !important; }
+      /* line 34, ../sass/_sections/black.scss */
+      section.sponsor aside.main.hover .logo,
+      section.past aside.main.hover .logo,
+      section.alumni aside.main.hover .logo {
+        border-color: #ff5000 !important; }
+  /* line 40, ../sass/_sections/black.scss */
   section.sponsor .nav-toggle .icon.default,
   section.past .nav-toggle .icon.default,
   section.alumni .nav-toggle .icon.default {
     background-image: url(../images/toggle-black.svg) !important; }
-  /* line 34, ../sass/_sections/black.scss */
+  /* line 43, ../sass/_sections/black.scss */
   section.sponsor .nav-toggle .icon.hover,
   section.past .nav-toggle .icon.hover,
   section.alumni .nav-toggle .icon.hover {
     background-image: url(../images/toggle-orange.svg) !important; }
-  /* line 38, ../sass/_sections/black.scss */
+  /* line 47, ../sass/_sections/black.scss */
   section.sponsor header.main nav .cell .sub-menu .child-item,
   section.past header.main nav .cell .sub-menu .child-item,
   section.alumni header.main nav .cell .sub-menu .child-item {
     background-image: url(../images/bullet-black.svg) !important; }
-    /* line 40, ../sass/_sections/black.scss */
+    /* line 49, ../sass/_sections/black.scss */
     section.sponsor header.main nav .cell .sub-menu .child-item:hover,
     section.past header.main nav .cell .sub-menu .child-item:hover,
     section.alumni header.main nav .cell .sub-menu .child-item:hover {
       background-image: url(../images/bullet-orange.svg) !important; }
-  /* line 46, ../sass/_sections/black.scss */
+  /* line 55, ../sass/_sections/black.scss */
   section.sponsor .content .filter .bar .select.dropdown .icon.default,
   section.past .content .filter .bar .select.dropdown .icon.default,
   section.alumni .content .filter .bar .select.dropdown .icon.default {
     background-image: url(../images/dropdown-black.svg); }
-  /* line 49, ../sass/_sections/black.scss */
+  /* line 58, ../sass/_sections/black.scss */
   section.sponsor .content .filter .bar .select.dropdown .icon.hover,
   section.past .content .filter .bar .select.dropdown .icon.hover,
   section.alumni .content .filter .bar .select.dropdown .icon.hover {
     background-image: url(../images/dropdown-orange.svg); }
-  /* line 56, ../sass/_sections/black.scss */
+  /* line 65, ../sass/_sections/black.scss */
   section.sponsor .content .filter .bar .select.view.toggle .icon.default,
   section.past .content .filter .bar .select.view.toggle .icon.default,
   section.alumni .content .filter .bar .select.view.toggle .icon.default {
     background-image: url(../images/view-toggle-black.svg); }
-  /* line 59, ../sass/_sections/black.scss */
+  /* line 68, ../sass/_sections/black.scss */
   section.sponsor .content .filter .bar .select.view.toggle .icon.hover,
   section.past .content .filter .bar .select.view.toggle .icon.hover,
   section.alumni .content .filter .bar .select.view.toggle .icon.hover {
     background-image: url(../images/view-toggle-orange.svg); }
-  /* line 64, ../sass/_sections/black.scss */
+  /* line 73, ../sass/_sections/black.scss */
   section.sponsor .content .residents .resident .image,
   section.past .content .residents .resident .image,
   section.alumni .content .residents .resident .image {
     background-color: white; }
-  /* line 67, ../sass/_sections/black.scss */
+  /* line 76, ../sass/_sections/black.scss */
   section.sponsor .bullet, section.sponsor section#resident-resources ul li, section#resident-resources ul section.sponsor li,
   section.past .bullet,
   section.past section#resident-resources ul li,
@@ -2353,7 +2393,7 @@ section.alumni {
   section.alumni section#resident-resources ul li,
   section#resident-resources ul section.alumni li {
     background-image: url(../images/bullet-black.svg) !important; }
-    /* line 69, ../sass/_sections/black.scss */
+    /* line 78, ../sass/_sections/black.scss */
     section.sponsor .bullet:hover, section.sponsor section#resident-resources ul li:hover, section#resident-resources ul section.sponsor li:hover,
     section.past .bullet:hover,
     section.past section#resident-resources ul li:hover,
@@ -2362,44 +2402,44 @@ section.alumni {
     section.alumni section#resident-resources ul li:hover,
     section#resident-resources ul section.alumni li:hover {
       background-image: url(../images/bullet-orange.svg) !important; }
-  /* line 73, ../sass/_sections/black.scss */
+  /* line 82, ../sass/_sections/black.scss */
   section.sponsor .shelves.grid .shelf-item .inner a.wrap:hover h3,
   section.past .shelves.grid .shelf-item .inner a.wrap:hover h3,
   section.alumni .shelves.grid .shelf-item .inner a.wrap:hover h3 {
     color: #ff5000 !important; }
-  /* line 76, ../sass/_sections/black.scss */
+  /* line 85, ../sass/_sections/black.scss */
   section.sponsor h4.title,
   section.past h4.title,
   section.alumni h4.title {
     color: #1a1919; }
-  /* line 79, ../sass/_sections/black.scss */
+  /* line 88, ../sass/_sections/black.scss */
   section.sponsor footer,
   section.past footer,
   section.alumni footer {
     background-color: #1a1919 !important; }
-    /* line 81, ../sass/_sections/black.scss */
+    /* line 90, ../sass/_sections/black.scss */
     section.sponsor footer *,
     section.past footer *,
     section.alumni footer * {
       background-color: #1a1919 !important;
       color: #fff !important;
       border-color: #fff !important; }
-    /* line 86, ../sass/_sections/black.scss */
+    /* line 95, ../sass/_sections/black.scss */
     section.sponsor footer a:hover,
     section.past footer a:hover,
     section.alumni footer a:hover {
       color: #fff; }
-    /* line 89, ../sass/_sections/black.scss */
+    /* line 98, ../sass/_sections/black.scss */
     section.sponsor footer aside.footer,
     section.past footer aside.footer,
     section.alumni footer aside.footer {
       border-color: #fff !important; }
-      /* line 92, ../sass/_sections/black.scss */
+      /* line 101, ../sass/_sections/black.scss */
       section.sponsor footer aside.footer .icon.default,
       section.past footer aside.footer .icon.default,
       section.alumni footer aside.footer .icon.default {
         background-image: url(../images/logo-white.svg); }
-      /* line 95, ../sass/_sections/black.scss */
+      /* line 104, ../sass/_sections/black.scss */
       section.sponsor footer aside.footer .icon.hover,
       section.past footer aside.footer .icon.hover,
       section.alumni footer aside.footer .icon.hover {
