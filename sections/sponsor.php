@@ -190,7 +190,7 @@ $sponsor_query = array(
 							endif;
 						endwhile;
 					else:
-						echo 'No upcoming deadlines.';
+						echo 'No applications available';
 					endif;
 					?>
 
