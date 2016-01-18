@@ -160,14 +160,41 @@ $sponsor_query = array(
 
 		<div class="info">
 			<div class="block name">
-				<?php echo $sponsor_title ?>
+				<div class="horizontal-align">
+					<?php echo $sponsor_title ?>
+				</div>
 			</div>
 			<div class="block website">
-				<a href="<?php echo $sponsor_website ?>">
-					<?php echo pretty_url( $sponsor_website ) ?>
-				</a>
+				<div class="horizontal-align">
+					<a href="<?php echo $sponsor_website ?>">
+						<?php echo pretty_url( $sponsor_website ) ?>
+					</a>
+				</div>
 			</div>
 			<div class="block deadline">
+				<div class="horizontal-align">
+					<?php 
+					if( have_rows( 'applications', $sponsor_id ) ):
+			    		while ( have_rows( 'applications' ) ) : the_row();
+							$app_title = get_sub_field( 'title', $sponsor_id );
+							$app_deadline = get_sub_field( 'deadline', $sponsor_id );
+							$app_deadline_dt = new DateTime( $app_deadline );
+							$app_deadline_format = $app_deadline_dt->format('M. dS Y');
+							$app_brief = get_sub_field( 'brief', $sponsor_id );
+							$app_link = get_sub_field( 'link', $sponsor_id );
+							if( $app_deadline > $today ):
+								echo '<a href="' . $app_link . '">';
+								echo '<div>Application Deadline</div>';
+								echo '<div>' . $app_deadline_format . '</div>';
+								echo '</a>';
+							endif;
+						endwhile;
+					else:
+						echo 'No upcoming deadlines.';
+					endif;
+					?>
+
+				</div>
 			</div>
 		</div>
 

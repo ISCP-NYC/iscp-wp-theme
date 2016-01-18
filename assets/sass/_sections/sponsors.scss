@@ -20,9 +20,18 @@ section.residents {
 			display: table;
 			padding: 20px 0 40px 0;
             @extend .border-bottom;
+            display: -webkit-flex;
+		    display: -ms-flexbox;
+		    display: flex;
+		    -webkit-flex-wrap: wrap;
+		    -ms-flex-wrap: wrap;
+		    flex-wrap: wrap;
 			.block {
 				width: calc(100%/3 - 6px);
 				float: left;
+				display: -webkit-flex;
+	            display: -ms-flexbox;
+	            display: flex;
 				text-align: center;
 				@include medium-fs;
 			}

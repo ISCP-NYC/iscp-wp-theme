@@ -2085,20 +2085,31 @@ section.residents .content .top .right.type {
 section.residents .content .info {
   width: 100%;
   display: table;
-  padding: 20px 0 40px 0; }
-  /* line 23, ../sass/_sections/sponsors.scss */
+  padding: 20px 0 40px 0;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: -webkit-box;
+  display: flex;
+  -webkit-flex-wrap: wrap;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap; }
+  /* line 29, ../sass/_sections/sponsors.scss */
   section.residents .content .info .block {
     width: calc(100%/3 - 6px);
     float: left;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: -webkit-box;
+    display: flex;
     text-align: center;
     font-size: 25px;
     line-height: 30px; }
     @media (max-width: 900px) {
-      /* line 23, ../sass/_sections/sponsors.scss */
+      /* line 29, ../sass/_sections/sponsors.scss */
       section.residents .content .info .block {
         font-size: 20px;
         line-height: 23px; } }
-/* line 30, ../sass/_sections/sponsors.scss */
+/* line 39, ../sass/_sections/sponsors.scss */
 section.residents .content .residents.shelves.list {
   margin-top: 0; }
 
