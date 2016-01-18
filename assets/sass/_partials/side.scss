@@ -12,14 +12,28 @@ aside {
 		@include height('100% - 30px');
 		border-color: $white;
 		.logo {
+			bottom: 0;
 			border-bottom: none;
-			border-top-width: 10px;
-			border-top-style: solid;
-			bottom: 0px;
-			background-image: url(../images/logo-white.svg);
-			&:hover {
+			border-top: 10px solid $white;
+			.icon {
+				&.default {
+					background-image: url(../images/logo-white.svg);
+				}
+				&.hover {
+					background-image: url(../images/logo-black.svg);
+				}
+			}
+		}
+	}
+	&.main .logo {
+		top: 0;
+		.icon {
+			&.default {
+				background-image: url(../images/logo-orange.svg);
+			}
+			&.hover {
 				background-image: url(../images/logo-black.svg);
-			}	
+			}
 		}
 	}
 	&.left {
@@ -42,18 +56,12 @@ aside {
 		width: $side_width - 10;
 		height: $side_width - 20;
 		position: absolute;
-	    background-size: 60px;
-	    background-position: center;
-	    background-repeat: no-repeat;
-	    border-bottom: 10px solid $orange;
-	    transition: transform 600ms ease;
-	}
-	&.main .logo {
-		top: 0;
-		background-image: url(../images/logo-orange.svg);
-		&:hover {
-			background-image: url(../images/logo-black.svg);
+		.icon {
+		    background-size: 60px;
+		    background-position: center;
+		    background-repeat: no-repeat;
 		}
+	    border-bottom: 10px solid $orange;
 	}
 	@include xsmall {
 		display: none !important;

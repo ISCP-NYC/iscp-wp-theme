@@ -310,6 +310,15 @@ function is_ground_floor( $id ) {
 ///////////OUTPUT METHODS////////////
 /////////////////////////////////////
 /////////////////////////////////////
+function get_status( $id ) {
+	if( is_current( $id ) ):
+		return 'current';
+	elseif( is_alumni( $id ) ):
+		return 'alumni';
+	else:
+		return null;
+	endif;
+}
 function section_attr( $id, $slug, $classes ) {
 	echo 'class="' . $slug . ' ' . $classes . '"';
 	echo 'id="' . $slug . '" '; 

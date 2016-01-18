@@ -1,3 +1,25 @@
+.swap {
+    position: relative;
+    .icon {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        transition: opacity 150ms ease-in-out;
+        &.hover {
+            opacity: 0;
+        }
+    }
+    &:hover {
+        .hover {
+            opacity: 1;
+        }
+        .default {
+            opacity: 0;
+        }
+    }
+}
 .gallery {
     .piece {
         .image {
@@ -50,7 +72,7 @@
                         margin: auto;
                     }
                 }
-                .description {
+                .caption {
                     width: 50% !important;
                     display: table;
                     margin: auto !important;
@@ -78,13 +100,6 @@
     &.grid {
         .shelf-item {
             @extend .noselect;
-            .name {
-                @extend .yesselect;
-                a {
-                    display: table;
-                    margin: 0 auto 10px auto;
-                }
-            }
             @include width('100% / 3');
             display: -webkit-flex;
             display: -ms-flexbox;
@@ -94,6 +109,19 @@
             margin-bottom: 50px;
             .inner {
                 @include width('100% - 20px');
+                a.wrap {
+                    display: table;
+                    &:hover {
+                        h3 {
+                            color: $black !important;
+                        }
+                    }
+                }
+                h3 {
+                    @extend .yesselect;
+                    text-align: center;
+                    margin-bottom: 5px;
+                }
                 span {
                     margin-top: 5px;
                     display: block;
@@ -128,6 +156,12 @@
                     margin: 0 !important;
                 }
             }
+            &.current * {
+                color: $orange !important;
+                a:hover {
+                    color: $black !important;
+                }
+            }
         }
     }
     &.list {
@@ -140,6 +174,9 @@
                 display: -webkit-flex;
                 display: -ms-flexbox;
                 display: flex;
+                h3 {
+                    @include small-fs;
+                }
                 .image {display: none;}
                 .value {
                     float:left;
@@ -152,10 +189,6 @@
                     -webkit-align-items: center;
                     -ms-flex-align: center;
                     align-items: center;
-                    span, a {
-                        display: table-cell;
-                        vertical-align: middle;
-                    }
                 }
             }
         }
@@ -170,31 +203,61 @@
         line-height: $small-fs;
         display: table;
         color: $orange;
-        padding: 0 25px 0 0;
+        padding: 0;
         margin: 0 20px 5px 0;
-        background-size: 20px 40px;
-        background-position: right top;
-        background-repeat: no-repeat;
         cursor: pointer;
         &.view.toggle {
-            span.grid{display: none;}
-            background-image: url(../images/view-toggle-orange.svg);
-            &:hover {
-                background-image: url(../images/view-toggle-black.svg);
-            }
+            .grid{ display: none; }
             &.grid {
-                span.grid{display: block;}
-                span.list{display: none;}
-                background-position: right bottom;
+                span.grid{ display: block; }
+                span.list{ display: none; }
+                .icon { background-position: right bottom; }
+            }
+            .icon {
+                &.default {
+                    background-image: url(../images/view-toggle-orange.svg);
+                }
+                &.hover {
+                    background-image: url(../images/view-toggle-black.svg);   
+                }
             }
         }
         &.dropdown {
-            background-image: url(../images/dropdown-orange.svg);
-            &.dropped {
-                background-position: right bottom;
+            .icon {
+                &.default {
+                    background-image: url(../images/dropdown-orange.svg);
+                }
+                &.hover {
+                    background-image: url(../images/dropdown-black.svg);   
+                }
             }
-            &:hover {
-                background-image: url(../images/dropdown-black.svg);
+            &.dropped {
+                .icon {
+                    background-position: right bottom;
+                }
+            }
+        }
+        &:hover {
+            .icon.default {
+                opacity: 0;
+            }
+            .icon.hover {
+                opacity: 1;
+            }
+        }
+        span {
+            float: left;
+        }
+        .swap {
+            width: 20px;
+            height: 20px;
+            display: block;
+            float: left;
+            margin: 0 0 0 5px;
+            .icon {
+                background-size: 20px 40px;
+                background-position: right top;
+                background-repeat: no-repeat;
             }
         }
     }

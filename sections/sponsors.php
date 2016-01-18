@@ -1,25 +1,14 @@
 <?php
-$sponsor_title = get_the_title();
-$sponsor_slug = $post->post_name;
-$sponsor_id = $post->ID;
-$sponsor_country = get_field( 'country', $sponsor_id )[0]->post_title;
-$sponsor_website = get_field( 'website', $sponsor_id );
-$sponsor_type = get_field( 'type', $sponsor_id );
-$today = new DateTime();
-$today = $today->format( 'Ymd' );
+$title = get_the_title();
+$slug = $post->post_name;
+$id = $post->ID;
 
 $country_param = get_query_var( 'from' );
 $country_param_obj = get_page_by_path( $country_param, OBJECT, 'country' );
 $country_param_title = $country_param_obj->post_title;
 $country_param_id = $country_param_obj->ID;
-$year_param = get_query_var( 'date' );
 $program_param = get_query_var( 'residency_program' );
 $page_url = get_the_permalink();
-$sponsor_query = array(
-	'key' => 'residency_dates_0_sponsors',
-	'value' => '"' . $sponsor_id . '"',
-	'compare' => 'LIKE'
-);
 ?>
 
 <section <?php section_attr( $sponsor_id, $sponsor_slug, 'sponsor residents' ); ?>>
@@ -210,8 +199,8 @@ $sponsor_query = array(
 				$thumb = get_thumb( $resident_id );
 				$resident_status = get_status( $resident_id );
 				echo '<div class="resident shelf-item border-bottom ' . $resident_status . '"><div class="inner">';
-				echo '<h3 class="value name"><a href="' . $url . '">' . $title . '</a></h3>';
-				echo '<a href="' . $url . '">';
+				echo '<a class="wrap value name" href="' . $url . '">';
+				echo '<h3 class="link">' . $title . '</h3>';
 				echo '<div class="image">';
 				echo '<img src="' . $thumb . '"/>';
 				echo '</div>';

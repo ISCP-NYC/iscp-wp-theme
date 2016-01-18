@@ -132,12 +132,11 @@
 		        echo '<div class="image">';
 		        echo '<img src="' . $gallery_image . '"/>';
 		        echo '</div>';
-		        echo '<div class="description">';
+		        echo '<div class="caption">';
 		        echo $caption;
 		        echo '</div>';
 		        echo '</div>';
 		        echo '</div>';
-
 		    endwhile;
 		    echo '</div>';
 		endif;
@@ -178,7 +177,6 @@
 					$related_year = $related_year->format('Y');
 					$related_url =  get_the_permalink( $related_id );
 					$related_thumb = get_thumb( $related_id );
-
 					echo '<div class="related shelf-item resident"><div class="inner">';
 					echo '<a href="' . $related_url . '">';
 					echo '<h3 class="name">' . $related_name . '</h3>';
@@ -190,7 +188,6 @@
 					echo '<div class="sponsor">' . $related_sponsor . '</div>';
 					echo '<div class="year">' . $related_year . '</div>';
 					echo '</div></div></div>';
-
 				endforeach;
 				?>
 			</div>

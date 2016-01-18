@@ -34,7 +34,6 @@
 				wp_reset_postdata();
 
 			elseif( is_alumni( $this_resident_id ) ):
-
 				$alumni_page_id = get_page_by_path('alumni')->ID;
 				$post = get_post( $alumni_page_id, OBJECT );
 				setup_postdata( $post );

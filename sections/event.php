@@ -4,6 +4,7 @@
 	$slug = get_post( $post )->post_name;
 	$id = get_the_ID();
 	$description = get_field( 'description', $id );
+	$footnote = get_field( 'footnote', $id );
 	$event_type = get_field( 'event_type', $id );
 	$event_type_pretty = pretty( $event_type );
 	$dates = get_event_date( $id );
@@ -97,6 +98,9 @@
 		<div class="info">
 			<div class="description">
 				<?php echo $description ?>
+			</div>
+			<div class="footnote">
+				<?php echo $footnote ?>
 			</div>
 			<div class="links">
 				<a href="#" class="link bullet">RSVP</a>
@@ -197,28 +201,27 @@
 				$resident_year = new DateTime($resident_start_date);
 				$resident_year = $resident_year->format('Y');
 				$resident_url =  get_the_permalink( $resident_id );
-				$thumb = get_thumb( $resident_id );
+				$resident_thumb = get_thumb( $resident_id );
 				if( is_alumni( $id ) ) {
 					$resident_status = 'Current';
 					$resident_studio = get_field('studio_number', $resident_id );
 				} else {
 					$resident_status = 'Alumni';
 				}
-
 				echo '<div class="resident shelf-item event"><div class="inner">';
-				echo '<a href="' . $resident_url . '">';
-				echo '<h3 class="name">' . $resident_name . '</h3>';
+				echo '<a class="wrap" href="' . $resident_url . '">';
+				echo '<h3 class="value name link">' . $resident_name . '</h3>';
 				echo '<div class="image">';
-				echo '<img src="' . $thumb . '"/>';
+				echo '<img src="' . $resident_thumb . '"/>';
 				echo '</div>';
 				echo '</a>';
 				echo '<div class="details">';
 				echo '<div class="left half">';
-				echo '<div class="detail country">' . $resident_country . '</div>';
-				echo '<div class="detail sponsor">' . $resident_sponsor . '</div>';
+				echo '<div class="value detail country">' . $resident_country . '</div>';
+				echo '<div class="value detail sponsor">' . $resident_sponsor . '</div>';
 				echo '</div>';
 				echo '<div class="right half">';
-				echo '<div class="detail status">' . $resident_status . ' Resident</div>';
+				echo '<div class="value detail status">' . $resident_status . ' Resident</div>';
 				if( $resident_studio ) {
 					echo '<div class="detail studio">Studio #' . $resident_studio . ' Resident</div>';
 				}

@@ -1,29 +1,37 @@
+section.sponsor,
 section.past,
 section.alumni {
 	background-color: $white !important;
 	* {
-		color: $black !important;
 		border-color: $black !important;
 	}
-	a:hover, a:hover *, .link:hover, .link:hover * {
+	a, .link {
+		color: $black;
+	}
+	a:hover, .link:hover {
 		color: $orange !important;
 	}
 	nav,
 	header.main nav a.overlay {
 		background-color: $white !important;
+		* {
+			color: $black;
+		}
 	}
 	aside.main {
 		border-color: $black !important;
-	 	.logo {
+	 	.icon.default {
 			background-image: url(../images/logo-black.svg) !important;
-			&:hover {
-				background-image: url(../images/logo-orange.svg) !important;
-			}
+		}
+		.icon.hover {
+			background-image: url(../images/logo-orange.svg) !important;
 		}
 	}
 	.nav-toggle {
-		background-image: url(../images/toggle-black.svg) !important;
-		&:hover {
+		.icon.default {
+			background-image: url(../images/toggle-black.svg) !important;
+		}
+		.icon.hover {
 			background-image: url(../images/toggle-orange.svg) !important;
 		}
 	}
@@ -34,16 +42,24 @@ section.alumni {
 		}
 	}
 	.content .filter .bar .select.dropdown {
-		background-image: url(../images/dropdown-black.svg) !important;
-		&:hover {
-			background-image: url(../images/dropdown-orange.svg) !important;
-		}
+		.icon {
+	        &.default {
+	            background-image: url(../images/dropdown-black.svg);
+	        }
+	        &.hover {
+	            background-image: url(../images/dropdown-orange.svg);   
+	        }
+	    }
 	}
 	.content .filter .bar .select.view.toggle {
-		background-image: url(../images/view-toggle-black.svg) !important;
-		&:hover {
-			background-image: url(../images/view-toggle-orange.svg) !important;
-		}
+		.icon {
+	        &.default {
+	            background-image: url(../images/view-toggle-black.svg);
+	        }
+	        &.hover {
+	            background-image: url(../images/view-toggle-orange.svg);   
+	        }
+	    }
 	}
 	.content .residents .resident .image {
 		background-color: white;
@@ -53,6 +69,12 @@ section.alumni {
 		&:hover {
 			background-image: url(../images/bullet-orange.svg) !important;
 		}
+	}
+	.shelves.grid .shelf-item .inner a.wrap:hover h3 {
+		color: $orange !important;
+	}
+	h4.title {
+		color: $black;
 	}
 	footer {
 		background-color: $black !important;
@@ -66,8 +88,13 @@ section.alumni {
 		}
 		aside.footer {
 			border-color: $white !important;
-		 	.logo:hover {
-				background-image: url(../images/logo-orange.svg) !important;
+		 	.icon {
+				&.default {
+					background-image: url(../images/logo-white.svg);
+				}
+				&.hover {
+					background-image: url(../images/logo-orange.svg);
+				}
 			}
 		}
 	}

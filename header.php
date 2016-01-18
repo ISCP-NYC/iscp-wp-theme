@@ -72,12 +72,11 @@
 			endif;
 			break;
 	}
-	
 	switch($post_type) {
 		case 'resident':
 			if( is_current( $page_id ) ) {
 				$classes .= 'current';
-			} else {
+			} elseif( is_alumni( $page_id ) ) {
 				$classes .= 'alumni';
 			}
 			break;

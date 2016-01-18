@@ -1,8 +1,6 @@
 jQuery(document).ready(function($) {
 	headerView();
-	footerView();
 	filter();
-	loadMore();
 
 	$(window).load(function() {
 		if($('.image_slider')) {
@@ -78,12 +76,8 @@ jQuery(document).ready(function($) {
 		event.preventDefault();
 		var side = $(this).parents('aside');
 		var index = $(side).parents('section').index();
-
-		// if(firstSlide) {
-			var currentUrl = $('section').eq(index).data('permalink');
-			window.history.pushState({page: index}, null, currentUrl);
-			// firstSlide = false;
-		// }	
+		var currentUrl = $('section').eq(index).data('permalink');
+		window.history.pushState({page: index}, null, currentUrl);
 		if($(side).hasClass('right')) {
 			var shift = index + 1;
 		} else {
@@ -103,21 +97,6 @@ jQuery(document).ready(function($) {
 		window.history.replaceState({page: shift}, null, url);
 	});
 
-	// $('a').on('click', function(event) {
-	// 	var url = $(this).attr('href');
-	// 	var section = $('section[data-permalink="' + url + '"]');
-	// 	var slug = $(section).data('slug');
-	// 	if(section.length) {
-	// 		event.preventDefault();
-	// 		slideTo(slug, true);
-	// 	}
-	// });
-	
-
-
-	function loadMore() {
-		
-	}
 
 	window.addEventListener('popstate', function(e) {
 	    var state = e.state;
@@ -169,39 +148,48 @@ jQuery(document).ready(function($) {
 		});
 	}
 
-
-	function footerView() {
-		//toggle ability to scroll to footer
-		$('section').each(function() {
-			var section = $(this);
-			var content = $(this).children('.content');
-			var footer = $(this).children('footer')[0];
-			$(content).scroll(function(event) {
-				var scrollHeight = content[0].scrollHeight;
-				var contentHeight = content[0].clientHeight;
-				var scrollTop = this.scrollTop;
-				//scrolled to end of content -> scroll to footer
-				if(scrollHeight - scrollTop == contentHeight) {
-					$(section).addClass('show-footer');
-					$(section).scroll(function(event) {
-						var scrollTop = this.scrollTop;
-						var scrollHeight = this.scrollHeight;
-						var footerHeight = footer.clientHeight;
-						//scrolled to top of footer -> scroll in content 
-						if(scrollTop == 0) {
-							$(section).removeClass('show-footer');
-						}
-					});
-				}
-			});
-			// if content is too short to scroll -> scroll to footer
+	//toggle ability to scroll to footer
+	$('section').each(function() {
+		var section = $(this);
+		var content = $(this).children('.content');
+		var footer = $(this).children('footer')[0];
+		$(content).scroll(function(event) {
 			var scrollHeight = content[0].scrollHeight;
 			var contentHeight = content[0].clientHeight;
-			if(scrollHeight <= contentHeight) {
+			var scrollTop = this.scrollTop;
+			//scrolled to end of content -> scroll to footer
+			if(scrollHeight - scrollTop == contentHeight) {
 				$(section).addClass('show-footer');
+				$(section).scroll(function(event) {
+					var scrollTop = this.scrollTop;
+					var scrollHeight = this.scrollHeight;
+					var footerHeight = footer.clientHeight;
+					//scrolled to top of footer -> scroll in content 
+					if(scrollTop == 0) {
+						$(section).removeClass('show-footer');
+					}
+				});
 			}
 		});
-	}
+		// if content is too short to scroll -> scroll to footer
+		var scrollHeight = content[0].scrollHeight;
+		var contentHeight = content[0].clientHeight;
+		if(scrollHeight <= contentHeight) {
+			$(section).addClass('show-footer');
+		}
+	});
+
+	$('aside.main').on('mousewheel', function(e) {
+		var section = $(this).parents('section');
+		if(!$(section).hasClass('show-footer')) {
+			var e = window.event || e;
+			var delta = e.deltaY;
+			var content = $(section).find('.content');
+			var scrollTop = $(content).scrollTop();
+			var scrollTo = scrollTop + delta;
+			$(content).scrollTop(scrollTo);
+		}
+	});
 
 
 	function filter() {

@@ -1,21 +1,22 @@
 <?php 
-	global $about;
-	$title = get_post( $about )->post_title;
-	$slug = get_post( $about )->post_name;
+	global $post;
+	$id = $post->ID;
+	$title = $post->post_title;
+	$slug = $post->post_name;
 ?>
 
-<section class="about" id="about">
+<section  <?php section_attr( $id, $slug, 'support about' ); ?>>
 	<?php get_template_part('partials/nav') ?>
 	<?php get_template_part('partials/side') ?>
 	<div class="content">
 		<h4 class="title orange"><?php echo $title ?></h4>
 
 		<?php
-			$address = get_field( 'address', $about );
+			$address = get_field( 'address', $id );
 			$directions_base = 'https://www.google.com/maps/dir//';
 			$directions = $directions_base . strip_tags($address);
-			$phone = get_field( 'phone', $about );
-			$email = get_field( 'email', $about );
+			$phone = get_field( 'phone', $id );
+			$email = get_field( 'email', $id );
 		?>
 		<div class="contact module">
 			<div class="half left">
@@ -35,8 +36,8 @@
 		</div>
 
 		<?php
-			$mission = get_field( 'mission', $about );
-			$description = get_field( 'description', $about );
+			$mission = get_field( 'mission', $id );
+			$description = get_field( 'description', $id );
 		?>
 
 		<div class="main">
@@ -45,15 +46,15 @@
 					<?php echo $mission ?>
 				</div>
 				<?php
-				if( get_field( 'image_slider', $about ) ):
+				if( get_field( 'image_slider', $id ) ):
 					echo '<div class="image_slider module">';
 					echo '<div class="left arrow"></div>';
 					echo '<div class="right arrow"></div>';
 					echo '<div class="slides">';
-					while( has_sub_field( 'image_slider', $about ) ):
-						$image = get_sub_field( 'image', $about );
+					while( has_sub_field( 'image_slider', $id ) ):
+						$image = get_sub_field( 'image', $id );
 						$image_url = $image['url'];
-						$caption = get_sub_field( 'caption', $about );
+						$caption = label_art( $the_ID );
 						echo '<div class="slide">';
 						echo '<div class="vert">';
 						echo '<div class="image">';
@@ -69,10 +70,10 @@
 				?>
 
 				<?php 
-				$twitter = get_field( 'twitter', $about );
+				$twitter = get_field( 'twitter', $id );
 				$twitter_url = 'http://www.twitter.com/' . $twitter;
-				$facebook_url = get_field( 'facebook', $about );
-				$instagram = get_field( 'instagram', $about );
+				$facebook_url = get_field( 'facebook', $id );
+				$instagram = get_field( 'instagram', $id );
 				$instagram_url = 'http://www.instagram.com/' . $instagram;
 				?>
 				<div class="module social">
@@ -88,12 +89,12 @@
 			</div>
 			<div class="half right">
 				<?php
-				if( get_field( 'image_stack', $about ) ):
+				if( get_field( 'image_stack', $id ) ):
 				echo '<div class="image_stack module">';
-				while( has_sub_field( 'image_stack', $about ) ):
-					$image = get_sub_field( 'image', $about );
+				while( has_sub_field( 'image_stack', $id ) ):
+					$image = get_sub_field( 'image', $id );
 					$image_url = $image['url'];
-					$caption = get_sub_field( 'caption', $about );
+					$caption = get_sub_field( 'caption', $id );
 					echo '<div class="image">';
 					echo '<img src="' . $image_url . '" alt=""/>';
 					echo '<h4 class="caption">' . $caption . '</h4>';
@@ -103,32 +104,32 @@
 				endif;
 				?>
 
-				<?php $description = get_field( 'description', $about ); ?>
+				<?php $description = get_field( 'description', $id ); ?>
 				<div class="module description">
 					<?php echo $description ?>
 				</div>
 				
 				<?php
-				if( get_field( 'board_members', $about ) ):
+				if( get_field( 'board_members', $id ) ):
 				echo '<div class="module">';
 				echo '<div class="board list">';
 				echo '<h4>Board</h4>';
 				echo '<ul>';
-				while( has_sub_field( 'board_members', $about ) ):
-					$name = get_sub_field( 'name', $about );
+				while( has_sub_field( 'board_members', $id ) ):
+					$name = get_sub_field( 'name', $id );
 					echo '<li>' . $name . '</li>';
 				endwhile;
 				echo '</ul>';
 				echo '</div>';
 				endif;
 
-				if( get_field( 'staff', $about ) ):
+				if( get_field( 'staff', $id ) ):
 				echo '<div class="staff list">';
 				echo '<h4>Staff</h4>';
 				echo '<ul>';
-				while( has_sub_field( 'staff', $about ) ):
-					$name = get_sub_field( 'name', $about );
-					$role = get_sub_field( 'role', $about );
+				while( has_sub_field( 'staff', $id ) ):
+					$name = get_sub_field( 'name', $id );
+					$role = get_sub_field( 'role', $id );
 					echo '<li>' . $name . ', ' . $role . '</li>';
 				endwhile;
 				echo '</ul>';

@@ -6,7 +6,10 @@
 ?> 
 <footer>
 	<aside class="left footer">
-		<a href="<?php echo site_url() ?>" class="logo"></a>
+		<a href="<?php echo site_url() ?>" class="logo swap">
+			<div class="icon default"></div>
+			<div class="icon hover"></div>
+		</a>
 	</aside>
 	<div class="wrapper">
 		<div class="inner">
@@ -24,7 +27,6 @@
 					    				<div class="title">' . $title . '</div>
 					    			</a>
 					    			<div class="sub-menu">';
-
 					    $menu_item_html .= $sub_menu_html;
 					    foreach ( (array) $menu_items as $key => $child_menu_item ) {
 					    	$child_title = $child_menu_item->title;
@@ -119,6 +121,9 @@
 	    </div>
 	</div>
 	<aside class="right footer">
-		<a href="<?php echo site_url() ?>" class="logo"></a>
+		<a href="<?php echo site_url() ?>" class="logo swap">
+			<div class="icon default"></div>
+			<div class="icon hover"></div>
+		</a>
 	</aside>
 </footer>

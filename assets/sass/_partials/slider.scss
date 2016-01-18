@@ -34,20 +34,12 @@
 			width: 100%;
 			height: 100%;
 			display: table;
-			display: block;
 			position: relative;
 			float: left;
 			.image {
 				width: auto;
-				// max-width: 100%;
 				width: 100%;
-				height: 100%;
 				display: block;
-				// display: table;
-				// margin: auto;
-				background-size: cover;
-				background-repeat: no-repeat;
-				background-position: center;
 				img {
 					width: auto;
 					height: auto;
@@ -62,6 +54,17 @@
 				@include small-fs;
 				text-align: center;
 				padding-top: 10px;
+			}
+		}
+	}
+	&.full {
+		.slide {
+			display: block;
+			.image {
+				height: 100%;
+				background-size: cover;
+				background-repeat: no-repeat;
+				background-position: center;
 			}
 		}
 	}

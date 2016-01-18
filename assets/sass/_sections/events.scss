@@ -2,34 +2,7 @@ section#events .content {
 	h4.title {
 		margin-bottom: 20px;
 	}
-	.filter {
-		width: 100%;
-		display: table;
-		margin: 25px 0;
-		@extend .noselect;
-		.bar {
-			width: 100%;
-			display: table;
-			.select {
-				float: left;
-			}
-		}
-		.sub {
-			margin-top: 20px;
-			@include xsmall-fs;
-			.option {
-				float: left;
-				margin: 0 0 20px 0;
-			}
-			&.event-type .option {
-				margin-right: 25px;
-			}
-			&.year .option {
-				margin-right: 25px;
-			}
-		}
-	}
-	.events {
+	.shelves.events {
 		margin-top: 50px;
 		.event {
 			h3 {
@@ -57,31 +30,23 @@ section#events .content {
 	}
 	.events.list {
 		.event {
-			.name {
-				width: 50%;
+			.date {
+				width: 40%;
 			}
 			.details {
-				width: 50%;
+				width: 60%;
 				display: flex;
-				.left {
+				.title {
 					width: 60%;
-					display: flex;
-					.date {
-						margin-left: 30px;
-						width: 100%;
-					}
 				}
-				.right {
+				.event-type {
 					width: 40%;
-					display: flex;
-					.event-type {
-						margin-left: 30px;
+					text-align: right;
+					a {
 						width: 100%;
-						text-align: right;
 					}
 				}
 			}
-			
 		}
 	}
 }

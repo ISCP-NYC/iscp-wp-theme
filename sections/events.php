@@ -26,9 +26,12 @@
 					else:
 						$event_type_count = null;
 					endif;
-					echo 'Event Type' . $event_type_count;
+					echo '<span>Event Type' . $event_type_count . '</span>';
 					?>
-					
+					<div class="swap">
+						<div class="icon default"></div>
+						<div class="icon hover"></div>
+					</div>
 				</div>
 				<div class="select link dropdown year" data-filter="year" data-slug="<?php echo $slug ?>">
 					<?php
@@ -37,65 +40,75 @@
 					else:
 						$year_count = null;
 					endif;
-					echo 'Year' . $year_count;
+					echo '<span>Year' . $year_count . '</span>';
 					?>
+					<div class="swap">
+						<div class="icon default"></div>
+						<div class="icon hover"></div>
+					</div>
 				</div>
 				<div class="select link view toggle" data-slug="<?php echo $slug ?>">
-					<span class="list">List</span>
-					<span class="grid">Grid</span>
+					<span class="option list">List</span>
+					<span class="option grid">Grid</span>
+					<div class="swap">
+						<div class="icon default"></div>
+						<div class="icon hover"></div>
+					</div>
 				</div>
 			</div>
-			<div class="filter-list sub event-type <?php echo $slug ?>">
-				<div class="options">
-					<?php
-					$event_types = array( 'event', 'exhibition', 'off-site-project', 'iscp-talk', 'open-studios' );
-					foreach( $event_types as $event_type ): 
-						$filter_url =  $page_url . '?type=' . $event_type;
-						$event_type_count = event_count_by_type( $event_type );
+			<div class="filter-lists">
+				<div class="filter-list event-type <?php echo $slug ?>">
+					<div class="options">
+						<?php
+						$event_types = array( 'event', 'exhibition', 'off-site-project', 'iscp-talk', 'open-studios' );
+						foreach( $event_types as $event_type ): 
+							$filter_url =  $page_url . '?type=' . $event_type;
+							$event_type_count = event_count_by_type( $event_type );
 
-						if($event_type == $event_type_param) {
-							$selected = 'selected';
-							$filter_url = $page_url;
-						} else {
-							$selected = null;
-						}
+							if($event_type == $event_type_param) {
+								$selected = 'selected';
+								$filter_url = $page_url;
+							} else {
+								$selected = null;
+							}
 
-						$event_type = pretty( $event_type );
-						echo '<div class="option ' . $selected . '">';
-						echo '<a href="' . $filter_url . '">';
-						echo ucwords( $event_type );
-						echo ' (' . $event_type_count . ')';
-						echo '</a>';
-						echo '</div>';
-					endforeach;
-					?>
+							$event_type = pretty( $event_type );
+							echo '<div class="option ' . $selected . '">';
+							echo '<a href="' . $filter_url . '">';
+							echo ucwords( $event_type );
+							echo ' (' . $event_type_count . ')';
+							echo '</a>';
+							echo '</div>';
+						endforeach;
+						?>
+					</div>
 				</div>
-			</div>
 
-			<div class="filter-list sub year <?php echo $slug ?>">
-				<div class="options">
-					<?php
-					$page_url = get_the_permalink();
-					$start_date = 1994;
-					$end_date = date( "Y" );
-					$years = array_reverse( range( $start_date,$end_date ) );
-					foreach( $years as $year ): 
-						$filter_url = $page_url . '?date=' . $year;
-						$year_count = event_count_by_year( $year );
-						if($year == $year_param) {
-							$selected = 'selected';
-							$filter_url = $page_url;
-						} else {
-							$selected = null;
-						}
-						echo '<div class="option ' . $selected . '">';
-						echo '<a href="' . $filter_url . '">';
-						echo $year;
-						echo ' (' . $year_count . ')';
-						echo '</a>';
-						echo '</div>';
-					endforeach;
-					?>
+				<div class="filter-list sub year <?php echo $slug ?>">
+					<div class="options">
+						<?php
+						$page_url = get_the_permalink();
+						$start_date = 1994;
+						$end_date = date( "Y" );
+						$years = array_reverse( range( $start_date,$end_date ) );
+						foreach( $years as $year ): 
+							$filter_url = $page_url . '?date=' . $year;
+							$year_count = event_count_by_year( $year );
+							if($year == $year_param) {
+								$selected = 'selected';
+								$filter_url = $page_url;
+							} else {
+								$selected = null;
+							}
+							echo '<div class="option ' . $selected . '">';
+							echo '<a href="' . $filter_url . '">';
+							echo $year;
+							echo ' (' . $year_count . ')';
+							echo '</a>';
+							echo '</div>';
+						endforeach;
+						?>
+					</div>
 				</div>
 			</div>
 		</div>
@@ -163,8 +176,8 @@
 					$thumb = get_thumb( $resident_id );
 
 					echo '<div class="event orange shelf-item border-bottom"><div class="inner">';
-					echo '<h3 class="value date"><a href="' . $url . '">' . $date_format . '</a></h3>';
-					echo '<a href="' . $url . '">';
+					echo '<a class="wrap value date" href="' . $url . '">';
+					echo '<h3 class="link">' . $date_format . '</h3>';
 					echo '<div class="image">';
 					echo '<img src="' . $thumb . '"/>';
 					echo '</div>';

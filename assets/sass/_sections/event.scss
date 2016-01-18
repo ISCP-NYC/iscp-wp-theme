@@ -40,6 +40,13 @@ section.single.event {
 		.description {
 			@include medium-fs;
 			padding-bottom: 50px;
+			p, span {
+				line-height: $medium-lh !important;
+			}
+		}
+		.footnote {
+			@include small-fs;
+			padding-bottom: 50px;
 		}
 		.links {
 			padding-bottom: 50px;

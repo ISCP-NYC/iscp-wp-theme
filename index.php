@@ -47,32 +47,32 @@ $id = $post->ID;
 
 				$loop = new WP_Query( $args );
 				while ( $loop->have_posts() ) : $loop->the_post();
-					$id = $the_ID;
-					$slug = get_post( $id )->post_name;
-					$title = get_the_title( $id );
-					$url = get_permalink();
-					$type = get_field( 'event_type', $id );
-					$type_name = pretty( $type );
-					$date_format = get_event_date( $id );
+					$event_id = $the_ID;
+					$event_slug = get_post( $eventid )->post_name;
+					$event_title = get_the_title( $eventid );
+					$event_url = get_permalink();
+					$event_type = get_field( 'event_type', $eventid );
+					$event_type_name = pretty( $type );
+					$event_date_format = get_event_date( $eventid );
 
-					$thumb = get_thumb( $id );
+					$event_thumb = get_thumb( $eventid );
 
-					echo '<div class="event ' . $type . '" id="' . $slug . '">';
-						echo '<a href="' . $url . '">';
+					echo '<div class="event ' . $eventtype . '" id="' . $eventslug . '">';
+						echo '<a href="' . $eventurl . '">';
 					  		echo '<h3 class="date">';
-					  		echo $date_format;
+					  		echo $eventdate_format;
 					  		echo '</h3>';
 					  		echo '<div class="thumb">';
-					  		echo '<img src="' . $thumb . '"/>';
+					  		echo '<img src="' . $event_thumb . '"/>';
 					  		echo '</div>';
 					  	echo '</a>';
 					  	echo '<h4 class="type">';
-					  	echo '<a href="' . site_url() . '/events?type=' . $type . '">';
-					  	echo $type_name;
+					  	echo '<a href="' . site_url() . '/events?type=' . $event_type . '">';
+					  	echo $event_type_name;
 					  	echo '</h4>';
 					  	echo '<h4 class="title">';
-					  	echo '<a href="' . $url . '">';
-					  	echo $title;
+					  	echo '<a href="' . $event_url . '">';
+					  	echo $event_title;
 					  	echo '</a>';
 					  	echo '</h4>';
 					echo '</div>';
@@ -96,25 +96,22 @@ $id = $post->ID;
 
 
 		<?php
-		$home = get_page_by_path( 'home' );
-		if( get_field( 'image_slider', $home ) ):
-			echo '<div class="image_slider module">';
+		$home_id = get_page_by_path( 'home' );
+		if( get_field( 'image_slider', $home_id ) ):
+			echo '<div class="image_slider module full">';
 			echo '<div class="left arrow"></div>';
 			echo '<div class="right arrow"></div>';
 			echo '<div class="slides">';
-			while( has_sub_field( 'image_slider', $home ) ):
-				$image = get_sub_field( 'image', $home );
-				$image_url = $image['sizes']['slider'];
-				$image_caption = get_sub_field( 'caption', $home );
+			while( has_sub_field( 'image_slider', $home_id ) ):
+				$home_image = get_sub_field( 'image', $home_id );
+				$home_image_url = $home_image['sizes']['slider'];
+				$home_image_caption = get_sub_field( 'caption', $home_id );
 				echo '<div class="slide">';
-				// echo '<div class="vert">';
-				echo '<div class="image" style="background-image:url(' . $image_url . ')">';
-				// echo '<img src="' . $image_url . '" alt=""/>';
+				echo '<div class="image" style="background-image:url(' . $home_image_url . ')">';
 				echo '</div>';
 				echo '<div class="caption">';
-				echo $image_caption;
+				echo $home_image_caption;
 				echo '</div>';
-				// echo '</div>';
 				echo '</div>';
 			endwhile;
 			echo '</div>';

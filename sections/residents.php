@@ -17,6 +17,7 @@ switch( $slug ) {
 				'compare' => '>='
 			)
 		);
+		$resident_status = 'current';
 		$alt_slug = 'alumni';
 		break;
 	case 'alumni':
@@ -25,6 +26,7 @@ switch( $slug ) {
 				'compare' => '<='
 			)
 		);
+		$resident_status = 'alumni';
 		$alt_slug = 'current-residents';
 		break;
 }
@@ -42,17 +44,22 @@ $page_url = get_the_permalink();
 	<?php get_template_part('partials/nav') ?>
 	<?php get_template_part('partials/side') ?>
 	<div class="content">
-		<h4 class="title orange"><?php the_title() ?></h4>
+		<h4 class="title"><?php the_title() ?></h4>
 		<div class="top">
 			<div class="filter">
 				<div class="bar">
 					<div class="select link dropdown country" data-filter="country" data-slug="<?php echo $slug ?>">
-						Country
 						<?php
 						if($country_param):
-							echo ': ' . $country_param_title . ' (' . resident_count_by_country( $country_param_id, $page_query ) . ')';
+							$country_count = ': ' . $country_param_title . ' (' . resident_count_by_country( $country_param_id, $page_query ) . ')';
 						endif;
+						echo '<span>Country' . $country_count . '</span>';
 						?>
+						</span>
+						<div class="swap">
+							<div class="icon default"></div>
+							<div class="icon hover"></div>
+						</div>
 					</div>
 					<?php if($slug == 'alumni'): ?>
 					<div class="select link dropdown year" data-filter="year" data-slug="<?php echo $slug ?>">
@@ -62,8 +69,12 @@ $page_url = get_the_permalink();
 						else:
 							$year_count = null;
 						endif;
-						echo 'Year' . $year_count;
+						echo '<span>Year' . $year_count . '</span>';
 						?>
+						<div class="swap">
+							<div class="icon default"></div>
+							<div class="icon hover"></div>
+						</div>
 					</div>
 					<?php endif; ?>
 					<div class="select link dropdown program" data-filter="program" data-slug="<?php echo $slug ?>">
@@ -73,12 +84,20 @@ $page_url = get_the_permalink();
 						else:
 							$program_count = null;
 						endif;
-						echo 'Residency Program' . $program_count;
+						echo '<span>Residency Program' . $program_count . '</span>';
 						?>
+						<div class="swap">
+							<div class="icon default"></div>
+							<div class="icon hover"></div>
+						</div>
 					</div>
 					<div class="select link view toggle" data-slug="<?php echo $slug ?>">
-						<span class="list">List</span>
-						<span class="grid">Grid</span>
+						<span class="option list">List</span>
+						<span class="option grid">Grid</span>
+						<div class="swap">
+							<div class="icon default"></div>
+							<div class="icon hover"></div>
+						</div>
 					</div>
 				</div>
 			</div>
@@ -217,9 +236,9 @@ $page_url = get_the_permalink();
 				}
 				$thumb = get_thumb( $resident_id );
 
-				echo '<div class="resident orange shelf-item border-bottom"><div class="inner">';
-				echo '<h3 class="value name"><a href="' . $url . '">' . $title . '</a></h3>';
-				echo '<a href="' . $url . '">';
+				echo '<div class="resident shelf-item border-bottom ' . $resident_status . '"><div class="inner">';
+				echo '<a class="wrap value name" href="' . $url . '">';
+				echo '<h3 class="link">' . $title . '</h3>';
 				echo '<div class="image">';
 				echo '<img src="' . $thumb . '"/>';
 				echo '</div>';
@@ -228,7 +247,9 @@ $page_url = get_the_permalink();
 				echo '<div class="left">';
 				echo '<div class="value country"><a href="#">' . $country . '</a></div>';
 				echo '<div class="value sponsors">';
+				echo '<div class="vertical-align">';
 				echo get_sponsors( $resident_id );
+				echo '</div>';
 				echo '</div>';
 				echo '</div>';
 				echo '<div class="right">';
@@ -236,9 +257,6 @@ $page_url = get_the_permalink();
 					echo '<div class="value studio-number">Studio ' . $studio_number . '</div>';
 				} elseif( $slug == 'alumni' ) {
 					echo '<div class="value year">' . $residency_year . '</div>';
-				}
-				if($residency_program == 'ground_floor') {
-					echo '<div class="value ground-floor"><a href="#">Ground Floor</a></div>';
 				}
 				echo '</div>';
 				echo '</div></div></div>';

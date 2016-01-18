@@ -1,5 +1,6 @@
 <?php 
 	global $post;
+	$id = $post->ID;
 	$title = get_post( $post )->post_title;
 	$slug = get_post( $post )->post_name;
 
@@ -13,7 +14,7 @@
 	$residency_programs = get_pages( $residency_programs_query ); 
 ?>
 
-<section class="apply" id="apply">
+<section <?php section_attr( $id, $slug, 'apply' ); ?>>
 	<?php get_template_part('partials/nav') ?>
 	<?php get_template_part('partials/side') ?>
 	<div class="content">

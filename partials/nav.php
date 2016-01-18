@@ -22,11 +22,10 @@
 			    foreach ( (array) $menu_items as $key => $child_menu_item ) {
 			    	$child_title = $child_menu_item->title;
 			    	$child_url = $child_menu_item->url;
-			    	$child_slug = str_replace('#','-',basename($child_url));
 			    	$parent_id = $child_menu_item->menu_item_parent;
 			    	if ($parent_id == $item_id ) : 
 			    		$child_item_html = '
-			    			<div class="child-item bullet ' . $child_slug . '">
+			    			<div class="child-item bullet">
 			    				<a href="' . $child_url . '">' .
 			    					$child_title .
 			    				'</a>
@@ -47,4 +46,7 @@
     	</div>
 	</nav>
 </header>
-<div class="nav-toggle nav-hover"></div>
+<div class="nav-toggle nav-hover swap">
+	<div class="icon default"></div>
+	<div class="icon hover"></div>
+</div>
