@@ -36,11 +36,15 @@ $sponsor_query = array(
 				<div class="bar">
 					<div class="select link dropdown country" data-filter="country" data-slug="<?php echo $sponsor_slug ?>">
 						<?php
-						echo 'Country';
 						if( $country_param ):
-							echo ': ' . $country_param_title . ' (' . resident_count_by_country( $country_param_id, $sponsor_query ) . ')';
+							$country_count = ': ' . $country_param_title . ' (' . resident_count_by_country( $country_param_id, $sponsor_query ) . ')';
 						endif;
+						echo '<span>Country' . $country_count . '</span>';
 						?>
+						<div class="swap">
+							<div class="icon default"></div>
+							<div class="icon hover"></div>
+						</div>
 					</div>
 					<div class="select link dropdown year" data-filter="year" data-slug="<?php echo $sponsor_slug ?>">
 						<?php
@@ -49,8 +53,12 @@ $sponsor_query = array(
 						else:
 							$year_count = null;
 						endif;
-						echo 'Year' . $year_count;
+						echo '<span>Year' . $year_count . '</span>';
 						?>
+						<div class="swap">
+							<div class="icon default"></div>
+							<div class="icon hover"></div>
+						</div>
 					</div>
 					<div class="select link dropdown program" data-filter="program" data-slug="<?php echo $sponsor_slug ?>">
 						<?php
@@ -59,12 +67,20 @@ $sponsor_query = array(
 						else:
 							$program_count = null;
 						endif;
-						echo 'Residency Program' . $program_count;
+						echo '<span>Residency Program' . $program_count . '</span>';
 						?>
+						<div class="swap">
+							<div class="icon default"></div>
+							<div class="icon hover"></div>
+						</div>
 					</div>
 					<div class="select link view toggle" data-slug="<?php echo $sponsor_slug ?>">
 						<span class="list">List</span>
 						<span class="grid">Grid</span>
+						<div class="swap">
+							<div class="icon default"></div>
+							<div class="icon hover"></div>
+						</div>
 					</div>
 				</div>
 			</div>
