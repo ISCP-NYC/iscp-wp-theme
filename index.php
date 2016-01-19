@@ -103,7 +103,8 @@ $id = $post->ID;
 		<?php
 		$home_id = get_page_by_path( 'home' );
 		if( get_field( 'image_slider', $home_id ) ):
-			echo '<div class="image_slider module bg">';
+			echo '<div class="image_slider gallery module bg">';
+			echo '<div class="cursor"></div>';
 			echo '<div class="left arrow"></div>';
 			echo '<div class="right arrow"></div>';
 			echo '<div class="slides">';

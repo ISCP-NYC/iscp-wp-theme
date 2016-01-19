@@ -163,79 +163,6 @@ article, aside, details, figcaption, figure, footer, header, hgroup, main, menu,
     opacity: 0; }
 
 /* line 23, ../sass/components.scss */
-.gallery {
-  cursor: none !important; }
-  /* line 25, ../sass/components.scss */
-  .gallery .cursor {
-    width: 50px;
-    height: 50px;
-    position: absolute;
-    margin-left: -25px;
-    margin-top: -25px;
-    background-image: url(../images/gallery-cursor-white.svg);
-    background-size: 50px;
-    background-repeat: no-repeat;
-    display: none;
-    z-index: 10000; }
-    /* line 36, ../sass/components.scss */
-    .gallery .cursor[data-icon="center"] {
-      background-position: top center; }
-    /* line 39, ../sass/components.scss */
-    .gallery .cursor[data-icon="left"] {
-      background-position: center; }
-    /* line 42, ../sass/components.scss */
-    .gallery .cursor[data-icon="right"] {
-      background-position: bottom center; }
-  /* line 46, ../sass/components.scss */
-  .gallery.full {
-    width: 100% !important;
-    height: 100% !important;
-    position: fixed;
-    top: 0;
-    left: 0;
-    background-color: black;
-    z-index: 1000; }
-    /* line 54, ../sass/components.scss */
-    .gallery.full .piece {
-      height: 100% !important;
-      margin: 0 !important;
-      display: table; }
-      /* line 59, ../sass/components.scss */
-      .gallery.full .piece .inner {
-        width: 100%;
-        display: table-cell;
-        vertical-align: middle; }
-        /* line 63, ../sass/components.scss */
-        .gallery.full .piece .inner .image {
-          display: table !important;
-          margin: 0 auto 0 auto; }
-          /* line 66, ../sass/components.scss */
-          .gallery.full .piece .inner .image img {
-            width: auto !important;
-            max-width: 90% !important;
-            height: auto !important;
-            max-height: 90% !important;
-            display: table;
-            margin: auto; }
-        /* line 75, ../sass/components.scss */
-        .gallery.full .piece .inner .caption {
-          width: 50% !important;
-          display: table;
-          margin: auto !important;
-          text-align: center !important;
-          color: #fff !important; }
-          /* line 81, ../sass/components.scss */
-          .gallery.full .piece .inner .caption * {
-            color: #fff !important; }
-  /* line 90, ../sass/components.scss */
-  .gallery:not(.full) .piece .image {
-    cursor: -webkit-zoom-in;
-    cursor: zoom-in; }
-  /* line 96, ../sass/components.scss */
-  .gallery:not(.full) .cursor {
-    display: none !important; }
-
-/* line 101, ../sass/components.scss */
 .shelves {
   width: 100%;
   display: -webkit-flex;
@@ -245,110 +172,122 @@ article, aside, details, figcaption, figure, footer, header, hgroup, main, menu,
   -webkit-flex-wrap: wrap;
   -ms-flex-wrap: wrap;
   flex-wrap: wrap; }
-  /* line 110, ../sass/components.scss */
+  /* line 32, ../sass/components.scss */
   .shelves.grid .shelf-item {
     width: -ms-calc(100% / 3);
     width: calc(100% / 3);
     float: left;
     padding-bottom: 50px;
     margin-bottom: 50px; }
-    /* line 119, ../sass/components.scss */
+    /* line 41, ../sass/components.scss */
     .shelves.grid .shelf-item .inner {
       width: -ms-calc(100% - 20px);
       width: calc(100% - 20px); }
-      /* line 121, ../sass/components.scss */
+      /* line 43, ../sass/components.scss */
       .shelves.grid .shelf-item .inner a.wrap {
         display: table; }
-        /* line 124, ../sass/components.scss */
+        /* line 46, ../sass/components.scss */
         .shelves.grid .shelf-item .inner a.wrap:hover h3 {
           color: #1a1919 !important; }
-      /* line 129, ../sass/components.scss */
+      /* line 51, ../sass/components.scss */
       .shelves.grid .shelf-item .inner h3 {
         text-align: center;
         margin-bottom: 5px; }
-      /* line 134, ../sass/components.scss */
+      /* line 56, ../sass/components.scss */
       .shelves.grid .shelf-item .inner .image {
         width: 100%; }
-        /* line 136, ../sass/components.scss */
+        /* line 58, ../sass/components.scss */
         .shelves.grid .shelf-item .inner .image img {
           width: 100%;
           height: 100%;
           min-height: 100px;
           vertical-align: bottom; }
-      /* line 143, ../sass/components.scss */
+      /* line 65, ../sass/components.scss */
       .shelves.grid .shelf-item .inner span {
         margin-top: 5px;
         display: block; }
-      /* line 147, ../sass/components.scss */
+      /* line 69, ../sass/components.scss */
       .shelves.grid .shelf-item .inner .details {
         margin-top: 10px;
         font-size: 17px;
         line-height: 19px; }
         @media (max-width: 900px) {
-          /* line 147, ../sass/components.scss */
+          /* line 69, ../sass/components.scss */
           .shelves.grid .shelf-item .inner .details {
             font-size: 15px;
             line-height: 17px; } }
-    /* line 152, ../sass/components.scss */
+    /* line 74, ../sass/components.scss */
     .shelves.grid .shelf-item:nth-child(3n+1) .inner {
       margin: 0 20px 0 0; }
-    /* line 155, ../sass/components.scss */
+    /* line 77, ../sass/components.scss */
     .shelves.grid .shelf-item:nth-child(3n+2) .inner {
       margin: 0 10px; }
-    /* line 158, ../sass/components.scss */
+    /* line 80, ../sass/components.scss */
     .shelves.grid .shelf-item:nth-child(3n+3) .inner {
       margin: 0 0 0 20px; }
     @media (max-width: 900px) {
-      /* line 110, ../sass/components.scss */
+      /* line 32, ../sass/components.scss */
       .shelves.grid .shelf-item {
         width: 50% !important; }
-        /* line 163, ../sass/components.scss */
+        /* line 85, ../sass/components.scss */
         .shelves.grid .shelf-item:nth-child(even) .inner {
           margin: 0 0 0 20px; }
-        /* line 166, ../sass/components.scss */
+        /* line 88, ../sass/components.scss */
         .shelves.grid .shelf-item:nth-child(odd) .inner {
           margin: 0 20px 0 0; } }
     @media (max-width: 480px) {
-      /* line 110, ../sass/components.scss */
+      /* line 32, ../sass/components.scss */
       .shelves.grid .shelf-item {
         width: 100% !important; }
-        /* line 172, ../sass/components.scss */
+        /* line 94, ../sass/components.scss */
         .shelves.grid .shelf-item .inner {
           width: 100%;
           margin: 0 !important; } }
-    /* line 177, ../sass/components.scss */
-    .shelves.grid .shelf-item.current * {
-      color: #ff5000 !important; }
-      /* line 179, ../sass/components.scss */
-      .shelves.grid .shelf-item.current * a:hover {
+    /* line 101, ../sass/components.scss */
+    .shelves.grid .shelf-item.current .inner *, .shelves.grid .shelf-item.upcoming * .inner * {
+      color: #ff5000; }
+    /* line 104, ../sass/components.scss */
+    .shelves.grid .shelf-item.current .inner a:hover, .shelves.grid .shelf-item.current .inner .link:hover, .shelves.grid .shelf-item.current .inner .wrap:hover, .shelves.grid .shelf-item.upcoming * .inner a:hover, .shelves.grid .shelf-item.upcoming * .inner .link:hover, .shelves.grid .shelf-item.upcoming * .inner .wrap:hover {
+      color: #1a1919 !important; }
+      /* line 106, ../sass/components.scss */
+      .shelves.grid .shelf-item.current .inner a:hover h3, .shelves.grid .shelf-item.current .inner .link:hover h3, .shelves.grid .shelf-item.current .inner .wrap:hover h3, .shelves.grid .shelf-item.upcoming * .inner a:hover h3, .shelves.grid .shelf-item.upcoming * .inner .link:hover h3, .shelves.grid .shelf-item.upcoming * .inner .wrap:hover h3 {
         color: #1a1919 !important; }
-  /* line 185, ../sass/components.scss */
+    /* line 114, ../sass/components.scss */
+    .shelves.grid .shelf-item.past .inner *, .shelves.grid .shelf-item.alumni .inner * {
+      color: #1a1919; }
+    /* line 117, ../sass/components.scss */
+    .shelves.grid .shelf-item.past .inner a:hover, .shelves.grid .shelf-item.past .inner .link:hover, .shelves.grid .shelf-item.past .inner .wrap:hover, .shelves.grid .shelf-item.alumni .inner a:hover, .shelves.grid .shelf-item.alumni .inner .link:hover, .shelves.grid .shelf-item.alumni .inner .wrap:hover {
+      color: #ff5000 !important; }
+      /* line 119, ../sass/components.scss */
+      .shelves.grid .shelf-item.past .inner a:hover h3, .shelves.grid .shelf-item.past .inner .link:hover h3, .shelves.grid .shelf-item.past .inner .wrap:hover h3, .shelves.grid .shelf-item.alumni .inner a:hover h3, .shelves.grid .shelf-item.alumni .inner .link:hover h3, .shelves.grid .shelf-item.alumni .inner .wrap:hover h3 {
+        color: #ff5000 !important; }
+  /* line 127, ../sass/components.scss */
   .shelves.list {
     margin-bottom: 50px; }
-    /* line 187, ../sass/components.scss */
+    /* line 129, ../sass/components.scss */
     .shelves.list .shelf-item {
       width: 100%;
       text-align: left;
       padding: 20px 0; }
-      /* line 191, ../sass/components.scss */
+      /* line 133, ../sass/components.scss */
       .shelves.list .shelf-item .inner {
         display: -webkit-flex;
         display: -ms-flexbox;
         display: -webkit-box;
         display: flex; }
-        /* line 195, ../sass/components.scss */
+        /* line 137, ../sass/components.scss */
         .shelves.list .shelf-item .inner h3 {
           font-size: 20px;
           line-height: 23px; }
           @media (max-width: 900px) {
-            /* line 195, ../sass/components.scss */
+            /* line 137, ../sass/components.scss */
             .shelves.list .shelf-item .inner h3 {
               font-size: 17px;
               line-height: 19px; } }
-        /* line 198, ../sass/components.scss */
+        /* line 140, ../sass/components.scss */
         .shelves.list .shelf-item .inner .image {
           display: none; }
-        /* line 199, ../sass/components.scss */
+        /* line 141, ../sass/components.scss */
         .shelves.list .shelf-item .inner .value {
           float: left;
           text-align: left;
@@ -363,15 +302,15 @@ article, aside, details, figcaption, figure, footer, header, hgroup, main, menu,
           -ms-flex-align: center;
           align-items: center; }
           @media (max-width: 900px) {
-            /* line 199, ../sass/components.scss */
+            /* line 141, ../sass/components.scss */
             .shelves.list .shelf-item .inner .value {
               font-size: 17px;
               line-height: 19px; } }
 
-/* line 216, ../sass/components.scss */
+/* line 158, ../sass/components.scss */
 .filter {
   width: 100%; }
-  /* line 219, ../sass/components.scss */
+  /* line 161, ../sass/components.scss */
   .filter .select {
     font-size: 20px;
     line-height: 20px;
@@ -380,68 +319,68 @@ article, aside, details, figcaption, figure, footer, header, hgroup, main, menu,
     padding: 0;
     margin: 0 20px 5px 0;
     cursor: pointer; }
-    /* line 228, ../sass/components.scss */
+    /* line 170, ../sass/components.scss */
     .filter .select.view.toggle .grid {
       display: none; }
-    /* line 230, ../sass/components.scss */
+    /* line 172, ../sass/components.scss */
     .filter .select.view.toggle.grid span.grid {
       display: block; }
-    /* line 231, ../sass/components.scss */
+    /* line 173, ../sass/components.scss */
     .filter .select.view.toggle.grid span.list {
       display: none; }
-    /* line 232, ../sass/components.scss */
+    /* line 174, ../sass/components.scss */
     .filter .select.view.toggle.grid .icon {
       background-position: right bottom; }
-    /* line 235, ../sass/components.scss */
+    /* line 177, ../sass/components.scss */
     .filter .select.view.toggle .icon.default {
       background-image: url(../images/view-toggle-orange.svg); }
-    /* line 238, ../sass/components.scss */
+    /* line 180, ../sass/components.scss */
     .filter .select.view.toggle .icon.hover {
       background-image: url(../images/view-toggle-black.svg); }
-    /* line 245, ../sass/components.scss */
+    /* line 187, ../sass/components.scss */
     .filter .select.dropdown .icon.default {
       background-image: url(../images/dropdown-orange.svg); }
-    /* line 248, ../sass/components.scss */
+    /* line 190, ../sass/components.scss */
     .filter .select.dropdown .icon.hover {
       background-image: url(../images/dropdown-black.svg); }
-    /* line 253, ../sass/components.scss */
+    /* line 195, ../sass/components.scss */
     .filter .select.dropdown.dropped .icon {
       background-position: right bottom; }
-    /* line 259, ../sass/components.scss */
+    /* line 201, ../sass/components.scss */
     .filter .select:hover .icon.default {
       opacity: 0; }
-    /* line 262, ../sass/components.scss */
+    /* line 204, ../sass/components.scss */
     .filter .select:hover .icon.hover {
       opacity: 1; }
-    /* line 266, ../sass/components.scss */
+    /* line 208, ../sass/components.scss */
     .filter .select span {
       float: left; }
-    /* line 269, ../sass/components.scss */
+    /* line 211, ../sass/components.scss */
     .filter .select .swap {
       width: 20px;
       height: 20px;
       display: block;
       float: left;
       margin: 0 0 0 5px; }
-      /* line 275, ../sass/components.scss */
+      /* line 217, ../sass/components.scss */
       .filter .select .swap .icon {
         background-size: 20px 40px;
         background-position: right top;
         background-repeat: no-repeat; }
-  /* line 282, ../sass/components.scss */
+  /* line 224, ../sass/components.scss */
   .filter .bar {
     width: 100%;
     display: table;
     margin-bottom: 20px; }
-    /* line 286, ../sass/components.scss */
+    /* line 228, ../sass/components.scss */
     .filter .bar .select {
       float: left; }
 
-/* line 291, ../sass/components.scss */
+/* line 233, ../sass/components.scss */
 .filter-lists {
   width: 100%;
   display: block; }
-  /* line 294, ../sass/components.scss */
+  /* line 236, ../sass/components.scss */
   .filter-lists .filter-list {
     height: 0px;
     display: block;
@@ -451,19 +390,19 @@ article, aside, details, figcaption, figure, footer, header, hgroup, main, menu,
     -webkit-transition: height 500ms cubic-bezier(0.645, 0.045, 0.355, 1);
             transition: height 500ms cubic-bezier(0.645, 0.045, 0.355, 1); }
     @media (max-width: 900px) {
-      /* line 294, ../sass/components.scss */
+      /* line 236, ../sass/components.scss */
       .filter-lists .filter-list {
         font-size: 15px;
         line-height: 17px; } }
-    /* line 300, ../sass/components.scss */
+    /* line 242, ../sass/components.scss */
     .filter-lists .filter-list .options {
       display: table; }
-    /* line 303, ../sass/components.scss */
+    /* line 245, ../sass/components.scss */
     .filter-lists .filter-list .option {
       width: 200px;
       margin: 0 0 10px 0;
       float: left; }
-      /* line 307, ../sass/components.scss */
+      /* line 249, ../sass/components.scss */
       .filter-lists .filter-list .option.selected a {
         color: #1a1919;
         padding-right: 25px;
@@ -471,7 +410,7 @@ article, aside, details, figcaption, figure, footer, header, hgroup, main, menu,
         background-size: contain;
         background-repeat: no-repeat;
         background-position: right center; }
-        /* line 314, ../sass/components.scss */
+        /* line 256, ../sass/components.scss */
         .filter-lists .filter-list .option.selected a:hover {
           color: #ff5000 !important;
           background-image: url(../images/close-thin-orange.svg); }
@@ -960,12 +899,36 @@ section {
     -webkit-transform: translateY(0px);
         -ms-transform: translateY(0px);
             transform: translateY(0px); }
-  /* line 1, ../sass/_partials/slider.scss */
+  /* line 2, ../sass/_partials/slider.scss */
+  section .gallery .cursor {
+    width: 50px;
+    height: 50px;
+    position: absolute;
+    margin-left: -25px;
+    margin-top: -25px;
+    background-image: url(../images/gallery-cursor-white.svg);
+    background-size: 50px;
+    background-repeat: no-repeat;
+    display: none;
+    z-index: 10000; }
+    /* line 13, ../sass/_partials/slider.scss */
+    section .gallery .cursor[data-icon="center"] {
+      background-position: top center; }
+    /* line 16, ../sass/_partials/slider.scss */
+    section .gallery .cursor[data-icon="left"] {
+      background-position: center; }
+    /* line 19, ../sass/_partials/slider.scss */
+    section .gallery .cursor[data-icon="right"] {
+      background-position: bottom center; }
+  /* line 23, ../sass/_partials/slider.scss */
+  section .gallery .image img {
+    cursor: pointer; }
+  /* line 27, ../sass/_partials/slider.scss */
   section .image_slider {
     overflow: hidden;
     display: block;
     position: relative; }
-    /* line 5, ../sass/_partials/slider.scss */
+    /* line 31, ../sass/_partials/slider.scss */
     section .image_slider .arrow {
       width: 30px;
       height: 50px;
@@ -976,15 +939,15 @@ section {
       background-position: center;
       background-size: contain;
       background-repeat: no-repeat; }
-      /* line 15, ../sass/_partials/slider.scss */
+      /* line 41, ../sass/_partials/slider.scss */
       section .image_slider .arrow.left {
         left: 20px;
         background-image: url(../images/arrow-left-orange.svg); }
-      /* line 19, ../sass/_partials/slider.scss */
+      /* line 45, ../sass/_partials/slider.scss */
       section .image_slider .arrow.right {
         right: 20px;
         background-image: url(../images/arrow-right-orange.svg); }
-    /* line 24, ../sass/_partials/slider.scss */
+    /* line 50, ../sass/_partials/slider.scss */
     section .image_slider .slides {
       height: 100%;
       display: block;
@@ -994,27 +957,28 @@ section {
       left: 0;
       -webkit-transition: left 500ms cubic-bezier(0.645, 0.045, 0.355, 1);
               transition: left 500ms cubic-bezier(0.645, 0.045, 0.355, 1); }
-      /* line 33, ../sass/_partials/slider.scss */
+      /* line 59, ../sass/_partials/slider.scss */
       section .image_slider .slides .slide {
         width: 100%;
         height: 100%;
         display: table;
         position: relative;
         float: left; }
-        /* line 39, ../sass/_partials/slider.scss */
+        /* line 65, ../sass/_partials/slider.scss */
         section .image_slider .slides .slide .image {
           width: auto;
           width: 100%;
           display: block; }
-          /* line 43, ../sass/_partials/slider.scss */
+          /* line 69, ../sass/_partials/slider.scss */
           section .image_slider .slides .slide .image img {
             width: auto;
             height: auto;
             max-width: 100%;
             max-height: 500px;
             display: table;
-            margin: auto; }
-        /* line 52, ../sass/_partials/slider.scss */
+            margin: auto;
+            cursor: pointer; }
+        /* line 79, ../sass/_partials/slider.scss */
         section .image_slider .slides .slide .caption {
           width: 100%;
           font-size: 20px;
@@ -1022,14 +986,67 @@ section {
           text-align: center;
           padding-top: 10px; }
           @media (max-width: 900px) {
-            /* line 52, ../sass/_partials/slider.scss */
+            /* line 79, ../sass/_partials/slider.scss */
             section .image_slider .slides .slide .caption {
               font-size: 17px;
               line-height: 19px; } }
-    /* line 61, ../sass/_partials/slider.scss */
+    /* line 87, ../sass/_partials/slider.scss */
+    section .image_slider.full {
+      width: 100% !important;
+      height: 100% !important;
+      position: fixed;
+      top: 0;
+      left: 0;
+      background-color: black;
+      z-index: 1000;
+      cursor: none !important; }
+      /* line 96, ../sass/_partials/slider.scss */
+      section .image_slider.full .arrow {
+        display: none; }
+      /* line 99, ../sass/_partials/slider.scss */
+      section .image_slider.full .piece {
+        height: 100% !important;
+        margin: 0 !important;
+        display: table; }
+        /* line 104, ../sass/_partials/slider.scss */
+        section .image_slider.full .piece .inner {
+          width: 100%;
+          display: table-cell;
+          vertical-align: middle; }
+          /* line 108, ../sass/_partials/slider.scss */
+          section .image_slider.full .piece .inner .image {
+            display: table !important;
+            margin: 0 auto 0 auto; }
+            /* line 111, ../sass/_partials/slider.scss */
+            section .image_slider.full .piece .inner .image img {
+              width: auto !important;
+              max-width: 90% !important;
+              height: auto !important;
+              max-height: 90% !important;
+              display: table;
+              margin: auto;
+              cursor: none !important; }
+          /* line 121, ../sass/_partials/slider.scss */
+          section .image_slider.full .piece .inner .caption {
+            width: 50% !important;
+            display: table;
+            margin: auto !important;
+            text-align: center !important;
+            color: #fff !important; }
+            /* line 127, ../sass/_partials/slider.scss */
+            section .image_slider.full .piece .inner .caption * {
+              color: #fff !important; }
+    /* line 136, ../sass/_partials/slider.scss */
+    section .image_slider:not(.full) .piece .image {
+      cursor: -webkit-zoom-in;
+      cursor: zoom-in; }
+    /* line 142, ../sass/_partials/slider.scss */
+    section .image_slider:not(.full) .cursor {
+      display: none !important; }
+    /* line 147, ../sass/_partials/slider.scss */
     section .image_slider.bg .slide {
       display: block; }
-      /* line 63, ../sass/_partials/slider.scss */
+      /* line 149, ../sass/_partials/slider.scss */
       section .image_slider.bg .slide .image {
         height: 100%;
         background-size: cover;
@@ -2454,43 +2471,38 @@ section.alumni {
     section#resident-resources ul section.alumni li:hover {
       background-image: url(../images/bullet-orange.svg) !important; }
   /* line 82, ../sass/_sections/black.scss */
-  section.sponsor .shelves.grid .shelf-item .inner a.wrap:hover h3,
-  section.past .shelves.grid .shelf-item .inner a.wrap:hover h3,
-  section.alumni .shelves.grid .shelf-item .inner a.wrap:hover h3 {
-    color: #ff5000 !important; }
-  /* line 85, ../sass/_sections/black.scss */
   section.sponsor h4.title,
   section.past h4.title,
   section.alumni h4.title {
     color: #1a1919; }
-  /* line 88, ../sass/_sections/black.scss */
+  /* line 85, ../sass/_sections/black.scss */
   section.sponsor footer,
   section.past footer,
   section.alumni footer {
     background-color: #1a1919 !important; }
-    /* line 90, ../sass/_sections/black.scss */
+    /* line 87, ../sass/_sections/black.scss */
     section.sponsor footer *,
     section.past footer *,
     section.alumni footer * {
       background-color: #1a1919 !important;
       color: #fff !important;
       border-color: #fff !important; }
-    /* line 95, ../sass/_sections/black.scss */
+    /* line 92, ../sass/_sections/black.scss */
     section.sponsor footer a:hover,
     section.past footer a:hover,
     section.alumni footer a:hover {
       color: #fff; }
-    /* line 98, ../sass/_sections/black.scss */
+    /* line 95, ../sass/_sections/black.scss */
     section.sponsor footer aside.footer,
     section.past footer aside.footer,
     section.alumni footer aside.footer {
       border-color: #fff !important; }
-      /* line 101, ../sass/_sections/black.scss */
+      /* line 98, ../sass/_sections/black.scss */
       section.sponsor footer aside.footer .icon.default,
       section.past footer aside.footer .icon.default,
       section.alumni footer aside.footer .icon.default {
         background-image: url(../images/logo-white.svg); }
-      /* line 104, ../sass/_sections/black.scss */
+      /* line 101, ../sass/_sections/black.scss */
       section.sponsor footer aside.footer .icon.hover,
       section.past footer aside.footer .icon.hover,
       section.alumni footer aside.footer .icon.hover {

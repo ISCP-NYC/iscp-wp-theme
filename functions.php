@@ -319,6 +319,25 @@ function get_status( $id ) {
 		return null;
 	endif;
 }
+function get_event_status( $id ) {
+	$today = new DateTime();
+	$today = $today->format('Ymd');
+	$start_date = get_field( 'start_date', $id );
+	$end_date = get_field( 'end_date', $id );
+
+	if(is_numeric($end_date)):
+		$check_date = $end_date;
+	elseif(is_numeric($start_date)):
+		$check_date = $start_date;
+	endif;
+	if( $check_date > $today ):
+		$status = 'upcoming';
+	elseif( $check_date < $today ):
+		$status = 'past';
+	endif;
+
+	return $status;
+}
 function section_attr( $id, $slug, $classes ) {
 	echo 'class="' . $slug . ' ' . $classes . '"';
 	echo 'id="' . $slug . '" '; 

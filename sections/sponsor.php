@@ -253,8 +253,8 @@ $sponsor_query = array(
 				$thumb = get_thumb( $resident_id );
 				$resident_status = get_status( $resident_id );
 				echo '<div class="resident shelf-item border-bottom ' . $resident_status . '"><div class="inner">';
-				echo '<h3 class="value name"><a href="' . $url . '">' . $title . '</a></h3>';
-				echo '<a href="' . $url . '">';
+				echo '<a class="wrap value" href="' . $url . '">';
+				echo '<h3 class="link title">' . $title . '</h3>';
 				echo '<div class="image">';
 				echo '<img src="' . $thumb . '"/>';
 				echo '</div>';

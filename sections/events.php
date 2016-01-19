@@ -155,38 +155,38 @@
 				$args = array(
 					'post_type' => 'event',
 					'posts_per_page' => 30,
-					'orderby' => array('date', 'end_date'),
+					'orderby' => 'meta_value',
 					'order' => 'DESC',
 					'meta_query' => array( $filter_query )
 				);
 
-				$loop = new WP_Query( $args );
+				$events = new WP_Query( $args );
 
-				while ( $loop->have_posts() ) : $loop->the_post();
-
-					$id = $the_ID;
-					$title = get_the_title( $id );
-					$url = get_permalink();
-					$type = get_field( 'event_type', $id );
-					$type_name = pretty( $type );
-					$date_format = get_event_date( $id );
-					if( $append_query && is_alumni( $id ) ) {
-						$url .= $append_query;
+				while ( $events->have_posts() ) : $events->the_post();
+					$event_id = $the_ID;
+					$event_title = get_the_title( $event_id );
+					$event_url = get_permalink();
+					$event_type = get_field( 'event_type', $event_id );
+					$event_type_name = pretty( $event_type );
+					$event_status = get_event_status( $event_id );
+					$event_date_format = get_event_date( $event_id );
+					if( $append_query && is_alumni( $event_id ) ) {
+						$event_url .= $append_query;
 					}
-					$thumb = get_thumb( $resident_id );
+					$event_thumb = get_thumb( $resident_id );
 
-					echo '<div class="event orange shelf-item border-bottom"><div class="inner">';
-					echo '<a class="wrap value date" href="' . $url . '">';
-					echo '<h3 class="link">' . $date_format . '</h3>';
+					echo '<div class="event shelf-item border-bottom ' . $event_status . '"><div class="inner">';
+					echo '<a class="wrap value" href="' . $event_url . '">';
+					echo '<h3 class="link date">' . $event_date_format . '</h3>';
 					echo '<div class="image">';
-					echo '<img src="' . $thumb . '"/>';
+					echo '<img src="' . $event_thumb . '"/>';
 					echo '</div>';
 					echo '</a>';
 					echo '<div class="details">';
-					echo '<div class="value title"><a href="' . $url . '">' . $title . '</a></div>';
+					echo '<div class="value title"><a href="' . $event_url . '">' . $event_title . '</a></div>';
 					echo '<div class="value event-type">';
-					echo '<a href="' . site_url() . '/events?type=' . $type . '">';
-					echo $type_name;
+					echo '<a href="' . site_url() . '/events?type=' . $event_type . '">';
+					echo $event_type_name;
 					echo '</a>';
 					echo '</div></div></div></div>';
 

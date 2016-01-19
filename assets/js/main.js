@@ -317,7 +317,7 @@ jQuery(document).ready(function($) {
 		}, 600);
 	}
 
-	$('body').on('click', '.gallery .piece .image', function() {
+	$('body').on('click', '.gallery .slide .image', function() {
 		var index = $(this).parents('.slide').index();
 		var gallery = $(this).parents('.gallery');
 		$(gallery).attr('data-start', index);
@@ -361,6 +361,7 @@ jQuery(document).ready(function($) {
 					$(this).off('click');
 					$(this).find('.slides').attr('style','');
 					$(this).find('.slide').attr('style','');
+					$(cursor).attr('style','');
 					break;
 				case 'right':
 					var nextIndex = showIndex + 1;

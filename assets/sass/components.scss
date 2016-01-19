@@ -20,84 +20,6 @@
         }
     }
 }
-.gallery {
-    cursor: none !important;
-    .cursor {
-        width: 50px;
-        height: 50px;
-        position: absolute;
-        margin-left: -25px;
-        margin-top: -25px;
-        background-image: url(../images/gallery-cursor-white.svg);
-        background-size: 50px;
-        background-repeat: no-repeat;
-        display: none;
-        z-index: 10000;
-        &[data-icon="center"] {
-            background-position: top center;
-        }
-        &[data-icon="left"] {
-            background-position: center;
-        }
-        &[data-icon="right"] {
-            background-position: bottom center;
-        }
-    }
-    &.full {
-        width: 100% !important;
-        height: 100% !important;
-        position: fixed;
-        top: 0;
-        left: 0; 
-        background-color: black;
-        z-index: 1000;
-        .piece {
-            // width: 100% !important;
-            height: 100% !important;
-            margin: 0 !important;
-            display: table;
-            .inner {
-                width: 100%;
-                display: table-cell;
-                vertical-align: middle;
-                .image {
-                    display: table !important;
-                    margin: 0 auto 0 auto;
-                    img {
-                        width: auto !important;
-                        max-width: 90% !important;
-                        height: auto !important;
-                        max-height: 90% !important;
-                        display: table;
-                        margin: auto;
-                    }
-                }
-                .caption {
-                    width: 50% !important;
-                    display: table;
-                    margin: auto !important;
-                    text-align: center !important;
-                    color: $white !important;
-                    * {
-                        color: $white !important;
-                    }
-                }
-            }
-        }
-    }
-    &:not(.full) {
-        .piece {
-            .image {
-                cursor: -webkit-zoom-in;
-                cursor: -moz-zoom-in;
-                cursor: zoom-in;
-            }
-        }
-        .cursor {
-            display: none !important;
-        }
-    }
-}
 .shelves {
     width: 100%;
     display: -webkit-flex;
@@ -174,10 +96,30 @@
                     margin: 0 !important;
                 }
             }
-            &.current * {
-                color: $orange !important;
-                a:hover {
-                    color: $black !important;
+            &.current, &.upcoming * {
+                 .inner {
+                    * {
+                        color: $orange;
+                    }
+                    a:hover, .link:hover, .wrap:hover {
+                        color: $black !important;
+                        h3 {
+                            color: $black !important;
+                        }
+                    }
+                }
+            }
+            &.past, &.alumni {
+                .inner {
+                    * {
+                        color: $black;
+                    }
+                    a:hover, .link:hover, .wrap:hover {
+                        color: $orange !important;
+                        h3 {
+                            color: $orange !important;
+                        }
+                    }
                 }
             }
         }
