@@ -296,7 +296,7 @@ jQuery(document).ready(function($) {
 		var slideWrapper = $(slider).children('.slides');
 		var slides = $(slideWrapper).children('.slide');
 		var slidesLength = $(slides).length;
-
+		var startIndex = $(slider).attr('data-start');
 		//size slide wrapper to fit all slides
 		$(slideWrapper).css({width:sliderWidth*slidesLength});
 		//size all slides to fit in viewport
@@ -306,6 +306,10 @@ jQuery(document).ready(function($) {
 
 		//don't allow transition on size
 		$(slideWrapper).addClass('static');
+		if(startIndex != undefined) {
+			$(slideWrapper).find('.show').removeClass('show');
+			$(slides).eq(startIndex).addClass('show');
+		}
 		var showingSlide = $('.slide.show');
 		var showIndex = $(showingSlide).index();
 		$(slideWrapper).css({
@@ -314,16 +318,13 @@ jQuery(document).ready(function($) {
 	}
 
 	$('body').on('click', '.gallery .piece .image', function() {
+		var index = $(this).parents('.slide').index();
 		var gallery = $(this).parents('.gallery');
-		if($(gallery).hasClass('full')) {
-			$(gallery).removeClass('full');
-		} else {
-			$(gallery).addClass('full');
-		}
+		$(gallery).attr('data-start', index);
+		$(gallery).addClass('full');
 		var gallery = $(this).parents('.gallery');
 		var cursor = $(gallery).find('.cursor');
 		setUpSlider(gallery)
-		$(cursor).attr('icon', 'close');
 		$(gallery).addClass('image_slider');
 		setUpSlider();
 		$(gallery).on('mousemove', function(event) {
@@ -342,7 +343,7 @@ jQuery(document).ready(function($) {
 				'display': 'block',
 				'cursor': 'none !important'
 			});
-		}).on('click', function() {
+		}).on('click', function(event) {
 			var cursor = $(gallery).find('.cursor');
 			var icon = $(cursor).attr('data-icon');
 			var sliderWidth = $(gallery).innerWidth();
@@ -357,6 +358,7 @@ jQuery(document).ready(function($) {
 				case 'close':
 					$(this).removeClass('full').removeClass('image_slider').attr('style','');
 					$(gallery).off('mousemove');
+					$(this).off('click');
 					$(this).find('.slides').attr('style','');
 					$(this).find('.slide').attr('style','');
 					break;
@@ -365,11 +367,13 @@ jQuery(document).ready(function($) {
 					if(nextIndex == slidesLength) {
 						nextIndex = 0;
 					}
+					break;
 				case 'left':
-					var nextIndex = showIndex + 1;
-					if(nextIndex == slidesLength) {
-						nextIndex = 0;
+					var nextIndex = showIndex - 1;
+					if(nextIndex == -1) {
+						nextIndex = slidesLength - 1;
 					}
+					break;
 			}
 			if(nextIndex != undefined) {
 				var nextSlide = $(slides).eq(nextIndex);

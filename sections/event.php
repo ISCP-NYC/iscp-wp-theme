@@ -139,50 +139,48 @@
 
 		<?php if( $page_columns == 'two_col' ): ?>
 			<div class="gallery">
-			<?php
-				if( have_rows('gallery') ):
-				    while ( have_rows('gallery') ) : the_row();
+			<div class="cursor"></div>
+				<div class="images slides">
+				<?php
+					if( have_rows('gallery') ):
+					    while ( have_rows('gallery') ) : the_row();
+					        $gallery_image = get_sub_field( 'image' )['url'];
+					        $image_artist = get_sub_field( 'artist' );
+					        $image_title = get_sub_field( 'title' );
+					        $image_year = get_sub_field( 'year' );
+					        $image_medium = get_sub_field( 'medium' );
+					        $image_dimensions = get_sub_field( 'dimensions' );
+					        $image_credit = get_sub_field( 'credit' );
 
-				        $gallery_image = get_sub_field( 'image' )['url'];
-				        $image_artist = get_sub_field( 'artist' );
-				        $image_title = get_sub_field( 'title' );
-				        $image_year = get_sub_field( 'year' );
-				        $image_medium = get_sub_field( 'medium' );
-				        $image_dimensions = get_sub_field( 'dimensions' );
-				        $image_credit = get_sub_field( 'credit' );
+					        $caption = $image_artist;
+					        if( $image_title ) {
+					        	$caption .= ', <em>' . $image_title . ',</em>';
+					        }
+					        if( $image_year ) {
+					        	$caption .= ' ' . $image_year;
+					        }
+					        if( $image_medium ) {
+					        	$caption .= ', ' . $image_medium;
+					        }
+					        if( $image_dimensions ) {
+					        	$caption .= ', ' . $image_dimensions;
+					        }
 
-				        $caption = $image_artist;
-				        if( $image_title ) {
-				        	$caption .= ', <em>' . $image_title . ',</em>';
-				        }
-				        if( $image_year ) {
-				        	$caption .= ' ' . $image_year;
-				        }
-				        if( $image_medium ) {
-				        	$caption .= ', ' . $image_medium;
-				        }
-				        if( $image_dimensions ) {
-				        	$caption .= ', ' . $image_dimensions;
-				        }
+					        echo '<div class="piece slide">';
+					        echo '<div class="inner">';
+					        echo '<div class="image">';
+					        echo '<img src="' . $gallery_image . '"/>';
+					        echo '</div>';
+					        echo '<div class="caption">';
+					        echo $caption;
+					        echo '</div>';
+					        echo '</div>';
+					        echo '</div>';
 
-				        echo '<div class="piece">';
-				        echo '<div class="image">';
-				        echo '<img src="' . $gallery_image . '"/>';
-				        echo '</div>';
-				        echo '<div class="caption">';
-				        echo $caption;
-				        echo '</div>';
-				        echo '</div>';
-
-				    endwhile;
-
-				else :
-
-				    // no rows found
-
-				endif;
-			?>
-
+					    endwhile;
+					endif;
+				?>
+				</div>
 			</div>
 		<?php endif; ?>
 		
