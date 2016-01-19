@@ -138,7 +138,7 @@
 		</div>
 
 		<?php if( $page_columns == 'two_col' ): ?>
-			<div class="gallery">
+			<div class="gallery stack">
 			<div class="cursor"></div>
 				<div class="images slides">
 				<?php

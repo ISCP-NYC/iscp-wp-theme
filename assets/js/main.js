@@ -296,7 +296,7 @@ jQuery(document).ready(function($) {
 		var slideWrapper = $(slider).children('.slides');
 		var slides = $(slideWrapper).children('.slide');
 		var slidesLength = $(slides).length;
-		var startIndex = $(slider).attr('data-start');
+		var startIndex = $(slider).attr('data-show');
 		//size slide wrapper to fit all slides
 		$(slideWrapper).css({width:sliderWidth*slidesLength});
 		//size all slides to fit in viewport
@@ -320,19 +320,19 @@ jQuery(document).ready(function($) {
 	$('body').on('click', '.gallery .slide .image', function() {
 		var index = $(this).parents('.slide').index();
 		var gallery = $(this).parents('.gallery');
-		$(gallery).attr('data-start', index);
+		$(gallery).attr('data-show', index);
 		$(gallery).addClass('full');
 		var gallery = $(this).parents('.gallery');
 		var cursor = $(gallery).find('.cursor');
-		setUpSlider(gallery)
 		$(gallery).addClass('image_slider');
+		var slidesLength = $(gallery).find('.slide').length;
 		setUpSlider();
 		$(gallery).on('mousemove', function(event) {
 			var x = event.pageX;
 			var y = event.pageY;
-			if(x >= window.innerWidth - 100) {
+			if(x >= window.innerWidth - 100 && slidesLength > 1) {
 				$(cursor).attr('data-icon', 'right');
-			} else if(x <= 100) {
+			} else if(x <= 100 && slidesLength > 1) {
 				$(cursor).attr('data-icon', 'left');
 			} else {
 				$(cursor).attr('data-icon', 'close');
@@ -356,12 +356,17 @@ jQuery(document).ready(function($) {
 			var shift = $(slideWrapper).css('left');
 			switch(icon) {
 				case 'close':
-					$(this).removeClass('full').removeClass('image_slider').attr('style','');
+					$(this).removeClass('full').attr('style','');
 					$(gallery).off('mousemove');
 					$(this).off('click');
 					$(this).find('.slides').attr('style','');
 					$(this).find('.slide').attr('style','');
 					$(cursor).attr('style','');
+					if($(this).hasClass('stack')) {
+						$(this).removeClass('image_slider');
+					} else {
+						setUpSlider();
+					}
 					break;
 				case 'right':
 					var nextIndex = showIndex + 1;
@@ -380,6 +385,7 @@ jQuery(document).ready(function($) {
 				var nextSlide = $(slides).eq(nextIndex);
 				$(showingSlide).removeClass('show');
 				$(nextSlide).addClass('show');
+				$(gallery).attr('data-show', nextIndex);
 				$(slideWrapper).removeClass('static').css({
 					'left' : -sliderWidth * nextIndex
 				});

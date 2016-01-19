@@ -122,7 +122,7 @@
 
 		<?php
 		if( have_rows( 'gallery' ) ):
-			echo '<div class="gallery">';
+			echo '<div class="gallery stack">';
 			echo '<div class="cursor"></div>';
 			echo '<div class="images slides">';
 		    while ( have_rows( 'gallery' ) ) : the_row();

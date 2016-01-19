@@ -20,8 +20,12 @@
             background-position: bottom center;
         }
     }
-    .image img {
-    	cursor: pointer;
+    .slide {
+        .image {
+            cursor: -webkit-zoom-in;
+            cursor: -moz-zoom-in;
+            cursor: zoom-in;
+        }
     }
 }
 .image_slider {
@@ -132,18 +136,14 @@
         }
     }
     &:not(.full) {
-        .piece {
-            .image {
-                cursor: -webkit-zoom-in;
-                cursor: -moz-zoom-in;
-                cursor: zoom-in;
-            }
-        }
         .cursor {
             display: none !important;
         }
     }
 	&.bg {
+        .cursor {
+            background-image: url(../images/gallery-cursor-orange.svg);
+        }
 		.slide {
 			display: block;
 			.image {
