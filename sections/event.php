@@ -24,9 +24,9 @@
 		$event_classes .= ' ' . $page_columns;
 	else:
 		if( have_rows('gallery') ):
-			$event_classes .= ' two_col';
+			$event_classes .= ' cols_2';
 		else:
-			$event_classes .= ' one_col';
+			$event_classes .= ' cols_1';
 		endif;		
 	endif;
 

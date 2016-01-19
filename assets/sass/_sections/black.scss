@@ -18,9 +18,6 @@ section.alumni {
 			color: $black;
 		}
 	}
-	aside .logo:hover {
-		border-color: $orange !important;
-	}
 	aside.main {
 		border-color: $black !important;
 	 	.icon.default {
@@ -49,6 +46,9 @@ section.alumni {
 		&:hover {
 			background-image: url(../images/bullet-orange.svg) !important;
 		}
+	}
+	&.tease-nav header.main {
+		border-color: $orange !important;
 	}
 	.content .filter .bar .select.dropdown {
 		.icon {

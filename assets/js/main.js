@@ -1,5 +1,4 @@
 jQuery(document).ready(function($) {
-	headerView();
 	filter();
 
 	$(window).load(function() {
@@ -111,7 +110,7 @@ jQuery(document).ready(function($) {
 		$(side).removeClass('hover');
 	});
 
-
+	//slide to pages with browser forward and backward navigation
 	window.addEventListener('popstate', function(e) {
 	    var state = e.state;
 	    if(state) {
@@ -121,46 +120,55 @@ jQuery(document).ready(function($) {
 		}
 	});
 
-	function headerView() {
-		
-		$('body').on('mouseenter', 'section:not(.open-nav) .nav-hover', function() {
-			var section = $(this).parent('section');
-			$(section).addClass('tease-nav');
-		}).on('mouseleave', 'section:not(.open-nav) .nav-hover', function() {
-			var section = $(this).parent('section');
-			$(section).removeClass('tease-nav');
-		});
+	//tease header on hover
+	$('body').on('mouseenter', 'section:not(.open-nav) .nav-hover', function() {
+		var section = $(this).parent('section');
+		$(section).addClass('tease-nav');
+	}).on('mouseleave', 'section:not(.open-nav) .nav-hover', function() {
+		var section = $(this).parent('section');
+		$(section).removeClass('tease-nav');
+	});
 
-		//toggle nav visibility with button
-		$('body').on('click', 'section:not(.open-nav) .nav-hover', function() {
-			var section = $(this).parent('section');
-			$(section).addClass('open-nav').removeClass('tease-nav');
-		});
+	//toggle nav visibility with button
+	$('body').on('click', 'section:not(.open-nav) .nav-hover', function() {
+		var section = $(this).parent('section');
+		$(section).addClass('open-nav').removeClass('tease-nav');
+	}).on('click', '.open-nav .nav-toggle', function() {
+		var section = $(this).parent('section');
+		$(section).removeClass('open-nav');
+	});
 
-		$('body').on('click', '.open-nav .nav-toggle', function() {
-			var section = $(this).parent('section');
-			$(section).removeClass('open-nav');
+	//toggle header visibility with scroll behavior
+	$('section').each(function() {
+		var lastScrollTop = 0;
+		var section = $(this);
+		var content = $(this).children('.content');
+		$(content).scroll(function(event) {
+			var scrollTop = $(this).scrollTop();
+			if(scrollTop > lastScrollTop + 10) {
+				$(section).addClass('hide-header');
+				$(section).removeClass('open-nav');
+				$(section).removeClass('tease-nav');
+			} else if(scrollTop < lastScrollTop - 5 || scrollTop <= 50) {
+				$(section).removeClass('tease-nav');
+				$(section).removeClass('hide-header');
+			}
+			lastScrollTop = scrollTop;
 		});
+	});
 
-		//toggle header visibility with scroll behavior
-		$('section').each(function() {
-			var lastScrollTop = 0;
-			var section = $(this);
-			var content = $(this).children('.content');
-			$(content).scroll(function(event) {
-				var scrollTop = $(this).scrollTop();
-				if(scrollTop > lastScrollTop + 10) {
-					$(section).addClass('hide-header');
-					$(section).removeClass('open-nav');
-					$(section).removeClass('tease-nav');
-				} else if(scrollTop < lastScrollTop - 5 || scrollTop <= 50) {
-					$(section).removeClass('tease-nav');
-					$(section).removeClass('hide-header');
-				}
-				lastScrollTop = scrollTop;
-			});
-		});
-	}
+
+	$('section').scroll(function(event) {
+		var scrollTop = $(this).scrollTop();
+		var footer = $(this).find('footer');
+		var footerMargin = parseInt($(footer).css('marginTop').replace('px', ''));
+		var footerHeight = $(footer).outerHeight() + footerMargin;
+		if(scrollTop >= footerHeight - 100) {
+			$(this).addClass('show-footer-bottom');
+		} else if(scrollTop <= footerMargin) {
+			$(this).removeClass('show-footer-bottom');
+		}
+	});
 
 	//toggle ability to scroll to footer
 	$('section').each(function() {

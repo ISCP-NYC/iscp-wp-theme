@@ -51,12 +51,12 @@ header.main {
 			}
 			.inner {
 				@include width('100% - 10px');
-				height: 100%;
+				@include height('100% - 10px');
 				position: absolute;
 				top: 0;
 				left: 0;
-				display: table;
 				border-bottom: 10px solid $orange;
+				display: table;
 				a.overlay {
 					width: 100%;
 					height: 100%;
@@ -79,8 +79,11 @@ header.main {
 			.sub-menu {
 				@extend .vertical-align;
 				padding-left: 3px;
+				width: 100%;
 				.child-item {
+					@include width('50% - 26px');
 					display: table;
+					float: left;
 					&:hover {
 						background-image: url(../images/bullet-black.svg);
 						a {

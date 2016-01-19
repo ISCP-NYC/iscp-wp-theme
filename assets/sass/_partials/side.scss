@@ -8,16 +8,13 @@ aside {
 		position: absolute;
 		transition: border-color 150ms ease-in-out;
 		border-bottom: 10px solid;
-		&:hover {
-			border-color: $orange;
-		}
 		.icon {
 		    background-size: 60px;
 		    background-position: center;
 		    background-repeat: no-repeat;
 		}
 	    &:hover {
-			border-color: $black;
+			border-color: inherit !important;
 		}
 	}
 	&.main {

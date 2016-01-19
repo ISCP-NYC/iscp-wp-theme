@@ -10,72 +10,77 @@ $id = $post->ID;
 	<div class="content">
 		<h4 class="title">
 			International Studio &amp; Curatorial Program
-			<a href="<?php echo site_url(); ?>/events">
-				Events &amp; Exhibitions
-			</a>
+			<a href="<?php echo site_url() ?>/events">Events &amp; Exhibitions</a>
 		</h4>
-
-		<div class="events upcoming">
-			<?php 
-				$today = new DateTime();
-				$today = $today->format('Y-m-d H:i:s');
-				$args = array(
-					'post_type' => 'event',
-					'posts_per_page' => 3,
-					'meta_query' => array(
-						'relation' => 'OR',
-						array(
-							'key' => 'end_date',
-							'compare' => '>=',
-							'value' => $today,
-							'type' => 'DATE',
-							'orderby' => 'meta_value',
-							'order' => 'DESC'
-						),
-						array(
-							'key' => 'date',
-							'compare' => '>=',
-							'value' => $today,
-							'type' => 'DATE',
-							'orderby' => 'meta_value',
-							'order' => 'DESC'
-						)
+		<?php 
+			$today = new DateTime();
+			$today = $today->format('Y-m-d H:i:s');
+			$args = array(
+				'post_type' => 'event',
+				'posts_per_page' => 3,
+				'meta_query' => array(
+					'relation' => 'OR',
+					array(
+						'key' => 'start_date',
+						'compare' => '>=',
+						'value' => $today,
+						'type' => 'DATE',
+						'orderby' => 'meta_value',
+						'order' => 'DESC'
 					),
-					'orderby' => 'meta_value',
-				    'order' => 'ASC'
-				);
+					array(
+						'key' => 'end_date',
+						'compare' => '>=',
+						'value' => $today,
+						'type' => 'DATE',
+						'orderby' => 'meta_value',
+						'order' => 'DESC'
+					),
+					array(
+						'key' => 'date',
+						'compare' => '>=',
+						'value' => $today,
+						'type' => 'DATE',
+						'orderby' => 'meta_value',
+						'order' => 'DESC'
+					),
+				),
+				'orderby' => 'meta_value',
+			    'order' => 'ASC'
+			);
+			$upcoming_events = new WP_Query( $args );
+			$count = $upcoming_events->found_posts;
+			$count_class = 'cols_' . $count;
+			
+			echo '<div class="events shelves grid upcoming ' . $count_class . '">';
+				while ( $upcoming_events->have_posts() ) : $upcoming_events->the_post();
 
-				$loop = new WP_Query( $args );
-				while ( $loop->have_posts() ) : $loop->the_post();
 					$event_id = $the_ID;
-					$event_slug = get_post( $eventid )->post_name;
-					$event_title = get_the_title( $eventid );
+					$event_title = get_the_title( $event_id );
 					$event_url = get_permalink();
-					$event_type = get_field( 'event_type', $eventid );
-					$event_type_name = pretty( $type );
-					$event_date_format = get_event_date( $eventid );
+					$event_type = get_field( 'event_type', $event_id );
+					$event_type_name = pretty( $event_type );
+					$event_date_format = get_event_date( $event_id );
+					if( $append_query && is_alumni( $event_id ) ) {
+						$url .= $append_query;
+					}
+					$event_thumb = get_thumb( $resident_id );
 
-					$event_thumb = get_thumb( $eventid );
-
-					echo '<div class="event ' . $eventtype . '" id="' . $eventslug . '">';
-						echo '<a href="' . $eventurl . '">';
-					  		echo '<h3 class="date">';
-					  		echo $eventdate_format;
-					  		echo '</h3>';
-					  		echo '<div class="thumb">';
-					  		echo '<img src="' . $event_thumb . '"/>';
-					  		echo '</div>';
-					  	echo '</a>';
-					  	echo '<h4 class="type">';
-					  	echo '<a href="' . site_url() . '/events?type=' . $event_type . '">';
-					  	echo $event_type_name;
-					  	echo '</h4>';
-					  	echo '<h4 class="title">';
-					  	echo '<a href="' . $event_url . '">';
-					  	echo $event_title;
-					  	echo '</a>';
-					  	echo '</h4>';
+					echo '<div class="event shelf-item border-bottom"><div class="inner">';
+					echo '<a class="wrap value date" href="' . $event_url . '">';
+					echo '<h3 class="link">' . $event_date_format . '</h3>';
+					echo '<div class="image">';
+					echo '<img src="' . $event_thumb . '"/>';
 					echo '</div>';
+					echo '</a>';
+					echo '<div class="details">';
+					echo '<div class="value title"><a href="' . $event_url . '">' . $event_title . '</a></div>';
+					echo '<div class="value event-type">';
+					echo '<a href="' . site_url() . '/events?type=' . $event_type . '">';
+					echo $event_type_name;
+					echo '</a>';
+					echo '</div></div></div></div>';
+
 				endwhile;
 			?>
 		</div>	
