@@ -2,6 +2,9 @@
 <!-- Generator: Adobe Illustrator 16.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
 <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
 <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-	 width="30px" height="50px" viewBox="0 0 30 50" enable-background="new 0 0 30 50" xml:space="preserve">
-<polygon fill="#FF5000" points="30,7.87 21.067,0.251 0,25.001 21.067,49.749 30,42.147 15.363,25.001 "/>
+	 width="25.76px" height="39.018px" viewBox="2.12 5.491 25.76 39.018" enable-background="new 2.12 5.491 25.76 39.018"
+	 xml:space="preserve">
+<path fill="#FF5000" d="M3.522,28.944c0.133,0.164,0.276,0.322,0.429,0.475l4.419,4.419l0,0l8.84,8.84
+	c2.439,2.441,6.397,2.441,8.839,0c2.441-2.442,2.441-6.398,0-8.84L17.21,25l8.839-8.839c2.441-2.443,2.441-6.397,0-8.839
+	s-6.399-2.441-8.84,0L8.37,16.161l0,0l-4.419,4.42C2.73,21.802,2.12,23.4,2.12,25C2.12,26.399,2.588,27.799,3.522,28.944z"/>
 </svg>

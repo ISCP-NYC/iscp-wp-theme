@@ -123,11 +123,12 @@
 		<?php
 		if( have_rows( 'gallery' ) ):
 			echo '<div class="gallery">';
-			echo '<div class="close"></div>';
+			echo '<div class="cursor"></div>';
+			echo '<div class="images slides">';
 		    while ( have_rows( 'gallery' ) ) : the_row();
 		        $gallery_image = get_sub_field( 'image' )['url'];
 		        $caption = label_art( $the_ID );
-		        echo '<div class="piece">';
+		        echo '<div class="piece slide">';
 		        echo '<div class="inner">';
 		        echo '<div class="image">';
 		        echo '<img src="' . $gallery_image . '"/>';
@@ -138,6 +139,7 @@
 		        echo '</div>';
 		        echo '</div>';
 		    endwhile;
+		    echo '</div>';
 		    echo '</div>';
 		endif;
 		?>
