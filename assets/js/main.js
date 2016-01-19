@@ -320,11 +320,8 @@ jQuery(document).ready(function($) {
 	$('body').on('click', '.gallery .slide .image', function() {
 		var index = $(this).parents('.slide').index();
 		var gallery = $(this).parents('.gallery');
-		$(gallery).attr('data-show', index);
-		$(gallery).addClass('full');
-		var gallery = $(this).parents('.gallery');
+		$(gallery).attr('data-show', index).addClass('full').addClass('image_slider').css({'cursor':'none'});
 		var cursor = $(gallery).find('.cursor');
-		$(gallery).addClass('image_slider');
 		var slidesLength = $(gallery).find('.slide').length;
 		setUpSlider();
 		$(gallery).on('mousemove', function(event) {

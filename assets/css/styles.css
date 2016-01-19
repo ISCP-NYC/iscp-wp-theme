@@ -1213,7 +1213,7 @@ h5, .xsmall {
   border-top: 10px solid #ff5000; }
 
 /* line 119, ../sass/styles.scss */
-.border-bottom, section.residents .content .info, section#about .module, section#visit .directions, section#visit .newsletter {
+.border-bottom, section.sponsor .content .info, section#about .module, section#visit .directions, section#visit .newsletter {
   border-bottom: 10px solid #ff5000; }
 
 /* line 122, ../sass/styles.scss */
@@ -2126,20 +2126,44 @@ section.programs .program {
             margin: 0 !important; } }
 
 /* line 3, ../sass/_sections/sponsors.scss */
-section.residents .content h4.title {
+section.sponsors .sponsors.shelves .value {
+  margin-right: 5px; }
+  /* line 5, ../sass/_sections/sponsors.scss */
+  section.sponsors .sponsors.shelves .value.name {
+    width: -ms-calc(50% - 5px);
+    width: calc(50% - 5px); }
+  /* line 8, ../sass/_sections/sponsors.scss */
+  section.sponsors .sponsors.shelves .value.country {
+    width: -ms-calc(25% - 5px);
+    width: calc(25% - 5px); }
+  /* line 11, ../sass/_sections/sponsors.scss */
+  section.sponsors .sponsors.shelves .value.website {
+    width: -ms-calc(25% - 5px);
+    width: calc(25% - 5px);
+    -webkit-box-pack: end;
+    -webkit-justify-content: flex-end;
+        -ms-flex-pack: end;
+            justify-content: flex-end; }
+    /* line 14, ../sass/_sections/sponsors.scss */
+    section.sponsors .sponsors.shelves .value.website a {
+      float: right;
+      text-align: right; }
+
+/* line 3, ../sass/_sections/sponsor.scss */
+section.sponsor .content h4.title {
   margin-bottom: 20px; }
-/* line 7, ../sass/_sections/sponsors.scss */
-section.residents .content .top .filter {
+/* line 7, ../sass/_sections/sponsor.scss */
+section.sponsor .content .top .filter {
   width: 70%;
   float: left; }
-/* line 11, ../sass/_sections/sponsors.scss */
-section.residents .content .top .right.type {
+/* line 11, ../sass/_sections/sponsor.scss */
+section.sponsor .content .top .right.type {
   width: 30%;
   float: left;
   white-space: nowrap;
   text-align: right; }
-/* line 18, ../sass/_sections/sponsors.scss */
-section.residents .content .info {
+/* line 18, ../sass/_sections/sponsor.scss */
+section.sponsor .content .info {
   width: 100%;
   display: table;
   padding: 20px 0 40px 0;
@@ -2150,8 +2174,8 @@ section.residents .content .info {
   -webkit-flex-wrap: wrap;
   -ms-flex-wrap: wrap;
   flex-wrap: wrap; }
-  /* line 29, ../sass/_sections/sponsors.scss */
-  section.residents .content .info .block {
+  /* line 29, ../sass/_sections/sponsor.scss */
+  section.sponsor .content .info .block {
     width: calc(100%/3 - 6px);
     float: left;
     display: -webkit-flex;
@@ -2162,12 +2186,12 @@ section.residents .content .info {
     font-size: 25px;
     line-height: 30px; }
     @media (max-width: 900px) {
-      /* line 29, ../sass/_sections/sponsors.scss */
-      section.residents .content .info .block {
+      /* line 29, ../sass/_sections/sponsor.scss */
+      section.sponsor .content .info .block {
         font-size: 20px;
         line-height: 23px; } }
-/* line 39, ../sass/_sections/sponsors.scss */
-section.residents .content .residents.shelves.list {
+/* line 39, ../sass/_sections/sponsor.scss */
+section.sponsor .content .residents.shelves.list {
   margin-top: 0; }
 
 /* line 2, ../sass/_sections/apply.scss */
@@ -2884,22 +2908,22 @@ section#resident-resources {
           section#resident-resources .staff .members .staff-member .info .description {
             padding-top: 10px; }
 
-/* line 178, ../sass/styles.scss */
+/* line 179, ../sass/styles.scss */
 ::-webkit-scrollbar {
   display: none; }
 
-/* line 179, ../sass/styles.scss */
+/* line 180, ../sass/styles.scss */
 ::-moz-scrollbar {
   display: none; }
 
-/* line 180, ../sass/styles.scss */
+/* line 181, ../sass/styles.scss */
 ::-o-scrollbar {
   display: none; }
 
-/* line 181, ../sass/styles.scss */
+/* line 182, ../sass/styles.scss */
 ::-google-ms-scrollbar {
   display: none; }
 
-/* line 182, ../sass/styles.scss */
+/* line 183, ../sass/styles.scss */
 ::-khtml-scrollbar {
   display: none; }

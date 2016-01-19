@@ -1,43 +1,21 @@
-section.residents {
-	.content {
-		h4.title {
-			margin-bottom: 20px;
-		}
-		.top {
-			.filter {
-				width: 70%;
-				float: left;
+section.sponsors {
+	.sponsors.shelves {
+		.value {
+			margin-right: 5px;
+			&.name {
+				@include width('50% - 5px');
 			}
-			.right.type {
-				width: 30%;
-				float: left;
-				white-space: nowrap;
-				text-align: right;
+			&.country {
+				@include width('25% - 5px');
 			}
-		}
-		.info {
-			width: 100%;
-			display: table;
-			padding: 20px 0 40px 0;
-            @extend .border-bottom;
-            display: -webkit-flex;
-		    display: -ms-flexbox;
-		    display: flex;
-		    -webkit-flex-wrap: wrap;
-		    -ms-flex-wrap: wrap;
-		    flex-wrap: wrap;
-			.block {
-				width: calc(100%/3 - 6px);
-				float: left;
-				display: -webkit-flex;
-	            display: -ms-flexbox;
-	            display: flex;
-				text-align: center;
-				@include medium-fs;
+			&.website {
+				@include width('25% - 5px');
+				justify-content: flex-end;
+				a {
+					float: right;
+					text-align: right;
+				}
 			}
-		}
-		.residents.shelves.list {
-			margin-top: 0;
 		}
 	}
 }
