@@ -8,7 +8,10 @@
 		<div class="icon default"></div>
 		<div class="icon hover"></div>
 	</a>
-	<a class="slide">
+	<a class="move left">
+		<div class="label vertical-align"></div>
+	</a>
+	<a class="move right">
 		<div class="label vertical-align"></div>
 	</a>
 </aside>
@@ -17,7 +20,10 @@
 		<div class="icon default"></div>
 		<div class="icon hover"></div>
 	</a>
-	<a class="slide">
+	<a class="move left">
+		<div class="label vertical-align"></div>
+	</a>
+	<a class="move right">
 		<div class="label vertical-align"></div>
 	</a>
 </aside>

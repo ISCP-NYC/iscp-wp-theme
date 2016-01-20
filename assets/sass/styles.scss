@@ -48,20 +48,25 @@ section {
 	@import '_partials/slider';
 	@import '_partials/twitter';
 	.content {
-		@include width('100% - 80px - '$side_width*2);
+		@include width('100% - 60px - '$side_width*2);
 		@include height('100% - 260px');
-		padding: 130px 30px;
-		margin-left: 130px;
+		padding: 130px 20px;
+		margin-left: 120px;
 		overflow-y: scroll;
 		@include xsmall {
 			@include width('100% - 60px');
 			margin-left: 0;
 		}
+		border-style: solid;
+		border-width: 0 10px;
+		border-color: $orange;
+		transition: border-color 150ms ease-in-out;
 	}
 	h4.title {
 		color: $orange;
 	}
-	&.center {
+	&:not(.center) {
+		pointer-events: none;
 	}
 	&.hide-header {
 		@include height('100%');
@@ -70,6 +75,16 @@ section {
 		overflow-y: auto;
 		.content {
 			overflow: hidden;
+		}
+	}
+	&.hover-right {
+		.content {
+			border-right-color: $black;
+		}
+	}
+	&.hover-left {
+		.content {
+			border-left-color: $black;
 		}
 	}
 }

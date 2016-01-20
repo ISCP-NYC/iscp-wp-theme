@@ -1,7 +1,6 @@
 section.sponsor,
 section.past,
 section.alumni {
-	background-color: $white !important;
 	* {
 		border-color: $black !important;
 	}
@@ -26,11 +25,8 @@ section.alumni {
 		.icon.hover {
 			background-image: url(../images/logo-orange.svg) !important;
 		}
-		&.hover {
+		&.hover .logo {
 			border-color: $orange !important;
-			.logo {
-				border-color: $orange !important;
-			}
 		}
 	}
 	.nav-toggle {
@@ -72,6 +68,16 @@ section.alumni {
 	}
 	.content .residents .resident .image {
 		background-color: white;
+	}
+	&.hover-right {
+		.content {
+			border-right-color: $orange !important;
+		}
+	}
+	&.hover-left {
+		.content {
+			border-left-color: $orange !important;
+		}
 	}
 	.bullet {
 		background-image: url(../images/bullet-black.svg) !important;

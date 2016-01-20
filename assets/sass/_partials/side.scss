@@ -1,12 +1,12 @@
 aside {
 	width: $side_width;
 	position: absolute;
-	transition: border-color 150ms ease-in-out;
+	transition: border-color 150ms ease-in-out, opacity 800ms ease-in-out;
 	.logo {
 		width: $side_width - 10;
 		height: $side_width - 20;
 		position: absolute;
-		transition: border-color 150ms ease-in-out;
+		transition: border-color 150ms ease-in-out, left 800ms ease-in-out;
 		border-bottom: 10px solid;
 		.icon {
 		    background-size: 60px;
@@ -21,7 +21,18 @@ aside {
 		top: 0;	
 		height: 100%;
 		border-color: $orange;
-		background: $white;
+		.logo {
+			top: 0;
+			.icon {
+				background-color: $white;
+				&.default {
+					background-image: url(../images/logo-orange.svg);
+				}
+				&.hover {
+					background-image: url(../images/logo-black.svg);
+				}
+			}
+		}
 		&.hover {
 			border-color: $black;
 			.logo {
@@ -34,18 +45,41 @@ aside {
 				}
 			}
 		}
+	}
+	&.left {
+		left: 0;
 		.logo {
-			top: 0;
-			.icon {
-				&.default {
-					background-image: url(../images/logo-orange.svg);
-				}
-				&.hover {
-					background-image: url(../images/logo-black.svg);
-				}
-			}
-			
+			left: 0;
 		}
+	}
+	&.right {
+		right: 0;
+		.logo {
+			left: 10px;
+		}
+	}
+	@include xsmall {
+		display: none !important;
+	}
+	.move {
+		width: auto;
+		background: $white;
+		height: 120px;
+		position: absolute;
+	    display: table;
+		transform-origin: left top 0;
+		@include large-fs;
+		text-align: center;
+	}
+	&.left .move {
+		bottom: -120px;
+    	left: 0px;
+		transform: rotate(-90deg); 
+	}
+	&.right .move {
+		top: 110px;
+	    left: 120px;
+		transform: rotate(90deg); 
 	}
 	&.footer {
 		top: 30px;
@@ -68,42 +102,24 @@ aside {
 			}
 		}
 	}
-	&.left {
+}
+&:not(.center) {
+	aside {
+		opacity: 0;
+	}
+}
+&.center {
+	aside {
+		opacity: 1;
+	}
+}
+&.left {
+	aside.right  .logo {
 		left: 0;
-		border-right-width: 10px;
-		border-right-style: solid;
-		.logo {
-			left: 0;
-		}
 	}
-	&.right {
-		right: 0;
-		border-left-width: 10px;
-		border-left-style: solid;
-		.logo {
-			right: 0;
-		}
-	}
-	@include xsmall {
-		display: none !important;
-	}
-	.slide {
-		width: auto;
-		height: 120px;
-		position: absolute;
-	    display: table;
-		transform-origin: left top 0;
-		@include large-fs;
-		text-align: center;
-	}
-	&.left .slide {
-		bottom: -120px;
-    	left: 0px;
-		transform: rotate(-90deg); 
-	}
-	&.right .slide {
-		top: 110px;
-	    left: 120px;
-		transform: rotate(90deg); 
+}
+&.right {
+	aside.left  .logo {
+		left: 10px;
 	}
 }
