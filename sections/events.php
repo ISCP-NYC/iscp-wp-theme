@@ -170,7 +170,7 @@
 					$event_type_name = pretty( $event_type );
 					$event_status = get_event_status( $event_id );
 					$event_date_format = get_event_date( $event_id );
-					if( $append_query && is_alumni( $event_id ) ) {
+					if( $append_query && is_past( $event_id ) ) {
 						$event_url .= $append_query;
 					}
 					$event_thumb = get_thumb( $resident_id );

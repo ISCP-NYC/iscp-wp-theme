@@ -18,15 +18,15 @@ switch( $slug ) {
 			)
 		);
 		$resident_status = 'current';
-		$alt_slug = 'alumni';
+		$alt_slug = 'past-residents';
 		break;
-	case 'alumni':
+	case 'past-residents':
 		$page_query = array_merge(
 			$page_query, array(
 				'compare' => '<='
 			)
 		);
-		$resident_status = 'alumni';
+		$resident_status = 'past';
 		$alt_slug = 'current-residents';
 		break;
 }
@@ -61,7 +61,7 @@ $page_url = get_the_permalink();
 							<div class="icon hover"></div>
 						</div>
 					</div>
-					<?php if($slug == 'alumni'): ?>
+					<?php if($slug == 'past-residents'): ?>
 					<div class="select link dropdown year" data-filter="year" data-slug="<?php echo $slug ?>">
 						<?php
 						if($year_param):
@@ -138,7 +138,7 @@ $page_url = get_the_permalink();
 				?>
 				</div>
 			</div>
-			<?php if($slug == 'alumni'): ?>
+			<?php if($slug == 'past-residents'): ?>
 			<div class="filter-list year <?php echo $slug ?>">
 				<div class="options">
 				<?php
@@ -231,7 +231,7 @@ $page_url = get_the_permalink();
 				$url = get_permalink();
 				$residency_date = get_field( get_end_date_value( $resident_id ), $resident_id );
 				$residency_year = ( new DateTime( $residency_date ) )->format('Y');
-				if( $append_query && is_alumni( $resident_id ) ) {
+				if( $append_query && is_past( $resident_id ) ) {
 					$url .= $append_query;
 				}
 				$thumb = get_thumb( $resident_id );
@@ -255,7 +255,7 @@ $page_url = get_the_permalink();
 				echo '<div class="right">';
 				if( $slug == 'current-residents' ) {
 					echo '<div class="value studio-number">Studio ' . $studio_number . '</div>';
-				} elseif( $slug == 'alumni' ) {
+				} elseif( $slug == 'past-residents' ) {
 					echo '<div class="value year">' . $residency_year . '</div>';
 				}
 				echo '</div>';

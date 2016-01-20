@@ -32,6 +32,15 @@
     background-size: 15px;
     background-repeat: no-repeat;
     background-position: left center;
+    background-image: url(../images/bullet-black.svg);
+    &.link {
+        background-image: url(../images/bullet-orange.svg);
+        &:hover {
+            background-image: url(../images/bullet-black.svg);
+        }
+    }
+}
+a.bullet {
     background-image: url(../images/bullet-orange.svg);
     &:hover {
         background-image: url(../images/bullet-black.svg);

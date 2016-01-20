@@ -33,9 +33,9 @@
 				get_template_part( 'sections/residents' );
 				wp_reset_postdata();
 
-			elseif( is_alumni( $this_resident_id ) ):
-				$alumni_page_id = get_page_by_path('alumni')->ID;
-				$post = get_post( $alumni_page_id, OBJECT );
+			elseif( is_past( $this_resident_id ) ):
+				$past_residents_page_id = get_page_by_path('past-residents')->ID;
+				$post = get_post( $past_residents_page_id, OBJECT );
 				setup_postdata( $post );
 				get_template_part( 'sections/residents' );
 				wp_reset_postdata();

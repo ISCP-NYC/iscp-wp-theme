@@ -14,6 +14,7 @@
 $xsmall-width: 480px;
 $small-width: 768px;
 $medium-width: 900px;
+$xmedium-width: 1040px;
 $large-width: 1280px;
 $xlarge-width: 1824px;
 $xxlarge-width: 2560px;
@@ -32,6 +33,12 @@ $xxlarge-width: 2560px;
 
 @mixin large {
   @media (max-width: #{$large-width}) {
+    @content;
+  }
+}
+
+@mixin xmedium {
+  @media (max-width: #{$xmedium-width}) {
     @content;
   }
 }

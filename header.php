@@ -58,11 +58,11 @@
 	$post_type = get_post_type();
 	
 	switch($page_slug) {
-		case 'current_residents':
-			$classes = 'current_residents residents';
+		case 'current-residents':
+			$classes = 'current-residents residents';
 			break;
-		case 'alumni':
-			$classes = 'alumni residents';
+		case 'past-residents':
+			$classes = 'past-residents residents';
 			break;
 		case 'resident-resources':
 			if (is_user_logged_in()):
@@ -76,8 +76,8 @@
 		case 'resident':
 			if( is_current( $page_id ) ) {
 				$classes .= 'current';
-			} elseif( is_alumni( $page_id ) ) {
-				$classes .= 'alumni';
+			} elseif( is_past( $page_id ) ) {
+				$classes .= 'past';
 			}
 			break;
 	}

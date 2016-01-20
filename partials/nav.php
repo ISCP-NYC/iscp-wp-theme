@@ -15,7 +15,7 @@
 			   	echo '<div class="cell ' . $classes . ' ">';
 				echo '<div class="inner">';
 				echo '<a class="overlay" href="' . $item_url . '">';
-			    echo '<h1>' . $item_title . '</h1>';
+			    echo '<h1 class="link">' . $item_title . '</h1>';
 			    echo '</a>';
 			    echo '<div class="sub-menu">';
 
@@ -25,7 +25,7 @@
 			    	$parent_id = $child_menu_item->menu_item_parent;
 			    	if ($parent_id == $item_id ) : 
 			    		$child_item_html = '
-			    			<div class="child-item bullet">
+			    			<div class="child-item bullet link">
 			    				<a href="' . $child_url . '">' .
 			    					$child_title .
 			    				'</a>
@@ -40,7 +40,7 @@
 		<div class="cell search">
 			<div class="inner">
 				<a class="overlay" href="#">
-					<h1>Search</h1>
+					<h1 class="link">Search</h1>
 				</a>
 			</div>
     	</div>

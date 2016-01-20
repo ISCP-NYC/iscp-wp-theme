@@ -61,7 +61,7 @@ $id = $post->ID;
 					$event_type = get_field( 'event_type', $event_id );
 					$event_type_name = pretty( $event_type );
 					$event_date_format = get_event_date( $event_id );
-					if( $append_query && is_alumni( $event_id ) ) {
+					if( $append_query && is_past( $event_id ) ) {
 						$url .= $append_query;
 					}
 					$event_thumb = get_thumb( $resident_id );

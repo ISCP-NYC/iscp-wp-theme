@@ -87,6 +87,9 @@ section {
 			border-left-color: $black;
 		}
 	}
+	&.static * {
+		transition: none !important;
+	}
 }
 
 em, i {
@@ -128,6 +131,12 @@ h5, .xsmall {
 .orange {color: $orange;}
 .black {color: $black;}
 .white {color: $white;}
+.current {
+	color: $orange;
+	* {
+		color: $orange;
+	}
+}
 .border-top {
 	border-top: 10px solid $orange;
 }

@@ -271,7 +271,7 @@ $sponsor_query = array(
 				echo '<div class="right">';
 				if( $resident_status == 'current' ) {
 					echo '<div class="value studio-number">Studio ' . $studio_number . '</div>';
-				} elseif( $resident_status == 'alumni' ) {
+				} elseif( $resident_status == 'past' ) {
 					echo '<div class="value year">' . $residency_year . '</div>';
 				}
 				echo '</div>';

@@ -5,29 +5,29 @@
 	$parent = $post->post_parent;
 	$parent_slug = get_post( $parent )->post_name;
 
-	$resident_types = array( 'current-residents', 'alumni' );
+	$resident_types = array( 'current-residents', 'past-residents' );
 	$event_types = array( 'events', 'exhbitions', 'iscp-talks', 'off-site-projects', 'open-studios' );
 	
 	if( $slug == 'current-residents' ):
 
-		$alumni_page_id = get_page_by_path( 'residency-programs' )->ID;
-		$post = get_post( $alumni_page_id, OBJECT );
+		$programs_page_id = get_page_by_path( 'residency-programs' )->ID;
+		$post = get_post( $programs_page_id, OBJECT );
 		setup_postdata( $post );
 		get_template_part( 'sections/programs' );
 		wp_reset_postdata();
 
 		get_template_part( 'sections/residents' );
 
-		$alumni_page_id = get_page_by_path( 'alumni' )->ID;
-		$post = get_post( $alumni_page_id, OBJECT );
+		$past_residents_page_id = get_page_by_path( 'past-residents' )->ID;
+		$post = get_post( $past_residents_page_id, OBJECT );
 		setup_postdata( $post );
 		get_template_part( 'sections/residents' );
 		wp_reset_postdata();
 
-	elseif ( $slug == 'alumni' ):
+	elseif ( $slug == 'past-residents' ):
 
-		$alumni_page_id = get_page_by_path( 'current-residents' )->ID;
-		$post = get_post( $alumni_page_id, OBJECT );
+		$current_residents_page_id = get_page_by_path( 'current-residents' )->ID;
+		$post = get_post( $current_residents_page_id, OBJECT );
 		setup_postdata( $post );
 		get_template_part( 'sections/residents' );
 		wp_reset_postdata();
@@ -44,16 +44,16 @@
 
 	elseif( $parent_slug == 'residency-programs' ):
 
-		$alumni_page_id = get_page_by_path( 'current-residents' )->ID;
-		$post = get_post( $alumni_page_id, OBJECT );
+		$current_residents_page_id = get_page_by_path( 'current-residents' )->ID;
+		$post = get_post( $current_residents_page_id, OBJECT );
 		setup_postdata( $post );
 		get_template_part( 'sections/residents' );
 		wp_reset_postdata();
 
 		get_template_part( 'sections/programs' );
 
-		$alumni_page_id = get_page_by_path( 'apply' )->ID;
-		$post = get_post( $alumni_page_id, OBJECT );
+		$apply_page_id = get_page_by_path( 'apply' )->ID;
+		$post = get_post( $apply_page_id, OBJECT );
 		setup_postdata( $post );
 		get_template_part( 'sections/apply' );
 		wp_reset_postdata();

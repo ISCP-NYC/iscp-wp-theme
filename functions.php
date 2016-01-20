@@ -283,7 +283,7 @@ function is_current( $id ) {
 		}
 	}
 }
-function is_alumni( $id ) {
+function is_past( $id ) {
 	$today = new DateTime();
 	$today = $today->format('Ymd');
 	$resident = get_post( $id );
@@ -313,8 +313,8 @@ function is_ground_floor( $id ) {
 function get_status( $id ) {
 	if( is_current( $id ) ):
 		return 'current';
-	elseif( is_alumni( $id ) ):
-		return 'alumni';
+	elseif( is_past( $id ) ):
+		return 'past';
 	else:
 		return null;
 	endif;
@@ -339,6 +339,7 @@ function get_event_status( $id ) {
 	return $status;
 }
 function section_attr( $id, $slug, $classes ) {
+	$classes .= ' static';
 	echo 'class="' . $slug . ' ' . $classes . '"';
 	echo 'id="' . $slug . '" '; 
 	echo 'data-slug="' . $slug . '" ';
@@ -670,8 +671,8 @@ function get_thumb( $id ) {
 
 function get_sponsors( $id ) {
 	$sponsor_list = '';
-	if( have_rows( 'residency_dates', $resident_id ) ):
-		$sponsors = get_field( 'residency_dates', $resident_id )[0]['sponsors'];
+	if( have_rows( 'residency_dates', $id ) ):
+		$sponsors = get_field( 'residency_dates', $id )[0]['sponsors'];
 		if( $sponsors ):
 			foreach ($sponsors as $index=>$sponsor):
 				if( $index != 0 ):

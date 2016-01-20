@@ -12,8 +12,8 @@
 	$residencies = array();
  
 	$resident_classes = 'resident single';
-	if( is_alumni( $resident_id ) ):
-		$resident_classes .= ' alumni';
+	if( is_past( $resident_id ) ):
+		$resident_classes .= ' past';
 	endif;
 	if( have_rows( 'gallery' ) == false ):
 		$resident_classes .= ' one_col';
@@ -51,8 +51,9 @@
 						array_push( $residencies, $residency_object );
 					endwhile;
 				endif;
-				if( is_alumni( $resident_id ) ):
-					echo 'Alumni ';
+				if( is_past( $resident_id ) ):
+					echo '<h4>';
+					echo 'Past Resident: ';
 					foreach ($residencies as $index=>$residency):
 						if( $index != 0 ):
 							echo ', ';
@@ -62,11 +63,14 @@
 						echo '</br>';
 						echo get_sponsors( $resident_id );
 					endforeach;
+					echo '</h4>';
 				elseif( is_current( $resident_id ) ):
 					$current_residency = $residencies[0];
 					$date_range = $current_residency->date_range;
+					echo '<h4>';
 					echo 'Current Resident: ' . $date_range;
 					echo '</br>';
+					echo '</h4>';
 					echo get_sponsors( $resident_id );
 				endif; ?>
 			</div>
@@ -144,7 +148,7 @@
 		endif;
 		?>
 
-		<div class="relations border-top shelves grid">
+		<div class="relations border-top">
 			<?php
 			if( is_ground_floor( $resident_id ) ):
 				echo '<h4>Ground Floor Residents</h4>';
@@ -162,7 +166,7 @@
 				);
 			endif;
 			?>
-			<div class="inner">
+			<div class="inner residents shelves grid">
 				<?php 
 				$residents = get_posts(array(
 					'posts_per_page' => 3,
@@ -172,23 +176,37 @@
 				));
 				foreach( $residents as $related ): 
 					$related_id = $related->ID;
-					$related_name = get_the_title( $related_id );
-					$related_sponsor = get_field('sponsor_temp', $related_id );
-					$related_start_date = get_field('residency_dates_0_start_date', $related_id );
-					$related_year = new DateTime($related_start_date);
-					$related_year = $related_year->format('Y');
-					$related_url =  get_the_permalink( $related_id );
+					$related_title = get_the_title( $related_id );
+					$related_country = get_field('country', $related_resident_id )[0]->post_title;
+					$related_studio_number = get_field( 'studio_number', $related_resident_id );
+					$related_residency_program = get_field( 'residency_program', $related_resident_id );
+					$related_url = get_permalink();
+					$related_residency_date = get_field( get_end_date_value( $related_resident_id ), $related_resident_id );
+					$related_residency_year = ( new DateTime( $related_residency_date ) )->format('Y');
 					$related_thumb = get_thumb( $related_id );
-					echo '<div class="related shelf-item resident"><div class="inner">';
-					echo '<a href="' . $related_url . '">';
-					echo '<h3 class="name">' . $related_name . '</h3>';
+					$related_status = get_status( $related_id );
+					echo '<div class="resident shelf-item border-bottom ' . $related_status . '"><div class="inner">';
+					echo '<a class="wrap value name" href="' . $related_url . '">';
+					echo '<h3 class="link">' . $related_title . '</h3>';
 					echo '<div class="image">';
 					echo '<img src="' . $related_thumb . '"/>';
 					echo '</div>';
 					echo '</a>';
 					echo '<div class="details">';
-					echo '<div class="sponsor">' . $related_sponsor . '</div>';
-					echo '<div class="year">' . $related_year . '</div>';
+					echo '<div class="left">';
+					echo '<div class="value sponsors">';
+					echo '<div class="vertical-align">';
+					echo get_sponsors( $related_id );
+					echo '</div>';
+					echo '</div>';
+					echo '</div>';
+					echo '<div class="right">';
+					if( $related_slug == 'current-residents' ) {
+						echo '<div class="value studio-number">Studio ' . $related_number . '</div>';
+					} elseif( $related_slug == 'past-residents' ) {
+						echo '<div class="value year">' . $related_residency_year . '</div>';
+					}
+					echo '</div>';
 					echo '</div></div></div>';
 				endforeach;
 				?>

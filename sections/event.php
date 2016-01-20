@@ -200,11 +200,11 @@
 				$resident_year = $resident_year->format('Y');
 				$resident_url =  get_the_permalink( $resident_id );
 				$resident_thumb = get_thumb( $resident_id );
-				if( is_alumni( $id ) ) {
+				if( is_past( $id ) ) {
 					$resident_status = 'Current';
 					$resident_studio = get_field('studio_number', $resident_id );
 				} else {
-					$resident_status = 'Alumni';
+					$resident_status = 'Past';
 				}
 				echo '<div class="resident shelf-item event"><div class="inner">';
 				echo '<a class="wrap" href="' . $resident_url . '">';

@@ -97,18 +97,28 @@ article, aside, details, figcaption, figure, footer, header, hgroup, main, menu,
   background-size: 15px;
   background-repeat: no-repeat;
   background-position: left center;
-  background-image: url(../images/bullet-orange.svg); }
+  background-image: url(../images/bullet-black.svg); }
   /* line 36, ../sass/extends.scss */
-  .bullet:hover, section#resident-resources ul li:hover {
+  .bullet.link, section#resident-resources ul li.link {
+    background-image: url(../images/bullet-orange.svg); }
+    /* line 38, ../sass/extends.scss */
+    .bullet.link:hover, section#resident-resources ul li.link:hover {
+      background-image: url(../images/bullet-black.svg); }
+
+/* line 43, ../sass/extends.scss */
+a.bullet {
+  background-image: url(../images/bullet-orange.svg); }
+  /* line 45, ../sass/extends.scss */
+  a.bullet:hover {
     background-image: url(../images/bullet-black.svg); }
 
-/* line 40, ../sass/extends.scss */
+/* line 49, ../sass/extends.scss */
 .clear {
   width: 100%;
   float: none;
   clear: both; }
 
-/* line 45, ../sass/extends.scss */
+/* line 54, ../sass/extends.scss */
 .wrap-parent, section.programs .images, section.programs .program .columns {
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -118,25 +128,25 @@ article, aside, details, figcaption, figure, footer, header, hgroup, main, menu,
   -ms-flex-wrap: wrap;
   flex-wrap: wrap; }
 
-/* line 53, ../sass/extends.scss */
+/* line 62, ../sass/extends.scss */
 .wrap-child, section.programs .images .image, section.programs .program .columns .column {
   display: -webkit-flex;
   display: -ms-flexbox;
   display: -webkit-box;
   display: flex; }
 
-/* line 58, ../sass/extends.scss */
+/* line 67, ../sass/extends.scss */
 .vert {
   width: 100%;
   display: table-cell;
   vertical-align: middle; }
 
-/* line 63, ../sass/extends.scss */
+/* line 72, ../sass/extends.scss */
 .static {
   -webkit-transition-duration: 0ms !important;
           transition-duration: 0ms !important; }
 
-/* line 66, ../sass/extends.scss */
+/* line 75, ../sass/extends.scss */
 .italic {
   font-family: 'Life Italic'; }
 
@@ -253,13 +263,13 @@ article, aside, details, figcaption, figure, footer, header, hgroup, main, menu,
       .shelves.grid .shelf-item.current .inner a:hover h3, .shelves.grid .shelf-item.current .inner .link:hover h3, .shelves.grid .shelf-item.current .inner .wrap:hover h3, .shelves.grid .shelf-item.upcoming * .inner a:hover h3, .shelves.grid .shelf-item.upcoming * .inner .link:hover h3, .shelves.grid .shelf-item.upcoming * .inner .wrap:hover h3 {
         color: #1a1919 !important; }
     /* line 114, ../sass/components.scss */
-    .shelves.grid .shelf-item.past .inner *, .shelves.grid .shelf-item.alumni .inner * {
+    .shelves.grid .shelf-item.past .inner *, .shelves.grid .shelf-item.past-residents .inner * {
       color: #1a1919; }
     /* line 117, ../sass/components.scss */
-    .shelves.grid .shelf-item.past .inner a:hover, .shelves.grid .shelf-item.past .inner .link:hover, .shelves.grid .shelf-item.past .inner .wrap:hover, .shelves.grid .shelf-item.alumni .inner a:hover, .shelves.grid .shelf-item.alumni .inner .link:hover, .shelves.grid .shelf-item.alumni .inner .wrap:hover {
+    .shelves.grid .shelf-item.past .inner a:hover, .shelves.grid .shelf-item.past .inner .link:hover, .shelves.grid .shelf-item.past .inner .wrap:hover, .shelves.grid .shelf-item.past-residents .inner a:hover, .shelves.grid .shelf-item.past-residents .inner .link:hover, .shelves.grid .shelf-item.past-residents .inner .wrap:hover {
       color: #ff5000 !important; }
       /* line 119, ../sass/components.scss */
-      .shelves.grid .shelf-item.past .inner a:hover h3, .shelves.grid .shelf-item.past .inner .link:hover h3, .shelves.grid .shelf-item.past .inner .wrap:hover h3, .shelves.grid .shelf-item.alumni .inner a:hover h3, .shelves.grid .shelf-item.alumni .inner .link:hover h3, .shelves.grid .shelf-item.alumni .inner .wrap:hover h3 {
+      .shelves.grid .shelf-item.past .inner a:hover h3, .shelves.grid .shelf-item.past .inner .link:hover h3, .shelves.grid .shelf-item.past .inner .wrap:hover h3, .shelves.grid .shelf-item.past-residents .inner a:hover h3, .shelves.grid .shelf-item.past-residents .inner .link:hover h3, .shelves.grid .shelf-item.past-residents .inner .wrap:hover h3 {
         color: #ff5000 !important; }
   /* line 127, ../sass/components.scss */
   .shelves.list {
@@ -805,23 +815,28 @@ section {
     width: 100%;
     position: relative;
     margin-top: 30px;
+    padding-top: 30px;
     background: #ff5000;
     color: #fff; }
-    /* line 7, ../sass/_partials/footer.scss */
+    /* line 8, ../sass/_partials/footer.scss */
     section footer a {
       color: #fff; }
-    /* line 10, ../sass/_partials/footer.scss */
+    /* line 11, ../sass/_partials/footer.scss */
     section footer .wrapper {
-      width: calc(100% - 40px - 240px);
+      width: calc(100% - 280px);
       height: calc(100% - 260px);
-      margin-left: 110px;
+      margin-left: 120px;
       overflow-y: hidden;
-      padding: 30px 30px 0px 30px; }
-      /* line 16, ../sass/_partials/footer.scss */
+      padding: 10px 10px 0px 10px;
+      border-width: 0 10px;
+      border-color: #fff;
+      border-style: solid;
+      overflow: hidden; }
+      /* line 21, ../sass/_partials/footer.scss */
       section footer .wrapper .inner {
         padding: 0 20px;
-        overflow: hidden; }
-        /* line 19, ../sass/_partials/footer.scss */
+        margin-bottom: 20px; }
+        /* line 24, ../sass/_partials/footer.scss */
         section footer .wrapper .inner nav {
           display: -webkit-flex;
           display: -ms-flexbox;
@@ -829,9 +844,8 @@ section {
           display: flex;
           -webkit-flex-wrap: wrap;
           -ms-flex-wrap: wrap;
-          flex-wrap: wrap;
-          padding-bottom: 100px; }
-          /* line 27, ../sass/_partials/footer.scss */
+          flex-wrap: wrap; }
+          /* line 31, ../sass/_partials/footer.scss */
           section footer .wrapper .inner nav .cell {
             width: calc( (100%/6) - 30px);
             margin: 0 30px 30px 0;
@@ -840,18 +854,18 @@ section {
             display: -webkit-box;
             display: flex;
             float: left; }
-            /* line 35, ../sass/_partials/footer.scss */
+            /* line 39, ../sass/_partials/footer.scss */
             section footer .wrapper .inner nav .cell .title {
               letter-spacing: 1px;
               text-align: left;
               text-transform: uppercase; }
-            /* line 41, ../sass/_partials/footer.scss */
+            /* line 45, ../sass/_partials/footer.scss */
             section footer .wrapper .inner nav .cell .sub-menu .child-item {
               margin: 2px 0; }
-            /* line 45, ../sass/_partials/footer.scss */
+            /* line 49, ../sass/_partials/footer.scss */
             section footer .wrapper .inner nav .cell:nth-child(6) {
               clear: both; }
-            /* line 48, ../sass/_partials/footer.scss */
+            /* line 52, ../sass/_partials/footer.scss */
             section footer .wrapper .inner nav .cell input[type="text"] {
               padding-left: 10px;
               margin-top: 5px;
@@ -863,23 +877,23 @@ section {
               font-size: 20px;
               line-height: 23px; }
               @media (max-width: 900px) {
-                /* line 48, ../sass/_partials/footer.scss */
+                /* line 52, ../sass/_partials/footer.scss */
                 section footer .wrapper .inner nav .cell input[type="text"] {
                   font-size: 17px;
                   line-height: 19px; } }
-              /* line 124, ../sass/mixins.scss */
+              /* line 131, ../sass/mixins.scss */
               section footer .wrapper .inner nav .cell input[type="text"]::-webkit-input-placeholder {
                 color: #fff; }
-              /* line 127, ../sass/mixins.scss */
+              /* line 134, ../sass/mixins.scss */
               section footer .wrapper .inner nav .cell input[type="text"]:-moz-placeholder {
                 color: #fff; }
-              /* line 130, ../sass/mixins.scss */
+              /* line 137, ../sass/mixins.scss */
               section footer .wrapper .inner nav .cell input[type="text"]::-moz-placeholder {
                 color: #fff; }
-              /* line 133, ../sass/mixins.scss */
+              /* line 140, ../sass/mixins.scss */
               section footer .wrapper .inner nav .cell input[type="text"]:-ms-input-placeholder {
                 color: #fff; }
-      /* line 64, ../sass/_partials/footer.scss */
+      /* line 68, ../sass/_partials/footer.scss */
       section footer .wrapper .bottom {
         width: 100%;
         height: 100px;
@@ -889,23 +903,23 @@ section {
                 transform: translateY(160px);
         -webkit-transition: -webkit-transform 300ms ease-out;
                 transition: transform 300ms ease-out; }
-        /* line 70, ../sass/_partials/footer.scss */
+        /* line 74, ../sass/_partials/footer.scss */
         section footer .wrapper .bottom .half {
           width: 50%;
           height: 100%;
           float: left;
           display: table; }
-          /* line 75, ../sass/_partials/footer.scss */
+          /* line 79, ../sass/_partials/footer.scss */
           section footer .wrapper .bottom .half h3 {
             width: 100%;
             display: table-cell;
             vertical-align: middle; }
-            /* line 79, ../sass/_partials/footer.scss */
+            /* line 83, ../sass/_partials/footer.scss */
             section footer .wrapper .bottom .half h3 a {
               display: table;
               margin: auto;
               text-align: center; }
-  /* line 90, ../sass/_partials/footer.scss */
+  /* line 94, ../sass/_partials/footer.scss */
   section.show-footer-bottom footer .wrapper .bottom {
     -webkit-transform: translateY(0px);
         -ms-transform: translateY(0px);
@@ -1145,119 +1159,130 @@ section {
   /* line 86, ../sass/styles.scss */
   section.hover-left .content {
     border-left-color: #1a1919; }
+  /* line 90, ../sass/styles.scss */
+  section.static * {
+    -webkit-transition: none !important;
+            transition: none !important; }
 
-/* line 92, ../sass/styles.scss */
+/* line 95, ../sass/styles.scss */
 em, i {
   display: inline;
   font-family: 'Life Italic'; }
 
-/* line 96, ../sass/styles.scss */
+/* line 99, ../sass/styles.scss */
 p {
   text-indent: 60px; }
 
-/* line 99, ../sass/styles.scss */
+/* line 102, ../sass/styles.scss */
 p:first-child {
   text-indent: 0; }
 
-/* line 102, ../sass/styles.scss */
+/* line 105, ../sass/styles.scss */
 h1, .xlarge {
   font-size: 45px;
   line-height: 55px; }
   @media (max-width: 900px) {
-    /* line 102, ../sass/styles.scss */
+    /* line 105, ../sass/styles.scss */
     h1, .xlarge {
       font-size: 30px;
       line-height: 35px; } }
 
-/* line 105, ../sass/styles.scss */
+/* line 108, ../sass/styles.scss */
 h2, .large {
   font-size: 30px;
   line-height: 35px; }
   @media (max-width: 900px) {
-    /* line 105, ../sass/styles.scss */
+    /* line 108, ../sass/styles.scss */
     h2, .large {
       font-size: 25px;
       line-height: 30px; } }
 
-/* line 108, ../sass/styles.scss */
+/* line 111, ../sass/styles.scss */
 h3, .medium {
   font-size: 25px;
   line-height: 30px; }
   @media (max-width: 900px) {
-    /* line 108, ../sass/styles.scss */
+    /* line 111, ../sass/styles.scss */
     h3, .medium {
       font-size: 20px;
       line-height: 23px; } }
-  /* line 110, ../sass/styles.scss */
+  /* line 113, ../sass/styles.scss */
   h3.title, .medium.title {
     text-align: center;
     padding: 3px 0; }
 
-/* line 115, ../sass/styles.scss */
+/* line 118, ../sass/styles.scss */
 .content h4.title:first-child {
   margin-bottom: 50px; }
 
-/* line 118, ../sass/styles.scss */
+/* line 121, ../sass/styles.scss */
 h4, .small {
   font-size: 20px;
   line-height: 23px; }
   @media (max-width: 900px) {
-    /* line 118, ../sass/styles.scss */
+    /* line 121, ../sass/styles.scss */
     h4, .small {
       font-size: 17px;
       line-height: 19px; } }
-  /* line 120, ../sass/styles.scss */
+  /* line 123, ../sass/styles.scss */
   h4.title, .small.title {
     text-align: center;
     padding: 3px 0; }
 
-/* line 125, ../sass/styles.scss */
+/* line 128, ../sass/styles.scss */
 h5, .xsmall {
   font-size: 17px;
   line-height: 19px; }
   @media (max-width: 900px) {
-    /* line 125, ../sass/styles.scss */
+    /* line 128, ../sass/styles.scss */
     h5, .xsmall {
       font-size: 15px;
       line-height: 17px; } }
 
-/* line 128, ../sass/styles.scss */
+/* line 131, ../sass/styles.scss */
 .orange {
   color: #ff5000; }
 
-/* line 129, ../sass/styles.scss */
+/* line 132, ../sass/styles.scss */
 .black {
   color: #1a1919; }
 
-/* line 130, ../sass/styles.scss */
+/* line 133, ../sass/styles.scss */
 .white {
   color: #fff; }
 
-/* line 131, ../sass/styles.scss */
+/* line 134, ../sass/styles.scss */
+.current {
+  color: #ff5000; }
+  /* line 136, ../sass/styles.scss */
+  .current * {
+    color: #ff5000; }
+
+/* line 140, ../sass/styles.scss */
 .border-top, section.single.event .residents, section.single.event .upcoming, section#visit .directions, section#resident-resources .welcome, section#resident-resources .contact, section#resident-resources .staff {
   border-top: 10px solid #ff5000; }
 
-/* line 134, ../sass/styles.scss */
+/* line 143, ../sass/styles.scss */
 .border-bottom, section.sponsor .content .info, section#about .module, section#visit .directions, section#visit .newsletter {
   border-bottom: 10px solid #ff5000; }
 
-/* line 137, ../sass/styles.scss */
+/* line 146, ../sass/styles.scss */
 .border-right {
   border-right: 10px solid #ff5000; }
 
-/* line 140, ../sass/styles.scss */
+/* line 149, ../sass/styles.scss */
 .half-border-right {
   border-right: 5px solid #ff5000; }
 
-/* line 143, ../sass/styles.scss */
+/* line 152, ../sass/styles.scss */
 .border-left {
   border-left: 10px solid #ff5000; }
 
-/* line 146, ../sass/styles.scss */
+/* line 155, ../sass/styles.scss */
 .half-border-left {
   border-left: 5px solid #ff5000; }
 
-/* line 150, ../sass/styles.scss */
+/* line 159, ../sass/styles.scss */
 .load-more {
   font-size: 30px;
   line-height: 35px;
@@ -1265,38 +1290,38 @@ h5, .xsmall {
   display: table;
   margin: auto; }
   @media (max-width: 900px) {
-    /* line 150, ../sass/styles.scss */
+    /* line 159, ../sass/styles.scss */
     .load-more {
       font-size: 25px;
       line-height: 30px; } }
 
-/* line 156, ../sass/styles.scss */
+/* line 165, ../sass/styles.scss */
 body.login {
   background-color: #ff5000;
   color: #fff; }
-  /* line 159, ../sass/styles.scss */
+  /* line 168, ../sass/styles.scss */
   body.login main {
     width: 100% !important;
     display: table; }
-    /* line 162, ../sass/styles.scss */
+    /* line 171, ../sass/styles.scss */
     body.login main .login {
       width: 100%;
       display: table-cell;
       vertical-align: middle;
       text-align: center; }
-      /* line 168, ../sass/styles.scss */
+      /* line 177, ../sass/styles.scss */
       body.login main .login h1 {
         font-size: 90px;
         line-height: 110px;
         margin-bottom: 25px; }
-      /* line 173, ../sass/styles.scss */
+      /* line 182, ../sass/styles.scss */
       body.login main .login a {
         font-size: 20px;
         line-height: 23px;
         color: #fff;
         margin: 0 25px; }
         @media (max-width: 900px) {
-          /* line 173, ../sass/styles.scss */
+          /* line 182, ../sass/styles.scss */
           body.login main .login a {
             font-size: 17px;
             line-height: 19px; } }
@@ -1460,10 +1485,10 @@ section.residents .content .top {
     section.residents .content .top .right.alt a {
       float: right; }
     /* line 23, ../sass/_sections/residents.scss */
-    section.residents .content .top .right.alt.alumni a {
+    section.residents .content .top .right.alt.past-residents a {
       color: #1a1919 !important; }
       /* line 25, ../sass/_sections/residents.scss */
-      section.residents .content .top .right.alt.alumni a:hover {
+      section.residents .content .top .right.alt.past-residents a:hover {
         color: #ff5000 !important; }
     /* line 31, ../sass/_sections/residents.scss */
     section.residents .content .top .right.alt.current-residents a {
@@ -1671,18 +1696,17 @@ section.single.resident .relations {
     /* line 114, ../sass/_sections/resident.scss */
     section.single.resident .relations .related h3.name {
       display: table;
-      margin: 0 auto 10px auto;
-      color: #1a1919; }
-    /* line 119, ../sass/_sections/resident.scss */
+      margin: 0 auto 10px auto; }
+    /* line 118, ../sass/_sections/resident.scss */
     section.single.resident .relations .related .image {
       width: 100%; }
-      /* line 121, ../sass/_sections/resident.scss */
+      /* line 120, ../sass/_sections/resident.scss */
       section.single.resident .relations .related .image img {
         width: 100%;
         height: 100%;
         min-height: 100px;
         vertical-align: bottom; }
-    /* line 128, ../sass/_sections/resident.scss */
+    /* line 127, ../sass/_sections/resident.scss */
     section.single.resident .relations .related .details {
       display: -webkit-box;
       display: -webkit-flex;
@@ -1691,28 +1715,28 @@ section.single.resident .relations {
       font-size: 20px;
       line-height: 23px; }
       @media (max-width: 900px) {
-        /* line 128, ../sass/_sections/resident.scss */
+        /* line 127, ../sass/_sections/resident.scss */
         section.single.resident .relations .related .details {
           font-size: 17px;
           line-height: 19px; } }
-      /* line 131, ../sass/_sections/resident.scss */
+      /* line 130, ../sass/_sections/resident.scss */
       section.single.resident .relations .related .details .sponsor, section.single.resident .relations .related .details .year {
         display: -webkit-inline-box;
         display: -webkit-inline-flex;
         display: -ms-inline-flexbox;
         display: inline-flex; }
-      /* line 134, ../sass/_sections/resident.scss */
+      /* line 133, ../sass/_sections/resident.scss */
       section.single.resident .relations .related .details .sponsor {
         width: 100%; }
-      /* line 137, ../sass/_sections/resident.scss */
+      /* line 136, ../sass/_sections/resident.scss */
       section.single.resident .relations .related .details .year {
         text-align: right;
         padding-left: 7px; }
-/* line 145, ../sass/_sections/resident.scss */
+/* line 144, ../sass/_sections/resident.scss */
 section.single.resident.one_col .info {
   width: 100%;
   padding: 0; }
-/* line 150, ../sass/_sections/resident.scss */
+/* line 149, ../sass/_sections/resident.scss */
 section.single.resident .center {
   z-index: 0; }
 
@@ -2389,172 +2413,174 @@ section.apply .program {
 /* line 4, ../sass/_sections/black.scss */
 section.sponsor *,
 section.past *,
-section.alumni * {
+section.past-residents * {
   border-color: #1a1919 !important; }
 /* line 7, ../sass/_sections/black.scss */
 section.sponsor a, section.sponsor .link,
 section.past a,
 section.past .link,
-section.alumni a,
-section.alumni .link {
+section.past-residents a,
+section.past-residents .link {
   color: #1a1919; }
 /* line 10, ../sass/_sections/black.scss */
 section.sponsor a:hover, section.sponsor .link:hover,
 section.past a:hover,
 section.past .link:hover,
-section.alumni a:hover,
-section.alumni .link:hover {
+section.past-residents a:hover,
+section.past-residents .link:hover {
   color: #ff5000 !important; }
 /* line 13, ../sass/_sections/black.scss */
 section.sponsor nav,
 section.sponsor header.main nav a.overlay,
 section.past nav,
 section.past header.main nav a.overlay,
-section.alumni nav,
-section.alumni header.main nav a.overlay {
+section.past-residents nav,
+section.past-residents header.main nav a.overlay {
   background-color: #fff !important; }
   /* line 16, ../sass/_sections/black.scss */
   section.sponsor nav *,
   section.sponsor header.main nav a.overlay *,
   section.past nav *,
   section.past header.main nav a.overlay *,
-  section.alumni nav *,
-  section.alumni header.main nav a.overlay * {
+  section.past-residents nav *,
+  section.past-residents header.main nav a.overlay * {
     color: #1a1919; }
 /* line 20, ../sass/_sections/black.scss */
 section.sponsor aside.main,
 section.past aside.main,
-section.alumni aside.main {
+section.past-residents aside.main {
   border-color: #1a1919 !important; }
   /* line 22, ../sass/_sections/black.scss */
   section.sponsor aside.main .icon.default,
   section.past aside.main .icon.default,
-  section.alumni aside.main .icon.default {
+  section.past-residents aside.main .icon.default {
     background-image: url(../images/logo-black.svg) !important; }
   /* line 25, ../sass/_sections/black.scss */
   section.sponsor aside.main .icon.hover,
   section.past aside.main .icon.hover,
-  section.alumni aside.main .icon.hover {
+  section.past-residents aside.main .icon.hover {
     background-image: url(../images/logo-orange.svg) !important; }
   /* line 28, ../sass/_sections/black.scss */
   section.sponsor aside.main.hover .logo,
   section.past aside.main.hover .logo,
-  section.alumni aside.main.hover .logo {
+  section.past-residents aside.main.hover .logo {
     border-color: #ff5000 !important; }
 /* line 33, ../sass/_sections/black.scss */
 section.sponsor .nav-toggle .icon.default,
 section.past .nav-toggle .icon.default,
-section.alumni .nav-toggle .icon.default {
+section.past-residents .nav-toggle .icon.default {
   background-image: url(../images/toggle-black.svg) !important; }
 /* line 36, ../sass/_sections/black.scss */
 section.sponsor .nav-toggle .icon.hover,
 section.past .nav-toggle .icon.hover,
-section.alumni .nav-toggle .icon.hover {
+section.past-residents .nav-toggle .icon.hover {
   background-image: url(../images/toggle-orange.svg) !important; }
 /* line 40, ../sass/_sections/black.scss */
 section.sponsor header.main nav .cell .sub-menu .child-item,
 section.past header.main nav .cell .sub-menu .child-item,
-section.alumni header.main nav .cell .sub-menu .child-item {
+section.past-residents header.main nav .cell .sub-menu .child-item {
   background-image: url(../images/bullet-black.svg) !important; }
   /* line 42, ../sass/_sections/black.scss */
   section.sponsor header.main nav .cell .sub-menu .child-item:hover,
   section.past header.main nav .cell .sub-menu .child-item:hover,
-  section.alumni header.main nav .cell .sub-menu .child-item:hover {
+  section.past-residents header.main nav .cell .sub-menu .child-item:hover {
     background-image: url(../images/bullet-orange.svg) !important; }
 /* line 46, ../sass/_sections/black.scss */
 section.sponsor.tease-nav header.main,
 section.past.tease-nav header.main,
-section.alumni.tease-nav header.main {
+section.past-residents.tease-nav header.main {
   border-color: #ff5000 !important; }
 /* line 51, ../sass/_sections/black.scss */
 section.sponsor .content .filter .bar .select.dropdown .icon.default,
 section.past .content .filter .bar .select.dropdown .icon.default,
-section.alumni .content .filter .bar .select.dropdown .icon.default {
+section.past-residents .content .filter .bar .select.dropdown .icon.default {
   background-image: url(../images/dropdown-black.svg); }
 /* line 54, ../sass/_sections/black.scss */
 section.sponsor .content .filter .bar .select.dropdown .icon.hover,
 section.past .content .filter .bar .select.dropdown .icon.hover,
-section.alumni .content .filter .bar .select.dropdown .icon.hover {
+section.past-residents .content .filter .bar .select.dropdown .icon.hover {
   background-image: url(../images/dropdown-orange.svg); }
 /* line 61, ../sass/_sections/black.scss */
 section.sponsor .content .filter .bar .select.view.toggle .icon.default,
 section.past .content .filter .bar .select.view.toggle .icon.default,
-section.alumni .content .filter .bar .select.view.toggle .icon.default {
+section.past-residents .content .filter .bar .select.view.toggle .icon.default {
   background-image: url(../images/view-toggle-black.svg); }
 /* line 64, ../sass/_sections/black.scss */
 section.sponsor .content .filter .bar .select.view.toggle .icon.hover,
 section.past .content .filter .bar .select.view.toggle .icon.hover,
-section.alumni .content .filter .bar .select.view.toggle .icon.hover {
+section.past-residents .content .filter .bar .select.view.toggle .icon.hover {
   background-image: url(../images/view-toggle-orange.svg); }
 /* line 69, ../sass/_sections/black.scss */
 section.sponsor .content .residents .resident .image,
 section.past .content .residents .resident .image,
-section.alumni .content .residents .resident .image {
+section.past-residents .content .residents .resident .image {
   background-color: white; }
 /* line 73, ../sass/_sections/black.scss */
 section.sponsor.hover-right .content,
 section.past.hover-right .content,
-section.alumni.hover-right .content {
+section.past-residents.hover-right .content {
   border-right-color: #ff5000 !important; }
 /* line 78, ../sass/_sections/black.scss */
 section.sponsor.hover-left .content,
 section.past.hover-left .content,
-section.alumni.hover-left .content {
+section.past-residents.hover-left .content {
   border-left-color: #ff5000 !important; }
 /* line 82, ../sass/_sections/black.scss */
 section.sponsor .bullet, section.sponsor section#resident-resources ul li, section#resident-resources ul section.sponsor li,
 section.past .bullet,
 section.past section#resident-resources ul li,
 section#resident-resources ul section.past li,
-section.alumni .bullet,
-section.alumni section#resident-resources ul li,
-section#resident-resources ul section.alumni li {
+section.past-residents .bullet,
+section.past-residents section#resident-resources ul li,
+section#resident-resources ul section.past-residents li {
   background-image: url(../images/bullet-black.svg) !important; }
   /* line 84, ../sass/_sections/black.scss */
   section.sponsor .bullet:hover, section.sponsor section#resident-resources ul li:hover, section#resident-resources ul section.sponsor li:hover,
   section.past .bullet:hover,
   section.past section#resident-resources ul li:hover,
   section#resident-resources ul section.past li:hover,
-  section.alumni .bullet:hover,
-  section.alumni section#resident-resources ul li:hover,
-  section#resident-resources ul section.alumni li:hover {
+  section.past-residents .bullet:hover,
+  section.past-residents section#resident-resources ul li:hover,
+  section#resident-resources ul section.past-residents li:hover {
     background-image: url(../images/bullet-orange.svg) !important; }
 /* line 88, ../sass/_sections/black.scss */
-section.sponsor h4.title,
-section.past h4.title,
-section.alumni h4.title {
-  color: #1a1919; }
+section.sponsor h1, section.sponsor h4,
+section.past h1,
+section.past h4,
+section.past-residents h1,
+section.past-residents h4 {
+  color: #1a1919 !important; }
 /* line 91, ../sass/_sections/black.scss */
 section.sponsor footer,
 section.past footer,
-section.alumni footer {
+section.past-residents footer {
   background-color: #1a1919 !important; }
   /* line 93, ../sass/_sections/black.scss */
   section.sponsor footer *,
   section.past footer *,
-  section.alumni footer * {
+  section.past-residents footer * {
     background-color: #1a1919 !important;
     color: #fff !important;
     border-color: #fff !important; }
   /* line 98, ../sass/_sections/black.scss */
   section.sponsor footer a:hover,
   section.past footer a:hover,
-  section.alumni footer a:hover {
+  section.past-residents footer a:hover {
     color: #fff; }
   /* line 101, ../sass/_sections/black.scss */
   section.sponsor footer aside.footer,
   section.past footer aside.footer,
-  section.alumni footer aside.footer {
+  section.past-residents footer aside.footer {
     border-color: #fff !important; }
     /* line 104, ../sass/_sections/black.scss */
     section.sponsor footer aside.footer .icon.default,
     section.past footer aside.footer .icon.default,
-    section.alumni footer aside.footer .icon.default {
+    section.past-residents footer aside.footer .icon.default {
       background-image: url(../images/logo-white.svg); }
     /* line 107, ../sass/_sections/black.scss */
     section.sponsor footer aside.footer .icon.hover,
     section.past footer aside.footer .icon.hover,
-    section.alumni footer aside.footer .icon.hover {
+    section.past-residents footer aside.footer .icon.hover {
       background-image: url(../images/logo-orange.svg); }
 
 /* line 2, ../sass/_sections/about.scss */
@@ -2592,7 +2618,7 @@ section#about h4 {
       font-size: 17px;
       line-height: 19px; } }
 /* line 30, ../sass/_sections/about.scss */
-section#about .contact {
+section#about .info {
   width: 100%;
   font-size: 25px;
   line-height: 30px;
@@ -2602,86 +2628,81 @@ section#about .contact {
   display: flex; }
   @media (max-width: 900px) {
     /* line 30, ../sass/_sections/about.scss */
-    section#about .contact {
+    section#about .info {
       font-size: 20px;
       line-height: 23px; } }
-/* line 38, ../sass/_sections/about.scss */
-section#about .main .half.left .mission {
+  /* line 34, ../sass/_sections/about.scss */
+  section#about .info .bullet, section#about .info section#resident-resources ul li, section#resident-resources ul section#about .info li {
+    display: block; }
+/* line 39, ../sass/_sections/about.scss */
+section#about .main .description {
   font-size: 45px;
   line-height: 55px; }
   @media (max-width: 900px) {
-    /* line 38, ../sass/_sections/about.scss */
-    section#about .main .half.left .mission {
+    /* line 39, ../sass/_sections/about.scss */
+    section#about .main .description {
       font-size: 30px;
       line-height: 35px; } }
 /* line 42, ../sass/_sections/about.scss */
-section#about .main .half.left .image_slider {
+section#about .main .image_slider {
   width: 100%;
   height: 500px; }
-/* line 48, ../sass/_sections/about.scss */
-section#about .main .half.left .social h3 {
+/* line 47, ../sass/_sections/about.scss */
+section#about .main .social h3 {
   width: 100%;
   text-align: center; }
-/* line 56, ../sass/_sections/about.scss */
-section#about .main .half.right .image_stack .image {
-  width: 100%; }
-  @media (max-width: 1280px) {
-    /* line 56, ../sass/_sections/about.scss */
-    section#about .main .half.right .image_stack .image {
-      width: -ms-calc(50% - 5px);
-      width: calc(50% - 5px);
-      float: left; }
-      /* line 61, ../sass/_sections/about.scss */
-      section#about .main .half.right .image_stack .image:nth-child(odd) {
-        margin-right: 5px; }
-      /* line 64, ../sass/_sections/about.scss */
-      section#about .main .half.right .image_stack .image:nth-child(even) {
-        margin-left: 5px; } }
+/* line 52, ../sass/_sections/about.scss */
+section#about .main .history {
+  font-size: 25px;
+  line-height: 30px;
+  display: block;
+  -webkit-column-count: 2;
+     -moz-column-count: 2;
+          column-count: 2;
+  -webkit-column-gap: 2em;
+     -moz-column-gap: 2em;
+          column-gap: 2em; }
   @media (max-width: 900px) {
-    /* line 56, ../sass/_sections/about.scss */
-    section#about .main .half.right .image_stack .image {
-      width: 100%;
-      margin: 0; } }
-  /* line 72, ../sass/_sections/about.scss */
-  section#about .main .half.right .image_stack .image img {
-    width: 100%; }
-  /* line 76, ../sass/_sections/about.scss */
-  section#about .main .half.right .image_stack .image:last-child h4.caption {
-    padding-bottom: 0; }
-/* line 83, ../sass/_sections/about.scss */
-section#about .main .half.right .description {
+    /* line 52, ../sass/_sections/about.scss */
+    section#about .main .history {
+      font-size: 20px;
+      line-height: 23px; } }
+  @media (max-width: 1040px) {
+    /* line 52, ../sass/_sections/about.scss */
+    section#about .main .history {
+      -webkit-column-count: 1;
+         -moz-column-count: 1;
+              column-count: 1; } }
+/* line 61, ../sass/_sections/about.scss */
+section#about .main .list {
+  width: 50%;
+  float: left;
   font-size: 25px;
   line-height: 30px; }
   @media (max-width: 900px) {
-    /* line 83, ../sass/_sections/about.scss */
-    section#about .main .half.right .description {
+    /* line 61, ../sass/_sections/about.scss */
+    section#about .main .list {
       font-size: 20px;
       line-height: 23px; } }
-/* line 87, ../sass/_sections/about.scss */
-section#about .main .half.right .list {
-  font-size: 25px;
-  line-height: 30px; }
-  @media (max-width: 900px) {
-    /* line 87, ../sass/_sections/about.scss */
-    section#about .main .half.right .list {
-      font-size: 20px;
-      line-height: 23px; } }
-  /* line 90, ../sass/_sections/about.scss */
-  section#about .main .half.right .list.board h4 {
-    padding-top: 0; }
+  /* line 66, ../sass/_sections/about.scss */
+  section#about .main .list.staff li {
+    margin-bottom: 15px; }
+    /* line 68, ../sass/_sections/about.scss */
+    section#about .main .list.staff li em {
+      display: block; }
   @media (max-width: 768px) {
-    /* line 87, ../sass/_sections/about.scss */
-    section#about .main .half.right .list {
+    /* line 61, ../sass/_sections/about.scss */
+    section#about .main .list {
       width: calc(50% - 5px);
       float: left; }
-      /* line 97, ../sass/_sections/about.scss */
-      section#about .main .half.right .list.board {
+      /* line 76, ../sass/_sections/about.scss */
+      section#about .main .list.board {
         margin-right: 5px; }
-      /* line 100, ../sass/_sections/about.scss */
-      section#about .main .half.right .list.staff {
+      /* line 79, ../sass/_sections/about.scss */
+      section#about .main .list.staff {
         margin-left: 5px; } }
-  /* line 105, ../sass/_sections/about.scss */
-  section#about .main .half.right .list ul li {
+  /* line 84, ../sass/_sections/about.scss */
+  section#about .main .list ul li {
     text-indent: -15px;
     padding: 0 0 5px 15px; }
 
@@ -2933,22 +2954,22 @@ section#resident-resources {
           section#resident-resources .staff .members .staff-member .info .description {
             padding-top: 10px; }
 
-/* line 194, ../sass/styles.scss */
+/* line 203, ../sass/styles.scss */
 ::-webkit-scrollbar {
   display: none; }
 
-/* line 195, ../sass/styles.scss */
+/* line 204, ../sass/styles.scss */
 ::-moz-scrollbar {
   display: none; }
 
-/* line 196, ../sass/styles.scss */
+/* line 205, ../sass/styles.scss */
 ::-o-scrollbar {
   display: none; }
 
-/* line 197, ../sass/styles.scss */
+/* line 206, ../sass/styles.scss */
 ::-google-ms-scrollbar {
   display: none; }
 
-/* line 198, ../sass/styles.scss */
+/* line 207, ../sass/styles.scss */
 ::-khtml-scrollbar {
   display: none; }

@@ -77,6 +77,7 @@ jQuery(document).ready(function($) {
 			}).addClass('center');
 			$(section).next().addClass('right');
 			$(section).prev().addClass('left');
+			$(section).removeClass('static');
 			$('main').transition({
 				left: -pageWidth * index + (index*asideWidth),
 			}, duration, 'cubic-bezier(0.645, 0.045, 0.355, 1)', function() {
@@ -118,7 +119,6 @@ jQuery(document).ready(function($) {
 			var side = 'left';
 		}
 		if($(aside).find('.label').text().length) {
-			console.log(section);
 			$(section).addClass('hover-' + side);
 			$(aside).addClass('hover');
 		}
@@ -346,9 +346,9 @@ jQuery(document).ready(function($) {
 		$(gallery).on('mousemove', function(event) {
 			var x = event.pageX;
 			var y = event.pageY;
-			if(x >= window.innerWidth - 100 && slidesLength > 1) {
+			if(x >= window.innerWidth - 200 && slidesLength > 1) {
 				$(cursor).attr('data-icon', 'right');
-			} else if(x <= 100 && slidesLength > 1) {
+			} else if(x <= 200 && slidesLength > 1) {
 				$(cursor).attr('data-icon', 'left');
 			} else {
 				$(cursor).attr('data-icon', 'close');

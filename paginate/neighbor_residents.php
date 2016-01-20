@@ -8,7 +8,7 @@
 		get_template_part('sections/resident');
 		wp_reset_postdata();
 		get_residents( $this_resident_id, 'next', 3 );
-	elseif( is_alumni( $this_resident_id ) ):
+	elseif( is_past( $this_resident_id ) ):
 
 		$alumni = get_page_by_path('alumni');
 		setup_postdata( $alumni );

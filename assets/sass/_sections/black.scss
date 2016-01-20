@@ -1,6 +1,6 @@
 section.sponsor,
 section.past,
-section.alumni {
+section.past-residents {
 	* {
 		border-color: $black !important;
 	}
@@ -85,8 +85,8 @@ section.alumni {
 			background-image: url(../images/bullet-orange.svg) !important;
 		}
 	}
-	h4.title {
-		color: $black;
+	h1, h4 {
+		color: $black !important;
 	}
 	footer {
 		background-color: $black !important;

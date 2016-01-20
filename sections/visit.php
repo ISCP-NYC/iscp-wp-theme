@@ -14,9 +14,9 @@
 		<?php
 		$office_hours = get_field( 'office_hours', $visit );
 		$exhibition_hours = get_field( 'exhibition_hours', $visit );
-		$address = get_field( 'address', $about );
+		$address = strip_tags( get_field( 'address', $about ) );
 		$directions_base = 'https://www.google.com/maps/dir//';
-		$directions_link = $directions_base . strip_tags($address);
+		$directions_link = $directions_base . $address;
 		$phone = get_field( 'phone', $about );
 		$email = get_field( 'email', $about );
 
