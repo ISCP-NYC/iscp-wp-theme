@@ -51,6 +51,9 @@
 	if( is_home() ):
 		$page_slug = 'home';
 		$page_id = null;
+	elseif( is_search() ):
+		$page_slug = 'search';
+		$page_id = null;
 	else:
 		$page_slug = get_post( $post )->post_name;
 		$page_id = get_the_ID();

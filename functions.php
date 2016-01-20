@@ -691,6 +691,15 @@ function get_sponsors( $id ) {
 	return $sponsor_list;
 }
 
+function get_orientation( $id ) {
+	$imgmeta = wp_get_attachment_metadata( $id );
+	if ($imgmeta['width'] > $imgmeta['height']) {
+		return 'landscape';
+	} else {
+		return 'portait';
+	}
+}
+
 function pretty($string) {
 	switch ($string) {
 		case 'event':

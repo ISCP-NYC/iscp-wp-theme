@@ -39,9 +39,7 @@
 		} ?>
 		<div class="cell search">
 			<div class="inner">
-				<a class="overlay" href="#">
-					<h1 class="link">Search</h1>
-				</a>
+				<?php get_search_form(); ?>
 			</div>
     	</div>
 	</nav>

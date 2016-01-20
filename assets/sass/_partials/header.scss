@@ -73,6 +73,7 @@ header.main {
 				}
 			}
 			&.parent:hover .inner a.overlay,
+			&.search:hover .inner a.overlay,
 			{
 				display: none;
 			}
@@ -109,8 +110,9 @@ header.main {
 					color: $orange;
 					@include xlarge-fs;
 					padding: 10px;
-					border: 5px solid $orange;
+					border: 0;
 					outline: none; 
+					text-align: center;
 				}
 			}
 		}

@@ -144,14 +144,15 @@
 				<?php
 					if( have_rows('gallery') ):
 					    while ( have_rows('gallery') ) : the_row();
-					        $gallery_image = get_sub_field( 'image' )['url'];
+					        $image = get_sub_field( 'image' );
 					        $image_artist = get_sub_field( 'artist' );
 					        $image_title = get_sub_field( 'title' );
 					        $image_year = get_sub_field( 'year' );
 					        $image_medium = get_sub_field( 'medium' );
 					        $image_dimensions = get_sub_field( 'dimensions' );
 					        $image_credit = get_sub_field( 'credit' );
-
+					        $image_orientation = get_orientation( $image['id'] );
+					        $image_url = $image['url'];
 					        $caption = $image_artist;
 					        if( $image_title ) {
 					        	$caption .= ', <em>' . $image_title . ',</em>';
@@ -168,11 +169,13 @@
 
 					        echo '<div class="piece slide">';
 					        echo '<div class="inner">';
-					        echo '<div class="image">';
-					        echo '<img src="' . $gallery_image . '"/>';
+					        echo '<div class="image ' . $image_orientation . '">';
+					        echo '<div class="wrap">';
+					        echo '<img src="' . $image_url . '"/>';
 					        echo '</div>';
 					        echo '<div class="caption">';
 					        echo $caption;
+					        echo '</div>';
 					        echo '</div>';
 					        echo '</div>';
 					        echo '</div>';

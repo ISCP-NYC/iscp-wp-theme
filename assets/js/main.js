@@ -157,6 +157,22 @@ jQuery(document).ready(function($) {
 		$(section).removeClass('open-nav');
 	});
 
+	$('body').on('mouseenter', 'nav .search', function() {
+		var field = $(this).find('#s');
+		var value = $(field).attr('value');
+		if(value == 'Search') {
+			$(field).attr('value', '');
+		}
+		$(field).focus();
+	}).on('mouseleave', 'nav .search', function() {
+		var field = $(this).find('#s');
+		var value = $(field).attr('value');
+		if(value == '') {
+			$(field).attr('value', 'Search');
+		}
+		$(field).blur();
+	});
+
 	//toggle header visibility with scroll behavior
 	$('section').each(function() {
 		var lastScrollTop = 0;
