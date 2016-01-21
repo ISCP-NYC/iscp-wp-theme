@@ -66,7 +66,7 @@ $id = $post->ID;
 					}
 					$event_thumb = get_thumb( $resident_id );
 
-					echo '<div class="event shelf-item border-bottom"><div class="inner">';
+					echo '<div class="event shelf-item"><div class="inner">';
 					echo '<a class="wrap value date" href="' . $event_url . '">';
 					echo '<h3 class="link">' . $event_date_format . '</h3>';
 					echo '<div class="image">';

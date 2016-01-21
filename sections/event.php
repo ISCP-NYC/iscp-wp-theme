@@ -194,104 +194,53 @@
 			echo '<h4>Participating Residents</h4>';
 			echo '<div class="inner">';
 			foreach( $residents as $resident ): 
-				$resident_id = $resident->ID;
-				$resident_name = get_the_title( $resident_id );
-				$resident_country = ucwords( get_field('country_temp', $resident_id ) );
-				$resident_sponsor = ucwords( get_field('sponsor_temp', $resident_id ) );
-				$resident_start_date = get_field('residency_dates_0_start_date', $resident_id );
-				$resident_year = new DateTime($resident_start_date);
-				$resident_year = $resident_year->format('Y');
-				$resident_url =  get_the_permalink( $resident_id );
-				$resident_thumb = get_thumb( $resident_id );
-				if( is_past( $id ) ) {
-					$resident_status = 'Current';
-					$resident_studio = get_field('studio_number', $resident_id );
-				} else {
-					$resident_status = 'Past';
-				}
-				echo '<div class="resident shelf-item event"><div class="inner">';
-				echo '<a class="wrap" href="' . $resident_url . '">';
-				echo '<h3 class="value name link">' . $resident_name . '</h3>';
-				echo '<div class="image">';
-				echo '<img src="' . $resident_thumb . '"/>';
-				echo '</div>';
-				echo '</a>';
-				echo '<div class="details">';
-				echo '<div class="left half">';
-				echo '<div class="value detail country">' . $resident_country . '</div>';
-				echo '<div class="value detail sponsor">' . $resident_sponsor . '</div>';
-				echo '</div>';
-				echo '<div class="right half">';
-				echo '<div class="value detail status">' . $resident_status . ' Resident</div>';
-				if( $resident_studio ) {
-					echo '<div class="detail studio">Studio #' . $resident_studio . ' Resident</div>';
-				}
-				echo '</div></div></div></div>';
-
+				$post = $resident;
+				get_template_part( 'items/resident' );
 			endforeach;
 			echo '</div>';
 			echo '</div>';
 		endif;
 		?>
-
-		<div class="upcoming shelves grid">
+		<div class="events">
 			<h4>Upcoming Events &amp; Exhibitions</h4>
-			<div class="inner">
+			<div class="shelves grid">
 				<?php 
-					$today = new DateTime();
-					$today = $today->format('Y-m-d H:i:s');
-					$args = array(
-						'post_type' => 'event',
-						'posts_per_page' => 3,
-						'meta_query' => array(
-							'relation' => 'OR',
-							array(
-								'key' => 'end_date',
-								'compare' => '>=',
-								'value' => $today,
-								'type' => 'DATE',
-								'orderby' => 'meta_value',
-								'order' => 'DESC'
-							),
-							array(
-								'key' => 'date',
-								'compare' => '>=',
-								'value' => $today,
-								'type' => 'DATE',
-								'orderby' => 'meta_value',
-								'order' => 'DESC'
-							)
+				$today = new DateTime();
+				$today = $today->format('Y-m-d H:i:s');
+				$args = array(
+					'post_type' => 'event',
+					'posts_per_page' => 3,
+					'meta_query' => array(
+						'relation' => 'OR',
+						array(
+							'key' => 'end_date',
+							'compare' => '>=',
+							'value' => $today,
+							'type' => 'DATE',
+							'orderby' => 'meta_value',
+							'order' => 'DESC'
 						),
-						'orderby' => 'meta_value',
-					    'order' => 'ASC',
-					    'post__not_in' => array($id)
-					);
+						array(
+							'key' => 'date',
+							'compare' => '>=',
+							'value' => $today,
+							'type' => 'DATE',
+							'orderby' => 'meta_value',
+							'order' => 'DESC'
+						)
+					),
+					'orderby' => 'meta_value',
+				    'order' => 'ASC',
+				    'post__not_in' => array($id)
+				);
 
-					$loop = new WP_Query( $args );
-					while ( $loop->have_posts() ) : $loop->the_post();
-						$upcoming_id = $the_ID;
-						$upcoming_title = get_the_title( $upcoming_id );
-						$upcoming_url = get_permalink( $upcoming_id );
-						$upcoming_type = get_field('event_type', $upcoming_id);
-						$upcoming_dates = get_event_date( $upcoming_id );
-						$upcoming_dates = preg_replace("~</br>~", ' ', $dates);
-						$upcoming_thumb = get_thumb( $upcoming_id );
-						echo '<div class="event shelf-item event' . $upcoming_type . '"><div class="inner">';
-						echo '<a href="' . $upcoming_url . '">';
-						echo '<h3 class="name">' . $upcoming_title . '</h3>';
-						echo '<div class="image">';
-						echo '<img src="' . $upcoming_thumb . '"/>';
-						echo '</div>';
-						echo '</a>';
-						echo '<div class="details">';
-						echo '<div class="detail dates">' . $upcoming_dates . '</div>';
-						// echo '<div class="detail extra">' . $resident_sponsor . '</div>';
-						echo '</div></div></div>';
-					endwhile;
+				$loop = new WP_Query( $args );
+				while ( $loop->have_posts() ) : $loop->the_post();
+					get_template_part( 'items/event' );
+				endwhile;
 				?>
 			</div>
 		</div>
-
 	</div>
 	<?php get_template_part('partials/footer') ?>
 </section>

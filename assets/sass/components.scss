@@ -32,9 +32,6 @@
         .shelf-item {
             @extend .noselect;
             @include width('100% / 3');
-            // display: -webkit-flex;
-            // display: -ms-flexbox;
-            // display: flex;
             float: left;
             padding-bottom: 50px;
             margin-bottom: 50px;
@@ -80,22 +77,7 @@
             &:nth-child(3n+3) .inner {
                 margin: 0 0 0 20px;
             }
-            @include medium {
-                width: 50% !important;
-                &:nth-child(even) .inner {
-                    margin: 0 0 0 20px;
-                }
-                &:nth-child(odd) .inner {
-                    margin: 0 20px 0 0;
-                }
-            }
-            @include xsmall {
-                width: 100% !important;
-                .inner {
-                    width: 100%;
-                    margin: 0 !important;
-                }
-            }
+            
             &.current, &.upcoming * {
                  .inner {
                     * {
@@ -120,6 +102,53 @@
                             color: $orange !important;
                         }
                     }
+                }
+            }
+            &.no-image {
+                display: flex;
+                align-items: center;
+                * {
+                    text-align: center;
+                }
+            }
+            @media (min-width: #{$xmedium-width}) {
+                &.border-bottom {
+                    //three columns, last row, last item of one
+                    &:nth-child(3n+1):nth-last-child(-n+3):last-child {
+                        @include width('100%');
+                        .inner {
+                            @include width('100%/3 - 20px');
+                        }
+                    }
+                    //three columns, last row, last item of two
+                    &:nth-child(3n+1):nth-last-child(-n+2) + .shelf-item {
+                        @include width('100% / 1.5');
+                        .inner {
+                            @include width('50% - 20px');
+                        }
+                    } 
+                }
+            }
+            @include xmedium {
+                width: 50% !important;
+                &:nth-child(even) .inner {
+                    margin: 0 0 0 20px;
+                }
+                &:nth-child(odd) .inner {
+                    margin: 0 20px 0 0;
+                }
+                &:nth-child(2n+1):nth-last-child(-n+2):last-child {
+                    width: 100% !important;
+                    .inner {
+                        @include width('50% - 20px');
+                    }
+                }
+            }
+            @include small {
+                width: 100% !important;
+                .inner {
+                    width: 100%;
+                    margin: 0 !important;
                 }
             }
         }
@@ -154,7 +183,6 @@
         }
     }
 }
-
 .filter {
     width: 100%;
     @extend .noselect;

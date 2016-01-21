@@ -5,25 +5,20 @@ get_header();
 	<?php get_template_part( 'partials/nav' ) ?>
 	<?php get_template_part( 'partials/side' ) ?>
 	<div class="content">
-
-	<?php if ( have_posts() ) : ?>
-		<h4 class="title orange">
-			<?php echo 'Results for "' . get_search_query() . '"'; ?>
-		</h4>
-		<?php
+	<?php 
+	if ( have_posts() ) :
+		echo '<h4 class="title orange">';
+			echo 'Results for "' . get_search_query() . '"';
+		echo '</h4>';
+		echo '<div class="shelves results grid">';
 		while ( have_posts() ) : the_post();
 			global $post;
 			setup_postdata( $post );
-			print_r( $post );
+			$post_type = $post->post_type;
+			get_template_part( 'items/' . $post_type );
 			wp_reset_postdata();
 		endwhile;
-
-		// the_posts_pagination( array(
-		// 	'prev_text'          => __( 'Previous page', 'twentyfifteen' ),
-		// 	'next_text'          => __( 'Next page', 'twentyfifteen' ),
-		// 	'before_page_number' => '<span class="meta-nav screen-reader-text">' . __( 'Page', 'twentyfifteen' ) . ' </span>',
-		// ) );
-
+		echo '</div>';
 	else :
 		get_template_part( 'content', 'none' );
 	endif;

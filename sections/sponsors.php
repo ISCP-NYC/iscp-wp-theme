@@ -169,9 +169,9 @@ $page_url = get_the_permalink();
 			endwhile;
 			wp_reset_query(); 
 			?>
-			<div class="clear">
-				<a href="#" class="load-more">Load More.</a>
-			</div>
+		</div>
+		<div class="clear">
+			<a href="#" class="load-more">Load More.</a>
 		</div>
 	</div>
 	<?php get_template_part('partials/footer'); ?>
