@@ -7,8 +7,15 @@ $country = get_field('country', $resident_id )[0]->post_title;
 $studio_number = get_field( 'studio_number', $resident_id );
 $residency_program = get_field( 'residency_program', $resident_id );
 $url = get_permalink();
-$residency_date = get_field( get_end_date_value( $resident_id ), $resident_id );
-$residency_year = ( new DateTime( $residency_date ) )->format('Y');
+
+if( have_rows( 'residency_dates', $resident_id ) ):
+	while ( have_rows( 'residency_dates' ) ) : the_row();
+		$start_date_dt = new DateTime( get_sub_field( 'start_date', $resident_id ) );
+		$start_date = $start_date_dt->format( 'M d, Y' );
+		$resident_year = $start_date_dt->format( 'Y' );
+	endwhile;
+endif;
+
 if( $append_query && is_past( $resident_id ) ) {
 	$url .= $append_query;
 }
@@ -31,10 +38,10 @@ echo '</div>';
 echo '</div>';
 echo '</div>';
 echo '<div class="right">';
-if( $slug == 'current-residents' ) {
+if( is_current( $resident_id ) ) {
 	echo '<div class="value studio-number">Studio ' . $studio_number . '</div>';
-} elseif( $slug == 'past-residents' ) {
-	echo '<div class="value year">' . $residency_year . '</div>';
+} elseif( is_past( $resident_id ) ) {
+	echo '<div class="value year">' . $resident_year . '</div>';
 }
 echo '</div>';
 echo '</div></div></div>';

@@ -58,9 +58,6 @@ aside {
 			left: 10px;
 		}
 	}
-	@include xsmall {
-		display: none !important;
-	}
 	.move {
 		width: auto;
 		background: $white;
@@ -101,6 +98,9 @@ aside {
 				}
 			}
 		}
+	}
+	@include small {
+		display: none;
 	}
 }
 &:not(.center) {

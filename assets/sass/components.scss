@@ -66,6 +66,9 @@
                 .details {
                     margin-top: 10px;
                     @include xsmall-fs;
+                    .value {
+                        margin-bottom: 5px;
+                    }
                 }
             }
             &:nth-child(3n+1) .inner {

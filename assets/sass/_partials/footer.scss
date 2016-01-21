@@ -19,7 +19,7 @@ footer {
 	    border-style: solid;
 	    overflow: hidden;
 		.inner {
-			padding: 0 20px;
+			padding: 0 5px;
 			margin-bottom: 20px;
 		    nav {
 		    	display: -webkit-flex;
@@ -30,36 +30,59 @@ footer {
 			    flex-wrap: wrap;
 				.cell {
 					width: calc( (100%/6) - 30px);
-					margin: 0 30px 30px 0;
+					margin: 0 15px 15px 15px;
 					display: -webkit-flex;
 				    display: -ms-flexbox;
 				    display: -webkit-box;
 				    display: flex;
 					float: left;
-					.title {
-						letter-spacing: 1px;
-						text-align: left;
-						text-transform: uppercase;
-					}
-					.sub-menu {
-						.child-item {
-							margin: 2px 0;
+					.cell-inner {
+						width: 100%;
+						display: block;
+						.title {
+							letter-spacing: 1px;
+							text-align: left;
+							text-transform: uppercase;
+						}
+						.sub-menu {
+							width: 100%;
+							.child-item {
+								margin: 2px 0;
+							}
+						}
+						input[type="text"] {
+							padding-left: 10px;
+							margin-top: 5px;
+							outline: none;
+							border: solid $white;
+							border-width: 0 0 0 2px;
+							background-color: transparent;
+							color: $white;
+							@include small-fs;
+							@include placeholder {
+								color: $white;
+							}
 						}
 					}
 					&:nth-child(6) {
 						clear: both;
 					}
-					input[type="text"] {
-						padding-left: 10px;
-						margin-top: 5px;
-						outline: none;
-						border: solid $white;
-						border-width: 0 0 0 2px;
-						background-color: transparent;
-						color: $white;
-						@include small-fs;
-						@include placeholder {
-							color: $white;
+					@include large {
+						width: calc( (100%/4) - 30px);
+						&:nth-child(5) {
+							clear: both;
+						}
+					}
+					@include medium {
+						width: calc( (100%/3) - 30px);
+						&:nth-child(3) {
+							clear: both;
+						}
+					}
+					@include xsmall {
+						width: calc( 50% - 30px);
+						&:nth-child(2) {
+							clear: both;
 						}
 					}
 				}
@@ -87,6 +110,11 @@ footer {
 					}
 				}
 			}
+		}
+		@include small {
+			width: 100%;
+			margin: 0;
+			border-width: 0;
 		}
 	}
 }

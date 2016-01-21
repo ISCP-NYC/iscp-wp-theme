@@ -44,6 +44,10 @@
     	</div>
 	</nav>
 </header>
+<a href="<?php echo site_url() ?>" class="mobile logo swap">
+	<div class="icon default"></div>
+	<div class="icon hover"></div>
+</a>
 <div class="nav-toggle nav-hover swap">
 	<div class="icon default"></div>
 	<div class="icon hover"></div>

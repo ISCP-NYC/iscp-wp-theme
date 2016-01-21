@@ -10,7 +10,13 @@ jQuery(document).ready(function($) {
 		var main = $('main');
 		var sections = $('section');
 		var count = $('section').length;
-		var asideWidth = $('section').find('aside').innerWidth();
+		var size = $('#size').css('content');
+		console.log(size);
+		if(size != 'xsmall') {
+			var asideWidth = $('section').find('aside').innerWidth();
+		} else {
+			var asideWidth = 0;
+		}
 		var winWidth = $(window).innerWidth();
 		var pageWidth = winWidth;
 		var fullWidth = count * pageWidth;

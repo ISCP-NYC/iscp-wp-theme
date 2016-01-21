@@ -43,7 +43,7 @@ section.residents {
 				.details {
 					display: flex;
 					.left {
-						width: 100%;
+						width: 80%;
 						// display: inline-flex;
 					}
 		            .country {
@@ -53,8 +53,9 @@ section.residents {
 		            	// width: 100%;
 		            }
 		            .right {
+		            	@include width('20% - 5px');
 		            	display: block;
-		            	padding-left: 7px;
+		            	padding-left: 5px;
 		            	text-align: right;
 		            	.value {
 		            		float: right;
