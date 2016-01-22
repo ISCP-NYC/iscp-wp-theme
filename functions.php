@@ -511,7 +511,7 @@ function get_tweets( $count ) {
 	echo '<div class="twitter">';
 	echo '<div class="follow">';
 	echo '<a href="'.$twitter_url.'" target="_blank">';
-	echo 'Follow us on Twitter @'.$handle;
+	echo '<h3 class="title">Follow us on Twitter @' . $handle . '</h3>';
 	echo '</a>';
 	echo '</div>';
 	echo '<div class="tweets">';
@@ -563,14 +563,6 @@ function get_event_date( $id ) {
 		$end_year = $end_date->format('Y');
 	endif;
 
-	// if ( get_field('date', $id) ):
-	// 	$event_date = new DateTime(get_field('date', $id));
-	// 	$event_month = $event_date->format('F');
-	// 	$event_day_word = $event_date->format('l');
-	// 	$event_day = $event_date->format('d');
-	// 	$event_year = $event_date->format('Y');
-	// endif;
-
 	$start_time = get_field('start_time', $id);
 	$end_time = get_field('end_time', $id);
 
@@ -578,90 +570,28 @@ function get_event_date( $id ) {
 		if ( $today > $start_date ):
 			$date_format = 'Through ' . $end_month . ' ' . $end_day;
 		else:
-			$date_format = $start_month . ' ' . $start_day;
+			$date_format = $start_month . '&nbsp;' . $start_day;
 			if ( $start_year != $end_year ):
 				$date_format .= ', ' . $start_year;
 			endif;
 			if ($end_date):
-				$date_format .= ' &ndash; ' . $end_month . ' ' . $end_day . ', ' . $end_year;
+				$date_format .= ' &ndash; ' . $end_month . '&nbsp;' . $end_day . ',&nbsp;' . $end_year;
 			endif;
 		endif;
 	else:
-		$date_format = $start_month . ' ' . $start_day . ', ' . $start_year;
+		$date_format = $start_month . ' ' . $start_day . ',&nbsp;' . $start_year;
 	endif;
 
-	$type = get_field('event_type', $id);
-	// switch ($type) {
-	// 	case 'event':
-	//     	$type_name = 'Event';
-	//     	$date_format = $event_month . ' ' . $event_day . ', ' . $event_year;
-	//     	if( $start_time ):
-	//     		$date_format .= '</br>' . $start_time;
-	//     		if( $end_time ):
-	//     			$date_format .= ' - ' . $end_time;
-	//     		endif;
-	// 		endif;
-	//     	break;
-	//     case 'iscp-talk':
-	//     	$type_name = 'ISCP Talk';
-	//     	$date_format = $event_month . ' ' . $event_day . ', ' . $event_year;
-	//     	if( $start_time ):
-	//     		$date_format .= '</br>' . $start_time;
-	//     		if( $end_time ):
-	//     			$date_format .= ' - ' . $end_time;
-	//     		endif;
-	// 		endif;
-	//     	break;
-	//     case 'exhibition':
-	//     	$type_name = 'Exhibition';
-	//     	if ( $today > $start_date ):
-	// 			$date_format = 'Through ' . $end_month . ' ' . $end_day. ', ' . $end_year;
-	// 		else:
-	// 			$date_format = $start_month . ' ' . $start_day;
-	// 			if ( $start_year != $end_year ):
-	// 				$date_format .= ', ' . $start_year;
-	// 			endif;
-	// 			if ($end_date):
-	// 				$date_format .= ' &ndash; ' . $end_month . ' ' . $end_day . ', ' . $end_year;
-	// 			endif;
-	// 		endif;
-	//     	break;
-	//     case 'open-studios':
-	//     	$type_name = 'Open Studio';
-	//     	if ( $today > $start_date ):
-	// 			$date_format = 'Through ' . $end_month . ' ' . $end_day. ', ' . $end_year;
-	// 		else:
-	// 			$date_format = $start_month . ' ' . $start_day;
-	// 			if ( $start_year != $end_year ):
-	// 				$date_format .= ', ' . $start_year;
-	// 			endif;
-	// 			if ($end_date):
-	// 				$date_format .= ' &ndash; ' . $end_month . ' ' . $end_day . ', ' . $end_year;
-	// 			endif;
-	// 		endif;
-	//     	break;
-	//     case 'off-site-project':
-	//     	$type_name = 'Off-Site Project';
-	//     	if ( $today > $start_date ):
-	// 			$date_format = 'Through ' . $end_month . ' ' . $end_day;
-	// 		else:
-	// 			$date_format = $start_month . ' ' . $start_day;
-	// 			if ( $start_year != $end_year ):
-	// 				$date_format .= ', ' . $start_year;
-	// 			endif;
-	// 			if ($end_date):
-	// 				$date_format .= ' &ndash; ' . $end_month . ' ' . $end_day . ', ' . $end_year;
-	// 			endif;
-	// 		endif;
-	//     	break;
-	// }
 	return $date_format;
 }
 
-function get_thumb( $id ) {
+function get_thumb( $id, $size = undefined ) {
 	$thumbnail = get_display_image( $id );
+	if($size == undefined):
+		$size = 'thumb';
+	endif;
 	if( !$thumbnail ) {
-		$thumbnail = get_field( 'gallery', $id )[0]['image']['sizes']['thumb'];
+		$thumbnail = get_field( 'gallery', $id )[0]['image']['sizes'][$size];
 	}
 	if( !$thumbnail ) {
 		$thumbnail = get_template_directory_uri() . '/assets/images/placeholder.svg';

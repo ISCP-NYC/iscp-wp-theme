@@ -1,5 +1,4 @@
 <?php
-// echo $the_page->post_name;
 $title = get_the_title();
 $slug = $post->post_name;
 $id = $post->ID;

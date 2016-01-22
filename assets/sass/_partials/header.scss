@@ -67,7 +67,7 @@ header.main {
 					background-color: $white;
 					h1 {
 						@extend .vertical-align;
-						@include xlarge-fs;
+						@include large-fs;
 						text-align: center;
 					}
 				}
@@ -108,7 +108,7 @@ header.main {
 					display: table;
 					margin: auto;
 					color: $orange;
-					@include xlarge-fs;
+					@include large-fs;
 					padding: 10px;
 					border: 0;
 					outline: none; 

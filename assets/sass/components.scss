@@ -45,7 +45,7 @@
                         }
                     }
                 }
-                h3 {
+                h2 {
                     @extend .yesselect;
                     text-align: center;
                     margin-bottom: 5px;
@@ -65,7 +65,7 @@
                 }
                 .details {
                     margin-top: 10px;
-                    @include xsmall-fs;
+                    @include small-fs;
                     .value {
                         margin-bottom: 5px;
                     }
@@ -134,24 +134,30 @@
             }
             @include xmedium {
                 width: 50% !important;
+                margin-left: 0 !important;
+                margin-right: 0 !important;
+                .inner {
+                    width: calc(100% - 10px) !important;
+                }
                 &:nth-child(even) .inner {
-                    margin: 0 0 0 20px;
+                    margin: 0 0 0 10px !important;
                 }
                 &:nth-child(odd) .inner {
-                    margin: 0 20px 0 0;
+                    margin: 0 10px 0 0 !important;
                 }
                 &:nth-child(2n+1):nth-last-child(-n+2):last-child {
                     width: 100% !important;
                     .inner {
-                        @include width('50% - 20px');
+                        width: calc(50% - 20px) !important;
                     }
                 }
             }
-            @include small {
+            @include xsmall {
                 width: 100% !important;
                 .inner {
-                    width: 100%;
-                    margin: 0 !important;
+                    display: table;
+                    width: auto !important;
+                    margin: auto !important;
                 }
             }
         }
@@ -268,7 +274,7 @@
         height: 0px;
         display: block;
         overflow: hidden;
-        @include xsmall-fs;
+        @include small-fs;
         transition: height 500ms cubic-bezier(0.645, 0.045, 0.355, 1);
         .options {
             display: table;

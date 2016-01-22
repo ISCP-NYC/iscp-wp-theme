@@ -65,8 +65,11 @@ aside {
 		position: absolute;
 	    display: table;
 		transform-origin: left top 0;
-		@include large-fs;
 		text-align: center;
+		.label {
+			font-size: $large-fs;
+			line-height: $large-lh;
+		}
 	}
 	&.left .move {
 		bottom: -120px;

@@ -24,7 +24,7 @@ section.apply {
 			top: 20px;
 			right: 0;
 			.bullet {
-				@include xsmall-fs;
+				@include small-fs;
 				background-size: 11px;
 				padding-left: 15px;
 				display: inline;
@@ -70,7 +70,7 @@ section.apply {
 					width: 100%;
 					display: table;
 					padding: 0 0 20px 0;
-					@include xsmall-fs;
+					@include small-fs;
 					color: $orange;
 					.cell {
 						float: left;

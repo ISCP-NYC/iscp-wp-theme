@@ -10,13 +10,7 @@ jQuery(document).ready(function($) {
 		var main = $('main');
 		var sections = $('section');
 		var count = $('section').length;
-		var size = $('#size').css('content');
-		console.log(size);
-		if(size != 'xsmall') {
-			var asideWidth = $('section').find('aside').innerWidth();
-		} else {
-			var asideWidth = 0;
-		}
+		var asideWidth = $('section').eq(0).find('aside').innerWidth();
 		var winWidth = $(window).innerWidth();
 		var pageWidth = winWidth;
 		var fullWidth = count * pageWidth;
@@ -35,8 +29,8 @@ jQuery(document).ready(function($) {
 			$(asideLinks).css({
 				width: asideLabelHeight
 			});
-			var prevTitle = $(this).prev().data('title');
-			var nextTitle = $(this).next().data('title');
+			var prevTitle = $(this).prev().attr('data-title');
+			var nextTitle = $(this).next().attr('data-title');
 			if(nextTitle) {
 				$(nextSideLink).find('.label').text(nextTitle);
 			} else {
@@ -47,8 +41,8 @@ jQuery(document).ready(function($) {
 			} else {
 				$(prevSideLink).remove();
 			}
-			var prevUrl = $(this).prev().data('permalink');
-			var nextUrl = $(this).next().data('permalink');
+			var prevUrl = $(this).prev().attr('data-permalink');
+			var nextUrl = $(this).next().attr('data-permalink');
 			if(nextUrl) {
 				$(nextSideLink).attr('href', nextUrl);
 			}
@@ -56,7 +50,7 @@ jQuery(document).ready(function($) {
 				$(prevSideLink).attr('href', prevUrl);
 			}
 		});
-		var centerSlug = $('body').data('center-slug');
+		var centerSlug = $('body').attr('data-center-slug');
 		var centerIndex = $('section#' + centerSlug).index();
 		slideTo(centerIndex, false);
 	}
@@ -64,9 +58,11 @@ jQuery(document).ready(function($) {
 	var firstSlide = true;
 	function slideTo(index, animate) {
 		var section = $('section').eq(index);
-		var asideWidth = $(section).find('aside').innerWidth();
+		var side = $(section).find('aside');
+		var size = $('#size').css('content');
+		var asideWidth = $(side).innerWidth();
 		if(section.length) {
-			$('section.center').removeClass('center');
+			$('section.center').removeClass('center').removeClass('hover-left').removeClass('hover-right');
 			$('section.right').removeClass('right');
 			$('section.left').removeClass('left');
 			$(section.addClass('center'));

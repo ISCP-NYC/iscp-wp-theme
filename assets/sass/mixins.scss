@@ -73,14 +73,14 @@ $xxlarge-width: 2560px;
   }
 }
 
-@mixin xsmall-fs {
-  font-size: $xsmall-fs;
-  line-height: $xsmall-lh;
-  @include medium {
-    font-size: $xxsmall-fs;
-    line-height: $xxsmall-lh;
-  }
-}
+// @mixin xsmall-fs {
+//   font-size: $xsmall-fs;
+//   line-height: $xsmall-lh;
+//   @include medium {
+//     font-size: $xxsmall-fs;
+//     line-height: $xxsmall-lh;
+//   }
+// }
 
 @mixin small-fs {
   font-size: $small-fs;
@@ -109,23 +109,23 @@ $xxlarge-width: 2560px;
   }
 }
 
-@mixin xlarge-fs {
-  font-size: $xlarge-fs;
-  line-height: $xlarge-lh;
-  @include medium {
-    font-size: $large-fs;
-    line-height: $large-lh;
-  }
-}
+// @mixin xlarge-fs {
+//   font-size: $xlarge-fs;
+//   line-height: $xlarge-lh;
+//   @include medium {
+//     font-size: $large-fs;
+//     line-height: $large-lh;
+//   }
+// }
 
-@mixin xxlarge-fs {
-  font-size: $xxlarge-fs;
-  line-height: $xxlarge-lh;
-  @include medium {
-    font-size: $xlarge-fs;
-    line-height: $xlarge-lh;
-  }
-}
+// @mixin xxlarge-fs {
+//   font-size: $xxlarge-fs;
+//   line-height: $xxlarge-lh;
+//   @include medium {
+//     font-size: $xlarge-fs;
+//     line-height: $xlarge-lh;
+//   }
+// }
 
 @mixin placeholder {
   &::-webkit-input-placeholder {

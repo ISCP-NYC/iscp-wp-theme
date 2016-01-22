@@ -55,7 +55,7 @@
 		    				<div class="title">Search</div>
 		    			</a>
 		    			<div class="sub-menu">
-		    				<input type="text"/>
+		    				<?php get_search_form(); ?>
 		    			</div>
 		    		</div>
 		    	</div>

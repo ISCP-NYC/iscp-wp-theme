@@ -29,6 +29,14 @@ section.past-residents {
 			border-color: $orange !important;
 		}
 	}
+	.logo.mobile {
+		.icon.default {
+			background-image: url(../images/logo-black.svg) !important;
+		}
+		.icon.hover {
+			background-image: url(../images/logo-orange.svg) !important;
+		}
+	}
 	.nav-toggle {
 		.icon.default {
 			background-image: url(../images/toggle-black.svg) !important;

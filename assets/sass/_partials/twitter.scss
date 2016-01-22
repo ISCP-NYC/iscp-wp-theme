@@ -10,7 +10,6 @@
 	}
 	.tweets {
 		display: table;
-		padding: 20px 0;
 		.tweet {
 			.text {
 				@include medium-fs;

@@ -8,10 +8,12 @@ $id = $post->ID;
 	<?php get_template_part('partials/nav') ?>
 	<?php get_template_part('partials/side') ?>
 	<div class="content">
-		<h4 class="title">
+		<h2 class="head">
 			International Studio &amp; Curatorial Program
+		</h2>
+		<h3 class="title">
 			<a href="<?php echo site_url() ?>/events">Events &amp; Exhibitions</a>
-		</h4>
+		</h3>
 		<?php 
 			$today = new DateTime();
 			$today = $today->format('Y-m-d H:i:s');
@@ -52,7 +54,7 @@ $id = $post->ID;
 			$count = $upcoming_events->found_posts;
 			$count_class = 'cols_' . $count;
 			
-			echo '<div class="events shelves grid upcoming ' . $count_class . '">';
+			echo '<div class="events module shelves grid upcoming ' . $count_class . '">';
 				while ( $upcoming_events->have_posts() ) : $upcoming_events->the_post();
 
 					$event_id = $the_ID;
@@ -68,7 +70,7 @@ $id = $post->ID;
 
 					echo '<div class="event shelf-item"><div class="inner">';
 					echo '<a class="wrap value date" href="' . $event_url . '">';
-					echo '<h3 class="link">' . $event_date_format . '</h3>';
+					echo '<h2 class="title link">' . $event_date_format . '</h2>';
 					echo '<div class="image">';
 					echo '<img src="' . $event_thumb . '"/>';
 					echo '</div>';
@@ -92,10 +94,10 @@ $id = $post->ID;
 			$address = get_field('address', $about_id);
 		?>
 
-		<div class="mission border-top border-bottom">
-			<h3 class="title orange"><?php echo $address ?></h3>
-			<div class="large">
-				<?php echo $mission ?>
+		<div class="mission module">
+			<h3 class="title"><?php echo $address ?></h3>
+			<div class="medium">
+				<?php echo strip_tags( $mission ) ?>
 			</div>
 		</div>
 
@@ -103,7 +105,8 @@ $id = $post->ID;
 		<?php
 		$home_id = get_page_by_path( 'home' );
 		if( get_field( 'image_slider', $home_id ) ):
-			echo '<div class="image_slider gallery module bg">';
+			echo '<div class="module">';
+			echo '<div class="image_slider gallery bg">';
 			echo '<div class="cursor"></div>';
 			echo '<div class="left arrow"></div>';
 			echo '<div class="right arrow"></div>';
@@ -122,6 +125,7 @@ $id = $post->ID;
 			endwhile;
 			echo '</div>';
 			echo '</div>';
+			echo '</div>';
 		endif;
 		?>
 
@@ -132,14 +136,16 @@ $id = $post->ID;
 			$residency_tagline .= ' <a href="#">Learn more.</a>';
 		?>
 
-		<div class="residency_program border-top border-bottom">
-			<h3 class="title orange">Residency Program</h3>
-			<div class="text xlarge">
+		<div class="residency_program module">
+			<h3 class="title">Residency Program</h3>
+			<div class="text large">
 				<?php echo $residency_tagline ?>
 			</div>
 		</div>
 
-		<? get_tweets( 3 ); ?>
+		<div class="module">
+			<? get_tweets( 3 ); ?>
+		</div>
 
 		<?php
 			$facebook_url = get_field( 'facebook', $about_id );
@@ -147,12 +153,15 @@ $id = $post->ID;
 			$instagram_url = 'http://instagram.com/' . $instagram_handle;
 		?>
 
-		<div class="social border-top border-bottom">
+		<div class="social module">
 			<div class="link medium facebook half-border-right">
-				<a href="<?php echo $facebook_url ?>" target="_blank">Facebook</a>
+				<a href="<?php echo $facebook_url ?>" target="_blank">
+					<h3>Facebook</h3>
+				</a>
 			</div>
 			<div class="link medium instagram half-border-left">
-				<a href="<?php echo $instagram_url ?>" target="_blank">Instagram</a>
+				<a href="<?php echo $instagram_url ?>" target="_blank">
+					<h3>Instagram</h3>
 			</div>
 		</div>
 
@@ -160,7 +169,7 @@ $id = $post->ID;
 			$newsletter_url = get_field( 'newsletter', $about_id );
 		?>
 
-		<h3 class="newsletter title orange">
+		<h3 class="newsletter title">
 			<a href="<?php echo $newsletter_url ?>" target="_blank">
 				Subscribe for our newsletter
 			</a>
