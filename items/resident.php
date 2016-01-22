@@ -23,7 +23,7 @@ $thumb = get_thumb( $resident_id );
 
 echo '<div class="resident shelf-item border-bottom ' . $resident_status . '"><div class="inner">';
 echo '<a class="wrap value name" href="' . $url . '">';
-echo '<h3 class="link">' . $title . '</h3>';
+echo '<h2 class="link title name">' . $title . '</h2>';
 echo '<div class="image">';
 echo '<img src="' . $thumb . '"/>';
 echo '</div>';
@@ -39,7 +39,7 @@ echo '</div>';
 echo '</div>';
 echo '<div class="right">';
 if( is_current( $resident_id ) ) {
-	echo '<div class="value studio-number">Studio ' . $studio_number . '</div>';
+	echo '<div class="value studio-number">Studio #' . $studio_number . '</div>';
 } elseif( is_past( $resident_id ) ) {
 	echo '<div class="value year">' . $resident_year . '</div>';
 }

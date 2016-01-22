@@ -70,11 +70,11 @@ section.residents {
 		}
 		.residents.list {
 			.resident {
-				.name {
-					width: 20%;
+				.wrap.name {
+					width: 40%;
 				}
 				.details {
-					width: 80%;
+					width: 60%;
 					display: flex;
 					.left {
 						width: 100%;

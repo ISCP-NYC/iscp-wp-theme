@@ -14,18 +14,18 @@ if( $append_query && is_past( $event_id ) ) {
 $event_thumb = get_thumb( $resident_id );
 
 echo '<div class="event shelf-item border-bottom ' . $event_status . '"><div class="inner">';
-echo '<a class="wrap value" href="' . $event_url . '">';
-echo '<h3 class="link date">' . $event_date_format . '</h3>';
+echo '<a class="wrap value date" href="' . $event_url . '">';
+echo '<h2 class="link name title">' . $event_title . '</h2>';
 echo '<div class="image">';
 echo '<img src="' . $event_thumb . '"/>';
 echo '</div>';
+echo '<div class="value date link">' . $event_date_format . '</div>';
 echo '</a>';
-echo '<div class="details">';
-echo '<div class="value title"><a href="' . $event_url . '">' . $event_title . '</a></div>';
 echo '<div class="value event-type">';
 echo '<a href="' . site_url() . '/events?type=' . $event_type . '">';
 echo $event_type_name;
 echo '</a>';
-echo '</div></div></div></div>';
+echo '</div>';
+echo '</div></div>';
 wp_reset_postdata();
 ?>

@@ -9,7 +9,7 @@
 	<?php get_template_part('partials/nav') ?>
 	<?php get_template_part('partials/side') ?>
 	<div class="content">
-		<h4 class="title orange"><?php echo $title ?></h4>
+		<h3 class="title head"><?php echo $title ?></h3>
 
 		<?php
 		$office_hours = get_field( 'office_hours', $visit );
@@ -19,19 +19,27 @@
 		$directions_link = $directions_base . $address;
 		$phone = get_field( 'phone', $about );
 		$email = get_field( 'email', $about );
+		$fax = get_field( 'fax', $about );
 
 		$directions = get_field( 'directions', $visit );
 		$directions_footnote = get_field( 'directions_footnote', $visit );
 		?>
 
-		<div class="info">
+		<div class="info module">
 			<h1>Office Hours: <?php echo $office_hours; ?></h1>
 			<h1>Exhibition Hours: <?php echo $exhibition_hours; ?></h1>
 			<h1><?php echo $address ?></h1>
 		</div>
 
-		<div class="map" id="map">
-
+		<div class="map module">
+			<div class="inner" id="map"></div>
+			<div class="contact">
+				<h1><?php echo $phone ?></h1>
+				<h1>
+					<a class="black" href="mailto:<?php echo $email ?>"><?php echo $email ?></a>
+				</h1>
+				<h1><?php echo $fax ?></h1>
+			</div>
 		</div>
 
 		<?php
@@ -62,8 +70,8 @@
 	    </script>
 	    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyApM4iQyAfb0hbmkeXc_zs58aA_Jy0SIac&callback=initMap"></script>
 		<?php
-		echo '<div class="directions">';
-		echo '<h4>Directions by Subway</h4>';
+		echo '<div class="module directions">';
+		echo '<h3 class="title">Directions by Subway</h3>';
 		if( get_field( 'directions', $visit ) ):
 			echo '<ul class="steps">';
 			while( has_sub_field( 'directions', $visit ) ):
@@ -78,7 +86,7 @@
 		echo '</div>';
 		?>
 
-		<div class="newsletter">
+		<div class=" module newsletter">
 			<input type="text" placeholder="Subscribe for our newsletter"/>
 		</div>
 		

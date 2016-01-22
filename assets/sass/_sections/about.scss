@@ -1,11 +1,4 @@
 section#about {
-	.module {
-		width: 100%;
-		display: table;
-		padding-bottom: 25px;
-		margin-bottom: 25px;
-		@extend .border-bottom;
-	}
 	.half {
 		width: calc(50% - 15px);
 		float: left;

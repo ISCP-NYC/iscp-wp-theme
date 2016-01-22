@@ -15,10 +15,10 @@ $page_url = get_the_permalink();
 	<?php get_template_part( 'partials/nav' ) ?>
 	<?php get_template_part( 'partials/side' ) ?>
 	<div class="content">
-		<h4 class="title orange">
+		<h3 class="title head">
 			Sponsors</br>
 			<?php echo $sponsor_country; ?>
-		</h4>
+		</h3>
 
 		<div class="top">
 			<div class="filter">

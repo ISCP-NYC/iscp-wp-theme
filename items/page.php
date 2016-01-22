@@ -7,7 +7,7 @@ $permalink = get_permalink();
 echo '<div class="sponsor shelf-item border-bottom no-image">';
 echo '<div class="inner">';
 echo '<a class="value name" href="' . $permalink . '">';
-echo '<h3 class="link">' . $title . '</h3>';
+echo '<h2 class="link title">' . $title . '</h2>';
 echo '</a>';
 echo '<div class="value country"><a href="' . $country_permalink . '">' . $country . '</a></div>';
 if($website):

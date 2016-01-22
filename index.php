@@ -57,31 +57,7 @@ $id = $post->ID;
 			echo '<div class="events module shelves grid upcoming ' . $count_class . '">';
 				while ( $upcoming_events->have_posts() ) : $upcoming_events->the_post();
 
-					$event_id = $the_ID;
-					$event_title = get_the_title( $event_id );
-					$event_url = get_permalink();
-					$event_type = get_field( 'event_type', $event_id );
-					$event_type_name = pretty( $event_type );
-					$event_date_format = get_event_date( $event_id );
-					if( $append_query && is_past( $event_id ) ) {
-						$url .= $append_query;
-					}
-					$event_thumb = get_thumb( $resident_id );
-
-					echo '<div class="event shelf-item"><div class="inner">';
-					echo '<a class="wrap value date" href="' . $event_url . '">';
-					echo '<h2 class="title link">' . $event_date_format . '</h2>';
-					echo '<div class="image">';
-					echo '<img src="' . $event_thumb . '"/>';
-					echo '</div>';
-					echo '</a>';
-					echo '<div class="details">';
-					echo '<div class="value title"><a href="' . $event_url . '">' . $event_title . '</a></div>';
-					echo '<div class="value event-type">';
-					echo '<a href="' . site_url() . '/events?type=' . $event_type . '">';
-					echo $event_type_name;
-					echo '</a>';
-					echo '</div></div></div></div>';
+					get_template_part( 'items/event' );
 
 				endwhile;
 			?>
@@ -112,16 +88,18 @@ $id = $post->ID;
 			echo '<div class="right arrow"></div>';
 			echo '<div class="slides">';
 			while( has_sub_field( 'image_slider', $home_id ) ):
-				$home_image = get_sub_field( 'image', $home_id );
-				$home_image_url = $home_image['sizes']['slider'];
-				$home_image_caption = get_sub_field( 'caption', $home_id );
-				echo '<div class="slide">';
-				echo '<div class="image" style="background-image:url(' . $home_image_url . ')">';
-				echo '</div>';
-				echo '<div class="caption">';
-				echo $home_image_caption;
-				echo '</div>';
-				echo '</div>';
+				$image = get_sub_field( 'image', $home_id );
+		        $image_url = $image['url'];
+		        $image_id = $image['id'];
+		        $orientation = get_orientation( $image_id );
+		        $caption = label_art( $image_id );
+		        echo '<div class="piece slide">';
+		        echo '<div class="image" style="background-image:url(' . $image_url . ')">';
+		        echo '<div class="caption">';
+		        echo $caption;
+		        echo '</div>';
+		        echo '</div>';
+		        echo '</div>';
 			endwhile;
 			echo '</div>';
 			echo '</div>';

@@ -66,26 +66,30 @@
 			display: table;
 			position: relative;
 			float: left;
-			.image {
-				width: auto;
-				width: 100%;
-				display: block;
-				img {
-					width: auto;
-					height: auto;
-					// max-width: 100%;
-					// max-height: 500px;
-					display: table;
-					margin: auto;
-					cursor: pointer;
-				}
-			}
-			.caption {
-				width: 100%;
-				@include small-fs;
-				text-align: center;
-				padding-top: 10px;
-			}
+            .inner {
+                display: table-cell;
+                vertical-align: middle;
+    			.image {
+    				width: auto;
+    				width: 100%;
+    				display: block;
+    				img {
+    					width: auto;
+    					height: auto;
+    					// max-width: 100%;
+    					// max-height: 500px;
+    					display: table;
+    					margin: auto;
+    					cursor: pointer;
+    				}
+    			}
+    			.caption {
+    				width: 100%;
+    				@include small-fs;
+    				text-align: center;
+    				padding-top: 10px;
+    			}
+            }
 		}
 	}
 	&.full {
@@ -107,9 +111,8 @@
             .inner {
                 width: 100%;
                 height: 100%;
-                display: table;
-                // display: table-cell;
-                // vertical-align: middle;
+                display: flex;
+                align-items: center;
                 .image {
                     display: block !important;
                     margin: 0 auto 0 auto;
@@ -118,6 +121,7 @@
                     overflow:hidden;
                     img {
                         cursor: none !important;
+                        display: table !important;
                     }
                     &.portait {
                         width: 100%;
@@ -125,7 +129,7 @@
                         margin: 50px 0 0 0;
                         .wrap {
                             height: 100%;
-                            display: table;
+                            // display: table;
                             margin: auto;
                             img {
                                 @include height('100% - 50px');
@@ -142,18 +146,13 @@
                         }
                     }
                     &.landscape {
-                        @include width('100% - 200px');
-                        @include height('100% - 50px');
-                        // max-height: calc('~100% - 100px');
-                        // margin: 50px auto 0 auto;
-                        display: table-cell !important;
-                        vertical-align: middle;
+
                         .wrap {
                             height: 100%;
                             margin: auto;
                             display: table;
                             img {
-                                width: 100%;
+                                @include width('100% - 200px');
                             }
                             .caption {
                                 width: 100% !important;

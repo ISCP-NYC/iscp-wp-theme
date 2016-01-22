@@ -9,7 +9,7 @@
 	<?php get_template_part('partials/nav') ?>
 	<?php get_template_part('partials/side') ?>
 	<div class="content">
-		<h4 class="title orange"><?php echo $title ?></h4>
+		<h3 class="title orange head"><?php echo $title ?></h3>
 
 		<?php
 			$description = get_field( 'description', $id );
@@ -21,23 +21,32 @@
 			</div>
 			<?php
 			if( get_field( 'image_slider', $id ) ):
-				echo '<div class="image_slider module">';
+				echo '<div class="module">';
+				echo '<div class="image_slider gallery">';
+				echo '<div class="cursor"></div>';
 				echo '<div class="left arrow"></div>';
 				echo '<div class="right arrow"></div>';
 				echo '<div class="slides">';
 				while( has_sub_field( 'image_slider', $id ) ):
 					$image = get_sub_field( 'image', $id );
-					$image_url = $image['url'];
-					$caption = label_art( $the_ID );
-					echo '<div class="slide">';
-					echo '<div class="vert">';
-					echo '<div class="image">';
-					echo '<img src="' . $image_url . '" alt=""/>';
-					echo '</div>';
-					echo '<div class="caption">' . $caption . '</div>';
-					echo '</div>';
-					echo '</div>';
+			        $image_url = $image['url'];
+			        $image_id = $image['id'];
+			        $orientation = get_orientation( $image_id );
+			        $caption = label_art( $image_id );
+			        echo '<div class="piece slide">';
+			        echo '<div class="inner">';
+			        echo '<div class="image ' . $orientation . '">';
+			        echo '<div class="wrap">';
+			        echo '<img src="' . $image_url . '" alt="' . $image_caption . '"/>';
+			        echo '<div class="caption">';
+			        echo $caption;
+			        echo '</div>';
+			        echo '</div>';
+			        echo '</div>';
+			        echo '</div>';
+			        echo '</div>';
 				endwhile;
+				echo '</div>';
 				echo '</div>';
 				echo '</div>';
 			endif;

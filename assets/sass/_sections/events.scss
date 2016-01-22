@@ -19,22 +19,26 @@ section#events .content {
 		}
 	}
 	.events.list {
+		* {
+			text-align: left;
+		}
 		.event {
 			.wrap {
-				width: 40%;
-			}
-			.details {
-				width: 60%;
-				display: flex;
-				.title {
-					width: 60%;
+				width: 80%;
+				h2.title {
+					width: 50%;
+				} 
+				.date {
+					width: 50%;
+					padding-left: 15px;	
 				}
-				.event-type {
-					width: 40%;
+			}
+			.event-type {
+				width: 20%;
+				padding-left: 15px;
+				a {
+					width: 100%;
 					text-align: right;
-					a {
-						width: 100%;
-					}
 				}
 			}
 		}

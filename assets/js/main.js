@@ -1,12 +1,14 @@
 jQuery(document).ready(function($) {
 	$(window).load(function() {
-		if($('.image_slider')) {
+		if($('.image_slider').length > 0) {
 			setUpSlider();
 		}
+		setUp();
+		setSliderWidth();
 	});
 
 	//sets width for full slider field and each section within
-	function setMainWidth() {
+	function setUp() {
 		var main = $('main');
 		var sections = $('section');
 		var count = $('section').length;
@@ -18,6 +20,7 @@ jQuery(document).ready(function($) {
 		var asideLabelHeight = winHeight - asideWidth;
 		$(main).css({width:fullWidth});
 		$(sections).each(function(i) {
+			var section = $('section').eq(i);
 			var shift = i * asideWidth;
 			$(this).css({
 				left: i * pageWidth - shift,
@@ -49,6 +52,23 @@ jQuery(document).ready(function($) {
 			if(prevUrl) {
 				$(prevSideLink).attr('href', prevUrl);
 			}
+			$(section).find('.filter-list.show').each(function() {
+				var optionsHeight = $(this).find('.options')[0].clientHeight;
+				$(this).height(optionsHeight);
+			});
+			var content = $(section).find('.content');	
+			setTimeout(function() {
+				var scrollHeight = content[0].scrollHeight;
+				var contentHeight = $(content)[0].clientHeight;
+				// keep content scrolled to bottom when footer is visible
+				if($(section).hasClass('show-footer')) {
+					$(content).scrollTop(scrollHeight);
+				}
+				// if content is too short to scroll -> scroll to footer
+				if(scrollHeight <= contentHeight && scrollHeight != 0) {
+					$(section).addClass('show-footer');
+				}
+			});
 		});
 		var centerSlug = $('body').attr('data-center-slug');
 		var centerIndex = $('section#' + centerSlug).index();
@@ -175,21 +195,7 @@ jQuery(document).ready(function($) {
 
 	//toggle header visibility with scroll behavior
 	$('section').each(function() {
-		var lastScrollTop = 0;
-		var section = $(this);
-		var content = $(this).children('.content');
-		$(content).scroll(function(event) {
-			var scrollTop = $(this).scrollTop();
-			if(scrollTop > lastScrollTop + 10) {
-				$(section).addClass('hide-header');
-				$(section).removeClass('open-nav');
-				$(section).removeClass('tease-nav');
-			} else if(scrollTop < lastScrollTop - 5 || scrollTop <= 50) {
-				$(section).removeClass('tease-nav');
-				$(section).removeClass('hide-header');
-			}
-			lastScrollTop = scrollTop;
-		});
+		
 	});
 
 
@@ -203,6 +209,16 @@ jQuery(document).ready(function($) {
 		} else if(scrollTop <= footerMargin) {
 			$(this).removeClass('show-footer-bottom');
 		}
+
+		if($(this).hasClass('show-footer')) {
+			var scrollTop = this.scrollTop;
+			var scrollHeight = this.scrollHeight;
+			var footerHeight = footer.clientHeight;
+			//scrolled to top of footer -> scroll in content 
+			if(scrollTop == 0) {
+				$(this).removeClass('show-footer');
+			}
+		}
 	});
 
 	//toggle ability to scroll to footer
@@ -210,6 +226,7 @@ jQuery(document).ready(function($) {
 		var section = $(this);
 		var content = $(this).children('.content');
 		var footer = $(this).children('footer')[0];
+		var lastScrollTop = 0;
 		$(content).scroll(function(event) {
 			var scrollHeight = content[0].scrollHeight;
 			var contentHeight = content[0].clientHeight;
@@ -217,23 +234,19 @@ jQuery(document).ready(function($) {
 			//scrolled to end of content -> scroll to footer
 			if(scrollHeight - scrollTop == contentHeight) {
 				$(section).addClass('show-footer');
-				$(section).scroll(function(event) {
-					var scrollTop = this.scrollTop;
-					var scrollHeight = this.scrollHeight;
-					var footerHeight = footer.clientHeight;
-					//scrolled to top of footer -> scroll in content 
-					if(scrollTop == 0) {
-						$(section).removeClass('show-footer');
-					}
-				});
 			}
+			if(scrollTop > lastScrollTop + 10) {
+				$(section).addClass('hide-header');
+				$(section).removeClass('open-nav');
+				$(section).removeClass('tease-nav');
+			} else if(scrollTop < lastScrollTop - 5 || scrollTop <= 50) {
+				$(section).removeClass('tease-nav');
+				$(section).removeClass('hide-header');
+			}
+			lastScrollTop = scrollTop;
 		});
-		// if content is too short to scroll -> scroll to footer
-		var scrollHeight = content[0].scrollHeight;
-		var contentHeight = content[0].clientHeight;
-		if(scrollHeight <= contentHeight) {
-			$(section).addClass('show-footer');
-		}
+
+
 	});
 
 	$('body').on('mousewheel', 'aside.main', function(e) {
@@ -295,8 +308,8 @@ jQuery(document).ready(function($) {
 		$(showingImage).addClass('show');
 		$(showingCaption).addClass('show');
 		setSliderWidth();
-
-		$(arrow).click(function() {
+		$(arrow).off('click');
+		$(arrow).on('click', function() {
 			var sliderWidth = $(slider).innerWidth();
 			var showingSlide = $('.slide.show');
 			var showingCaption = $('.caption.show');
@@ -428,8 +441,8 @@ jQuery(document).ready(function($) {
 	}
 
 	$(window).resize(function() {
-		setMainWidth();
+		setUp();
 		setSliderWidth();
-	}).resize();
+	});
 
 });

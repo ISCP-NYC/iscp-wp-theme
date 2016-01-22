@@ -16,7 +16,7 @@
 	<?php get_template_part('partials/nav') ?>
 	<?php get_template_part('partials/side') ?>
 	<div class="content">
-		<h4 class="title orange">Events &amp; Exhibitions</h4>
+		<h3 class="title head">Events &amp; Exhibitions</h3>
 		<div class="filter">
 			<div class="bar">
 				<div class="select link dropdown event-type" data-filter="event-type" data-slug="<?php echo $slug ?>">

@@ -45,10 +45,15 @@ section.past-residents {
 			background-image: url(../images/toggle-orange.svg) !important;
 		}
 	}
-	header.main nav .cell .sub-menu .child-item {
-		background-image: url(../images/bullet-black.svg) !important;
-		&:hover {
-			background-image: url(../images/bullet-orange.svg) !important;
+	header.main nav {
+		.cell .sub-menu .child-item {
+			background-image: url(../images/bullet-black.svg) !important;
+			&:hover {
+				background-image: url(../images/bullet-orange.svg) !important;
+			}
+		}
+		.cell.search input#s {
+			color: $black;
 		}
 	}
 	&.tease-nav header.main {
@@ -93,7 +98,7 @@ section.past-residents {
 			background-image: url(../images/bullet-orange.svg) !important;
 		}
 	}
-	h1, h4 {
+	h1, h2, h3 {
 		color: $black !important;
 	}
 	footer {
@@ -116,6 +121,14 @@ section.past-residents {
 					background-image: url(../images/logo-orange.svg);
 				}
 			}
+		}
+	}
+}
+a.black, .link.black, .past .link {
+	&:hover {
+		color: $orange !important;
+		&.wrap * {
+			color: $orange !important;
 		}
 	}
 }

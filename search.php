@@ -5,27 +5,25 @@ get_header();
 	<?php get_template_part( 'partials/nav' ) ?>
 	<?php get_template_part( 'partials/side' ) ?>
 	<div class="content">
-	<?php 
-	if ( have_posts() ) :
-		// echo '<h4 class="title orange">';
-		// 	echo 'Results for "' . get_search_query() . '"';
-		// echo '</h4>';
-
-		echo '<form role="search" method="get" class="searchform" action="' . esc_url( home_url( '/' ) ) . '">';
+	<?php
+	echo '<h3 class="title head">Results for: ';
+	echo '<form role="search" method="get" class="searchform" action="' . esc_url( home_url( '/' ) ) . '">';
 			$search_value = get_search_query();
 			if( !$search_value ):
 				$search_value = 'Search';
 			endif;
 			echo '<input type="text" value="' . $search_value . '" name="s" class="search" />';
-		echo '</form>';
+	echo '</form>';
+	echo '</h3>';
 
+	if ( have_posts() ) :
 		echo '<div class="shelves results list">';
 		while ( have_posts() ) : the_post();
 			get_template_part( 'items/search');
 		endwhile;
 		echo '</div>';
-	else :
-		get_template_part( 'content', 'none' );
+	else :	
+			echo '<h2 class="no">No results found for "' . $search_value . '"</h2>';
 	endif;
 	?>
 	</div>

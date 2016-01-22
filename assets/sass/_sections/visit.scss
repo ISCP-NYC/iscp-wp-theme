@@ -1,71 +1,72 @@
 section#visit {
-	.info {
-		h1 {
-			text-align: center;
+	.module {
+		&.info {
+			h1 {
+				text-align: center;
+			}
+			padding-bottom: 30px;
 		}
-		padding-bottom: 30px;
-	}
-	.map {
-		height: 500px;
-	}
-	.directions {
-		h4 {
+		&.map {
+			height: 500px;
+			.inner {
+				height: 500px;
+			}
+			.contact {
+				margin-top: 20px;
+				h1 {
+					width: calc(100%/3);
+					float: left;
+					text-align: center;
+				}
+			}
+		}
+		&.directions {
+			.steps {
+				width: 100%;
+				max-width: 600px;
+				display: table;
+				margin: auto;
+				.step {
+					@include medium-fs;
+					list-style-type:decimal;
+					padding-left: 20px;
+					margin: 0 0 20px 30px;
+				}
+			}
+			.footnote {
+				width: 100%;
+				max-width: 600px;
+				display: table;
+				margin: 10px auto 0 auto;
+				@include small-fs;
+			}
+		}
+		&.newsletter {
 			width: 100%;
-			padding: 20px 0;
-			@include small-fs;
-			text-align: center;
-			color: $orange;
-		}
-		.steps {
-			width: 100%;
-			max-width: 600px;
-			display: table;
-			margin: auto;
-			.step {
-				@include medium-fs;
-				list-style-type:decimal;
-				padding-left: 20px;
-				margin: 0 0 20px 30px;
-			}
-		}
-		.footnote {
-			width: 100%;
-			max-width: 600px;
-			display: table;
-			margin: 10px auto 0 auto;
-			@include small-fs;
-		}
-		padding-bottom: 30px;
-		@extend .border-top;
-		@extend .border-bottom;
+		    height: 70px;
+		    display: table;
+		    input {
+		    	width: 100%;
+		    	height: 100%;
+		    	border: 0;
+		    	padding: 0;
+		    	@include large-fs;
+		    	color: $orange;
+		    	text-align: center;
+		    	font-family: Times;
+		    	&::-webkit-input-placeholder {
+		    		color: $orange !important;  
+		    	}
+				&:-moz-placeholder {
+					color: $orange !important;  	
+				}
+				&::-moz-placeholder {
+					color: $orange !important;  
+				}
+				&:-ms-input-placeholder {  
+				    color: $orange !important;  
+				}
+		    }
+		}	
 	}
-	.newsletter {
-		width: 100%;
-	    height: 70px;
-	    padding: 20px 0;
-	    display: table;
-	    @extend .border-bottom;
-	    input {
-	    	width: 100%;
-	    	height: 100%;
-	    	border: 0;
-	    	padding: 0;
-	    	@include large-fs;
-	    	color: $orange;
-	    	text-align: center;
-	    	font-family: Times;
-	    	&::-webkit-input-placeholder {
-	    		color: $orange !important;  
-	    	}
-			&:-moz-placeholder {
-				color: $orange !important;  	
-			}
-			&::-moz-placeholder {
-				color: $orange !important;  
-			}
-			&:-ms-input-placeholder {  
-			    color: $orange !important;  
-			}
-	    }
-	}	
 }

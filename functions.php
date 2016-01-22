@@ -543,7 +543,7 @@ function get_tweets( $count ) {
 
 function get_event_date( $id ) {
 	$today = new DateTime();
-	$today = $today->format( 'Y-m-d H:i:s' );
+	$today_year = $today->format('Y');
 	$_start_date = get_field( 'start_date', $id );
 	$_end_date = get_field( 'end_date', $id );
 
@@ -568,18 +568,28 @@ function get_event_date( $id ) {
 
 	if ( $end_date ):
 		if ( $today > $start_date ):
-			$date_format = 'Through ' . $end_month . ' ' . $end_day;
+			$date_format = 'Thru ' . $end_month . ' ' . $end_day;
 		else:
 			$date_format = $start_month . '&nbsp;' . $start_day;
-			if ( $start_year != $end_year ):
+			if ( $start_year != $today_year ):
 				$date_format .= ', ' . $start_year;
 			endif;
-			if ($end_date):
-				$date_format .= ' &ndash; ' . $end_month . '&nbsp;' . $end_day . ',&nbsp;' . $end_year;
+			$date_format .= ' &ndash; ' . $end_month . '&nbsp;' . $end_day;
+			if ( $end_year != $today_year ):
+				$date_format .= ',&nbsp;' . $end_year;
 			endif;
 		endif;
 	else:
-		$date_format = $start_month . ' ' . $start_day . ',&nbsp;' . $start_year;
+		$date_format = $start_month . ' ' . $start_day;
+		if($start_year != $today_year):
+		 	$date_format .= ',&nbsp;' . $start_year;
+		endif;
+		if($start_time):
+			$date_format .= '</br>' . $start_time;
+			if($end_time):
+				$date_format .= ' &ndash; ' . $end_time;
+			endif;
+		endif;
 	endif;
 
 	return $date_format;

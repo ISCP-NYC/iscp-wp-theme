@@ -26,7 +26,7 @@ $programs = get_pages( $programs_query );
 	<?php get_template_part( 'partials/nav' ) ?>
 	<?php get_template_part( 'partials/side' ) ?>
 	<div class="content">
-		<h4 class="title orange"><?php echo $parent_title ?></h4>
+		<h3 class="title head"><?php echo $parent_title ?></h3>
 		<div class="program-links">
 			<?php
 			foreach( $programs as $program ):
