@@ -2,6 +2,7 @@
 	h2.head {
 		color: $black;
 		text-align: center;
+		margin-bottom: 48px;
 		a {
 			display: table;
 			margin: auto;
@@ -10,15 +11,17 @@
 	.events.upcoming {
 		width: 100%;
 		display: table;
+		padding-top: 10px !important;
 		.event {
-			@include width('100% / 3 - 20px');
+			width: calc('100% / 3') !important;
 			float: left;
-			margin: 0;
+			margin: 0 !important;
 			padding: 0;
 			border: 0;
 			.inner {
-				width: 100%;
-				margin: 0;
+				h2.title {
+					padding: 3px 0;
+				}
 				h3 {
 					text-align: center;
 					&.link {}
@@ -38,9 +41,9 @@
 				a {
 					width: 100%;
 					display: table;
-					color: $black;
+					color: $orange;
 					&:hover {
-						color: $orange !important;
+						color: $black !important;
 					}
 				}
 			}

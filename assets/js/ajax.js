@@ -8,6 +8,7 @@ jQuery(document).ready(function($) {
 		vars['pagename'] = slug;
 		vars['paged'] = paged;
 		vars = JSON.stringify(vars);
+		console.log(vars);
 		$.ajax({
 			url: ajaxpagination.ajaxurl,
 			type: 'post',
@@ -22,7 +23,7 @@ jQuery(document).ready(function($) {
 			success: function(response) {
 				replaceContent(response, vars);
 			}
-		})
+		});
 	});
 	function loading(vars) {
 		var vars = JSON.parse(vars);
@@ -46,4 +47,6 @@ jQuery(document).ready(function($) {
 			$(content).scrollTop(scrollHeight);
 		}
 	}
+
+	
 });

@@ -1,11 +1,12 @@
 <?php 
 	global $visit;
-	$title = get_post( $about )->post_title;
-	$slug = get_post( $about )->post_name;
+	$title = $post->post_title;
+	$slug = $post->post_name;
+	$id = $post->ID;
 	$about = get_page_by_path( 'about' );
 ?>
 
-<section class="visit" id="visit">
+<section <?php section_attr( $id, $slug, 'visit' ); ?>>
 	<?php get_template_part('partials/nav') ?>
 	<?php get_template_part('partials/side') ?>
 	<div class="content">

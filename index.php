@@ -12,7 +12,7 @@ $id = $post->ID;
 			International Studio &amp; Curatorial Program
 		</h2>
 		<h3 class="title">
-			<a href="<?php echo site_url() ?>/events">Events &amp; Exhibitions</a>
+			Upcoming Events &amp; Exhibitions
 		</h3>
 		<?php 
 			$today = new DateTime();

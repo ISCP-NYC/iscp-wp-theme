@@ -67,5 +67,4 @@ else:
 	get_template_part( 'partials/no-posts' );
 endif;
 wp_reset_query();
-wp_reset_query(); 
 ?>

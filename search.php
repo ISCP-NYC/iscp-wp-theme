@@ -1,29 +1,33 @@
 <?php 
 get_header();
+if( $query_vars ):
+	$paged = $query_vars['paged'];
+else:
+	$paged = 1;
+endif;
+$search_value = get_search_query();
+if( !$search_value ):
+	$search_value = 'Search';
+endif;
+// global $wp_query;
+$search_count = $wp_query->found_posts;
 ?>
-<section <?php section_attr( null, 'search', '' ); ?>>
+<section <?php section_attr( null, 'search', '' ); ?> data-page="<?php echo $paged ?>">
 	<?php get_template_part( 'partials/nav' ) ?>
 	<?php get_template_part( 'partials/side' ) ?>
 	<div class="content">
 	<?php
-	echo '<h3 class="title head">Results for: ';
-	echo '<form role="search" method="get" class="searchform" action="' . esc_url( home_url( '/' ) ) . '">';
-			$search_value = get_search_query();
-			if( !$search_value ):
-				$search_value = 'Search';
-			endif;
-			echo '<input type="text" value="' . $search_value . '" autocomplete="off" name="s" class="search" />';
-	echo '</form>';
-	echo '</h3>';
-
+	if( $search_value ):
+		echo '<h3 class="title head">' . $search_count . ' results for &ldquo;' . $search_value . '&rdquo;';
+	endif;
+	get_search_form();
 	if ( have_posts() ) :
 		echo '<div class="shelves results list">';
-		while ( have_posts() ) : the_post();
-			get_template_part( 'items/search');
-		endwhile;
+			include( locate_template( 'sections/loops/search.php' ) );
 		echo '</div>';
+		get_template_part( 'partials/load-more' );
 	else :	
-			echo '<h2 class="no">No results found for "' . $search_value . '"</h2>';
+		echo '<h2 class="no">No results found for "' . $search_value . '"</h2>';
 	endif;
 	?>
 	</div>

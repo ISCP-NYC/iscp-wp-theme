@@ -179,20 +179,74 @@ jQuery(document).ready(function($) {
 		$(section).removeClass('open-nav');
 	});
 
-	$('body').on('mouseenter', 'nav .search', function() {
-		var field = $(this).find('#s');
+	$('body').on('mouseenter', 'form.searchform', function() {
+		var field = $(this).find('input.s');
 		var value = $(field).attr('value');
 		if(value == 'Search') {
 			$(field).attr('value', '');
 		}
 		$(field).focus();
-	}).on('mouseleave', 'nav .search', function() {
-		var field = $(this).find('#s');
+	}).on('mouseleave', 'form.searchform', function() {
+		var field = $(this).find('input.s');
 		var value = $(field).attr('value');
 		if(value == '') {
 			$(field).attr('value', 'Search');
 		}
 		$(field).blur();
+	})
+
+	$('body').on('keyup', 'nav .search input', function() {
+		var input = this;
+		var section = $(input).parents('section');
+		var text = input.value;
+		var vars = ajaxpagination.query_vars;
+		vars = JSON.parse(vars);
+		vars['text'] = text;
+		vars = JSON.stringify(vars);
+		$.ajax({
+			url: ajaxpagination.ajaxurl,
+			type: 'post',
+			data: {
+				action: 'get_search_count',
+				query_vars: vars
+			},
+			success: function(response) {
+				response = JSON.parse(response);
+				var count = response['count'];
+				var countText = response['text'];
+				var inputText = input.value;
+				if(countText === inputText) {
+					var counter = $(section).find('nav .search .counter');
+					count = '(' + count + ')';
+					$(counter).text(count);
+				}
+			}
+		});
+	});
+
+	$('body').on('keyup', 'section#search input.s', function() {
+		var input = this;
+		var section = $(input).parents('section');
+		var text = input.value;
+		var vars = ajaxpagination.query_vars;
+		vars = JSON.parse(vars);
+		vars['s'] = text;
+		vars = JSON.stringify(vars);
+		$.ajax({
+			url: ajaxpagination.ajaxurl,
+			type: 'post',
+			data: {
+				action: 'update_search_results',
+				query_vars: vars
+			},
+			success: function(response) {
+				$(section).find('.results').html(response);
+				if (history.pushState) {
+				    var newurl = window.location.protocol + "//" + window.location.host + window.location.pathname + '?s=' + text;
+				    window.history.pushState({path:newurl},'',newurl);
+				}
+			}
+		});
 	});
 
 	//toggle header visibility with scroll behavior

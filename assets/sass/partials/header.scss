@@ -102,7 +102,7 @@ header.main {
 						display: table-cell;
 						vertical-align: middle;
 					}
-					input#s {
+					input.s {
 						width: 80%;
 						display: table;
 						margin: auto;
@@ -113,6 +113,14 @@ header.main {
 						outline: none; 
 						text-align: center;
 					}
+				}
+				.counter {
+					width: 100%;
+				    position: absolute;
+				    bottom: 0;
+				    left: 0;
+				    @include large-fs;
+				    text-align: center;
 				}
 			}
 		}

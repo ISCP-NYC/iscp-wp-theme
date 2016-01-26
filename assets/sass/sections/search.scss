@@ -1,15 +1,17 @@
 section#search {
 	.content {
 		form.searchform {
+			width: 100%;
 			display: table;
-			margin: auto;
-			input.search {
-				width: 150px;
-				padding: 0px;
+			margin: 50px 0;
+			input.s {
+				width: 100%;
+				padding: 0 0 10px 0;
+				margin: 0;
 			    color: $orange;
-			    @include small-fs;
+			    @include large-fs;
 			    border: 0; 
-			    border-bottom: 2px solid $orange;
+			    border-bottom: 10px solid $orange;
 			    outline: none;
 			    text-align: center;
 			    float: left;

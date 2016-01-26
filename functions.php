@@ -74,12 +74,32 @@ function load_more() {
     $post_type = $slug;
     if( strstr( $slug, 'residents' ) ):
     	$post_type = 'residents';
+    elseif( $slug == 'search-count' ):
+    	include( locate_template( 'other/search-count.php' ) );
     endif;
     include( locate_template( 'sections/loops/' . $post_type . '.php' ) );
     die();
 }
 add_action( 'wp_ajax_nopriv_load_more', 'load_more' );
 add_action( 'wp_ajax_load_more', 'load_more' );
+
+function get_search_count() {
+	$query_vars = json_decode( stripslashes( $_POST['query_vars'] ), true );
+	include( locate_template( 'other/search-count.php' ) );
+	die();
+}
+add_action( 'wp_ajax_nopriv_get_search_count', 'get_search_count' );
+add_action( 'wp_ajax_get_search_count', 'get_search_count' );
+
+function update_search_results() {
+	$query_vars = json_decode( stripslashes( $_POST['query_vars'] ), true );
+    $text = $query_vars['text'];
+    include( locate_template( 'sections/loops/search.php' ) );
+    die();
+}
+add_action( 'wp_ajax_nopriv_update_search_results', 'update_search_results' );
+add_action( 'wp_ajax_update_search_results', 'update_search_results' );
+
 
 
 /////////////////////////////////////

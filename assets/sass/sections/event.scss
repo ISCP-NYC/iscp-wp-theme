@@ -161,7 +161,7 @@ section.single.event {
 			}
 		}
 	}
-	.events {
+	.upcoming-events {
 		width: 100%;
 		display: table;
 		color: $orange;
@@ -192,6 +192,15 @@ section.single.event {
 					width: 100%;
 
 				}
+			}
+		}
+		* {
+			color: $orange !important;
+		}
+		a:hover, .link:hover, .wrap:hover {
+			color: $black !important;
+			* {
+				color: $black !important;
 			}
 		}
 	}

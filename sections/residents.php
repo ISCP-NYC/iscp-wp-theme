@@ -1,6 +1,4 @@
-<?php
-include(locate_template('sections/params/residents.php'));
-?>
+<?php include( locate_template( 'sections/params/residents.php' ) ); ?>
 <section <?php section_attr( $id, $slug, 'residents' ); ?> data-page="<?php echo $paged ?>">
 	<?php get_template_part('partials/nav') ?>
 	<?php get_template_part('partials/side') ?>

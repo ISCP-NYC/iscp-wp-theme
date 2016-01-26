@@ -7,8 +7,8 @@
 	$footnote = get_field( 'footnote', $id );
 	$event_type = get_field( 'event_type', $id );
 	$event_type_pretty = pretty( $event_type );
-	$dates = get_event_date( $id );
-	$dates = preg_replace("~</br>~", ' ', $dates);
+	$date = get_event_date( $id );
+	$date = preg_replace("~</br>~", ' ', $date);
 	$event_classes = 'event single';
 	
 	$end_date_key = get_end_date_value( $id );
@@ -36,11 +36,11 @@
 	<?php get_template_part('partials/side') ?>
 
 	<div class="content">
-		<h4 class="title orange">
+		<h3 class="title">
 			<?php echo $event_type_pretty; ?>
 			</br>
-			<?php echo $dates; ?>
-		</h4>	
+			<?php echo $date; ?>
+		</h3>	
 
 		<h1 class="title"><?php echo $title ?></h1>
 
@@ -201,46 +201,50 @@
 			echo '</div>';
 		endif;
 		?>
-		<div class="events">
-			<h4>Upcoming Events &amp; Exhibitions</h4>
-			<div class="shelves grid">
-				<?php 
-				$today = new DateTime();
-				$today = $today->format('Y-m-d H:i:s');
-				$args = array(
-					'post_type' => 'event',
-					'posts_per_page' => 3,
-					'meta_query' => array(
-						'relation' => 'OR',
-						array(
-							'key' => 'end_date',
-							'compare' => '>=',
-							'value' => $today,
-							'type' => 'DATE',
-							'orderby' => 'meta_value',
-							'order' => 'DESC'
-						),
-						array(
-							'key' => 'date',
-							'compare' => '>=',
-							'value' => $today,
-							'type' => 'DATE',
-							'orderby' => 'meta_value',
-							'order' => 'DESC'
-						)
-					),
+		<?php 
+		$today = new DateTime();
+		$today = $today->format('Y-m-d H:i:s');
+		$args = array(
+			'post_type' => 'event',
+			'posts_per_page' => 3,
+			'meta_query' => array(
+				'relation' => 'OR',
+				array(
+					'key' => 'end_date',
+					'compare' => '>=',
+					'value' => $today,
+					'type' => 'DATE',
 					'orderby' => 'meta_value',
-				    'order' => 'ASC',
-				    'post__not_in' => array($id)
-				);
+					'order' => 'DESC'
+				),
+				array(
+					'key' => 'date',
+					'compare' => '>=',
+					'value' => $today,
+					'type' => 'DATE',
+					'orderby' => 'meta_value',
+					'order' => 'DESC'
+				)
+			),
+			'orderby' => 'meta_value',
+		    'order' => 'ASC',
+		    'post__not_in' => array($id)
+		);
 
-				$loop = new WP_Query( $args );
-				while ( $loop->have_posts() ) : $loop->the_post();
-					get_template_part( 'items/event' );
-				endwhile;
-				?>
-			</div>
-		</div>
+		$upcoming_events = new WP_Query( $args );
+		$GLOBALS['wp_query'] = $upcoming_events;
+		if ( have_posts() ):
+			echo '<div class="upcoming-events">';
+			echo '<h4>Upcoming Events &amp; Exhibitions</h4>';
+			echo '<div class="shelves grid">';
+			while ( have_posts() ) :
+				the_post();
+				get_template_part( 'sections/items/event' );
+			endwhile;
+			echo '</div>';
+			echo '</div>';
+		endif;
+		?>
 	</div>
 	<?php get_template_part('partials/footer') ?>
 </section>

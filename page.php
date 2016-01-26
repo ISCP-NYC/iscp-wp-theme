@@ -38,6 +38,12 @@
 
 		get_template_part( 'sections/events' );
 
+		$visit_page_id = get_page_by_path( 'visit' )->ID;
+		$post = get_post( $visit_page_id, OBJECT );
+		setup_postdata( $post );
+		get_template_part( 'sections/visit' );
+		wp_reset_postdata();
+
 	elseif( $page_slug == 'sponsors' ):
 
 		get_template_part( 'sections/sponsors' );		
@@ -60,7 +66,19 @@
 
 	elseif( $page_slug == 'apply' ):
 
+		$programs_page_id = get_page_by_path( 'residency-programs' )->ID;
+		$post = get_post( $programs_page_id, OBJECT );
+		setup_postdata( $post );
+		get_template_part( 'sections/programs' );
+		wp_reset_postdata();
+
 		get_template_part( 'sections/apply' );
+
+		$sponsors_page_id = get_page_by_path( 'support/sponsors' )->ID;
+		$post = get_post( $sponsors_page_id, OBJECT );
+		setup_postdata( $post );
+		get_template_part( 'sections/sponsors' );
+		wp_reset_postdata();
 
 	elseif( $page_slug == 'about' ):
 

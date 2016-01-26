@@ -142,7 +142,7 @@
 				</div>
 			</div>
 
-		<? wp_reset_postdata(); ?>
+		<?php wp_reset_postdata(); ?>
 		<?php endforeach; ?>
 	</div>
 	<?php get_template_part('partials/footer') ?>
