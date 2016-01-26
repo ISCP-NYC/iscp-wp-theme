@@ -201,7 +201,7 @@ jQuery(document).ready(function($) {
 		var text = input.value;
 		var vars = ajaxpagination.query_vars;
 		vars = JSON.parse(vars);
-		vars['text'] = text;
+		vars['s'] = text;
 		vars = JSON.stringify(vars);
 		$.ajax({
 			url: ajaxpagination.ajaxurl,
@@ -224,7 +224,10 @@ jQuery(document).ready(function($) {
 		});
 	});
 
+	var timer;
+
 	$('body').on('keyup', 'section#search input.s', function() {
+		clearTimeout(timer);
 		var input = this;
 		var section = $(input).parents('section');
 		var text = input.value;
@@ -232,21 +235,44 @@ jQuery(document).ready(function($) {
 		vars = JSON.parse(vars);
 		vars['s'] = text;
 		vars = JSON.stringify(vars);
-		$.ajax({
-			url: ajaxpagination.ajaxurl,
-			type: 'post',
-			data: {
-				action: 'update_search_results',
-				query_vars: vars
-			},
-			success: function(response) {
-				$(section).find('.results').html(response);
-				if (history.pushState) {
-				    var newurl = window.location.protocol + "//" + window.location.host + window.location.pathname + '?s=' + text;
-				    window.history.pushState({path:newurl},'',newurl);
+		timer = setTimeout(function() {
+			$.ajax({
+				url: ajaxpagination.ajaxurl,
+				type: 'post',
+				data: {
+					action: 'get_search_count',
+					query_vars: vars
+				},
+				success: function(response) {
+					response = JSON.parse(response);
+					var count = response['count'];
+					var countText = response['text'];
+					var inputText = input.value;
+					if(countText === inputText) {
+						var counter = $(section).find('.title .counter');
+						var value = $(section).find('.title .value');
+						$(counter).text(count);
+						$(value).text(countText);
+					}
 				}
-			}
-		});
+			});
+
+			$.ajax({
+				url: ajaxpagination.ajaxurl,
+				type: 'post',
+				data: {
+					action: 'update_search_results',
+					query_vars: vars
+				},
+				success: function(response) {
+					$(section).find('.results').html(response);
+					if (history.pushState) {
+					    var newurl = window.location.protocol + "//" + window.location.host + window.location.pathname + '?s=' + text;
+					    window.history.pushState({path:newurl},'',newurl);
+					}
+				}
+			});
+		}, 200);
 	});
 
 	//toggle header visibility with scroll behavior

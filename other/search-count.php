@@ -1,7 +1,6 @@
 <?php
 if( $query_vars ):
-	$text = $query_vars['text'];
-	// $search = new WP_Query('s=' . $text . '&showposts=0');
+	$text = $query_vars['s'];
 	$search = new WP_Query( array(
 		's' => $text,
 		'posts_per_page' => -1,
@@ -12,7 +11,7 @@ if( $query_vars ):
 		'count' => $search_count, 
 		'text' => $text
 	);
-	echo  json_encode($response);
+	echo json_encode($response);
 	wp_reset_query();
 endif;
 ?>

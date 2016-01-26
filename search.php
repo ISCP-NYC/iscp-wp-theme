@@ -18,17 +18,19 @@ $search_count = $wp_query->found_posts;
 	<div class="content">
 	<?php
 	if( $search_value ):
-		echo '<h3 class="title head">' . $search_count . ' results for &ldquo;' . $search_value . '&rdquo;';
+		echo '<h3 class="title head">';
+		echo '<span class="counter">' . $search_count . '</span>';
+		echo ' results for ';
+		echo '&ldquo;<span class="value">'. $search_value . '</span>&rdquo;';
+		echo '</h3>';
 	endif;
 	get_search_form();
+	echo '<div class="shelves results list">';
 	if ( have_posts() ) :
-		echo '<div class="shelves results list">';
-			include( locate_template( 'sections/loops/search.php' ) );
-		echo '</div>';
+		include( locate_template( 'sections/loops/search.php' ) );
 		get_template_part( 'partials/load-more' );
-	else :	
-		echo '<h2 class="no">No results found for "' . $search_value . '"</h2>';
 	endif;
+	echo '</div>';
 	?>
 	</div>
 	<?php get_template_part('partials/footer'); ?>
