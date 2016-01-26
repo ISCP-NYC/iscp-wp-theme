@@ -1,18 +1,7 @@
-<?php 
-	global $post;
-	$title = get_post( $post )->post_title;
-	$slug = get_post( $post )->post_name;
-	$id = get_post( $post )->ID;
-	$today = new DateTime();
-	$today = $today->format( 'Ymd' );
-
-	$event_type_param = get_query_var( 'type' );
-	$year_param = get_query_var( 'date' );
-	$event_classes = $event_type_param . ' ' . $year_param;
-	$page_url = get_the_permalink();
+<?php
+include(locate_template('sections/params/events.php'));
 ?>
-
-<section <?php section_attr( $id, $slug, $events_classes ); ?>>
+<section <?php section_attr( $id, $slug, $events_classes ); ?> data-page="<?php echo $page ?>">
 	<?php get_template_part('partials/nav') ?>
 	<?php get_template_part('partials/side') ?>
 	<div class="content">
@@ -114,64 +103,9 @@
 		</div>
 
 		<div class="events shelves filter-this grid <?php echo $slug ?>">
-			<?php
-				if( $event_type_param ) {
-					$filter_key = 'event_type';
-					$filter_query = array(
-						'key' => 'event_type',
-						'type' => 'CHAR',
-						'value' => $event_type_param,
-						'compare' => 'LIKE'
-					);
-					$append_query = '?type=' . $event_type;
-				} elseif( $year_param ) {
-					$year_begin = $year_param . '0101';
-					$year_end = $year_param . '1231';
-					$year_range = array( $year_begin, $year_end );
-					$filter_query = array(
-						'relation' => 'OR',
-						array(
-							'key' => 'start_date',
-							'type' => 'DATE',
-							'value' => $year_range,
-							'compare' => 'BETWEEN'
-						),
-						array(
-							'key' => 'end_date',
-							'type' => 'DATE',
-							'value' => $year_range,
-							'compare' => 'BETWEEN'
-						),
-						array(
-							'key' => 'date',
-							'type' => 'DATE',
-							'value' => $year_range,
-							'compare' => 'BETWEEN'
-						)
-					);
-					$append_query = '?date=' . $year_param;
-				}
-				
-				$args = array(
-					'post_type' => 'event',
-					'posts_per_page' => 6,
-					'orderby' => 'meta_value',
-					'order' => 'DESC',
-					'meta_query' => array( $filter_query )
-				);
-
-				$events = new WP_Query( $args );
-				while ( $events->have_posts() ) : $events->the_post();
-					get_template_part( 'items/event' );
-				endwhile;
-				wp_reset_query(); 
-			?>
+			<?php get_template_part('sections/loops/events'); ?>	
 		</div>
-		<div class="clear">
-			<a href="#" class="load-more">
-				Load More.
-			</a>
-		</div>
+		<?php get_template_part('partials/load-more'); ?>
 	</div>
 	<?php get_template_part('partials/footer') ?>
 </section>

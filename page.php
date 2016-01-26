@@ -1,14 +1,14 @@
 <?php
 	get_header();
 	global $post;
-	$slug = get_post( $post )->post_name;
+	$page_slug = get_post( $post )->post_name;
 	$parent = $post->post_parent;
 	$parent_slug = get_post( $parent )->post_name;
 
 	$resident_types = array( 'current-residents', 'past-residents' );
 	$event_types = array( 'events', 'exhbitions', 'iscp-talks', 'off-site-projects', 'open-studios' );
 	
-	if( $slug == 'current-residents' ):
+	if( $page_slug == 'current-residents' ):
 
 		$programs_page_id = get_page_by_path( 'residency-programs' )->ID;
 		$post = get_post( $programs_page_id, OBJECT );
@@ -24,7 +24,7 @@
 		get_template_part( 'sections/residents' );
 		wp_reset_postdata();
 
-	elseif ( $slug == 'past-residents' ):
+	elseif ( $page_slug == 'past-residents' ):
 
 		$current_residents_page_id = get_page_by_path( 'current-residents' )->ID;
 		$post = get_post( $current_residents_page_id, OBJECT );
@@ -34,11 +34,11 @@
 
 		get_template_part( 'sections/residents' );
 
-	elseif( in_array( $slug, $event_types ) ):
+	elseif( in_array( $page_slug, $event_types ) ):
 
 		get_template_part( 'sections/events' );
 
-	elseif( $slug == 'sponsors' ):
+	elseif( $page_slug == 'sponsors' ):
 
 		get_template_part( 'sections/sponsors' );		
 
@@ -58,19 +58,19 @@
 		get_template_part( 'sections/apply' );
 		wp_reset_postdata();
 
-	elseif( $slug == 'apply' ):
+	elseif( $page_slug == 'apply' ):
 
 		get_template_part( 'sections/apply' );
 
-	elseif( $slug == 'about' ):
+	elseif( $page_slug == 'about' ):
 
 		get_template_part( 'sections/about' );
 
-	elseif( $slug == 'visit' ):
+	elseif( $page_slug == 'visit' ):
 
 		get_template_part( 'sections/visit' );
 
-	elseif( $slug == 'resident-resources'):
+	elseif( $page_slug == 'resident-resources'):
 
 		if (user_is_resident()):
 			get_template_part( 'sections/resident-resources' );

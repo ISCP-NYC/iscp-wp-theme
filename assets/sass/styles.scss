@@ -113,6 +113,29 @@ section {
 	&.static * {
 		transition: none !important;
 	}
+	.load-more {
+		width: 100%;
+		@include large-fs;
+		a {
+			display: table;
+			margin: auto;
+			color: $orange;
+		}
+		span {
+			display: none;
+			margin: auto;
+		}
+	}
+	&.loading {
+		.load-more {
+			a {
+				display: none;
+			}
+			span {
+				display: table;
+			}
+		}
+	}
 }
 
 em, i {
@@ -179,13 +202,6 @@ h4, .small {
 }
 .half-border-left {
 	border-left: 5px solid $orange;
-}
-
-.load-more {
-	@include large-fs;
-	color: $orange;
-	display: table;
-	margin: auto;
 }
 body.login {
 	background-color: $orange;

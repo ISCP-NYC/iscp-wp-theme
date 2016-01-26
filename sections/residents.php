@@ -1,45 +1,7 @@
 <?php
-$title = get_the_title();
-$slug = $post->post_name;
-$id = $post->ID;
-$today = new DateTime();
-$today = $today->format( 'Ymd' );
-$page_query = array(
-	'key' => 'residency_dates_0_end_date',
-	'type' => 'DATE',
-	'value' => $today,
-);
-switch( $slug ) {
-	case 'current-residents':
-		$page_query = array_merge(
-			$page_query, array(
-				'compare' => '>='
-			)
-		);
-		$resident_status = 'current';
-		$alt_slug = 'past-residents';
-		break;
-	case 'past-residents':
-		$page_query = array_merge(
-			$page_query, array(
-				'compare' => '<='
-			)
-		);
-		$resident_status = 'past';
-		$alt_slug = 'current-residents';
-		break;
-}
-
-$country_param = get_query_var( 'from' );
-$country_param_obj = get_page_by_path($country_param, OBJECT, 'country');
-$country_param_title = $country_param_obj->post_title;
-$country_param_id = $country_param_obj->ID;
-$year_param = get_query_var( 'date' );
-$program_param = get_query_var( 'residency_program' );
-$page_url = get_the_permalink();
+include(locate_template('sections/params/residents.php'));
 ?>
-
-<section <?php section_attr( $id, $slug, 'residents' ); ?>>
+<section <?php section_attr( $id, $slug, 'residents' ); ?> data-page="<?php echo $paged ?>">
 	<?php get_template_part('partials/nav') ?>
 	<?php get_template_part('partials/side') ?>
 	<div class="content">
@@ -114,7 +76,6 @@ $page_url = get_the_permalink();
 			<div class="filter-list country <?php echo $slug ?>">
 				<div class="options">
 				<?php
-					$page_url = get_the_permalink();
 					$countries = get_posts( array(
 						'posts_per_page'	=> -1,
 						'post_type'			=> 'country',
@@ -126,7 +87,7 @@ $page_url = get_the_permalink();
 						$country_slug = $country->post_name;
 						$country_title = $country->post_title;
 						$country_count = resident_count_by_country( $country_id, $page_query );
-						$filter_url = $page_url . '?from=' . $country_slug;
+						$filter_url = $page_url . '&from=' . $country_slug;
 						echo '<div class="option">';
 						echo '<a href="' . $filter_url . '">';
 						echo ucwords( $country_title );
@@ -141,12 +102,11 @@ $page_url = get_the_permalink();
 			<div class="filter-list year <?php echo $slug ?>">
 				<div class="options">
 				<?php
-					$page_url = get_the_permalink();
 					$start_date = 1994;
 					$end_date = date( "Y" );
 					$years = array_reverse( range( $start_date,$end_date ) );
 					foreach( $years as $year ): 
-						$filter_url = $page_url . '?date=' . $year;
+						$filter_url = $page_url . '&date=' . $year;
 						$year_count = resident_count_by_year( $year, $page_query );
 						echo '<div class="option">';
 						echo '<a href="' . $filter_url . '">';
@@ -168,7 +128,7 @@ $page_url = get_the_permalink();
 						'ground_floor'
 					);
 					foreach( $residency_programs as $program ): 
-						$filter_url = $page_url . '?residency_program=' . $program;
+						$filter_url = $page_url . '&residency_program=' . $program;
 						$program_count = resident_count_by_program( $program, $page_query );
 						echo '<div class="option">';
 						echo '<a href="' . $filter_url . '">';
@@ -183,53 +143,9 @@ $page_url = get_the_permalink();
 		</div>
 
 		<div class="residents shelves filter-this grid <?php echo $slug ?>">
-			<?php
-			if( $country_param ) {
-				$filter_query = array(
-					'key' => 'country',
-					'value' => '"' . $country_param_id . '"',
-					'compare' => 'LIKE'
-				);
-				$append_query = '?from=' . $country_param;
-			} elseif( $year_param ) {
-				$year_begin = $year . '0101';
-				$year_end = $year . '1231';
-				$year_range = array( $year_begin, $year_end );
-				$filter_query = array(
-					'key' => 'residency_dates_0_start_date',
-					'type' => 'DATE',
-					'value' => $year_range,
-					'compare' => 'BETWEEN'
-				);
-				$append_query = '?date=' . $year_param;
-			} elseif( $program_param ) {
-				$filter_query = array(
-					'key' => 'residency_program',
-					'type' => 'CHAR',
-					'value' => $residency_program,
-					'compare' => 'LIKE'
-				);
-				$append_query = '?residency_program=' . $program_param;
-			}
-							
-			$residents_query = array(
-				'post_type' => 'resident',
-				'posts_per_page' => 18,
-				'orderby' => 'last_name',
-				'order' => 'ASC',
-				'post_status' => 'publish',
-				'meta_query' => array( $page_query, $filter_query )
-			);
-			$residents = new WP_Query( $residents_query );
-			while ( $residents->have_posts() ) : $residents->the_post();
-				get_template_part( 'items/resident' );
-			endwhile;
-			wp_reset_query(); 
-			?>
+			<?php include(locate_template('sections/loops/residents.php')); ?>	
 		</div>
-		<div class="clear">
-			<a href="#" class="load-more">Load More.</a>
-		</div>
+		<?php get_template_part('partials/load-more'); ?>
 	</div>
 	<?php get_template_part('partials/footer'); ?>
 </section>

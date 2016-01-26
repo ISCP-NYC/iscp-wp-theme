@@ -17,7 +17,7 @@ $id = $post->ID;
 		<?php 
 			$today = new DateTime();
 			$today = $today->format('Y-m-d H:i:s');
-			$args = array(
+			$events_query = array(
 				'post_type' => 'event',
 				'posts_per_page' => 3,
 				'meta_query' => array(
@@ -50,30 +50,34 @@ $id = $post->ID;
 				'orderby' => 'meta_value',
 			    'order' => 'ASC'
 			);
-			$upcoming_events = new WP_Query( $args );
+
+			$upcoming_events = new WP_Query( $events_query );
 			$count = $upcoming_events->found_posts;
 			$count_class = 'cols_' . $count;
-			
-			echo '<div class="events module shelves grid upcoming ' . $count_class . '">';
-				while ( $upcoming_events->have_posts() ) : $upcoming_events->the_post();
-
-					get_template_part( 'items/event' );
-
+			$GLOBALS['wp_query'] = $upcoming_events;
+			if ( have_posts() ):
+				echo '<div class="events module shelves grid upcoming ' . $count_class . '">';
+				while ( have_posts() ) :
+					the_post();
+					get_template_part( 'sections/items/event' );
 				endwhile;
+				echo '</div>';
+			else:
+				get_template_part( 'partials/no-posts' );
+			endif;
 			?>
-		</div>	
 
 		<?php
 			$about = get_page_by_path( 'about' );
 			$about_id = $about->ID;
-			$mission = get_field('mission', $about_id);
+			$description = get_field('description', $about_id);
 			$address = get_field('address', $about_id);
 		?>
 
-		<div class="mission module">
+		<div class="about module">
 			<h3 class="title"><?php echo $address ?></h3>
 			<div class="medium">
-				<?php echo strip_tags( $mission ) ?>
+				<?php echo strip_tags( $description ) ?>
 			</div>
 		</div>
 

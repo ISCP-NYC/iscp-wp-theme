@@ -72,6 +72,7 @@ jQuery(document).ready(function($) {
 		});
 		var centerSlug = $('body').attr('data-center-slug');
 		var centerIndex = $('section#' + centerSlug).index();
+		$('section#' + centerSlug).attr('data-permalink', window.location);
 		slideTo(centerIndex, false);
 	}
 
@@ -108,6 +109,8 @@ jQuery(document).ready(function($) {
 			var id = $(section).attr('data-id');
 			var slug = $(section).attr('data-slug');
 			$('body').attr('data-center-id', id).attr('data-center-slug', slug);
+
+			//this is overriding the query vars
 			window.history.replaceState({page: index}, null, url);
 		}
 	}

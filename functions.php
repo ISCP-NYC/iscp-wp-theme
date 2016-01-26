@@ -41,22 +41,64 @@ add_action( 'wp_head', 'twentyfifteen_javascript_detection', 0 );
  */
 function iscp_scripts() {
 	wp_enqueue_style( 'style', get_template_directory_uri() . '/assets/css/styles.css' );
-	wp_register_script( 'main', get_template_directory_uri() . '/assets/js/main.js', array( 'jquery' ) );
 	wp_register_script( 'transit', get_template_directory_uri() . '/assets/js/jquery.transit.min.js', array( 'jquery' ) );
-	wp_enqueue_script( 'main' );
+	wp_register_script( 'ajax', get_template_directory_uri() . '/assets/js/ajax.js', array( 'jquery' ) );
+	wp_register_script( 'main', get_template_directory_uri() . '/assets/js/main.js', array( 'jquery' ) );
 	wp_enqueue_script( 'transit' );
-
-	wp_localize_script( 'main', 'ajaxpagination', array(
-		'ajaxurl' => admin_url( 'admin-ajax.php' )
+	wp_enqueue_script( 'ajax' );
+	wp_enqueue_script( 'main' );
+	global $wp_query;
+	wp_localize_script( 'ajax', 'ajaxpagination', array(
+		'ajaxurl' => admin_url( 'admin-ajax.php' ),
+		'query_vars' => json_encode( $wp_query->query )
 	));
 }
 add_action( 'wp_enqueue_scripts', 'iscp_scripts' );
-
 
 show_admin_bar(false);
 add_theme_support( 'post-thumbnails' ); 
 add_image_size( 'thumb', 500, 350, true );
 add_image_size( 'slider', 9999, 500, false );
+
+
+/////////////////////////////////////
+/////////////////////////////////////
+///////////AJAX AJAX AJAX////////////
+/////////////////////////////////////
+/////////////////////////////////////
+
+function load_more() {
+	$query_vars = json_decode( stripslashes( $_POST['query_vars'] ), true );
+    $query_vars['paged'] = $_POST['page'];
+    $slug = $query_vars['pagename'];
+    $post_type = $slug;
+    if( strstr( $slug, 'residents' ) ):
+    	$post_type = 'residents';
+    endif;
+    include( locate_template( 'sections/loops/' . $post_type . '.php' ) );
+    die();
+}
+add_action( 'wp_ajax_nopriv_load_more', 'load_more' );
+add_action( 'wp_ajax_load_more', 'load_more' );
+
+
+/////////////////////////////////////
+/////////////////////////////////////
+//////////////LOOP QUERY/////////////
+/////////////////////////////////////
+/////////////////////////////////////
+
+function add_query_vars_filter( $vars ){
+  $vars[] .= 'when';
+  $vars[] .= 'date';
+  $vars[] .= 'country';
+  $vars[] .= 'from';
+  $vars[] .= 'residency_program';
+  $vars[] .= 'type';
+  $vars[] .= 'filter';
+  return $vars;
+}
+add_filter( 'query_vars', 'add_query_vars_filter' );
 
 /////////////////////////////////////
 /////////////////////////////////////
@@ -245,24 +287,6 @@ function resident_column_orderby( $vars ) {
 	return $vars;
 }
 add_filter( 'request', 'resident_column_orderby' );
-
-
-
-/////////////////////////////////////
-/////////////////////////////////////
-///////QUERY FILTER VARIABLES////////
-/////////////////////////////////////
-/////////////////////////////////////
-function add_query_vars_filter( $vars ){
-  $vars[] = 'when';
-  $vars[] = 'date';
-  $vars[] .= 'country';
-  $vars[] .= 'from';
-  $vars[] .= 'residency_program';
-  $vars[] .= 'type';
-  return $vars;
-}
-add_filter( 'query_vars', 'add_query_vars_filter' );
 
 
 /////////////////////////////////////
@@ -744,7 +768,7 @@ function user_is_resident() {
 	}
 }
 
-function resident_count_by_country( $country_id, $page_query ) {	
+function resident_count_by_country( $country_id, $page_query ) {
 	$country_meta_query = array(
 		'key' => 'country',
 		'value' => '"' . $country_id . '"',

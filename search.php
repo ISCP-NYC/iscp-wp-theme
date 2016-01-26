@@ -12,7 +12,7 @@ get_header();
 			if( !$search_value ):
 				$search_value = 'Search';
 			endif;
-			echo '<input type="text" value="' . $search_value . '" name="s" class="search" />';
+			echo '<input type="text" value="' . $search_value . '" autocomplete="off" name="s" class="search" />';
 	echo '</form>';
 	echo '</h3>';
 
