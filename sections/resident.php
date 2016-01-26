@@ -26,7 +26,7 @@
 	<div class="content">
 		<header class="sub">
 			<div class="left">
-				<h2 class="country"><?php echo $country ?></h2>
+				<h3 class="country"><?php echo $country ?></h3>
 			</div>
 
 			<div class="center">
@@ -52,7 +52,7 @@
 					endwhile;
 				endif;
 				if( is_past( $resident_id ) ):
-					echo '<h2>';
+					echo '<h3>';
 					echo 'Past Resident: ';
 					foreach ($residencies as $index=>$residency):
 						if( $index != 0 ):
@@ -63,21 +63,21 @@
 						echo '</br>';
 						echo get_sponsors( $resident_id );
 					endforeach;
-					echo '</h2>';
+					echo '</h3>';
 				elseif( is_current( $resident_id ) ):
 					$current_residency = $residencies[0];
 					$date_range = $current_residency->date_range;
-					echo '<h2>';
+					echo '<h3>';
 					echo 'Current Resident: ' . $date_range;
 					echo '</br>';
-					echo '</h2>';
+					echo '</h3>';
 					echo get_sponsors( $resident_id );
 				endif; ?>
 			</div>
 
 			<div class="right">
 				<?php if( is_current( $resident_id ) ): 
-					echo '<h2 class="studio-number">Studio #' . $studio_number . '</h2>';
+					echo '<h3 class="studio-number">Studio #' . $studio_number . '</h3>';
 				endif; ?>
 				<h2 class="resident-type"><?php echo $resident_type ?></h2>
 			</div>

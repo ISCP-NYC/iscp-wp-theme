@@ -15,6 +15,5 @@ if( $query_vars ):
 	$paged = $query_vars['paged'];
 	$post = get_page_by_path( $slug, OBJECT, 'page' );
 	$country_param = $query_vars['from'];
-	$type_param = $query_vars['type'];
 endif;
 ?>

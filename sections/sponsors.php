@@ -23,20 +23,6 @@
 							<div class="icon hover"></div>
 						</div>
 					</div>
-					<div class="select link dropdown type" data-filter="type" data-slug="<?php echo $slug ?>">
-						<?php
-						if( $program_param ):
-							$program_count = '';
-						else:
-							$program_count = null;
-						endif;
-						echo '<span>Sponsor Type' . $program_count . '</span>';
-						?>
-						<div class="swap">
-							<div class="icon default"></div>
-							<div class="icon hover"></div>
-						</div>
-					</div>
 				</div>
 			</div>
 			<div class="right type">

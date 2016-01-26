@@ -7,11 +7,7 @@ if( $query_vars ):
 		'post_status' => 'publish'
 	) ); 
 	$search_count = $search->found_posts;
-	$response = array(
-		'count' => $search_count, 
-		'text' => $text
-	);
-	echo json_encode($response);
+	echo $search_count;
 	wp_reset_query();
 endif;
 ?>

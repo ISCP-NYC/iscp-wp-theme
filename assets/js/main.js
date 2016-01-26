@@ -193,41 +193,11 @@ jQuery(document).ready(function($) {
 			$(field).attr('value', 'Search');
 		}
 		$(field).blur();
-	})
-
-	$('body').on('keyup', 'nav .search input', function() {
-		var input = this;
-		var section = $(input).parents('section');
-		var text = input.value;
-		var vars = ajaxpagination.query_vars;
-		vars = JSON.parse(vars);
-		vars['s'] = text;
-		vars = JSON.stringify(vars);
-		$.ajax({
-			url: ajaxpagination.ajaxurl,
-			type: 'post',
-			data: {
-				action: 'get_search_count',
-				query_vars: vars
-			},
-			success: function(response) {
-				response = JSON.parse(response);
-				var count = response['count'];
-				var countText = response['text'];
-				var inputText = input.value;
-				if(countText === inputText) {
-					var counter = $(section).find('nav .search .counter');
-					count = '(' + count + ')';
-					$(counter).text(count);
-				}
-			}
-		});
 	});
 
-	var timer;
-
-	$('body').on('keyup', 'section#search input.s', function() {
-		clearTimeout(timer);
+	var navTimer;
+	$('body').on('keyup', 'nav .search input', function() {
+		clearTimeout(navTimer);
 		var input = this;
 		var section = $(input).parents('section');
 		var text = input.value;
@@ -235,7 +205,7 @@ jQuery(document).ready(function($) {
 		vars = JSON.parse(vars);
 		vars['s'] = text;
 		vars = JSON.stringify(vars);
-		timer = setTimeout(function() {
+		navTimer = setTimeout(function() {
 			$.ajax({
 				url: ajaxpagination.ajaxurl,
 				type: 'post',
@@ -243,17 +213,38 @@ jQuery(document).ready(function($) {
 					action: 'get_search_count',
 					query_vars: vars
 				},
-				success: function(response) {
-					response = JSON.parse(response);
-					var count = response['count'];
-					var countText = response['text'];
-					var inputText = input.value;
-					if(countText === inputText) {
-						var counter = $(section).find('.title .counter');
-						var value = $(section).find('.title .value');
-						$(counter).text(count);
-						$(value).text(countText);
-					}
+				success: function(count) {
+					var counter = $(section).find('nav .search .counter');
+					count = '(' + count + ')';
+					$(counter).text(count);
+				}
+			});
+		}, 200);
+	});
+
+	var mainTimer;
+	$('body').on('keyup', 'section#search input.s', function() {
+		clearTimeout(mainTimer);
+		var input = this;
+		var section = $(input).parents('section');
+		var text = input.value;
+		var vars = ajaxpagination.query_vars;
+		vars = JSON.parse(vars);
+		vars['s'] = text;
+		vars = JSON.stringify(vars);
+		mainTimer = setTimeout(function() {
+			$.ajax({
+				url: ajaxpagination.ajaxurl,
+				type: 'post',
+				data: {
+					action: 'get_search_count',
+					query_vars: vars
+				},
+				success: function(count) {
+					var counter = $(section).find('.title .counter');
+					var value = $(section).find('.title .value');
+					$(counter).text(count);
+					$(value).text(text);
 				}
 			});
 
