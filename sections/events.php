@@ -1,7 +1,7 @@
 <?php
 include(locate_template('sections/params/events.php'));
 ?>
-<section <?php section_attr( $id, $slug, $events_classes ); ?> data-page="<?php echo $page ?>">
+<section <?php section_attr( $id, $slug, $events_classes ); ?> data-page="<?php echo $paged ?>">
 	<?php get_template_part('partials/nav') ?>
 	<?php get_template_part('partials/side') ?>
 	<div class="content">

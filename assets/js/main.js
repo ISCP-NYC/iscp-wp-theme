@@ -68,6 +68,7 @@ jQuery(document).ready(function($) {
 				if(scrollHeight <= contentHeight && scrollHeight != 0) {
 					$(section).addClass('show-footer');
 				}
+				$(section).removeClass('static');
 			});
 		});
 		var centerSlug = $('body').attr('data-center-slug');
@@ -98,7 +99,6 @@ jQuery(document).ready(function($) {
 			}).addClass('center');
 			$(section).next().addClass('right');
 			$(section).prev().addClass('left');
-			$(section).removeClass('static');
 			$('main').transition({
 				left: -pageWidth * index + (index*asideWidth),
 			}, duration, 'cubic-bezier(0.645, 0.045, 0.355, 1)', function() {
@@ -109,7 +109,6 @@ jQuery(document).ready(function($) {
 			var id = $(section).attr('data-id');
 			var slug = $(section).attr('data-slug');
 			$('body').attr('data-center-id', id).attr('data-center-slug', slug);
-
 			//this is overriding the query vars
 			window.history.replaceState({page: index}, null, url);
 		}

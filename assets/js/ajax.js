@@ -8,7 +8,6 @@ jQuery(document).ready(function($) {
 		vars['pagename'] = slug;
 		vars['paged'] = paged;
 		vars = JSON.stringify(vars);
-		console.log(vars);
 		$.ajax({
 			url: ajaxpagination.ajaxurl,
 			type: 'post',

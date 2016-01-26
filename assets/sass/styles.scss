@@ -36,18 +36,18 @@ main {
 	left: 0;
 	top: 0;
 	overflow: hidden;
-	// transition: left 800ms cubic-bezier(0.645, 0.045, 0.355, 1);
 }
 section {
 	@include height('100%');
 	position: absolute;
 	left: 100px;
 	overflow: hidden;
-	@import '_partials/header';
-	@import '_partials/side';
-	@import '_partials/footer';
-	@import '_partials/slider';
-	@import '_partials/twitter';
+	@import 'partials/header';
+	@import 'partials/side';
+	@import 'partials/slider';
+	@import 'partials/shelves';
+	@import 'partials/twitter';
+	@import 'partials/footer';
 	.content {
 		@include width('100% - 60px - '$side_width*2);
 		@include height('100% - 260px');
@@ -228,20 +228,20 @@ body.login {
 		}
 	}
 }
-@import '_sections/home';
-@import '_sections/residents';
-@import '_sections/resident';
-@import '_sections/events';
-@import '_sections/event';
-@import '_sections/programs';
-@import '_sections/sponsors';
-@import '_sections/sponsor';
-@import '_sections/apply';
-@import '_sections/black';
-@import '_sections/about';
-@import '_sections/visit';
-@import '_sections/resources';
-@import '_sections/search';
+@import 'sections/home';
+@import 'sections/residents';
+@import 'sections/resident';
+@import 'sections/events';
+@import 'sections/event';
+@import 'sections/programs';
+@import 'sections/sponsors';
+@import 'sections/sponsor';
+@import 'sections/apply';
+@import 'sections/black';
+@import 'sections/about';
+@import 'sections/visit';
+@import 'sections/resources';
+@import 'sections/search';
 ::-webkit-scrollbar {display:none;}
 ::-moz-scrollbar {display:none;}
 ::-o-scrollbar {display:none;}

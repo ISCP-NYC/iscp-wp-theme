@@ -1,15 +1,4 @@
 <?php
-if( $query_vars ):
-	$slug = $query_vars['pagename'];
-	$paged = $query_vars['paged'];
-	$event_type_param = $query_vars['type'];
-	$year_param = $query_vars['date'];
-	$post = get_page_by_path( $slug, OBJECT, 'page' );
-	$page_param = $slug;
-else:
-	$event_type_param = get_query_var( 'type' );
-	$year_param = get_query_var( 'date' );
-endif;
 include(locate_template('sections/params/events.php'));
 if( $event_type_param ) {
 	$filter_key = 'event_type';

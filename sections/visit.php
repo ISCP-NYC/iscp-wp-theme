@@ -48,24 +48,32 @@
 		?>
 		<script type="text/javascript">
 		function initMap() {
-			var map;
-			var location = new google.maps.LatLng(40.7142351, -73.9368839);
-			map = new google.maps.Map(document.getElementById('map'), {
-				center: location,
-				zoom: 15,
-				scrollwheel: false,
-				navigationControl: false,
-				mapTypeControl: false,
-				scaleControl: false,
-				draggable: false,
-				mapTypeId: google.maps.MapTypeId.ROADMAP
-			});
+			setTimeout(function() {
+				var map;
+				var location = new google.maps.LatLng(40.7142351, -73.9368839);
+				map = new google.maps.Map(document.getElementById('map'), {
+					center: location,
+					zoom: 15,
+					scrollwheel: false,
+					navigationControl: false,
+					mapTypeControl: false,
+					scaleControl: false,
+					// draggable: false,
+					mapTypeId: google.maps.MapTypeId.ROADMAP
+				});
 
-		  	var marker = new google.maps.Marker({
-				position: location,
-				map: map,
-				icon: '<?php echo $marker; ?>'
-			});
+			  	var marker = new google.maps.Marker({
+					position: location,
+					map: map,
+					icon: '<?php echo $marker; ?>'
+				});
+
+			  	google.maps.event.addDomListener(window, 'resize', function() {
+			  		google.maps.event.trigger(map, 'resize');
+				    map.setCenter(location);
+				});
+
+			},200);
 		}
 	    </script>
 	    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyApM4iQyAfb0hbmkeXc_zs58aA_Jy0SIac&callback=initMap"></script>
