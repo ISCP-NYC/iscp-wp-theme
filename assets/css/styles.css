@@ -923,64 +923,64 @@ section {
             display: table;
             width: auto !important;
             margin: auto !important; } }
-    /* line 127, ../sass/partials/shelves.scss */
-    section .shelves.list {
-      margin-bottom: 50px; }
-      /* line 129, ../sass/partials/shelves.scss */
-      section .shelves.list .shelf-item {
-        width: 100%;
-        text-align: left;
-        padding: 20px 0; }
-        /* line 133, ../sass/partials/shelves.scss */
-        section .shelves.list .shelf-item .inner {
+    /* line 128, ../sass/partials/shelves.scss */
+    section .shelves.list .shelf-item {
+      width: 100%;
+      text-align: left;
+      padding: 20px 0; }
+      /* line 132, ../sass/partials/shelves.scss */
+      section .shelves.list .shelf-item .inner {
+        display: -webkit-flex;
+        display: -ms-flexbox;
+        display: -webkit-box;
+        display: flex; }
+        /* line 136, ../sass/partials/shelves.scss */
+        section .shelves.list .shelf-item .inner h2 {
+          font-size: 18px;
+          line-height: 21px; }
+          @media (max-width: 900px) {
+            /* line 136, ../sass/partials/shelves.scss */
+            section .shelves.list .shelf-item .inner h2 {
+              font-size: 16px;
+              line-height: 20px; } }
+        /* line 139, ../sass/partials/shelves.scss */
+        section .shelves.list .shelf-item .inner .image {
+          display: none; }
+        /* line 140, ../sass/partials/shelves.scss */
+        section .shelves.list .shelf-item .inner .value {
+          float: left;
+          text-align: left;
+          font-size: 18px;
+          line-height: 21px;
           display: -webkit-flex;
           display: -ms-flexbox;
           display: -webkit-box;
-          display: flex; }
-          /* line 137, ../sass/partials/shelves.scss */
-          section .shelves.list .shelf-item .inner h2 {
-            font-size: 18px;
-            line-height: 21px; }
-            @media (max-width: 900px) {
-              /* line 137, ../sass/partials/shelves.scss */
-              section .shelves.list .shelf-item .inner h2 {
-                font-size: 16px;
-                line-height: 20px; } }
-          /* line 140, ../sass/partials/shelves.scss */
-          section .shelves.list .shelf-item .inner .image {
-            display: none; }
-          /* line 141, ../sass/partials/shelves.scss */
-          section .shelves.list .shelf-item .inner .value {
-            float: left;
-            text-align: left;
-            font-size: 18px;
-            line-height: 21px;
-            display: -webkit-flex;
-            display: -ms-flexbox;
-            display: -webkit-box;
-            display: flex;
-            -webkit-box-align: center;
-            -webkit-align-items: center;
-            -ms-flex-align: center;
-            align-items: center; }
-            @media (max-width: 900px) {
-              /* line 141, ../sass/partials/shelves.scss */
-              section .shelves.list .shelf-item .inner .value {
-                font-size: 16px;
-                line-height: 20px; } }
-    /* line 159, ../sass/partials/shelves.scss */
+          display: flex;
+          -webkit-box-align: center;
+          -webkit-align-items: center;
+          -ms-flex-align: center;
+          align-items: center; }
+          @media (max-width: 900px) {
+            /* line 140, ../sass/partials/shelves.scss */
+            section .shelves.list .shelf-item .inner .value {
+              font-size: 16px;
+              line-height: 20px; } }
+    /* line 154, ../sass/partials/shelves.scss */
+    section .shelves.list .load-more {
+      margin-top: 50px; }
+    /* line 161, ../sass/partials/shelves.scss */
     section .shelves .shelf-item.past .inner *, section .shelves .shelf-item.past-residents .inner * {
       color: #142328; }
-    /* line 162, ../sass/partials/shelves.scss */
+    /* line 164, ../sass/partials/shelves.scss */
     section .shelves .shelf-item.past .inner a:hover, section .shelves .shelf-item.past .inner .link:hover, section .shelves .shelf-item.past .inner .wrap:hover, section .shelves .shelf-item.past-residents .inner a:hover, section .shelves .shelf-item.past-residents .inner .link:hover, section .shelves .shelf-item.past-residents .inner .wrap:hover {
       color: #ff5000 !important; }
-      /* line 164, ../sass/partials/shelves.scss */
+      /* line 166, ../sass/partials/shelves.scss */
       section .shelves .shelf-item.past .inner a:hover h2, section .shelves .shelf-item.past .inner .link:hover h2, section .shelves .shelf-item.past .inner .wrap:hover h2, section .shelves .shelf-item.past-residents .inner a:hover h2, section .shelves .shelf-item.past-residents .inner .link:hover h2, section .shelves .shelf-item.past-residents .inner .wrap:hover h2 {
         color: #ff5000 !important; }
-  /* line 172, ../sass/partials/shelves.scss */
+  /* line 174, ../sass/partials/shelves.scss */
   section .filter {
     width: 100%; }
-    /* line 175, ../sass/partials/shelves.scss */
+    /* line 177, ../sass/partials/shelves.scss */
     section .filter .select {
       font-size: 18px;
       line-height: 18px;
@@ -989,79 +989,79 @@ section {
       padding: 0;
       margin: 0 20px 5px 0;
       cursor: pointer; }
-      /* line 184, ../sass/partials/shelves.scss */
+      /* line 186, ../sass/partials/shelves.scss */
       section .filter .select.view.toggle .grid {
         display: none; }
-      /* line 186, ../sass/partials/shelves.scss */
+      /* line 188, ../sass/partials/shelves.scss */
       section .filter .select.view.toggle.grid span.grid {
         display: block; }
-      /* line 187, ../sass/partials/shelves.scss */
+      /* line 189, ../sass/partials/shelves.scss */
       section .filter .select.view.toggle.grid span.list {
         display: none; }
-      /* line 188, ../sass/partials/shelves.scss */
+      /* line 190, ../sass/partials/shelves.scss */
       section .filter .select.view.toggle.grid .icon {
         background-position: right bottom; }
-      /* line 191, ../sass/partials/shelves.scss */
+      /* line 193, ../sass/partials/shelves.scss */
       section .filter .select.view.toggle .icon.default {
         background-image: url(../images/view-toggle-orange.svg); }
-      /* line 194, ../sass/partials/shelves.scss */
+      /* line 196, ../sass/partials/shelves.scss */
       section .filter .select.view.toggle .icon.hover {
         background-image: url(../images/view-toggle-black.svg); }
-      /* line 201, ../sass/partials/shelves.scss */
+      /* line 203, ../sass/partials/shelves.scss */
       section .filter .select.dropdown .icon.default {
         background-image: url(../images/dropdown-orange.svg); }
-      /* line 204, ../sass/partials/shelves.scss */
+      /* line 206, ../sass/partials/shelves.scss */
       section .filter .select.dropdown .icon.hover {
         background-image: url(../images/dropdown-black.svg); }
-      /* line 209, ../sass/partials/shelves.scss */
+      /* line 211, ../sass/partials/shelves.scss */
       section .filter .select.dropdown.dropped .icon {
         background-position: right bottom; }
-      /* line 215, ../sass/partials/shelves.scss */
+      /* line 217, ../sass/partials/shelves.scss */
       section .filter .select:hover .icon.default {
         opacity: 0; }
-      /* line 218, ../sass/partials/shelves.scss */
+      /* line 220, ../sass/partials/shelves.scss */
       section .filter .select:hover .icon.hover {
         opacity: 1; }
-      /* line 222, ../sass/partials/shelves.scss */
+      /* line 224, ../sass/partials/shelves.scss */
       section .filter .select span {
         float: left; }
-      /* line 225, ../sass/partials/shelves.scss */
+      /* line 227, ../sass/partials/shelves.scss */
       section .filter .select .swap {
-        width: 16px;
-        height: 16px;
+        width: 18px;
+        height: 18px;
         display: block;
         float: left;
         margin: 0 0 0 5px; }
-        /* line 231, ../sass/partials/shelves.scss */
+        /* line 233, ../sass/partials/shelves.scss */
         section .filter .select .swap .icon {
-          background-size: 16px 32px;
+          background-size: 18px 36px;
           background-position: right top;
           background-repeat: no-repeat; }
-    /* line 238, ../sass/partials/shelves.scss */
+    /* line 240, ../sass/partials/shelves.scss */
     section .filter .bar {
       width: 100%;
       display: table;
       margin-bottom: 20px; }
-      /* line 242, ../sass/partials/shelves.scss */
+      /* line 244, ../sass/partials/shelves.scss */
       section .filter .bar .select {
         float: left; }
-  /* line 247, ../sass/partials/shelves.scss */
+  /* line 249, ../sass/partials/shelves.scss */
   section .filter-lists {
     width: 100%;
     display: block; }
-    /* line 250, ../sass/partials/shelves.scss */
+    /* line 252, ../sass/partials/shelves.scss */
     section .filter-lists .filter-list {
       height: 0px;
       display: block;
       overflow: hidden;
       -webkit-transition: height 500ms cubic-bezier(0.645, 0.045, 0.355, 1);
               transition: height 500ms cubic-bezier(0.645, 0.045, 0.355, 1); }
-      /* line 255, ../sass/partials/shelves.scss */
+      /* line 257, ../sass/partials/shelves.scss */
       section .filter-lists .filter-list .options {
         -webkit-column-width: 150px;
            -moz-column-width: 150px;
                 column-width: 150px; }
-        /* line 257, ../sass/partials/shelves.scss */
+        /* line 259, ../sass/partials/shelves.scss */
         section .filter-lists .filter-list .options .option {
           width: 150px;
           display: inline-block;
@@ -1069,11 +1069,11 @@ section {
           font-size: 18px;
           line-height: 21px; }
           @media (max-width: 900px) {
-            /* line 257, ../sass/partials/shelves.scss */
+            /* line 259, ../sass/partials/shelves.scss */
             section .filter-lists .filter-list .options .option {
               font-size: 16px;
               line-height: 20px; } }
-          /* line 262, ../sass/partials/shelves.scss */
+          /* line 264, ../sass/partials/shelves.scss */
           section .filter-lists .filter-list .options .option.selected a {
             color: #142328;
             padding-right: 25px;
@@ -1081,7 +1081,7 @@ section {
             background-size: contain;
             background-repeat: no-repeat;
             background-position: right center; }
-            /* line 269, ../sass/partials/shelves.scss */
+            /* line 271, ../sass/partials/shelves.scss */
             section .filter-lists .filter-list .options .option.selected a:hover {
               color: #ff5000 !important;
               background-image: url(../images/close-thin-orange.svg); }
@@ -2680,9 +2680,9 @@ section.past-residents header.main nav .cell .sub-menu .child-item {
   section.past-residents header.main nav .cell .sub-menu .child-item:hover {
     background-image: url(../images/bullet-orange.svg) !important; }
 /* line 55, ../sass/sections/black.scss */
-section.sponsor header.main nav .cell.search input#s,
-section.past header.main nav .cell.search input#s,
-section.past-residents header.main nav .cell.search input#s {
+section.sponsor header.main nav .cell.search input.s,
+section.past header.main nav .cell.search input.s,
+section.past-residents header.main nav .cell.search input.s {
   color: #142328; }
 /* line 59, ../sass/sections/black.scss */
 section.sponsor.tease-nav header.main,

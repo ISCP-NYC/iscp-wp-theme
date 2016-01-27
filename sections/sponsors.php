@@ -81,7 +81,6 @@
 		<div class="sponsors shelves filter-this list <?php echo $slug ?>">
 			<?php include( locate_template( 'sections/loops/sponsors.php' ) ); ?>	
 		</div>
-		<?php get_template_part( 'partials/load-more' ); ?>
 	</div>
 	<?php get_template_part( 'partials/footer' ); ?>
 </section>

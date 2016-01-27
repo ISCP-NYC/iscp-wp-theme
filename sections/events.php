@@ -105,7 +105,6 @@ include(locate_template('sections/params/events.php'));
 		<div class="events shelves filter-this grid <?php echo $slug ?>">
 			<?php get_template_part('sections/loops/events'); ?>	
 		</div>
-		<?php get_template_part('partials/load-more'); ?>
 	</div>
 	<?php get_template_part('partials/footer') ?>
 </section>

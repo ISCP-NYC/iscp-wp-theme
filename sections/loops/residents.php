@@ -38,11 +38,15 @@ $residents_query = array(
 );
 $residents = new WP_Query( $residents_query );
 $GLOBALS['wp_query'] = $residents;
-if ( have_posts() ):
+$last_page = $residents->max_num_pages;
+if( have_posts() ):
 	while ( have_posts() ) :
 		the_post();
 		get_template_part( 'sections/items/resident' );
 	endwhile;
+	if( $paged < $last_page ):
+		get_template_part('partials/load-more');
+	endif;
 else:
 	get_template_part( 'partials/no-posts' );
 endif;

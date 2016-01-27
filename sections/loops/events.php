@@ -49,11 +49,15 @@ $events_query = array(
 
 $events = new WP_Query( $events_query );
 $GLOBALS['wp_query'] = $events;
+$last_page = $events->max_num_pages;
 if ( have_posts() ):
 	while ( have_posts() ) :
 		the_post();
 		get_template_part( 'sections/items/event' );
 	endwhile;
+	if( $paged < $last_page ):
+		get_template_part('partials/load-more');
+	endif;
 else:
 	get_template_part( 'partials/no-posts' );
 endif;

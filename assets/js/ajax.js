@@ -8,7 +8,6 @@ jQuery(document).ready(function($) {
 		vars['pagename'] = slug;
 		vars['paged'] = paged;
 		vars = JSON.stringify(vars);
-		console.log(vars);
 		$.ajax({
 			url: ajaxpagination.ajaxurl,
 			type: 'post',
@@ -40,7 +39,8 @@ jQuery(document).ready(function($) {
 		var shelves = $(section).find('.shelves');
 		var paged = parseInt($(section).attr('data-page')) + 1;
 		$(section).attr('data-page', paged);
-		$(section).removeClass('loading');		
+		$(section).removeClass('loading');
+		$(section).find('.load-more').remove();
 		$(shelves).append(html);
 		var scrollHeight = content[0].scrollHeight;
 		if($(section).hasClass('show-footer')) {

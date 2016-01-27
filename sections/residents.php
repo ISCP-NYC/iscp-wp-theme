@@ -143,7 +143,7 @@
 		<div class="residents shelves filter-this grid <?php echo $slug ?>">
 			<?php include(locate_template('sections/loops/residents.php')); ?>	
 		</div>
-		<?php get_template_part('partials/load-more'); ?>
+		<?#php get_template_part('partials/load-more'); ?>
 	</div>
 	<?php get_template_part('partials/footer'); ?>
 </section>

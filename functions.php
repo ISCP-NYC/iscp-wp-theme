@@ -60,7 +60,6 @@ add_theme_support( 'post-thumbnails' );
 add_image_size( 'thumb', 500, 350, true );
 add_image_size( 'slider', 9999, 500, false );
 
-
 /////////////////////////////////////
 /////////////////////////////////////
 ///////////AJAX AJAX AJAX////////////
@@ -100,8 +99,6 @@ function update_search_results() {
 add_action( 'wp_ajax_nopriv_update_search_results', 'update_search_results' );
 add_action( 'wp_ajax_update_search_results', 'update_search_results' );
 
-
-
 /////////////////////////////////////
 /////////////////////////////////////
 //////////////LOOP QUERY/////////////
@@ -126,7 +123,6 @@ add_filter( 'query_vars', 'add_query_vars_filter' );
 /////////////////////////////////////
 /////////////////////////////////////
 
-
 // http://www.paulund.co.uk/add-custom-post-meta-data-to-list-post-table
 // add_filter( 'manage_${post_type}_posts_columns', 'add_new_columns');
 
@@ -140,8 +136,6 @@ function add_event_columns($columns) {
     ));
 }
 add_filter('manage_event_posts_columns' , 'add_event_columns');
-
-
 
 function custom_event_column( $column, $post_id ) {
     switch ( $column ) {

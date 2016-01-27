@@ -41,6 +41,7 @@ $sponsors_query = array(
 );
 $sponsors = new WP_Query( $sponsors_query );
 $GLOBALS['wp_query'] = $sponsors;
+$last_page = $sponsors->max_num_pages;
 if ( have_posts() ):
 	while ( have_posts() ) :
 		the_post();
@@ -63,6 +64,9 @@ if ( have_posts() ):
 		endif;
 		echo '</div></div>';
 	endwhile;
+	if( $paged < $last_page ):
+		get_template_part('partials/load-more');
+	endif;
 else:
 	get_template_part( 'partials/no-posts' );
 endif;
