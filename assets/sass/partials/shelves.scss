@@ -277,3 +277,8 @@
         }
     }
 }
+&.hide-shelves {
+    .shelves {
+        display: none;
+    }
+}

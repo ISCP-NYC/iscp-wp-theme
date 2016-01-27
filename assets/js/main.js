@@ -77,6 +77,13 @@ jQuery(document).ready(function($) {
 		slideTo(centerIndex, false);
 	}
 
+
+
+/////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////
+///////////////////////ASIDE & SLIDE ////////////////////////
+/////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////
 	var firstSlide = true;
 	function slideTo(index, animate) {
 		var section = $('section').eq(index);
@@ -87,13 +94,14 @@ jQuery(document).ready(function($) {
 			$('section.center').removeClass('center').removeClass('hover-left').removeClass('hover-right');
 			$('section.right').removeClass('right');
 			$('section.left').removeClass('left');
-			$(section.addClass('center'));
+			$(section).addClass('center');
 			var pageWidth = $(window).innerWidth();
 			if(animate) {
 				var duration = 800;	
 			} else {
 				var duration = 0;
 			}
+			$(section).removeClass('hide-shelves');
 			$(section).css({
 				zIndex: 0
 			}).addClass('center');
@@ -102,6 +110,7 @@ jQuery(document).ready(function($) {
 			$('main').transition({
 				left: -pageWidth * index + (index*asideWidth),
 			}, duration, 'cubic-bezier(0.645, 0.045, 0.355, 1)', function() {
+				$('section:not(.center)').addClass('hide-shelves');
 				$('section:not(.center)').find('.content').scrollTop(0);
 				$('section:not(.center)').scrollTop(0);
 			});
@@ -109,7 +118,6 @@ jQuery(document).ready(function($) {
 			var id = $(section).attr('data-id');
 			var slug = $(section).attr('data-slug');
 			$('body').attr('data-center-id', id).attr('data-center-slug', slug);
-			//this is overriding the query vars
 			window.history.replaceState({page: index}, null, url);
 		}
 	}
@@ -161,6 +169,80 @@ jQuery(document).ready(function($) {
 		}
 	});
 
+	$('body').on('mousewheel', 'aside.main', function(e) {
+		var section = $(this).parents('section');
+		if(!$(section).hasClass('show-footer')) {
+			var e = window.event || e;
+			var delta = e.deltaY;
+			var content = $(section).find('.content');
+			var scrollTop = $(content).scrollTop();
+			var scrollTo = scrollTop + delta;
+			$(content).scrollTop(scrollTo);
+		}
+	});
+
+/////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////
+///////////////////////AJAX AJAX AJAX////////////////////////
+/////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////
+	$('body').on('click', '.load-more a', function(event) {
+		event.preventDefault();
+		var paged = parseInt($(this).parents('section').attr('data-page')) + 1;
+		var slug = $(this).parents('section').attr('id');
+		var vars = ajaxpagination.query_vars;
+		vars = JSON.parse(vars);
+		vars['pagename'] = slug;
+		vars['paged'] = paged;
+		vars = JSON.stringify(vars);
+		$.ajax({
+			url: ajaxpagination.ajaxurl,
+			type: 'post',
+			data: {
+				action: 'load_more',
+				query_vars: vars,
+				page: paged
+			},
+			beforeSend: function() {
+				loading(vars);
+			},
+			success: function(response) {
+				replaceContent(response, vars);
+			}
+		});
+	});
+	function loading(vars) {
+		var vars = JSON.parse(vars);
+		var sectionSlug = vars.pagename;
+		var section = $('section#'+sectionSlug);
+		var shelves = $(section).find('.shelves');
+		$(section).addClass('loading');
+	}
+	function replaceContent(html, vars) {
+		var vars = JSON.parse(vars);
+		var sectionSlug = vars.pagename;
+		var section = $('section#'+sectionSlug);
+		var content = $(section).find('.content');
+		var shelves = $(section).find('.shelves');
+		var footer = $(section).find('footer')
+		var paged = parseInt($(section).attr('data-page')) + 1;
+		var contentScrollTop = $(content).scrollTop();
+		var sectionScrollTop = $(section).scrollTop();
+		$(section).attr('data-page', paged);
+		$(section).removeClass('loading');
+		$(section).find('.load-more').remove();
+		$(shelves).append(html);
+		$(section).removeClass('show-footer');
+		// $(content).animate({ scrollTop: contentScrollTop + sectionScrollTop }, 300, 'easeOutQuart');
+		$(section).animate({ scrollTop: 0 }, 300, 'easeOutQuart');
+	}
+
+/////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////
+///////////////////////HEADER & NAV//////////////////////////
+/////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////
+
 	//tease header on hover
 	$('body').on('mouseenter', 'section:not(.open-nav) .nav-hover', function() {
 		var section = $(this).parent('section');
@@ -179,6 +261,12 @@ jQuery(document).ready(function($) {
 		$(section).removeClass('open-nav');
 	});
 
+
+/////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////
+//////////////////////////SEARCH/////////////////////////////
+/////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////
 	$('body').on('mouseenter', 'form.searchform', function() {
 		var field = $(this).find('input.s');
 		var value = $(field).attr('value');
@@ -266,14 +354,16 @@ jQuery(document).ready(function($) {
 		}, 200);
 	});
 
+
+/////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////
+/////////////////////////FOOTER//////////////////////////////
+/////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////
 	//toggle header visibility with scroll behavior
-	$('section').each(function() {
-		
-	});
-
-
 	$('section').scroll(function(event) {
 		var scrollTop = $(this).scrollTop();
+		console.log(scrollTop);
 		var footer = $(this).find('footer');
 		var footerMargin = parseInt($(footer).css('marginTop').replace('px', ''));
 		var footerHeight = $(footer).outerHeight() + footerMargin;
@@ -282,7 +372,6 @@ jQuery(document).ready(function($) {
 		} else if(scrollTop <= footerMargin) {
 			$(this).removeClass('show-footer-bottom');
 		}
-
 		if($(this).hasClass('show-footer')) {
 			var scrollTop = this.scrollTop;
 			var scrollHeight = this.scrollHeight;
@@ -321,19 +410,6 @@ jQuery(document).ready(function($) {
 
 
 	});
-
-	$('body').on('mousewheel', 'aside.main', function(e) {
-		var section = $(this).parents('section');
-		if(!$(section).hasClass('show-footer')) {
-			var e = window.event || e;
-			var delta = e.deltaY;
-			var content = $(section).find('.content');
-			var scrollTop = $(content).scrollTop();
-			var scrollTo = scrollTop + delta;
-			$(content).scrollTop(scrollTo);
-		}
-	});
-
 
 	$('body').on('click', '.filter .select', function() {
 		var slug = $(this).attr('data-slug');

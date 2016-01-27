@@ -301,47 +301,62 @@ section {
             position: absolute;
             left: 0;
             top: 0;
+            z-index: 102;
             display: table;
             background-color: #fff; }
-            /* line 67, ../sass/partials/header.scss */
+            /* line 68, ../sass/partials/header.scss */
             section header.main nav .cell .inner a.overlay h1 {
               text-align: center; }
-        /* line 73, ../sass/partials/header.scss */
+        /* line 74, ../sass/partials/header.scss */
         section header.main nav .cell.parent:hover .inner a.overlay, section header.main nav .cell.search:hover .inner a.overlay {
           display: none; }
-        /* line 78, ../sass/partials/header.scss */
+        /* line 79, ../sass/partials/header.scss */
         section header.main nav .cell .sub-menu {
-          display: block;
-          padding-left: 3px;
-          width: 100%; }
-          /* line 82, ../sass/partials/header.scss */
+          width: calc(100% - 6px);
+          height: calc(100% - 6px);
+          position: absolute;
+          display: -webkit-box;
+          display: -webkit-flex;
+          display: -ms-flexbox;
+          display: flex;
+          -webkit-box-orient: vertical;
+          -webkit-box-direction: normal;
+          -webkit-flex-direction: column;
+              -ms-flex-direction: column;
+                  flex-direction: column;
+          -webkit-flex-wrap: wrap;
+              -ms-flex-wrap: wrap;
+                  flex-wrap: wrap;
+          padding: 3px;
+          z-index: 101; }
+          /* line 88, ../sass/partials/header.scss */
           section header.main nav .cell .sub-menu .child-item {
-            margin-bottom: 3px;
+            margin: 2px 0 0 0;
             display: table;
             font-size: 24px;
             line-height: 28px; }
             @media (max-width: 900px) {
-              /* line 82, ../sass/partials/header.scss */
+              /* line 88, ../sass/partials/header.scss */
               section header.main nav .cell .sub-menu .child-item {
                 font-size: 18px;
                 line-height: 21px; } }
-            /* line 86, ../sass/partials/header.scss */
+            /* line 92, ../sass/partials/header.scss */
             section header.main nav .cell .sub-menu .child-item:hover {
               background-image: url(../images/bullet-black.svg); }
-              /* line 88, ../sass/partials/header.scss */
+              /* line 94, ../sass/partials/header.scss */
               section header.main nav .cell .sub-menu .child-item:hover a {
                 color: #142328; }
-        /* line 94, ../sass/partials/header.scss */
+        /* line 100, ../sass/partials/header.scss */
         section header.main nav .cell:last-child .inner, section header.main nav .cell:nth-last-child(2) .inner {
           border-bottom: none; }
-        /* line 99, ../sass/partials/header.scss */
+        /* line 105, ../sass/partials/header.scss */
         section header.main nav .cell.search .inner {
           display: table; }
-          /* line 101, ../sass/partials/header.scss */
+          /* line 107, ../sass/partials/header.scss */
           section header.main nav .cell.search .inner form {
             display: table-cell;
             vertical-align: middle; }
-          /* line 105, ../sass/partials/header.scss */
+          /* line 111, ../sass/partials/header.scss */
           section header.main nav .cell.search .inner input.s {
             width: 80%;
             display: table;
@@ -354,11 +369,11 @@ section {
             outline: none;
             text-align: center; }
             @media (max-width: 900px) {
-              /* line 105, ../sass/partials/header.scss */
+              /* line 111, ../sass/partials/header.scss */
               section header.main nav .cell.search .inner input.s {
                 font-size: 24px;
                 line-height: 28px; } }
-        /* line 117, ../sass/partials/header.scss */
+        /* line 123, ../sass/partials/header.scss */
         section header.main nav .cell.search .counter {
           width: 100%;
           position: absolute;
@@ -368,11 +383,11 @@ section {
           line-height: 46px;
           text-align: center; }
           @media (max-width: 900px) {
-            /* line 117, ../sass/partials/header.scss */
+            /* line 123, ../sass/partials/header.scss */
             section header.main nav .cell.search .counter {
               font-size: 24px;
               line-height: 28px; } }
-  /* line 129, ../sass/partials/header.scss */
+  /* line 135, ../sass/partials/header.scss */
   section .mobile.logo {
     width: 110px;
     height: 100px;
@@ -382,22 +397,22 @@ section {
     z-index: 101;
     -webkit-transition: -webkit-transform 600ms cubic-bezier(0.645, 0.045, 0.355, 1), opacity 150ms 400ms ease-in-out;
             transition: transform 600ms cubic-bezier(0.645, 0.045, 0.355, 1), opacity 150ms 400ms ease-in-out; }
-    /* line 137, ../sass/partials/header.scss */
+    /* line 143, ../sass/partials/header.scss */
     section .mobile.logo .icon {
       background-size: 60px;
       background-position: center;
       background-repeat: no-repeat; }
-      /* line 141, ../sass/partials/header.scss */
+      /* line 147, ../sass/partials/header.scss */
       section .mobile.logo .icon.default {
         background-image: url(../images/logo-orange.svg); }
-      /* line 144, ../sass/partials/header.scss */
+      /* line 150, ../sass/partials/header.scss */
       section .mobile.logo .icon.hover {
         background-image: url(../images/logo-black.svg); }
     @media (min-width: 768px) {
-      /* line 129, ../sass/partials/header.scss */
+      /* line 135, ../sass/partials/header.scss */
       section .mobile.logo {
         display: none; } }
-  /* line 152, ../sass/partials/header.scss */
+  /* line 158, ../sass/partials/header.scss */
   section .nav-toggle {
     width: 30px;
     height: 30px;
@@ -408,25 +423,25 @@ section {
     cursor: pointer;
     -webkit-transition: -webkit-transform 600ms cubic-bezier(0.645, 0.045, 0.355, 1), opacity 200ms ease-in-out;
             transition: transform 600ms cubic-bezier(0.645, 0.045, 0.355, 1), opacity 200ms ease-in-out; }
-    /* line 161, ../sass/partials/header.scss */
+    /* line 167, ../sass/partials/header.scss */
     section .nav-toggle .icon {
       background-size: 30px;
       background-position: top;
       background-repeat: no-repeat; }
-    /* line 166, ../sass/partials/header.scss */
+    /* line 172, ../sass/partials/header.scss */
     section .nav-toggle .default {
       background-image: url(../images/toggle-orange.svg); }
-    /* line 169, ../sass/partials/header.scss */
+    /* line 175, ../sass/partials/header.scss */
     section .nav-toggle .hover {
       background-image: url(../images/toggle-black.svg); }
     @media (max-width: 768px) {
-      /* line 152, ../sass/partials/header.scss */
+      /* line 158, ../sass/partials/header.scss */
       section .nav-toggle {
         right: 35px; } }
-  /* line 177, ../sass/partials/header.scss */
+  /* line 183, ../sass/partials/header.scss */
   section:not(.open-nav) header.main {
     cursor: pointer; }
-  /* line 182, ../sass/partials/header.scss */
+  /* line 188, ../sass/partials/header.scss */
   section.tease-nav header.main {
     border-color: #142328;
     -webkit-transition: -webkit-transform 300ms ease-out, border-color 150ms ease-in-out;
@@ -434,28 +449,28 @@ section {
     -webkit-transform: translateY(calc(-100% + 120px));
         -ms-transform: translateY(calc(-100% + 120px));
             transform: translateY(calc(-100% + 120px)); }
-  /* line 188, ../sass/partials/header.scss */
+  /* line 194, ../sass/partials/header.scss */
   section.tease-nav .nav-toggle .default {
     opacity: 0; }
-  /* line 191, ../sass/partials/header.scss */
+  /* line 197, ../sass/partials/header.scss */
   section.tease-nav .nav-toggle .hover {
     opacity: 1; }
-  /* line 197, ../sass/partials/header.scss */
+  /* line 203, ../sass/partials/header.scss */
   section.open-nav header.main {
     -webkit-transition-duration: 600ms;
             transition-duration: 600ms;
     -webkit-transform: translateY(0) !important;
         -ms-transform: translateY(0) !important;
             transform: translateY(0) !important; }
-    /* line 200, ../sass/partials/header.scss */
+    /* line 206, ../sass/partials/header.scss */
     section.open-nav header.main nav {
       -webkit-transform: translateY(0) !important;
           -ms-transform: translateY(0) !important;
               transform: translateY(0) !important; }
-  /* line 205, ../sass/partials/header.scss */
+  /* line 211, ../sass/partials/header.scss */
   section.open-nav .nav-toggle .icon {
     background-position: bottom; }
-  /* line 212, ../sass/partials/header.scss */
+  /* line 218, ../sass/partials/header.scss */
   section.open-nav .mobile.logo {
     opacity: 0;
     -webkit-transform: translateY(100vh) !important;
@@ -463,17 +478,17 @@ section {
             transform: translateY(100vh) !important;
     -webkit-transition: -webkit-transform 600ms cubic-bezier(0.645, 0.045, 0.355, 1), opacity 150ms ease-in-out;
             transition: transform 600ms cubic-bezier(0.645, 0.045, 0.355, 1), opacity 150ms ease-in-out; }
-  /* line 220, ../sass/partials/header.scss */
+  /* line 226, ../sass/partials/header.scss */
   section.hide-header header.main {
     -webkit-transform: translateY(calc(-100% - 50px)) !important;
         -ms-transform: translateY(calc(-100% - 50px)) !important;
             transform: translateY(calc(-100% - 50px)) !important; }
-  /* line 223, ../sass/partials/header.scss */
+  /* line 229, ../sass/partials/header.scss */
   section.hide-header .nav-toggle {
     -webkit-transform: translateY(-250px) !important;
         -ms-transform: translateY(-250px) !important;
             transform: translateY(-250px) !important; }
-  /* line 226, ../sass/partials/header.scss */
+  /* line 232, ../sass/partials/header.scss */
   section.hide-header .mobile.logo {
     -webkit-transform: translateY(-250px) !important;
         -ms-transform: translateY(-250px) !important;
@@ -1085,6 +1100,9 @@ section {
             section .filter-lists .filter-list .options .option.selected a:hover {
               color: #ff5000 !important;
               background-image: url(../images/close-thin-orange.svg); }
+  /* line 281, ../sass/partials/shelves.scss */
+  section.hide-shelves .shelves {
+    display: none; }
   /* line 2, ../sass/partials/twitter.scss */
   section .twitter .follow {
     width: 100%;
