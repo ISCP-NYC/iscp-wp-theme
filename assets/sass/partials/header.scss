@@ -6,9 +6,11 @@ header.main {
 	top: 0;
 	z-index: 100;
 	background-color: $white;
-	border-bottom: 10px solid $orange;
-	transform: translateY(calc(-100% + 110px));
+	border-bottom: 10px solid $orange;	
 	transition: transform 600ms cubic-bezier(0.645, 0.045, 0.355, 1), border-color 150ms ease-in-out;
+	&:not(.static) {
+		transform: translateY(calc(-100% + 110px));
+	}
 	@include small {
 		width: 100% !important;
 		left: 0;
@@ -224,7 +226,9 @@ header.main {
 
 &.hide-header {
 	header.main {
-		transform: translateY(calc(-100% - 50px)) !important;
+		&:not(.static) {
+			transform: translateY(calc(-100% - 50px)) !important;
+		}
 	}
 	.nav-toggle {
 		transform: translateY(-250px) !important;

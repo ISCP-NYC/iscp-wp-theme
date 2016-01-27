@@ -73,8 +73,8 @@ function load_more() {
     $post_type = $slug;
     if( strstr( $slug, 'residents' ) ):
     	$post_type = 'residents';
-    elseif( $slug == 'search-count' ):
-    	include( locate_template( 'other/search-count.php' ) );
+    // elseif( $slug == 'search-count' ):
+    // 	include( locate_template( 'other/search-count.php' ) );
     endif;
     include( locate_template( 'sections/loops/' . $post_type . '.php' ) );
     die();
@@ -447,12 +447,22 @@ function get_display_image( $id ) {
 	}
 }
 
-function get_residents( $resident_id, $direction, $count ) {
+function get_neighbor_residents() {
+	$query_vars = json_decode( stripslashes( $_POST['query_vars'] ), true );
+    $resident_id = $query_vars['id'];
+    $direction = $query_vars['direction'];
+    $count = 1;
+	get_residents( $resident_id, $direction );   	
+    die();
+}
+add_action( 'wp_ajax_nopriv_get_neighbor_residents', 'get_neighbor_residents' );
+add_action( 'wp_ajax_get_neighbor_residents', 'get_neighbor_residents' );
+
+function get_residents( $resident_id, $direction ) {
 	$resident_end_date = get_resident_end_date( $resident_id );
 	$resident_studio = get_field( 'studio_number', $resident_id );
 	$today = new DateTime();
 	$today = $today->format( 'Ymd' );
-
 	if( is_current( $resident_id ) ):
 		$date_compare = '>=';
 		$direction_key = 'studio_number';
@@ -472,8 +482,10 @@ function get_residents( $resident_id, $direction, $count ) {
 
 	if( $direction == 'prev' ):
 		$direction_compare = '<';
+		$order = 'DESC';
 	elseif ( $direction == 'next' ):
 		$direction_compare = '>';
+		$order = 'ASC';
 	endif;
 
 	$direction_args = array(
@@ -482,30 +494,35 @@ function get_residents( $resident_id, $direction, $count ) {
 		'compare' => $direction_compare,
 		'value' => $direction_value
 	);
-
 	$resident_args = array(
 		'post_type' => 'resident',
-		'posts_per_page' => $count,
-		'order' => 'DESC',
+		'posts_per_page' => 3,
+		'order' => $order,
 		'orderby' => $resident_orderby,
 		'meta_key' => $resident_meta_key,
 		'meta_query' => array( $date_args, $direction_args )
 	);
-
 	$residents = new WP_Query( $resident_args );
-	$reverse_residents = array_reverse($residents->posts);
-	$residents->posts = $reverse_residents;
+	$last_page = $residents->max_num_pages;
+	if ( $direction == 'prev' ):
+		$reverse_residents = array_reverse( $residents->posts );
+		$residents->posts = $reverse_residents;
+	endif;
 
-    while ( $residents->have_posts() ) : $residents->the_post();
-		global $post;
-		setup_postdata( $post );
-		get_template_part('sections/resident');
-		wp_reset_postdata();
-	endwhile;
+	if( $residents->have_posts() ):
+		while ( $residents->have_posts() ) : $residents->the_post();
+			global $post;
+			setup_postdata( $post );
+			get_template_part( 'sections/resident' );
+			wp_reset_postdata();
+		endwhile;
+	endif;
+
+	wp_reset_query();
 }
 
 //http://stackoverflow.com/questions/2915864/php-how-to-find-the-time-elapsed-since-a-date-time
-function humanTiming($time) {
+function humanTiming( $time ) {
     $time = time() - $time;
     $time = ($time<1)? 1 : $time;
     $tokens = array (
@@ -526,7 +543,7 @@ function humanTiming($time) {
 }
 
 
-function makeClickableLinks($s) {
+function makeClickableLinks( $s ) {
   return preg_replace('@(https?://([-\w\.]+[-\w])+(:\d+)?(/([\w/_\.#-]*(\?\S+)?[^\.\s])?)?)@', '<a target="blank" rel="nofollow" href="$1" target="_blank">$1</a>', $s);
 }
 
@@ -555,8 +572,8 @@ function get_tweets( $count ) {
 	echo '<div class="tweets">';
 
 	$counter = 0;
-	foreach ($raw_tweets as $tweet) {
-		if(isset($tweet->errors)) {           
+	foreach ( $raw_tweets as $tweet ) {
+		if( isset( $tweet->errors ) ) {           
 		    // $tweet = 'Error :'. $raw_tweets[$counter]->errors[0]->code. ' - '. $raw_tweets[$counter]->errors[0]->message;
 		} else {
 		    $text = makeClickableLinks($tweet->text);
@@ -678,8 +695,8 @@ function get_orientation( $id ) {
 	}
 }
 
-function pretty($string) {
-	switch ($string) {
+function pretty( $string ) {
+	switch ( $string ) {
 		case 'event':
 			return 'Event';
 			break;
@@ -704,8 +721,8 @@ function pretty($string) {
 	}
 }
 
-function pretty_short($string) {
-	switch ($string) {
+function pretty_short( $string ) {
+	switch ( $string ) {
 		case 'international':
 			return 'International';
 			break;
@@ -722,7 +739,7 @@ function pretty_url( $url ) {
 	return $url;
 }
 
-function label_art($id) {
+function label_art( $id ) {
 	$artist = get_sub_field( 'artist' );
 	$title = get_sub_field( 'title' );
     $year = get_sub_field( 'year' );
@@ -775,7 +792,7 @@ $result = add_role( 'resident', __( 'Resident' ),
 function user_is_resident() {
 	$user = wp_get_current_user();
 	$allowed_roles = array('editor', 'administrator', 'author', 'resident');
-	if( array_intersect($allowed_roles, $user->roles ) ) {
+	if( array_intersect( $allowed_roles, $user->roles ) ) {
 		return true;
 	} else {
 		return false;

@@ -31,11 +31,11 @@ $residents_query = array(
 	'post_type' => 'resident',
 	'posts_per_page' => 12,
 	'paged' => $paged,
-	'orderby' => 'last_name',
 	'order' => 'ASC',
 	'post_status' => 'publish',
 	'meta_query' => array( $page_query, $filter_query )
 );
+$residents_query = array_merge( $residents_query, $orderby_array );
 $residents = new WP_Query( $residents_query );
 $GLOBALS['wp_query'] = $residents;
 $last_page = $residents->max_num_pages;

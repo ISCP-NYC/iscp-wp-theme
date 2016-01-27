@@ -9,14 +9,14 @@ switch($post_type) {
 		if( is_current( $this_resident_id ) ):
 
 			//current residents list
-			$current_residents_page_id = get_page_by_path('current-residents')->ID;
-			$post = get_post( $current_residents_page_id, OBJECT );
-			setup_postdata( $post );
-			get_template_part( 'sections/residents' );
-			wp_reset_postdata();
+			// $current_residents_page_id = get_page_by_path('current-residents')->ID;
+			// $post = get_post( $current_residents_page_id, OBJECT );
+			// setup_postdata( $post );
+			// get_template_part( 'sections/residents' );
+			// wp_reset_postdata();
 
 			//previous current residents by studio number
-			get_residents( $this_resident_id, 'prev', 3 );
+			get_residents( $this_resident_id, 'prev' );
 
 			//opened current resident
 			setup_postdata( $this_resident );
@@ -24,14 +24,14 @@ switch($post_type) {
 			wp_reset_postdata();
 
 			//next current residents by studio number
-			get_residents( $this_resident_id, 'next', 3 );
+			get_residents( $this_resident_id, 'next' );
 
-			//current residents list
-			$current_residents_page_id = get_page_by_path('current-residents')->ID;
-			$post = get_post( $current_residents_page_id, OBJECT );
-			setup_postdata( $post );
-			get_template_part( 'sections/residents' );
-			wp_reset_postdata();
+			// current residents list
+			// $current_residents_page_id = get_page_by_path('current-residents')->ID;
+			// $post = get_post( $current_residents_page_id, OBJECT );
+			// setup_postdata( $post );
+			// get_template_part( 'sections/residents' );
+			// wp_reset_postdata();
 
 		elseif( is_past( $this_resident_id ) ):
 			$past_residents_page_id = get_page_by_path('past-residents')->ID;

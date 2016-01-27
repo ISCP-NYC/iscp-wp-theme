@@ -79,7 +79,7 @@
 				<?php if( is_current( $resident_id ) ): 
 					echo '<h3 class="studio-number">Studio #' . $studio_number . '</h3>';
 				endif; ?>
-				<h2 class="resident-type"><?php echo $resident_type ?></h2>
+				<h3 class="resident-type"><?php echo $resident_type ?></h3>
 			</div>
 		</header>
 
