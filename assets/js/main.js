@@ -94,13 +94,13 @@ jQuery(document).ready(function($) {
 			$('section.center').removeClass('center').removeClass('hover-left').removeClass('hover-right');
 			$('section.right').removeClass('right');
 			$('section.left').removeClass('left');
-			$(section).addClass('center');
 			var pageWidth = $(window).innerWidth();
 			if(animate) {
 				var duration = 800;	
 			} else {
 				var duration = 0;
 			}
+			$(section).addClass('center');
 			$(section).removeClass('hide-shelves');
 			$(section).css({
 				zIndex: 0
@@ -255,7 +255,6 @@ jQuery(document).ready(function($) {
 			var section = $('section.resident').last();
 		}
 		var id = $(section).attr('data-id');
-		console.log($(section).attr('id'), direction);
 		var vars = ajaxpagination.query_vars;
 		vars = JSON.parse(vars);
 		vars['id'] = id;
@@ -343,12 +342,10 @@ jQuery(document).ready(function($) {
 				$(section).addClass('show-footer');
 			}
 			if(scrollTop > lastScrollTop + 10 && scrollTop > 100) {
-				$(header).attr('style','').removeClass('static');
 				$(section).addClass('hide-header');
 				$(section).removeClass('open-nav');
 				$(section).removeClass('tease-nav');
 			} else if(scrollTop < lastScrollTop - 5) {
-				$(header).attr('style','').removeClass('static');
 				$(section).removeClass('tease-nav');
 				$(section).removeClass('hide-header');
 			}
