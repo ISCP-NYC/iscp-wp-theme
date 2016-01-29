@@ -23,6 +23,7 @@
 			</div>
 		</div>
 		<div class="journal filter-this grid items">
+			<div class="sizer"></div>
 			<?php include( locate_template( 'sections/loops/journals.php' ) ); ?>	
 		</div>
 	</div>

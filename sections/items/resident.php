@@ -21,7 +21,7 @@ if( $append_query && is_past( $resident_id ) ) {
 }
 $thumb = get_thumb( $resident_id );
 
-echo '<div class="resident shelf-item border-bottom ' . $resident_status . '"><div class="inner">';
+echo '<div class="resident item shelf-item border-bottom ' . $resident_status . '"><div class="inner">';
 echo '<a class="wrap value name" href="' . $url . '">';
 echo '<h2 class="link title name">' . $title . '</h2>';
 echo '<div class="image">';

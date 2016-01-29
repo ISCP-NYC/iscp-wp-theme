@@ -5,6 +5,15 @@ $(window).load(function() {
 	}
 	setUp();
 	setSliderWidth();
+	$('.journal.grid').masonry('layout');
+});
+
+$('.journal.grid').masonry({
+	columnWidth: '.sizer',
+	itemSelector: '.item',
+	gutter: 20,
+	transitionDuration: 0,
+	resize: false
 });
 
 //sets width for full slider field and each section within
@@ -214,7 +223,7 @@ $('body').on('click', '.load-more a', function(event) {
 			loading(vars);
 		},
 		success: function(response) {
-			replaceContent(response, vars);
+			addItems(response, vars);
 		}
 	});
 });
@@ -226,7 +235,7 @@ function loading(vars) {
 	var shelves = $(section).find('.items');
 	$(section).addClass('loading');
 }
-function replaceContent(html, vars) {
+function addItems(html, vars) {
 	if(html.length > 0) {
 		var vars = JSON.parse(vars);
 		var sectionSlug = vars.pagename;
@@ -241,9 +250,18 @@ function replaceContent(html, vars) {
 		$(section).attr('data-page', paged);
 		$(section).removeClass('loading');
 		$(section).find('.load-more').remove();
-		$(shelves).append(html);
+		$(html).each(function() {
+			var item = this;
+			if(!$(item).hasClass('load-more')) {
+				$(item).addClass('hide');
+			}
+			$(shelves).append($(item));
+			setTimeout(function() {
+				$(item).removeClass('hide');
+			},300);
+		});
 		$(section).removeClass('show-footer');
-		// $(content).animate({ scrollTop: contentScrollTop + sectionScrollTop }, 300, 'easeOutQuart');
+		$(content).animate({ scrollTop: contentScrollTop + sectionScrollTop }, 300, 'easeOutQuart');
 		$(section).animate({ scrollTop: 0 }, 300, 'easeOutQuart');
 	}
 }
@@ -655,6 +673,7 @@ function winW() {
 $(window).resize(function() {
 	setUp();
 	setSliderWidth();
+	$('.journal.grid').masonry('layout');
 });
 
 });

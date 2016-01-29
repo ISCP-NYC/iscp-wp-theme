@@ -8,7 +8,7 @@ $country_permalink = get_field('country', $sponsor_id )[0]->permalink;
 $permalink = get_permalink();
 $website = get_field('website', $sponsor_id );
 $pretty_website = pretty_url( $website );
-echo '<div class="sponsor shelf-item border-bottom no-image"><div class="inner">';
+echo '<div class="sponsor item shelf-item border-bottom no-image"><div class="inner">';
 echo '<a class="value name" href="' . $permalink . '">';
 echo '<h2 class="link title name">' . $title . '</h2>';
 echo '</a>';

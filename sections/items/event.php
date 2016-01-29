@@ -13,7 +13,7 @@ if( $append_query && is_past( $event_id ) ) {
 }
 $event_thumb = get_thumb( $resident_id );
 
-echo '<div class="event shelf-item border-bottom ' . $event_status . '"><div class="inner">';
+echo '<div class="event item shelf-item border-bottom ' . $event_status . '"><div class="inner">';
 echo '<a class="wrap value date" href="' . $event_url . '">';
 echo '<h2 class="link name title">' . $event_title . '</h2>';
 echo '<div class="image">';

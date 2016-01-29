@@ -2,7 +2,7 @@
 include(locate_template('sections/params/journals.php'));
 $journal_query = array(
 	'post_type' => 'journal',
-	'posts_per_page' => 1,
+	'posts_per_page' => 12,
 	'paged' => $paged,
 	'orderby' => 'date',
 	'order' => 'DESC',

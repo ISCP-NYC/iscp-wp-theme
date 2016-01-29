@@ -7,7 +7,7 @@ $thumb = get_thumb( $resident_id, 'thumbnail' );
 $post_type = $post->post_type;
 $permalink = get_permalink( $id );
 
-echo '<div class="result shelf-item border-bottom">';
+echo '<div class="result item shelf-item border-bottom">';
 echo '<div class="inner">';
 echo '<a class="value wrap" href="' . $permalink . '">';
 if($thumb):

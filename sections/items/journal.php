@@ -15,16 +15,16 @@ if( $append_query ) {
 }
 $joural_post_status = 'new';
 
-echo '<div class="journal-post border-bottom ' . $joural_post_status . '">';
+echo '<div class="journal-post item border-bottom ' . $joural_post_status . '">';
 echo '<div class="inner">';
 echo '<header>';
-echo '<a href="' . $url . '">';
+echo '<a class="name" href="' . $url . '">';
 echo '<h2 class="name">' . $title . '</h2>';
 echo '</a>';
 echo '<h3 class="date">' . $date . '</h3>';
 echo '<h3 class="author">by ' . $author . '</h3>';
 echo '</header>';
-echo '<a href="' . $url . '">';
+echo '<a class="image" href="' . $url . '">';
 echo '<div class="image">';
 if ($thumb != ''):
 echo '<img src="' . $thumb . '"/>';

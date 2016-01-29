@@ -217,6 +217,12 @@ h4, .small {
 .half-border-left {
 	border-left: 5px solid $orange;
 }
+.item {
+	transition: opacity 200ms ease-in-out;
+	&.hide {
+		opacity: 0;
+	}
+}
 body.login {
 	background-color: $orange;
 	color: $white;

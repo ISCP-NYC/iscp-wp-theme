@@ -1,15 +1,17 @@
 section.journal {
 	.content {
 		.journal {
-		    display: flex;
-		    justify-content: space-between;
-		    flex-wrap: wrap;
+		    // display: flex;
+		    // justify-content: space-between;
+		    // flex-wrap: wrap;
 		    .journal-post {
-		    	width: calc(33.333% - 15px);
 		    	margin-bottom: 30px;
 		    	padding-bottom: 30px;
 		    	a {
 		    		display: table;
+		    		&.image {
+		    			margin: auto;
+		    		}
 		    	}
 		    	h2.name {
 		    		display: table;
@@ -32,12 +34,21 @@ section.journal {
 			    		display: inline-table;
 			    	}
 			    }
-			    @include large {
+			}
+			.journal-post, .sizer {
+				width: calc(33.333% - 15px);
+				@include large {
 					width: calc(50% - 10px);
 				}
 				@include medium {
 					width: 100%;
 				}
+			}
+			.sizer {
+
+			}
+			.size {
+				display: none;
 			}
 		    &[data-columns]::before {
 			    content: '3 .column.size-1of3';
@@ -52,17 +63,17 @@ section.journal {
 				    content: '1 .column.size-1of1';
 				}
 			}
-		    .column {
-		    	&.size-1of3 {
-				    width: calc(33.333% - 15px);
-				}
-				&.size-1of2 {
-				    width: calc(50% - 10px);
-				}
-			    &.size-1of1 {
-				    width: 100%;
-				}
-			}
+		 //    .column {
+		 //    	&.size-1of3 {
+			// 	    width: calc(33.333% - 15px);
+			// 	}
+			// 	&.size-1of2 {
+			// 	    width: calc(50% - 10px);
+			// 	}
+			//     &.size-1of1 {
+			// 	    width: 100%;
+			// 	}
+			// }
 		}
 	}
 }
