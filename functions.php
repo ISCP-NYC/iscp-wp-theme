@@ -43,9 +43,11 @@ function iscp_scripts() {
 	wp_enqueue_style( 'style', get_template_directory_uri() . '/assets/css/styles.css' );
 	wp_register_script( 'transit', get_template_directory_uri() . '/assets/js/jquery.transit.min.js', array( 'jquery' ) );
 	wp_register_script( 'jquery-ui', get_template_directory_uri() . '/assets/js/jquery-ui.min.js', array( 'jquery' ) );
+	wp_register_script( 'salvattore', get_template_directory_uri() . '/assets/js/salvattore.min.js', array( 'jquery' ), null, true );
 	wp_register_script( 'main', get_template_directory_uri() . '/assets/js/main.js', array( 'jquery' ) );
 	wp_enqueue_script( 'transit' );
 	wp_enqueue_script( 'jquery-ui' );
+	wp_enqueue_script( 'salvattore' );
 	wp_enqueue_script( 'main' );
 	global $wp_query;
 	wp_localize_script( 'main', 'ajaxpagination', array(
@@ -54,6 +56,9 @@ function iscp_scripts() {
 	));
 }
 add_action( 'wp_enqueue_scripts', 'iscp_scripts' );
+
+
+
 
 show_admin_bar(false);
 add_theme_support( 'post-thumbnails' ); 
@@ -73,8 +78,8 @@ function load_more() {
     $post_type = $slug;
     if( strstr( $slug, 'residents' ) ):
     	$post_type = 'residents';
-    // elseif( $slug == 'search-count' ):
-    // 	include( locate_template( 'other/search-count.php' ) );
+    elseif( $post_type == 'journal' ):
+    	$post_type .= 's';
     endif;
     include( locate_template( 'sections/loops/' . $post_type . '.php' ) );
     die();
@@ -451,14 +456,14 @@ function get_neighbor_residents() {
 	$query_vars = json_decode( stripslashes( $_POST['query_vars'] ), true );
     $resident_id = $query_vars['id'];
     $direction = $query_vars['direction'];
-    $count = 1;
-	get_residents( $resident_id, $direction );   	
+    $count = 3;
+	get_residents( $resident_id, $direction, $count );   	
     die();
 }
 add_action( 'wp_ajax_nopriv_get_neighbor_residents', 'get_neighbor_residents' );
 add_action( 'wp_ajax_get_neighbor_residents', 'get_neighbor_residents' );
 
-function get_residents( $resident_id, $direction ) {
+function get_residents( $resident_id, $direction, $count = 3 ) {
 	$resident_end_date = get_resident_end_date( $resident_id );
 	$resident_studio = get_field( 'studio_number', $resident_id );
 	$today = new DateTime();
@@ -496,7 +501,7 @@ function get_residents( $resident_id, $direction ) {
 	);
 	$resident_args = array(
 		'post_type' => 'resident',
-		'posts_per_page' => 3,
+		'posts_per_page' => $count,
 		'order' => $order,
 		'orderby' => $resident_orderby,
 		'meta_key' => $resident_meta_key,
@@ -650,7 +655,7 @@ function get_event_date( $id ) {
 	return $date_format;
 }
 
-function get_thumb( $id, $size = undefined ) {
+function get_thumb( $id, $size = undefined, $orange = true ) {
 	$thumbnail = get_display_image( $id );
 	if($size == undefined):
 		$size = 'thumb';
@@ -658,7 +663,7 @@ function get_thumb( $id, $size = undefined ) {
 	if( !$thumbnail ) {
 		$thumbnail = get_field( 'gallery', $id )[0]['image']['sizes'][$size];
 	}
-	if( !$thumbnail ) {
+	if( !$thumbnail && $orange == true ) {
 		$thumbnail = get_template_directory_uri() . '/assets/images/placeholder.svg';
 	}
 	return $thumbnail;
@@ -928,7 +933,15 @@ function add_favicon() {
   	$favicon_url = get_template_directory_uri( ). '/assets/images/favicons/favicon.ico';
 	echo '<link rel="shortcut icon" href="' . $favicon_url . '" />';
 }
-  
+
+function wpdocs_excerpt_more( $more ) {
+    return sprintf( '</br><a class="read-more" href="%1$s">%2$s</a>',
+        get_permalink( get_the_ID() ),
+        __( 'Read More.', 'textdomain' )
+    );
+}
+add_filter( 'excerpt_more', 'wpdocs_excerpt_more' );
+
 add_action('login_head', 'add_favicon');
 add_action('admin_head', 'add_favicon');
 

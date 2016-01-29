@@ -1,12 +1,10 @@
 .home {
 	h2.head {
 		color: $black;
-		text-align: center;
 		margin-bottom: 48px;
-		a {
-			display: table;
-			margin: auto;
-		}
+	}
+	h3.title {
+		color: $orange;
 	}
 	.events.upcoming {
 		width: 100%;
@@ -24,7 +22,6 @@
 				}
 				h3 {
 					text-align: center;
-					&.link {}
 				}
 				h4 {
 					display: table;

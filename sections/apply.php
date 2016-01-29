@@ -13,12 +13,11 @@
 	); 
 	$residency_programs = get_pages( $residency_programs_query ); 
 ?>
-
 <section <?php section_attr( $id, $slug, 'apply' ); ?>>
 	<?php get_template_part('partials/nav') ?>
 	<?php get_template_part('partials/side') ?>
 	<div class="content">
-		<h3 class="title"><?php echo $title ?></h3>
+		<h2 class="title"><?php echo $title ?></h2>
 
 		<div class="program-links">
 			<?php
@@ -26,9 +25,7 @@
 				setup_postdata($program);
 				$title = get_post( $program )->post_title;
 				$slug = $program->post_name;
-				echo '<div class="bullet">';
-				echo '<a href="#' . $slug . '">' . $title . '</a></br>';
-				echo '</div>';
+				echo '<a class="bullet small" href="#' . $slug . '">' . $title . '</a></br>';
 				wp_reset_postdata();
 			endforeach;
 			?>
@@ -46,10 +43,10 @@
 					<?php echo $title ?>
 				</div>
 				<div class="links">
-					<div class="bullet">
+					<div class="bullet small link">
 						<a href="#">Read more about this residency program</a>
 					</div>
-					<div class="bullet">
+					<div class="bullet small link">
 						<a href="#">Application FAQ</a>
 					</div>
 				</div>

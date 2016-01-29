@@ -12,7 +12,7 @@ html,
 body {
 	height: 100%;
 	overflow: hidden;
-	font-family: 'Life Rounded Regular';
+	font-family: 'Life Rounded';
 	@include small-fs;
 }
 #mfPreviewBar {
@@ -42,12 +42,6 @@ section {
 	position: absolute;
 	left: 100px;
 	overflow: hidden;
-	@import 'partials/header';
-	@import 'partials/side';
-	@import 'partials/slider';
-	@import 'partials/shelves';
-	@import 'partials/twitter';
-	@import 'partials/footer';
 	.content {
 		@include width('100% - 60px - '$side_width*2);
 		@include height('100% - 260px');
@@ -78,12 +72,15 @@ section {
 				color: $orange;
 			}
 		}
-	}
-	h3.title {
-		color: $orange;
-		&.head {
-			padding: 0 0 20px 0;
+		& > * {
+			transition: opacity 300ms ease-in-out;
 		}
+	}
+	h2.head {
+		width: 100%;
+		text-align: center;
+		color: $orange;
+		margin-bottom: 20px;
 	}
 	&:not(.center) {
 		pointer-events: none;
@@ -136,6 +133,18 @@ section {
 			}
 		}
 	}
+	&.new {
+		.content > * {
+			opacity: 0;
+		}
+	}
+	@import 'partials/filter';
+	@import 'partials/footer';
+	@import 'partials/header';
+	@import 'partials/shelves';
+	@import 'partials/side';
+	@import 'partials/slider';
+	@import 'partials/twitter';
 }
 
 em, i {
@@ -233,20 +242,22 @@ body.login {
 		}
 	}
 }
+@import 'sections/about';
+@import 'sections/apply';
+@import 'sections/black';
+@import 'sections/events';
+@import 'sections/event';
 @import 'sections/home';
 @import 'sections/residents';
 @import 'sections/resident';
-@import 'sections/events';
-@import 'sections/event';
+@import 'sections/journals';
+@import 'sections/journal';
 @import 'sections/programs';
-@import 'sections/sponsors';
-@import 'sections/sponsor';
-@import 'sections/apply';
-@import 'sections/black';
-@import 'sections/about';
-@import 'sections/visit';
 @import 'sections/resources';
 @import 'sections/search';
+@import 'sections/sponsors';
+@import 'sections/sponsor';
+@import 'sections/visit';
 ::-webkit-scrollbar {display:none;}
 ::-moz-scrollbar {display:none;}
 ::-o-scrollbar {display:none;}

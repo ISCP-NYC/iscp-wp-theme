@@ -26,7 +26,7 @@ $programs = get_pages( $programs_query );
 	<?php get_template_part( 'partials/nav' ) ?>
 	<?php get_template_part( 'partials/side' ) ?>
 	<div class="content">
-		<h3 class="title head"><?php echo $parent_title ?></h3>
+		<h2 class="head">Residency Programs</h2>
 		<div class="program-links">
 			<?php
 			foreach( $programs as $program ):
@@ -35,14 +35,14 @@ $programs = get_pages( $programs_query );
 					$full_title = get_post( $program )->post_title;
 				endif;
 				$slug = $program->post_name;
-				echo '<a class="bullet" href="#' . $slug . '">' . $full_title . '</a></br>';
+				echo '<a class="bullet small" href="#' . $slug . '">' . $full_title . '</a></br>';
 			endforeach;
 			?>
 		</div>
 
 		<?php
 			if( have_rows( 'images', $programs_id ) ):
-			echo '<div class="images">';
+			echo '<div class="images border-top">';
 			while ( have_rows( 'images', $programs_id ) ) : the_row();
 				$image = get_sub_field( 'image' )['sizes']['thumb'];
 				$caption = get_sub_field( 'caption' );

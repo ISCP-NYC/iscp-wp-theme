@@ -5,12 +5,12 @@ section.apply {
 	.program {
 		display: table;
 		margin-top: 30px;
-		padding-top: 20px;
+		padding-top: 30px;
 		position: relative;
 		.title {
 			width: 140px;
 			position: absolute;
-			top: 20px;
+			top: 30px;
 			left: 0;
 			@include small {
 				width: 100% !important;
@@ -21,16 +21,10 @@ section.apply {
 		.links {
 			width: 140px;
 			position: absolute;
-			top: 20px;
+			top: 30px;
 			right: 0;
 			.bullet {
-				@include small-fs;
-				background-size: 11px;
-				padding-left: 15px;
 				display: inline;
-				a {
-					margin-bottom: 5px;
-				}
 			}
 			@include small {
 				width: 100% !important;

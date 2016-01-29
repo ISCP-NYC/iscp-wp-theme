@@ -67,6 +67,7 @@ aside {
 		transform-origin: left top 0;
 		text-align: center;
 		.label {
+			transition: opacity 300ms ease-in-out;
 			font-size: $medium-fs;
 			line-height: $medium-lh;
 		}
@@ -124,5 +125,10 @@ aside {
 &.right {
 	aside.left  .logo {
 		left: 10px;
+	}
+}
+&.new {
+	aside .move .label {
+		opacity: 0;
 	}
 }

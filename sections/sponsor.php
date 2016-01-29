@@ -26,10 +26,10 @@ $sponsor_query = array(
 	<?php get_template_part( 'partials/nav' ) ?>
 	<?php get_template_part( 'partials/side' ) ?>
 	<div class="content">
-		<h3 class="title head">
+		<h2 class="head">
 			Sponsor</br>
 			<?php echo $sponsor_country; ?>
-		</h3>
+		</h2>
 
 		<div class="top">
 			<div class="filter">

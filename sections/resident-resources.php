@@ -13,7 +13,7 @@
 	<?php get_template_part('partials/nav') ?>
 	<?php get_template_part('partials/side') ?>
 	<div class="content">
-		<h4 class="title orange"><?php echo $title ?></h4>
+		<h2 class="head"><?php echo $title ?></h2>
 		<div class="user-info">
 			Logged in as <?php echo $name ?> <br/>
 			<a href="<?php echo wp_logout_url( home_url() ); ?>">Logout</a>

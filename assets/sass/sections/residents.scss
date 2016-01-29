@@ -43,17 +43,10 @@ section.residents {
 				.details {
 					display: flex;
 					.left {
-						width: 80%;
-						// display: inline-flex;
+						width: 70%;
 					}
-		            .country {
-		            	// width: 100%;
-		            }
-		            .sponsor {
-		            	// width: 100%;
-		            }
 		            .right {
-		            	@include width('20% - 5px');
+		            	@include width('30% - 5px');
 		            	display: block;
 		            	padding-left: 5px;
 		            	text-align: right;
@@ -90,6 +83,9 @@ section.residents {
 						.studio-number, .year {
 							width: 10%;
 						}
+					}
+					.right {
+						align-self: center;
 					}
 				}
 				

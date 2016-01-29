@@ -19,16 +19,14 @@
 		$resident_classes .= ' one_col';
 	endif;
 ?>
-
 <section <?php section_attr( $resident_id, $resident_slug, $resident_classes ); ?>>
 	<?php get_template_part('partials/nav') ?>
 	<?php get_template_part('partials/side') ?>
 	<div class="content">
 		<header class="sub">
 			<div class="left">
-				<h3 class="country"><?php echo $country ?></h3>
+				<h3><?php echo $country ?></h3>
 			</div>
-
 			<div class="center">
 				<?php
 				if( have_rows( 'residency_dates', $resident_id ) ):
@@ -52,7 +50,7 @@
 					endwhile;
 				endif;
 				if( is_past( $resident_id ) ):
-					echo '<h3>';
+					echo '<h2>';
 					echo 'Past Resident: ';
 					foreach ($residencies as $index=>$residency):
 						if( $index != 0 ):
@@ -63,14 +61,14 @@
 						echo '</br>';
 						echo get_sponsors( $resident_id );
 					endforeach;
-					echo '</h3>';
+					echo '</h2>';
 				elseif( is_current( $resident_id ) ):
 					$current_residency = $residencies[0];
 					$date_range = $current_residency->date_range;
-					echo '<h3>';
+					echo '<h2>';
 					echo 'Current Resident: ' . $date_range;
 					echo '</br>';
-					echo '</h3>';
+					echo '</h2>';
 					echo get_sponsors( $resident_id );
 				endif; ?>
 			</div>

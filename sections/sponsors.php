@@ -3,10 +3,10 @@
 	<?php get_template_part( 'partials/nav' ) ?>
 	<?php get_template_part( 'partials/side' ) ?>
 	<div class="content">
-		<h3 class="title head">
+		<h2 class="head">
 			Sponsors</br>
 			<?php echo $sponsor_country; ?>
-		</h3>
+		</h2>
 
 		<div class="top">
 			<div class="filter">
@@ -56,29 +56,9 @@
 					?>
 				</div>
 			</div>
-			<!-- <div class="filter-list program <?php echo $page_slug ?>"> -->
-				<!-- <div class="options"> -->
-				<?php
-				// $residency_programs = array(
-				// 	'international',
-				// 	'ground_floor'
-				// );
-				// foreach( $residency_programs as $program ): 
-				// 	$filter_url = $page_url . '?residency_program=' . $program;
-				// 	$program_count = resident_count_by_program( $program, $sponsor_query );
-				// 	echo '<div class="option">';
-				// 	echo '<a href="' . $filter_url . '">';
-				// 	echo pretty( $program );
-				// 	echo ' (' . $program_count . ')';
-				// 	echo '</a>';
-				// 	echo '</div>';
-				// endforeach;
-				?>
-			<!-- 	</div>
-			</div> -->
 		</div>
 
-		<div class="sponsors shelves filter-this list <?php echo $slug ?>">
+		<div class="sponsors shelves filter-this list items <?php echo $slug ?>">
 			<?php include( locate_template( 'sections/loops/sponsors.php' ) ); ?>	
 		</div>
 	</div>

@@ -87,5 +87,5 @@
 
 
 ?>
-<body <?php body_class(); ?> data-center-slug="<?php echo $page_slug ?>" data-center-id="<?php echo $page_id ?>">
-	<main>
+<body <?php body_class(); ?>>
+	<main data-center-slug="<?php echo $page_slug ?>" data-center-id="<?php echo $page_id ?>">

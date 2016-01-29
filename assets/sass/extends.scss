@@ -39,6 +39,11 @@
             background-image: url(../images/bullet-black.svg);
         }
     }
+    &.small {
+        @include small-fs;
+        padding: 4px 0 1px 19px;
+        background-size: 12px;
+    }
 }
 a.bullet {
     background-image: url(../images/bullet-orange.svg);

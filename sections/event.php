@@ -36,11 +36,11 @@
 	<?php get_template_part('partials/side') ?>
 
 	<div class="content">
-		<h3 class="title">
+		<h2 class="title">
 			<?php echo $event_type_pretty; ?>
 			</br>
 			<?php echo $date; ?>
-		</h3>	
+		</h2>	
 
 		<h1 class="title"><?php echo $title ?></h1>
 

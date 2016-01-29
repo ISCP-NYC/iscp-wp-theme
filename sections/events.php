@@ -5,7 +5,7 @@ include(locate_template('sections/params/events.php'));
 	<?php get_template_part('partials/nav') ?>
 	<?php get_template_part('partials/side') ?>
 	<div class="content">
-		<h3 class="title head">Events &amp; Exhibitions</h3>
+		<h2 class="title head">Events &amp; Exhibitions</h2>
 		<div class="filter">
 			<div class="bar">
 				<div class="select link dropdown event-type" data-filter="event-type" data-slug="<?php echo $slug ?>">
@@ -102,7 +102,7 @@ include(locate_template('sections/params/events.php'));
 			</div>
 		</div>
 
-		<div class="events shelves filter-this grid <?php echo $slug ?>">
+		<div class="events shelves filter-this grid items <?php echo $slug ?>">
 			<?php get_template_part('sections/loops/events'); ?>	
 		</div>
 	</div>

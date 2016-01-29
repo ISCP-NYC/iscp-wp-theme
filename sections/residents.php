@@ -3,7 +3,7 @@
 	<?php get_template_part('partials/nav') ?>
 	<?php get_template_part('partials/side') ?>
 	<div class="content">
-		<h4 class="title"><?php the_title() ?></h4>
+		<h2 class="head"><?php the_title() ?></h2>
 		<div class="top">
 			<div class="filter">
 				<div class="bar">
@@ -140,10 +140,9 @@
 			</div>
 		</div>
 
-		<div class="residents shelves filter-this grid <?php echo $slug ?>">
+		<div class="residents shelves filter-this grid items <?php echo $slug ?>">
 			<?php include(locate_template('sections/loops/residents.php')); ?>	
 		</div>
-		<?#php get_template_part('partials/load-more'); ?>
 	</div>
 	<?php get_template_part('partials/footer'); ?>
 </section>

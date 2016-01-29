@@ -44,6 +44,10 @@
 		get_template_part( 'sections/visit' );
 		wp_reset_postdata();
 
+	elseif( $page_slug == 'journal' ):
+
+		get_template_part( 'sections/journals' );	
+
 	elseif( $page_slug == 'sponsors' ):
 
 		get_template_part( 'sections/sponsors' );		
