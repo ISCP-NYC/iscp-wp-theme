@@ -59,7 +59,6 @@
 		$page_id = get_the_ID();
 	endif;
 	$post_type = get_post_type();
-	
 	switch($page_slug) {
 		case 'current-residents':
 			$classes = 'current-residents residents';

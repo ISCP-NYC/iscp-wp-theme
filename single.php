@@ -52,6 +52,9 @@ switch($post_type) {
 	case 'sponsor':
 		get_template_part('sections/sponsor');
 		break;
+	case 'journal':
+		get_template_part('sections/journal');
+		break;
 }
 get_footer();
 ?>

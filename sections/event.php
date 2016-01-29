@@ -1,7 +1,7 @@
 <?php 
 	global $post;
-	$title = get_post( $post )->post_title;
-	$slug = get_post( $post )->post_name;
+	$title = $post->post_title;
+	$slug = $post->post_name;
 	$id = get_the_ID();
 	$description = get_field( 'description', $id );
 	$footnote = get_field( 'footnote', $id );

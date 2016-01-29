@@ -5,15 +5,14 @@ $(window).load(function() {
 	}
 	setUp();
 	setSliderWidth();
-	$('.journal.grid').masonry('layout');
+	$masonry.masonry('layout');
 });
 
-$('.journal.grid').masonry({
+$masonry = $('.journal.grid').masonry({
 	columnWidth: '.sizer',
 	itemSelector: '.item',
 	gutter: 20,
-	transitionDuration: 0,
-	resize: false
+	transitionDuration: 0
 });
 
 //sets width for full slider field and each section within
@@ -242,7 +241,7 @@ function addItems(html, vars) {
 		if(sectionSlug == 'journals') {sectionSlug='journal';}
 		var section = $('section#'+sectionSlug);
 		var content = $(section).find('.content');
-		var shelves = $(section).find('.items');
+		var container = $(section).find('.items');
 		var footer = $(section).find('footer')
 		var paged = parseInt($(section).attr('data-page')) + 1;
 		var contentScrollTop = $(content).scrollTop();
@@ -255,10 +254,15 @@ function addItems(html, vars) {
 			if(!$(item).hasClass('load-more')) {
 				$(item).addClass('hide');
 			}
-			$(shelves).append($(item));
-			setTimeout(function() {
+			if($(container).hasClass('journal')) {
+				$masonry.append(item).masonry('appended', item);
+			} else {
+				$(container).append($(item));
+			}
+			$(container).imagesLoaded(function() {
 				$(item).removeClass('hide');
-			},300);
+				$masonry.masonry('layout');
+			});
 		});
 		$(section).removeClass('show-footer');
 		$(content).animate({ scrollTop: contentScrollTop + sectionScrollTop }, 300, 'easeOutQuart');
@@ -673,7 +677,7 @@ function winW() {
 $(window).resize(function() {
 	setUp();
 	setSliderWidth();
-	$('.journal.grid').masonry('layout');
+	$masonry.masonry('layout');
 });
 
 });

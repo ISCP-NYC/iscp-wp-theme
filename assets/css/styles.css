@@ -3419,81 +3419,98 @@ section.single.resident .center {
   z-index: 0;
 }
 
-/* line 7, ../sass/sections/journals.scss */
+/* line 3, ../sass/sections/journals.scss */
+section.journal .content .journal {
+  padding-bottom: 50px;
+  position: relative;
+  overflow: hidden;
+  clear: both;
+}
+/* line 8, ../sass/sections/journals.scss */
 section.journal .content .journal .journal-post {
   margin-bottom: 30px;
   padding-bottom: 30px;
 }
-/* line 10, ../sass/sections/journals.scss */
+/* line 11, ../sass/sections/journals.scss */
 section.journal .content .journal .journal-post a {
   display: table;
 }
-/* line 12, ../sass/sections/journals.scss */
+/* line 13, ../sass/sections/journals.scss */
 section.journal .content .journal .journal-post a.image {
   margin: auto;
 }
-/* line 16, ../sass/sections/journals.scss */
+/* line 17, ../sass/sections/journals.scss */
 section.journal .content .journal .journal-post h2.name {
   display: table;
   margin-bottom: 4px;
 }
-/* line 20, ../sass/sections/journals.scss */
+/* line 21, ../sass/sections/journals.scss */
 section.journal .content .journal .journal-post header {
   margin-bottom: 10px;
 }
-/* line 23, ../sass/sections/journals.scss */
+/* line 24, ../sass/sections/journals.scss */
 section.journal .content .journal .journal-post .image {
   margin-bottom: 10px;
 }
-/* line 25, ../sass/sections/journals.scss */
+/* line 26, ../sass/sections/journals.scss */
 section.journal .content .journal .journal-post .image img {
   max-width: 100%;
   display: table;
   margin: auto;
 }
-/* line 31, ../sass/sections/journals.scss */
+/* line 32, ../sass/sections/journals.scss */
 section.journal .content .journal .journal-post .tags {
   margin-top: 5px;
 }
-/* line 33, ../sass/sections/journals.scss */
+/* line 34, ../sass/sections/journals.scss */
 section.journal .content .journal .journal-post .tags a {
   display: inline-table;
 }
-/* line 38, ../sass/sections/journals.scss */
+/* line 39, ../sass/sections/journals.scss */
 section.journal .content .journal .journal-post, section.journal .content .journal .sizer {
   width: calc(33.333% - 15px);
 }
 @media (max-width: 1280px) {
-  /* line 38, ../sass/sections/journals.scss */
+  /* line 39, ../sass/sections/journals.scss */
   section.journal .content .journal .journal-post, section.journal .content .journal .sizer {
     width: calc(50% - 10px);
   }
 }
 @media (max-width: 900px) {
-  /* line 38, ../sass/sections/journals.scss */
+  /* line 39, ../sass/sections/journals.scss */
   section.journal .content .journal .journal-post, section.journal .content .journal .sizer {
     width: 100%;
   }
 }
-/* line 50, ../sass/sections/journals.scss */
+/* line 51, ../sass/sections/journals.scss */
 section.journal .content .journal .size {
   display: none;
 }
-/* line 53, ../sass/sections/journals.scss */
-section.journal .content .journal[data-columns]::before {
-  content: '3 .column.size-1of3';
+/* line 54, ../sass/sections/journals.scss */
+section.journal .content .journal .load-more {
+  position: absolute;
+  bottom: 0;
 }
-@media (max-width: 1280px) {
-  /* line 57, ../sass/sections/journals.scss */
-  section.journal .content .journal[data-columns]::before {
-    content: '2 .column.size-1of2';
-  }
+
+/* line 4, ../sass/sections/journal.scss */
+section.journal.single .content .text img {
+  max-width: 100%;
+  width: auto !important;
+  height: auto;
+  display: table;
+  margin: auto;
 }
-@media (max-width: 900px) {
-  /* line 62, ../sass/sections/journals.scss */
-  section.journal .content .journal[data-columns]::before {
-    content: '1 .column.size-1of1';
-  }
+/* line 11, ../sass/sections/journal.scss */
+section.journal.single .content .text .wp-caption {
+  max-width: 100%;
+  width: auto !important;
+  display: table;
+  margin: 20px auto;
+}
+/* line 16, ../sass/sections/journal.scss */
+section.journal.single .content .text .wp-caption .wp-caption-text {
+  display: table;
+  margin: 10px auto 0 auto;
 }
 
 /* line 2, ../sass/sections/programs.scss */

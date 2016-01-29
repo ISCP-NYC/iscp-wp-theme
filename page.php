@@ -7,7 +7,6 @@
 
 	$resident_types = array( 'current-residents', 'past-residents' );
 	$event_types = array( 'events', 'exhbitions', 'iscp-talks', 'off-site-projects', 'open-studios' );
-	
 	if( $page_slug == 'current-residents' ):
 
 		$programs_page_id = get_page_by_path( 'residency-programs' )->ID;

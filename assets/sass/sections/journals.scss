@@ -1,9 +1,10 @@
 section.journal {
 	.content {
 		.journal {
-		    // display: flex;
-		    // justify-content: space-between;
-		    // flex-wrap: wrap;
+		    padding-bottom: 50px;
+		    position: relative;
+		    overflow: hidden;
+		    clear: both;
 		    .journal-post {
 		    	margin-bottom: 30px;
 		    	padding-bottom: 30px;
@@ -50,30 +51,10 @@ section.journal {
 			.size {
 				display: none;
 			}
-		    &[data-columns]::before {
-			    content: '3 .column.size-1of3';
-			}
-			@include large {
-				&[data-columns]::before {
-				    content: '2 .column.size-1of2';
-				}
-			}
-			@include medium {
-				&[data-columns]::before {
-				    content: '1 .column.size-1of1';
-				}
-			}
-		 //    .column {
-		 //    	&.size-1of3 {
-			// 	    width: calc(33.333% - 15px);
-			// 	}
-			// 	&.size-1of2 {
-			// 	    width: calc(50% - 10px);
-			// 	}
-			//     &.size-1of1 {
-			// 	    width: 100%;
-			// 	}
-			// }
+		 	.load-more {
+		 		position: absolute;
+		 		bottom: 0;
+		 	}
 		}
 	}
 }

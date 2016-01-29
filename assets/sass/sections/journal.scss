@@ -1,0 +1,23 @@
+section.journal.single {
+	.content {
+		.text {
+			img {
+				max-width: 100%;
+				width: auto !important;
+				height: auto;
+				display: table;
+				margin: auto;
+			}
+			.wp-caption {
+				max-width: 100%;
+				width: auto !important;
+				display: table;
+				margin: 20px auto;
+				.wp-caption-text {
+					display: table;
+					margin: 10px auto 0 auto;
+				}
+			}
+		}
+	}
+}
