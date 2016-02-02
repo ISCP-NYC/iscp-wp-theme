@@ -3,8 +3,8 @@
 	<nav>
 		<?php 
 		$menu_items = add_parent_class( $menu_items );
-		foreach ( (array) $menu_items as $key => $menu_item ) {
-			if ( $menu_item->menu_item_parent == 0 ) :
+		foreach ( (array) $menu_items as $key => $menu_item ):
+			if ( $menu_item->menu_item_parent == 0 ):
 				$item_title = $menu_item->title;
 				$item_id = $menu_item->ID;
 				$item_url = $menu_item->url;
@@ -36,10 +36,13 @@
 
 			   	echo '</div></div></div>';
 			endif;
-		} ?>
+		endforeach; ?>
 		<div class="cell search">
 			<div class="inner">
-				<?php get_search_form(); ?>
+				<form role="search" method="get" class="searchform" class="searchform" autocomplete="off" action="<?php echo esc_url( home_url( '/' ) ); ?>">
+					<input type="text" data-placeholder="Search" value="Search" name="s" class="s nav-search" />
+				</form>
+				<div class="counter"></div>
 			</div>
     	</div>
 	</nav>

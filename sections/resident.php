@@ -25,7 +25,7 @@
 	<div class="content">
 		<header class="sub">
 			<div class="left">
-				<h3><?php echo $country ?></h3>
+				<h2><?php echo $country ?></h2>
 			</div>
 			<div class="center">
 				<?php
@@ -69,15 +69,17 @@
 					echo 'Current Resident: ' . $date_range;
 					echo '</br>';
 					echo '</h2>';
+					echo '<h2>';
 					echo get_sponsors( $resident_id );
+					echo '</h2>';
 				endif; ?>
 			</div>
 
 			<div class="right">
 				<?php if( is_current( $resident_id ) ): 
-					echo '<h3 class="studio-number">Studio #' . $studio_number . '</h3>';
+					echo '<h2 class="studio-number">Studio #' . $studio_number . '</h2>';
 				endif; ?>
-				<h3 class="resident-type"><?php echo $resident_type ?></h3>
+				<h2 class="resident-type"><?php echo $resident_type ?></h2>
 			</div>
 		</header>
 
@@ -168,50 +170,25 @@
 				);
 			endif;
 			?>
-			<div class="inner residents shelves grid">
-				<?php 
-				$residents = get_posts(array(
-					'posts_per_page' => 3,
-					'post__not_in' => array($resident_id),
-					'post_type'	=> 'resident',
-					'meta_query' => array( $meta_query )
-				));
-				foreach( $residents as $related ): 
-					$related_id = $related->ID;
-					$related_title = get_the_title( $related_id );
-					$related_country = get_field('country', $related_resident_id )[0]->post_title;
-					$related_studio_number = get_field( 'studio_number', $related_resident_id );
-					$related_residency_program = get_field( 'residency_program', $related_resident_id );
-					$related_url = get_permalink( $related_id );
-					$related_residency_date = get_field( get_end_date_value( $related_resident_id ), $related_resident_id );
-					$related_residency_year = ( new DateTime( $related_residency_date ) )->format('Y');
-					$related_thumb = get_thumb( $related_id );
-					$related_status = get_status( $related_id );
-					echo '<div class="resident shelf-item border-bottom ' . $related_status . '"><div class="inner">';
-					echo '<a class="wrap value name" href="' . $related_url . '">';
-					echo '<h3 class="link">' . $related_title . '</h3>';
-					echo '<div class="image">';
-					echo '<img src="' . $related_thumb . '"/>';
-					echo '</div>';
-					echo '</a>';
-					echo '<div class="details">';
-					echo '<div class="left">';
-					echo '<div class="value sponsors">';
-					echo '<div class="vertical-align">';
-					echo get_sponsors( $related_id );
-					echo '</div>';
-					echo '</div>';
-					echo '</div>';
-					echo '<div class="right">';
-					if( $related_slug == 'current-residents' ) {
-						echo '<div class="value studio-number">Studio ' . $related_number . '</div>';
-					} elseif( $related_slug == 'past-residents' ) {
-						echo '<div class="value year">' . $related_residency_year . '</div>';
-					}
-					echo '</div>';
-					echo '</div></div></div>';
-				endforeach;
-				?>
+			<?php 
+			$residents_query = array(
+				'post_type'	=> 'resident',
+				'posts_per_page' => 3,
+				'post__not_in' => array($resident_id),
+				'meta_query' => array( $meta_query )
+			);
+			$residents = new WP_Query( $residents_query );
+			$GLOBALS['wp_query'] = $residents;
+			if( $residents->have_posts() ):
+				echo '<div class="inner residents shelves grid">';
+				while ( $residents->have_posts() ) : 
+					the_post();
+					get_template_part( 'sections/items/resident' );
+				endwhile;
+				echo '</div>';
+			endif;
+			wp_reset_query(); 
+			?>
 			</div>
 		</div>
 

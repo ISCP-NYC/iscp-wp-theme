@@ -19,43 +19,42 @@
 						$title = $menu_item->title;
 						$id = $menu_item->ID;
 						$url = $menu_item->url;
+						$no_link = array( 'residencies' );
 						$slug = basename($url);
-					    $menu_item_html = '
-					    	<div class="cell ' . $slug . '">
-					    		<div class="cell-inner">
-					    			<a href="' . $url . '">
-					    				<div class="title">' . $title . '</div>
-					    			</a>
-					    			<div class="sub-menu">';
-					    $menu_item_html .= $sub_menu_html;
+					    echo '<div class="cell ' . $slug . '">';
+						echo '<div class="cell-inner">';
+						$html_title = '<div class="title">' . $title . '</div>';
+						if( in_array( $slug, $no_link ) ):
+							echo $html_title;
+						else:
+					    	echo '<a href="' . $url . '">' . $html_title . '</a>';
+					    endif;
+					    echo '<div class="sub-menu">';
 					    foreach ( (array) $menu_items as $key => $child_menu_item ) {
 					    	$child_title = $child_menu_item->title;
 					    	$child_url = $child_menu_item->url;
 					    	$child_slug = str_replace('#','-',basename($child_url));
 					    	$parent_id = $child_menu_item->menu_item_parent;
 					    	if ($parent_id == $id ) : 
-					    		$child_item_html = '
-					    			<div class="child-item ' . $child_slug . '">
-					    				<a href="' . $child_url . '">' .
-					    					$child_title .
-					    				'</a>
-					    			</div>';
-					    		$menu_item_html .= $child_item_html;
+					    		echo '<div class="child-item ' . $child_slug . '">';
+					    		echo '<a href="' . $child_url . '">' . $child_title . '</a>';
+					    		echo '</div>';
 					    	endif;
 					    }
-
-					   	$menu_item_html .= '</div></div></div>';
-					   	echo $menu_item_html;
+					   	echo '</div>';
+					   	echo '</div>';
+					   	echo '</div>';
 					endif;
 				} ?>
 
 				<div class="cell search">
 		    		<div class="cell-inner">
-		    			<a href="">
-		    				<div class="title">Search</div>
-		    			</a>
+	    				<div class="title">Search</div>
 		    			<div class="sub-menu">
-		    				<?php get_search_form(); ?>
+		    				<form role="search" method="get" class="searchform" class="searchform" autocomplete="off" action="<?php echo esc_url( home_url( '/' ) ); ?>">
+								<input type="text" data-placeholder="Type here" value="Type here" name="s" class="s" />
+								<div class="counter"></div>
+							</form>
 		    			</div>
 		    		</div>
 		    	</div>
@@ -71,9 +70,7 @@
 
 		    	<div class="cell connect">
 		    		<div class="cell-inner">
-		    			<a href="">
-		    				<div class="title">Connect</div>
-		    			</a>
+	    				<div class="title">Connect</div>
 		    			<div class="sub-menu">
 		    				<div class="child-item twitter">
 		    					<a href="<?php echo $twitter_url ?>">Twitter</a>
@@ -90,11 +87,11 @@
 
 		    	<div class="cell newsletter">
 		    		<div class="cell-inner">
-		    			<a href="<?php echo $newsletter_url ?>">
-		    				<div class="title">Newsletter</div>
-		    			</a>
+		    			<div class="title">Newsletter</div>
 		    			<div class="sub-menu">
-		    				<input type="text" placeholder="Subscribe">
+		    				<form role="search" method="get" class="newsletter" action="<?php echo esc_url( home_url( '/' ) ); ?>">
+		    					<input type="text" value="Subscribe" data-placeholder="Subscribe">
+		    				</form>
 		    			</div>
 		    		</div>
 		    	</div>

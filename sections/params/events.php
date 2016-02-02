@@ -12,6 +12,7 @@ if( $query_vars ):
 	$paged = $query_vars['paged'];
 	$event_type_param = $query_vars['type'];
 	$year_param = $query_vars['date'];
+	$upcoming_ids = $query_vars['upcoming_ids'];
 	$post = get_page_by_path( $slug, OBJECT, 'page' );
 	$page_param = $slug;
 else:

@@ -24,7 +24,10 @@ $search_count = $wp_query->found_posts;
 		echo '&ldquo;<span class="value">'. $search_value . '</span>&rdquo;';
 		echo '</h3>';
 	endif;
-	get_search_form();
+	echo '<form role="search" method="get" class="searchform" class="searchform" autocomplete="off" action="' . esc_url( home_url( '/' ) ) . '">';
+	echo '<input type="text" data-placeholder="Search" value="Search" name="s" class="s main-search" />';
+	echo '</form>';
+	echo '<div class="counter"></div>';
 	echo '<div class="shelves results list">';
 	if ( have_posts() ) :
 		include( locate_template( 'sections/loops/search.php' ) );

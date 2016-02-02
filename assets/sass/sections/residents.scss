@@ -4,37 +4,36 @@ section.residents {
 			margin-bottom: 20px;
 		}
 		.top {
-			display: -webkit-box;
-		    display: -webkit-flex;
-		    display: -ms-flexbox;
 		    display: flex;
 		    .filter {
-		    	width: 70%;
+		    	// width: 70%;
 		    	float: left;
 		    }
 		    .right.alt {
-		    	width: 30%;
+		    	// width: 30%;
 		    	float: left;
 		    	white-space: nowrap;
 		    	a {
 		    		float: right;
 		    	}
-		    	&.past-residents {
-		    		a {
-		    			color: $black !important;
-		    			&:hover {
-		    				color: $orange !important;
-		    			}
-		    		}
+		    }
+		    @media (max-width: 510px) {
+		    	.right.alt {
+		    		display: none;
 		    	}
-		    	&.current-residents {
-		    		a {
-		    			color: $orange !important;
-		    			&:hover {
-		    				color: $black !important;
-		    			}
-		    		}
-		    	}
+		    }
+		    @include medium {
+		    	// flex-direction: column-reverse;
+		    	// .filter {
+		     //    	width: 100%;
+		     //    }
+		     //    .right.alt {
+		     //    	// width: 100%;
+		     //    	float: none;
+		     //    	a {
+		     //    		float: left;
+		     //    	}
+		     //    }
 		    }
 		}
 		.residents {

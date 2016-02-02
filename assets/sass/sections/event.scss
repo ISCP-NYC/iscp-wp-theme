@@ -123,6 +123,9 @@ section.single.event {
 		}
 		.resident {
 			float: left;
+			padding: 0;
+			margin-bottom: 20px;
+			border-bottom: none !important;
 			h3.name {
 				display: table;
     			margin: 0 auto 10px auto;
@@ -164,7 +167,6 @@ section.single.event {
 	.upcoming-events {
 		width: 100%;
 		display: table;
-		color: $orange;
 		@extend .border-top;
 		h4 {
 			text-align: center;
@@ -192,15 +194,6 @@ section.single.event {
 					width: 100%;
 
 				}
-			}
-		}
-		* {
-			color: $orange !important;
-		}
-		a:hover, .link:hover, .wrap:hover {
-			color: $black !important;
-			* {
-				color: $black !important;
 			}
 		}
 	}

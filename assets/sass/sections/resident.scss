@@ -34,7 +34,7 @@ section.single.resident {
 		text-align: center;
 	}
 	.info {
-		@include width('60% - 20px');
+		width: calc(66.666% - 10px);
 		padding-right: 20px;
 		float: left;
 		.bio {
@@ -74,7 +74,7 @@ section.single.resident {
 	}
 
 	.gallery {
-		width: 40%;
+		width: calc(33.333% - 10px);
 		float: left;
 		.piece {
 			margin-bottom: 20px;

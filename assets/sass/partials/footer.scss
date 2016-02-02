@@ -9,17 +9,17 @@ footer {
 		color: $white;
 	}
 	.wrapper {	
-	    width: calc(100% - 280px);
+	    width: calc(100% - 290px);
 	    height: calc(100% - 260px);
 	    margin-left: 120px;
 	    overflow-y: hidden;
-	    padding: 10px 10px 0px 10px;
+	    padding: 0 15px;
 	    border-width: 0 10px;
 	    border-color: #fff;
 	    border-style: solid;
 	    overflow: hidden;
 		.inner {
-			padding: 0 5px;
+			padding: 0;
 			margin-bottom: 20px;
 		    nav {
 		    	display: -webkit-flex;
@@ -39,6 +39,9 @@ footer {
 					.cell-inner {
 						width: 100%;
 						display: block;
+						a {
+							display: table;
+						}
 						.title {
 							letter-spacing: 1px;
 							text-align: left;

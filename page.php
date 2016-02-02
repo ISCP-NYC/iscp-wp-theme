@@ -99,6 +99,10 @@
 			get_template_part( 'sections/login' );
 		endif;
 
+	elseif ( $page_slug == 'map' ):
+
+		get_template_part( 'sections/map' );
+
 	endif;
 
 get_footer(); ?>

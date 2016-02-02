@@ -20,12 +20,10 @@
             background-position: bottom center;
         }
     }
-    .slide {
-        .image {
-            cursor: -webkit-zoom-in;
-            cursor: -moz-zoom-in;
-            cursor: zoom-in;
-        }
+    .slide .image img {
+        cursor: -webkit-zoom-in;
+        cursor: -moz-zoom-in;
+        cursor: zoom-in;
     }
 }
 .image_slider {
@@ -98,7 +96,7 @@
         position: fixed;
         top: 0;
         left: 0; 
-        background-color: black;
+        background-color: white;
         z-index: 1000;
         cursor: none !important;
         .arrow {

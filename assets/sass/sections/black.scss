@@ -1,6 +1,7 @@
 section.sponsor,
 section.past,
-section.past-residents {
+section.past-residents,
+section.events .past.wrapper {
 	* {
 		border-color: $black !important;
 	}
@@ -59,7 +60,7 @@ section.past-residents {
 	&.tease-nav header.main {
 		border-color: $orange !important;
 	}
-	.content .filter .bar .select.dropdown {
+	.filter .bar .select.dropdown {
 		.icon {
 	        &.default {
 	            background-image: url(../images/dropdown-black.svg);
@@ -69,7 +70,7 @@ section.past-residents {
 	        }
 	    }
 	}
-	.content .filter .bar .select.view.toggle {
+	.filter .bar .select.view.toggle {
 		.icon {
 	        &.default {
 	            background-image: url(../images/view-toggle-black.svg);
@@ -79,7 +80,7 @@ section.past-residents {
 	        }
 	    }
 	}
-	.content .residents .resident .image {
+	.residents .resident .image {
 		background-color: white;
 	}
 	&.hover-right {
@@ -122,6 +123,24 @@ section.past-residents {
 				}
 			}
 		}
+	}
+	.wrap:hover {
+		color: $orange !important;
+		.link {
+			color: $orange !important;
+		}
+	}
+	.shelves {
+		color: $black;
+		.shelf-item.hover {
+            color: $orange;
+            a, .link {
+                color: $orange;
+            }
+        }
+	}
+	.image_slider.full {
+		background-color: $black;
 	}
 }
 a.black, .link.black, .past .link {

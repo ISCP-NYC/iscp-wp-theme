@@ -2,6 +2,7 @@
 global $post;
 setup_postdata( $post );
 $event_id = $post->ID;
+$event_status = get_event_status( $event_id );
 $event_title = get_the_title( $event_id );
 $event_url = get_permalink();
 $event_type = get_field( 'event_type', $event_id );
@@ -13,7 +14,8 @@ if( $append_query && is_past( $event_id ) ) {
 }
 $event_thumb = get_thumb( $resident_id );
 
-echo '<div class="event item shelf-item border-bottom ' . $event_status . '"><div class="inner">';
+echo '<div class="event item shelf-item border-bottom ' . $event_status . '" data-id="' . $event_id . '">';
+echo '<div class="inner">';
 echo '<a class="wrap value date" href="' . $event_url . '">';
 echo '<h2 class="link name title">' . $event_title . '</h2>';
 echo '<div class="image">';

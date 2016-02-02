@@ -10,7 +10,7 @@
 		width: 100%;
 		display: table;
 		padding-top: 10px !important;
-		.event {
+		.shelf-item.event {
 			width: calc('100% / 3') !important;
 			float: left;
 			margin: 0 !important;
@@ -47,14 +47,11 @@
 			&:nth-child(2) {
 				margin: 0 30px;
 			}
-			// @media (max-width: 900px) {
-			// 	@include width('50% - 20px');
-			// 	&:nth-child(odd) {
-			// 		margin: 0 20px 0 0 !important;
-			// 	}
-			// 	&:nth-child(even) {
-			// 		margin: 0 0 0 20px !important;
-			// 	}
+			@include xsmall {
+                .inner {
+                    margin: auto !important;
+                }
+            }
 		}
 		&.cols_1 {
 			.event {
@@ -67,15 +64,15 @@
 		}
 		&.cols_2 {
 			.event {
-				@include width('50% - 15px');
+				width: 50%;
 				.inner {
-					margin: auto;
+					width: calc(100% - 10px);
 				}
-				&:first-child {
-					margin: 0 15px 0 0;
+				&:nth-child(1) .inner {
+					margin: 0 10px 0 0;
 				}
-				&:last-child {
-					margin: 0 0 0 15px;
+				&:nth-child(2) .inner {
+					margin: 0 0 0 10px;
 				}
 			}
 		}	
@@ -132,6 +129,46 @@
 				display: table-cell;
 				vertical-align: middle;
 				text-align: center;
+				h3 {
+					padding-left: 20px;
+					display: table;
+					margin: auto;
+					.swap {
+						width: 18px;
+						height: 18px;
+						margin-right: 5px;
+						float: left;
+						.icon {
+							background-position: center;
+							background-repeat: no-repeat;
+						    background-size: contain;
+						}
+					}
+				}
+				&:hover .swap {
+					.default.icon {
+						opacity: 0;
+					}
+					.hover.icon {
+						opacity: 1;
+					}
+				}
+			}
+			&.facebook .swap {
+				.default.icon {
+					background-image: url(../images/facebook-orange.svg);
+				}
+				.hover.icon {
+					background-image: url(../images/facebook-black.svg);	
+				}
+			}
+			&.instagram .swap {
+				.default.icon {
+					background-image: url(../images/instagram-orange.svg);
+				}
+				.hover.icon {
+					background-image: url(../images/instagram-black.svg);	
+				}
 			}
 		}
 	}

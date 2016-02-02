@@ -16,7 +16,7 @@ switch($post_type) {
 			// wp_reset_postdata();
 
 			//previous current residents by studio number
-			get_residents( $this_resident_id, 'prev' );
+			insert_neighbor_residents( $this_resident_id, 'prev' );
 
 			//opened current resident
 			setup_postdata( $this_resident );
@@ -24,7 +24,7 @@ switch($post_type) {
 			wp_reset_postdata();
 
 			//next current residents by studio number
-			get_residents( $this_resident_id, 'next' );
+			insert_neighbor_residents( $this_resident_id, 'next' );
 
 			// current residents list
 			// $current_residents_page_id = get_page_by_path('current-residents')->ID;
@@ -53,7 +53,18 @@ switch($post_type) {
 		get_template_part('sections/sponsor');
 		break;
 	case 'journal':
+
+		$this_post = $post;
+		$this_post_id = $this_post->ID;
+
+		insert_neighbor_journal_posts( $this_post_id, 'new' );
+
+		setup_postdata( $this_post );
 		get_template_part('sections/journal');
+		wp_reset_postdata();
+
+		insert_neighbor_journal_posts( $this_post_id, 'old' );
+
 		break;
 }
 get_footer();

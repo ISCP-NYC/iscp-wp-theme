@@ -9,7 +9,7 @@
 	<?php get_template_part('partials/nav') ?>
 	<?php get_template_part('partials/side') ?>
 	<div class="content">
-		<h3 class="title orange head"><?php echo $title ?></h3>
+		<h2 class="head"><?php echo $title ?></h2>
 
 		<?php
 			$description = get_field( 'description', $id );

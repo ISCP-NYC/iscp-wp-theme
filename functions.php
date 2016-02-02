@@ -46,11 +46,34 @@ function iscp_scripts() {
 	wp_register_script( 'imagesloaded', get_template_directory_uri() . '/assets/js/imagesloaded.pkgd.min.js', array( 'jquery' ) );
 	wp_register_script( 'masonry', get_template_directory_uri() . '/assets/js/masonry.pkgd.min.js', array( 'jquery' ) );
 	wp_register_script( 'main', get_template_directory_uri() . '/assets/js/main.js', array( 'jquery' ) );
+	wp_enqueue_script( 'webglearth', 'http://www.webglearth.com/v2/api.js' );
 	wp_enqueue_script( 'transit' );
 	wp_enqueue_script( 'jquery-ui' );
 	wp_enqueue_script( 'masonry' );
 	wp_enqueue_script( 'imagesloaded' );
 	wp_enqueue_script( 'main' );
+	global $post;
+	if( $post->post_name == 'map' ):
+		$countries_query = array(
+			'post_type' => 'country',
+			'posts_per_page' => -1,
+			'post_status' => 'publish'
+		);
+		$countries = new WP_Query( $countries_query );
+		$countries_array = array();
+		while ( $countries->have_posts() ) : $countries->the_post(); 
+			global $post;
+			setup_postdata( $post );
+		    $country = array(
+		       'name' => $post->post_title,
+		       'slug' => $post->post_name
+		    );
+		    $countries_array[] = $country;
+		    wp_reset_postdata();
+		endwhile;
+		$json = json_decode( json_encode( $countries_array ), true );
+	    wp_localize_script( 'main', 'countries', $json );
+	endif;
 	global $wp_query;
 	wp_localize_script( 'main', 'ajaxpagination', array(
 		'ajaxurl' => admin_url( 'admin-ajax.php' ),
@@ -59,13 +82,18 @@ function iscp_scripts() {
 }
 add_action( 'wp_enqueue_scripts', 'iscp_scripts' );
 
-
-
-
 show_admin_bar(false);
 add_theme_support( 'post-thumbnails' ); 
 add_image_size( 'thumb', 500, 350, true );
 add_image_size( 'slider', 9999, 500, false );
+
+function add_lat_lng( $post_id ) {
+	$post_type = get_post_type( $post_id );
+	if( $post_type == 'country' ):
+		
+	endif;
+}
+add_action( 'save_post', 'add_lat_lng' );
 
 /////////////////////////////////////
 /////////////////////////////////////
@@ -370,14 +398,9 @@ function get_event_status( $id ) {
 	$start_date = get_field( 'start_date', $id );
 	$end_date = get_field( 'end_date', $id );
 
-	if(is_numeric($end_date)):
-		$check_date = $end_date;
-	elseif(is_numeric($start_date)):
-		$check_date = $start_date;
-	endif;
-	if( $check_date > $today ):
+	if( $start_date > $today || $end_date > $today ):
 		$status = 'upcoming';
-	elseif( $check_date < $today ):
+	else:
 		$status = 'past';
 	endif;
 
@@ -454,18 +477,75 @@ function get_display_image( $id ) {
 	}
 }
 
+function get_neighbor_journal_posts() {
+	die();
+	$query_vars = json_decode( stripslashes( $_POST['query_vars'] ), true );
+    $post_id = $query_vars['id'];
+    $direction = $query_vars['direction'];
+    $count = 3;
+	get_neighbors( $post_id, $direction, $count );   	
+    die();
+}
+add_action( 'wp_ajax_nopriv_get_neighbor_journal_posts', 'get_neighbor_journal_posts' );
+add_action( 'wp_ajax_get_neighbor_journal_posts', 'get_neighbor_journal_posts' );
+
+function insert_neighbor_journal_posts( $post_id, $direction, $count = 3 ) {
+	$post = get_post( $post_id );
+	$post_date = $post->post_date;
+	if( $direction == 'new' ):
+		$compare = '>';
+		$order = 'ASC';
+		$when = 'after';
+	elseif ( $direction == 'old' ):
+		$compare = '<';
+		$order = 'DESC';
+		$when = 'before';
+	endif;
+	$posts_args = array(
+		'post_type' => 'journal',
+		'posts_per_page' => $count,
+		'type' => 'DATE',
+		'date_query' => array( $when => $post_date ),
+		'post__not_in' => array( $post_id ),
+		'order' => $order,
+		'orderby' => 'post_date'
+	);
+	$posts = new WP_Query( $posts_args );
+	$last_page = $posts->max_num_pages;
+
+	if ( $direction == 'new' ):
+		$reverse_posts = array_reverse( $posts->posts );
+		$posts->posts = $reverse_posts;
+	endif;
+
+	if( $posts->have_posts() ):
+		while ( $posts->have_posts() ) : $posts->the_post();
+			global $post;
+			setup_postdata( $post );
+			get_template_part( 'sections/journal' );
+			wp_reset_postdata();
+		endwhile;
+	endif;
+
+	wp_reset_query();
+}
+
+
+
+
+
 function get_neighbor_residents() {
 	$query_vars = json_decode( stripslashes( $_POST['query_vars'] ), true );
     $resident_id = $query_vars['id'];
     $direction = $query_vars['direction'];
     $count = 3;
-	get_residents( $resident_id, $direction, $count );   	
+	insert_neighbor_residents( $resident_id, $direction, $count );   	
     die();
 }
 add_action( 'wp_ajax_nopriv_get_neighbor_residents', 'get_neighbor_residents' );
 add_action( 'wp_ajax_get_neighbor_residents', 'get_neighbor_residents' );
 
-function get_residents( $resident_id, $direction, $count = 3 ) {
+function insert_neighbor_residents( $resident_id, $direction, $count = 3 ) {
 	$resident_end_date = get_resident_end_date( $resident_id );
 	$resident_studio = get_field( 'studio_number', $resident_id );
 	$today = new DateTime();
@@ -629,7 +709,7 @@ function get_event_date( $id ) {
 	$end_time = get_field('end_time', $id);
 
 	if ( $end_date ):
-		if ( $today > $start_date ):
+		if ( $today > $start_date && $today < $end_date ):
 			$date_format = 'Thru ' . $end_month . ' ' . $end_day;
 		else:
 			$date_format = $start_month . '&nbsp;' . $start_day;
@@ -931,19 +1011,14 @@ function add_parent_class( $items ) {
 }
 add_filter( 'wp_nav_menu_objects', 'add_parent_class' );
 
+function new_excerpt_more($more) {
+	return '...';
+}
+add_filter('excerpt_more', 'new_excerpt_more');
+
 function add_favicon() {
   	$favicon_url = get_template_directory_uri( ). '/assets/images/favicons/favicon.ico';
 	echo '<link rel="shortcut icon" href="' . $favicon_url . '" />';
 }
-
-function wpdocs_excerpt_more( $more ) {
-    return sprintf( '</br><a class="read-more" href="%1$s">%2$s</a>',
-        get_permalink( get_the_ID() ),
-        __( 'Read More.', 'textdomain' )
-    );
-}
-add_filter( 'excerpt_more', 'wpdocs_excerpt_more' );
-
 add_action('login_head', 'add_favicon');
 add_action('admin_head', 'add_favicon');
-

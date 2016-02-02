@@ -10,7 +10,7 @@
 	<?php get_template_part('partials/nav') ?>
 	<?php get_template_part('partials/side') ?>
 	<div class="content">
-		<h3 class="title head"><?php echo $title ?></h3>
+		<h2 class="head"><?php echo $title ?></h2>
 
 		<?php
 		$office_hours = get_field( 'office_hours', $visit );
@@ -74,7 +74,7 @@
 				    map.setCenter(location);
 				});
 
-			},200);
+			},400);
 		}
 	    </script>
 	    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyApM4iQyAfb0hbmkeXc_zs58aA_Jy0SIac&callback=initMap"></script>

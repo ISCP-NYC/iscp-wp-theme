@@ -9,15 +9,7 @@
 	$event_type_pretty = pretty( $event_type );
 	$date = get_event_date( $id );
 	$date = preg_replace("~</br>~", ' ', $date);
-	$event_classes = 'event single';
-	
-	$end_date_key = get_end_date_value( $id );
-	$end_date = get_field( $end_date_key, $id );
-	$today = new DateTime();
-	$today = $today->format( 'Ymd' );
-	if($today > $end_date):
-		$event_classes .= ' past';
-	endif;
+	$event_classes = 'event single ' . get_status( $id );
 
 	$page_columns = get_field( 'page_columns', $id );
 	if( $page_columns ):
@@ -99,9 +91,13 @@
 			<div class="description">
 				<?php echo $description ?>
 			</div>
-			<div class="footnote">
-				<?php echo $footnote ?>
-			</div>
+			<?php
+			if( $footnote ):
+				echo '<div class="footnote">';
+				echo $footnote;
+				echo '</div>';
+			endif;
+			?>
 			<div class="links">
 				<a href="#" class="link bullet">RSVP</a>
 				<a href="#" class="link bullet">Add to calendar</a>
@@ -188,14 +184,15 @@
 		<?php endif; ?>
 		
 		<?php 
-		$residents = get_field( 'residents' );
-		if( $residents ):
-			echo '<div class="residents shelves grid">';
+		$participating_residents = get_field( 'residents' );
+		if( $participating_residents ):
+			echo '<div class="participating residents shelves grid">';
 			echo '<h4>Participating Residents</h4>';
 			echo '<div class="inner">';
-			foreach( $residents as $resident ): 
-				$post = $resident;
-				get_template_part( 'items/resident' );
+			foreach( $participating_residents as $participating_resident ): 
+				$post = $participating_resident;
+				global $post;
+				get_template_part( 'sections/items/resident' );
 			endforeach;
 			echo '</div>';
 			echo '</div>';
@@ -207,25 +204,6 @@
 		$args = array(
 			'post_type' => 'event',
 			'posts_per_page' => 3,
-			'meta_query' => array(
-				'relation' => 'OR',
-				array(
-					'key' => 'end_date',
-					'compare' => '>=',
-					'value' => $today,
-					'type' => 'DATE',
-					'orderby' => 'meta_value',
-					'order' => 'DESC'
-				),
-				array(
-					'key' => 'date',
-					'compare' => '>=',
-					'value' => $today,
-					'type' => 'DATE',
-					'orderby' => 'meta_value',
-					'order' => 'DESC'
-				)
-			),
 			'orderby' => 'meta_value',
 		    'order' => 'ASC',
 		    'post__not_in' => array($id)

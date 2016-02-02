@@ -1,5 +1,6 @@
 <?php
 include(locate_template('sections/params/events.php'));
+$events_section = $GLOBALS['events_section'];
 if( $event_type_param ) {
 	$filter_key = 'event_type';
 	$filter_query = array(
@@ -26,17 +27,43 @@ if( $event_type_param ) {
 			'type' => 'DATE',
 			'value' => $year_range,
 			'compare' => 'BETWEEN'
-		),
-		array(
-			'key' => 'date',
-			'type' => 'DATE',
-			'value' => $year_range,
-			'compare' => 'BETWEEN'
 		)
 	);
 	$append_query = '?date=' . $year_param;
 }
-
+$today = date('Ymd');
+if( $events_section == 'upcoming' ):
+	$date_query = array(
+		'relation' => 'OR',
+		array(
+			'key' => 'start_date',
+			'compare' => '>',
+			'value' => $today
+		),
+		array(
+			'key' => 'end_date',
+			'compare' => '>',
+			'value' => $today
+		)
+	);
+else:
+	$date_query = array(
+		'relation' => 'OR',
+		array(
+			'key' => 'start_date',
+			'compare' => '<',
+			'value' => $today
+		),
+		array(
+			'key' => 'end_date',
+			'compare' => '<',
+			'value' => $today
+		)
+	);
+endif;
+if( !$upcoming_ids ):
+	$upcoming_ids = $GLOBALS['upcoming_ids'];
+endif;
 $events_query = array(
 	'post_type' => 'event',
 	'posts_per_page' => 12,
@@ -44,9 +71,10 @@ $events_query = array(
 	'orderby' => 'meta_value',
 	'order' => 'DESC',
 	'post_status' => 'publish',
-	'meta_query' => array( $filter_query )
+	'post__not_in' => $upcoming_ids,
+	'meta_query' => array( array( 'key'=>'start_date' ), $filter_query, $date_query )
 );
-
+$upcoming_ids = array();
 $events = new WP_Query( $events_query );
 $GLOBALS['wp_query'] = $events;
 $last_page = $events->max_num_pages;
@@ -54,6 +82,9 @@ if ( have_posts() ):
 	while ( have_posts() ) :
 		the_post();
 		get_template_part( 'sections/items/event' );
+		if( $events_section == 'upcoming' ):
+			$upcoming_ids[] = get_the_ID();
+		endif;
 	endwhile;
 	if( $paged < $last_page ):
 		get_template_part('partials/load-more');
@@ -61,5 +92,6 @@ if ( have_posts() ):
 else:
 	get_template_part( 'partials/no-posts' );
 endif;
+$GLOBALS['upcoming_ids'] = $upcoming_ids;
 wp_reset_query();
 ?>

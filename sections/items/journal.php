@@ -1,5 +1,7 @@
 <?php
 global $post;
+global $more;
+$more = 0;
 setup_postdata( $post );
 $joural_post_id = $the_ID;
 $title = get_the_title();
@@ -33,6 +35,7 @@ echo '</div>';
 echo '</a>';
 echo '<div class="excerpt">';
 echo the_excerpt();
+echo ' <a href="' . $url . '">Read more.</a>';
 echo '</div>';
 $tags_count = count( $tags ) - 1;
 $tag_index = 0;

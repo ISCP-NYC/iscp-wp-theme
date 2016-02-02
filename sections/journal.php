@@ -12,11 +12,12 @@ $event_classes = 'journal single';
 	<?php get_template_part('partials/side') ?>
 
 	<div class="content">
+	<div class="inner">
 		<h3 class="title"><?php echo $date ?></h3>	
 
 		<h2 class="title head"><?php echo $title ?></h2>
 		<div class="text">
-			<?php the_content(); ?>
+			<?php the_content('', false, ''); ?>
 		</div>
 
 		<?php

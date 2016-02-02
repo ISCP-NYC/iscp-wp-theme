@@ -1,25 +1,26 @@
 .shelves {
     width: 100%;
-    display: -webkit-flex;
-    display: -ms-flexbox;
     display: flex;
-    -webkit-flex-wrap: wrap;
-    -ms-flex-wrap: wrap;
     flex-wrap: wrap;
+    color: $orange;
     &.grid {
         .shelf-item {
             @extend .noselect;
-            @include width('100% / 3');
+            width: 33.333%;
             float: left;
             padding-bottom: 50px;
             margin-bottom: 50px;
+            transition: color 150ms ease-in-out;
             .inner {
-                @include width('100% - 20px');
+                width: calc(100% - 13.333px);
                 a.wrap {
                     display: table;
                     &:hover * {
                         color: $black;
                     }
+                }
+                h3 {
+                    text-align: center;
                 }
                 h2 {
                     @extend .yesselect;
@@ -47,13 +48,13 @@
                 }
             }
             &:nth-child(3n+1) .inner {
-                margin: 0 20px 0 0;
+                margin: 0 13.333px 0 0;
             }
             &:nth-child(3n+2) .inner {
-                margin: 0 10px;
+                margin: 0 6.666px;
             }
             &:nth-child(3n+3) .inner {
-                margin: 0 0 0 20px;
+                margin: 0 0 0 13.333px;
             }
             
             &.current, &.upcoming * {
@@ -76,22 +77,10 @@
                     text-align: center;
                 }
             }
-            @media (min-width: #{$xmedium-width}) {
-                &.border-bottom {
-                    //three columns, last row, last item of one
-                    &:nth-child(3n+1):nth-last-child(-n+3):last-child {
-                        @include width('100%');
-                        .inner {
-                            @include width('100%/3 - 20px');
-                        }
-                    }
-                    //three columns, last row, last item of two
-                    &:nth-child(3n+1):nth-last-child(-n+2) + .shelf-item {
-                        @include width('100% / 1.5');
-                        .inner {
-                            @include width('50% - 20px');
-                        }
-                    } 
+            &.hover {
+                color: $black;
+                a, .link {
+                    color: $black;
                 }
             }
             @include xmedium {
@@ -102,10 +91,10 @@
                     width: calc(100% - 10px) !important;
                 }
                 &:nth-child(even) .inner {
-                    margin: 0 0 0 10px !important;
+                    margin: 0 0 0 10px;
                 }
                 &:nth-child(odd) .inner {
-                    margin: 0 10px 0 0 !important;
+                    margin: 0 10px 0 0;
                 }
                 &:nth-child(2n+1):nth-last-child(-n+2):last-child {
                     width: 100% !important;
@@ -174,5 +163,26 @@
 &.hide-shelves {
     .shelves {
         display: none;
+    }
+}
+
+@media (min-width: #{$xmedium-width}) {
+&:not(.home) {
+    .shelves.grid .shelf-item.border-bottom {
+            //three columns, last row, last item of one
+            &:nth-child(3n+1):nth-last-child(-n+3):last-child {
+                @include width('100%');
+                .inner {
+                    @include width('100%/3 - 20px');
+                }
+            }
+            //three columns, last row, last item of two
+            &:nth-child(3n+1):nth-last-child(-n+2) + .shelf-item {
+                @include width('100% / 1.5');
+                .inner {
+                    @include width('50% - 20px');
+                }
+            } 
+        }
     }
 }

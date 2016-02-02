@@ -138,12 +138,25 @@ $id = $post->ID;
 		<div class="social module">
 			<div class="link medium facebook half-border-right">
 				<a href="<?php echo $facebook_url ?>" target="_blank">
-					<h3>Facebook</h3>
+					<h3>
+						<div class="swap">
+							<div class="icon default"></div>
+							<div class="icon hover"></div>
+						</div>
+						Facebook
+					</h3>
 				</a>
 			</div>
 			<div class="link medium instagram half-border-left">
 				<a href="<?php echo $instagram_url ?>" target="_blank">
-					<h3>Instagram</h3>
+					<h3>
+						<div class="swap">
+							<div class="icon default"></div>
+							<div class="icon hover"></div>
+						</div>
+						Instagram
+					</h3>
+				</a>
 			</div>
 		</div>
 
