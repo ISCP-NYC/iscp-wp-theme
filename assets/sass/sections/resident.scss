@@ -34,8 +34,7 @@ section.single.resident {
 		text-align: center;
 	}
 	.info {
-		width: calc(66.666% - 10px);
-		padding-right: 20px;
+		width: 66.666%;
 		float: left;
 		.bio {
 			@include medium-fs;
@@ -74,29 +73,32 @@ section.single.resident {
 	}
 
 	.gallery {
-		width: calc(33.333% - 10px);
+		width: 33.333%;
 		float: left;
-		.piece {
-			margin-bottom: 20px;
-			.image {
-				width: 100%;				
-				img {
-					width: 100%;
-					height: auto;
+		.images {
+			margin-left: 13.333px;
+			.piece {
+				margin-bottom: 20px;
+				.image {
+					width: 100%;				
+					img {
+						width: 100%;
+						height: auto;
+					}
+				}
+				.description {
+					text-align: left;
+					margin: 5px 0 0 0;
+					@include small-fs;
+					color: $orange;
 				}
 			}
-			.description {
-				text-align: left;
-				margin: 5px 0 0 0;
-				@include small-fs;
-				color: $orange;
+			@include xsmall {
+				width: 100%;
 			}
-		}
-		@include xsmall {
-			width: 100%;
-		}
-		@include small {
-			width: 100%;
+			@include small {
+				width: 100%;
+			}
 		}
 
 	}

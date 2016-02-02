@@ -76,7 +76,7 @@ $id = $post->ID;
 
 		<div class="about module">
 			<h3 class="title"><?php echo $address ?></h3>
-			<div class="medium">
+			<div class="text">
 				<?php echo strip_tags( $description ) ?>
 			</div>
 		</div>
@@ -120,7 +120,7 @@ $id = $post->ID;
 
 		<div class="residency_program module">
 			<h3 class="title">Residency Program</h3>
-			<div class="text large">
+			<div class="text">
 				<?php echo $residency_tagline ?>
 			</div>
 		</div>
@@ -164,11 +164,11 @@ $id = $post->ID;
 			$newsletter_url = get_field( 'newsletter', $about_id );
 		?>
 
-		<h3 class="newsletter title">
-			<a href="<?php echo $newsletter_url ?>" target="_blank">
-				Subscribe for our newsletter
-			</a>
-		</h3>
+		<div class="module newsletter">
+			<form role="subscribe" method="get" class="newsletter">
+				<input type="text" value="Subscribe to our newsletter" data-placeholder="Subscribe to our newsletter"/>
+			</form>
+		</div>
 	</div>
 	<?php get_template_part('partials/footer') ?>
 </section>

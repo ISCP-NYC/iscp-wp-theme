@@ -95,8 +95,10 @@
 		echo '</div>';
 		?>
 
-		<div class=" module newsletter">
-			<input type="text" placeholder="Subscribe for our newsletter"/>
+		<div class="module newsletter">
+			<form role="subscribe" method="get" class="newsletter">
+				<input type="text" value="Subscribe to our newsletter" data-placeholder="Subscribe to our newsletter"/>
+			</form>
 		</div>
 		
 	</div>

@@ -22,19 +22,6 @@ section.residents {
 		    		display: none;
 		    	}
 		    }
-		    @include medium {
-		    	// flex-direction: column-reverse;
-		    	// .filter {
-		     //    	width: 100%;
-		     //    }
-		     //    .right.alt {
-		     //    	// width: 100%;
-		     //    	float: none;
-		     //    	a {
-		     //    		float: left;
-		     //    	}
-		     //    }
-		    }
 		}
 		.residents {
 			margin-top: 50px;
@@ -82,9 +69,6 @@ section.residents {
 						.studio-number, .year {
 							width: 10%;
 						}
-					}
-					.right {
-						align-self: center;
 					}
 				}
 				

@@ -72,7 +72,7 @@
             }
             &.no-image {
                 display: flex;
-                align-items: center;
+                // align-items: center;
                 * {
                     text-align: center;
                 }
@@ -130,13 +130,7 @@
                     float:left;
                     text-align: left;
                     @include small-fs;
-                    display: -webkit-flex;
-                    display: -ms-flexbox;
                     display: flex;
-                    -webkit-box-align: center;
-                    -webkit-align-items: center;
-                    -ms-flex-align: center;
-                    align-items: center;
                 }
             }
         }

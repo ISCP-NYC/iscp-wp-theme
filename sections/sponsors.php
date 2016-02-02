@@ -45,13 +45,15 @@
 						$country_slug = $country->post_name;
 						$country_title = $country->post_title;
 						$country_count = resident_count_by_country( $country_id, $sponsor_query );
-						$filter_url = $page_url . '?from=' . $country_slug;
-						echo '<div class="option">';
-						echo '<a href="' . $filter_url . '">';
-						echo ucwords( $country_title );
-						echo ' (' . $country_count . ')';
-						echo '</a>';
-						echo '</div>';
+						if( $country_count != 0 ):
+							$filter_url = $page_url . '?from=' . $country_slug;
+							echo '<div class="option">';
+							echo '<a href="' . $filter_url . '">';
+							echo ucwords( $country_title );
+							echo ' (' . $country_count . ')';
+							echo '</a>';
+							echo '</div>';
+						endif;
 					endforeach;
 					?>
 				</div>

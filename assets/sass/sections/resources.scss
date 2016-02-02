@@ -1,12 +1,13 @@
 section#resident-resources {
 	@include medium-fs;
 	background-color: $light;
-	aside.main .icon {
-		background-color: $light;
+	aside.main {
+		.icon, .label {
+			background-color: $light;
+		}
 	}
 	.content {
-		position: relative;
-		
+		position: relative;	
 	}
 	.user-info {
 		width: 150px;

@@ -14,23 +14,20 @@
 				$classes = implode(' ', $classes_array);
 			   	echo '<div class="cell ' . $classes . ' ">';
 				echo '<div class="inner">';
-				echo '<a class="overlay" href="' . $item_url . '">';
+				echo '<div class="overlay">';
+				echo '<a href="' . $item_url . '">';
 			    echo '<h1 class="link">' . $item_title . '</h1>';
 			    echo '</a>';
+			    echo '</div>';
 			    echo '<div class="sub-menu">';
-
 			    foreach ( (array) $menu_items as $key => $child_menu_item ) {
 			    	$child_title = $child_menu_item->title;
 			    	$child_url = $child_menu_item->url;
 			    	$parent_id = $child_menu_item->menu_item_parent;
 			    	if ($parent_id == $item_id ) : 
-			    		$child_item_html = '
-			    			<div class="child-item bullet link">
-			    				<a href="' . $child_url . '">' .
-			    					$child_title .
-			    				'</a>
-			    			</div>';
-			    		echo $child_item_html;
+			    		echo '<a href="' . $child_url . '" class="child-item bullet">';
+			    		echo $child_title;
+			    		echo '</a>';
 			    	endif;
 			    }
 

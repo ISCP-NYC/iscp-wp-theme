@@ -1,0 +1,11 @@
+section#map {
+	.content {
+		width: calc(100% - 260px);
+		height: calc(100% - 110px);
+		padding: 110px 0;
+		#mapWrap {
+			width: 100%;
+			height: 100%;
+		}
+	}
+}

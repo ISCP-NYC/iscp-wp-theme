@@ -64,21 +64,21 @@ include(locate_template('sections/params/events.php'));
 							foreach( $event_types as $event_type ): 
 								$filter_url =  $page_url . '?type=' . $event_type;
 								$event_type_count = event_count_by_type( $event_type );
-
-								if($event_type == $event_type_param) {
-									$selected = 'selected';
-									$filter_url = $page_url;
-								} else {
-									$selected = null;
-								}
-
-								$event_type = pretty( $event_type );
-								echo '<div class="option ' . $selected . '">';
-								echo '<a href="' . $filter_url . '">';
-								echo ucwords( $event_type );
-								echo ' (' . $event_type_count . ')';
-								echo '</a>';
-								echo '</div>';
+								if( $event_type_count != 0 ):
+									if($event_type == $event_type_param) {
+										$selected = 'selected';
+										$filter_url = $page_url;
+									} else {
+										$selected = null;
+									}
+									$event_type = pretty( $event_type );
+									echo '<div class="option ' . $selected . '">';
+									echo '<a href="' . $filter_url . '">';
+									echo ucwords( $event_type );
+									echo ' (' . $event_type_count . ')';
+									echo '</a>';
+									echo '</div>';
+								endif;
 							endforeach;
 							?>
 						</div>
@@ -94,18 +94,20 @@ include(locate_template('sections/params/events.php'));
 							foreach( $years as $year ): 
 								$filter_url = $page_url . '?date=' . $year;
 								$year_count = event_count_by_year( $year );
-								if($year == $year_param) {
-									$selected = 'selected';
-									$filter_url = $page_url;
-								} else {
-									$selected = null;
-								}
-								echo '<div class="option ' . $selected . '">';
-								echo '<a href="' . $filter_url . '">';
-								echo $year;
-								echo ' (' . $year_count . ')';
-								echo '</a>';
-								echo '</div>';
+								if( $year_count != 0 ):
+									if( $year == $year_param ):
+										$selected = 'selected';
+										$filter_url = $page_url;
+									else:
+										$selected = null;
+									endif;
+									echo '<div class="option ' . $selected . '">';
+									echo '<a href="' . $filter_url . '">';
+									echo $year;
+									echo ' (' . $year_count . ')';
+									echo '</a>';
+									echo '</div>';
+								endif;
 							endforeach;
 							?>
 						</div>

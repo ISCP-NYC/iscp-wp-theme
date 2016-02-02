@@ -85,13 +85,15 @@
 						$country_slug = $country->post_name;
 						$country_title = $country->post_title;
 						$country_count = resident_count_by_country( $country_id, $page_query );
-						$filter_url = $page_url . '&from=' . $country_slug;
-						echo '<div class="option">';
-						echo '<a href="' . $filter_url . '">';
-						echo ucwords( $country_title );
-						echo ' (' . $country_count . ')';
-						echo '</a>';
-						echo '</div>';
+						if( $country_count != 0 ):
+							$filter_url = $page_url . '&from=' . $country_slug;
+							echo '<div class="option">';
+							echo '<a href="' . $filter_url . '">';
+							echo ucwords( $country_title );
+							echo ' (' . $country_count . ')';
+							echo '</a>';
+							echo '</div>';
+						endif;
 					endforeach;
 				?>
 				</div>
@@ -106,12 +108,14 @@
 					foreach( $years as $year ): 
 						$filter_url = $page_url . '&date=' . $year;
 						$year_count = resident_count_by_year( $year, $page_query );
-						echo '<div class="option">';
-						echo '<a href="' . $filter_url . '">';
-						echo $year;
-						echo ' (' . $year_count . ')';
-						echo '</a>';
-						echo '</div>';
+						if( $year_count  != 0 ):
+							echo '<div class="option">';
+							echo '<a href="' . $filter_url . '">';
+							echo $year;
+							echo ' (' . $year_count . ')';
+							echo '</a>';
+							echo '</div>';
+						endif;
 					endforeach;
 				?>
 				</div>
@@ -128,12 +132,14 @@
 					foreach( $residency_programs as $program ): 
 						$filter_url = $page_url . '&residency_program=' . $program;
 						$program_count = resident_count_by_program( $program, $page_query );
-						echo '<div class="option">';
-						echo '<a href="' . $filter_url . '">';
-						echo pretty( $program );
-						echo ' (' . $program_count . ')';
-						echo '</a>';
-						echo '</div>';
+						if( $program_count != 0 ):
+							echo '<div class="option">';
+							echo '<a href="' . $filter_url . '">';
+							echo pretty( $program );
+							echo ' (' . $program_count . ')';
+							echo '</a>';
+							echo '</div>';
+						endif;
 					endforeach;
 					?>
 				</div>

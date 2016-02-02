@@ -1,3 +1,3 @@
 <?php
-echo 'Sorry';
+echo '<h3 class="no-posts">Sorry, nothing was found.</h3>';
 ?>
