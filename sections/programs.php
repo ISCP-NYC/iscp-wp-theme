@@ -42,7 +42,7 @@ $programs = get_pages( $programs_query );
 
 		<?php
 			if( have_rows( 'images', $programs_id ) ):
-			echo '<div class="images border-top">';
+			echo '<div class="images module">';
 			while ( have_rows( 'images', $programs_id ) ) : the_row();
 				$image = get_sub_field( 'image' )['sizes']['thumb'];
 				$caption = get_sub_field( 'caption' );
@@ -65,7 +65,7 @@ $programs = get_pages( $programs_query );
 			$apply_link = get_field( 'apply_link', $program );
 			$deadline = get_field( 'deadline', $program );
 
-			echo '<div class="border-top program" id="' . $slug . '">';
+			echo '<div class="module program" id="' . $slug . '">';
 			echo '<h3 class="title orange ' . $slug . '">' . $title . '</h3>';
 			echo '<div class="description">' . $description . '</div>';
 			echo '<a class="bullet apply" href="' . $apply_link . '">Apply</a>';

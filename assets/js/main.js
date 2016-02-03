@@ -48,13 +48,13 @@ function setUp() {
 		var nextTitle = $(section).next().attr('data-title');
 
 		if(nextTitle) {
-			if($(section).is('.single.journal')) {
+			if($(section).next().is('.single.journal-post')) {
 				nextTitle = 'Next';
 			}
 			$(nextSideLink).find('.label').text(nextTitle);
 		}
 		if(prevTitle) {
-			if($(section).is('.single.journal')) {
+			if($(section).prev().is('.single.journal-post')) {
 				prevTitle = 'Previous';
 			}
 			$(prevSideLink).find('.label').text(prevTitle);
@@ -99,6 +99,121 @@ $('body').on('mouseenter', '.shelf-item .wrap', function() {
 	$(this).parents('.shelf-item').removeClass('hover');
 });
 
+
+$('body').on('wheel', 'section', function(e) {
+	var section = $(this);
+	if(!$(section).hasClass('show-footer')) {
+		var e = window.event || e;
+		var delta = e.deltaY;
+		if(delta == undefined) {
+			 delta = e.originalEvent.deltaY;
+		}
+		var content = $(section).find('.content');
+		var scrollTop = $(content).scrollTop();
+		var scrollTo = scrollTop + delta;
+		$(content).scrollTop(scrollTo);
+	}
+});
+
+
+// $('body').on('mousewheel', 'aside.main', function(e) {
+// 	var section = $(this).parents('section');
+// 	if(!$(section).hasClass('show-footer')) {
+// 		var e = window.event || e;
+// 		var delta = e.deltaY;
+// 		var content = $(section).find('.content');
+// 		var scrollTop = $(content).scrollTop();
+// 		var scrollTo = scrollTop + delta;
+// 		$(content).scrollTop(scrollTo);
+// 	}
+// });
+
+
+/////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////
+///////////////////////HEADER & FOOTER///////////////////////
+/////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////
+
+//tease header on hover
+$('body').on('mouseenter', 'section:not(.open-nav) .nav-hover', function() {
+	var section = $(this).parent('section');
+	$(section).addClass('tease-nav');
+}).on('mouseleave', 'section:not(.open-nav) .nav-hover', function() {
+	var section = $(this).parent('section');
+	$(section).removeClass('tease-nav');
+});
+
+//toggle nav visibility with button
+$('body').on('click', 'section:not(.open-nav) .nav-hover', function() {
+	var section = $(this).parent('section');
+	$(section).addClass('open-nav').removeClass('tease-nav');
+}).on('click', '.open-nav .nav-toggle', function() {
+	var section = $(this).parent('section');
+	$(section).removeClass('open-nav');
+});
+
+//toggle header visibility with scroll behavior
+function sectionScrollListener(section) {
+	var scrollTop = $(section).scrollTop();
+	var footer = $(section).find('footer');
+	var footerMargin = parseInt($(footer).css('marginTop').replace('px', ''));
+	var footerHeight = $(footer).outerHeight() + footerMargin;
+	if(scrollTop >= footerHeight - 100) {
+		$(section).addClass('show-footer-bottom');
+	} else if(scrollTop <= footerMargin) {
+		$(section).removeClass('show-footer-bottom');
+	}
+	if($(section).hasClass('show-footer')) {
+		var scrollTop = section.scrollTop;
+		var scrollHeight = section.scrollHeight;
+		var footerHeight = footer.clientHeight;
+		//scrolled to top of footer -> scroll in content 
+		if(scrollTop <= 0) {
+			$(section).removeClass('show-footer');
+		}
+	}
+}
+$('section').scroll(function() {
+	sectionScrollListener(this);
+});
+
+var lastScrollTop;
+//toggle ability to scroll to footer
+function sectionContentScrollListener(content) {
+	var section = $(content).parents('section');
+	var footer = $(section).children('footer')[0];
+	var header = $(section).find('header.main');
+	var scrollHeight = content.scrollHeight;
+	var contentHeight = content.clientHeight;
+	var scrollTop = content.scrollTop;
+	//scrolled to end of content -> scroll to footer
+	if(scrollHeight - scrollTop == contentHeight && scrollTop > lastScrollTop) {
+		$(section).addClass('show-footer');
+	}
+	if(scrollTop > lastScrollTop + 10 && scrollTop > 100) {
+		$(section).addClass('hide-header');
+		$(section).removeClass('open-nav');
+		$(section).removeClass('tease-nav');
+	} else if(scrollTop < lastScrollTop - 5) {
+		$(section).removeClass('tease-nav');
+		$(section).removeClass('hide-header');
+	}
+	lastScrollTop = scrollTop;
+
+	if($(section).is('#events')) {
+		var past = $(content).find('.past.wrapper');
+		var pastTop = past[0].offsetTop - 90;
+		if(scrollTop > pastTop) {
+			$(section).addClass('past');
+		} else {
+			$(section).removeClass('past');
+		}
+	}
+}
+$('section .content').scroll(function() {
+	sectionContentScrollListener(this);
+});
 
 
 /////////////////////////////////////////////////////////////
@@ -173,19 +288,6 @@ window.addEventListener('popstate', function(e) {
 	}
 });
 
-$('body').on('mousewheel', 'aside.main', function(e) {
-	var section = $(this).parents('section');
-	if(!$(section).hasClass('show-footer')) {
-		var e = window.event || e;
-		var delta = e.deltaY;
-		var content = $(section).find('.content');
-		var scrollTop = $(content).scrollTop();
-		var scrollTo = scrollTop + delta;
-		$(content).scrollTop(scrollTo);
-	}
-});
-
-
 $('body').on('click', 'aside .move', function(event) {
 	event.preventDefault();
 	var aside = $(this).parents('aside');
@@ -196,8 +298,8 @@ $('body').on('click', 'aside .move', function(event) {
 
 	if($(section).is('.resident')) {
 		var type = 'resident';
-	} else if($(section).is('.journal')) {
-		var type = 'journal';
+	} else if($(section).is('.journal-post')) {
+		var type = 'journal-post';
 	}
 
 	if($(aside).hasClass('left')) {
@@ -328,11 +430,14 @@ function getNeighbors(direction, type) {
 	vars['id'] = id;
 	vars['direction'] = direction;
 	vars = JSON.stringify(vars);
+
+	var action = 'get_neighbor_' + type.replace(/[-]/g, '_') + 's';
+	console.log(action);
 	$.ajax({
 		url: ajaxpagination.ajaxurl,
 		type: 'post',
 		data: {
-			action: 'get_neighbor_'+type+'s',
+			action: action,
 			query_vars: vars
 		},
 		beforeSend: function() {
@@ -363,94 +468,6 @@ function getNeighbors(direction, type) {
 		}
 	});
 }
-
-/////////////////////////////////////////////////////////////
-/////////////////////////////////////////////////////////////
-///////////////////////HEADER & FOOTER///////////////////////
-/////////////////////////////////////////////////////////////
-/////////////////////////////////////////////////////////////
-
-//tease header on hover
-$('body').on('mouseenter', 'section:not(.open-nav) .nav-hover', function() {
-	var section = $(this).parent('section');
-	$(section).addClass('tease-nav');
-}).on('mouseleave', 'section:not(.open-nav) .nav-hover', function() {
-	var section = $(this).parent('section');
-	$(section).removeClass('tease-nav');
-});
-
-//toggle nav visibility with button
-$('body').on('click', 'section:not(.open-nav) .nav-hover', function() {
-	var section = $(this).parent('section');
-	$(section).addClass('open-nav').removeClass('tease-nav');
-}).on('click', '.open-nav .nav-toggle', function() {
-	var section = $(this).parent('section');
-	$(section).removeClass('open-nav');
-});
-
-//toggle header visibility with scroll behavior
-function sectionScrollListener(section) {
-	var scrollTop = $(section).scrollTop();
-	var footer = $(section).find('footer');
-	var footerMargin = parseInt($(footer).css('marginTop').replace('px', ''));
-	var footerHeight = $(footer).outerHeight() + footerMargin;
-	if(scrollTop >= footerHeight - 100) {
-		$(section).addClass('show-footer-bottom');
-	} else if(scrollTop <= footerMargin) {
-		$(section).removeClass('show-footer-bottom');
-	}
-	if($(section).hasClass('show-footer')) {
-		var scrollTop = section.scrollTop;
-		var scrollHeight = section.scrollHeight;
-		var footerHeight = footer.clientHeight;
-		//scrolled to top of footer -> scroll in content 
-		if(scrollTop == 0) {
-			$(section).removeClass('show-footer');
-		}
-	}
-}
-$('section').scroll(function() {
-	sectionScrollListener(this);
-});
-
-var lastScrollTop;
-//toggle ability to scroll to footer
-function sectionContentScrollListener(content) {
-	var section = $(content).parents('section');
-	var footer = $(section).children('footer')[0];
-	var header = $(section).find('header.main');
-	var scrollHeight = content.scrollHeight;
-	var contentHeight = content.clientHeight;
-	var scrollTop = content.scrollTop;
-	//scrolled to end of content -> scroll to footer
-	if(scrollHeight - scrollTop == contentHeight) {
-		$(section).addClass('show-footer');
-	}
-	if(scrollTop > lastScrollTop + 10 && scrollTop > 100) {
-		$(section).addClass('hide-header');
-		$(section).removeClass('open-nav');
-		$(section).removeClass('tease-nav');
-	} else if(scrollTop < lastScrollTop - 5) {
-		$(section).removeClass('tease-nav');
-		$(section).removeClass('hide-header');
-	}
-	lastScrollTop = scrollTop;
-
-	if($(section).is('#events')) {
-		var past = $(content).find('.past.wrapper');
-		var pastTop = past[0].offsetTop - 90;
-		if(scrollTop > pastTop) {
-			$(section).addClass('past');
-		} else {
-			$(section).removeClass('past');
-		}
-	}
-}
-$('section .content').scroll(function() {
-	sectionContentScrollListener(this);
-});
-
-
 
 /////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////

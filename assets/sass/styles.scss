@@ -48,7 +48,7 @@ section {
 		height: calc(100% - 260px);
 		padding: 130px 30px;
 		margin-left: 120px;
-		overflow-y: scroll;
+		overflow-y: hidden;
 		border-style: solid;
 		border-width: 0 10px;
 		border-color: $orange;

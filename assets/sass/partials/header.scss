@@ -1,5 +1,5 @@
 header.main {
-	@include width('100% - 280px');
+	width: calc(100% - 280px);
 	height: 100%;
 	position: absolute;
 	left: 140px;
@@ -20,11 +20,11 @@ header.main {
 	}
 	nav {
 		width: 100%;
-		@include height('100% - 20px');
+		height: calc(100% - 20px);
 		min-height: 500px;
 		padding: 10px 0 !important;
 		background-color: $white;
-		transform: translateY(-150px);
+		transform: translateY(calc(-100% - 150px));
 		transition: transform 600ms cubic-bezier(0.645, 0.045, 0.355, 1);
 		.cell {
 			@include width('50% - 5px');
@@ -34,7 +34,7 @@ header.main {
 			float: left;
 			color: $orange;
 			overflow: hidden;
-			display: table;
+			display: block;
 			&:hover .overlay,
 			{
 				color: $black;
@@ -72,7 +72,7 @@ header.main {
 					left: 0;
 					top: 0;
 					z-index: 102;
-					display: table;
+					display: block;
 					background-color: $white;
 					a {
 					    width: calc(100% - 20px);

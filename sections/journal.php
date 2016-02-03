@@ -5,7 +5,7 @@ $title = get_the_title();
 $slug = $post->post_name;
 $date = get_the_date('F d, Y');date;
 $id = get_the_ID();
-$event_classes = 'journal single';
+$event_classes = 'journal-post single';
 ?>
 <section <?php section_attr( $id, $slug, $event_classes ); ?>>
 	<?php get_template_part('partials/nav') ?>

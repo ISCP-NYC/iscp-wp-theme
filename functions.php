@@ -477,18 +477,18 @@ function get_display_image( $id ) {
 	}
 }
 
-function get_neighbor_journals() {
+function get_neighbor_journal_posts() {
 	$query_vars = json_decode( stripslashes( $_POST['query_vars'] ), true );
     $post_id = $query_vars['id'];
     $direction = $query_vars['direction'];
     $count = 1;
-	insert_neighbor_journals( $post_id, $direction, $count );   	
+	insert_neighbor_journal_posts( $post_id, $direction, $count );   	
     die();
 }
-add_action( 'wp_ajax_nopriv_get_neighbor_journals', 'get_neighbor_journals' );
-add_action( 'wp_ajax_get_neighbor_journals', 'get_neighbor_journals' );
+add_action( 'wp_ajax_nopriv_get_neighbor_journal_posts', 'get_neighbor_journal_posts' );
+add_action( 'wp_ajax_get_neighbor_journal_posts', 'get_neighbor_journal_posts' );
 
-function insert_neighbor_journals( $post_id, $direction, $count = 3 ) {
+function insert_neighbor_journal_posts( $post_id, $direction, $count = 3 ) {
 	$post = get_post( $post_id );
 	$post_date = $post->post_date;
 	if( $direction == 'new' ):

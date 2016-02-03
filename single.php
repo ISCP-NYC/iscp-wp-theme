@@ -8,12 +8,12 @@ switch($post_type) {
 		$this_resident_id = $this_resident->ID;
 		if( is_current( $this_resident_id ) ):
 
-			//current residents list
-			// $current_residents_page_id = get_page_by_path('current-residents')->ID;
-			// $post = get_post( $current_residents_page_id, OBJECT );
-			// setup_postdata( $post );
-			// get_template_part( 'sections/residents' );
-			// wp_reset_postdata();
+			// current residents list
+			$current_residents_page_id = get_page_by_path('current-residents')->ID;
+			$post = get_post( $current_residents_page_id, OBJECT );
+			setup_postdata( $post );
+			get_template_part( 'sections/residents' );
+			wp_reset_postdata();
 
 			//previous current residents by studio number
 			insert_neighbor_residents( $this_resident_id, 'prev', 3 );
@@ -27,11 +27,11 @@ switch($post_type) {
 			insert_neighbor_residents( $this_resident_id, 'next', 3 );
 
 			// current residents list
-			// $current_residents_page_id = get_page_by_path('current-residents')->ID;
-			// $post = get_post( $current_residents_page_id, OBJECT );
-			// setup_postdata( $post );
-			// get_template_part( 'sections/residents' );
-			// wp_reset_postdata();
+			$current_residents_page_id = get_page_by_path('current-residents')->ID;
+			$post = get_post( $current_residents_page_id, OBJECT );
+			setup_postdata( $post );
+			get_template_part( 'sections/residents' );
+			wp_reset_postdata();
 
 		elseif( is_past( $this_resident_id ) ):
 			$past_residents_page_id = get_page_by_path('past-residents')->ID;
@@ -54,16 +54,33 @@ switch($post_type) {
 		break;
 	case 'journal':
 
+		//all journal posts
+		$journal_page_id = get_page_by_path('journal')->ID;
+		$post = get_post( $journal_page_id, OBJECT );
+		setup_postdata( $post );
+		get_template_part( 'sections/journals' );
+		wp_reset_postdata();
+
 		$this_post = $post;
 		$this_post_id = $this_post->ID;
 
-		insert_neighbor_journals( $this_post_id, 'new' );
+		//newer journal posts
+		insert_neighbor_journal_posts( $this_post_id, 'new' );
 
+		//opened journal post
 		setup_postdata( $this_post );
 		get_template_part('sections/journal');
 		wp_reset_postdata();
 
-		insert_neighbor_journals( $this_post_id, 'old' );
+		//older journal posts
+		insert_neighbor_journal_posts( $this_post_id, 'old' );
+
+		//all journal posts
+		$journal_page_id = get_page_by_path('journal')->ID;
+		$post = get_post( $journal_page_id, OBJECT );
+		setup_postdata( $post );
+		get_template_part( 'sections/journals' );
+		wp_reset_postdata();
 
 		break;
 }
