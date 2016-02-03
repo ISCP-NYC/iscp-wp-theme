@@ -5,7 +5,7 @@
         position: absolute;
         margin-left: -25px;
         margin-top: -25px;
-        background-image: url(../images/gallery-cursor-white.svg);
+        background-image: url(../images/gallery-cursor-orange.svg);
         background-size: 50px;
         background-repeat: no-repeat;
         display: none;
@@ -25,15 +25,16 @@
     }
     &:not(.full) {
         img {
-            cursor: none !important;
+            // cursor: none !important;
         }
         .cursor {
-            cursor: none !important;
+            // cursor: none !important;
             pointer-events: none;
         }
     }
 }
 .image_slider {
+    height: 600px;
 	overflow: hidden;
 	display: block;
 	position: relative;
@@ -81,9 +82,8 @@
     				display: block;
     				img {
     					width: auto;
+                        max-width: 100%;
     					height: auto;
-    					// max-width: 100%;
-    					// max-height: 500px;
     					display: table;
     					margin: auto;
     					cursor: pointer;
@@ -125,21 +125,32 @@
                     position:relative;
                     display:inline-block;
                     overflow:hidden;
-                    img {
-                        cursor: none !important;
-                        display: table !important;
+                    .wrap {
+                        height: 100%;
+                        margin: auto;
+                        display: flex !important;
+                        flex-direction: row;
+                        flex-wrap: wrap;
+                        align-content: center;
+                        img {
+                            width: auto !important;
+                            cursor: none !important;
+                            // display: table !important;
+                            display: block;
+
+                        }
+                        .caption {
+                            display: none;
+                        }
                     }
                     &.portait {
                         width: 100%;
-                        @include height('100% - 50px');
-                        margin: 50px 0 0 0;
+                        height: calc(100% - 100px);
+                        margin: 50px 0;
                         .wrap {
-                            height: 100%;
-                            // display: table;
-                            margin: auto;
                             img {
-                                @include height('100% - 50px');
-                                width: auto !important;
+                                max-width: none;
+                                height: calc(100% - 50px);
                             }
                             .caption {
                                 width: 100% !important;
@@ -155,13 +166,13 @@
                         }
                     }
                     &.landscape {
-
+                        width: calc(100% - 100px);
+                        height: calc(100% - 100px);
+                        margin: 50px;
                         .wrap {
-                            height: 100%;
-                            margin: auto;
-                            display: table;
                             img {
-                                width: 100%;
+                                max-width: 100%;
+                                max-height: 100%;
                             }
                             .caption {
                                 width: 100% !important;
@@ -180,19 +191,23 @@
         .cursor {
             display: none !important;
         }
-    }
-	&.bg {
-        .cursor {
-            background-image: url(../images/gallery-cursor-orange.svg);
+        img {
+            cursor: pointer;
+            max-height: 600px;
         }
-		.slide {
-			display: block;
-			.image {
-				height: 100%;
-				background-size: cover;
-				background-repeat: no-repeat;
-				background-position: center;
-			}
-		}
-	}
+    }
+	// &.bg {
+ //        .cursor {
+ //            background-image: url(../images/gallery-cursor-orange.svg);
+ //        }
+	// 	.slide {
+	// 		display: block;
+	// 		.image {
+	// 			height: 100%;
+	// 			background-size: cover;
+	// 			background-repeat: no-repeat;
+	// 			background-position: center;
+	// 		}
+	// 	}
+	// }
 }

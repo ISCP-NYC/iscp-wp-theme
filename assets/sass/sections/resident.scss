@@ -69,7 +69,6 @@ section.single.resident {
 		@include small {
 			width: 100%;
 		}
-
 	}
 
 	.gallery {
@@ -93,16 +92,18 @@ section.single.resident {
 					color: $orange;
 				}
 			}
-			@include xsmall {
-				width: 100%;
-			}
-			@include small {
-				width: 100%;
-			}
 		}
-
 	}
-
+	@include large {
+		.info, .gallery {
+			width: 50%;
+		}
+	}
+	@include small {
+		.info, .gallery {
+			width: 100%;
+		}
+	}
 	.relations {
 		width: 100%;
 		display: table;

@@ -477,19 +477,18 @@ function get_display_image( $id ) {
 	}
 }
 
-function get_neighbor_journal_posts() {
-	die();
+function get_neighbor_journals() {
 	$query_vars = json_decode( stripslashes( $_POST['query_vars'] ), true );
     $post_id = $query_vars['id'];
     $direction = $query_vars['direction'];
-    $count = 3;
-	get_neighbors( $post_id, $direction, $count );   	
+    $count = 1;
+	insert_neighbor_journals( $post_id, $direction, $count );   	
     die();
 }
-add_action( 'wp_ajax_nopriv_get_neighbor_journal_posts', 'get_neighbor_journal_posts' );
-add_action( 'wp_ajax_get_neighbor_journal_posts', 'get_neighbor_journal_posts' );
+add_action( 'wp_ajax_nopriv_get_neighbor_journals', 'get_neighbor_journals' );
+add_action( 'wp_ajax_get_neighbor_journals', 'get_neighbor_journals' );
 
-function insert_neighbor_journal_posts( $post_id, $direction, $count = 3 ) {
+function insert_neighbor_journals( $post_id, $direction, $count = 3 ) {
 	$post = get_post( $post_id );
 	$post_date = $post->post_date;
 	if( $direction == 'new' ):
@@ -517,7 +516,6 @@ function insert_neighbor_journal_posts( $post_id, $direction, $count = 3 ) {
 		$reverse_posts = array_reverse( $posts->posts );
 		$posts->posts = $reverse_posts;
 	endif;
-
 	if( $posts->have_posts() ):
 		while ( $posts->have_posts() ) : $posts->the_post();
 			global $post;
@@ -538,14 +536,14 @@ function get_neighbor_residents() {
 	$query_vars = json_decode( stripslashes( $_POST['query_vars'] ), true );
     $resident_id = $query_vars['id'];
     $direction = $query_vars['direction'];
-    $count = 3;
+    $count = 1;
 	insert_neighbor_residents( $resident_id, $direction, $count );   	
     die();
 }
 add_action( 'wp_ajax_nopriv_get_neighbor_residents', 'get_neighbor_residents' );
 add_action( 'wp_ajax_get_neighbor_residents', 'get_neighbor_residents' );
 
-function insert_neighbor_residents( $resident_id, $direction, $count = 3 ) {
+function insert_neighbor_residents( $resident_id, $direction, $count ) {
 	$resident_end_date = get_resident_end_date( $resident_id );
 	$resident_studio = get_field( 'studio_number', $resident_id );
 	$today = new DateTime();

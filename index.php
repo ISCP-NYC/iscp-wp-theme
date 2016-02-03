@@ -86,7 +86,7 @@ $id = $post->ID;
 		$home_id = get_page_by_path( 'home' );
 		if( get_field( 'image_slider', $home_id ) ):
 			echo '<div class="module">';
-			echo '<div class="image_slider gallery bg">';
+			echo '<div class="image_slider gallery">';
 			echo '<div class="cursor"></div>';
 			echo '<div class="left arrow"></div>';
 			echo '<div class="right arrow"></div>';
@@ -98,12 +98,17 @@ $id = $post->ID;
 		        $orientation = get_orientation( $image_id );
 		        $caption = label_art( $image_id );
 		        echo '<div class="piece slide">';
-		        echo '<div class="image" style="background-image:url(' . $image_url . ')">';
-		        echo '<div class="caption">';
-		        echo $caption;
-		        echo '</div>';
-		        echo '</div>';
-		        echo '</div>';
+			        echo '<div class="inner">';
+			        echo '<div class="image ' . $orientation . '">';
+			        echo '<div class="wrap">';
+			        echo '<img src="' . $image_url . '" alt="' . $caption . '"/>';
+			        echo '<div class="caption">';
+			        echo $caption;
+			        echo '</div>';
+			        echo '</div>';
+			        echo '</div>';
+			        echo '</div>';
+			        echo '</div>';
 			endwhile;
 			echo '</div>';
 			echo '</div>';
@@ -125,44 +130,40 @@ $id = $post->ID;
 			</div>
 		</div>
 
-		<div class="module">
-			<? get_tweets( 3 ); ?>
-		</div>
-
-		<?php
+		<div class="module social">
+			<? 
+			get_tweets( 3 );
 			$facebook_url = get_field( 'facebook', $about_id );
 			$instagram_handle = str_replace('@', '', get_field( 'instagram', $about_id ) );
 			$instagram_url = 'http://instagram.com/' . $instagram_handle;
-		?>
+			?>
 
-		<div class="social module">
-			<div class="link medium facebook half-border-right">
-				<a href="<?php echo $facebook_url ?>" target="_blank">
-					<h3>
-						<div class="swap">
-							<div class="icon default"></div>
-							<div class="icon hover"></div>
-						</div>
-						Facebook
-					</h3>
-				</a>
-			</div>
-			<div class="link medium instagram half-border-left">
-				<a href="<?php echo $instagram_url ?>" target="_blank">
-					<h3>
-						<div class="swap">
-							<div class="icon default"></div>
-							<div class="icon hover"></div>
-						</div>
-						Instagram
-					</h3>
-				</a>
+			<div class="links">
+				<div class="link medium facebook half-border-right">
+					<a href="<?php echo $facebook_url ?>" target="_blank">
+						<h3>
+							<div class="swap">
+								<div class="icon default"></div>
+								<div class="icon hover"></div>
+							</div>
+							Facebook
+						</h3>
+					</a>
+				</div>
+				<div class="link medium instagram half-border-left">
+					<a href="<?php echo $instagram_url ?>" target="_blank">
+						<h3>
+							<div class="swap">
+								<div class="icon default"></div>
+								<div class="icon hover"></div>
+							</div>
+							Instagram
+						</h3>
+					</a>
+				</div>
 			</div>
 		</div>
-
-		<?php
-			$newsletter_url = get_field( 'newsletter', $about_id );
-		?>
+		<?php $newsletter_url = get_field( 'newsletter', $about_id ); ?>
 
 		<div class="module newsletter">
 			<form role="subscribe" method="get" class="newsletter">

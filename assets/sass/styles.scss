@@ -42,10 +42,11 @@ section {
 	position: absolute;
 	left: 100px;
 	overflow: hidden;
+	opacity: 0;
 	.content {
-		@include width('100% - 60px - '$side_width*2);
-		@include height('100% - 260px');
-		padding: 130px 20px;
+		@include width('100% - 80px - '$side_width*2);
+		height: calc(100% - 260px);
+		padding: 130px 30px;
 		margin-left: 120px;
 		overflow-y: scroll;
 		border-style: solid;
@@ -53,13 +54,14 @@ section {
 		border-color: $orange;
 		transition: border-color 150ms ease-in-out;
 		@include small {
-			@include width('100% - 40px');
+			@include width('100% - 60px');
 			margin-left: 0;
 			border-width: 0;
 		}
 		.module {
 			width: 100%;
-			padding: 30px 0;
+			padding: 30px 0 60px;
+			margin-bottom: 30px;
 		    display: table;
 			@extend .border-bottom;
 			h2.title {
@@ -73,7 +75,15 @@ section {
 			}
 		}
 		& > * {
-			transition: opacity 300ms ease-in-out;
+			// opacity: 0;
+			// transition: opacity 350ms 50ms cubic-bezier(0.77, 0, 0.175, 1);
+		}
+	}
+	&.ready {
+		opacity: 1;
+		transition: opacity 400ms cubic-bezier(0.77, 0, 0.175, 1);
+		.content > * {
+			// opacity: 1;	
 		}
 	}
 	h2.head {
