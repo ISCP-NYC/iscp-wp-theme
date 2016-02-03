@@ -12,7 +12,8 @@ section#visit {
 				height: 500px;
 			}
 			.contact {
-				margin-top: 20px;
+				display: table;
+				margin-top: 60px;
 				h1 {
 					width: calc(100%/3);
 					float: left;

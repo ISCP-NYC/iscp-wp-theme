@@ -14,6 +14,7 @@ body {
 	overflow: hidden;
 	font-family: 'Life Rounded', Times;
 	@include small-fs;
+	color: $black;
 }
 #mfPreviewBar {
 	display: none;

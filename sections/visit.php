@@ -49,6 +49,45 @@
 		?>
 		<script type="text/javascript">
 		function initMap() {
+			var mapStyle = new google.maps.StyledMapType([
+			    {
+			        "featureType": "all",
+			        "elementType": "geometry.fill",
+			        "stylers": [
+			            {
+			                "color": "#ffffff"
+			            }
+			        ]
+			    },
+			    {
+			        "featureType": "all",
+			        "elementType": "geometry.stroke",
+			        "stylers": [
+			            {
+			                "color": "#ff5000"
+			            }
+			        ]
+			    },
+			    {
+			        "featureType": "all",
+			        "elementType": "labels.text.fill",
+			        "stylers": [
+			            {
+			                "color": "#14233E"
+			            }
+			        ]
+			    },
+			    {
+			        "featureType": "all",
+			        "elementType": "labels.text.stroke",
+			        "stylers": [
+			            {
+			                "color": "#ffffff"
+			            }
+			        ]
+			    }
+			]);
+			var mapStyleId = 'orange';
 			setTimeout(function() {
 				var map;
 				var location = new google.maps.LatLng(40.7142351, -73.9368839);
@@ -60,8 +99,11 @@
 					mapTypeControl: false,
 					scaleControl: false,
 					// draggable: false,
-					mapTypeId: google.maps.MapTypeId.ROADMAP
+					mapTypeId: [google.maps.MapTypeId.ROADMAP, mapStyleId]
 				});
+
+				map.mapTypes.set(mapStyleId, mapStyle);
+				map.setMapTypeId(mapStyleId);
 
 			  	var marker = new google.maps.Marker({
 					position: location,

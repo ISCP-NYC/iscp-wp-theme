@@ -372,6 +372,7 @@ function loading(vars) {
 	var shelves = $(section).find('.items');
 	$(section).addClass('loading');
 }
+//append section items to bottom of section content
 function addItems(html, vars) {
 	if(html.length > 0) {
 		var vars = JSON.parse(vars);
@@ -413,6 +414,7 @@ function addItems(html, vars) {
 }
 var loadedFrom = [];
 var click = 0;
+//query wordpress for section 'neighbor' and insert them into main wrapper
 function getNeighbors(direction, type) {
 	click++;
 	if(direction == 'prev') {
@@ -430,9 +432,7 @@ function getNeighbors(direction, type) {
 	vars['id'] = id;
 	vars['direction'] = direction;
 	vars = JSON.stringify(vars);
-
 	var action = 'get_neighbor_' + type.replace(/[-]/g, '_') + 's';
-	console.log(action);
 	$.ajax({
 		url: ajaxpagination.ajaxurl,
 		type: 'post',
@@ -464,7 +464,6 @@ function getNeighbors(direction, type) {
 				setUp();
 			}
 			$('main').removeClass('loading-neighbors');
-			
 		}
 	});
 }
