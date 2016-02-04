@@ -9,7 +9,7 @@
     $name = $current_user->user_firstname . ' ' . $current_user->user_lastname;
 ?>
 
-<section id="<?php echo $slug ?>">
+<section <?php section_attr( $id, $slug, null ); ?>>
 	<?php get_template_part('partials/nav') ?>
 	<?php get_template_part('partials/side') ?>
 	<div class="content">
@@ -23,32 +23,64 @@
 		<div class="dashboard">
 			<div class="half left">
 			<?php 
-			if( have_rows( 'to_do_list' ) ):
+			$to_do_page_id = get_page_by_path( $slug . '/to-do' )->ID;
+			$post = get_post( $to_do_page_id, OBJECT );
+			setup_postdata( $post );
+			if( have_rows( 'to-do' ) ):
 				echo '<div class="to-do">';
-				echo '<h3>To-do:</h3>';
-				echo '<ul>';
-				while ( have_rows('to_do_list') ) : the_row();
-					$text = get_sub_field( 'to_do' );
-					echo '<li>' . $text . '</li>';
+				echo '<h2>To-do:</h2>';
+				while ( have_rows('to-do') ) : the_row();
+					$title = get_sub_field( 'title' );
+					echo '<div>';
+					echo '<span class="bullet">' . $title . '</span>';
+					echo '</div>';
 				endwhile;
-				echo '</ul>';
 				echo '</div>';
 			endif;
+			wp_reset_postdata();
 			?>
 			</div>
 			<div class="half right">
 				<?php 
-				if( have_rows( 'to_do_list' ) ):
-					echo '<div class="to-do">';
-					echo '<h3>To-do:</h3>';
-					echo '<ul>';
-					while ( have_rows('to_do_list') ) : the_row();
-						$text = get_sub_field( 'to_do' );
-						echo '<li>' . $text . '</li>';
+				$to_do_page_id = get_page_by_path( $slug . '/iscp' )->ID;
+				$post = get_post( $to_do_page_id, OBJECT );
+				setup_postdata( $post );
+				$permalink = get_the_permalink();
+				if( have_rows( 'item' ) ):
+					echo '<div class="at-iscp">';
+					echo '<h2>@ISCP:</h2>';
+					$index = 0;
+					while ( have_rows('item') ) : the_row();
+						$title = get_sub_field( 'title' );
+						$index++;
+						echo '<div>';
+						echo '<a class="bullet" href="' . $permalink . '#' . $index . '">' . $title . '</a>';
+						echo '</div>';
 					endwhile;
-					echo '</ul>';
 					echo '</div>';
 				endif;
+				wp_reset_postdata();
+				?>
+				</br>
+				<?php 
+				$to_do_page_id = get_page_by_path( $slug . '/in-nyc' )->ID;
+				$post = get_post( $to_do_page_id, OBJECT );
+				setup_postdata( $post );
+				$permalink = get_the_permalink();
+				if( have_rows( 'item' ) ):
+					echo '<div class="in-nyc">';
+					echo '<h2>In NYC:</h2>';
+					$index = 0;
+					while ( have_rows('item') ) : the_row();
+						$title = get_sub_field( 'title' );
+						$index++;
+						echo '<div>';
+						echo '<a class="bullet" href="' . $permalink . '#' . $index . '">' . $title . '</a>';
+						echo '</div>';
+					endwhile;
+					echo '</div>';
+				endif;
+				wp_reset_postdata();
 				?>
 			</div>
 		</div>

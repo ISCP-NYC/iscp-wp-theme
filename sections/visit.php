@@ -43,10 +43,7 @@
 			</div>
 		</div>
 
-		<?php
-		$theme = get_template_directory_uri();
-		$marker = $theme .'/assets/images/marker.svg'
-		?>
+		
 		<script type="text/javascript">
 		function initMap() {
 			var mapStyle = new google.maps.StyledMapType([
@@ -85,12 +82,66 @@
 			                "color": "#ffffff"
 			            }
 			        ]
+			    },
+			    {
+			        "featureType": "road.arterial",
+			        "elementType": "geometry.fill",
+			        "stylers": [
+			            {
+			                "color": "#facab4"
+			            }
+			        ]
+			    },
+			    {
+			        "featureType": "road.local",
+			        "elementType": "geometry.fill",
+			        "stylers": [
+			            {
+			                "color": "#facab4"
+			            }
+			        ]
+			    },
+			    {
+			        "featureType": "road.highway.controlled_access",
+			        "elementType": "geometry.fill",
+			        "stylers": [
+			            {
+			                "color": "#facab4"
+			            }
+			        ]
+			    },
+			    {
+			        "featureType": "transit.line",
+			        "elementType": "geometry.fill",
+			        "stylers": [
+			            {
+			                "color": "#14233E"
+			            }
+			        ]
+			    },
+			    {
+			        "featureType": "transit.line",
+			        "elementType": "geometry.stroke",
+			        "stylers": [
+			            {
+			                "color": "#14233E"
+			            }
+			        ]
+			    },
+			    {
+			        "featureType": "water",
+			        "elementType": "geometry.fill",
+			        "stylers": [
+			            {
+			                "color": "#b3d1ff"
+			            }
+			        ]
 			    }
 			]);
 			var mapStyleId = 'orange';
 			setTimeout(function() {
 				var map;
-				var location = new google.maps.LatLng(40.7142351, -73.9368839);
+				var location = new google.maps.LatLng(40.714229, -73.934692);
 				map = new google.maps.Map(document.getElementById('map'), {
 					center: location,
 					zoom: 15,
@@ -105,10 +156,26 @@
 				map.mapTypes.set(mapStyleId, mapStyle);
 				map.setMapTypeId(mapStyleId);
 
-			  	var marker = new google.maps.Marker({
-					position: location,
-					map: map,
-					icon: '<?php echo $marker; ?>'
+			 //  	var marker = new google.maps.Marker({
+				// 	position: location,
+				// 	map: map,
+				// 	icon: ''
+				// });
+
+				<?php
+				$theme = get_template_directory_uri();
+				$marker = $theme .'/assets/images/marker.svg'
+				?>
+
+				var markerImage = new google.maps.MarkerImage('<?php echo $marker; ?>',
+				    new google.maps.Size(50, 50),
+				    new google.maps.Point(0, 0),
+				    new google.maps.Point(0, 50));
+				var marker = new google.maps.Marker({
+				    position: location,
+				    title: 'ISCP',
+				    map: map,
+				    icon: markerImage
 				});
 
 			  	google.maps.event.addDomListener(window, 'resize', function() {

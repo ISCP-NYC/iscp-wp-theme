@@ -13,9 +13,10 @@ endif;
 	<?php get_template_part('partials/nav') ?>
 	<?php get_template_part('partials/side') ?>
 	<div class="content">
-		<!-- <h2 class="head"><?php the_title() ?></h2> -->
-		<div id="mapWrap">
-
+		<div id="mapWrap"></div>
+		<div class="residents">
+			<div class="head"></div>
+			<div class="shelves list"></div>
 		</div>
 	</div>
 	<?php get_template_part('partials/footer'); ?>

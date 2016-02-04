@@ -6,8 +6,17 @@ $(window).load(function() {
 	if($('.image_slider').length > 0) {
 		setUpSlider();
 	}
-	if($('#earth').length > 0) {
+	if($('.earth').length > 0) {
 		setUpEarth();
+	}
+	if($('.center').is('.resident-resources')) {
+		var hash = parseInt(window.location.hash.replace('#', ''));
+		var index = hash + 1; 
+		console.log(index);
+		var item = $('.item').eq(index);
+		var scrollTop = item[0].offsetTop;
+		$('.center .content').scrollTop(scrollTop);
+
 	}
 });
 
@@ -770,6 +779,10 @@ $('body').on('click', '.gallery .slide .image', function() {
 /////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////
 function setUpEarth() {
+	var section = $('section#map');
+	var residents = $(section).find('.residents');
+	var residentsList = $(residents).find('.list');
+	var head = $(residents).find('.head');
 	var earth = new WE.map('mapWrap');
     earth.setView([46.8011, 8.2266], 1.6);
     WE.tileLayer('http://data.webglearth.com/natural-earth-color/{z}/{x}/{y}.jpg', {
@@ -784,10 +797,89 @@ function setUpEarth() {
     var mapHeight = $('#mapWrap').innerHeight();
     $('#mapWrap canvas').width(mapWidth).height(mapHeight);
     var countries = window.countries;
+    var themeUrl = window.wp_info['theme_url'];
+    var markerUrl = themeUrl+'/assets/images/bullet-orange.svg'
     $(countries).each(function(i, country) {
+    	var name = country['name'];
+    	var slug = country['slug'];
+    	var count = country['count'];
+    	var lat = country['lat'];
+    	var lng = country['lng'];
+    	if(isNumeric(lat) && isNumeric(lng)) {
+    		var marker = WE.marker([lat, lng], markerUrl, 30, 30).addTo(earth);
+    		var html = marker.element;
+    		var inner = $(html).find('.we-pm-icon');
+    		$(html).addClass('marker').attr('data-slug', slug).attr('data-name', name).attr('data-count', count);
+    		$(inner).html('<span class="count">' + count + '</span>');
+    	}
+    });
+    $('body').on('mouseenter', '.marker', function() {
+    	var marker = $(this);
+    	var name = $(this).attr('data-name');
+    	var slug = $(this).attr('data-slug');
+    	var count = $(this).attr('data-count');
+    	$(residents).removeClass('open').transition({'height':'auto'}, 0, function() {
+    		$(head).html(name+' ('+count+')');
+    	}).transition({
+    		y: -$(head).innerHeight()
+    	}, function() {
+    		$(residents).addClass('tease');
+    	});
     	
+    }).on('mouseleave', '.marker', function() {
+    	$(residents).removeClass('tease').transition({
+			y: 0
+		});	;
+    }).on('click', '.marker', function() {
+    	var marker = $(this);
+    	var name = $(this).attr('data-name');
+    	var slug = $(this).attr('data-slug');
+    	var count = $(this).attr('data-count');
+    	$(head).html(name+' ('+count+')');
+    	getMapList(slug);
     });
 };
+
+function getMapList(slug) {
+	var section = $('section#map');
+	var residents = $(section).find('.residents');
+	var residentsList = $(residents).find('.list');
+	var head = $(residents).find('.head');
+	var earth = new WE.map('mapWrap');
+	var vars = ajaxpagination.query_vars;
+	vars = JSON.parse(vars);
+	vars['pagename'] = slug;
+	vars = JSON.stringify(vars);
+	$.ajax({
+		url: ajaxpagination.ajaxurl,
+		type: 'post',
+		data: {
+			action: 'get_map_list',
+			query_vars: vars
+		},
+		beforeSend: function() {
+			if($(residents).is('.open')) {
+				$(residents).removeClass('open').transition({
+					y: 0
+				}, function() {
+					$(residents).css({'height':'auto'});
+				});
+			}
+		},
+		success: function(response) {
+			$(residentsList).html(response);
+			var residentsHeight = $(residents).innerHeight();
+			console.log(residentsHeight);
+			$(residents).addClass('open').height(residentsHeight).transition({
+				y: -residentsHeight
+			});
+		}
+	});
+}
+
+function isNumeric(n) {
+  return !isNaN(parseFloat(n)) && isFinite(n);
+}
 
 /////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////

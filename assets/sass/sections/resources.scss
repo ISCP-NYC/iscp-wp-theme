@@ -1,4 +1,4 @@
-section#resident-resources {
+section.resident-resources {
 	@include medium-fs;
 	background-color: $light;
 	aside.main {
@@ -10,11 +10,9 @@ section#resident-resources {
 		position: relative;	
 	}
 	.user-info {
-		width: 150px;
 		position: absolute;
-		right: 0;
+		right: 10px;
 		top: 130px;
-		color: white;
 		@include small-fs;
 	}
 	header.main {

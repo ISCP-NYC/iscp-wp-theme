@@ -4,7 +4,6 @@
 	$page_slug = get_post( $post )->post_name;
 	$parent = $post->post_parent;
 	$parent_slug = get_post( $parent )->post_name;
-
 	$resident_types = array( 'current-residents', 'past-residents' );
 	$event_types = array( 'events', 'exhbitions', 'iscp-talks', 'off-site-projects', 'open-studios' );
 	if( $page_slug == 'current-residents' ):
@@ -94,7 +93,51 @@
 	elseif( $page_slug == 'resident-resources'):
 
 		if (user_is_resident()):
-			get_template_part( 'sections/resident-resources' );
+			get_template_part( 'sections/resources' );
+		else:
+			get_template_part( 'sections/login' );
+		endif;
+
+	elseif( $page_slug == 'in-nyc'):
+
+		if (user_is_resident()):
+
+			$resources_page_id = get_page_by_path( 'resident-resources' )->ID;
+			$post = get_post( $resources_page_id, OBJECT );
+			setup_postdata( $post );
+			get_template_part( 'sections/resources' );
+			wp_reset_postdata();
+
+			get_template_part( 'sections/resource' );
+
+			$at_iscp_page_id = get_page_by_path( 'resident-resources/iscp' )->ID;
+			$post = get_post( $at_iscp_page_id, OBJECT );
+			setup_postdata( $post );
+			get_template_part( 'sections/resource' );
+			wp_reset_postdata();
+
+		else:
+			get_template_part( 'sections/login' );
+		endif;
+
+	elseif( $page_slug == 'iscp'):
+
+		if (user_is_resident()):
+
+			$resources_page_id = get_page_by_path( 'resident-resources' )->ID;
+			$post = get_post( $resources_page_id, OBJECT );
+			setup_postdata( $post );
+			get_template_part( 'sections/resources' );
+			wp_reset_postdata();
+
+			get_template_part( 'sections/resource' );
+
+			$in_nyc_page_id = get_page_by_path( 'resident-resources/in-nyc' )->ID;
+			$post = get_post( $in_nyc_page_id, OBJECT );
+			setup_postdata( $post );
+			get_template_part( 'sections/resource' );
+			wp_reset_postdata();
+
 		else:
 			get_template_part( 'sections/login' );
 		endif;

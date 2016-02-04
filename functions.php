@@ -64,9 +64,13 @@ function iscp_scripts() {
 		while ( $countries->have_posts() ) : $countries->the_post(); 
 			global $post;
 			setup_postdata( $post );
+			$country_id = $post->ID;
 		    $country = array(
 		       'name' => $post->post_title,
-		       'slug' => $post->post_name
+		       'slug' => $post->post_name,
+		       'lat' => get_field( 'latitude', $country_id ),
+		       'lng' => get_field( 'longitude', $country_id ),
+		       'count' => resident_count_by_country( $country_id )
 		    );
 		    $countries_array[] = $country;
 		    wp_reset_postdata();
@@ -77,8 +81,13 @@ function iscp_scripts() {
 	global $wp_query;
 	wp_localize_script( 'main', 'ajaxpagination', array(
 		'ajaxurl' => admin_url( 'admin-ajax.php' ),
-		'query_vars' => json_encode( $wp_query->query )
+		'query_vars' => json_encode( $wp_query->query ),
 	));
+	wp_localize_script( 'main', 'wp_info', array(
+		'theme_url' => get_stylesheet_directory_uri()
+	));
+
+	
 }
 add_action( 'wp_enqueue_scripts', 'iscp_scripts' );
 
@@ -90,7 +99,18 @@ add_image_size( 'slider', 9999, 500, false );
 function add_lat_lng( $post_id ) {
 	$post_type = get_post_type( $post_id );
 	if( $post_type == 'country' ):
-		
+		$country_name = urlencode( get_the_title( $id ) );
+	    $url = "http://maps.google.com/maps/api/geocode/json?sensor=false&address=" . $country_name;
+	    $response = file_get_contents( $url );
+	    $json = json_decode( $response, true );
+	    $lat = $json['results'][0]['geometry']['location']['lat'];
+	    $lng = $json['results'][0]['geometry']['location']['lng'];
+	    if( is_numeric( $lat ) ):
+	    	update_post_meta( $post_id, 'latitude', $lat );
+	    endif;
+	    if( is_numeric( $lng ) ):
+		    update_post_meta( $post_id, 'longitude', $lng );
+		endif;
 	endif;
 }
 add_action( 'save_post', 'add_lat_lng' );
@@ -133,6 +153,15 @@ function update_search_results() {
 }
 add_action( 'wp_ajax_nopriv_update_search_results', 'update_search_results' );
 add_action( 'wp_ajax_update_search_results', 'update_search_results' );
+
+function get_map_list() {
+	$query_vars = json_decode( stripslashes( $_POST['query_vars'] ), true );
+    $country_slug = $query_vars['pagename'];
+    include( locate_template( 'other/map-list.php' ) );
+    die();
+}
+add_action( 'wp_ajax_nopriv_get_map_list', 'get_map_list' );
+add_action( 'wp_ajax_get_map_list', 'get_map_list' );
 
 /////////////////////////////////////
 /////////////////////////////////////
@@ -884,7 +913,7 @@ function user_is_resident() {
 	}
 }
 
-function resident_count_by_country( $country_id, $page_query ) {
+function resident_count_by_country( $country_id, $page_query = null ) {
 	$country_meta_query = array(
 		'key' => 'country',
 		'value' => '"' . $country_id . '"',
