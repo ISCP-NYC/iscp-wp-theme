@@ -1,10 +1,10 @@
 jQuery(document).ready(function($) {
 $(window).load(function() {
 	setUp();
-	setSliderWidth();
+	setImageSliderWidth();
 	$masonry.masonry('layout');
-	if($('.image_slider').length > 0) {
-		setUpSlider();
+	if($('.imageSlider').length > 0) {
+		setUpImageSlider();
 	}
 	if($('.earth').length > 0) {
 		setUpEarth();
@@ -31,18 +31,20 @@ function setUp() {
 	var main = $('main');
 	var sections = $('section');
 	var count = $(sections).length;
-	var asideWidth = $('section').eq(0).find('aside').innerWidth();
+	var asideWidth = $('section').eq(0).children('aside.main')[0].clientWidth;
 	var winWidth = winW();
 	var pageWidth = winWidth;
-	var fullWidth = count * pageWidth;
-	var winHeight = $(window).innerHeight();
-	var asideLabelHeight = winHeight - asideWidth;
-	$(main).css({width:fullWidth});
+	if(pageWidth < 320) {pageWidth=320;}
+	var mainWidth = count * pageWidth;
+	var winHeight = winH();
+	var asideLabelHeight = winHeight - asideWidth + 10;
+	$(main).width(mainWidth);
 	$(sections).each(function(i) {
 		var section = $('section').eq(i);
-		var shift = i * asideWidth;
+		var asideShift = i * asideWidth;
+		var left = i * pageWidth - asideShift;
 		$(section).css({
-			left: i * pageWidth - shift,
+			left: left,
 			width: pageWidth
 		});
 		var asideLinks = $(section).find('aside .move');
@@ -90,7 +92,7 @@ function setUp() {
 				}
 				// if content is too short to scroll -> scroll to footer
 				if(scrollHeight <= contentHeight && scrollHeight != 0) {
-					$(section).addClass('show-footer');
+					// $(section).addClass('show-footer');
 				}
 			}
 			$(section).removeClass('static').addClass('ready');
@@ -234,9 +236,9 @@ $('section .content').scroll(function() {
 var firstSlide = true;
 function slideTo(index, animate) {
 	var section = $('section').eq(index);
-	var side = $(section).find('aside');
+	var aside = $(section).children('aside.main');
 	var size = $('#size').css('content');
-	var asideWidth = $(side).innerWidth();
+	var asideWidth = $(aside)[0].clientWidth;
 	if(section.length) {
 		$('main').addClass('sliding');
 		$('section.center').removeClass('center').removeClass('hover-left').removeClass('hover-right');
@@ -609,8 +611,8 @@ $('body').on('keyup', 'section#search .content input.s', function() {
 ////////////////////////IMAGE SLIDER/////////////////////////
 /////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////
-function setUpSlider() {
-	var slider = $('.image_slider');
+function setUpImageSlider() {
+	var slider = $('.imageSlider');
 	if(slider.length == 0) {return;}
 	var sliderWidth = $(slider).innerWidth();
 	var slideWrapper = $(slider).children('.slides');
@@ -626,7 +628,7 @@ function setUpSlider() {
 
 	$(showingImage).addClass('show');
 	$(showingCaption).addClass('show');
-	setSliderWidth();
+	setImageSliderWidth();
 	$(arrow).off('click');
 	$(arrow).on('click', function() {
 		var sliderWidth = $(slider).innerWidth();
@@ -654,8 +656,8 @@ function setUpSlider() {
 	});
 }
 
-function setSliderWidth() {
-	var slider = $('.image_slider');
+function setImageSliderWidth() {
+	var slider = $('.imageSlider');
 	var sliderWidth = $(slider).innerWidth();
 	var slideWrapper = $(slider).children('.slides');
 	var slides = $(slideWrapper).children('.slide');
@@ -706,13 +708,13 @@ function setSliderWidth() {
 // 	});
 // });
 
-$('body').on('click', '.gallery .slide .image', function() {
+$('body').on('click', '.gallery img', function() {
 	var index = $(this).parents('.slide').index();
 	var gallery = $(this).parents('.gallery');
-	$(gallery).attr('data-show', index).addClass('full').addClass('image_slider').css({'cursor':'none'});
+	$(gallery).attr('data-show', index).addClass('full').addClass('imageSlider').css({'cursor':'none'});
 	var cursor = $(gallery).find('.cursor');
 	var slidesLength = $(gallery).find('.slide').length;
-	setUpSlider();
+	setUpImageSlider();
 	$(gallery).on('mousemove', function(event) {
 		var x = event.pageX;
 		var y = event.pageY;
@@ -749,9 +751,9 @@ $('body').on('click', '.gallery .slide .image', function() {
 				$(this).find('.slide').attr('style','');
 				$(cursor).attr('style','');
 				if($(this).hasClass('stack')) {
-					$(this).removeClass('image_slider');
+					$(this).removeClass('imageSlider');
 				} else {
-					setUpSlider();
+					setUpImageSlider();
 				}
 				break;
 			case 'right':
@@ -997,7 +999,7 @@ function getParam(paramType) {
 
 $(window).resize(function() {
 	setUp();
-	setSliderWidth();
+	setImageSliderWidth();
 	$masonry.masonry('layout');
 });
 

@@ -35,7 +35,9 @@
 		<div class="map module">
 			<div class="inner" id="map"></div>
 			<div class="contact">
-				<h1><?php echo $phone ?></h1>
+				<h1>
+					<a class="black" href="call:<?php echo $phone ?>"><?php echo $phone ?></a>
+				</h1>
 				<h1>
 					<a class="black" href="mailto:<?php echo $email ?>"><?php echo $email ?></a>
 				</h1>

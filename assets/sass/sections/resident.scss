@@ -93,6 +93,7 @@ section.single.resident {
 				}
 			}
 		}
+		padding: 0 0 60px 0;
 	}
 	@include large {
 		.info, .gallery {
@@ -107,9 +108,10 @@ section.single.resident {
 	.relations {
 		width: 100%;
 		display: table;
+		padding: 60px 0 0 0;
 		h4 {
 			text-align: center;
-			margin: 20px 0;
+			margin: 0 0 30px 0;
 		}
 		.related {
 			float: left;

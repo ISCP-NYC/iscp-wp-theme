@@ -137,7 +137,7 @@
 		        echo '<div class="piece slide">';
 		        echo '<div class="inner">';
 		        echo '<div class="image ' . $orientation . '">';
-		        echo '<div class="wrap">';
+		        echo '<div class="imageWrap">';
 		        echo '<img src="' . $image_url . '"/>';
 		        echo '<div class="caption">';
 		        echo $caption;

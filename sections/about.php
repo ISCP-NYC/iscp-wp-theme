@@ -22,7 +22,7 @@
 			<?php
 			if( get_field( 'image_slider', $id ) ):
 				echo '<div class="module">';
-				echo '<div class="image_slider gallery">';
+				echo '<div class="imageSlider gallery">';
 				echo '<div class="cursor"></div>';
 				echo '<div class="left arrow"></div>';
 				echo '<div class="right arrow"></div>';
@@ -36,7 +36,7 @@
 			        echo '<div class="piece slide">';
 			        echo '<div class="inner">';
 			        echo '<div class="image ' . $orientation . '">';
-			        echo '<div class="wrap">';
+			        echo '<div class="imageWrap">';
 			        echo '<img src="' . $image_url . '" alt="' . $caption . '"/>';
 			        echo '<div class="caption">';
 			        echo $caption;
@@ -71,10 +71,10 @@
 						<?php echo $address ?>
 					</div>
 					<div class="phone">
-						<?php echo $phone ?>
+						<?php echo '<a href="tel:' . $phone . '">' . $phone . '</a>'; ?>
 					</div>
 					<div class="email">
-						<?php echo $email ?>
+						<?php echo '<a href="mailto:' . $email . '">' . $email . '</a>'; ?>
 					</div>
 					<div class="bullet facebook">
 						Facebook

@@ -1,10 +1,8 @@
 <?php
 get_header();
-$title = get_the_title();
-$slug = $post->post_name;
-$id = $post->ID;
+global $post;
 ?>
-<section <?php section_attr( null, 'home', null ); ?>>
+<section <?php section_attr( null, 'home', null ); ?> data-title="Home">
 	<?php get_template_part('partials/nav') ?>
 	<?php get_template_part('partials/side') ?>
 	<div class="content">
@@ -69,6 +67,7 @@ $id = $post->ID;
 			else:
 				get_template_part( 'partials/no-posts' );
 			endif;
+			wp_reset_query();
 			?>
 		<div class="about module">
 			<h3 class="title">
@@ -92,7 +91,7 @@ $id = $post->ID;
 		$home_id = get_page_by_path( 'home' );
 		if( get_field( 'image_slider', $home_id ) ):
 			echo '<div class="module">';
-			echo '<div class="image_slider gallery">';
+			echo '<div class="imageSlider gallery">';
 			echo '<div class="cursor"></div>';
 			echo '<div class="left arrow"></div>';
 			echo '<div class="right arrow"></div>';
@@ -106,7 +105,7 @@ $id = $post->ID;
 		        echo '<div class="piece slide">';
 			        echo '<div class="inner">';
 			        echo '<div class="image ' . $orientation . '">';
-			        echo '<div class="wrap">';
+			        echo '<div class="imageWrap">';
 			        echo '<img src="' . $image_url . '" alt="' . $caption . '"/>';
 			        echo '<div class="caption">';
 			        echo $caption;
@@ -138,7 +137,7 @@ $id = $post->ID;
 		</div>
 
 		<div class="module social">
-			<? 
+			<?php
 			get_tweets( 3 );
 			$facebook_url = get_field( 'facebook', $about_id );
 			$instagram_handle = str_replace('@', '', get_field( 'instagram', $about_id ) );
@@ -184,7 +183,8 @@ $id = $post->ID;
 $current_residents_page_id = get_page_by_path('current-residents')->ID;
 $post = get_post( $current_residents_page_id, OBJECT );
 setup_postdata( $post );
+global $post;
 get_template_part( 'sections/residents' );
-wp_reset_postdata();
+wp_reset_query();
 get_footer();
 ?>
