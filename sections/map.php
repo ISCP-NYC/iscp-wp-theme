@@ -10,14 +10,28 @@ if( $query_vars ):
 endif;
 ?>
 <section <?php section_attr( $id, $slug, 'earth' ); ?> data-page="<?php echo $paged ?>">
-	<?php get_template_part('partials/nav') ?>
-	<?php get_template_part('partials/side') ?>
-	<div class="content">
-		<div id="mapWrap"></div>
-		<div class="residents">
-			<div class="head"></div>
-			<div class="shelves list"></div>
+	<a href="<?php echo site_url() ?>" class="logo swap">
+		<div class="icon default"></div>
+		<div class="icon hover"></div>
+	</a>
+	<div id="mapWrap"></div>
+	<div class="residents">
+		<div class="head"></div>
+		<div class="content">
+			<div class="titles">
+				<div class="title name">Resident</div>
+				<div class="title years">Year(s)</div>
+				<div class="title sponsors">Sponsor(s)</div>
+			</div>
+			
+			<div class="shelves list">
+				
+
+			</div>
+		</div>
+		<div class="close swap">
+			<div class="icon default"></div>
+			<div class="icon hover"></div>
 		</div>
 	</div>
-	<?php get_template_part('partials/footer'); ?>
 </section>

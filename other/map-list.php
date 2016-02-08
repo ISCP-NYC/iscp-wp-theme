@@ -27,7 +27,7 @@ if( have_posts() ):
 		echo '<div class="row shelf-item resident">';
 		echo '<div class="inner">';
 		echo '<div class="value name">' . $name . '</div>';
-		echo '<div class="value year">' . $year . '</div>';
+		echo '<div class="value years">' . $year . '</div>';
 		echo '<div class="value sponsors">' . get_sponsors( $id ) . '</div>';
 		echo '</div>';
 		echo '</div>';

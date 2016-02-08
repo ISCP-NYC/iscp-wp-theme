@@ -149,18 +149,11 @@
 					navigationControl: false,
 					mapTypeControl: false,
 					scaleControl: false,
-					// draggable: false,
 					mapTypeId: [google.maps.MapTypeId.ROADMAP, mapStyleId]
 				});
 
 				map.mapTypes.set(mapStyleId, mapStyle);
 				map.setMapTypeId(mapStyleId);
-
-			 //  	var marker = new google.maps.Marker({
-				// 	position: location,
-				// 	map: map,
-				// 	icon: ''
-				// });
 
 				<?php
 				$theme = get_template_directory_uri();
@@ -183,7 +176,7 @@
 				    map.setCenter(location);
 				});
 
-			},400);
+			},700);
 		}
 	    </script>
 	    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyApM4iQyAfb0hbmkeXc_zs58aA_Jy0SIac&callback=initMap"></script>

@@ -12,7 +12,6 @@ $(window).load(function() {
 	if($('.center').is('.resident-resources')) {
 		var hash = parseInt(window.location.hash.replace('#', ''));
 		var index = hash + 1; 
-		console.log(index);
 		var item = $('.item').eq(index);
 		var scrollTop = item[0].offsetTop;
 		$('.center .content').scrollTop(scrollTop);
@@ -33,7 +32,7 @@ function setUp() {
 	var sections = $('section');
 	var count = $(sections).length;
 	var asideWidth = $('section').eq(0).find('aside').innerWidth();
-	var winWidth = $(window).innerWidth();
+	var winWidth = winW();
 	var pageWidth = winWidth;
 	var fullWidth = count * pageWidth;
 	var winHeight = $(window).innerHeight();
@@ -82,15 +81,17 @@ function setUp() {
 		});
 		var content = $(section).find('.content');	
 		setTimeout(function() {
-			var scrollHeight = content[0].scrollHeight;
-			var contentHeight = $(content)[0].clientHeight;
-			// keep content scrolled to bottom when footer is visible
-			if($(section).hasClass('show-footer')) {
-				$(content).scrollTop(scrollHeight);
-			}
-			// if content is too short to scroll -> scroll to footer
-			if(scrollHeight <= contentHeight && scrollHeight != 0) {
-				$(section).addClass('show-footer');
+			if($(content).length) {
+				var scrollHeight = content[0].scrollHeight;
+				var contentHeight = $(content)[0].clientHeight;
+				// keep content scrolled to bottom when footer is visible
+				if($(section).hasClass('show-footer')) {
+					$(content).scrollTop(scrollHeight);
+				}
+				// if content is too short to scroll -> scroll to footer
+				if(scrollHeight <= contentHeight && scrollHeight != 0) {
+					$(section).addClass('show-footer');
+				}
 			}
 			$(section).removeClass('static').addClass('ready');
 		});
@@ -237,6 +238,7 @@ function slideTo(index, animate) {
 	var size = $('#size').css('content');
 	var asideWidth = $(side).innerWidth();
 	if(section.length) {
+		$('main').addClass('sliding');
 		$('section.center').removeClass('center').removeClass('hover-left').removeClass('hover-right');
 		$('section.right').removeClass('right');
 		$('section.left').removeClass('left');
@@ -259,6 +261,7 @@ function slideTo(index, animate) {
 			$('section:not(.center)').addClass('hide-shelves');
 			$('section:not(.center)').find('.content').scrollTop(0);
 			$('section:not(.center)').scrollTop(0);
+			$('main').removeClass('sliding');
 		});
 		var url = $(section).attr('data-permalink');
 		var id = $(section).attr('data-id');
@@ -294,11 +297,15 @@ window.addEventListener('popstate', function(e) {
     if(state) {
 	    var index = state.page;
 	    slideTo(index, true);
+	    if($('section#map').length) {
+	    	openMapResidentsFromUrl();
+	    }
 	}
 });
 
 $('body').on('click', 'aside .move', function(event) {
 	event.preventDefault();
+	if($('main').is('.sliding')){return;}
 	var aside = $(this).parents('aside');
 	var index = $(aside).parents('section').index();
 	var section = $('section').eq(index);
@@ -330,7 +337,6 @@ $('body').on('click', 'aside .move', function(event) {
 		}
 	}
 	slideTo(nextIndex, true);
-
 });
 
 
@@ -778,27 +784,40 @@ $('body').on('click', '.gallery .slide .image', function() {
 /////////////////////////////MAP/////////////////////////////
 /////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////
+var earth;
 function setUpEarth() {
 	var section = $('section#map');
 	var residents = $(section).find('.residents');
 	var residentsList = $(residents).find('.list');
-	var head = $(residents).find('.head');
+	var residentsHead = $(residents).find('.head');
 	var earth = new WE.map('mapWrap');
+	var canvas = earth.canvas;
     earth.setView([46.8011, 8.2266], 1.6);
     WE.tileLayer('http://data.webglearth.com/natural-earth-color/{z}/{x}/{y}.jpg', {
       tileSize: 256,
       bounds: [[-85, -180], [85, 180]],
       minZoom: 0,
-      maxZoom: 16,
+      maxZoom: 5,
       tms: true
     }).addTo(earth); 
+
+    $(canvas).on('mousedown', function() {
+    	$(this).addClass('grabbing');
+    }).on('mouseup', function() {
+    	$(this).removeClass('grabbing');
+    });
+
+    $(window).resize(function() {
+    	$(canvas).width(winW());
+    });	
 
     var mapWidth = $('#mapWrap').width();
     var mapHeight = $('#mapWrap').innerHeight();
     $('#mapWrap canvas').width(mapWidth).height(mapHeight);
     var countries = window.countries;
     var themeUrl = window.wp_info['theme_url'];
-    var markerUrl = themeUrl+'/assets/images/bullet-orange.svg'
+    var markerUrl = themeUrl+'/assets/images/bullet-orange.svg';
+
     $(countries).each(function(i, country) {
     	var name = country['name'];
     	var slug = country['slug'];
@@ -813,32 +832,71 @@ function setUpEarth() {
     		$(inner).html('<span class="count">' + count + '</span>');
     	}
     });
-    $('body').on('mouseenter', '.marker', function() {
-    	var marker = $(this);
-    	var name = $(this).attr('data-name');
-    	var slug = $(this).attr('data-slug');
-    	var count = $(this).attr('data-count');
-    	$(residents).removeClass('open').transition({'height':'auto'}, 0, function() {
-    		$(head).html(name+' ('+count+')');
-    	}).transition({
-    		y: -$(head).innerHeight()
-    	}, function() {
-    		$(residents).addClass('tease');
-    	});
-    	
+
+    $('body').on('mouseenter', '.marker:not(.teasing)', function() {
+    	if(!$(residents).hasClass('show')) {
+	    	var marker = $(this);
+	    	var name = $(this).attr('data-name');
+	    	var slug = $(this).attr('data-slug');
+	    	var count = $(this).attr('data-count');
+	    	$(marker).addClass('teasing');
+	    	$(residentsHead).html(name +' ('+count+')');
+	    	var headHeight = $(residentsHead).innerHeight();
+	    	$(residents).addClass('tease');
+	    	if($(residents).hasClass('show')) {
+	    		$(residents).removeClass('show').attr('style','');
+	    		if (history.pushState) {
+				    var newurl = window.location.protocol + "//" + window.location.host + window.location.pathname;
+				    window.history.pushState({path:newurl},'',newurl);
+				}
+	    	}
+	    }
     }).on('mouseleave', '.marker', function() {
-    	$(residents).removeClass('tease').transition({
-			y: 0
-		});	;
+    	if(!$(residents).hasClass('show')) {
+	    	var marker = $(this);
+	    	$(marker).removeClass('teasing');
+	    	setTimeout(function() {
+	    		if(!$('.marker.teasing').length) {
+		    		$(residents).removeClass('tease');
+		    	}
+	    	},200);
+	    }
     }).on('click', '.marker', function() {
     	var marker = $(this);
     	var name = $(this).attr('data-name');
     	var slug = $(this).attr('data-slug');
     	var count = $(this).attr('data-count');
-    	$(head).html(name+' ('+count+')');
+    	$(marker).addClass('showing');
+    	$(residentsHead).html(name+' ('+count+')');
+    	$(residents).addClass('show');
+    	if (history.pushState) {
+		    var newurl = window.location.protocol + "//" + window.location.host + window.location.pathname + '?where=' + slug;
+		    window.history.pushState({path:newurl},'',newurl);
+		}
     	getMapList(slug);
+    }).on('click', '.close', function() {
+    	$(residents).removeClass('show').attr('style','');
+    	$('.marker.showing').removeClass('showing');
+    	if (history.pushState) {
+		    var newurl = window.location.protocol + "//" + window.location.host + window.location.pathname;
+		    window.history.pushState({path:newurl},'',newurl);
+		}
     });
-};
+    openMapResidentsFromUrl();
+}
+
+function openMapResidentsFromUrl() {
+	var urlParam = getParam('where');
+    if(urlParam.length) {
+    	var slug = urlParam;
+		var marker = $('.marker[data-slug="' + slug + '"]');
+		var count = $(marker).attr('data-count');
+		var name = $(marker).attr('data-name');
+		$(marker).addClass('showing');
+		$('.residents .head').html(name +' ('+count+')');
+		getMapList(slug);
+	}
+}
 
 function getMapList(slug) {
 	var section = $('section#map');
@@ -858,21 +916,20 @@ function getMapList(slug) {
 			query_vars: vars
 		},
 		beforeSend: function() {
-			if($(residents).is('.open')) {
-				$(residents).removeClass('open').transition({
-					y: 0
-				}, function() {
-					$(residents).css({'height':'auto'});
-				});
+			if($(residents).is('.show')) {
+				$(residents).removeClass('show').attr('style','');
+				$(residents).css({'height':'auto'});
 			}
 		},
 		success: function(response) {
 			$(residentsList).html(response);
 			var residentsHeight = $(residents).innerHeight();
-			console.log(residentsHeight);
-			$(residents).addClass('open').height(residentsHeight).transition({
+			if(residentsHeight > winH()) {
+				residentsHeight = winH() - 100;
+			}
+			$(residents).addClass('show').height(residentsHeight).transition({
 				y: -residentsHeight
-			});
+			}).removeClass('tease');
 		}
 	});
 }
@@ -918,8 +975,25 @@ $('body').on('click', '.filter .select', function() {
 });
 
 function winW() {
-	return window.innerWidth();
+	return window.innerWidth;
 }
+
+function winH() {
+	return window.innerHeight;
+}
+
+function getParam(paramType) {
+    var url = window.location.search.substring(1);
+    var urlVars = url.split('&');
+    for(var i = 0; i < urlVars.length; i++) {
+        var thisParamType = urlVars[i].split('=');
+        if(thisParamType[0] == paramType) {
+            return thisParamType[1];
+        }
+    }
+    return false;
+}
+
 
 $(window).resize(function() {
 	setUp();
