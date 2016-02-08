@@ -9,8 +9,15 @@
 	    }
 	}
 	.tweets {
+		width: 100%;
+		clear: both;
 		display: table;
 		.tweet {
+			@include width('100% / 3 - 10px');
+			float: left;
+			&:nth-child(2) {
+				margin: 0 15px;
+			}
 			.text {
 				@include medium-fs;
 			    padding: 1px 0 1px 25px;
@@ -22,9 +29,22 @@
 			}
 			.timestamp {
 				display: block;
-				padding: 8px 0 0 25px;
+				padding: 5px 0 0 25px;
 				@include small-fs;
 				color: $orange;
+			}
+		}
+	}
+	@include large {
+		.tweets {
+			max-width: 800px;
+			margin: auto;
+			.tweet {
+				width: 100%;
+				max-width: 600px;
+				margin: 0 auto 10px 0 !important;
+				float: none;
+				max-width: none;
 			}
 		}
 	}

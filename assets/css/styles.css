@@ -1441,34 +1441,58 @@ section {
       color: #ff5000; }
   /* line 11, ../sass/partials/twitter.scss */
   section .twitter .tweets {
+    width: 100%;
+    clear: both;
     display: table; }
-    /* line 14, ../sass/partials/twitter.scss */
-    section .twitter .tweets .tweet .text {
-      font-size: 24px;
-      line-height: 28px;
-      padding: 1px 0 1px 25px;
-      background-image: url(../images/bullet-black.svg);
-      background-position: left 8px;
-      background-size: 15px;
-      background-repeat: no-repeat;
-      word-wrap: break-word; }
-      @media (max-width: 900px) {
-        /* line 14, ../sass/partials/twitter.scss */
-        section .twitter .tweets .tweet .text {
-          font-size: 18px;
-          line-height: 21px; } }
-    /* line 23, ../sass/partials/twitter.scss */
-    section .twitter .tweets .tweet .timestamp {
-      display: block;
-      padding: 8px 0 0 25px;
-      font-size: 18px;
-      line-height: 21px;
-      color: #ff5000; }
-      @media (max-width: 900px) {
-        /* line 23, ../sass/partials/twitter.scss */
-        section .twitter .tweets .tweet .timestamp {
-          font-size: 16px;
-          line-height: 20px; } }
+    /* line 15, ../sass/partials/twitter.scss */
+    section .twitter .tweets .tweet {
+      width: -webkit-calc(100% / 3 - 10px);
+      width: -moz-calc(100% / 3 - 10px);
+      width: -ms-calc(100% / 3 - 10px);
+      width: calc(100% / 3 - 10px);
+      float: left; }
+      /* line 18, ../sass/partials/twitter.scss */
+      section .twitter .tweets .tweet:nth-child(2) {
+        margin: 0 15px; }
+      /* line 21, ../sass/partials/twitter.scss */
+      section .twitter .tweets .tweet .text {
+        font-size: 24px;
+        line-height: 28px;
+        padding: 1px 0 1px 25px;
+        background-image: url(../images/bullet-black.svg);
+        background-position: left 8px;
+        background-size: 15px;
+        background-repeat: no-repeat;
+        word-wrap: break-word; }
+        @media (max-width: 900px) {
+          /* line 21, ../sass/partials/twitter.scss */
+          section .twitter .tweets .tweet .text {
+            font-size: 18px;
+            line-height: 21px; } }
+      /* line 30, ../sass/partials/twitter.scss */
+      section .twitter .tweets .tweet .timestamp {
+        display: block;
+        padding: 5px 0 0 25px;
+        font-size: 18px;
+        line-height: 21px;
+        color: #ff5000; }
+        @media (max-width: 900px) {
+          /* line 30, ../sass/partials/twitter.scss */
+          section .twitter .tweets .tweet .timestamp {
+            font-size: 16px;
+            line-height: 20px; } }
+  @media (max-width: 1280px) {
+    /* line 39, ../sass/partials/twitter.scss */
+    section .twitter .tweets {
+      max-width: 800px;
+      margin: auto; }
+      /* line 42, ../sass/partials/twitter.scss */
+      section .twitter .tweets .tweet {
+        width: 100%;
+        max-width: 600px;
+        margin: 0 auto 10px 0 !important;
+        float: none;
+        max-width: none; } }
 
 /* line 161, ../sass/styles.scss */
 em, i {
@@ -2554,35 +2578,14 @@ section.single.event.cols_1 .info {
 .home .social {
   padding-bottom: 0 !important;
   margin-bottom: 0 !important; }
-  /* line 97, ../sass/sections/home.scss */
-  .home .social .twitter .tweets {
-    width: 100%;
-    clear: both; }
-    /* line 100, ../sass/sections/home.scss */
-    .home .social .twitter .tweets .tweet {
-      width: -webkit-calc(100% / 3 - 10px);
-      width: -moz-calc(100% / 3 - 10px);
-      width: -ms-calc(100% / 3 - 10px);
-      width: calc(100% / 3 - 10px);
-      float: left; }
-      /* line 103, ../sass/sections/home.scss */
-      .home .social .twitter .tweets .tweet:nth-child(2) {
-        margin: 0 15px; }
-      @media (max-width: 900px) {
-        /* line 100, ../sass/sections/home.scss */
-        .home .social .twitter .tweets .tweet {
-          width: 100%;
-          max-width: 600px;
-          margin: auto !important;
-          float: none; } }
-  /* line 115, ../sass/sections/home.scss */
+  /* line 99, ../sass/sections/home.scss */
   .home .social .links {
     width: 100%;
     height: 70px;
     padding: 10px 0;
     margin-top: 60px;
     display: table; }
-    /* line 122, ../sass/sections/home.scss */
+    /* line 106, ../sass/sections/home.scss */
     .home .social .links .link {
       width: -webkit-calc(50% - 5px);
       width: -moz-calc(50% - 5px);
@@ -2592,46 +2595,46 @@ section.single.event.cols_1 .info {
       float: left;
       display: table;
       margin: auto; }
-      /* line 128, ../sass/sections/home.scss */
+      /* line 112, ../sass/sections/home.scss */
       .home .social .links .link a {
         display: table-cell;
         vertical-align: middle;
         text-align: center; }
-        /* line 132, ../sass/sections/home.scss */
+        /* line 116, ../sass/sections/home.scss */
         .home .social .links .link a h3 {
           padding-left: 20px;
           display: table;
           margin: auto; }
-          /* line 136, ../sass/sections/home.scss */
+          /* line 120, ../sass/sections/home.scss */
           .home .social .links .link a h3 .swap {
             width: 18px;
             height: 18px;
             margin-right: 5px;
             float: left; }
-            /* line 141, ../sass/sections/home.scss */
+            /* line 125, ../sass/sections/home.scss */
             .home .social .links .link a h3 .swap .icon {
               background-position: center;
               background-repeat: no-repeat;
               background-size: contain; }
-        /* line 149, ../sass/sections/home.scss */
+        /* line 133, ../sass/sections/home.scss */
         .home .social .links .link a:hover .swap .default.icon {
           opacity: 0; }
-        /* line 152, ../sass/sections/home.scss */
+        /* line 136, ../sass/sections/home.scss */
         .home .social .links .link a:hover .swap .hover.icon {
           opacity: 1; }
-      /* line 158, ../sass/sections/home.scss */
+      /* line 142, ../sass/sections/home.scss */
       .home .social .links .link.facebook .swap .default.icon {
         background-image: url(../images/facebook-orange.svg); }
-      /* line 161, ../sass/sections/home.scss */
+      /* line 145, ../sass/sections/home.scss */
       .home .social .links .link.facebook .swap .hover.icon {
         background-image: url(../images/facebook-black.svg); }
-      /* line 166, ../sass/sections/home.scss */
+      /* line 150, ../sass/sections/home.scss */
       .home .social .links .link.instagram .swap .default.icon {
         background-image: url(../images/instagram-orange.svg); }
-      /* line 169, ../sass/sections/home.scss */
+      /* line 153, ../sass/sections/home.scss */
       .home .social .links .link.instagram .swap .hover.icon {
         background-image: url(../images/instagram-black.svg); }
-/* line 176, ../sass/sections/home.scss */
+/* line 160, ../sass/sections/home.scss */
 .home .module.newsletter {
   padding: 0 !important; }
 

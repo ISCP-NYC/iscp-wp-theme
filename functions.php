@@ -640,19 +640,19 @@ function humanTiming( $time ) {
     $time = time() - $time;
     $time = ($time<1)? 1 : $time;
     $tokens = array (
-        31536000 => 'y',
-        2592000 => 'm',
-        604800 => 'wk',
-        86400 => 'day',
-        3600 => 'hr',
-        60 => 'min',
-        1 => 'sec'
+        31536000 => ' year',
+        2592000 => ' month',
+        604800 => ' week',
+        86400 => ' day',
+        3600 => ' hour',
+        60 => ' minute',
+        1 => ' second'
     );
 
     foreach ($tokens as $unit => $text) {
         if ($time < $unit) continue;
         $numberOfUnits = floor($time / $unit);
-        return $numberOfUnits.$text.(($numberOfUnits>1)?'s':'');
+        return $numberOfUnits . $text . (($numberOfUnits>1)?'s':'') . ' ago';
     }
 }
 
@@ -690,16 +690,16 @@ function get_tweets( $count ) {
 		if( isset( $tweet->errors ) ) {           
 		    // $tweet = 'Error :'. $raw_tweets[$counter]->errors[0]->code. ' - '. $raw_tweets[$counter]->errors[0]->message;
 		} else {
-		    $text = makeClickableLinks($tweet->text);
-		    $timestamp = strtotime($tweet->created_at);
-		    $elapsed = humanTiming($timestamp);
+		    $text = makeClickableLinks( $tweet->text );
+		    $timestamp = strtotime( $tweet->created_at );
+		    $elapsed = humanTiming( $timestamp );
 		    $id = $tweet->id;
-		    $url = 'http://twitter.com/'.$handle.'/status/'.$id;
+		    $url = 'http://twitter.com/' . $handle . '/status/' . $id;
 		    echo '<div class="tweet">';
 		    echo '<div class="text">';
-			echo $text;
+			echo utf8_encode( $text );
 			echo '</div>';
-			echo '<a href="'.$url.'" target="_blank" class="timestamp">';
+			echo '<a href="' . $url . '" target="_blank" class="timestamp">';
 			echo $elapsed;
 			echo '</a>';
 			echo '</div>';

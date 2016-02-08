@@ -12,7 +12,11 @@ $id = $post->ID;
 			International Studio &amp; Curatorial Program
 		</h2>
 		<h3 class="title">
-			Events &amp; Exhibitions
+			<?php
+			$events_id = get_page_by_path( 'events' )->ID;
+			$events_permalink = get_the_permalink( $events_id );
+			echo '<a href="' . $events_permalink . '">Events &amp; Exhibitions</a>';
+			?>
 		</h3>
 		<?php 
 			$today = new DateTime();
@@ -66,16 +70,18 @@ $id = $post->ID;
 				get_template_part( 'partials/no-posts' );
 			endif;
 			?>
-
-		<?php
+		<div class="about module">
+			<h3 class="title">
+			<?php
 			$about = get_page_by_path( 'about' );
 			$about_id = $about->ID;
 			$description = get_field('description', $about_id);
 			$address = get_field('address', $about_id);
-		?>
-
-		<div class="about module">
-			<h3 class="title"><?php echo $address ?></h3>
+			$visit_id = get_page_by_path( 'visit' )->ID;
+			$visit_permalink = get_the_permalink( $visit_id );
+			echo '<a href="' . $visit_permalink . '">' . $address . '</a>';
+			?>
+			</h3>
 			<div class="text">
 				<?php echo strip_tags( $description ) ?>
 			</div>
@@ -116,17 +122,18 @@ $id = $post->ID;
 		endif;
 		?>
 
-
-		<?php
-			$residency_program = get_page_by_path( 'residency-programs' );
-			$residency_tagline = get_field('tagline', $residency_program);
-			$residency_tagline .= ' <a href="#">Learn more.</a>';
-		?>
-
 		<div class="residency_program module">
-			<h3 class="title">Residency Program</h3>
+			<h3 class="title">
+				<?php
+				$programs = get_page_by_path( 'residency-programs' );
+				$programs_tagline = get_field('tagline', $programs) . ' <a href="#">Learn more.</a>';
+				$programs_id = $programs->ID;
+				$programs_permalink = get_the_permalink( $programs_id );
+				echo '<a href="' . $programs_permalink . '">Residency Programs</a>';
+				?>
+			</h3>
 			<div class="text">
-				<?php echo $residency_tagline ?>
+				<?php echo $programs_tagline ?>
 			</div>
 		</div>
 
@@ -173,5 +180,11 @@ $id = $post->ID;
 	</div>
 	<?php get_template_part('partials/footer') ?>
 </section>
-
-<?php get_footer(); ?>
+<?php
+$current_residents_page_id = get_page_by_path('current-residents')->ID;
+$post = get_post( $current_residents_page_id, OBJECT );
+setup_postdata( $post );
+get_template_part( 'sections/residents' );
+wp_reset_postdata();
+get_footer();
+?>

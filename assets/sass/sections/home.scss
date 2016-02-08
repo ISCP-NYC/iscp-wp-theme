@@ -94,23 +94,7 @@
 		padding-bottom: 0 !important;
 		margin-bottom: 0 !important;
 		.twitter {
-			.tweets {
-				 width: 100%;
-				 clear: both;
-			 	.tweet {
-					@include width('100% / 3 - 10px');
-					float: left;
-					&:nth-child(2) {
-						margin: 0 15px;
-					}
-					@include medium {
-						width: 100%;
-						max-width: 600px;
-						margin: auto !important;
-						float: none;
-					}
-				}
-			}
+			
 		}
 		.links {
 			width: 100%;
