@@ -34,8 +34,7 @@ section.single.event {
 		text-align: center;
 	}
 	.info {
-		@include width('60% - 20px');
-		padding: 0 20px 0 0;
+		width: 66.666%;
 		float: left;
 		.description {
 			@include medium-fs;
@@ -86,30 +85,38 @@ section.single.event {
 		height: 500px;
 	}
 	.gallery {
-		width: 40%;
+		width: 33.333%;
 		float: left;
-		.piece {
-			margin-bottom: 20px;
-			.image {
-				width: 100%;
-				img {
-					width: 100%;
-					height: auto;
+		.images {
+			margin-left: 20px;
+			.piece {
+				margin-bottom: 20px;
+				.image {
+					width: 100%;				
+					img {
+						width: 100%;
+						height: auto;
+					}
+				}
+				.description {
+					text-align: left;
+					margin: 5px 0 0 0;
+					@include small-fs;
+					color: $orange;
 				}
 			}
-			.caption {
-				text-align: center;
-				margin: 5px 0 0 0;
-				@include small-fs;
-			}
 		}
-		@include xsmall {
+		padding: 0 0 60px 0;
+	}
+	@include large {
+		.info, .gallery {
+			width: 50%;
+		}
+	}
+	@include small {
+		.info, .gallery {
 			width: 100%;
 		}
-		@include small {
-			width: 100%;
-		}
-
 	}
 
 	.residents {
