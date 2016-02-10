@@ -6,6 +6,12 @@ $slug = $post->post_name;
 $date = get_the_date('F d, Y');date;
 $id = get_the_ID();
 $event_classes = 'journal-post single';
+$author_f = get_the_author_meta('first_name');
+$author_l = get_the_author_meta('last_name');
+$author = $author_f . ' ' . $author_l;
+if( get_field( 'author' ) ):
+  $author = get_field( 'author' );
+endif;
 ?>
 <section <?php section_attr( $id, $slug, $event_classes ); ?>>
 	<?php get_template_part('partials/nav') ?>
@@ -13,9 +19,9 @@ $event_classes = 'journal-post single';
 
 	<div class="content">
 	<div class="inner">
-		<h3 class="title"><?php echo $date ?></h3>	
-
+		<h3 class="title date"><?php echo $date ?></h3>	
 		<h2 class="title head"><?php echo $title ?></h2>
+		<h3 class="title author">by <?php echo $author ?></h3>	
 		<div class="text">
 			<?php the_content('', false, ''); ?>
 		</div>

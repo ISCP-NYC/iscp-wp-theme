@@ -10,13 +10,27 @@
 				$item_url = $menu_item->url;
 				$item_slug = basename($item_url);
 				$classes_array = $menu_item->classes;
-				array_push($classes_array, $slug);
+				array_push($classes_array, $item_slug);
 				$classes = implode(' ', $classes_array);
-			   	echo '<div class="cell ' . $classes . ' ">';
+			   	echo '<div class="cell' . $classes . '">';
 				echo '<div class="inner">';
 				echo '<div class="overlay">';
 				echo '<a href="' . $item_url . '">';
-			    echo '<h1 class="link">' . $item_title . '</h1>';
+			    if( $item_slug == 'resident-resources' ):
+			    	echo '<h1 class="link">';
+			    	echo '<div class="iconWrap">';
+			    	echo '<div class="swap">';
+					echo '<div class="icon default"></div>';
+					echo '<div class="icon hover"></div>';
+					echo '</div>';
+					echo $item_title;
+			    	echo '</h1>';
+			    	echo '</div>';
+			    else:
+			    	echo '<h1 class="link">';
+			    	echo $item_title;
+			    	echo '</h1>';
+			    endif;
 			    echo '</a>';
 			    echo '</div>';
 			    echo '<div class="sub-menu">';

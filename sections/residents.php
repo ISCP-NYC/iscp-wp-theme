@@ -58,6 +58,17 @@
 							<div class="icon hover"></div>
 						</div>
 					</div>
+					<?php 
+					$map_id = get_page_by_path( 'map' )->ID;
+					$map_permalink = get_the_permalink( $map_id );
+					?>
+					<a href="<?php echo $map_permalink ?>" class="select link map" data-slug="<?php echo $slug ?>">
+						<span class="option map">Residents Map</span>
+						<div class="swap">
+							<div class="icon default"></div>
+							<div class="icon hover"></div>
+						</div>
+					</a>
 				</div>
 			</div>
 			<div class="right alt <?php echo $alt_slug ?>">

@@ -1,5 +1,14 @@
 <?php
 get_header();
+
+
+$visit_page_id = get_page_by_path( 'visit' )->ID;
+$post = get_post( $visit_page_id, OBJECT );
+setup_postdata( $post );
+get_template_part( 'sections/visit' );
+wp_reset_postdata();
+
+
 global $post;
 ?>
 <section <?php section_attr( null, 'home', null ); ?> data-title="Home">
@@ -186,5 +195,13 @@ setup_postdata( $post );
 global $post;
 get_template_part( 'sections/residents' );
 wp_reset_query();
+
+$past_residents_page_id = get_page_by_path('past-residents')->ID;
+$post = get_post( $past_residents_page_id, OBJECT );
+setup_postdata( $post );
+global $post;
+get_template_part( 'sections/residents' );
+wp_reset_query();
+
 get_footer();
 ?>

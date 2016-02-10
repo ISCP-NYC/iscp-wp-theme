@@ -1,68 +1,68 @@
 <?php
 include(locate_template('sections/params/events.php'));
 $events_section = $GLOBALS['events_section'];
-if( $event_type_param ) {
-	$filter_key = 'event_type';
-	$filter_query = array(
-		'key' => 'event_type',
-		'type' => 'CHAR',
-		'value' => $event_type_param,
-		'compare' => 'LIKE'
-	);
-	$append_query = '?type=' . $event_type;
-} elseif( $year_param ) {
-	$year_begin = $year_param . '0101';
-	$year_end = $year_param . '1231';
-	$year_range = array( $year_begin, $year_end );
-	$filter_query = array(
-		'relation' => 'OR',
-		array(
-			'key' => 'start_date',
-			'type' => 'DATE',
-			'value' => $year_range,
-			'compare' => 'BETWEEN'
-		),
-		array(
-			'key' => 'end_date',
-			'type' => 'DATE',
-			'value' => $year_range,
-			'compare' => 'BETWEEN'
-		)
-	);
-	$append_query = '?date=' . $year_param;
-}
 $today = date('Ymd');
-if( $events_section == 'upcoming' ):
+if( $events_section == 'past' ):
+	if( $event_type_param ) {
+		$filter_key = 'event_type';
+		$filter_query = array(
+			'key' => 'event_type',
+			'type' => 'CHAR',
+			'value' => $event_type_param,
+			'compare' => 'LIKE'
+		);
+		$append_query = '?type=' . $event_type;
+	} elseif( $year_param ) {
+		$year_begin = $year_param . '0101';
+		$year_end = $year_param . '1231';
+		$year_range = array( $year_begin, $year_end );
+		$filter_query = array(
+			'relation' => 'OR',
+			array(
+				'key' => 'start_date',
+				'type' => 'DATE',
+				'value' => $year_range,
+				'compare' => 'BETWEEN'
+			),
+			array(
+				'key' => 'end_date',
+				'type' => 'DATE',
+				'value' => $year_range,
+				'compare' => 'BETWEEN'
+			)
+		);
+		$append_query = '?date=' . $year_param;
+	}
 	$date_query = array(
 		'relation' => 'OR',
 		array(
 			'key' => 'start_date',
-			'compare' => '>',
+			'compare' => '<',
 			'value' => $today
 		),
 		array(
 			'key' => 'end_date',
-			'compare' => '>',
+			'compare' => '<',
 			'value' => $today
 		)
 	);
+	if( !$upcoming_ids ):
+		$upcoming_ids = $GLOBALS['upcoming_ids'];
+	endif;
 else:
 	$date_query = array(
-		'relation' => 'OR',
-		array(
-			'key' => 'start_date',
-			'compare' => '<',
-			'value' => $today
-		),
-		array(
-			'key' => 'end_date',
-			'compare' => '<',
-			'value' => $today
-		)
-	);
-endif;
-if( !$upcoming_ids ):
-	$upcoming_ids = $GLOBALS['upcoming_ids'];
+			'relation' => 'OR',
+			array(
+				'key' => 'start_date',
+				'compare' => '>',
+				'value' => $today
+			),
+			array(
+				'key' => 'end_date',
+				'compare' => '>',
+				'value' => $today
+			)
+		);
 endif;
 $events_query = array(
 	'post_type' => 'event',

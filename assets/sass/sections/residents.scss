@@ -8,6 +8,21 @@ section.residents {
 		    .filter {
 		    	// width: 70%;
 		    	float: left;
+		    	.link.map {
+		    		cursor: pointer !important;
+		    		.swap {
+		    			margin-top: 1px;
+		    		}
+		    		.icon {
+		    			background-size: 16px;
+		    			&.default {
+		    				background-image: url(../images/earth1.png);
+		    			}
+		    			&.hover {
+		    				background-image: url(../images/earth2.png);	
+		    			}
+		    		}
+		    	}
 		    }
 		    .right.alt {
 		    	// width: 30%;

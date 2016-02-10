@@ -11,6 +11,9 @@ $thumb = get_thumb( $joural_post_id, null, false );
 $author_f = get_the_author_meta('first_name');
 $author_l = get_the_author_meta('last_name');
 $author = $author_f . ' ' . $author_l;
+if( get_field( 'author' ) ):
+  $author = get_field( 'author' );
+endif;
 $tags = get_the_tags();
 if( $append_query ) {
 	$url .= $append_query;

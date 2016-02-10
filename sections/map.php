@@ -25,8 +25,6 @@ endif;
 			</div>
 			
 			<div class="shelves list">
-				
-
 			</div>
 		</div>
 		<div class="close swap">

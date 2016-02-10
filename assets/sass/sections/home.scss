@@ -61,13 +61,13 @@
 			.event {
 				width: 50%;
 				.inner {
-					width: calc(100% - 10px);
+					width: calc(100% - 15px);
 				}
 				&:nth-child(1) .inner {
-					margin: 0 10px 0 0;
+					margin: 0 15px 0 0;
 				}
 				&:nth-child(2) .inner {
-					margin: 0 0 0 10px;
+					margin: 0 0 0 15px;
 				}
 			}
 		}	

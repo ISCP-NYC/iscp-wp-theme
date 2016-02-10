@@ -27,7 +27,7 @@ header.main {
 		transform: translateY(calc(-100% - 150px));
 		transition: transform 600ms cubic-bezier(0.645, 0.045, 0.355, 1);
 		.cell {
-			@include width('50% - 5px');
+			width: calc(50% - 5px);
 			height: 25%;
 			position: relative;
 			padding: 0;
@@ -58,8 +58,8 @@ header.main {
 				}
 			}
 			.inner {
-				@include width('100% - 10px');
-				@include height('100% - 10px');
+				width: calc(100% - 10px);
+				height: calc(100% - 10px);
 				position: absolute;
 				top: 0;
 				left: 0;
@@ -148,6 +148,49 @@ header.main {
 				    left: 0;
 				    @include large-fs;
 				    text-align: center;
+				}
+			}
+			&.resident-resources {
+				$lock-icon: calc(#{$large-fs} - 10px);
+				.iconWrap {
+					display: table;
+					margin: auto; 
+					position: relative;
+					padding-left: $lock-icon;
+					.swap {
+						width: $lock-icon;
+						height: $lock-icon;
+						display: inline-block;
+						.icon {
+							background-size: 80%;
+							background-position: center;
+							&.default {
+								background-image: url(../images/lock-orange.svg);
+							}
+							&.hover {
+								opacity: 0;
+								background-image: url(../images/lock-black.svg);
+							}
+						}
+					}
+					&:hover {
+						.icon.default {
+							opacity: 0;
+						}
+						.icon.hover {
+							opacity: 1;
+						}
+					}
+					@include medium {
+						padding-left: $medium-fs;
+						.swap {
+							width: $medium-fs;
+							height: $medium-fs;
+							.icon {
+								margin-top: 3px;
+							}
+						}
+					}
 				}
 			}
 		}

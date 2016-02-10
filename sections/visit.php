@@ -48,100 +48,100 @@
 		
 		<script type="text/javascript">
 		function initMap() {
-			var mapStyle = new google.maps.StyledMapType([
-			    {
-			        "featureType": "all",
-			        "elementType": "geometry.fill",
-			        "stylers": [
-			            {
-			                "color": "#ffffff"
-			            }
-			        ]
-			    },
-			    {
-			        "featureType": "all",
-			        "elementType": "geometry.stroke",
-			        "stylers": [
-			            {
-			                "color": "#ff5000"
-			            }
-			        ]
-			    },
-			    {
-			        "featureType": "all",
-			        "elementType": "labels.text.fill",
-			        "stylers": [
-			            {
-			                "color": "#14233E"
-			            }
-			        ]
-			    },
-			    {
-			        "featureType": "all",
-			        "elementType": "labels.text.stroke",
-			        "stylers": [
-			            {
-			                "color": "#ffffff"
-			            }
-			        ]
-			    },
-			    {
-			        "featureType": "road.arterial",
-			        "elementType": "geometry.fill",
-			        "stylers": [
-			            {
-			                "color": "#facab4"
-			            }
-			        ]
-			    },
-			    {
-			        "featureType": "road.local",
-			        "elementType": "geometry.fill",
-			        "stylers": [
-			            {
-			                "color": "#facab4"
-			            }
-			        ]
-			    },
-			    {
-			        "featureType": "road.highway.controlled_access",
-			        "elementType": "geometry.fill",
-			        "stylers": [
-			            {
-			                "color": "#facab4"
-			            }
-			        ]
-			    },
-			    {
-			        "featureType": "transit.line",
-			        "elementType": "geometry.fill",
-			        "stylers": [
-			            {
-			                "color": "#14233E"
-			            }
-			        ]
-			    },
-			    {
-			        "featureType": "transit.line",
-			        "elementType": "geometry.stroke",
-			        "stylers": [
-			            {
-			                "color": "#14233E"
-			            }
-			        ]
-			    },
-			    {
-			        "featureType": "water",
-			        "elementType": "geometry.fill",
-			        "stylers": [
-			            {
-			                "color": "#b3d1ff"
-			            }
-			        ]
-			    }
-			]);
-			var mapStyleId = 'orange';
-			setTimeout(function() {
+			window.onload = function() {
+				var mapStyle = new google.maps.StyledMapType([
+				    {
+				        "featureType": "all",
+				        "elementType": "geometry.fill",
+				        "stylers": [
+				            {
+				                "color": "#ffffff"
+				            }
+				        ]
+				    },
+				    {
+				        "featureType": "all",
+				        "elementType": "geometry.stroke",
+				        "stylers": [
+				            {
+				                "color": "#ff5000"
+				            }
+				        ]
+				    },
+				    {
+				        "featureType": "all",
+				        "elementType": "labels.text.fill",
+				        "stylers": [
+				            {
+				                "color": "#14233E"
+				            }
+				        ]
+				    },
+				    {
+				        "featureType": "all",
+				        "elementType": "labels.text.stroke",
+				        "stylers": [
+				            {
+				                "color": "#ffffff"
+				            }
+				        ]
+				    },
+				    {
+				        "featureType": "road.arterial",
+				        "elementType": "geometry.fill",
+				        "stylers": [
+				            {
+				                "color": "#facab4"
+				            }
+				        ]
+				    },
+				    {
+				        "featureType": "road.local",
+				        "elementType": "geometry.fill",
+				        "stylers": [
+				            {
+				                "color": "#facab4"
+				            }
+				        ]
+				    },
+				    {
+				        "featureType": "road.highway.controlled_access",
+				        "elementType": "geometry.fill",
+				        "stylers": [
+				            {
+				                "color": "#facab4"
+				            }
+				        ]
+				    },
+				    {
+				        "featureType": "transit.line",
+				        "elementType": "geometry.fill",
+				        "stylers": [
+				            {
+				                "color": "#14233E"
+				            }
+				        ]
+				    },
+				    {
+				        "featureType": "transit.line",
+				        "elementType": "geometry.stroke",
+				        "stylers": [
+				            {
+				                "color": "#14233E"
+				            }
+				        ]
+				    },
+				    {
+				        "featureType": "water",
+				        "elementType": "geometry.fill",
+				        "stylers": [
+				            {
+				                "color": "#b3d1ff"
+				            }
+				        ]
+				    }
+				]);
+				var mapStyleId = 'orange';
 				var map;
 				var location = new google.maps.LatLng(40.714229, -73.934692);
 				map = new google.maps.Map(document.getElementById('map'), {
@@ -178,7 +178,7 @@
 				    map.setCenter(location);
 				});
 
-			},700);
+			}
 		}
 	    </script>
 	    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyApM4iQyAfb0hbmkeXc_zs58aA_Jy0SIac&callback=initMap"></script>
