@@ -14,6 +14,16 @@ endif;
 		<div class="icon default"></div>
 		<div class="icon hover"></div>
 	</a>
+	<div class="buttons">
+		<div class="swap zoom out">
+			<div class="icon default"></div>
+			<div class="icon hover"></div>
+		</div>
+		<div class="swap zoom in">
+			<div class="icon default"></div>
+			<div class="icon hover"></div>
+		</div>
+	</div>
 	<div id="mapWrap"></div>
 	<div class="residents">
 		<div class="head"></div>

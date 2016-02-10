@@ -4,10 +4,13 @@ setup_postdata( $post );
 $resident_id = $the_ID;
 $title = get_the_title( $resident_id );
 $country = get_field('country', $resident_id )[0]->post_title;
+$country_slug = get_field('country', $resident_id )[0]->post_name;
+$resident_status = get_status( $resident_id );
+$residents_url = get_permalink( get_page_by_path( $resident_status . '-residents' ) );
+$country_url = $residents_url . '?filter=' . $resident_status . '&from=' . $country_slug;
 $studio_number = get_field( 'studio_number', $resident_id );
 $residency_program = get_field( 'residency_program', $resident_id );
 $url = get_permalink();
-
 if( have_rows( 'residency_dates', $resident_id ) ):
 	while ( have_rows( 'residency_dates' ) ) : the_row();
 		$start_date_dt = new DateTime( get_sub_field( 'start_date', $resident_id ) );
@@ -30,7 +33,9 @@ echo '</div>';
 echo '</a>';
 echo '<div class="details">';
 echo '<div class="left">';
-echo '<div class="value country"><a href="#">' . $country . '</a></div>';
+echo '<div class="value country">';
+echo '<a href="' . $country_url . '">' . $country . '</a>';
+echo '</div>';
 echo '<div class="value sponsors">';
 echo '<div class="vertical-align">';
 echo get_sponsors( $resident_id );

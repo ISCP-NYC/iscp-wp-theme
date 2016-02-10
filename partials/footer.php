@@ -37,7 +37,15 @@
 					    	$parent_id = $child_menu_item->menu_item_parent;
 					    	if ($parent_id == $id ) : 
 					    		echo '<div class="child-item ' . $child_slug . '">';
-					    		echo '<a href="' . $child_url . '">' . $child_title . '</a>';
+					    		echo '<a href="' . $child_url . '">';
+					    		if( $slug == 'resident-resources' ):
+							    	echo '<div class="swap">';
+									echo '<div class="icon default"></div>';
+									echo '<div class="icon hover"></div>';
+									echo '</div>';
+							    endif;
+					    		echo $child_title;
+					    		echo '</a>';
 					    		echo '</div>';
 					    	endif;
 					    }

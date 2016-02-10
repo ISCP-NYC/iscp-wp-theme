@@ -31,7 +31,6 @@ $residents_query = array(
 	'post_type' => 'resident',
 	'posts_per_page' => 12,
 	'paged' => $paged,
-	'order' => 'ASC',
 	'post_status' => 'publish',
 	'meta_query' => array( $page_query, $filter_query )
 );

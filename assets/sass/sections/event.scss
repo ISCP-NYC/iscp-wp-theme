@@ -112,6 +112,11 @@ section.single.event {
 		.info, .gallery {
 			width: 50%;
 		}
+		&.cols_1 {
+			.info {
+				width: 100%;
+			}
+		}
 	}
 	@include small {
 		.info, .gallery {
@@ -205,9 +210,8 @@ section.single.event {
 		}
 	}
 	&.cols_1 {
-		.info {
-			width: 100% !important;
-			padding: 0 !important;
+		.gallery {
+			display: none;
 		}
 	}
 }

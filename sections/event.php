@@ -1,27 +1,25 @@
 <?php 
-	global $post;
-	$title = $post->post_title;
-	$slug = $post->post_name;
-	$id = get_the_ID();
-	$description = get_field( 'description', $id );
-	$footnote = get_field( 'footnote', $id );
-	$event_type = get_field( 'event_type', $id );
-	$event_type_pretty = pretty( $event_type );
-	$date = get_event_date( $id );
-	$date = preg_replace("~</br>~", ' ', $date);
-	$event_classes = 'event single ' . get_status( $id );
-
-	$page_columns = get_field( 'page_columns', $id );
-	if( $page_columns ):
-		$event_classes .= ' ' . $page_columns;
+global $post;
+$title = $post->post_title;
+$slug = $post->post_name;
+$id = $post->ID;
+$description = get_field( 'description', $id );
+$footnote = get_field( 'footnote', $id );
+$event_type = get_field( 'event_type', $id );
+$event_type_pretty = pretty( $event_type );
+$date = get_event_date( $id );
+$date = preg_replace("~</br>~", ' ', $date);
+$event_classes = 'event single ' . get_event_status( $id );
+$page_columns = get_field( 'page_columns', $id );
+if( $page_columns ):
+	$event_classes .= ' ' . $page_columns;
+else:
+	if( have_rows('gallery') ):
+		$event_classes .= ' cols_2';
 	else:
-		if( have_rows('gallery') ):
-			$event_classes .= ' cols_2';
-		else:
-			$event_classes .= ' cols_1';
-		endif;		
-	endif;
-
+		$event_classes .= ' cols_1';
+	endif;		
+endif;
 ?>
 <section <?php section_attr( $id, $slug, $event_classes ); ?>>
 	<?php get_template_part('partials/nav') ?>
@@ -35,54 +33,51 @@
 		</h2>	
 
 		<h1 class="title"><?php echo $title ?></h1>
+		<?php 
+		if( $page_columns == 'one_col' ):
+			if( have_rows('gallery') ):
+				echo '<div class="image_slider">';
+				echo '<div class="left arrow"></div>';
+				echo '<div class="right arrow"></div>';
+				echo '<div class="slides">';
+			    while ( have_rows('gallery') ) : the_row();
+			        $gallery_image = get_sub_field( 'image' )['url'];
+			        $image_artist = get_sub_field( 'artist' );
+			        $image_title = get_sub_field( 'title' );
+			        $image_year = get_sub_field( 'year' );
+			        $image_medium = get_sub_field( 'medium' );
+			        $image_dimensions = get_sub_field( 'dimensions' );
+			        $image_credit = get_sub_field( 'credit' );
 
+			        $caption = $image_artist;
+			        if( $image_title ) {
+			        	$caption .= ', <em>' . $image_title . ',</em>';
+			        }
+			        if( $image_year ) {
+			        	$caption .= ' ' . $image_year;
+			        }
+			        if( $image_medium ) {
+			        	$caption .= ', ' . $image_medium;
+			        }
+			        if( $image_dimensions ) {
+			        	$caption .= ', ' . $image_dimensions;
+			        }
 
-		<?php if( $page_columns == 'one_col' ): ?>
-			<?php
-				if( have_rows('gallery') ):
-					echo '<div class="image_slider">';
-					echo '<div class="left arrow"></div>';
-					echo '<div class="right arrow"></div>';
-					echo '<div class="slides">';
-				    while ( have_rows('gallery') ) : the_row();
+					echo '<div class="slide piece">';
+					echo '<div class="vert">';
+					echo '<div class="image">';
+					echo '<img src="' . $gallery_image . '"/>';
+					echo '</div>';
+					echo '<div class="caption">';
+					echo $caption;
+					echo '</div>';
+					echo '</div>';
+					echo '</div>';
 
-				        $gallery_image = get_sub_field( 'image' )['url'];
-				        $image_artist = get_sub_field( 'artist' );
-				        $image_title = get_sub_field( 'title' );
-				        $image_year = get_sub_field( 'year' );
-				        $image_medium = get_sub_field( 'medium' );
-				        $image_dimensions = get_sub_field( 'dimensions' );
-				        $image_credit = get_sub_field( 'credit' );
-
-				        $caption = $image_artist;
-				        if( $image_title ) {
-				        	$caption .= ', <em>' . $image_title . ',</em>';
-				        }
-				        if( $image_year ) {
-				        	$caption .= ' ' . $image_year;
-				        }
-				        if( $image_medium ) {
-				        	$caption .= ', ' . $image_medium;
-				        }
-				        if( $image_dimensions ) {
-				        	$caption .= ', ' . $image_dimensions;
-				        }
-
-						echo '<div class="slide piece">';
-						echo '<div class="vert">';
-						echo '<div class="image">';
-						echo '<img src="' . $gallery_image . '"/>';
-						echo '</div>';
-						echo '<div class="caption">';
-						echo $caption;
-						echo '</div>';
-						echo '</div>';
-						echo '</div>';
-
-				    endwhile;
-				    echo '</div>';
-				    echo '</div>';
-				endif;
+			    endwhile;
+			    echo '</div>';
+			    echo '</div>';
+			endif;
 			?>
 
 		<?php endif; ?>

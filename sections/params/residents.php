@@ -32,7 +32,8 @@ switch( $slug ) {
 		);
 		$orderby_array = array(
 			'meta_key' => 'studio_number',
-			'orderby' => 'meta_value_num'
+			'orderby' => 'meta_value_num',
+			'order' => 'ASC'
 		);
 		$resident_status = 'current';
 		$alt_slug = 'past-residents';
@@ -43,8 +44,14 @@ switch( $slug ) {
 				'compare' => '<='
 			)
 		);
+		// $orderby_array = array(
+		// 	'orderby' => 'last_name'
+		// );
 		$orderby_array = array(
-			'orderby' => 'last_name'
+			'meta_key' => 'residency_dates_0_start_date',
+			// 'type' => 'DATE',
+			'orderby' => 'meta_value_num',
+			'order' => 'DESC'
 		);
 		$resident_status = 'past';
 		$alt_slug = 'current-residents';

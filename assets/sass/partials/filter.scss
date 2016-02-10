@@ -50,10 +50,10 @@
             .swap .icon {
                 background-size: 16px;
                 &.default {
-                    background-image: url(../images/close-thin-orange.svg);
+                    background-image: url(../images/close-orange.svg);
                 }
                 &.hover {
-                    background-image: url(../images/close-thin-black.svg);
+                    background-image: url(../images/close-black.svg);
                 }
             }
         }
@@ -106,16 +106,21 @@
                 display: inline-block;
                 margin: 0 0 10px 0;
                 @include small-fs;
-                &.selected a {
-                    color: $black;
-                    padding-right: 25px;
-                    background-image: url(../images/close-thin-black.svg);
-                    background-size: contain;
-                    background-repeat: no-repeat;
-                    background-position: right center; 
-                    &:hover {
-                        color: $orange !important;
-                        background-image: url(../images/close-thin-orange.svg);
+                .swap {
+                    width: $xsmall-fs;
+                    height: $xsmall-fs;
+                    display: inline-block;
+                    vertical-align: middle;
+                    .icon {
+                        background-position: top center;
+                        background-size: 90%;
+                        z-index: -1; 
+                        &.default {
+                            background-image: url(../images/close-black.svg);
+                        }
+                        &.hover {
+                            background-image: url(../images/close-orange.svg);
+                        }
                     }
                 }
             }

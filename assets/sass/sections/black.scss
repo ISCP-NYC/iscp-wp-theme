@@ -56,6 +56,17 @@ section.events .past.wrapper {
 		.cell.search input.s {
 			color: $black;
 		}
+		.cell.resident-resources {
+			h1:hover .iconWrap {
+				color: $orange;	
+			}
+			.swap .icon.default {
+				background-image: url(../images/lock-black.svg);
+			}
+			.swap .icon.hover {
+				background-image: url(../images/lock-orange.svg);
+			}
+		}
 	}
 	&.tease-nav header.main {
 		border-color: $orange !important;
@@ -79,6 +90,11 @@ section.events .past.wrapper {
 	            background-image: url(../images/view-toggle-orange.svg);   
 	        }
 	    }
+	}
+	.filter .link.map {
+		.icon.hover {
+			background-image: url(../images/bullet-orange.svg) !important;	
+		}
 	}
 	.residents .resident .image {
 		background-color: white;
@@ -122,6 +138,9 @@ section.events .past.wrapper {
 					background-image: url(../images/logo-orange.svg);
 				}
 			}
+		}
+		.resident-resources .login .swap .icon.hover {
+			background-image: url(../images/lock-orange.svg) !important;
 		}
 	}
 	.wrap:hover {

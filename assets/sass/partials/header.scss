@@ -35,8 +35,7 @@ header.main {
 			color: $orange;
 			overflow: hidden;
 			display: block;
-			&:hover .overlay,
-			{
+			&:hover .overlay {
 				color: $black;
 			}
 			&:nth-child(odd) {
@@ -156,7 +155,7 @@ header.main {
 					display: table;
 					margin: auto; 
 					position: relative;
-					padding-left: $lock-icon;
+					transition: color 150ms ease-in-out;
 					.swap {
 						width: $lock-icon;
 						height: $lock-icon;
@@ -173,16 +172,7 @@ header.main {
 							}
 						}
 					}
-					&:hover {
-						.icon.default {
-							opacity: 0;
-						}
-						.icon.hover {
-							opacity: 1;
-						}
-					}
 					@include medium {
-						padding-left: $medium-fs;
 						.swap {
 							width: $medium-fs;
 							height: $medium-fs;
@@ -190,6 +180,14 @@ header.main {
 								margin-top: 3px;
 							}
 						}
+					}
+				}
+				h1:hover {
+					.iconWrap .swap .icon.default {
+						opacity: 0 !important;
+					}
+					.iconWrap .swap .icon.hover {
+						opacity: 1 !important;
 					}
 				}
 			}
