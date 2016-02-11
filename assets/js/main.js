@@ -20,14 +20,13 @@ $(window).load(function() {
 		var item = $('.item').eq(index);
 		var scrollTop = item[0].offsetTop;
 		$('.center .content').scrollTo(scrollTop);
-
 	}
 });
 
 $masonry = $('.journal.grid').masonry({
 	columnWidth: '.sizer',
 	itemSelector: '.item',
-	gutter: 20,
+	gutter: 30,
 	transitionDuration: 0
 });
 

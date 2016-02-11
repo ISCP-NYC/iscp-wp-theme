@@ -34,13 +34,14 @@ section.single.resident {
 		text-align: center;
 	}
 	.info {
-		width: 66.666%;
+		width: calc(66.666% - 15px);
+		padding-right: 15px;
 		float: left;
 		.bio {
 			@include medium-fs;
 			.website {
 				display: block;
-				margin: 30px 0;
+				margin: 30px 0 0 0;
 				padding-left: 25px;
 				@include medium-fs;
 				background-image: url(../images/bullet-orange.svg);
@@ -98,17 +99,20 @@ section.single.resident {
 	@include large {
 		.info, .gallery {
 			width: 50%;
+			padding-right: 0;
 		}
 	}
 	@include small {
 		.info, .gallery {
 			width: 100%;
+			padding-right: 0;
 		}
 	}
 	.relations {
 		width: 100%;
-		display: table;
+		display: inline-block;
 		padding: 60px 0 0 0;
+		margin-top: 60px;
 		h4 {
 			text-align: center;
 			margin: 0 0 30px 0;

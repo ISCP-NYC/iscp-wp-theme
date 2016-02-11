@@ -94,8 +94,6 @@ endif;
 			endif;
 			?>
 			<div class="links">
-				<a href="#" class="link bullet">RSVP</a>
-				<a href="#" class="link bullet">Add to calendar</a>
 				<a href="#" class="link bullet">Share</a>
 			</div>
 
@@ -192,22 +190,46 @@ endif;
 			echo '</div>';
 			echo '</div>';
 		endif;
-		?>
-		<?php 
 		$today = new DateTime();
 		$today = $today->format('Y-m-d H:i:s');
-		$args = array(
+		$upcoming_query = array(
 			'post_type' => 'event',
 			'posts_per_page' => 3,
+			'meta_query' => array(
+				'relation' => 'OR',
+				array(
+					'key' => 'start_date',
+					'compare' => '>=',
+					'value' => $today,
+					'type' => 'DATE',
+					'orderby' => 'meta_value',
+					'order' => 'DESC'
+				),
+				array(
+					'key' => 'end_date',
+					'compare' => '>=',
+					'value' => $today,
+					'type' => 'DATE',
+					'orderby' => 'meta_value',
+					'order' => 'DESC'
+				),
+				array(
+					'key' => 'date',
+					'compare' => '>=',
+					'value' => $today,
+					'type' => 'DATE',
+					'orderby' => 'meta_value',
+					'order' => 'DESC'
+				),
+			),
 			'orderby' => 'meta_value',
 		    'order' => 'ASC',
 		    'post__not_in' => array($id)
 		);
-
-		$upcoming_events = new WP_Query( $args );
+		$upcoming_events = new WP_Query( $upcoming_query );
 		$GLOBALS['wp_query'] = $upcoming_events;
 		if ( have_posts() ):
-			echo '<div class="upcoming-events">';
+			echo '<div class="upcoming module">';
 			echo '<h4>Upcoming Events &amp; Exhibitions</h4>';
 			echo '<div class="shelves grid">';
 			while ( have_posts() ) :

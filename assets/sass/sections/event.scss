@@ -176,19 +176,27 @@ section.single.event {
 			}
 		}
 	}
-	.upcoming-events {
+	.upcoming.module {
 		width: 100%;
 		display: table;
 		@extend .border-top;
 		h4 {
+			color: $orange !important;
 			text-align: center;
 			margin: 20px 0;
 		}
 		.event {
 			float: left;
-			h3.name {
-				display: table;
-    			margin: 0 auto 10px auto;
+			border-bottom: 0 !important;
+			padding-bottom: 0 !important;
+			&.hover h2.name, &.hover .value, &.hover .value * {
+				color: $black !important;
+			}
+			h2.name {
+    			color: $orange !important;
+    			&:hover {
+					color: $black !important;
+				}
 			}
 			.image {
 				width: 100%;
@@ -199,12 +207,10 @@ section.single.event {
 					vertical-align: bottom;
 				}
 			}
-			.details {
-				width: 100%;
-				@include small-fs;
-				.detail {
-					width: 100%;
-
+			.value, .value * {
+				color: $orange !important;
+				&:hover {
+					color: $black !important;
 				}
 			}
 		}

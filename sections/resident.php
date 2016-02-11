@@ -42,7 +42,7 @@
 							'end_date_dt'   => $end_date_dt,
 							'start_date'    => $start_date,
 							'end_date'      => $end_date,
-							'date_range'    => $start_date . ' — ' . $end_date,
+							'date_range'    => $start_date . '&ndash;' . $end_date,
 							'sponsors'		=> $sponsors,
 							'year'			=> $year
 						);
