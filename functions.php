@@ -743,7 +743,7 @@ function get_event_date( $id ) {
 			if ( $start_year != $today_year ):
 				$date_format .= ', ' . $start_year;
 			endif;
-			$date_format .= ' &ndash; ' . $end_month . '&nbsp;' . $end_day;
+			$date_format .= '&ndash;' . $end_month . '&nbsp;' . $end_day;
 			if ( $end_year != $today_year ):
 				$date_format .= ',&nbsp;' . $end_year;
 			endif;
@@ -756,7 +756,7 @@ function get_event_date( $id ) {
 		if($start_time):
 			$date_format .= '</br>' . $start_time;
 			if($end_time):
-				$date_format .= ' &ndash; ' . $end_time;
+				$date_format .= '&ndash;' . $end_time;
 			endif;
 		endif;
 	endif;

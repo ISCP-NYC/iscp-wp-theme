@@ -39,7 +39,7 @@ main {
 	overflow: hidden;
 }
 section {
-	// min-width: 320px !important;
+	min-width: 320px !important;
 	@include height('100%');
 	position: absolute;
 	left: 100px;
@@ -75,6 +75,9 @@ section {
 				padding: 0;
 				margin-bottom: 20px;
 				color: $orange;
+			}
+			&:last-of-type {
+				margin-bottom: 0;
 			}
 		}
 	}
@@ -147,6 +150,10 @@ section {
 			opacity: 0;
 		}
 	}
+	::selection {
+		background-color: $orange;
+		color: $white;
+	}
 	@import 'partials/filter';
 	@import 'partials/footer';
 	@import 'partials/header';
@@ -190,7 +197,7 @@ h3, .small {
 	}
 }
 .content h4.title:first-child {
-	margin-bottom: 50px;
+	margin-bottom: 60px;
 }
 h4, .small {
 	@include small-fs;

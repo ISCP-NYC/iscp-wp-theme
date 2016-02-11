@@ -161,6 +161,10 @@ section.events .past.wrapper {
 	.image_slider.full {
 		background-color: $black;
 	}
+	::selection {
+		background-color: $black;
+		color: $white;
+	}
 }
 a.black, .link.black, .past .link {
 	&:hover {

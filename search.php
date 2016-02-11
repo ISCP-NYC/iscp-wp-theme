@@ -31,7 +31,6 @@ $search_count = $wp_query->found_posts;
 	echo '<div class="shelves results list">';
 	if ( have_posts() ) :
 		include( locate_template( 'sections/loops/search.php' ) );
-		get_template_part( 'partials/load-more' );
 	endif;
 	echo '</div>';
 	?>

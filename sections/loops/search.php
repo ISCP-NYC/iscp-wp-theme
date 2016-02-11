@@ -12,8 +12,16 @@ $search_query = new WP_Query( array(
 	'post_status' => 'publish'
 ) );
 $GLOBALS['wp_query'] = $search_query;
-while ( have_posts() ) :
-	the_post();
-	get_template_part( 'sections/items/search');
-endwhile;
+$last_page = $search_query->max_num_pages;
+if( have_posts() ):
+	while ( have_posts() ) :
+		the_post();
+		get_template_part( 'sections/items/search');
+	endwhile;
+	if( $paged < $last_page ):
+		get_template_part('partials/load-more');
+	endif;
+else:
+	get_template_part( 'partials/no-posts' );
+endif;
 ?>

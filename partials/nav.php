@@ -51,7 +51,8 @@
 		<div class="cell search">
 			<div class="inner">
 				<form role="search" method="get" class="searchform" class="searchform" autocomplete="off" action="<?php echo esc_url( home_url( '/' ) ); ?>">
-					<input type="text" data-placeholder="Search" value="Search" name="s" class="s nav-search" />
+					<div class="placeholder"><span>Search</span></div>
+					<input type="text" name="s" class="s nav-search"/>
 				</form>
 				<div class="counter"></div>
 			</div>

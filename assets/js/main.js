@@ -508,18 +508,15 @@ function getNeighbors(direction, type) {
 $('body').on('mouseenter', 'form', function() {
 	var input = $(this).find('input');
 	var value = $(input).attr('value');
-	var placeholder = $(input).attr('data-placeholder');
-	if(value === placeholder) {
-		$(input).attr('value', '');
-		$(input).siblings('.counter').html('');
-	}
+	var placeholder = $(this).find('.placeholder');
+	$(placeholder).css({'opacity':0});
 	$(input).focus();
 }).on('mouseleave', 'form', function() {
 	var input = $(this).find('input');
 	var value = $(input).attr('value');
-	var placeholder = $(input).attr('data-placeholder');
+	var placeholder = $(this).find('.placeholder');
 	if (!/\S/.test(value)) {
-		$(input).attr('value', placeholder);
+		$(placeholder).css({'opacity':1});
 		$(input).siblings('.counter').html('');
 	}
 	if(!$(input).is('.main-search')) {
@@ -701,8 +698,8 @@ function setImageSliderWidth() {
 $('body').on('mousemove', '.gallery:not(.full) ', function(e) {
 	var cursor = $(this).find('.cursor');
 	if ($(this).find('.image img:hover').length != 0 || $(cursor).is(':hover')) {
-		var x = e.offsetX==undefined?e.layerX:e.offsetX;
-		var y = e.offsetY==undefined?e.layerY:e.offsetY;
+		var x = e.clientX==undefined?e.layerX:e.clientX;
+		var y = e.clientY==undefined?e.layerY:e.clientY;
 		$(cursor).attr('data-icon', 'zoom');
 		$(cursor).css({
 			'left': x,
@@ -715,8 +712,7 @@ $('body').on('mousemove', '.gallery:not(.full) ', function(e) {
 			'display': 'none'
 		});
 	}
-})
-$('body').on('mouseleave', '.gallery:not(.full)', function() {
+}).on('mouseleave', '.gallery:not(.full)', function() {
 	var cursor = $(this).find('.cursor');
 	$(cursor).css({
 		'display': 'none'
@@ -815,7 +811,7 @@ function setUpEarth() {
       tileSize: 256,
       bounds: [[-85, -180], [85, 180]],
       minZoom: 0,
-      maxZoom: 5,
+      maxZoom: 1,
       tms: true,
       atmosphere: true
     }).addTo(earth); 
@@ -929,7 +925,7 @@ function setUpEarth() {
     	var before = null;
     	var delta = zoom;
         requestAnimationFrame(function animate() {
-            delta+= 0.1*factor;
+            delta+= 0.05*factor;
             earth.setZoom(delta);
             if(factor == 1) {
 	            if(delta <= zoomTo) {

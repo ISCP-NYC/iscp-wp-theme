@@ -11,7 +11,7 @@ echo '<div class="result item shelf-item border-bottom">';
 echo '<div class="inner">';
 echo '<a class="value wrap" href="' . $permalink . '">';
 if($thumb):
-	echo '<img src="' . $thumb . '"/>';
+	echo '<div class="thumb" style="background-image:url(' . $thumb . ')"></div>';
 endif;
 echo '<div class="title">' . $title . '</div>';
 echo '<div class="value post-type">' . $post_type . '</div>';

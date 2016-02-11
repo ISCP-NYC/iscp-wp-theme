@@ -201,7 +201,8 @@
 
 		<div class="module newsletter">
 			<form role="subscribe" method="get" class="newsletter">
-				<input type="text" value="Subscribe to our newsletter" data-placeholder="Subscribe to our newsletter"/>
+				<div class="placeholder"><span>Subscribe to our newsletter</span></div>
+				<input type="text" value/>
 			</form>
 		</div>
 		
