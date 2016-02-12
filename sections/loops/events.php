@@ -1,9 +1,11 @@
 <?php
 include(locate_template('sections/params/events.php'));
-$events_section = $GLOBALS['events_section'];
+if(!$events_section):
+	$events_section = $GLOBALS['events_section'];
+endif;
 $today = date('Ymd');
 if( $events_section == 'past' ):
-	if( $event_type_param ) {
+	if( $event_type_param ):
 		$filter_key = 'event_type';
 		$filter_query = array(
 			'key' => 'event_type',
@@ -12,7 +14,7 @@ if( $events_section == 'past' ):
 			'compare' => 'LIKE'
 		);
 		$append_query = '?type=' . $event_type;
-	} elseif( $year_param ) {
+	elseif( $year_param ):
 		$year_begin = $year_param . '0101';
 		$year_end = $year_param . '1231';
 		$year_range = array( $year_begin, $year_end );
@@ -32,7 +34,7 @@ if( $events_section == 'past' ):
 			)
 		);
 		$append_query = '?date=' . $year_param;
-	}
+	endif;
 	$date_query = array(
 		'relation' => 'OR',
 		array(

@@ -86,8 +86,6 @@ function iscp_scripts() {
 	wp_localize_script( 'main', 'wp_info', array(
 		'theme_url' => get_stylesheet_directory_uri()
 	));
-
-	
 }
 add_action( 'wp_enqueue_scripts', 'iscp_scripts' );
 
@@ -163,6 +161,22 @@ function get_map_list() {
 add_action( 'wp_ajax_nopriv_get_map_list', 'get_map_list' );
 add_action( 'wp_ajax_get_map_list', 'get_map_list' );
 
+function filter_items() {
+	$query_vars = json_decode( stripslashes( $_POST['query_vars'] ), true );
+    $query_vars['paged'] = $_POST['page'];
+    $slug = $query_vars['pagename'];
+    $post_type = $slug;
+    if( strstr( $slug, 'residents' ) ):
+    	$post_type = 'residents';
+    elseif( $post_type == 'journal' ):
+    	$post_type .= 's';
+    endif;
+    include( locate_template( 'sections/loops/' . $post_type . '.php' ) );
+    die();
+}
+add_action( 'wp_ajax_nopriv_filter_items', 'filter_items' );
+add_action( 'wp_ajax_filter_items', 'filter_items' );
+
 /////////////////////////////////////
 /////////////////////////////////////
 //////////////LOOP QUERY/////////////
@@ -172,6 +186,7 @@ add_action( 'wp_ajax_get_map_list', 'get_map_list' );
 function add_query_vars_filter( $vars ){
   $vars[] .= 'when';
   $vars[] .= 'date';
+  $vars[] .= 'year';
   $vars[] .= 'country';
   $vars[] .= 'from';
   $vars[] .= 'residency_program';

@@ -8,7 +8,7 @@ include(locate_template('sections/params/events.php'));
 		<!-- <h2 class="title head">Events &amp; Exhibitions</h2> -->
 		<div class="wrapper upcoming">
 			<h2 class="title head">Upcoming Events &amp; Exhibitions</h2>
-			<div class="events shelves filter-this grid items residents upcoming">
+			<div class="events shelves grid items residents upcoming">
 				<?php 
 				$GLOBALS['events_section'] = 'upcoming';
 				get_template_part('sections/loops/events');
@@ -65,17 +65,20 @@ include(locate_template('sections/params/events.php'));
 								$filter_url =  $page_url . '?type=' . $event_type;
 								$event_type_count = event_count_by_type( $event_type );
 								if( $event_type_count != 0 ):
-									if($event_type == $event_type_param) {
+									if($event_type == $event_type_param):
 										$selected = 'selected';
-										$filter_url = $page_url;
-									} else {
+									else:
 										$selected = null;
-									}
-									$event_type = pretty( $event_type );
+									endif;
 									echo '<div class="option ' . $selected . '">';
-									echo '<a href="' . $filter_url . '">';
-									echo ucwords( $event_type );
+									echo '<a data-type="' . $event_type . '" href="' . $filter_url . '">';
+									$event_type = ucwords( pretty( $event_type ) );
+									echo $event_type;
 									echo ' (' . $event_type_count . ')';
+									echo '<div class="swap">';
+									echo '<div class="icon default"></div>';
+									echo '<div class="icon hover"></div>';
+									echo '</div>';
 									echo '</a>';
 									echo '</div>';
 								endif;
@@ -92,19 +95,22 @@ include(locate_template('sections/params/events.php'));
 							$end_date = date( "Y" );
 							$years = array_reverse( range( $start_date,$end_date ) );
 							foreach( $years as $year ): 
-								$filter_url = $page_url . '?date=' . $year;
+								$filter_url = $page_url . '?when=' . $year;
 								$year_count = event_count_by_year( $year );
 								if( $year_count != 0 ):
 									if( $year == $year_param ):
 										$selected = 'selected';
-										$filter_url = $page_url;
 									else:
 										$selected = null;
 									endif;
 									echo '<div class="option ' . $selected . '">';
-									echo '<a href="' . $filter_url . '">';
+									echo '<a data-date="' . $year . '" href="' . $filter_url . '">';
 									echo $year;
 									echo ' (' . $year_count . ')';
+									echo '<div class="swap">';
+									echo '<div class="icon default"></div>';
+									echo '<div class="icon hover"></div>';
+									echo '</div>';
 									echo '</a>';
 									echo '</div>';
 								endif;

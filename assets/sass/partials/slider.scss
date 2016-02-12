@@ -4,7 +4,7 @@
         height: 50px;
         position: fixed;
         transform: translate(-25px, -25px);
-        background-image: url(../images/gallery-cursor-orange.svg);
+        background-image: url(../images/gallery-orange.svg);
         background-size: 50px;
         background-repeat: no-repeat;
         display: none;
@@ -44,22 +44,31 @@
 		top: calc(50% - 25px);
 		z-index: 20;
 		cursor: pointer;
+        .icon {
+            background-size: 50px;
+        }
 		&.left {
 			left: 20px;
-            .default {
-                background-image: url(../images/arrow-left-orange.svg);
-            }
-            .hover {
-                background-image: url(../images/arrow-left-black.svg);
+            .icon {
+                background-position: 0 -100px;
+                &.default {
+                    background-image: url(../images/gallery-orange.svg);
+                }
+                &.hover {
+                    background-image: url(../images/gallery-black.svg);
+                }
             }
 		}
 		&.right {
 			right: 20px;
-			.default {
-                background-image: url(../images/arrow-right-orange.svg);
-            }
-            .hover {
-                background-image: url(../images/arrow-right-black.svg);
+            .icon {
+                background-position: 0 -150px;
+    			&.default {
+                    background-image: url(../images/gallery-orange.svg);
+                }
+                &.hover {
+                    background-image: url(../images/gallery-black.svg);
+                }
             }
 		}
 	}

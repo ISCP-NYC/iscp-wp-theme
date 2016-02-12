@@ -71,29 +71,43 @@ section.events .past.wrapper {
 	&.tease-nav header.main {
 		border-color: $orange !important;
 	}
-	.filter .bar .select.dropdown {
-		.icon {
-	        &.default {
-	            background-image: url(../images/dropdown-black.svg);
-	        }
-	        &.hover {
-	            background-image: url(../images/dropdown-orange.svg);   
-	        }
-	    }
+	.filter { 
+		.bar {
+			.select.dropdown {
+				.icon {
+			        &.default {
+			            background-image: url(../images/dropdown-black.svg);
+			        }
+			        &.hover {
+			            background-image: url(../images/dropdown-orange.svg);   
+			        }
+			    }
+			}
+			.select.view.toggle {
+				.icon {
+			        &.default {
+			            background-image: url(../images/view-toggle-black.svg);
+			        }
+			        &.hover {
+			            background-image: url(../images/view-toggle-orange.svg);   
+			        }
+			    }
+		    }
+			.link.map {
+				.icon.hover {
+					background-image: url(../images/bullet-orange.svg) !important;	
+				}
+			}
+		}
 	}
-	.filter .bar .select.view.toggle {
-		.icon {
-	        &.default {
-	            background-image: url(../images/view-toggle-black.svg);
-	        }
-	        &.hover {
-	            background-image: url(../images/view-toggle-orange.svg);   
-	        }
-	    }
-	}
-	.filter .link.map {
-		.icon.hover {
-			background-image: url(../images/bullet-orange.svg) !important;	
+	.filter-list {
+		.options .option a .swap .icon {
+			&.default {
+                background-image: url(../images/close-black.svg);
+            }
+            &.hover {
+                background-image: url(../images/close-orange.svg);
+            }
 		}
 	}
 	.residents .resident .image {

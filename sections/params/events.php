@@ -11,12 +11,13 @@ if( $query_vars ):
 	$slug = $query_vars['pagename'];
 	$paged = $query_vars['paged'];
 	$event_type_param = $query_vars['type'];
-	$year_param = $query_vars['date'];
+	$year_param = $query_vars['when'];
 	$upcoming_ids = $query_vars['upcoming_ids'];
 	$post = get_page_by_path( $slug, OBJECT, 'page' );
+	$events_section = $query_vars['events_section'];
 	$page_param = $slug;
 else:
 	$event_type_param = get_query_var( 'type' );
-	$year_param = get_query_var( 'date' );
+	$year_param = get_query_var( 'when' );
 endif;
 ?>

@@ -96,19 +96,21 @@
 					$country_slug = $country->post_name;
 					$country_title = $country->post_title;
 					$country_count = resident_count_by_country( $country_id, $page_query );
-					
+					$filter_url = $page_url . '&from=' . $country_slug;
 					if( $country_count != 0 ):
-						$filter_url = $page_url . '&from=' . $country_slug;
-						echo '<div class="option">';
+						if( $country_param == $country_slug ):
+							$selected = ' selected';
+						else:
+							$selected = null;
+						endif;
+						echo '<div class="option' . $selected . '">';
 						echo '<a href="' . $filter_url . '">';
 						echo ucwords( $country_title );
 						echo ' (' . $country_count . ')';
-						if( $country_param == $country_slug ):
-							echo '<div class="swap">';
-							echo '<div class="icon default"></div>';
-							echo '<div class="icon hover"></div>';
-							echo '</div>';
-						endif;
+						echo '<div class="swap">';
+						echo '<div class="icon default"></div>';
+						echo '<div class="icon hover"></div>';
+						echo '</div>';
 						echo '</a>';
 						echo '</div>';
 					endif;
@@ -124,19 +126,22 @@
 				$end_date = date( "Y" );
 				$years = array_reverse( range( $start_date, $end_date ) );
 				foreach( $years as $year ): 
-					$filter_url = $page_url . '&date=' . $year;
 					$year_count = resident_count_by_year( $year, $page_query );
+					$filter_url = $page_url . '&date=' . $year;
 					if( $year_count  != 0 ):
+						if( $year_param == $year ):
+							$selected = ' selected';
+						else:
+							$selected = null;
+						endif;
 						echo '<div class="option' . $selected . '">';
-						echo '<a href="' . $filter_url . '">';
+						echo '<a data-date="' . $year . '" href="' . $filter_url . '">';
 						echo $year;
 						echo ' (' . $year_count . ')';
-						if( $year_param == $year ):
-							echo '<div class="swap">';
-							echo '<div class="icon default"></div>';
-							echo '<div class="icon hover"></div>';
-							echo '</div>';
-						endif;
+						echo '<div class="swap">';
+						echo '<div class="icon default"></div>';
+						echo '<div class="icon hover"></div>';
+						echo '</div>';
 						echo '</a>';
 						echo '</div>';
 					endif;
@@ -154,19 +159,22 @@
 						'ground_floor'
 					);
 					foreach( $residency_programs as $program ): 
-						$filter_url = $page_url . '&residency_program=' . $program;
 						$program_count = resident_count_by_program( $program, $page_query );
+						$filter_url = $page_url . '&residency_program=' . $program;
 						if( $program_count != 0 ):
+							if( $program_param == $program ):
+								$selected = ' selected';
+							else: 
+								$selected = null;
+							endif;
 							echo '<div class="option' . $selected . '">';
-							echo '<a href="' . $filter_url . '">';
+							echo '<a data-program="' . $program . '" href="' . $filter_url . '">';
 							echo pretty( $program );
 							echo ' (' . $program_count . ')';
-							if( $program_param == $program ):
-								echo '<div class="swap">';
-								echo '<div class="icon default"></div>';
-								echo '<div class="icon hover"></div>';
-								echo '</div>';
-							endif;
+							echo '<div class="swap">';
+							echo '<div class="icon default"></div>';
+							echo '<div class="icon hover"></div>';
+							echo '</div>';
 							echo '</a>';
 							echo '</div>';
 						endif;

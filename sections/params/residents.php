@@ -10,7 +10,6 @@ $page_query = array(
 	'type' => 'DATE',
 	'value' => $today,
 );
-
 if( $query_vars ):
 	$slug = $query_vars['pagename'];
 	$paged = $query_vars['paged'];
@@ -22,9 +21,7 @@ if( $query_vars ):
 else:
 	$page_param = get_query_var( 'filter' ) . '-residents';
 endif;
-
-switch( $slug ) {
-	case 'current-residents':
+if( $slug == 'current-residents' ):
 		$page_query = array_merge(
 			$page_query, array(
 				'compare' => '>=',
@@ -37,35 +34,29 @@ switch( $slug ) {
 		);
 		$resident_status = 'current';
 		$alt_slug = 'past-residents';
-		break;
-	case 'past-residents':
+elseif( $slug == 'past-residents' ):
 		$page_query = array_merge(
 			$page_query, array(
 				'compare' => '<='
 			)
 		);
-		// $orderby_array = array(
-		// 	'orderby' => 'last_name'
-		// );
 		$orderby_array = array(
 			'meta_key' => 'residency_dates_0_start_date',
-			// 'type' => 'DATE',
 			'orderby' => 'meta_value_num',
 			'order' => 'DESC'
 		);
 		$resident_status = 'past';
 		$alt_slug = 'current-residents';
-		break;
-}
+endif;
 $page_param = get_query_var( 'filter' ) . '-residents';
 if( $page_param == $slug ):
 	$country_param = get_query_var( 'from' );
-	$country_param_obj = get_page_by_path($country_param, OBJECT, 'country');
-	$country_param_title = $country_param_obj->post_title;
-	$country_param_id = $country_param_obj->ID;
 	$year_param = get_query_var( 'date' );
 	$program_param = get_query_var( 'residency_program' );
 endif;
+$country_param_obj = get_page_by_path($country_param, OBJECT, 'country');
+$country_param_title = $country_param_obj->post_title;
+$country_param_id = $country_param_obj->ID;
 $short_slug = str_replace('-residents', '', $slug);
 $page_url = get_the_permalink() . '?filter=' . $short_slug;
 ?>

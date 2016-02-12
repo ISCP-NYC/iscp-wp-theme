@@ -361,6 +361,10 @@ $('body').on('click', 'aside .move', function(event) {
 ///////////////////////AJAX AJAX AJAX////////////////////////
 /////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////
+
+/////////////////////////////////////////////////////////////
+//////////////////////////LOAD MORE//////////////////////////
+/////////////////////////////////////////////////////////////
 $('body').on('click', '.load-more a', function(event) {
 	event.preventDefault();
 	var paged = parseInt($(this).parents('section').attr('data-page')) + 1;
@@ -388,20 +392,19 @@ $('body').on('click', '.load-more a', function(event) {
 			page: paged
 		},
 		beforeSend: function() {
-			loading(vars);
+			loading(vars, 'loading');
 		},
 		success: function(response) {
 			addItems(response, vars);
 		}
 	});
 });
-function loading(vars) {
+function loading(vars, classes) {
 	var vars = JSON.parse(vars);
 	var sectionSlug = vars.pagename;
 	if(sectionSlug == 'journals') {sectionSlug='journal';}
 	var section = $('section#'+sectionSlug);
-	var shelves = $(section).find('.items');
-	$(section).addClass('loading');
+	$(section).addClass(classes);
 }
 //append section items to bottom of section content
 function addItems(html, vars) {
@@ -443,6 +446,9 @@ function addItems(html, vars) {
 		$(section).animate({ scrollTop: 0 }, 300, 'easeOutQuart');
 	}
 }
+/////////////////////////////////////////////////////////////
+//////////////////////LOAD NEIGHBORS/////////////////////////
+/////////////////////////////////////////////////////////////
 var loadedFrom = [];
 var click = 0;
 //query wordpress for section 'neighbor' and insert them into main wrapper
@@ -498,19 +504,128 @@ function getNeighbors(direction, type) {
 		}
 	});
 }
+/////////////////////////////////////////////////////////////
+///////////////////////LOAD FILTERED/////////////////////////
+/////////////////////////////////////////////////////////////
+$('body').on('click', '.filter-list .option a', function(event) {
+	event.preventDefault();
+	var option = $(this).parents('.option');
+	var slug = $(this).parents('section').attr('id');
+	var vars = ajaxpagination.query_vars;
+	var section = $(this).parents('section');
+	vars = JSON.parse(vars);
+	if($(section).is('.events')) {
+		var upcomingIds = [];
+		$(section).find('.item.upcoming').each(function() {
+			var upcomingId = $(this).attr('data-id');
+			upcomingIds.push(upcomingId)
+		});
+		vars['upcoming_ids'] = upcomingIds; 
+		vars['events_section'] = 'past'; 
+	}
+	var url = $(this).attr('href');
+	if($(option).is('.selected')) {
+		var params = {};
+		var filterVars = [
+			'when',
+	 		'date',
+	 		'country',
+	 		'from',
+	 		'residency_program',
+	 		'type',
+	 		'filter'
+ 		];
+ 		$(filterVars).each(function() {
+ 			delete vars[this];
+ 		});
+	} else {
+		var params = getParams(url);
+	}
+	$.each( params, function( key, value ) {
+		vars[key] = value;
+	});
+	vars['filter_params'] = JSON.stringify(params);
+	vars['pagename'] = slug;
+	console.log(vars);
+	vars = JSON.stringify(vars);
+	$.ajax({
+		url: ajaxpagination.ajaxurl,
+		type: 'post',
+		data: {
+			action: 'filter_items',
+			query_vars: vars,
+			page: 1
+		},
+		beforeSend: function() {
+			loading(vars, 'loading filtering');
+			var container = $(section).find('.filter-this');
+			var transitionEnd = 'transitionend webkitTransitionEnd oTransitionEnd';
+			$(section).one(transitionEnd, function(e) {
+				$(container).html('');
+				$(section).off(transitionEnd);
+			});
+			$(section).find('.option').filter('.selected').removeClass('selected');
+			$(option).addClass('selected');
+			window.history.pushState({path:url},'',url);
+		},
+		success: function(response) {
+			filterThis(response, vars);
+		}
+	});
+});
+
+function filterThis(html, vars) {
+	if(html.length > 0) {
+		var vars = JSON.parse(vars);
+		var sectionSlug = vars.pagename;
+		if(sectionSlug == 'journals') {sectionSlug='journal';}
+		var section = $('section#'+sectionSlug);
+		var content = $(section).find('.content');
+		if($(section).is('.events')) {
+			var container = $(section).find('.items.past');
+		} else {
+			var container = $(section).find('.items');
+		}
+		var footer = $(section).find('footer')
+		var paged = parseInt($(section).attr('data-page')) + 1;
+		var contentScrollTop = $(content).scrollTop();
+		var sectionScrollTop = $(section).scrollTop();
+		$(section).attr('data-page', paged);
+		$(section).removeClass('loading');
+		$(section).find('.load-more').remove();
+		$(html).each(function() {
+			var item = this;
+			if(!$(item).hasClass('load-more')) {
+				$(item).addClass('hide');
+			}
+			if($(container).hasClass('journal')) {
+				$masonry.append(item).masonry('appended', item);
+			} else {
+				$(container).append($(item));
+			}
+			$(container).imagesLoaded(function() {
+				$(item).removeClass('hide');
+				$masonry.masonry('layout');
+			});
+		});
+		$(section).removeClass('show-footer filtering');
+		$(content).animate({ scrollTop: contentScrollTop + sectionScrollTop }, 300, 'easeOutQuart');
+		$(section).animate({ scrollTop: 0 }, 300, 'easeOutQuart');
+	}
+}
 
 /////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////
 //////////////////////////SEARCH/////////////////////////////
 /////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////
-$('body').on('mouseenter', 'form', function() {
+$('body').on('mouseenter click touchstart', 'form', function() {
 	var input = $(this).find('input');
 	var value = $(input).attr('value');
 	var placeholder = $(this).find('.placeholder');
 	$(placeholder).css({'opacity':0});
 	$(input).focus();
-}).on('mouseleave', 'form', function() {
+}).on('mouseleave','form', function() {
 	var input = $(this).find('input');
 	var value = $(input).attr('value');
 	var placeholder = $(this).find('.placeholder');
@@ -1044,6 +1159,17 @@ function getParam(paramType) {
         }
     }
     return false;
+}
+function getParams(url) {
+	if(url==undefined) {var url = window.location.href}
+    var params = {}, hash;
+    var hashes = url.slice(url.indexOf('?') + 1).split('&');
+    for(var i = 0; i < hashes.length; i++) {
+        hash = hashes[i].split('=');
+        // params.push(hash[0]);
+        params[hash[0]] = hash[1];
+    }
+    return params;
 }
 
 

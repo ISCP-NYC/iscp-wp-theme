@@ -60,7 +60,8 @@
 	    				<div class="title">Search</div>
 		    			<div class="sub-menu">
 		    				<form role="search" method="get" class="searchform" class="searchform" autocomplete="off" action="<?php echo esc_url( home_url( '/' ) ); ?>">
-								<input type="text" data-placeholder="Type here" value="Type here" name="s" class="s" />
+		    					<div class="placeholder"><span>Type here</span></div>
+								<input type="text" name="s" class="s" />
 								<div class="counter"></div>
 							</form>
 		    			</div>
@@ -98,7 +99,8 @@
 		    			<div class="title">Newsletter</div>
 		    			<div class="sub-menu">
 		    				<form role="search" method="get" class="newsletter" action="<?php echo esc_url( home_url( '/' ) ); ?>">
-		    					<input type="text" value="Subscribe" data-placeholder="Subscribe">
+		    					<div class="placeholder"><span>Subscribe</span></div>
+		    					<input type="text">
 		    				</form>
 		    			</div>
 		    		</div>

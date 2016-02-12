@@ -16,11 +16,11 @@ section.resident-resources {
 		@include small-fs;
 	}
 	header.main {
-		background-color: $light;
+		background-color: $light !important;
 		nav {
-			background-color: $light;
-			.overlay {
-				background-color: $light;
+			background-color: $light !important;
+			.overlay, .placeholder {
+				background-color: $light !important;
 			}	
 		}
 	}

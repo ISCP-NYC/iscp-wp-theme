@@ -22,7 +22,7 @@ if( $country_param ) {
 	$filter_query = array(
 		'key' => 'residency_program',
 		'type' => 'CHAR',
-		'value' => $residency_program,
+		'value' => $program_param,
 		'compare' => 'LIKE'
 	);
 	$append_query = '?residency_program=' . $program_param;
