@@ -32,6 +32,12 @@
 
 		get_template_part( 'sections/residents' );
 
+		// $residents_map_page_id = get_page_by_path('map')->ID;
+		// $post = get_post( $residents_map_page_id, OBJECT );
+		// setup_postdata( $post );
+		// get_template_part( 'sections/map' );
+		// wp_reset_postdata();
+
 	elseif( in_array( $page_slug, $event_types ) ):
 
 		get_template_part( 'sections/events' );

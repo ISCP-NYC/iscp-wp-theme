@@ -11,17 +11,15 @@ if( $parent != 0 ) {
 } else {
 	$programs_id = $post->ID;
 }
-
 $programs_query = array(
 	'sort_order' => 'asc',
 	'sort_column' => 'post_title',
 	'post_type' => 'page',
 	'child_of' => $programs_id,
 	'post_status' => 'publish'
-); 
+);
 $programs = get_pages( $programs_query ); 
 ?>
-
 <section <?php section_attr( $id, $slug, 'programs' ); ?>>
 	<?php get_template_part( 'partials/nav' ) ?>
 	<?php get_template_part( 'partials/side' ) ?>

@@ -1,7 +1,8 @@
 <?php
+$sponsor = $post;
 $sponsor_title = get_the_title();
-$sponsor_slug = $post->post_name;
-$sponsor_id = $post->ID;
+$sponsor_slug = $sponsor->post_name;
+$sponsor_id = $sponsor->ID;
 $sponsor_country = get_field( 'country', $sponsor_id )[0]->post_title;
 $sponsor_website = get_field( 'website', $sponsor_id );
 $sponsor_type = get_field( 'type', $sponsor_id );
@@ -13,16 +14,20 @@ $country_param_obj = get_page_by_path( $country_param, OBJECT, 'country' );
 $country_param_title = $country_param_obj->post_title;
 $country_param_id = $country_param_obj->ID;
 $year_param = get_query_var( 'date' );
+
 $program_param = get_query_var( 'residency_program' );
+$program_param_name = get_program_title( $program_param );
+
 $page_url = get_the_permalink();
 $sponsor_query = array(
 	'key' => 'residency_dates_0_sponsors',
 	'value' => '"' . $sponsor_id . '"',
 	'compare' => 'LIKE'
 );
+$paged = 1;
 ?>
 
-<section <?php section_attr( $sponsor_id, $sponsor_slug, 'sponsor residents' ); ?>>
+<section <?php section_attr( $sponsor_id, $sponsor_slug, 'sponsor residents' ); ?> data-page="<?php echo $paged ?>">
 	<?php get_template_part( 'partials/nav' ) ?>
 	<?php get_template_part( 'partials/side' ) ?>
 	<div class="content">
@@ -63,7 +68,7 @@ $sponsor_query = array(
 					<div class="select link dropdown program" data-filter="program" data-slug="<?php echo $sponsor_slug ?>">
 						<?php
 						if( $program_param ):
-							$program_count = ': ' . pretty_short( $program_param ) . ' (' . resident_count_by_program( $program_param, $sponsor_query ) . ')';
+							$program_count = ': ' . $program_param_title . ' (' . resident_count_by_program( $program_param, $sponsor_query ) . ')';
 						else:
 							$program_count = null;
 						endif;
@@ -139,16 +144,23 @@ $sponsor_query = array(
 			<div class="filter-list program <?php echo $sponsor_slug ?>">
 				<div class="options">
 				<?php
-				$residency_programs = array(
-					'international',
-					'ground_floor'
-				);
+				$residency_programs_parent_id = get_page_by_path( 'residency-programs', OBJECT, 'page' )->ID;
+				$residency_programs = get_posts( array(
+					'posts_per_page'	=> -1,
+					'post_type'			=> 'page',
+					'orderby' 			=> 'title',
+					'order' 			=> 'ASC',
+					'post_parent'		=> $residency_programs_parent_id
+				) );
+
 				foreach( $residency_programs as $program ): 
-					$filter_url = $page_url . '?residency_program=' . $program;
-					$program_count = resident_count_by_program( $program, $sponsor_query );
+					$program_name = $program->post_title;
+					$program_slug = $program->post_name;
+					$filter_url = $page_url . '?residency_program=' . $program_slug;
+					$program_count = resident_count_by_program( $program_slug, $sponsor_query );
 					echo '<div class="option">';
 					echo '<a href="' . $filter_url . '">';
-					echo pretty( $program );
+					echo $program_name;
 					echo ' (' . $program_count . ')';
 					echo '</a>';
 					echo '</div>';
@@ -200,88 +212,10 @@ $sponsor_query = array(
 
 		<div class="residents shelves filter-this grid <?php echo $sponsor_slug ?>">
 			<?php
-			if( $country_param ):
-				$filter_query = array(
-					'key' => 'country',
-					'value' => '"' . $country_param_id . '"',
-					'compare' => 'LIKE'
-				);
-				$append_query = '?from=' . $country_param;
-			elseif( $year_param ):
-				$year_begin = $year_param . '0101';
-				$year_end = $year_param . '1231';
-				$year_range = array( $year_begin, $year_end );
-				$filter_query = array(
-					'key' => 'residency_dates_0_start_date',
-					'type' => 'DATE',
-					'value' => $year_range,
-					'compare' => 'BETWEEN'
-				);
-				$append_query = '?date=' . $year;
-			elseif( $program_param ):
-				$filter_query = array(
-					'key' => 'residency_program',
-					'type' => 'CHAR',
-					'value' => $program_param,
-					'compare' => 'LIKE'
-				);
-				$append_query = '?residency_program=' . $year;
-			endif;
-
-			if( $filter_query ):
-				$sponsor_query = array_merge( $sponsor_query, $filter_query );
-			endif;
-			
-			$residents_query = array(
-				'post_type' => 'resident',
-				'posts_per_page' => 18,
-				'orderby' => 'last_name',
-				'order' => 'ASC',
-				'post_status' => 'publish',
-				'meta_query' => array( $sponsor_query )
-			);
-			$loop = new WP_Query( $residents_query );
-			while ( $loop->have_posts() ) : $loop->the_post();
-				$resident_id = $the_ID;
-				$title = get_the_title( $resident_id );
-				$country = get_field('country', $resident_id )[0]->post_title;
-				$studio_number = get_field( 'studio_number', $resident_id );
-				$residency_program = get_field( 'residency_program', $resident_id );
-				$url = get_permalink();
-				$residency_date = get_field( get_end_date_value( $resident_id ), $resident_id );
-				$residency_year = ( new DateTime( $residency_date ) )->format( 'Y' );
-				$thumb = get_thumb( $resident_id );
-				$resident_status = get_status( $resident_id );
-				echo '<div class="resident shelf-item border-bottom ' . $resident_status . '"><div class="inner">';
-				echo '<a class="wrap value" href="' . $url . '">';
-				echo '<h3 class="link title">' . $title . '</h3>';
-				echo '<div class="image">';
-				echo '<img src="' . $thumb . '"/>';
-				echo '</div>';
-				echo '</a>';
-				echo '<div class="details">';
-				echo '<div class="left">';
-				echo '<div class="value country"><a href="#">' . $country . '</a></div>';
-				echo '<div class="value sponsors">';
-				echo '<div class="vertical-align">';
-				echo get_sponsors( $resident_id );
-				echo '</div>';
-				echo '</div>';
-				echo '</div>';
-				echo '<div class="right">';
-				if( $resident_status == 'current' ) {
-					echo '<div class="value studio-number">Studio ' . $studio_number . '</div>';
-				} elseif( $resident_status == 'past' ) {
-					echo '<div class="value year">' . $residency_year . '</div>';
-				}
-				echo '</div>';
-				echo '</div></div></div>';
-			endwhile;
-			wp_reset_query(); 
+			$sponsor_param = $sponsor;
+			$sponsor_param_id = $sponsor_id;
+			include(locate_template('sections/loops/residents.php'));
 			?>
-			<div class="clear">
-				<a href="#" class="load-more">Load More.</a>
-			</div>
 		</div>
 	</div>
 	<?php get_template_part('partials/footer'); ?>

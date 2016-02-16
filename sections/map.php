@@ -25,6 +25,15 @@ endif;
 		</div>
 	</div>
 	<div id="mapWrap"></div>
+
+	<div id="markerTemp">
+		<div class="swap">
+			<div class="icon default"></div>
+			<div class="icon hover"></div>
+		</div>
+		<div class="count"><span></span></div>
+	</div>
+
 	<div class="residents">
 		<div class="head"></div>
 		<div class="content">

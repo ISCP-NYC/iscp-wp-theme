@@ -24,8 +24,14 @@
 				echo '<div class="module">';
 				echo '<div class="imageSlider gallery">';
 				echo '<div class="cursor"></div>';
-				echo '<div class="left arrow"></div>';
-				echo '<div class="right arrow"></div>';
+				echo '<div class="left arrow swap">';
+				echo '<div class="icon default"></div>';
+				echo '<div class="icon hover"></div>';
+				echo '</div>';
+				echo '<div class="right arrow swap">';
+				echo '<div class="icon default"></div>';
+				echo '<div class="icon hover"></div>';
+				echo '</div>';
 				echo '<div class="slides">';
 				while( has_sub_field( 'image_slider', $id ) ):
 					$image = get_sub_field( 'image', $id );

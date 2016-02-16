@@ -1,23 +1,24 @@
 <?php 
-	$resident_id = get_the_ID();
-	$resident_slug = $post->post_name;
-	$resident = get_post( $resident_id );
-	$country = ucwords( get_field( 'country_temp', $resident_id ) );
-	$name = get_the_title();
-	$bio = get_field( 'bio', $resident_id );
-	$website = get_field( 'website', $resident_id );
-	$wbst = implode( '/', array_slice(explode('/', preg_replace('/https?:\/\/|www./', '', $website ) ), 0, 1));
-	$studio_number = get_field( 'studio_number', $resident_id );
-	$resident_type = ucfirst( get_field( 'resident_type', $resident_id ) );
-	$residencies = array();
- 
-	$resident_classes = 'resident single';
-	if( is_past( $resident_id ) ):
-		$resident_classes .= ' past';
-	endif;
-	if( have_rows( 'gallery' ) == false ):
-		$resident_classes .= ' one_col';
-	endif;
+$resident_id = get_the_ID();
+$resident_slug = $post->post_name;
+$resident = get_post( $resident_id );
+$country = get_field( 'country', $resident_id )[0];
+$country_title = $country->post_title;
+$country_slug = $country->post_name;
+$country_id = $country->ID;
+$name = get_the_title();
+$bio = get_field( 'bio', $resident_id );
+$website = get_field( 'website', $resident_id );
+$studio_number = get_field( 'studio_number', $resident_id );
+$resident_type = ucfirst( get_field( 'resident_type', $resident_id ) );
+$residencies = array();
+$resident_classes = 'resident single';
+if( is_past( $resident_id ) ):
+	$resident_classes .= ' past';
+endif;
+if( have_rows( 'gallery' ) == false ):
+	$resident_classes .= ' one_col';
+endif;
 ?>
 <section <?php section_attr( $resident_id, $resident_slug, $resident_classes ); ?>>
 	<?php get_template_part('partials/nav') ?>
@@ -25,7 +26,7 @@
 	<div class="content">
 		<header class="sub">
 			<div class="left">
-				<h2><?php echo $country ?></h2>
+				<h2><?php echo $country_title ?></h2>
 			</div>
 			<div class="center">
 				<?php
@@ -72,7 +73,8 @@
 					echo '<h2>';
 					echo get_sponsors( $resident_id );
 					echo '</h2>';
-				endif; ?>
+				endif;
+				?>
 			</div>
 
 			<div class="right">
@@ -88,39 +90,39 @@
 		<div class="info">
 			<div class="bio">
 				<?php echo $bio ?>
-				<?php if( $website && $website != '' ): ?>
+				<?php if( $website && $website != '' && is_current( $resident_id ) ): ?>
 					<a class="website" href="<?php echo $website ?>">
-						<?php echo $wbst; ?>
+						<?php echo pretty_url( $website ) ?>
 					</a>
 				<?php endif; ?>
 			</div>
 
 			<?php
-				$events = get_posts(array(
-					'post_type' => 'event',
-					'meta_query' => array(
-						array(
-							'key' => 'residents',
-							'value' => '"' . $resident_id . '"',
-							'compare' => 'LIKE'
-						)
+			$events = get_posts(array(
+				'post_type' => 'event',
+				'meta_query' => array(
+					array(
+						'key' => 'residents',
+						'value' => '"' . $resident_id . '"',
+						'compare' => 'LIKE'
 					)
-				));
+				)
+			));
 
-				if($events) {
-					echo '<div class="events">';
-					echo '<h3 class="title">Events &amp; Exhibitions</h3>';
-					foreach( $events as $event ): 
-						$event_id = $event->ID;
-						$event_name =  get_the_title( $event_id );
-						$event_url =  get_the_permalink( $event_id );
-						echo '<a class="event" href="' . $event_url . '">';
-						echo '<div class="name">' . $event_name . '</div>';
-						echo '<div class="date">' . format_date( $event_id ) . '</div>';
-						echo '</a>';
-					endforeach;
-					echo '</div>';
-				}
+			if($events):
+				echo '<div class="events">';
+				echo '<h3 class="title">Events &amp; Exhibitions</h3>';
+				foreach( $events as $event ): 
+					$event_id = $event->ID;
+					$event_name =  get_the_title( $event_id );
+					$event_url =  get_the_permalink( $event_id );
+					echo '<a class="event" href="' . $event_url . '">';
+					echo '<div class="name">' . $event_name . '</div>';
+					echo '<div class="date">' . format_date( $event_id ) . '</div>';
+					echo '</a>';
+				endforeach;
+				echo '</div>';
+			endif;
 			?>
 		</div>
 
@@ -131,21 +133,23 @@
 			echo '<div class="images slides">';
 		    while ( have_rows( 'gallery' ) ) : the_row();
 		        $image = get_sub_field( 'image' );
-		        $image_url = $image['url'];
-		        $orientation = get_orientation( $image['id'] );
-		        $caption = label_art( $the_ID );
-		        echo '<div class="piece slide">';
-		        echo '<div class="inner">';
-		        echo '<div class="image ' . $orientation . '">';
-		        echo '<div class="imageWrap">';
-		        echo '<img src="' . $image_url . '"/>';
-		        echo '<div class="caption">';
-		        echo $caption;
-		        echo '</div>';
-		        echo '</div>';
-		        echo '</div>';
-		        echo '</div>';
-		        echo '</div>';
+		        if( $image ):
+			        $image_url = $image['url'];
+			        $orientation = get_orientation( $image['id'] );
+			        $caption = label_art( $the_ID );
+			        echo '<div class="piece slide">';
+			        echo '<div class="inner">';
+			        echo '<div class="image ' . $orientation . '">';
+			        echo '<div class="imageWrap">';
+			        echo '<img src="' . $image_url . '"/>';
+			        echo '<div class="caption">';
+			        echo $caption;
+			        echo '</div>';
+			        echo '</div>';
+			        echo '</div>';
+			        echo '</div>';
+			        echo '</div>';
+			    endif;
 		    endwhile;
 		    echo '</div>';
 		    echo '</div>';
@@ -161,16 +165,14 @@
 					'value' => 'ground_floor',
 					'compare' => 'LIKE'
 				);
-			else:
-				echo '<h4>Residents from ' . $country . '</h4>';
+			elseif( $country_id ):
+				echo '<h4>Residents from ' . $country_title . '</h4>';
 				$meta_query = array(
-					'key' => 'country_temp',
-					'value' => $country,
+					'key' => 'country',
+					'value' => $country_id,
 					'compare' => 'LIKE'
 				);
 			endif;
-			?>
-			<?php 
 			$residents_query = array(
 				'post_type'	=> 'resident',
 				'posts_per_page' => 3,
@@ -179,7 +181,7 @@
 			);
 			$residents = new WP_Query( $residents_query );
 			$GLOBALS['wp_query'] = $residents;
-			if( $residents->have_posts() ):
+			if( $residents->have_posts() && $meta_query ):
 				echo '<div class="inner residents shelves grid">';
 				while ( $residents->have_posts() ) : 
 					the_post();

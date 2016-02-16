@@ -2,22 +2,26 @@ section.journal-post {
 	.content {
 		.inner {
 			width: 50%;
-			display: table;
+			display: block;
 			margin: auto;
 			@include medium {
 				width: 75%;
 			}
-			h2.head {
-				margin-bottom: 0;
+			.header {
+				width: 100%;
+				margin-bottom: 20px;
+				h2.head {
+					margin-bottom: 0;
+				}
+				.image {
+					width: 100%;
+					display: block;
+					img {
+						margin-bottom: 0;
+					}
+				}
 			}
 			.text {
-				img {
-					max-width: 100%;
-					width: auto !important;
-					height: auto;
-					display: table;
-					margin: 30px auto;
-				}
 				.wp-caption {
 					max-width: 100%;
 					width: auto !important;
@@ -28,6 +32,14 @@ section.journal-post {
 						margin: 10px auto 0 auto;
 					}
 				}
+			}
+
+			img {
+				max-width: 100%;
+				width: auto !important;
+				height: auto;
+				display: table;
+				margin: 20px 0;
 			}
 		}
 	}

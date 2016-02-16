@@ -100,11 +100,12 @@
         transition: height 500ms cubic-bezier(0.645, 0.045, 0.355, 1);
         position: relative;
         .options {
-            column-width: 150px;
+            column-width: 200px;
+            column-gap: 10px;
             .option {
-                width: 150px;
+                width: 200px;
                 display: inline-flex;
-                margin: 0 10px 10px 0;
+                margin: 0 0 10px 0;
                 @include small-fs;
                 a {
                     padding-right: $small-fs;
@@ -142,10 +143,21 @@
                     display: inline-block;
                 }
             }
+            @include medium {
+                column-width: 180px;
+                column-gap: 5px;
+                .option {
+                    width: 180px;
+                }
+            }
         }
+
         &.program {
-            .option {
-                width: 200px;
+            .options {
+                column-width: 250px;
+                .option {
+                    width: 250px;
+                }
             }
         }
         &::before {

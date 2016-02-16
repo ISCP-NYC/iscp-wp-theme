@@ -29,13 +29,13 @@ echo '</a>';
 echo '<h3 class="date">' . $date . '</h3>';
 echo '<h3 class="author">by ' . $author . '</h3>';
 echo '</header>';
+if ($thumb != ''):
 echo '<a class="image" href="' . $url . '">';
 echo '<div class="image">';
-if ($thumb != ''):
 echo '<img src="' . $thumb . '"/>';
-endif;
 echo '</div>';
 echo '</a>';
+endif;
 echo '<div class="excerpt">';
 echo the_excerpt();
 echo ' <a href="' . $url . '">Read more.</a>';

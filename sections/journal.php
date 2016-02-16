@@ -3,12 +3,16 @@ global $post;
 setup_postdata( $post );
 $title = get_the_title();
 $slug = $post->post_name;
-$date = get_the_date('F d, Y');date;
+$date = get_the_date('F d, Y');
+$featured_image = get_thumb( $joural_post_id, null, false );
+$featured_image_id = get_post_thumbnail_id();
 $id = get_the_ID();
 $event_classes = 'journal-post single';
 $author_f = get_the_author_meta('first_name');
 $author_l = get_the_author_meta('last_name');
 $author = $author_f . ' ' . $author_l;
+$images = get_attached_media( 'image', $id );
+$show_featured_image = get_field( 'show_featured_image' );
 if( get_field( 'author' ) ):
   $author = get_field( 'author' );
 endif;
@@ -19,9 +23,16 @@ endif;
 
 	<div class="content">
 	<div class="inner">
+		<div class="header">
 		<h3 class="title date"><?php echo $date ?></h3>	
 		<h2 class="title head"><?php echo $title ?></h2>
-		<h3 class="title author">by <?php echo $author ?></h3>	
+		<h3 class="title author">by <?php echo $author ?></h3>
+		<?php if ($featured_image && $show_featured_image): ?>
+		<div class="image">
+		<img src="<?php echo $featured_image ?>"/>
+		</div>
+		<?php endif; ?>
+		</div>
 		<div class="text">
 			<?php the_content('', false, ''); ?>
 		</div>

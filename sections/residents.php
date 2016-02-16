@@ -38,8 +38,9 @@
 					<?php endif; ?>
 					<div class="select link dropdown program" data-filter="program" data-slug="<?php echo $slug ?>">
 						<?php
+						echo $program_param;
 						if($program_param):
-							$program_count = ': ' . pretty_short( $program_param ) . ' (' . resident_count_by_program( $program_param, $page_query ) . ')';
+							$program_count = ': ' . get_program_title( $program_param ) . ' (' . resident_count_by_program( $program_param, $page_query ) . ')';
 						else:
 							$program_count = null;
 						endif;
@@ -97,7 +98,7 @@
 					$country_title = $country->post_title;
 					$country_count = resident_count_by_country( $country_id, $page_query );
 					$filter_url = $page_url . '&from=' . $country_slug;
-					if( $country_count != 0 ):
+					// if( $country_count != 0 ):
 						if( $country_param == $country_slug ):
 							$selected = ' selected';
 						else:
@@ -113,7 +114,7 @@
 						echo '</div>';
 						echo '</a>';
 						echo '</div>';
-					endif;
+					// endif;
 				endforeach;
 				?>
 				</div>
@@ -161,6 +162,7 @@
 					foreach( $residency_programs as $program ): 
 						$program_count = resident_count_by_program( $program, $page_query );
 						$filter_url = $page_url . '&residency_program=' . $program;
+						$program_title = get_program_title( $program );
 						if( $program_count != 0 ):
 							if( $program_param == $program ):
 								$selected = ' selected';
@@ -169,7 +171,7 @@
 							endif;
 							echo '<div class="option' . $selected . '">';
 							echo '<a data-program="' . $program . '" href="' . $filter_url . '">';
-							echo pretty( $program );
+							echo $program_title;
 							echo ' (' . $program_count . ')';
 							echo '<div class="swap">';
 							echo '<div class="icon default"></div>';

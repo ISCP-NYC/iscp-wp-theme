@@ -49,6 +49,9 @@ section.single.resident {
 				background-size: 15px;
 				background-repeat: no-repeat;
 			}
+			a  {
+				text-decoration: underline;
+			}
 		}
 		.events {
 			h3.title {
@@ -71,7 +74,6 @@ section.single.resident {
 			width: 100%;
 		}
 	}
-
 	.gallery {
 		width: 33.333%;
 		float: left;

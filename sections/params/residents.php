@@ -5,6 +5,7 @@ $id = $post->ID;
 $today = new DateTime();
 $today = $today->format( 'Ymd' );
 $paged = 1;
+$post_type = $post->post_type;
 $page_query = array(
 	'key' => 'residency_dates_0_end_date',
 	'type' => 'DATE',
@@ -22,31 +23,38 @@ else:
 	$page_param = get_query_var( 'filter' ) . '-residents';
 endif;
 if( $slug == 'current-residents' ):
-		$page_query = array_merge(
-			$page_query, array(
-				'compare' => '>=',
-			)
-		);
-		$orderby_array = array(
-			'meta_key' => 'studio_number',
-			'orderby' => 'meta_value_num',
-			'order' => 'ASC'
-		);
-		$resident_status = 'current';
-		$alt_slug = 'past-residents';
+	$page_query = array_merge(
+		$page_query, array(
+			'compare' => '>=',
+		)
+	);
+	$orderby_array = array(
+		'meta_key' => 'studio_number',
+		'orderby' => 'meta_value_num',
+		'order' => 'ASC'
+	);
+	$resident_status = 'current';
+	$alt_slug = 'past-residents';
 elseif( $slug == 'past-residents' ):
-		$page_query = array_merge(
-			$page_query, array(
-				'compare' => '<='
-			)
-		);
-		$orderby_array = array(
-			'meta_key' => 'residency_dates_0_start_date',
-			'orderby' => 'meta_value_num',
-			'order' => 'DESC'
-		);
-		$resident_status = 'past';
-		$alt_slug = 'current-residents';
+	$page_query = array_merge(
+		$page_query, array(
+			'compare' => '<='
+		)
+	);
+	$orderby_array = array(
+		'meta_key' => 'residency_dates_0_start_date',
+		'orderby' => 'meta_value_num',
+		'order' => 'DESC'
+	);
+	$resident_status = 'past';
+	$alt_slug = 'current-residents';
+elseif( $post_type == 'sponsor' ):
+	$page_query = null;
+	$orderby_array = array(
+		'meta_key' => 'residency_dates_0_start_date',
+		'orderby' => 'meta_value_num',
+		'order' => 'DESC'
+	);
 endif;
 $page_param = get_query_var( 'filter' ) . '-residents';
 if( $page_param == $slug ):

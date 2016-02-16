@@ -53,7 +53,9 @@ function iscp_scripts() {
 	wp_enqueue_script( 'imagesloaded' );
 	wp_enqueue_script( 'main' );
 	global $post;
-	if( $post->post_name == 'map' ):
+	$page_slug = $post->post_name;
+	$with_map = array('map', 'past-residents', 'current-residents');
+	if(in_array( $page_slug, $with_map ) ):
 		$countries_query = array(
 			'post_type' => 'country',
 			'posts_per_page' => -1,
@@ -211,62 +213,73 @@ function add_event_columns($columns) {
 	);
     return array_merge($columns, array(
 		'event_type' => __( 'Event Type' ),
-		'event_date' => __( 'Date' )
+		'start_date' => __( 'Start Date' ),
+		'end_date' => __( 'End Date' )
     ));
 }
 add_filter('manage_event_posts_columns' , 'add_event_columns');
 
 function custom_event_column( $column, $post_id ) {
     switch ( $column ) {
-      case 'event_type':
-        $event_type = get_post_meta( $post_id , 'event_type' , true );
-        if($event_type && $event_type != '') { 
-        	echo $event_type;
-        } else {
-        	echo '';
-        }
-        break;
+		case 'event_type':
+			$event_type = get_post_meta( $post_id , 'event_type' , true );
+			if($event_type && $event_type != ''):
+				echo pretty( $event_type );
+			else:
+				echo '';
+			endif;
+			break;
 
-      case 'event_date':
-        $start_date = get_post_meta( $post_id , 'start_date' , true );
-        $event_date = get_post_meta( $post_id , 'date' , true );
-        if($start_date && $start_date != '-' && $start_date != 'Invalid date') {  
-        	$start_date = new DateTime($start_date);
-        	echo $start_date->format('Y/m/d');
-        } else if($event_date && $event_date != '-' && $event_date != 'Invalid date') {  
-        	$event_date = new DateTime($event_date);
-        	echo $event_date->format('Y/m/d');
-        } else {
-        	echo '';
-        }
-        break;
+		case 'start_date':
+			$start_date = get_post_meta( $post_id , 'start_date' , true );
+			if($start_date && $start_date != '' && $start_date != 'Invalid date'):
+				$start_date = new DateTime($start_date);
+				echo $start_date->format('Y/m/d');
+			else:
+				echo '';
+			endif;
+			break;
+
+		case 'end_date':
+			$end_date = get_post_meta( $post_id , 'end_date' , true );
+			if($end_date && $end_date != '' && $end_date != 'Invalid date'):  
+				$end_date = new DateTime($end_date);
+				echo $end_date->format('Y/m/d');
+			else:
+				echo '';
+			endif;
+			break;
     }
 }
 add_action( 'manage_event_posts_custom_column' , 'custom_event_column', 10, 2 );
 
 
 function register_event_sortable_columns( $columns ) {
-    $columns['event_date'] = 'Event Date';
-    $columns['event_type'] = 'Event Type';
+    $columns['start_date'] = 'start_date';
+    $columns['end_date'] = 'end_date';
+    $columns['event_type'] = 'event_type';
 
     return $columns;
 }
 add_filter( 'manage_edit-event_sortable_columns', 'register_event_sortable_columns' );
 
-
-
 function event_column_orderby( $vars ) {
-	if ( isset( $vars['orderby'] ) && 'EventDate' == $vars['orderby'] ) {
+	if ( isset( $vars['orderby'] ) && 'start_date' == $vars['orderby'] ):
 		$vars = array_merge( $vars, array(
-			'meta_key' => 'event_date',
+			'meta_key' => 'start_date',
 			'orderby' => 'meta_value_num'
 		) );
-	} else if ( isset( $vars['orderby'] ) && 'EventType' == $vars['orderby'] ) {
+	elseif ( isset( $vars['orderby'] ) && 'end_date' == $vars['orderby'] ):
+		$vars = array_merge( $vars, array(
+			'meta_key' => 'end_date',
+			'orderby' => 'meta_value_num'
+		) );
+	elseif ( isset( $vars['orderby'] ) && 'event_type' == $vars['orderby'] ):
 		$vars = array_merge( $vars, array(
 			'meta_key' => 'event_type',
 			'orderby' => 'meta_value'
 		) );
-	}
+	endif;
 	$vars = array_merge( $vars, array (
 		'order' => $vars['order']
 	) );
@@ -286,9 +299,8 @@ function add_resident_columns($columns) {
     return array_merge($columns, array(
     	'country' =>__( 'Country'),
     	'residency_program' =>__( 'Program'),
-    	'sponsor' =>__( 'Sponsor'),
-		'start_date' => __('Start'),
-	    'end_date' =>__( 'End'),
+		'start_date' => __('Start Date'),
+	    'end_date' =>__( 'End Date'),
     ));
 }
 add_filter('manage_resident_posts_columns' , 'add_resident_columns');
@@ -296,29 +308,24 @@ add_filter('manage_resident_posts_columns' , 'add_resident_columns');
 function custom_resident_column( $column, $post_id ) {
     switch ( $column ) {
       case 'country':
-        $country = get_post_meta( $post_id , 'country_temp' , true );
+        $country = get_field( 'country', $post_id )[0]->post_title;
         echo $country;
-        break;
-
-      case 'sponsor':
-        $sponsor = get_post_meta( $post_id , 'sponsor_temp' , true );
-        echo $sponsor;
         break;
 
       case 'residency_program':
         $program = get_post_meta( $post_id , 'residency_program' , true );
-        echo pretty($program);
+        echo get_program_title( $program );
         break;
 
-      case 'start_date':
-        $start_date = get_post_meta( $post_id , 'residency_dates_0_start_date' , true );
-        if($start_date && $start_date != '' && $start_date != 'Invalid date') { 
-        	$start_date = new DateTime($start_date);
-        	echo $start_date->format('Y/m/d');
-        } else {
-        	echo '';
-        }
-        break;
+	case 'start_date':
+		$start_date = get_post_meta( $post_id , 'residency_dates_0_start_date' , true );
+		if($start_date && $start_date != '' && $start_date != 'Invalid date') {  
+			$start_date = new DateTime($start_date);
+			echo $start_date->format('Y/m/d');
+		} else {
+			echo '';
+		}
+		break;
 
       case 'end_date':
         $end_date = get_post_meta( $post_id , 'residency_dates_0_end_date' , true );
@@ -335,12 +342,10 @@ add_action( 'manage_resident_posts_custom_column' , 'custom_resident_column', 10
 
 
 function register_residents_sortable_columns( $columns ) {
-    $columns['country'] = 'Country';
-    $columns['sponsor'] = 'Sponsor';
-    $columns['residency_program'] = 'Program';
-    $columns['start_date'] = 'Start Date';
-    $columns['end_date'] = 'End Date';
-
+    // $columns['country'] = 'country';
+    // $columns['residency_program'] = 'residency_program';
+    // $columns['start_date'] = 'start_date';
+    // $columns['end_date'] = 'end_date';
     return $columns;
 }
 add_filter( 'manage_edit-resident_sortable_columns', 'register_residents_sortable_columns' );
@@ -348,32 +353,27 @@ add_filter( 'manage_edit-resident_sortable_columns', 'register_residents_sortabl
 
 
 function resident_column_orderby( $vars ) {
-	if ( isset( $vars['orderby'] ) && 'Country' == $vars['orderby'] ) {
+	if ( isset( $vars['orderby'] ) && 'country' == $vars['orderby'] ):
 		$vars = array_merge( $vars, array(
-			'meta_key' => 'country_temp',
+			'meta_key' => 'country',
 			'orderby' => 'meta_value'
 		) );
-	} else if ( isset( $vars['orderby'] ) && 'Sponsor' == $vars['orderby'] ) {
-		$vars = array_merge( $vars, array(
-			'meta_key' => 'sponsor_temp',
-			'orderby' => 'meta_value'
-		) );
-	} else if ( isset( $vars['orderby'] ) && 'Program' == $vars['orderby'] ) {
+	elseif ( isset( $vars['orderby'] ) && 'program' == $vars['orderby'] ):
 		$vars = array_merge( $vars, array(
 			'meta_key' => 'residency_program',
 			'orderby' => 'meta_value'
 		) );
-	} else if ( isset( $vars['orderby'] ) && 'StartDate' == $vars['orderby'] ) {
+	elseif ( isset( $vars['orderby'] ) && 'start_date' == $vars['orderby'] ):
 		$vars = array_merge( $vars, array(
-			'meta_key' => 'start_date',
+			'meta_key' => 'residency_dates_0_start_date',
 			'orderby' => 'meta_value_num',
 		) );
-	} else if ( isset( $vars['orderby'] ) && 'EndDate' == $vars['orderby'] ) {
+	elseif ( isset( $vars['orderby'] ) && 'end_date' == $vars['orderby'] ):
 		$vars = array_merge( $vars, array(
-			'meta_key' => 'end_date',
+			'meta_key' => 'residency_dates_0_end_date',
 			'orderby' => 'meta_value_num'
 		) );
-	}
+	endif;
 	$vars = array_merge( $vars, array (
 		'order' => $vars['order']
 	) );
@@ -392,34 +392,34 @@ function is_current( $id ) {
 	$today = $today->format('Ymd');
 	$resident = get_post( $id );
 	$end_date = get_resident_end_date( $id );
-	if($end_date) {
-		if($end_date > $today) {
+	if($end_date):
+		if($end_date > $today):
 			return true;
-		} else {
+		else:
 			return false;
-		}
-	}
+		endif;
+	endif;
 }
 function is_past( $id ) {
 	$today = new DateTime();
 	$today = $today->format('Ymd');
 	$resident = get_post( $id );
 	$end_date = get_resident_end_date( $id );
-	if($end_date) {
-		if($end_date < $today) {
+	if($end_date):
+		if($end_date < $today):
 			return true;
-		} else {
+		else:
 			return false;
-		}
-	}
+		endif;
+	endif;
 }
 function is_ground_floor( $id ) {
 	$residency_program = get_field( 'residency_program', $id );
-	if( $residency_program == 'ground_floor' ) {
+	if( $residency_program == 'ground_floor' ):
 		return true;
-	} else {
+	else:
 		return false;
-	}
+	endif;
 }	
 
 /////////////////////////////////////
@@ -441,13 +441,11 @@ function get_event_status( $id ) {
 	$today = $today->format('Ymd');
 	$start_date = get_field( 'start_date', $id );
 	$end_date = get_field( 'end_date', $id );
-
 	if( $start_date > $today || $end_date > $today ):
 		$status = 'upcoming';
 	else:
 		$status = 'past';
 	endif;
-
 	return $status;
 }
 function section_attr( $id, $slug, $classes ) {
@@ -468,34 +466,32 @@ function format_date( $id ) {
 	$ed = get_end_date_value( $id );
 	$start_date_dt = new DateTime(get_field($sd, $id));
 	$start_date = $start_date_dt->format('M d, Y');
-
-	if($ed != '') {
+	if($ed != ''):
 		$end_date_dt = new DateTime(get_field($ed, $id));
 		$end_date = $end_date_dt->format('M d, Y');
 		$date = $start_date . ' — ' . $end_date;
-	} else {
+	else:
 		$date = $start_date;
-	}
-
+	endif;
 	return $date;
 }
 
 function get_start_date_value( $id ) {
 	$post_type = get_post_type( $id );
-	if($post_type == 'resident') {
+	if($post_type == 'resident'):
 		return 'residency_dates_0_start_date';
-	} else {
+	else:
 		return 'start_date';
-	}
+	endif;
 }
 
 function get_end_date_value( $id ) {
 	$post_type = get_post_type( $id );
-	if($post_type == 'resident') {
+	if($post_type == 'resident'):
 		return 'residency_dates_0_end_date';
-	} else {
+	else:
 		return 'end_date';
-	}
+	endif;
 }
 
 function get_resident_end_date( $id ) {
@@ -509,16 +505,16 @@ function get_resident_end_date( $id ) {
 }
 
 function get_display_image( $id ) {
-	if( has_post_thumbnail( $id ) ) {
+	if( has_post_thumbnail( $id ) ):
 		$thumb_id = get_post_thumbnail_id( $id );
 		$thumb_url_array = wp_get_attachment_image_src($thumb_id, '', true);
 		$thumb_url = $thumb_url_array[0];
 		return $thumb_url;
-	} elseif( have_rows('gallery') ) {
+	elseif( have_rows('gallery') ):
 		return get_sub_field( 'image', $id )['url'];
-	} else {
+	else:
 		return '';
-	}
+	endif;
 }
 
 function get_neighbor_journal_posts() {
@@ -664,11 +660,11 @@ function humanTiming( $time ) {
         1 => ' second'
     );
 
-    foreach ($tokens as $unit => $text) {
+    foreach ($tokens as $unit => $text):
         if ($time < $unit) continue;
         $numberOfUnits = floor($time / $unit);
         return $numberOfUnits . $text . (($numberOfUnits>1)?'s':'') . ' ago';
-    }
+    endforeach;
 }
 
 
@@ -701,10 +697,10 @@ function get_tweets( $count ) {
 	echo '<div class="tweets">';
 
 	$counter = 0;
-	foreach ( $raw_tweets as $tweet ) {
-		if( isset( $tweet->errors ) ) {           
+	foreach ( $raw_tweets as $tweet ):
+		if( isset( $tweet->errors ) ):           
 		    // $tweet = 'Error :'. $raw_tweets[$counter]->errors[0]->code. ' - '. $raw_tweets[$counter]->errors[0]->message;
-		} else {
+		else:
 		    $text = makeClickableLinks( $tweet->text );
 		    $timestamp = strtotime( $tweet->created_at );
 		    $elapsed = humanTiming( $timestamp );
@@ -718,8 +714,8 @@ function get_tweets( $count ) {
 			echo $elapsed;
 			echo '</a>';
 			echo '</div>';
-		}
-	}
+		endif;
+	endforeach;
 
 	echo '</div>';
 	echo '</div>';
@@ -752,20 +748,20 @@ function get_event_date( $id ) {
 
 	if ( $end_date ):
 		if ( $today > $start_date && $today < $end_date ):
-			$date_format = 'Thru ' . $end_month . ' ' . $end_day;
+			$date_format = 'Through ' . $end_month . ' ' . $end_day;
 		else:
 			$date_format = $start_month . '&nbsp;' . $start_day;
-			if ( $start_year != $today_year ):
+			if ( $start_year && $start_year != $today_year ):
 				$date_format .= ', ' . $start_year;
 			endif;
 			$date_format .= '&ndash;' . $end_month . '&nbsp;' . $end_day;
-			if ( $end_year != $today_year ):
+			if ( $end_year && $end_year != $today_year ):
 				$date_format .= ',&nbsp;' . $end_year;
 			endif;
 		endif;
 	else:
 		$date_format = $start_month . ' ' . $start_day;
-		if($start_year != $today_year):
+		if($start_year && $start_year != $today_year):
 		 	$date_format .= ',&nbsp;' . $start_year;
 		endif;
 		if($start_time):
@@ -784,12 +780,12 @@ function get_thumb( $id, $size = undefined, $orange = true ) {
 	if($size == undefined):
 		$size = 'thumb';
 	endif;
-	if( !$thumbnail ) {
+	if( !$thumbnail ):
 		$thumbnail = get_field( 'gallery', $id )[0]['image']['sizes'][$size];
-	}
-	if( !$thumbnail && $orange == true ) {
+	endif;
+	if( !$thumbnail && $orange == true ):
 		$thumbnail = get_template_directory_uri() . '/assets/images/placeholder.svg';
-	}
+	endif;
 	return $thumbnail;
 }
 
@@ -817,11 +813,23 @@ function get_sponsors( $id ) {
 
 function get_orientation( $id ) {
 	$imgmeta = wp_get_attachment_metadata( $id );
-	if ($imgmeta['width'] > $imgmeta['height']) {
+	if ($imgmeta['width'] > $imgmeta['height']):
 		return 'landscape';
-	} else {
+	else:
 		return 'portait';
-	}
+	endif;
+}
+
+function get_program_title( $program_slug ) {
+	$program_slug = str_replace( '_', '-', $program_slug );
+	$program_obj = get_page_by_path( 'residency-programs/' . $program_slug, OBJECT, 'page' );
+	if($program_obj->post_parent != 0):
+		$program_title = $program_obj->post_title;
+		$program_id = $program_obj->ID;
+		return $program_title;
+	else:
+		return;
+	endif;
 }
 
 function pretty( $string ) {
@@ -841,23 +849,6 @@ function pretty( $string ) {
 		case 'off-site-project':
 			return 'Off-Site Project';
 			break;
-		case 'international':
-			return 'International Artist & Curator Program';
-			break;
-		case 'ground_floor':
-			return 'Ground Floor Residencies for New York City Artists';
-			break;
-	}
-}
-
-function pretty_short( $string ) {
-	switch ( $string ) {
-		case 'international':
-			return 'International';
-			break;
-		case 'ground_floor':
-			return 'Ground Floor';
-			break;
 	}
 }
 
@@ -868,38 +859,124 @@ function pretty_url( $url ) {
 	return $url;
 }
 
-function label_art( $id ) {
+function label_art() {
 	$artist = get_sub_field( 'artist' );
 	$title = get_sub_field( 'title' );
     $year = get_sub_field( 'year' );
     $medium = get_sub_field( 'medium' );
-    $dimensions = get_sub_field( 'dimensions' );
     $credit = get_sub_field( 'credit' );
-	$post_type = get_post_type( get_the_ID() );
+    $photo_credit = get_sub_field( 'photo_credit' );
+	$post_type = get_post_type();
+	$dimensions = get_dimensions();
 
-	if ( $post_type == 'resident' && !$image_artist ) {
+	if ( $post_type == 'resident' && !$artist ):
 		$artist = get_the_title();
-	}
+	endif;
     $caption = $artist;
-    if( $title && $title != ' ' ) {
+    if( $title && $title != ' ' ):
     	$caption .= ', <em>' . $title . '</em>';
-    }
-    if( $year && $year != ' ' ) {
+    endif;
+    if( $year && $year != ' ' ):
     	$caption .= ', ' . $year;
-    }
-    if( $medium && $medium != ' ' ) {
+    endif;
+    if( $medium && $medium != ' ' ):
     	$caption .= ', ' . $medium;
-    }
-    if( $dimensions && $dimensions != ' ' ) {
+    endif;
+    if( $dimensions && $dimensions != ' ' ):
     	$caption .= ', ' . $dimensions;
-    }
-    if( $credit && $credit != ' ' ) {
-    	$caption .= '. Courtesy of ' . $credit;
-    }
-    if( $photo_credit && $photo_credit != ' ' ) {
-    	$caption .= '. Photo courtesy of ' . $photo_credit;
-    }
+    else:
+    	$caption .= '. ';
+    endif;
+    if( $credit && $credit != ' ' ):
+    	$caption .= ' ' . $credit . '.';
+    endif;
+    if( $photo_credit && $photo_credit != ' ' ):
+    	$caption .= ' ' . $photo_credit . '.';
+    endif;
     return $caption;
+}
+
+function get_dimensions() {
+	$dimensions = get_sub_field( 'dimensions' );
+    $width = get_sub_field( 'width' );
+    $height = get_sub_field( 'height' );
+    $depth = get_sub_field( 'depth' );
+    $units = get_sub_field( 'units' );
+    if( (!$width && !$height) || (!$width && !$depth) || (!$height && !$height) ):
+    	return;
+    endif;
+    if( $units == 'in' ):
+
+	    if( $width ):
+	    	$ins .= $width;
+	    	$cms .= in_to_cm( $width );
+	    else:
+	    	$ins .= 0;
+	    	$cms .= 0;
+	    endif;
+	    $ins .= ' &times; ';
+	    $cms .= ' &times; ';
+	    if( $height ):
+	    	$ins .= $height ?: 0;
+	    	$cms .= in_to_cm( $height ) ?: 0;
+	    else:
+	    	$ins .= 0;
+	    	$cms .= 0;
+	    endif;
+	    if( $depth ):
+	    	$ins .= ' &times; ' . $depth;
+	    	$cms .= ' &times; ' . in_to_cm( $depth );
+	    else:
+	    	$ins .= ' &times; ' . 0;
+			$cms .= ' &times; ' . 0;
+	    endif;
+
+	elseif( $units == 'cm' ):
+
+		if( $width ):
+	    	$cms .= $width ?: 0;
+	    	$ins .= cm_to_in( $width ) ?: 0;
+	    else:
+	    	$ins .= 0;
+	    	$cms .= 0;
+	    endif;
+	    $cms .= ' &times; ';
+	    $ins .= ' &times; ';
+	    if( $height ):
+	    	$cms .= $height ?: 0;
+	    	$ins .= cm_to_in( $height ) ?: 0;
+	    else:
+	    	$cms .= 0;
+	    	$ins .= 0;
+	    endif;
+	    if( $depth ):
+	    	$cms .= ' &times; ' . $depth;
+	    	$ins .= ' &times; ' . cm_to_in( $depth );
+	    else:
+			$cms .= ' &times; ' . 0;
+			$ins .= ' &times; ' . 0;
+	    endif;
+
+	endif;
+
+
+    return $ins . ' inches (' . $cms . ' cm)';
+}
+
+function convert_unit( $int, $unit ) {
+	if( $unit == 'cm' ):
+		return cm_to_in( $int );
+	elseif( $unit == 'in' ):
+		return in_to_cm( $int );
+	endif;
+}
+
+function in_to_cm( $inches = 0 ) {
+    return (int) round( $inches / 0.393701 );
+}
+
+function cm_to_in( $cm = 0 ) {
+    return (int) round( $cm * 0.393701 );
 }
 
 
@@ -921,11 +998,11 @@ $result = add_role( 'resident', __( 'Resident' ),
 function user_is_resident() {
 	$user = wp_get_current_user();
 	$allowed_roles = array('editor', 'administrator', 'author', 'resident');
-	if( array_intersect( $allowed_roles, $user->roles ) ) {
+	if( array_intersect( $allowed_roles, $user->roles ) ):
 		return true;
-	} else {
+	else:
 		return false;
-	}
+	endif;
 }
 
 function resident_count_by_country( $country_id, $page_query = null ) {
@@ -1033,14 +1110,12 @@ function event_count_by_year( $year ) {
 }
 
 add_filter( 'posts_orderby', function( $orderby, \WP_Query $q ) {
-    if( 'last_name' === $q->get( 'orderby' ) && $get_order =  $q->get( 'order' ) )
-    {
-        if( in_array( strtoupper( $get_order ), ['ASC', 'DESC'] ) )
-        {
+    if( 'last_name' === $q->get( 'orderby' ) && $get_order =  $q->get( 'order' ) ):
+        if( in_array( strtoupper( $get_order ), ['ASC', 'DESC'] ) ):
             global $wpdb;
             $orderby = " SUBSTRING_INDEX( {$wpdb->posts}.post_title, ' ', -1 ) " . $get_order;
-        }
-    }
+        endif;
+    endif;
     return $orderby;
 }, PHP_INT_MAX, 2 );
 

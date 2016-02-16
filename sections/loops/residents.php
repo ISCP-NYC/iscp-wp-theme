@@ -26,6 +26,12 @@ if( $country_param ) {
 		'compare' => 'LIKE'
 	);
 	$append_query = '?residency_program=' . $program_param;
+} elseif( $sponsor_param ) {
+	$filter_query = array(
+		'key' => 'residency_dates_0_sponsors',
+		'value' => '"' . $sponsor_id . '"',
+		'compare' => 'LIKE'
+	);
 }
 $residents_query = array(
 	'post_type' => 'resident',

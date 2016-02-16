@@ -9,6 +9,7 @@ $resident_status = get_status( $resident_id );
 $residents_url = get_permalink( get_page_by_path( $resident_status . '-residents' ) );
 $country_url = $residents_url . '?filter=' . $resident_status . '&from=' . $country_slug;
 $studio_number = get_field( 'studio_number', $resident_id );
+$years_only = get_field( 'years_only', $resident_id );
 $residency_program = get_field( 'residency_program', $resident_id );
 $url = get_permalink();
 if( have_rows( 'residency_dates', $resident_id ) ):

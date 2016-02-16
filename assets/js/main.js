@@ -52,6 +52,9 @@ function setUp() {
 		var section = $('section').eq(i);
 		var asideShift = i * asideWidth;
 		var left = i * pageWidth - asideShift;
+		if($(section).is('#map')) {
+			left += asideShift;
+		}
 		$(section).css({
 			left: left,
 			width: pageWidth
@@ -546,7 +549,6 @@ $('body').on('click', '.filter-list .option a', function(event) {
 	});
 	vars['filter_params'] = JSON.stringify(params);
 	vars['pagename'] = slug;
-	console.log(vars);
 	vars = JSON.stringify(vars);
 	$.ajax({
 		url: ajaxpagination.ajaxurl,
@@ -924,8 +926,8 @@ function setUpEarth() {
     WE.tileLayer('http://data.webglearth.com/natural-earth-color/{z}/{x}/{y}.jpg', {
       tileSize: 256,
       bounds: [[-85, -180], [85, 180]],
-      minZoom: 0,
-      maxZoom: 1,
+      // minZoom: 0,
+      // maxZoom: 1,
       tms: true,
       atmosphere: true
     }).addTo(earth); 
@@ -945,8 +947,9 @@ function setUpEarth() {
     $('#mapWrap canvas').width(mapWidth).height(mapHeight);
     var countries = window.countries;
     var themeUrl = window.wp_info['theme_url'];
-    var markerUrl = themeUrl+'/assets/images/bullet-orange.svg';
-
+    var markerUrl = null;
+    // themeUrl+'/assets/images/bullet-orange.svg';
+    var markerTemp = $('#markerTemp').html();
     $(countries).each(function(i, country) {
     	var name = country['name'];
     	var slug = country['slug'];
@@ -955,15 +958,19 @@ function setUpEarth() {
     	var lng = country['lng'];
     	if(isNumeric(lat) && isNumeric(lng)) {
     		var marker = WE.marker([lat, lng], markerUrl, 30, 30).addTo(earth);
-    		var html = marker.element;
-    		var inner = $(html).find('.we-pm-icon');
-    		$(html).addClass('marker')
+    		var markerHtml = marker.element;
+    		var inner = $(markerHtml).find('.we-pm-icon');
+    		$(markerHtml).addClass('marker')
     		.attr('data-slug', slug)
     		.attr('data-name', name)
     		.attr('data-count', count)
     		.attr('data-lat', lat)
     		.attr('data-lng', lng);
-    		$(inner).html('<span class="count">' + count + '</span>');
+    		// setTimeout(function() {
+    		// 	$(markerHtml).addClass('show');
+    		// }, 1000+(i*10));
+    		$(inner).html(markerTemp);
+    		$(inner).find('.count span').text(count);
     	}
     });
 
@@ -985,7 +992,10 @@ function setUpEarth() {
 				}
 	    	}
 	    }
+    }).on('mouseenter', '.marker:not(.teasing)', function() {
+    	$(this).addClass('hover');
     }).on('mouseleave', '.marker', function() {
+    	$(this).removeClass('hover');
     	if(!$(residents).hasClass('show')) {
 	    	var marker = $(this);
 	    	$(marker).removeClass('teasing');
@@ -1015,7 +1025,7 @@ function setUpEarth() {
     	} else {
     		$(residentsHead).html(name+' ('+count+')');
     	}
-    	earth.panTo([lat, lng]);
+    	earth.panTo([lat, lng], 5000);
     	$(marker).addClass('showing');
     	if (history.pushState) {
 		    var newurl = window.location.protocol + "//" + window.location.host + window.location.pathname + '?where=' + slug;

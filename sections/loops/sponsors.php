@@ -1,4 +1,5 @@
 <?php
+include(locate_template('sections/params/sponsors.php'));
 if( $country_param ):
 	$filter_query = array(
 		'key' => 'country',
@@ -36,14 +37,15 @@ $sponsors_query = array(
 	'posts_per_page' => 18,
 	'orderby' => 'name',
 	'order' => 'ASC',
+	'paged' => $paged,
 	'post_status' => 'publish',
 	'meta_query' => array( $sponsors_query )
 );
 $sponsors = new WP_Query( $sponsors_query );
 $GLOBALS['wp_query'] = $sponsors;
 $last_page = $sponsors->max_num_pages;
-if ( have_posts() ):
-	while ( have_posts() ) :
+if( have_posts() ):
+	while( have_posts() ) :
 		the_post();
 		$sponsor_id = $the_ID;
 		$title = get_the_title( $sponsor_id );

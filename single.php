@@ -43,7 +43,6 @@ switch($post_type) {
 			setup_postdata( $this_resident );
 			get_template_part( 'sections/resident' );
 			wp_reset_postdata();
-
 		endif;
 		break;
 	case 'event':

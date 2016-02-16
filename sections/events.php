@@ -72,7 +72,7 @@ include(locate_template('sections/params/events.php'));
 									endif;
 									echo '<div class="option ' . $selected . '">';
 									echo '<a data-type="' . $event_type . '" href="' . $filter_url . '">';
-									$event_type = ucwords( pretty( $event_type ) );
+									$event_type = pretty( $event_type );
 									echo $event_type;
 									echo ' (' . $event_type_count . ')';
 									echo '<div class="swap">';
