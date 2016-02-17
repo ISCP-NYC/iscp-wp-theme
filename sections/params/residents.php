@@ -18,7 +18,7 @@ if( $query_vars ):
 	$page_param = $slug;
 	$country_param = $query_vars['from'];
 	$year_param = $query_vars['date'];
-	$program_param = $query_vars['residency_program'];
+	$program_param = $query_vars['program'];
 else:
 	$page_param = get_query_var( 'filter' ) . '-residents';
 endif;
@@ -60,7 +60,7 @@ $page_param = get_query_var( 'filter' ) . '-residents';
 if( $page_param == $slug ):
 	$country_param = get_query_var( 'from' );
 	$year_param = get_query_var( 'date' );
-	$program_param = get_query_var( 'residency_program' );
+	$program_param = get_query_var( 'program' );
 endif;
 $country_param_obj = get_page_by_path($country_param, OBJECT, 'country');
 $country_param_title = $country_param_obj->post_title;

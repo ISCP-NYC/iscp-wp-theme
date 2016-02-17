@@ -25,7 +25,6 @@ endif;
 		</div>
 	</div>
 	<div id="mapWrap"></div>
-
 	<div id="markerTemp">
 		<div class="swap">
 			<div class="icon default"></div>

@@ -36,7 +36,7 @@ if( $events_section == 'past' ):
 		$append_query = '?date=' . $year_param;
 	endif;
 	$date_query = array(
-		'relation' => 'OR',
+		'relation' => 'AND',
 		array(
 			'key' => 'start_date',
 			'compare' => '<',

@@ -192,6 +192,7 @@ function add_query_vars_filter( $vars ){
   $vars[] .= 'country';
   $vars[] .= 'from';
   $vars[] .= 'residency_program';
+  $vars[] .= 'program';
   $vars[] .= 'type';
   $vars[] .= 'filter';
   return $vars;
@@ -1040,6 +1041,8 @@ function resident_count_by_year( $year, $page_query ) {
 	);
 	$year_query_args = array(
 		'post_type' => 'resident',
+		'posts_per_page' => -1,
+		'post_status' => 'publish',
 		'meta_query' => array( $year_meta_query, $page_query )
 	);
 	$year_query = new WP_Query( $year_query_args );
@@ -1056,6 +1059,8 @@ function resident_count_by_program( $program, $page_query ) {
 	);
 	$program_query_args = array(
 		'post_type' => 'resident',
+		'posts_per_page' => -1,
+		'post_status' => 'publish',
 		'meta_query' => array( $program_meta_query, $page_query )
 	);
 	$program_query = new WP_Query( $program_query_args );
@@ -1072,7 +1077,9 @@ function event_count_by_type( $event_type ) {
 	);
 	$event_type_query_args = array(
 		'post_type' => 'event',
-		'meta_query' => array( $event_type_meta_query )
+		'posts_per_page' => -1,
+		'post_status' => 'publish',
+		'meta_query' => array( $event_type_meta_query, $date_query )
 	);
 	$event_type_query = new WP_Query( $event_type_query_args );
 	$event_type_count = $event_type_query->found_posts;
@@ -1106,9 +1113,26 @@ function event_count_by_year( $year ) {
 		)
 	);
 
+	$today = date('Ymd');
+	$date_query = array(
+		'relation' => 'AND',
+		array(
+			'key' => 'start_date',
+			'compare' => '<',
+			'value' => $today
+		),
+		array(
+			'key' => 'end_date',
+			'compare' => '<',
+			'value' => $today
+		)
+	);
+
 	$year_query_args = array(
 		'post_type' => 'event',
-		'meta_query' => $year_meta_query
+		'posts_per_page' => -1,
+		'post_status' => 'publish',
+		'meta_query' => array( $year_meta_query, $date_query )
 	);
 	$year_query = new WP_Query( $year_query_args );
 	$year_count = $year_query->found_posts;

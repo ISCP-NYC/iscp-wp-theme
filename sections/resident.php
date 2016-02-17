@@ -159,14 +159,14 @@ endif;
 		<div class="relations border-top">
 			<?php
 			if( is_ground_floor( $resident_id ) ):
-				echo '<h4>Ground Floor Residents</h4>';
+				$relation_title = '<h4>Ground Floor Residents</h4>';
 				$meta_query = array(
 					'key' => 'residency_program',
 					'value' => 'ground_floor',
 					'compare' => 'LIKE'
 				);
 			elseif( $country_id ):
-				echo '<h4>Residents from ' . $country_title . '</h4>';
+				$relation_title = '<h4>Residents from ' . $country_title . '</h4>';
 				$meta_query = array(
 					'key' => 'country',
 					'value' => $country_id,
@@ -182,6 +182,7 @@ endif;
 			$residents = new WP_Query( $residents_query );
 			$GLOBALS['wp_query'] = $residents;
 			if( $residents->have_posts() && $meta_query ):
+				echo $relation_title;
 				echo '<div class="inner residents shelves grid">';
 				while ( $residents->have_posts() ) : 
 					the_post();

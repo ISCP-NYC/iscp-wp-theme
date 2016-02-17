@@ -38,7 +38,6 @@
 					<?php endif; ?>
 					<div class="select link dropdown program" data-filter="program" data-slug="<?php echo $slug ?>">
 						<?php
-						echo $program_param;
 						if($program_param):
 							$program_count = ': ' . get_program_title( $program_param ) . ' (' . resident_count_by_program( $program_param, $page_query ) . ')';
 						else:
@@ -152,7 +151,7 @@
 			</div>
 			<?php endif; ?>
 
-			<div class="filter-list program <?php echo $slug ?>" data-filter="program">
+			<div class="filter-list program <?php echo $slug ?>" data-filter="programw">
 				<div class="options">
 					<?php
 					$residency_programs = array(
@@ -161,7 +160,7 @@
 					);
 					foreach( $residency_programs as $program ): 
 						$program_count = resident_count_by_program( $program, $page_query );
-						$filter_url = $page_url . '&residency_program=' . $program;
+						$filter_url = $page_url . '&program=' . $program;
 						$program_title = get_program_title( $program );
 						if( $program_count != 0 ):
 							if( $program_param == $program ):

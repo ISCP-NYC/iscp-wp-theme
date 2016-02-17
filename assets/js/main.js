@@ -526,6 +526,7 @@ $('body').on('click', '.filter-list .option a', function(event) {
 	var option = $(this).parents('.option');
 	var optionText = $(this).text();
 	var vars = ajaxpagination.query_vars;
+	var slug = $(this).parents('section').attr('id');
 	var section = $(this).parents('section');
 	$(section).attr('data-page', 1);
 	vars = JSON.parse(vars);
@@ -539,13 +540,9 @@ $('body').on('click', '.filter-list .option a', function(event) {
 		vars['events_section'] = 'past'; 
 	}
 	var url = $(this).attr('href');
+	$('.showing').text('');
 	if($(option).is('.selected')) {
 		$(option).removeClass('selected');
-		var filterType = $(this).parents('.filter-list').attr('data-filter');
-		var slug = $(this).parents('section').attr('id');
-		$('.showing').text('');
-		var filterShowing = $(section).find('.select[data-filter="'+filterType+'"]').find('.showing');
-		$(filterShowing).text(': '+optionText);
 		var params = {};
 		var filterVars = [
 			'when',
@@ -560,6 +557,11 @@ $('body').on('click', '.filter-list .option a', function(event) {
  			delete vars[this];
  		});
 	} else {
+		$(section).find('.option').filter('.selected').removeClass('selected');
+		$(option).addClass('selected');
+		var filterType = $(this).parents('.filter-list').attr('data-filter');
+		var filterShowing = $(section).find('.select[data-filter="'+filterType+'"]').find('.showing');
+		$(filterShowing).text(': '+optionText);
 		var params = getParams(url);
 	}
 	$.each( params, function( key, value ) {
@@ -584,8 +586,6 @@ $('body').on('click', '.filter-list .option a', function(event) {
 				$(container).html('');
 				$(section).off(transitionEnd);
 			});
-			$(section).find('.option').filter('.selected').removeClass('selected');
-			$(option).addClass('selected');
 			window.history.pushState({path:url},'',url);
 		},
 		success: function(response) {
