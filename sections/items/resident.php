@@ -45,7 +45,11 @@ echo '</div>';
 echo '</div>';
 echo '<div class="right">';
 if( is_current( $resident_id ) ) {
-	echo '<div class="value studio-number">Studio #' . $studio_number . '</div>';
+	if( is_ground_floor( $resident_id )  ):
+		echo '<div class="value">Ground Floor</div>';
+	else:
+		echo '<div class="value studio-number">Studio #' . $studio_number . '</div>';
+	endif;
 } elseif( is_past( $resident_id ) ) {
 	echo '<div class="value year">' . $resident_year . '</div>';
 }

@@ -449,7 +449,7 @@ function get_event_status( $id ) {
 	endif;
 	return $status;
 }
-function section_attr( $id, $slug, $classes ) {
+function section_attr( $id, $slug, $classes, $title = null ) {
 	$classes .= ' static';
 	echo 'class="' . $slug . ' ' . $classes . '"';
 	echo 'id="' . $slug . '" '; 
@@ -457,7 +457,9 @@ function section_attr( $id, $slug, $classes ) {
 	if( $id ):
 		echo 'data-id="' . $id . '" ';
 		$permalink = get_the_permalink( $id );
-		$title = get_the_title( $id );
+		if( !$title ):
+			$title = get_the_title( $id );
+		endif;
 		echo 'data-permalink="' . $permalink . '" ';
 		echo 'data-title="' . $title . '"';
 	endif;

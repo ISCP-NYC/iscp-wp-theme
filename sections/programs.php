@@ -44,12 +44,14 @@ $programs = get_pages( $programs_query );
 			while ( have_rows( 'images', $programs_id ) ) : the_row();
 				$image = get_sub_field( 'image' )['sizes']['thumb'];
 				$caption = get_sub_field( 'caption' );
-				echo '<div class="image">';
-				echo '<div class="inner">';
-		        echo '<img src="' . $image . '"/>';
-		        echo '<div class="caption">' . $caption  . '</div>';
-		        echo '</div>';
-		        echo '</div>';
+				if( $image ):
+					echo '<div class="image">';
+					echo '<div class="inner">';
+		        	echo '<img src="' . $image . '"/>';
+			        echo '<div class="caption">' . $caption  . '</div>';
+			        echo '</div>';
+			        echo '</div>';
+			    endif;
 			endwhile;
 			echo '</div>';
 			endif;
@@ -77,10 +79,11 @@ $programs = get_pages( $programs_query );
 				        $col_image = get_sub_field( 'image' )['sizes']['thumb'];
 				        $col_title = get_sub_field( 'title' );
 				        $col_description = get_sub_field( 'description' );
-
-				        echo '<div class="image">';
-				        echo '<img src="' . $col_image . '"/>';
-				        echo '</div>';
+				        if( $col_image ):
+					        echo '<div class="image">';
+					        echo '<img src="' . $col_image . '"/>';
+					        echo '</div>';
+					    endif;
 				        echo '<h3 class="title">' . $col_title . '</h3>';
 				        echo '<div class="description">' . $col_description . '</div>';
 
@@ -89,7 +92,7 @@ $programs = get_pages( $programs_query );
 				       	while ( have_rows( 'links', $program ) ) : the_row();
 				       		$title = get_sub_field( 'title' );
 				       		$link = get_sub_field( 'link' );
-				     		echo '<a href="' . $link . '">Past ' . $title . '</a>';
+				     		echo '<a href="' . $link . '">' . $title . '</a>';
 			     		endwhile;
 				     	echo '</div>';
 				     	endif;

@@ -78,9 +78,15 @@ endif;
 			</div>
 
 			<div class="right">
-				<?php if( is_current( $resident_id ) ): 
-					echo '<h2 class="studio-number">Studio #' . $studio_number . '</h2>';
-				endif; ?>
+				<?php
+				if( is_current( $resident_id ) ): 
+					if( is_ground_floor( $resident_id )  ):
+						echo '<h2 class="value">Ground Floor</h2>';
+					else:
+						echo '<h2 class="studio-number">Studio #' . $studio_number . '</h2>';
+					endif;
+				endif;
+				?>
 				<h2 class="resident-type"><?php echo $resident_type ?></h2>
 			</div>
 		</header>

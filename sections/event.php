@@ -74,14 +74,16 @@ $upcoming_events = new WP_Query( $upcoming_query );
 			if( have_rows( 'gallery' ) ):
 				echo '<div class="imageSlider gallery">';
 				echo '<div class="cursor"></div>';
-				echo '<div class="left arrow swap">';
-				echo '<div class="icon default"></div>';
-				echo '<div class="icon hover"></div>';
-				echo '</div>';
-				echo '<div class="right arrow swap">';
-				echo '<div class="icon default"></div>';
-				echo '<div class="icon hover"></div>';
-				echo '</div>';
+				if( count( get_field( 'gallery' ) ) > 1 ):
+					echo '<div class="left arrow swap">';
+					echo '<div class="icon default"></div>';
+					echo '<div class="icon hover"></div>';
+					echo '</div>';
+					echo '<div class="right arrow swap">';
+					echo '<div class="icon default"></div>';
+					echo '<div class="icon hover"></div>';
+					echo '</div>';
+				endif;
 				echo '<div class="images slides">';
 			    while ( have_rows( 'gallery' ) ) : the_row();
 			        $image = get_sub_field( 'image' );

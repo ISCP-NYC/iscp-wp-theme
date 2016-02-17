@@ -113,7 +113,7 @@ section.single.event {
 		}
 	}
 	@include large {
-		.info, .gallery {
+		.info, .gallery.stack {
 			width: 50% !important;
 			padding-right: 0;
 		}
@@ -124,7 +124,7 @@ section.single.event {
 		}
 		&.one_col {
 			.gallery, .info {
-				width: 100%;
+				width: 100% !important;
 			}
 		}
 	}

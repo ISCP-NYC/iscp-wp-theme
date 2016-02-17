@@ -1,20 +1,20 @@
-<?php get_header(); ?>
-	<div id="primary" class="content-area">
-		<main id="main" class="site-main" role="main">
+<?php
+global $post;
+get_header();
 
-			<section class="error-404 not-found">
-				<header class="page-header">
-					<h1 class="page-title"><?php _e( 'Oops! That page can&rsquo;t be found.', 'twentyfifteen' ); ?></h1>
-				</header><!-- .page-header -->
+$home_page_id = get_page_by_path('home')->ID;
+$post = get_post( $home_page_id, OBJECT );
+setup_postdata( $post );
+get_template_part( 'sections/home' );
+wp_reset_postdata();
 
-				<div class="page-content">
-					<p><?php _e( 'It looks like nothing was found at this location. Maybe try a search?', 'twentyfifteen' ); ?></p>
+get_template_part( 'sections/error' );
 
-					<?php get_search_form(); ?>
-				</div><!-- .page-content -->
-			</section><!-- .error-404 -->
+$about_page_id = get_page_by_path('current-about')->ID;
+$post = get_post( $about_page_id, OBJECT );
+setup_postdata( $post );
+get_template_part( 'sections/about' );
+wp_reset_postdata();
 
-		</main><!-- .site-main -->
-	</div><!-- .content-area -->
-
-<?php get_footer(); ?>
+get_footer();
+?>

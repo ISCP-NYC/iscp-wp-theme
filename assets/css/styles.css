@@ -2779,7 +2779,7 @@ section.single.event.one_col .gallery, section.single.event.one_col .info {
   width: 100%; }
 @media (max-width: 1280px) {
   /* line 116, ../sass/sections/event.scss */
-  section.single.event .info, section.single.event .gallery {
+  section.single.event .info, section.single.event .gallery.stack {
     width: 50% !important;
     padding-right: 0; }
   /* line 121, ../sass/sections/event.scss */
