@@ -874,7 +874,10 @@ function label_art() {
 	endif;
     $caption = $artist;
     if( $title && $title != ' ' ):
-    	$caption .= ', <em>' . $title . '</em>';
+    	if( $artist ):
+    		$caption .= ', ';
+    	endif;
+    	$caption .= '<em>' . $title . '</em>';
     endif;
     if( $year && $year != ' ' ):
     	$caption .= ', ' . $year;
@@ -884,14 +887,17 @@ function label_art() {
     endif;
     if( $dimensions && $dimensions != ' ' ):
     	$caption .= ', ' . $dimensions;
-    else:
-    	$caption .= '. ';
     endif;
     if( $credit && $credit != ' ' ):
-    	$caption .= ' ' . $credit . '.';
+    	if( !$dimensions || $dimensions == ' ' ):
+    		$caption .= '.' . $dimensions;
+    	endif;
+    	$caption .= '. ' . $credit;
     endif;
     if( $photo_credit && $photo_credit != ' ' ):
-    	$caption .= ' ' . $photo_credit . '.';
+    	$caption .= '. ' . $photo_credit . '.';
+    elseif( $credit && $credit != ' ' ):
+    	$caption .= '.';
     endif;
     return $caption;
 }
@@ -902,8 +908,8 @@ function get_dimensions() {
     $height = get_sub_field( 'height' );
     $depth = get_sub_field( 'depth' );
     $units = get_sub_field( 'units' );
-    if( (!$width && !$height) || (!$width && !$depth) || (!$height && !$height) ):
-    	return;
+    if( (!$width && !$height) || (!$width && !$depth) || (!$height && !$depth) ):
+    	return $dimensions;
     endif;
     if( $units == 'in' ):
 

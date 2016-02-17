@@ -1,4 +1,5 @@
-section.resident-resources {
+section.resident-resources,
+section.resident-resource {
 	@include medium-fs;
 	background-color: $light;
 	aside.main {
@@ -48,8 +49,10 @@ section.resident-resources {
 	}
 	.dashboard {
 		width: 100%;
-		display: table;
-		padding-bottom: 50px;
+		display: flex;
+		.resource-list {
+			padding-bottom: 15px;
+		}
 	}
 	h4 {
 		width: 100%;
@@ -59,36 +62,20 @@ section.resident-resources {
 	    @include small-fs;
 	}
 	.welcome {
-		width: 100%;
-		@extend .border-top; 
-		padding-bottom: 30px;
-		display: table;
+
 	}
 	.contact {
-		width: 100%;
-		@extend .border-top;
-		padding-bottom: 30px;
-		display: table;	
+
 	}
 	.staff {
-		width: 100%;
-		@extend .border-top;
-		padding-bottom: 30px;
 		.members {
-			display: -webkit-flex;
-		    display: -ms-flexbox;
 		    display: flex;
-		    -webkit-flex-wrap: wrap;
-		    -ms-flex-wrap: wrap;
 		    flex-wrap: wrap;
 			.staff-member {
-				@include width('100% / 3 - 20px');
-				display: -webkit-flex;
-			    display: -ms-flexbox;
-			    display: -webkit-box;
+				width: calc(100% / 3 - 20px);
 			    display: flex;
 				float: left;
-				margin-bottom: 20px;
+				margin-bottom: 60px;
 				.name {
 					padding: 10px 0;
 					text-align: center;
@@ -104,13 +91,17 @@ section.resident-resources {
 					margin: 0 30px;
 				}
 				@include medium {
-					@include width('50% - 20px');
+					width: calc(50% - 20px);
 					&:nth-child(odd) {
 						margin: 0 20px 0 0;
 					}
 					&:nth-child(even) {
 						margin: 0 0 0 20px;
 					}
+				}
+				@include xsmall {
+					width: 100% !important;
+					margin: 0 !important;
 				}
 				.info {
 					@include small-fs;

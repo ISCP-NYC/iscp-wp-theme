@@ -5,9 +5,8 @@ $event_id = $post->ID;
 $event_status = get_event_status( $event_id );
 $event_title = get_the_title( $event_id );
 $event_url = get_permalink();
-$event_type_field = get_field_object( 'event_type' );
 $event_type = get_field( 'event_type' );
-$event_type_name = $event_type_field['choices'][ $event_type ];
+$event_type_name = pretty( $event_type );
 $event_status = get_event_status( $event_id );
 $event_date_format = get_event_date( $event_id );
 if( $append_query && is_past( $event_id ) ) {

@@ -5,7 +5,6 @@ include(locate_template('sections/params/events.php'));
 	<?php get_template_part('partials/nav') ?>
 	<?php get_template_part('partials/side') ?>
 	<div class="content">
-		<!-- <h2 class="title head">Events &amp; Exhibitions</h2> -->
 		<div class="wrapper upcoming">
 			<h2 class="title head">Upcoming Events &amp; Exhibitions</h2>
 			<div class="events shelves grid items residents upcoming">
@@ -26,7 +25,7 @@ include(locate_template('sections/params/events.php'));
 						else:
 							$event_type_count = null;
 						endif;
-						echo '<span>Event Type' . $event_type_count . '</span>';
+						echo '<span>Event Type</span><span class="showing">' . $event_type_count . '</span>';
 						?>
 						<div class="swap">
 							<div class="icon default"></div>
@@ -40,7 +39,7 @@ include(locate_template('sections/params/events.php'));
 						else:
 							$year_count = null;
 						endif;
-						echo '<span>Year' . $year_count . '</span>';
+						echo '<span>Year</span><span class="showing">' . $year_count . '</span>';
 						?>
 						<div class="swap">
 							<div class="icon default"></div>
@@ -57,10 +56,10 @@ include(locate_template('sections/params/events.php'));
 					</div>
 				</div>
 				<div class="filter-lists">
-					<div class="filter-list event-type <?php echo $slug ?>">
+					<div class="filter-list event-type <?php echo $slug ?>" data-filter="event-type">
 						<div class="options">
 							<?php
-							$event_types = array( 'event', 'exhibition', 'off-site-project', 'iscp-talk', 'open-studios' );
+							$event_types = array( 'exhibition', 'off-site-project', 'iscp-talk', 'open-studios' );
 							foreach( $event_types as $event_type ): 
 								$filter_url =  $page_url . '?type=' . $event_type;
 								$event_type_count = event_count_by_type( $event_type );
@@ -87,13 +86,13 @@ include(locate_template('sections/params/events.php'));
 						</div>
 					</div>
 
-					<div class="filter-list sub year <?php echo $slug ?>">
+					<div class="filter-list sub year <?php echo $slug ?>" data-filter="year">
 						<div class="options">
 							<?php
 							$page_url = get_the_permalink();
 							$start_date = 1994;
 							$end_date = date( "Y" );
-							$years = array_reverse( range( $start_date,$end_date ) );
+							$years = array_reverse( range( $start_date, $end_date ) );
 							foreach( $years as $year ): 
 								$filter_url = $page_url . '?when=' . $year;
 								$year_count = event_count_by_year( $year );

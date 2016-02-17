@@ -12,7 +12,7 @@
 						if($country_param):
 							$country_count = ': ' . $country_param_title . ' (' . resident_count_by_country( $country_param_id, $page_query ) . ')';
 						endif;
-						echo '<span>Country' . $country_count . '</span>';
+						echo '<span>Country</span><span class="showing">' . $country_count . '</span>';
 						?>
 						</span>
 						<div class="swap">
@@ -28,7 +28,7 @@
 						else:
 							$year_count = null;
 						endif;
-						echo '<span>Year' . $year_count . '</span>';
+						echo '<span>Year</span><span class="showing">' . $year_count . '</span>';
 						?>
 						<div class="swap">
 							<div class="icon default"></div>
@@ -44,7 +44,7 @@
 						else:
 							$program_count = null;
 						endif;
-						echo '<span>Residency Program' . $program_count . '</span>';
+						echo '<span>Residency Program</span><span class="showing">' . $program_count . '</span>';
 						?>
 						<div class="swap">
 							<div class="icon default"></div>
@@ -83,7 +83,7 @@
 		</div>
 
 		<div class="filter-lists">
-			<div class="filter-list country <?php echo $slug ?>">
+			<div class="filter-list country <?php echo $slug ?>" data-filter="country">
 				<div class="options">
 				<?php
 				$countries = get_posts( array(
@@ -98,7 +98,7 @@
 					$country_title = $country->post_title;
 					$country_count = resident_count_by_country( $country_id, $page_query );
 					$filter_url = $page_url . '&from=' . $country_slug;
-					// if( $country_count != 0 ):
+					if( $country_count != 0 ):
 						if( $country_param == $country_slug ):
 							$selected = ' selected';
 						else:
@@ -114,13 +114,13 @@
 						echo '</div>';
 						echo '</a>';
 						echo '</div>';
-					// endif;
+					endif;
 				endforeach;
 				?>
 				</div>
 			</div>
 			<?php if($slug == 'past-residents'): ?>
-			<div class="filter-list year <?php echo $slug ?>">
+			<div class="filter-list year <?php echo $slug ?>" data-filter="year">
 				<div class="options">
 				<?php
 				$start_date = 1994;
@@ -152,7 +152,7 @@
 			</div>
 			<?php endif; ?>
 
-			<div class="filter-list program <?php echo $slug ?>">
+			<div class="filter-list program <?php echo $slug ?>" data-filter="program">
 				<div class="options">
 					<?php
 					$residency_programs = array(

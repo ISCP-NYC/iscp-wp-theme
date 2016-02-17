@@ -5,11 +5,9 @@ $slug = $post->post_name;
 $id = $post->ID;
 $description = get_field( 'description', $id );
 $footnote = get_field( 'footnote', $id );
-$event_type_field = get_field_object( 'event_type' );
 $event_type = get_field( 'event_type' );
-$event_type_name = $event_type_field['choices'][ $event_type ];
+$event_type_name = pretty( $event_type );
 $date = get_event_date( $id );
-// $date = preg_replace("~</br>~", ' ', $date);
 $event_classes = 'event single ' . get_event_status( $id );
 $page_columns = get_field( 'page_columns', $id );
 if( $page_columns ):

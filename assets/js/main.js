@@ -9,6 +9,9 @@ $(window).load(function() {
 	if($('section#map').length) {
 		setUpEarth();
 	} 
+	if($('section.resident-resource').length) {
+		scrollToResourceItem();
+	} 
 	if($('section#events').length && (getParam('date').length || getParam('type').length)) {
 		var pastWrapper = $('.past.wrapper');
 		var pastWrapperTop = $(pastWrapper).offset().top - 130;
@@ -262,11 +265,7 @@ function slideTo(index, animate) {
 		$('section.right').removeClass('right');
 		$('section.left').removeClass('left');
 		var pageWidth = $(window).innerWidth();
-		if(animate) {
-			var duration = 800;	
-		} else {
-			var duration = 0;
-		}
+		var duration = 800;	
 		$(section).addClass('center');
 		$(section).removeClass('hide-shelves');
 		$(section).css({
@@ -274,14 +273,24 @@ function slideTo(index, animate) {
 		}).addClass('center');
 		$(section).next().addClass('right');
 		$(section).prev().addClass('left');
-		$('main').transition({
-			left: -pageWidth * index + (index*asideWidth),
-		}, duration, 'cubic-bezier(0.645, 0.045, 0.355, 1)', function() {
+		if(animate) {
+			$('main').transition({
+				left: -pageWidth * index + (index*asideWidth),
+			}, duration, 'cubic-bezier(0.645, 0.045, 0.355, 1)', function() {
+				$('section:not(.center)').addClass('hide-shelves');
+				$('section:not(.center)').find('.content').scrollTop(0);
+				$('section:not(.center)').scrollTop(0);
+				$('main').removeClass('sliding');
+			});
+		} else {
+			$('main').css({
+				left: -pageWidth * index + (index*asideWidth),
+			});
 			$('section:not(.center)').addClass('hide-shelves');
 			$('section:not(.center)').find('.content').scrollTop(0);
 			$('section:not(.center)').scrollTop(0);
 			$('main').removeClass('sliding');
-		});
+		}
 		var url = $(section).attr('data-permalink');
 		var id = $(section).attr('data-id');
 		var slug = $(section).attr('data-slug');
@@ -382,6 +391,8 @@ $('body').on('click', '.load-more a', function(event) {
 			upcomingIds.push(upcomingId)
 		});
 		vars['upcoming_ids'] = upcomingIds; 
+		vars['events_section'] = 'past'; 
+		vars['type'] = getParam('type'); 
 	}
 	vars['pagename'] = slug;
 	vars['paged'] = paged;
@@ -513,9 +524,10 @@ function getNeighbors(direction, type) {
 $('body').on('click', '.filter-list .option a', function(event) {
 	event.preventDefault();
 	var option = $(this).parents('.option');
-	var slug = $(this).parents('section').attr('id');
+	var optionText = $(this).text();
 	var vars = ajaxpagination.query_vars;
 	var section = $(this).parents('section');
+	$(section).attr('data-page', 1);
 	vars = JSON.parse(vars);
 	if($(section).is('.events')) {
 		var upcomingIds = [];
@@ -528,6 +540,12 @@ $('body').on('click', '.filter-list .option a', function(event) {
 	}
 	var url = $(this).attr('href');
 	if($(option).is('.selected')) {
+		$(option).removeClass('selected');
+		var filterType = $(this).parents('.filter-list').attr('data-filter');
+		var slug = $(this).parents('section').attr('id');
+		$('.showing').text('');
+		var filterShowing = $(section).find('.select[data-filter="'+filterType+'"]').find('.showing');
+		$(filterShowing).text(': '+optionText);
 		var params = {};
 		var filterVars = [
 			'when',
@@ -1110,9 +1128,24 @@ function getMapList(slug) {
 		}
 	});
 }
-
-function isNumeric(n) {
-  return !isNaN(parseFloat(n)) && isFinite(n);
+/////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////
+///////////////////////RESOURCES/////////////////////////////
+/////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////
+function scrollToResourceItem() {
+	var hash = parseInt(window.location.hash.replace('#', ''));
+	var index = hash - 1;
+	var section = $('section.resident-resource');
+	var content = $(section).find('.content');
+	var item = $(section).find('.item').eq(index);
+	var offset;
+	if(index == 0) {
+		var itemTop = 0;
+	} else {
+		var itemTop = $(item).offset().top - 110;
+	}
+	$(content).scrollTop(itemTop);
 }
 
 /////////////////////////////////////////////////////////////
@@ -1150,6 +1183,10 @@ $('body').on('click', '.filter .select', function() {
 	
 	}
 });
+
+function isNumeric(n) {
+  return !isNaN(parseFloat(n)) && isFinite(n);
+}
 
 function winW() {
 	return window.innerWidth;

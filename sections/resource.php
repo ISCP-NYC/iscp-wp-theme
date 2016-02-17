@@ -7,10 +7,10 @@
 	$id = get_the_ID();
 	$slug = get_post( $post )->post_name;
 	$title = get_the_title();
-	$event_classes = 'resident-resources';
+	$section_classes = 'resident-resource';
 ?>
 
-<section <?php section_attr( $id, $slug, $event_classes ); ?>>
+<section <?php section_attr( $id, $slug, $section_classes ); ?>>
 	<?php get_template_part('partials/nav') ?>
 	<?php get_template_part('partials/side') ?>
 	<div class="content">
