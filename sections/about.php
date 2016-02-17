@@ -116,18 +116,6 @@
 
 			<div class="module people">
 			<?php
-			if( get_field( 'board_members', $id ) ):
-			echo '<div class="board list">';
-			echo '<h4 class="orange">Board</h4>';
-			echo '<ul>';
-			while( has_sub_field( 'board_members', $id ) ):
-				$name = get_sub_field( 'name', $id );
-				echo '<li>' . $name . '</li>';
-			endwhile;
-			echo '</ul>';
-			echo '</div>';
-			endif;
-
 			if( get_field( 'staff', $id ) ):
 			echo '<div class="staff list">';
 			echo '<h4 class="orange">Staff</h4>';
@@ -139,6 +127,17 @@
 				echo $name;
 				echo '<em class="role">' . $role . '</em>';
 				echo '</li>';
+			endwhile;
+			echo '</ul>';
+			echo '</div>';
+			endif;
+			if( get_field( 'board_members', $id ) ):
+			echo '<div class="board list">';
+			echo '<h4 class="orange">Board</h4>';
+			echo '<ul>';
+			while( has_sub_field( 'board_members', $id ) ):
+				$name = get_sub_field( 'name', $id );
+				echo '<li>' . $name . '</li>';
 			endwhile;
 			echo '</ul>';
 			echo '</div>';
