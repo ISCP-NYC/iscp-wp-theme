@@ -13,11 +13,12 @@
 				<div class="bar">
 					<div class="select link dropdown country" data-filter="country" data-slug="<?php echo $slug ?>">
 						<?php
-						if( $country_param ):
-							$country_title = ': ' . $country_param_title . ' (' . resident_count_by_country( $country_param_id, $sponsor_query ) . ')';
+						if($country_param):
+							$country_count = ': ' . $country_param_title . ' (' . sponsor_count_by_country( $country_param_id, $sponsor_query ) . ')';
 						endif;
-						echo '<span>Country' . $country_count . '</span>';
+						echo '<span>Country</span><span class="showing">' . $country_count . '</span>';
 						?>
+						</span>
 						<div class="swap">
 							<div class="icon default"></div>
 							<div class="icon hover"></div>
@@ -38,19 +39,28 @@
 						'post_type'			=> 'country',
 						'orderby' 			=> 'title',
 						'order' 			=> 'ASC',
-						'post_status' => 'publish'
+						'post_status' 		=> 'publish'
 					) );
 					foreach( $countries as $country ): 
 						$country_id = $country->ID;
 						$country_slug = $country->post_name;
 						$country_title = $country->post_title;
-						$country_count = resident_count_by_country( $country_id, $sponsor_query );
+						$country_count = sponsor_count_by_country( $country_id, $sponsor_query );
+						$filter_url = $page_url . '?from=' . $country_slug;
 						if( $country_count != 0 ):
-							$filter_url = $page_url . '?from=' . $country_slug;
-							echo '<div class="option">';
+							if( $country_param == $country_slug ):
+								$selected = ' selected';
+							else:
+								$selected = null;
+							endif;
+							echo '<div class="option' . $selected . '">';
 							echo '<a href="' . $filter_url . '">';
 							echo ucwords( $country_title );
 							echo ' (' . $country_count . ')';
+							echo '<div class="swap">';
+							echo '<div class="icon default"></div>';
+							echo '<div class="icon hover"></div>';
+							echo '</div>';
 							echo '</a>';
 							echo '</div>';
 						endif;

@@ -89,7 +89,8 @@
 					'posts_per_page'	=> -1,
 					'post_type'			=> 'country',
 					'orderby' 			=> 'title',
-					'order' 			=> 'ASC'
+					'order' 			=> 'ASC',
+					'post_status' 		=> 'publish'
 				) );
 				foreach( $countries as $country ): 
 					$country_id = $country->ID;
@@ -104,7 +105,7 @@
 							$selected = null;
 						endif;
 						echo '<div class="option' . $selected . '">';
-						echo '<a href="' . $filter_url . '">';
+						echo '<a data-from="' . $country_slug . '" href="' . $filter_url . '">';
 						echo ucwords( $country_title );
 						echo ' (' . $country_count . ')';
 						echo '<div class="swap">';
@@ -151,7 +152,7 @@
 			</div>
 			<?php endif; ?>
 
-			<div class="filter-list program <?php echo $slug ?>" data-filter="programw">
+			<div class="filter-list program <?php echo $slug ?>" data-filter="program">
 				<div class="options">
 					<?php
 					$residency_programs = array(

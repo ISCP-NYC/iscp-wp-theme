@@ -224,7 +224,7 @@ function custom_event_column( $column, $post_id ) {
     switch ( $column ) {
 		case 'event_type':
 			$event_type = get_post_meta( $post_id , 'event_type' , true );
-			if($event_type && $event_type != ''):
+			if($event_type && $event_type != '-'):
 				echo pretty( $event_type );
 			else:
 				echo '';
@@ -233,7 +233,7 @@ function custom_event_column( $column, $post_id ) {
 
 		case 'start_date':
 			$start_date = get_post_meta( $post_id , 'start_date' , true );
-			if($start_date && $start_date != '' && $start_date != 'Invalid date'):
+			if($start_date && $start_date != '-' && $start_date != 'Invalid date'):
 				$start_date = new DateTime($start_date);
 				echo $start_date->format('Y/m/d');
 			else:
@@ -243,7 +243,7 @@ function custom_event_column( $column, $post_id ) {
 
 		case 'end_date':
 			$end_date = get_post_meta( $post_id , 'end_date' , true );
-			if($end_date && $end_date != '' && $end_date != 'Invalid date'):  
+			if($end_date && $end_date != '-' && $end_date != 'Invalid date'):  
 				$end_date = new DateTime($end_date);
 				echo $end_date->format('Y/m/d');
 			else:
@@ -1137,6 +1137,23 @@ function event_count_by_year( $year ) {
 	$year_query = new WP_Query( $year_query_args );
 	$year_count = $year_query->found_posts;
 	return $year_count;
+}
+
+function sponsor_count_by_country( $country_id, $page_query ) {
+	$country_meta_query = array(
+		'key' => 'country',
+		'value' => '"' . $country_id . '"',
+		'compare' => 'LIKE'
+	);
+	$country_query_args = array(
+		'post_type' => 'sponsor',
+		'posts_per_page' => -1,
+		'post_status' => 'publish',
+		'meta_query' => array( $country_meta_query, $page_query )
+	);
+	$country_query = new WP_Query( $country_query_args );
+	$country_count = $country_query->found_posts;
+	return $country_count;
 }
 
 add_filter( 'posts_orderby', function( $orderby, \WP_Query $q ) {

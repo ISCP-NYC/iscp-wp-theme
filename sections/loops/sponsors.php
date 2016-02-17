@@ -7,31 +7,7 @@ if( $country_param ):
 		'compare' => 'LIKE'
 	);
 	$append_query = '?from=' . $country_param;
-elseif( $year_param ):
-	$year_begin = $year_param . '0101';
-	$year_end = $year_param . '1231';
-	$year_range = array( $year_begin, $year_end );
-	$filter_query = array(
-		'key' => 'residency_dates_0_start_date',
-		'type' => 'DATE',
-		'value' => $year_range,
-		'compare' => 'BETWEEN'
-	);
-	$append_query = '?date=' . $year;
-elseif( $program_param ):
-	$filter_query = array(
-		'key' => 'residency_program',
-		'type' => 'CHAR',
-		'value' => $program_param,
-		'compare' => 'LIKE'
-	);
-	$append_query = '?residency_program=' . $year;
 endif;
-
-if( $filter_query ):
-	$page_query = array_merge( $sponsors_query, $filter_query );
-endif;
-
 $sponsors_query = array(
 	'post_type' => 'sponsor',
 	'posts_per_page' => 18,
@@ -39,7 +15,7 @@ $sponsors_query = array(
 	'order' => 'ASC',
 	'paged' => $paged,
 	'post_status' => 'publish',
-	'meta_query' => array( $sponsors_query )
+	'meta_query' => array( $sponsors_query, $filter_query )
 );
 $sponsors = new WP_Query( $sponsors_query );
 $GLOBALS['wp_query'] = $sponsors;
