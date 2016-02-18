@@ -3,22 +3,11 @@ section.sponsor {
 		h4.title {
 			margin-bottom: 20px;
 		}
-		.top {
-			.filter {
-				width: 70%;
-				float: left;
-			}
-			.right.type {
-				width: 30%;
-				float: left;
-				white-space: nowrap;
-				text-align: right;
-			}
-		}
 		.info {
 			width: 100%;
 			display: table;
-			padding: 20px 0 40px 0;
+			padding: 30px 0 30px 0;
+			margin: 0 0 60px 0;
             @extend .border-bottom;
             display: -webkit-flex;
 		    display: -ms-flexbox;
@@ -34,6 +23,18 @@ section.sponsor {
 	            display: flex;
 				text-align: center;
 				@include medium-fs;
+			}
+		}
+		.top {
+			.filter {
+				width: 70%;
+				float: left;
+			}
+			.right.type {
+				width: 30%;
+				float: left;
+				white-space: nowrap;
+				text-align: right;
 			}
 		}
 		.residents.shelves.list {

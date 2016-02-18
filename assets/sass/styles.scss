@@ -162,7 +162,21 @@ section {
 	@import 'partials/slider';
 	@import 'partials/twitter';
 }
-
+.fraction {
+	white-space: nowrap;
+	margin-left: 2px;
+	sub, sup {
+		font-size: calc(#{$small-fs} - 7px);
+		line-height: calc(#{$small-fs} - 7px);
+		display: inline-block;
+	}
+	sup {
+		transform: translate3d(2px, -5px, 0px);
+	}
+	sub {
+		transform: translate3d(-2px, 2px, 0px);
+	}
+}
 em, i {
 	display: inline;
     font-family: 'Life Italic';

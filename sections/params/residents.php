@@ -13,6 +13,7 @@ $page_query = array(
 );
 if( $query_vars ):
 	$slug = $query_vars['pagename'];
+	$page_type = $query_vars['pagetype'];
 	$paged = $query_vars['paged'];
 	$post = get_page_by_path( $slug, OBJECT, 'page' );
 	$page_param = $slug;
@@ -48,7 +49,7 @@ elseif( $slug == 'past-residents' ):
 	);
 	$resident_status = 'past';
 	$alt_slug = 'current-residents';
-elseif( $post_type == 'sponsor' ):
+elseif( $post_type == 'sponsor' || $page_type == 'sponsor' || $post_type == 'residents' ):
 	$page_query = null;
 	$orderby_array = array(
 		'meta_key' => 'residency_dates_0_start_date',
@@ -57,7 +58,7 @@ elseif( $post_type == 'sponsor' ):
 	);
 endif;
 $page_param = get_query_var( 'filter' ) . '-residents';
-if( $page_param == $slug ):
+if( $page_param == $slug || $post_type == 'sponsor' ):
 	$country_param = get_query_var( 'from' );
 	$year_param = get_query_var( 'date' );
 	$program_param = get_query_var( 'program' );

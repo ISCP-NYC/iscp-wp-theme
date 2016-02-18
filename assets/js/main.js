@@ -288,7 +288,7 @@ function slideTo(index, animate) {
 			});
 			$('section:not(.center)').addClass('hide-shelves');
 			$('section:not(.center)').find('.content').scrollTop(0);
-			$('section:not(.center)').scrollTop(0);
+			$('section:not(.center)').scrollTop(0).removeClass('show-footer');
 			$('main').removeClass('sliding');
 		}
 		var url = $(section).attr('data-permalink');
@@ -395,6 +395,9 @@ $('body').on('click', '.load-more a', function(event) {
 		vars['type'] = getParam('type'); 
 	}
 	vars['pagename'] = slug;
+	if($(section).is('.sponsor')) {
+		vars['pagetype'] = 'sponsor';
+	}
 	vars['paged'] = paged;
 	vars = JSON.stringify(vars);
 	$.ajax({
@@ -556,6 +559,8 @@ $('body').on('click', '.filter-list .option a', function(event) {
  		$(filterVars).each(function() {
  			delete vars[this];
  		});
+ 		var currentUrl = window.location.href;
+ 		url = currentUrl.slice( 0, currentUrl.indexOf('?') );
 	} else {
 		$(section).find('.option').filter('.selected').removeClass('selected');
 		$(option).addClass('selected');
@@ -568,6 +573,9 @@ $('body').on('click', '.filter-list .option a', function(event) {
 		vars[key] = value;
 	});
 	vars['filter_params'] = JSON.stringify(params);
+	if($(section).is('.sponsor')) {
+		vars['pagetype'] = 'sponsor';
+	}
 	vars['pagename'] = slug;
 	vars = JSON.stringify(vars);
 	$.ajax({
@@ -1213,7 +1221,6 @@ function getParams(url) {
     var hashes = url.slice(url.indexOf('?') + 1).split('&');
     for(var i = 0; i < hashes.length; i++) {
         hash = hashes[i].split('=');
-        // params.push(hash[0]);
         params[hash[0]] = hash[1];
     }
     return params;

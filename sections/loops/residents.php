@@ -33,6 +33,19 @@ if( $country_param ) {
 		'compare' => 'LIKE'
 	);
 }
+if( $post_type == 'sponsor' || $page_type == 'sponsor' ):
+	$sponsor_id = get_page_by_path( $slug, OBJECT, 'sponsor' )->ID;
+	$sponsor_query = array(
+		'key' => 'residency_dates_0_sponsors',
+		'value' => '"' . $sponsor_id . '"',
+		'compare' => 'LIKE'
+	);
+	$filter_query = array(
+		'relation' => 'AND',
+		$filter_query,
+		$sponsor_query
+	);
+endif;
 $residents_query = array(
 	'post_type' => 'resident',
 	'posts_per_page' => 12,

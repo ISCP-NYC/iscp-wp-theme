@@ -116,9 +116,8 @@
                         position: absolute;
                         top: 0;
                         right: 0;
-                        display: none;
+                        display: inline-block;
                         vertical-align: middle;
-                        margin-left: 5px;
                         .icon {
                             background-position: center;
                             background-size: 80%;
@@ -139,8 +138,8 @@
                         }
                     }
                 }
-                &.selected .swap {
-                    display: inline-block;
+                &:not(.selected) .swap .icon {
+                    opacity: 0 !important;
                 }
             }
             @include medium {

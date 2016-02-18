@@ -125,8 +125,9 @@ function load_more() {
 	$query_vars = json_decode( stripslashes( $_POST['query_vars'] ), true );
     $query_vars['paged'] = $_POST['page'];
     $slug = $query_vars['pagename'];
+    $page_type = $query_vars['pagetype'];
     $post_type = $slug;
-    if( strstr( $slug, 'residents' ) ):
+    if( strstr( $slug, 'residents' ) || $page_type == 'sponsor' ):
     	$post_type = 'residents';
     elseif( $post_type == 'journal' ):
     	$post_type .= 's';
@@ -167,8 +168,9 @@ function filter_items() {
 	$query_vars = json_decode( stripslashes( $_POST['query_vars'] ), true );
     $query_vars['paged'] = $_POST['page'];
     $slug = $query_vars['pagename'];
+    $page_type = $query_vars['pagetype'];
     $post_type = $slug;
-    if( strstr( $slug, 'residents' ) ):
+    if( strstr( $slug, 'residents' ) || $page_type == 'sponsor' ):
     	$post_type = 'residents';
     elseif( $post_type == 'journal' ):
     	$post_type .= 's';
@@ -917,7 +919,7 @@ function get_dimensions() {
     if( $units == 'in' ):
 
 	    if( $width ):
-	    	$ins .= $width;
+	    	$ins .= dec_to_frac( $width );
 	    	$cms .= in_to_cm( $width );
 	    else:
 	    	$ins .= 0;
@@ -926,14 +928,14 @@ function get_dimensions() {
 	    $ins .= ' &times; ';
 	    $cms .= ' &times; ';
 	    if( $height ):
-	    	$ins .= $height ?: 0;
+	    	$ins .= dec_to_frac( $height ) ?: 0;
 	    	$cms .= in_to_cm( $height ) ?: 0;
 	    else:
 	    	$ins .= 0;
 	    	$cms .= 0;
 	    endif;
 	    if( $depth ):
-	    	$ins .= ' &times; ' . $depth;
+	    	$ins .= ' &times; ' . dec_to_frac( $depth );
 	    	$cms .= ' &times; ' . in_to_cm( $depth );
 	    else:
 	    	$ins .= ' &times; ' . 0;
@@ -981,11 +983,32 @@ function convert_unit( $int, $unit ) {
 }
 
 function in_to_cm( $inches = 0 ) {
-    return (int) round( $inches / 0.393701 );
+    return dec_to_frac( $inches / 0.393701 );
 }
 
 function cm_to_in( $cm = 0 ) {
-    return (int) round( $cm * 0.393701 );
+    return dec_to_frac( $cm * 0.393701 );
+}
+
+function dec_to_frac( $float = 0 ) {
+	$whole = floor ( $float );
+    $decimal = $float - $whole;
+    $leastCommonDenom = 16;
+    $denominators = array ( 2, 3, 4, 8, 16 );
+    $roundedDecimal = round ( $decimal * $leastCommonDenom ) / $leastCommonDenom;
+    if ($roundedDecimal == 0)
+	    return $whole;
+    if ($roundedDecimal == 1)
+	    return $whole + 1;
+    foreach ( $denominators as $d ) {
+	    if ($roundedDecimal * $d == floor ( $roundedDecimal * $d )) {
+		    $denom = $d;
+		    break;
+	    }
+    }
+    $whole = ($whole == 0 ? '' : $whole);
+    $frac = '<span class="fraction"><sup>' . ($roundedDecimal * $denom) . '</sup>/<sub>' . $denom . '</sub></span>';
+    return $whole . $frac;
 }
 
 
