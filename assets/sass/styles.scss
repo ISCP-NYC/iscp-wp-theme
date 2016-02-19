@@ -3,8 +3,8 @@ Theme Name: ISCPT
 */
 @import 'compass';
 @import 'compass/reset';
-@import 'mixins';
 @import 'vars';
+@import 'mixins';
 @import 'extends';
 @import 'components';
 
@@ -16,9 +16,12 @@ body {
 	font-family: 'Life Rounded', Times;
 	@include small-fs;
 	color: $black;
+	* {
+		font-family: 'Life Rounded', Times;
+	}
 }
-#mfPreviewBar {
-	display: none;
+#mfPreviewBar, #mfPreviewBarShow {
+	display: none !important;
 }
 a, .link {
 	text-decoration: none;
@@ -26,6 +29,12 @@ a, .link {
 	transition: color 150ms ease-in-out;
 	&:hover {
 		color: $black !important;
+	}
+	&.past {
+		color: $black !important;
+		&:hover {
+			color: $orange !important;
+		}	
 	}
 }
 input {
@@ -76,6 +85,7 @@ section {
 				margin-bottom: 20px;
 			}
 			h3.title {
+				text-align: center;
 				padding: 0;
 				margin-bottom: 20px;
 				color: $orange;
@@ -286,6 +296,7 @@ body.login {
 @import 'sections/about';
 @import 'sections/apply';
 @import 'sections/black';
+@import 'sections/error';
 @import 'sections/events';
 @import 'sections/event';
 @import 'sections/home';

@@ -23,7 +23,7 @@
 			$image_slider = get_field( 'image_slider', $id );
 			if( $image_slider ):
 				echo '<div class="module">';
-				echo '<div class="imageSlider gallery">';
+				echo '<div class="image_slider gallery">';
 				echo '<div class="cursor"></div>';
 				if( count( $image_slider ) > 1 ):
 					echo '<div class="left arrow swap">';

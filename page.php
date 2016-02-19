@@ -72,6 +72,16 @@
 		get_template_part( 'sections/apply' );
 		wp_reset_postdata();
 
+	elseif( $parent_slug == 'exhibition-programs' ):
+
+		get_template_part( 'sections/programs' );
+	
+		$events_page_id = get_page_by_path( 'events' )->ID;
+		$post = get_post( $events_page_id, OBJECT );
+		setup_postdata( $post );
+		get_template_part( 'sections/events' );
+		wp_reset_postdata();
+
 	elseif( $page_slug == 'apply' ):
 
 		$programs_page_id = get_page_by_path( 'residency-programs' )->ID;

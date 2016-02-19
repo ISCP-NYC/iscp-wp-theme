@@ -72,7 +72,7 @@ $upcoming_events = new WP_Query( $upcoming_query );
 		<?php 
 		if( $page_columns == 'one_col' ):
 			if( have_rows( 'gallery' ) ):
-				echo '<div class="imageSlider gallery">';
+				echo '<div class="image_slider gallery">';
 				echo '<div class="cursor"></div>';
 				if( count( get_field( 'gallery' ) ) > 1 ):
 					echo '<div class="left arrow swap">';
@@ -123,13 +123,35 @@ $upcoming_events = new WP_Query( $upcoming_query );
 			<div class="links">
 				<a href="#" class="link bullet">Share</a>
 			</div>
+			<?php
+			$residents = get_field( 'residents' );
+			if( $residents ):
+				echo '<div class="residents module">';
+				echo '<h3 class="title">Participating Residents</h3>';
+				echo '<div class="inner">';
+				foreach( $residents as $resident ): 
+					$resident_name = $resident->post_title;
+					$resident_id = $resident->ID;
+					$resident_permalink = get_permalink( $resident_id );
+					$resident_status = get_status( $resident_id );
+					echo '<div class="resident">';
+					echo '<a class="'. $resident_status .'" href="' . $resident_permalink . '">';
+					echo $resident_name;
+					echo '</a>';
+					echo '</div>';
+				endforeach;
+				echo '</div>';
+				echo '</div>';
+			endif;
+			?>
 		</div>
 
 		<?php 
 		if( $page_columns == 'two_col' ):
 			if( have_rows( 'gallery' ) ):
 				echo '<div class="gallery stack">';
-				echo '<div class="images">';
+				echo '<div class="cursor"></div>';
+				echo '<div class="images slides">';
 			    while ( have_rows( 'gallery' ) ) : the_row();
 			        $image = get_sub_field( 'image' );
 			        if( $image ):
@@ -156,32 +178,37 @@ $upcoming_events = new WP_Query( $upcoming_query );
 		endif; ?>
 		
 		<?php 
-		$participating_residents = get_field( 'residents' );
-		if( $participating_residents ):
-			echo '<div class="participating residents shelves grid">';
-			echo '<h4>Participating Residents</h4>';
-			echo '<div class="inner">';
-			foreach( $participating_residents as $participating_resident ): 
-				$post = $participating_resident;
-				global $post;
-				get_template_part( 'sections/items/resident' );
-			endforeach;
-			echo '</div>';
+		$related = get_field( 'related' );
+		if( $related || $upcoming_events ):
+			echo '<div class="bottom">';
+			$GLOBALS['wp_query'] = $upcoming_events;
+			if ( have_posts() ):
+				echo '<div class="upcoming module">';
+				echo '<h3 class="title">Upcoming Events &amp; Exhibitions</h3>';
+				echo '<div class="shelves grid">';
+				while ( have_posts() ) :
+					the_post();
+					get_template_part( 'sections/items/event' );
+				endwhile;
+				echo '</div>';
+				echo '</div>';
+			endif;
+			wp_reset_query();
+
+			if( $related ):
+				echo '<div class="related module">';
+				echo '<h3 class="title">Related Events &amp; Exhibitions</h3>';
+				echo '<div class="shelves grid">';
+				foreach( $related as $related_event ): 
+					$post = $related_event;
+					global $post;
+					get_template_part( 'sections/items/event' );
+				endforeach;
+				echo '</div>';
+				echo '</div>';
+			endif;
 			echo '</div>';
 		endif;
-		$GLOBALS['wp_query'] = $upcoming_events;
-		if ( have_posts() ):
-			echo '<div class="upcoming module">';
-			echo '<h4>Upcoming Events &amp; Exhibitions</h4>';
-			echo '<div class="shelves grid">';
-			while ( have_posts() ) :
-				the_post();
-				get_template_part( 'sections/items/event' );
-			endwhile;
-			echo '</div>';
-			echo '</div>';
-		endif;
-		wp_reset_query();
 		?>
 	</div>
 	<?php get_template_part('partials/footer') ?>

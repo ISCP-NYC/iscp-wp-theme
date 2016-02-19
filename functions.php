@@ -466,21 +466,6 @@ function section_attr( $id, $slug, $classes, $title = null ) {
 		echo 'data-title="' . $title . '"';
 	endif;
 }
-function format_date( $id ) {
-	$sd = get_start_date_value( $id );
-	$ed = get_end_date_value( $id );
-	$start_date_dt = new DateTime(get_field($sd, $id));
-	$start_date = $start_date_dt->format('M d, Y');
-	if($ed != ''):
-		$end_date_dt = new DateTime(get_field($ed, $id));
-		$end_date = $end_date_dt->format('M d, Y');
-		$date = $start_date . ' — ' . $end_date;
-	else:
-		$date = $start_date;
-	endif;
-	return $date;
-}
-
 function get_start_date_value( $id ) {
 	$post_type = get_post_type( $id );
 	if($post_type == 'resident'):
@@ -695,9 +680,9 @@ function get_tweets( $count ) {
 	$twitter_url = 'http://twitter.com/'.$handle;
 	echo '<div class="twitter">';
 	echo '<div class="follow">';
-	echo '<a href="'.$twitter_url.'" target="_blank">';
-	echo '<h3 class="title">Follow us on Twitter @' . $handle . '</h3>';
-	echo '</a>';
+	echo '<h3 class="title">';
+	echo '<a href="'.$twitter_url.'" target="_blank">Follow us on Twitter @' . $handle . '</a>';
+	echo '</h3>';
 	echo '</div>';
 	echo '<div class="tweets">';
 

@@ -2,6 +2,7 @@
 global $post;
 $id = $post->ID;
 $slug = $post->post_name;
+$title = $post->post_title;
 $parent = $post->post_parent;
 if( $parent != 0 ) {
 	$parent_title = get_post( $parent )->post_title;
@@ -24,7 +25,7 @@ $programs = get_pages( $programs_query );
 	<?php get_template_part( 'partials/nav' ) ?>
 	<?php get_template_part( 'partials/side' ) ?>
 	<div class="content">
-		<h2 class="head">Residency Programs</h2>
+		<h2 class="head"><?php echo $title ?></h2>
 		<div class="program-links">
 			<?php
 			foreach( $programs as $program ):

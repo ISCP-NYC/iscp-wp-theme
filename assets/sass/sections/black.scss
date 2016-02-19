@@ -1,7 +1,8 @@
 section.sponsor,
 section.past,
 section.past-residents,
-section.events .past.wrapper {
+section.events .past.wrapper,
+section.error {
 	* {
 		border-color: $black !important;
 	}
@@ -178,6 +179,9 @@ section.events .past.wrapper {
 	::selection {
 		background-color: $black;
 		color: $white;
+	}
+	.module, .module h4 {
+		color: $black !important;
 	}
 }
 a.black, .link.black, .past .link {

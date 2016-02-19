@@ -13,6 +13,8 @@ $studio_number = get_field( 'studio_number', $resident_id );
 $resident_type = ucfirst( get_field( 'resident_type', $resident_id ) );
 $residencies = array();
 $resident_classes = 'resident single';
+$past_residents_id = get_page_by_path( 'past-residents' )->ID;
+$past_residents_url = preg_replace( '{/$}', '', get_permalink( $past_residents_id ) );
 if( is_past( $resident_id ) ):
 	$resident_classes .= ' past';
 endif;
@@ -26,7 +28,16 @@ endif;
 	<div class="content">
 		<header class="sub">
 			<div class="left">
-				<h2><?php echo $country_title ?></h2>
+				<?php
+				if($country):
+					$country_url = $past_residents_url . '?filter=past&from=' . $country_slug;
+					echo '<h2>';
+					echo '<a href="' . $country_url . '">';
+					echo $country_title;
+					echo '</a>';
+					echo '</h2>';
+				endif;
+				?>
 			</div>
 			<div class="center">
 				<?php
@@ -81,7 +92,12 @@ endif;
 				<?php
 				if( is_current( $resident_id ) ): 
 					if( is_ground_floor( $resident_id )  ):
-						echo '<h2 class="value">Ground Floor</h2>';
+						$ground_floor_url = $past_residents_url . '?filter=past&program=ground_floor';
+						echo '<h2 class="value">';
+						echo '<a href="' . $ground_floor_url . '">';
+						echo 'Ground Floor';
+						echo '</a>';
+						echo '</h2>';
 					else:
 						echo '<h2 class="studio-number">Studio #' . $studio_number . '</h2>';
 					endif;
@@ -97,7 +113,7 @@ endif;
 			<div class="bio">
 				<?php echo $bio ?>
 				<?php if( $website && $website != '' && is_current( $resident_id ) ): ?>
-					<a class="website" href="<?php echo $website ?>">
+					<a class="website bullet" href="<?php echo $website ?>">
 						<?php echo pretty_url( $website ) ?>
 					</a>
 				<?php endif; ?>
@@ -124,7 +140,7 @@ endif;
 					$event_url =  get_the_permalink( $event_id );
 					echo '<a class="event" href="' . $event_url . '">';
 					echo '<div class="name">' . $event_name . '</div>';
-					echo '<div class="date">' . format_date( $event_id ) . '</div>';
+					echo '<div class="date">' . get_event_date( $event_id ) . '</div>';
 					echo '</a>';
 				endforeach;
 				echo '</div>';
@@ -162,44 +178,43 @@ endif;
 		endif;
 		?>
 
-		<div class="relations border-top">
-			<?php
-			if( is_ground_floor( $resident_id ) ):
-				$relation_title = '<h4>Ground Floor Residents</h4>';
-				$meta_query = array(
-					'key' => 'residency_program',
-					'value' => 'ground_floor',
-					'compare' => 'LIKE'
-				);
-			elseif( $country_id ):
-				$relation_title = '<h4>Residents from ' . $country_title . '</h4>';
-				$meta_query = array(
-					'key' => 'country',
-					'value' => $country_id,
-					'compare' => 'LIKE'
-				);
-			endif;
-			$residents_query = array(
-				'post_type'	=> 'resident',
-				'posts_per_page' => 3,
-				'post__not_in' => array($resident_id),
-				'meta_query' => array( $meta_query )
+		<?php
+		if( is_ground_floor( $resident_id ) ):
+			$relation_title = '<h4>Ground Floor Residents</h4>';
+			$meta_query = array(
+				'key' => 'residency_program',
+				'value' => 'ground_floor',
+				'compare' => 'LIKE'
 			);
-			$residents = new WP_Query( $residents_query );
-			$GLOBALS['wp_query'] = $residents;
-			if( $residents->have_posts() && $meta_query ):
-				echo $relation_title;
-				echo '<div class="inner residents shelves grid">';
-				while ( $residents->have_posts() ) : 
-					the_post();
-					get_template_part( 'sections/items/resident' );
-				endwhile;
-				echo '</div>';
-			endif;
-			wp_reset_query(); 
-			?>
-			</div>
-		</div>
+		elseif( $country_id ):
+			$relation_title = '<h4>Residents from ' . $country_title . '</h4>';
+			$meta_query = array(
+				'key' => 'country',
+				'value' => $country_id,
+				'compare' => 'LIKE'
+			);
+		endif;
+		$residents_query = array(
+			'post_type'	=> 'resident',
+			'posts_per_page' => 3,
+			'post__not_in' => array($resident_id),
+			'meta_query' => array( $meta_query )
+		);
+		$residents = new WP_Query( $residents_query );
+		$GLOBALS['wp_query'] = $residents;
+		if( $residents->have_posts() && $meta_query ):
+			echo '<div class="relations border-top">';
+			echo '<h3 class="title">' . $relation_title . '</h3>';
+			echo '<div class="inner residents shelves grid">';
+			while ( $residents->have_posts() ) : 
+				the_post();
+				get_template_part( 'sections/items/resident' );
+			endwhile;
+			echo '</div>';
+			echo '</div>';
+		endif;
+		wp_reset_query(); 
+		?>
 
 	</div>
 	<?php get_template_part('partials/footer') ?>
