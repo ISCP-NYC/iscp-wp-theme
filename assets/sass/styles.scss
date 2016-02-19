@@ -10,6 +10,7 @@ Theme Name: ISCPT
 
 html,
 body {
+	width: 100%;
 	height: 100%;
 	overflow: hidden;
 	font-family: 'Life Rounded', Times;
@@ -28,6 +29,8 @@ a, .link {
 	}
 }
 input {
+	-webkit-appearance: none;
+	border-radius: 0;
 	font-family: inherit;
 	outline: none;
 }
@@ -40,13 +43,14 @@ main {
 }
 section {
 	min-width: 320px !important;
-	@include height('100%');
+	height: 100%;
 	position: absolute;
 	left: 100px;
 	overflow: hidden;
 	opacity: 0;
+	-webkit-overflow-scrolling: touch;
 	.content {
-		@include width('100% - 80px - '$side_width*2);
+		width: calc(100% - 80px - #{$side_width}*2);
 		height: calc(100% - 260px);
 		display: block;
 		padding: 130px 30px 130px 30px;
@@ -57,7 +61,7 @@ section {
 		border-color: $orange;
 		transition: border-color 150ms ease-in-out;
 		@include small {
-			@include width('100% - 60px');
+			width: calc(100% - 60px);
 			margin-left: 0;
 			border-width: 0;
 		}
@@ -80,6 +84,7 @@ section {
 				margin-bottom: 0;
 			}
 		}
+		-webkit-overflow-scrolling: touch;
 	}
 	&.ready {
 		opacity: 1;
@@ -101,7 +106,7 @@ section {
 		}
 	}
 	&.hide-header {
-		@include height('100%');
+		height: 100%;
 	}
 	&.show-footer {
 		overflow-y: auto;
@@ -304,27 +309,21 @@ body.login {
 	@include xxlarge {
 		content: 'xxlarge';
 	}
-
 	@include xlarge {
 		content: 'xlarge';
 	}
-
 	@include large {
 		content: 'large';
 	}
-
 	@include xmedium {
 		content: 'xmedium';
 	}
-
 	@include medium {
 		content: 'medium';
 	}
-
 	@include small {
 		content: 'small';
 	}
-
 	@include xsmall {
 		content: 'xsmall';
 	}

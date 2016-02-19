@@ -937,15 +937,12 @@ function get_dimensions() {
 	    if( $depth ):
 	    	$ins .= ' &times; ' . dec_to_frac( $depth );
 	    	$cms .= ' &times; ' . in_to_cm( $depth );
-	    else:
-	    	$ins .= ' &times; ' . 0;
-			$cms .= ' &times; ' . 0;
 	    endif;
 
 	elseif( $units == 'cm' ):
 
 		if( $width ):
-	    	$cms .= $width ?: 0;
+	    	$cms .= dec_to_hund( $width ) ?: 0;
 	    	$ins .= cm_to_in( $width ) ?: 0;
 	    else:
 	    	$ins .= 0;
@@ -954,24 +951,21 @@ function get_dimensions() {
 	    $cms .= ' &times; ';
 	    $ins .= ' &times; ';
 	    if( $height ):
-	    	$cms .= $height ?: 0;
+	    	$cms .= dec_to_hund( $height ) ?: 0;
 	    	$ins .= cm_to_in( $height ) ?: 0;
 	    else:
 	    	$cms .= 0;
 	    	$ins .= 0;
 	    endif;
 	    if( $depth ):
-	    	$cms .= ' &times; ' . $depth;
+	    	$cms .= ' &times; ' . dec_to_hund( $depth );
 	    	$ins .= ' &times; ' . cm_to_in( $depth );
-	    else:
-			$cms .= ' &times; ' . 0;
-			$ins .= ' &times; ' . 0;
 	    endif;
 
 	endif;
 
 
-    return $ins . ' inches (' . $cms . ' cm)';
+    return $ins . ' in (' . $cms . ' cm)';
 }
 
 function convert_unit( $int, $unit ) {
@@ -983,7 +977,7 @@ function convert_unit( $int, $unit ) {
 }
 
 function in_to_cm( $inches = 0 ) {
-    return dec_to_frac( $inches / 0.393701 );
+    return dec_to_hund( $inches / 0.393701 );
 }
 
 function cm_to_in( $cm = 0 ) {
@@ -1009,6 +1003,10 @@ function dec_to_frac( $float = 0 ) {
     $whole = ($whole == 0 ? '' : $whole);
     $frac = '<span class="fraction"><sup>' . ($roundedDecimal * $denom) . '</sup>/<sub>' . $denom . '</sub></span>';
     return $whole . $frac;
+}
+
+function dec_to_hund( $float = 0 ) {
+	return round( $float, 2 );
 }
 
 

@@ -642,6 +642,36 @@ function filterThis(html, vars) {
 	}
 }
 
+$('body').on('click', '.filter .select', function() {
+	var slug = $(this).attr('data-slug');
+	var filterThis = $('.filter-this.'+slug);
+	if($(this).hasClass('view toggle')) {
+		//toggle view style
+		$(filterThis).toggleClass('list').toggleClass('grid');
+		$(this).toggleClass('list').toggleClass('grid');
+	} else if($(this).hasClass('dropdown')) {
+		var property = $(this).attr('data-filter');
+		var filterList = $('.filter-list.'+property+'.'+slug);
+		var filterListOptions = $(filterList).children('.options');
+		var filterListOptionsHeight = $(filterListOptions)[0].clientHeight;
+		if($(this).hasClass('dropped')) {
+			//toggle to hide this list
+			$(this).removeClass('dropped');
+			$(filterList).removeClass('show').css({height : 0});
+		} else {
+			//hide already opened filter list
+			$('.dropdown').removeClass('dropped');
+			$('.filter-list.show'+'.'+slug).removeClass('show').css({height : 0});
+			//open this filter list
+			$(this).addClass('dropped');
+			$(filterList).addClass('show growing').css({height : filterListOptionsHeight});
+			$(filterList).one('transitionend webkitTransitionEnd oTransitionEnd MSTransitionEnd', function() {
+				$(filterList).removeClass('growing');
+			});
+		}
+	
+	}
+});
 /////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////
 //////////////////////////SEARCH/////////////////////////////
@@ -1059,7 +1089,9 @@ function setUpEarth() {
 		}
     	getMapList(slug);
     }).on('click', '.close', function() {
-    	$(residents).removeClass('show').attr('style','');
+    	$(residents).removeClass('show').transition({y:0}, function() {
+    		$(this).attr('style','');
+    	});
     	$('.marker.showing').removeClass('showing');
     	if (history.pushState) {
 		    var newurl = window.location.protocol + "//" + window.location.host + window.location.pathname;
@@ -1127,11 +1159,11 @@ function getMapList(slug) {
 		success: function(response) {
 			$(residentsList).html(response);
 			var residentsHeight = $(residents).innerHeight();
-			if(residentsHeight > winH()) {
-				residentsHeight = winH() - 100;
+			if(residentsHeight > winH() - 110) {
+				residentsHeight = 'calc(100% - 110px)';
 			}
 			$(residents).addClass('show').height(residentsHeight).transition({
-				y: -residentsHeight
+				y: '-100%'
 			}).removeClass('tease');
 		}
 	});
@@ -1161,36 +1193,7 @@ function scrollToResourceItem() {
 /////////////////////////FOOTER//////////////////////////////
 /////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////
-$('body').on('click', '.filter .select', function() {
-	var slug = $(this).attr('data-slug');
-	var filterThis = $('.filter-this.'+slug);
-	if($(this).hasClass('view toggle')) {
-		//toggle view style
-		$(filterThis).toggleClass('list').toggleClass('grid');
-		$(this).toggleClass('list').toggleClass('grid');
-	} else if($(this).hasClass('dropdown')) {
-		var property = $(this).attr('data-filter');
-		var filterList = $('.filter-list.'+property+'.'+slug);
-		var filterListOptions = $(filterList).children('.options');
-		var filterListOptionsHeight = $(filterListOptions)[0].clientHeight;
-		if($(this).hasClass('dropped')) {
-			//toggle to hide this list
-			$(this).removeClass('dropped');
-			$(filterList).removeClass('show').css({height : 0});
-		} else {
-			//hide already opened filter list
-			$('.dropdown').removeClass('dropped');
-			$('.filter-list.show'+'.'+slug).removeClass('show').css({height : 0});
-			//open this filter list
-			$(this).addClass('dropped');
-			$(filterList).addClass('show growing').css({height : filterListOptionsHeight});
-			$(filterList).one('transitionend webkitTransitionEnd oTransitionEnd MSTransitionEnd', function() {
-				$(filterList).removeClass('growing');
-			});
-		}
-	
-	}
-});
+
 
 function isNumeric(n) {
   return !isNaN(parseFloat(n)) && isFinite(n);

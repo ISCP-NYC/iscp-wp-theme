@@ -240,10 +240,10 @@ header.main {
 		background-repeat: no-repeat;
 	}
 	.default {
-		background-image: url(../images/toggle-orange.svg);
+		background-image: url(../images/burger-orange.svg);
 	}
 	.hover {
-		background-image: url(../images/toggle-black.svg);
+		background-image: url(../images/burger-black.svg);
 	}
 	@include small {
 		right: 35px;
