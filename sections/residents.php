@@ -1,4 +1,7 @@
-<?php include( locate_template( 'sections/params/residents.php' ) ); ?>
+<?php
+include( locate_template( 'sections/params/residents.php' ) );
+$filter = $_GET['filter'];
+?>
 <section <?php section_attr( $id, $slug, 'residents' ); ?> data-page="<?php echo $paged ?>">
 	<?php get_template_part('partials/nav') ?>
 	<?php get_template_part('partials/side') ?>
@@ -9,10 +12,10 @@
 				<div class="bar">
 					<div class="select link dropdown country" data-filter="country" data-slug="<?php echo $slug ?>">
 						<?php
-						if($country_param):
-							$country_count = ': ' . $country_param_title . ' (' . resident_count_by_country( $country_param_id, $page_query ) . ')';
+						if( $country_param ):
+							$country_count = ': ' . $country_param_title . ' (' . get_resident_count( 'country', $country_param_id, $page_query ) . ')';
 						endif;
-						echo '<span>Country</span><span class="showing">' . $country_count . '</span>';
+						echo '<span>Country</span><span class="count">' . $country_count . '</span>';
 						?>
 						</span>
 						<div class="swap">
@@ -21,14 +24,14 @@
 						</div>
 					</div>
 					<?php if($slug == 'past-residents'): ?>
-					<div class="select link dropdown year" data-filter="year" data-slug="<?php echo $slug ?>">
+					<div class="select link dropdown date" data-filter="date" data-slug="<?php echo $slug ?>">
 						<?php
-						if($year_param):
-							$year_count = ': ' . $year_param . ' (' . resident_count_by_year( $year_param, $page_query ) . ')';
+						if( $year_param ):
+							$year_count = ': ' . $year_param . ' (' . get_resident_count( 'year', $year_param, $page_query ) . ')';
 						else:
 							$year_count = null;
 						endif;
-						echo '<span>Year</span><span class="showing">' . $year_count . '</span>';
+						echo '<span>Year</span><span class="count">' . $year_count . '</span>';
 						?>
 						<div class="swap">
 							<div class="icon default"></div>
@@ -38,12 +41,12 @@
 					<?php endif; ?>
 					<div class="select link dropdown program" data-filter="program" data-slug="<?php echo $slug ?>">
 						<?php
-						if($program_param):
-							$program_count = ': ' . get_program_title( $program_param ) . ' (' . resident_count_by_program( $program_param, $page_query ) . ')';
+						if( $program_param ):
+							$program_count = ': ' . get_program_title( $program_param ) . ' (' . get_resident_count( 'program', $program_param, $page_query ) . ')';
 						else:
 							$program_count = null;
 						endif;
-						echo '<span>Residency Program</span><span class="showing">' . $program_count . '</span>';
+						echo '<span>Residency Program</span><span class="count">' . $program_count . '</span>';
 						?>
 						<div class="swap">
 							<div class="icon default"></div>
@@ -77,7 +80,7 @@
 				$alt_url = get_the_permalink( $alt_page );
 				$alt_title = get_the_title( $alt_page );
 				?>
-				<a href="<?php echo $alt_url; ?>">View <?php echo $alt_title ?></a>
+				<!-- <a href="<?php echo $alt_url; ?>">View <?php echo $alt_title ?></a> -->
 			</div>
 		</div>
 
@@ -96,8 +99,8 @@
 					$country_id = $country->ID;
 					$country_slug = $country->post_name;
 					$country_title = $country->post_title;
-					$country_count = resident_count_by_country( $country_id, $page_query );
-					$filter_url = $page_url . '&from=' . $country_slug;
+					$country_count = get_resident_count( 'country', $country_id, $page_query );
+					$filter_url = query_url( 'from', $country_slug, $page_url, $short_slug );
 					if( $country_count != 0 ):
 						if( $country_param == $country_slug ):
 							$selected = ' selected';
@@ -105,9 +108,11 @@
 							$selected = null;
 						endif;
 						echo '<div class="option' . $selected . '">';
-						echo '<a data-from="' . $country_slug . '" href="' . $filter_url . '">';
-						echo ucwords( $country_title );
-						echo ' (' . $country_count . ')';
+						echo '<a href="' . $filter_url . '" data-value="' . $country_slug . '">';
+						echo $country_title;
+						echo ' (<span class="count">';
+						echo $country_count;
+						echo '</span>)';
 						echo '<div class="swap">';
 						echo '<div class="icon default"></div>';
 						echo '<div class="icon hover"></div>';
@@ -120,15 +125,15 @@
 				</div>
 			</div>
 			<?php if($slug == 'past-residents'): ?>
-			<div class="filter-list year <?php echo $slug ?>" data-filter="year">
+			<div class="filter-list date <?php echo $slug ?>" data-filter="date">
 				<div class="options">
 				<?php
 				$start_date = 1994;
 				$end_date = date( "Y" );
 				$years = array_reverse( range( $start_date, $end_date ) );
 				foreach( $years as $year ): 
-					$year_count = resident_count_by_year( $year, $page_query );
-					$filter_url = $page_url . '&date=' . $year;
+					$year_count = get_resident_count( 'year', $year, $page_query );
+					$filter_url = query_url( 'date', $year, $page_url, $short_slug );
 					if( $year_count  != 0 ):
 						if( $year_param == $year ):
 							$selected = ' selected';
@@ -136,9 +141,11 @@
 							$selected = null;
 						endif;
 						echo '<div class="option' . $selected . '">';
-						echo '<a data-date="' . $year . '" href="' . $filter_url . '">';
+						echo '<a href="' . $filter_url . '" data-value="' . $year . '">';
 						echo $year;
-						echo ' (' . $year_count . ')';
+						echo ' (<span class="count">';
+						echo $year_count;
+						echo '</span>)';
 						echo '<div class="swap">';
 						echo '<div class="icon default"></div>';
 						echo '<div class="icon hover"></div>';
@@ -160,8 +167,8 @@
 						'ground_floor'
 					);
 					foreach( $residency_programs as $program ): 
-						$program_count = resident_count_by_program( $program, $page_query );
-						$filter_url = $page_url . '&program=' . $program;
+						$program_count = get_resident_count( 'program', $program, $page_query );
+						$filter_url = query_url( 'program', $program, $page_url, $short_slug );
 						$program_title = get_program_title( $program );
 						if( $program_count != 0 ):
 							if( $program_param == $program ):
@@ -170,9 +177,11 @@
 								$selected = null;
 							endif;
 							echo '<div class="option' . $selected . '">';
-							echo '<a data-program="' . $program . '" href="' . $filter_url . '">';
+							echo '<a href="' . $filter_url . '" data-value="' . $program . '">';
 							echo $program_title;
-							echo ' (' . $program_count . ')';
+							echo ' (<span class="count">';
+							echo $program_count;
+							echo '</span>)';
 							echo '<div class="swap">';
 							echo '<div class="icon default"></div>';
 							echo '<div class="icon hover"></div>';

@@ -12,7 +12,7 @@ $(window).load(function() {
 	if($('section.resident-resource').length) {
 		scrollToResourceItem();
 	} 
-	if($('section#events').length && (getParam('date').length || getParam('type').length)) {
+	if($('section#events').length && (getParam('date') || getParam('type'))) {
 		var pastWrapper = $('.past.wrapper');
 		var pastWrapperTop = $(pastWrapper).offset().top - 130;
 		$('section#events .content').scrollTop(pastWrapperTop);
@@ -522,54 +522,56 @@ function getNeighbors(direction, type) {
 	});
 }
 /////////////////////////////////////////////////////////////
-///////////////////////LOAD FILTERED/////////////////////////
+//////////////////////////FILTER/////////////////////////////
 /////////////////////////////////////////////////////////////
+var filterVars = [
+	'when',
+	'date',
+	'country',
+	'from',
+	'residency_program',
+	'type',
+	'filter'
+];
 $('body').on('click', '.filter-list .option a', function(event) {
 	event.preventDefault();
 	var option = $(this).parents('.option');
 	var optionText = $(this).text();
-	var vars = ajaxpagination.query_vars;
+	var optionType = $(this).parents('.filter-list').attr('data-filter');
+	var optionValue = $(this).attr('data-value');
 	var slug = $(this).parents('section').attr('id');
 	var section = $(this).parents('section');
 	$(section).attr('data-page', 1);
+	var vars = ajaxpagination.query_vars;
 	vars = JSON.parse(vars);
+	$(filterVars).each(function() {
+		delete vars[this];
+	});
 	if($(section).is('.events')) {
 		var upcomingIds = [];
 		$(section).find('.item.upcoming').each(function() {
 			var upcomingId = $(this).attr('data-id');
-			upcomingIds.push(upcomingId)
+			upcomingIds.push(upcomingId);
 		});
 		vars['upcoming_ids'] = upcomingIds; 
 		vars['events_section'] = 'past'; 
 	}
 	var url = $(this).attr('href');
-	$('.showing').text('');
 	if($(option).is('.selected')) {
 		$(option).removeClass('selected');
+		$(section).find('.filter .select.' + optionType + ' .count').text('');
 		var params = {};
-		var filterVars = [
-			'when',
-	 		'date',
-	 		'country',
-	 		'from',
-	 		'residency_program',
-	 		'type',
-	 		'filter'
- 		];
- 		$(filterVars).each(function() {
- 			delete vars[this];
- 		});
  		var currentUrl = window.location.href;
- 		url = currentUrl.slice( 0, currentUrl.indexOf('?') );
+ 		url = removeParam(optionType, currentUrl);
 	} else {
-		$(section).find('.option').filter('.selected').removeClass('selected');
+		$(section).find('.filter-list.'+optionType+' .option.selected').removeClass('selected');
 		$(option).addClass('selected');
 		var filterType = $(this).parents('.filter-list').attr('data-filter');
-		var filterShowing = $(section).find('.select[data-filter="'+filterType+'"]').find('.showing');
-		$(filterShowing).text(': '+optionText);
+		var filterCount = $(section).find('.select[data-filter="'+filterType+'"]').find('.count');
+		$(filterCount).text(': '+optionText);
 		var params = getParams(url);
 	}
-	$.each( params, function( key, value ) {
+	$.each(params, function(key, value) {
 		vars[key] = value;
 	});
 	vars['filter_params'] = JSON.stringify(params);
@@ -577,6 +579,7 @@ $('body').on('click', '.filter-list .option a', function(event) {
 		vars['pagetype'] = 'sponsor';
 	}
 	vars['pagename'] = slug;
+	updateCounts(option, vars);
 	vars = JSON.stringify(vars);
 	$.ajax({
 		url: ajaxpagination.ajaxurl,
@@ -595,8 +598,10 @@ $('body').on('click', '.filter-list .option a', function(event) {
 				$(section).off(transitionEnd);
 			});
 			window.history.pushState({path:url},'',url);
+			$(section).attr('data-permalink', url);
 		},
 		success: function(response) {
+			updateFilterLinks(option, vars);
 			filterThis(response, vars);
 		}
 	});
@@ -642,6 +647,21 @@ function filterThis(html, vars) {
 	}
 }
 
+function updateFilterLinks(option) {
+	var section = $(option).parents('section');
+	var thisList = $(option).parents('.filter-list').attr('data-filter');
+	var filterType = $(option).parents('.filter-list').attr('data-filter');
+	var filterValue = $(option).find('a').attr('data-value');
+	$(section).find('.filter-list:not([data-filter="' + thisList + '"]) .option a').each(function() {
+		var url = $(this).attr('href');
+		if(getParam(filterType, url)) {
+			url = removeParam(filterType, url);
+		}
+		var newUrl = url + '&' + filterType + '=' + filterValue;
+		$(this).attr('href', newUrl);
+	});
+}
+
 $('body').on('click', '.filter .select', function() {
 	var slug = $(this).attr('data-slug');
 	var filterThis = $('.filter-this.'+slug);
@@ -672,6 +692,73 @@ $('body').on('click', '.filter .select', function() {
 	
 	}
 });
+function getParam(paramType, url) {
+    if (!url) url = window.location.href;
+    paramType = paramType.replace(/[\[\]]/g, "\\$&");
+    var regex = new RegExp("[?&]" + paramType + "(=([^&#]*)|&|#|$)"),
+        results = regex.exec(url);
+    if (!results) return null;
+    if (!results[2]) return '';
+    return decodeURIComponent(results[2].replace(/\+/g, " "));
+}
+function getParams(url) {
+	if (!url) url = window.location.href;
+    var params = {}, hash;
+    var hashes = url.slice(url.indexOf('?') + 1).split('&');
+    for(var i = 0; i < hashes.length; i++) {
+        hash = hashes[i].split('=');
+        params[hash[0]] = hash[1];
+    }
+    return params;
+}
+function removeParam(paramType, url) {
+	if(param=='year'){param='date';}
+	if(param=='country'){param='from';}
+    var rtn = url.split("?")[0],
+        param,
+        params_arr = [],
+        queryString = (url.indexOf("?") !== -1) ? url.split("?")[1] : "";
+    if (queryString !== "") {
+        params_arr = queryString.split("&");
+        for (var i = params_arr.length - 1; i >= 0; i -= 1) {
+            param = params_arr[i].split("=")[0];
+            if (param === paramType) {
+                params_arr.splice(i, 1);
+            }
+        }
+        rtn = rtn + "?" + params_arr.join("&");
+    }
+    return rtn;
+}
+function updateCounts(option, vars) {	
+	// var section = $(option).parents('section');
+	// var filterType = $(option).parents('.filter-list').attr('data-filter');
+	// var filterValue = $(option).find('a').attr('data-value');
+	// var url = $(option).find('a').attr('href');
+	// var params = getParams(url);
+	// $(section).find('.filter-list .option a').each(function() {
+
+	// });
+	// var option = this;
+	// vars = JSON.stringify(vars);
+	// getCount(vars);
+}
+function getCount(vars) {
+	$.ajax({
+		url: ajaxpagination.ajaxurl,
+		type: 'post',
+		data: {
+			action: 'get_filter_count',
+			query_vars: vars
+		},
+		beforeSend: function() {
+			
+		},
+		success: function(response) {
+			console.log(response);
+		}
+	});
+}
 /////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////
 //////////////////////////SEARCH/////////////////////////////
@@ -1207,27 +1294,6 @@ function winH() {
 	return window.innerHeight;
 }
 
-function getParam(paramType) {
-    var url = window.location.search.substring(1);
-    var urlVars = url.split('&');
-    for(var i = 0; i < urlVars.length; i++) {
-        var thisParamType = urlVars[i].split('=');
-        if(thisParamType[0] == paramType) {
-            return thisParamType[1];
-        }
-    }
-    return false;
-}
-function getParams(url) {
-	if(url==undefined) {var url = window.location.href}
-    var params = {}, hash;
-    var hashes = url.slice(url.indexOf('?') + 1).split('&');
-    for(var i = 0; i < hashes.length; i++) {
-        hash = hashes[i].split('=');
-        params[hash[0]] = hash[1];
-    }
-    return params;
-}
 
 
 $(window).resize(function() {

@@ -53,18 +53,18 @@ if( $events_section == 'past' ):
 	endif;
 else:
 	$date_query = array(
-			'relation' => 'OR',
-			array(
-				'key' => 'start_date',
-				'compare' => '>',
-				'value' => $today
-			),
-			array(
-				'key' => 'end_date',
-				'compare' => '>',
-				'value' => $today
-			)
-		);
+		'relation' => 'OR',
+		array(
+			'key' => 'start_date',
+			'compare' => '>',
+			'value' => $today
+		),
+		array(
+			'key' => 'end_date',
+			'compare' => '>',
+			'value' => $today
+		)
+	);
 endif;
 $events_query = array(
 	'post_type' => 'event',

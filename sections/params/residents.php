@@ -63,7 +63,7 @@ if( $page_param == $slug || $post_type == 'sponsor' ):
 	$year_param = get_query_var( 'date' );
 	$program_param = get_query_var( 'program' );
 endif;
-$country_param_obj = get_page_by_path($country_param, OBJECT, 'country');
+$country_param_obj = get_page_by_path( $country_param, OBJECT, 'country' );
 $country_param_title = $country_param_obj->post_title;
 $country_param_id = $country_param_obj->ID;
 $short_slug = str_replace('-residents', '', $slug);

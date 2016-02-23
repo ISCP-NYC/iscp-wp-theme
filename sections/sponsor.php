@@ -90,7 +90,7 @@ $paged = 1;
 							<div class="icon hover"></div>
 						</div>
 					</div>
-					<div class="select link dropdown year" data-filter="year" data-slug="<?php echo $sponsor_slug ?>">
+					<div class="select link dropdown date" data-filter="date" data-slug="<?php echo $sponsor_slug ?>">
 						<?php
 						if($year_param):
 							$year_count = ': ' . $year_param . ' (' . resident_count_by_year( $year_param, $sponsor_query ) . ')';
@@ -139,9 +139,6 @@ $paged = 1;
 					</a>
 				</div>
 			</div>
-			<!-- <div class="right type">
-				<?#php echo ucwords( $sponsor_type ) ?>
-			</div> -->
 		</div>	
 		<div class="filter-lists">
 			<div class="filter-list country <?php echo $sponsor_slug ?>" data-filter="country">
@@ -169,7 +166,9 @@ $paged = 1;
 						echo '<div class="option' . $selected . '">';
 						echo '<a data-from="' . $country_slug . '" href="' . $filter_url . '">';
 						echo ucwords( $country_title );
-						echo ' (' . $country_count . ')';
+						echo ' (<span class="count">';
+						echo $country_count;
+						echo '</span>)';
 						echo '<div class="swap">';
 						echo '<div class="icon default"></div>';
 						echo '<div class="icon hover"></div>';
@@ -181,7 +180,7 @@ $paged = 1;
 				?>
 				</div>
 			</div>
-			<div class="filter-list year <?php echo $sponsor_slug ?>" data-filter="year">
+			<div class="filter-list date <?php echo $sponsor_slug ?>" data-filter="date">
 				<div class="options">
 				<?php
 				$start_date = 1994;
@@ -199,7 +198,9 @@ $paged = 1;
 						echo '<div class="option' . $selected . '">';
 						echo '<a data-date="' . $year . '" href="' . $filter_url . '">';
 						echo $year;
-						echo ' (' . $year_count . ')';
+						echo ' (<span class="count">';
+						echo $year_count;
+						echo '</span>)';
 						echo '<div class="swap">';
 						echo '<div class="icon default"></div>';
 						echo '<div class="icon hover"></div>';
@@ -231,7 +232,9 @@ $paged = 1;
 							echo '<div class="option' . $selected . '">';
 							echo '<a data-program="' . $program . '" href="' . $filter_url . '">';
 							echo $program_title;
-							echo ' (' . $program_count . ')';
+							echo ' (<span class="count">';
+							echo $program_count;
+							echo '</span>)';
 							echo '<div class="swap">';
 							echo '<div class="icon default"></div>';
 							echo '<div class="icon hover"></div>';

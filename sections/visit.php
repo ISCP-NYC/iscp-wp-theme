@@ -1,9 +1,9 @@
 <?php 
-	global $visit;
-	$title = $post->post_title;
-	$slug = $post->post_name;
-	$id = $post->ID;
-	$about = get_page_by_path( 'about' );
+global $visit;
+$title = $post->post_title;
+$slug = $post->post_name;
+$id = $post->ID;
+$about = get_page_by_path( 'about' );
 ?>
 
 <section <?php section_attr( $id, $slug, 'visit' ); ?>>
@@ -187,6 +187,7 @@
 		echo '<h3 class="title">Directions by Subway</h3>';
 		if( get_field( 'directions', $visit ) ):
 			echo '<ul class="steps">';
+			$home = get_page_by_path( 'home' )->ID;
 			while( has_sub_field( 'directions', $visit ) ):
 				$step = get_sub_field( 'step', $home );
 				echo '<li class="step">' . $step . '</li>';

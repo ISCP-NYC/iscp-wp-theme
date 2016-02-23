@@ -9,10 +9,7 @@ $event_type = get_field( 'event_type' );
 $event_type_name = pretty( $event_type );
 $event_status = get_event_status( $event_id );
 $event_date_format = get_event_date( $event_id );
-if( $append_query && is_past( $event_id ) ) {
-	$event_url .= $append_query;
-}
-$event_thumb = get_thumb( $resident_id );
+$event_thumb = get_thumb( $event_id, 'thumb' );
 
 echo '<div class="event item shelf-item border-bottom ' . $event_status . '" data-id="' . $event_id . '">';
 echo '<div class="inner">';

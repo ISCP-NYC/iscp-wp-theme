@@ -20,9 +20,6 @@ if( have_rows( 'residency_dates', $resident_id ) ):
 	endwhile;
 endif;
 
-if( $append_query && is_past( $resident_id ) ) {
-	$url .= $append_query;
-}
 $thumb = get_thumb( $resident_id );
 
 echo '<div class="resident item shelf-item border-bottom ' . $resident_status . '"><div class="inner">';

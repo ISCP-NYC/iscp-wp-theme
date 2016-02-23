@@ -1028,27 +1028,21 @@ function user_is_resident() {
 	endif;
 }
 
-function query_url( $key, $value, $url, $filter = null ) {
-	$params = $_GET;
-	$this_query = array( $key => $value );
-	if( $params['filter'] == $filter ):
-		unset( $params['filter'] );
-		if( array_key_exists( $key, $params ) ):
-			unset( $params[$key] );
-		endif;
-		$params = array_merge( $this_query, $params );
+function query_url( $key, $value, $url ) {
+	if( strpos( $url, '?' ) ):
+		$url .= '&' . $key . '=' . $value;
 	else:
-		$params = $this_query;
+		$url .= '?' . $key . '=' . $value;
 	endif;
-
-	foreach($params as $_key => $_value):
-		if($url):
-			$url .= '&';
-		else:
-			$url .= '?';
-		endif;
-		$url .= $_key . '=' . $_value;
-	endforeach;
+	// foreach($_GET as $key => $value):
+	// 	if( in_array( $key, array( 'filter' ) ) ) return;
+	// 	if($append_url):
+	// 		$append_url .= '&';
+	// 	else:
+	// 		$append_url .= '?';
+	// 	endif;
+	// 	$append_url .= $key . '=' . $value;
+	// endforeach;
 	return $url;
 }
 

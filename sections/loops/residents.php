@@ -1,38 +1,59 @@
 <?php
 include(locate_template('sections/params/residents.php'));
-if( $country_param ) {
-	$filter_query = array(
+$append_url = '';
+if( isset( $country_param ) ):
+	$country_query = array(
 		'key' => 'country',
 		'value' => '"' . $country_param_id . '"',
 		'compare' => 'LIKE'
 	);
-	$append_query = '?from=' . $country_param;
-} elseif( $year_param ) {
+	$filter_query = array(
+		'relation' => 'AND',
+		$filter_query,
+		$country_query
+	);
+endif;
+if( isset( $year_param ) ):
 	$year_begin = $year_param . '0101';
 	$year_end = $year_param . '1231';
 	$year_range = array( $year_begin, $year_end );
-	$filter_query = array(
+	$year_query = array(
 		'key' => 'residency_dates_0_start_date',
 		'type' => 'DATE',
 		'value' => $year_range,
 		'compare' => 'BETWEEN'
 	);
-	$append_query = '?date=' . $year_param;
-} elseif( $program_param ) {
 	$filter_query = array(
+		'relation' => 'AND',
+		$filter_query,
+		$year_query
+	);
+endif;
+if( isset( $program_param ) ):
+	$program_query = array(
 		'key' => 'residency_program',
 		'type' => 'CHAR',
 		'value' => $program_param,
 		'compare' => 'LIKE'
 	);
-	$append_query = '?program=' . $program_param;
-} elseif( $sponsor_param ) {
-	$filter_query = array(
+	$program_query = array(
+		'relation' => 'AND',
+		$filter_query,
+		$sponsor_query
+	);
+endif;
+if( isset( $sponsor_param ) ):
+	$sponsor_query = array(
 		'key' => 'residency_dates_0_sponsors',
 		'value' => '"' . $sponsor_id . '"',
 		'compare' => 'LIKE'
 	);
-}
+	$sponsor_query = array(
+		'relation' => 'AND',
+		$filter_query,
+		$sponsor_query
+	);
+endif;
 if( $post_type == 'sponsor' || $page_type == 'sponsor' ):
 	$sponsor_id = get_page_by_path( $slug, OBJECT, 'sponsor' )->ID;
 	$sponsor_query = array(

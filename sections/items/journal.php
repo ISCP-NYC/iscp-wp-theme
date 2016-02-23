@@ -15,9 +15,6 @@ if( get_field( 'author' ) ):
   $author = get_field( 'author' );
 endif;
 $tags = get_the_tags();
-if( $append_query ) {
-	$url .= $append_query;
-}
 $joural_post_status = 'new';
 
 echo '<div class="journal-post item border-bottom ' . $joural_post_status . '">';
