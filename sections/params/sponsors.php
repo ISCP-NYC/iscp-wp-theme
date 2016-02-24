@@ -3,6 +3,7 @@ $title = get_the_title();
 $slug = $post->post_name;
 $id = $post->ID;
 $country_param = get_query_var( 'from' );
+$year_param = get_query_var( 'date' );
 $type_param = get_query_var( 'type' );
 $paged = 1;
 $page_url = get_the_permalink();

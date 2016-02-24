@@ -1,7 +1,7 @@
 <?php
 include(locate_template('sections/params/residents.php'));
 $append_url = '';
-if( isset( $country_param ) ):
+if( $country_param ):
 	$country_query = array(
 		'key' => 'country',
 		'value' => '"' . $country_param_id . '"',
@@ -13,7 +13,7 @@ if( isset( $country_param ) ):
 		$country_query
 	);
 endif;
-if( isset( $year_param ) ):
+if( $year_param ):
 	$year_begin = $year_param . '0101';
 	$year_end = $year_param . '1231';
 	$year_range = array( $year_begin, $year_end );
@@ -29,20 +29,20 @@ if( isset( $year_param ) ):
 		$year_query
 	);
 endif;
-if( isset( $program_param ) ):
+if( $program_param ):
 	$program_query = array(
 		'key' => 'residency_program',
 		'type' => 'CHAR',
 		'value' => $program_param,
 		'compare' => 'LIKE'
 	);
-	$program_query = array(
+	$filter_query = array(
 		'relation' => 'AND',
 		$filter_query,
-		$sponsor_query
+		$program_query
 	);
 endif;
-if( isset( $sponsor_param ) ):
+if( $sponsor_param ):
 	$sponsor_query = array(
 		'key' => 'residency_dates_0_sponsors',
 		'value' => '"' . $sponsor_id . '"',

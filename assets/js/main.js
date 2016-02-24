@@ -226,6 +226,7 @@ function sectionContentScrollListener(content) {
 		$(section).removeClass('tease-nav');
 		$(section).removeClass('hide-header');
 	}
+
 	lastScrollTop = scrollTop;
 
 	if($(section).is('#events')) {
@@ -241,7 +242,6 @@ function sectionContentScrollListener(content) {
 $('section .content').scroll(function() {
 	sectionContentScrollListener(this);
 });
-
 
 /////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////
@@ -657,6 +657,16 @@ function updateFilterLinks(option) {
 		if(getParam(filterType, url)) {
 			url = removeParam(filterType, url);
 		}
+
+		switch(filterType) {
+			case 'country':
+				filterType = 'from';
+				break;
+			case 'year':
+				filterType = 'date';
+				break;
+		}
+
 		var newUrl = url + '&' + filterType + '=' + filterValue;
 		$(this).attr('href', newUrl);
 	});
