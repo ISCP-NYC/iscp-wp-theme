@@ -95,9 +95,11 @@ $upcoming_events = new WP_Query( $upcoming_query );
 				        echo '<div class="inner">';
 				        echo '<div class="image ' . $orientation . '">';
 				        echo '<div class="imageWrap">';
+				        echo '<div class="captionWrap">';
 				        echo '<img src="' . $image_url . '"/>';
 				        echo '<div class="caption">';
 				        echo $caption;
+				        echo '</div>';
 				        echo '</div>';
 				        echo '</div>';
 				        echo '</div>';
@@ -162,9 +164,11 @@ $upcoming_events = new WP_Query( $upcoming_query );
 				        echo '<div class="inner">';
 				        echo '<div class="image ' . $orientation . '">';
 				        echo '<div class="imageWrap">';
+				        echo '<div class="captionWrap">';
 				        echo '<img src="' . $image_url . '"/>';
 				        echo '<div class="caption">';
 				        echo $caption;
+				        echo '</div>';
 				        echo '</div>';
 				        echo '</div>';
 				        echo '</div>';
@@ -180,7 +184,7 @@ $upcoming_events = new WP_Query( $upcoming_query );
 		<?php 
 		$related = get_field( 'related' );
 		if( $related || $upcoming_events ):
-			echo '<div class="bottom">';
+			echo '<div class="bottom-modules">';
 			$GLOBALS['wp_query'] = $upcoming_events;
 			if ( have_posts() ):
 				echo '<div class="upcoming module">';

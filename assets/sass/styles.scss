@@ -49,6 +49,10 @@ main {
 	left: 0;
 	top: 0;
 	overflow: hidden;
+	@include small {
+		width: 100% !important;
+		left: 0 !important;
+	}
 }
 section {
 	min-width: 320px !important;
@@ -62,7 +66,7 @@ section {
 		width: calc(100% - 80px - #{$side_width}*2);
 		height: calc(100% - 260px);
 		display: block;
-		padding: 130px 30px 130px 30px;
+		padding: 130px 30px;
 		margin-left: 120px;
 		overflow-y: hidden;
 		border-style: solid;
@@ -73,6 +77,10 @@ section {
 			width: calc(100% - 60px);
 			margin-left: 0;
 			border-width: 0;
+		}
+		@include xsmall {
+			width: calc(100% - 30px);
+			padding: 130px 15px;
 		}
 		.module {
 			width: 100%;
@@ -168,6 +176,18 @@ section {
 	::selection {
 		background-color: $orange;
 		color: $white;
+	}
+	@include small {
+		width: 100% !important;
+		left: 0 !important;
+		overflow-y: auto;
+		overflow-x: hidden;
+		&:not(.center) {
+			display: none !important;
+		}
+		.content {
+			height: auto;
+		}
 	}
 	@import 'partials/filter';
 	@import 'partials/footer';

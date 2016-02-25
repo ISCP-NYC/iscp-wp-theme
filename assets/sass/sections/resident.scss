@@ -62,12 +62,6 @@ section.single.resident {
 				}
 			}
 		}
-		@include xsmall {
-			width: 100%;
-		}
-		@include small {
-			width: 100%;
-		}
 	}
 	.gallery {
 		width: 33.333%;
@@ -99,7 +93,7 @@ section.single.resident {
 			padding-right: 0;
 		}
 	}
-	@include small {
+	@include medium {
 		.info, .gallery {
 			width: 100% !important;
 			padding-right: 0;

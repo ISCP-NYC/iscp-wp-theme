@@ -31,12 +31,23 @@
             pointer-events: none;
         }
     }
+    @include small {
+        .cursor {
+            display: none !important;
+        }
+    }
 }
 .image_slider {
     height: 600px;
 	overflow: hidden;
 	display: block;
 	position: relative;
+    @include medium {
+        height: 300px;
+    }
+    @include small {
+        height: 200px;
+    }
 	.arrow {
 		width: 30px;
 		height: 30px;
@@ -131,6 +142,11 @@
         .arrow {
         	display: none;
         }
+        @include small {
+            .arrow {
+                display: block;
+            }
+        }
         .piece {
             height: 100% !important;
             margin: 0 !important;
@@ -144,7 +160,6 @@
                     display: block !important;
                     margin: 0 auto 0 auto;
                     position:relative;
-                    overflow:hidden;
                     .imageWrap {
                         height: 100%;
                         margin: auto;
@@ -159,8 +174,16 @@
                             display: block;
 
                         }
-                        .caption {
-                            display: none;
+                        .captionWrap {
+                            display: block;
+                            position: relative;
+                            margin: auto;
+                            .caption {
+                                width: 100%;
+                                position: absolute;
+                                left: 0;
+                                top: 100%;
+                            }
                         }
                     }
                     &.portait {
@@ -169,16 +192,8 @@
                         margin: 50px 0;
                         .imageWrap {
                             img {
-                                max-width: none;
-                                height: calc(100% - 50px);
-                            }
-                            .caption {
-                                width: 100% !important;
-                                height: 90px;
-                                color: $white !important;
-                                * {
-                                    color: $white !important;
-                                }
+                                max-width: 100%;
+                                max-height: 100%;
                             }
                             &:hover {
                                 color: inherit;
@@ -194,12 +209,8 @@
                                 max-width: 100%;
                                 max-height: 100%;
                             }
-                            .caption {
-                                width: 100% !important;
-                                color: $white !important;
-                                * {
-                                    color: $white !important;
-                                }
+                            &:hover {
+                                color: inherit;
                             }
                         }
                     }
@@ -211,6 +222,12 @@
         img {
             cursor: pointer;
             max-height: 600px;
+            @include medium {
+                max-height: 300px;
+            }
+            @include small {
+                max-height: 200px;
+            }
         }
     }
 	// &.bg {

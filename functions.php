@@ -91,7 +91,7 @@ function iscp_scripts() {
 }
 add_action( 'wp_enqueue_scripts', 'iscp_scripts' );
 
-// show_admin_bar(false);
+show_admin_bar(false);
 add_theme_support( 'post-thumbnails' ); 
 add_image_size( 'thumb', 500, 350, true );
 add_image_size( 'slider', 9999, 500, false );
@@ -245,7 +245,7 @@ function custom_event_column( $column, $post_id ) {
 			$start_date = get_post_meta( $post_id , 'start_date' , true );
 			if($start_date && $start_date != '-' && $start_date != 'Invalid date'):
 				$start_date = new DateTime($start_date);
-				echo $start_date->format('Y/m/d');
+				echo $start_date->format('m/d/Y');
 			else:
 				echo '';
 			endif;
@@ -255,7 +255,7 @@ function custom_event_column( $column, $post_id ) {
 			$end_date = get_post_meta( $post_id , 'end_date' , true );
 			if($end_date && $end_date != '-' && $end_date != 'Invalid date'):  
 				$end_date = new DateTime($end_date);
-				echo $end_date->format('Y/m/d');
+				echo $end_date->format('m/d/Y');
 			else:
 				echo '';
 			endif;
@@ -353,7 +353,7 @@ add_action( 'manage_resident_posts_custom_column' , 'custom_resident_column', 10
 
 
 function register_residents_sortable_columns( $columns ) {
-    // $columns['country'] = 'country';
+    $columns['country'] = 'country';
     // $columns['residency_program'] = 'residency_program';
     // $columns['start_date'] = 'start_date';
     // $columns['end_date'] = 'end_date';
@@ -391,6 +391,42 @@ function resident_column_orderby( $vars ) {
 	return $vars;
 }
 add_filter( 'request', 'resident_column_orderby' );
+
+
+add_action( 'restrict_manage_posts', 'event_column_select' );
+function event_column_select() {
+  global $wpdb;
+  if ( $_GET['post_type'] == 'event' ) {
+
+    $event_types = array( 'iscp-talk', 'exhibition', 'open-studios', 'event' );
+    echo '<select name="event_type">';
+      echo '<option>' . __( 'Event Type', 'textdomain' ) . '</option>';
+    foreach( $event_types as $value ) {
+      $selected = ( !empty( $_GET['event_type'] ) AND $_GET['event_type'] == $value ) ? 'selected="selected"' : '';
+      echo '<option ' . $selected . 'value="' . $value . '">' . pretty( $value ) . '</option>';
+    }
+    echo '</select>';
+
+  }
+}
+
+
+add_filter( 'parse_query','event_column_filter' );
+function event_column_filter( $query ) {
+  if( is_admin() AND $query->query['post_type'] == 'event' ) {
+    $qv = &$query->query_vars;
+    $qv['meta_query'] = array();
+
+    if( !empty( $_GET['event_type'] ) ) {
+      $qv['meta_query'][] = array(
+        'field' => 'event_type',
+        'value' => $_GET['event_type'],
+        'compare' => '=',
+        'type' => 'CHAR'
+      );
+    }
+  }
+}
 
 
 /////////////////////////////////////
@@ -567,9 +603,6 @@ function insert_neighbor_journal_posts( $post_id, $direction, $count = 3 ) {
 }
 
 
-
-
-
 function get_neighbor_residents() {
 	$query_vars = json_decode( stripslashes( $_POST['query_vars'] ), true );
     $resident_id = $query_vars['id'];
@@ -741,8 +774,7 @@ function get_event_date( $id ) {
 		$end_year = $end_date->format('Y');
 	endif;
 
-	$start_time = get_field('start_time', $id);
-	$end_time = get_field('end_time', $id);
+	$time = get_field('time', $id);
 
 	if ( $end_date ):
 		if ( $today > $start_date && $today < $end_date ):
@@ -762,11 +794,8 @@ function get_event_date( $id ) {
 		if($start_year && $start_year != $today_year):
 		 	$date_format .= ',&nbsp;' . $start_year;
 		endif;
-		if($start_time):
-			$date_format .= '</br>' . $start_time;
-			if($end_time):
-				$date_format .= '&ndash;' . $end_time;
-			endif;
+		if($time):
+			$date_format .= '</br>' . $time;
 		endif;
 	endif;
 
@@ -1213,8 +1242,81 @@ function new_excerpt_more($more) {
 add_filter('excerpt_more', 'new_excerpt_more');
 
 function add_favicon() {
-  	$favicon_url = get_template_directory_uri( ). '/assets/images/favicons/favicon.ico';
+  	$favicon_url = get_template_directory_uri() . '/assets/images/favicons/favicon.ico';
 	echo '<link rel="shortcut icon" href="' . $favicon_url . '" />';
 }
 add_action('login_head', 'add_favicon');
 add_action('admin_head', 'add_favicon');
+
+
+function remove_menu_items() {
+    remove_menu_page( 'index.php' );
+    remove_menu_page( 'edit.php' );
+    remove_menu_page( 'edit-comments.php' );
+}
+add_action( 'admin_menu', 'remove_menu_items' );
+
+function reorder_menu_items( $menu_order ) {
+    return array(
+        'edit.php?post_type=resident',
+        'edit.php?post_type=event',
+        'edit.php?post_type=journal',
+        'edit.php?post_type=sponsor',
+        'edit.php?post_type=contributor',
+        'edit.php?post_type=country',
+        'edit.php?post_type=page',
+        'upload.php'
+    );
+}
+add_filter( 'custom_menu_order', '__return_true' );
+add_filter( 'menu_order', 'reorder_menu_items' );
+
+function wpdocs_register_my_custom_menu_page() {
+	$lock_icon = get_template_directory_uri() . '/assets/images/lock-white-small.svg';
+
+
+	$to_do_id = get_page_by_path( 'resident-resources/to-do' )->ID;
+    add_menu_page(
+        __( 'To-Do', 'textdomain' ),
+        'To-Do',
+        'manage_options',
+        'post.php?post=' . $to_do_id . '&action=edit',
+        '',
+        $lock_icon,
+        10
+    );
+
+    $staff_messages_id = get_page_by_path( 'resident-resources/staff-messages' )->ID;
+    add_menu_page(
+        __( 'Staff Messages', 'textdomain' ),
+        'Staff Messages',
+        'manage_options',
+        'post.php?post=' . $staff_messages_id . '&action=edit',
+        '',
+        $lock_icon,
+        11
+    );
+
+    $at_iscp_id = get_page_by_path( 'resident-resources/at-iscp' )->ID;
+    add_menu_page(
+        __( 'At ISCP', 'textdomain' ),
+        'At ISCP',
+        'manage_options',
+        'post.php?post=' . $at_iscp_id . '&action=edit',
+        '',
+        $lock_icon,
+        12
+    );
+
+    $in_nyc_id = get_page_by_path( 'resident-resources/in-nyc' )->ID;
+    add_menu_page(
+        __( 'In NYC', 'textdomain' ),
+        'In NYC',
+        'manage_options',
+        'post.php?post=' . $in_nyc_id . '&action=edit',
+        '',
+        $lock_icon,
+        13
+    );
+}
+add_action( 'admin_menu', 'wpdocs_register_my_custom_menu_page' );

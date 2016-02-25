@@ -151,9 +151,8 @@ $about = get_page_by_path( 'about' );
 					navigationControl: false,
 					mapTypeControl: false,
 					scaleControl: false,
-					mapTypeId: [google.maps.MapTypeId.ROADMAP, mapStyleId]
+					mapTypeId: mapStyleId
 				});
-
 				map.mapTypes.set(mapStyleId, mapStyle);
 				map.setMapTypeId(mapStyleId);
 

@@ -144,6 +144,17 @@ footer {
 			width: 100%;
 			margin: 0;
 			border-width: 0;
+			.bottom {
+				height: auto;
+				.half {
+					width: 100%;
+					height: auto;
+					margin-top: 10px;
+					&:last-child {
+						margin-bottom: 10px;
+					}
+				}
+			}
 		}
 	}
 }

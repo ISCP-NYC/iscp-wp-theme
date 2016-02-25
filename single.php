@@ -49,6 +49,12 @@ switch($post_type) {
 		get_template_part( 'sections/event' );
 		break;
 	case 'sponsor':
+		$sponsors_page_id = get_page_by_path( 'support/sponsors' )->ID;
+		$post = get_post( $sponsors_page_id, OBJECT );
+		setup_postdata( $post );
+		get_template_part( 'sections/sponsors' );
+		wp_reset_postdata();
+
 		get_template_part( 'sections/sponsor' );
 		break;
 	case 'journal':

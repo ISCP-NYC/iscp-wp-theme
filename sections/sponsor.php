@@ -80,7 +80,7 @@ $paged = 1;
 					<div class="select link dropdown country" data-filter="country" data-slug="<?php echo $sponsor_slug ?>">
 						<?php
 						if($country_param):
-							$country_count = ': ' . $country_param_title . ' (' . resident_count_by_country( $country_param_id, $sponsor_query ) . ')';
+							$country_count = ': ' . $country_param_title . ' (' . get_resident_count( 'country', $country_param_id, $sponsor_query ) . ')';
 						endif;
 						echo '<span>Country</span><span class="showing">' . $country_count . '</span>';
 						?>
@@ -93,7 +93,7 @@ $paged = 1;
 					<div class="select link dropdown date" data-filter="date" data-slug="<?php echo $sponsor_slug ?>">
 						<?php
 						if($year_param):
-							$year_count = ': ' . $year_param . ' (' . resident_count_by_year( $year_param, $sponsor_query ) . ')';
+							$year_count = ': ' . $year_param . ' (' . get_resident_count( 'year', $year_param, $sponsor_query ) . ')';
 						else:
 							$year_count = null;
 						endif;
@@ -107,7 +107,7 @@ $paged = 1;
 					<div class="select link dropdown program" data-filter="program" data-slug="<?php echo $sponsor_slug ?>">
 						<?php
 						if($program_param):
-							$program_count = ': ' . get_program_title( $program_param ) . ' (' . resident_count_by_program( $program_param, $sponsor_query ) . ')';
+							$program_count = ': ' . get_program_title( $program_param ) . ' (' . get_resident_count( 'program', $program_param, $sponsor_query ) . ')';
 						else:
 							$program_count = null;
 						endif;
@@ -155,7 +155,7 @@ $paged = 1;
 					$country_id = $country->ID;
 					$country_slug = $country->post_name;
 					$country_title = $country->post_title;
-					$country_count = resident_count_by_country( $country_id, $sponsor_query );
+					$country_count = get_resident_count( 'country', $country_id, $sponsor_query );
 					$filter_url = $page_url . '?from=' . $country_slug;
 					if( $country_count != 0 ):
 						if( $country_param == $country_slug ):
@@ -187,7 +187,7 @@ $paged = 1;
 				$end_date = date( "Y" );
 				$years = array_reverse( range( $start_date, $end_date ) );
 				foreach( $years as $year ): 
-					$year_count = resident_count_by_year( $year, $sponsor_query );
+					$year_count = get_resident_count( 'year', $year, $sponsor_query );
 					$filter_url = $page_url . '?date=' . $year;
 					if( $year_count  != 0 ):
 						if( $year_param == $year ):
@@ -220,7 +220,7 @@ $paged = 1;
 						'ground_floor'
 					);
 					foreach( $residency_programs as $program ): 
-						$program_count = resident_count_by_program( $program, $sponsor_query );
+						$program_count = get_resident_count( 'program', $program, $sponsor_query );
 						$filter_url = $page_url . '?program=' . $program;
 						$program_title = get_program_title( $program );
 						if( $program_count != 0 ):

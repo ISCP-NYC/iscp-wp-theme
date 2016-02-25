@@ -46,9 +46,11 @@
 			        echo '<div class="inner">';
 			        echo '<div class="image ' . $orientation . '">';
 			        echo '<div class="imageWrap">';
-			        echo '<img src="' . $image_url . '" alt="' . $caption . '"/>';
+			        echo '<div class="captionWrap">';
+			        echo '<img src="' . $image_url . '"/>';
 			        echo '<div class="caption">';
 			        echo $caption;
+			        echo '</div>';
 			        echo '</div>';
 			        echo '</div>';
 			        echo '</div>';
