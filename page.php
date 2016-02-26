@@ -16,19 +16,19 @@
 
 		get_template_part( 'sections/residents' );
 
-		$past_residents_page_id = get_page_by_path( 'past-residents' )->ID;
-		$post = get_post( $past_residents_page_id, OBJECT );
-		setup_postdata( $post );
-		get_template_part( 'sections/residents' );
-		wp_reset_postdata();
+		// $past_residents_page_id = get_page_by_path( 'past-residents' )->ID;
+		// $post = get_post( $past_residents_page_id, OBJECT );
+		// setup_postdata( $post );
+		// get_template_part( 'sections/residents' );
+		// wp_reset_postdata();
 
 	elseif ( $page_slug == 'past-residents' ):
 
-		$current_residents_page_id = get_page_by_path( 'current-residents' )->ID;
-		$post = get_post( $current_residents_page_id, OBJECT );
-		setup_postdata( $post );
-		get_template_part( 'sections/residents' );
-		wp_reset_postdata();
+		// $current_residents_page_id = get_page_by_path( 'current-residents' )->ID;
+		// $post = get_post( $current_residents_page_id, OBJECT );
+		// setup_postdata( $post );
+		// get_template_part( 'sections/residents' );
+		// wp_reset_postdata();
 
 		get_template_part( 'sections/residents' );
 

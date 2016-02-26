@@ -194,7 +194,6 @@ section {
 	@import 'partials/nav';
 	@import 'partials/shelves';
 	@import 'partials/side';
-	@import 'partials/slider';
 	@import 'partials/twitter';
 }
 .fraction {
@@ -313,6 +312,8 @@ body.login {
 		}
 	}
 }
+@import 'partials/slider';
+
 @import 'sections/about';
 @import 'sections/apply';
 @import 'sections/black';

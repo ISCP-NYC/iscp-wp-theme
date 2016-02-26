@@ -1,6 +1,5 @@
 <?php
 include(locate_template('sections/params/residents.php'));
-$append_url = '';
 if( $country_param ):
 	$country_query = array(
 		'key' => 'country',

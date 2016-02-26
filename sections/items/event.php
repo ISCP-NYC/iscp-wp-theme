@@ -21,7 +21,7 @@ echo '</div>';
 echo '<div class="value date link">' . $event_date_format . '</div>';
 echo '</a>';
 echo '<div class="value event-type">';
-echo '<a href="' . site_url() . '/events?type=' . $event_type . '">';
+echo '<a href="' . query_url( 'type', $event_type, site_url() . '/events' ) . '">';
 echo $event_type_name;
 echo '</a>';
 echo '</div>';

@@ -113,15 +113,27 @@ $upcoming_events = new WP_Query( $upcoming_query );
 		endif; ?>
 		<div class="info">
 			<div class="description">
-				<?php echo $description ?>
+				<?php
+				echo $description;
+				$contributors = get_field( 'contributors' );
+				if( $contributors ):
+					$c_length = sizeof( $contributors );
+					echo $title . ' is made possible through the generous support of ';
+					foreach( $contributors as $index => $contributor ):
+						$contributor_name = $contributor->post_title;
+						if( $index > 0 && $index+1 != $c_length ):
+							echo ', ';
+						elseif( $index+1 == $c_length ):
+							echo ' & ';
+						endif;
+						echo $contributor_name;
+						if( $index+1 == $c_length ):
+							echo '.';
+						endif;
+					endforeach;
+				endif;
+				?>
 			</div>
-			<?php
-			if( $footnote ):
-				echo '<div class="footnote">';
-				echo $footnote;
-				echo '</div>';
-			endif;
-			?>
 			<div class="links">
 				<a href="#" class="link bullet">Share</a>
 			</div>
@@ -211,6 +223,7 @@ $upcoming_events = new WP_Query( $upcoming_query );
 				echo '</div>';
 				echo '</div>';
 			endif;
+
 			echo '</div>';
 		endif;
 		?>

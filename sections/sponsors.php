@@ -14,7 +14,7 @@
 					<div class="select link dropdown country" data-filter="country" data-slug="<?php echo $slug ?>">
 						<?php
 						if($country_param):
-							$country_count = ': ' . $country_param_title . ' (' . sponsor_count_by_country( $country_param_id, $sponsor_query ) . ')';
+							$country_count = ': ' . $country_param_title . ' (' . get_sponsor_count( 'country', $country_param_id, $sponsor_query ) . ')';
 						endif;
 						echo '<span>Country</span><span class="showing">' . $country_count . '</span>';
 						?>
@@ -45,7 +45,7 @@
 						$country_id = $country->ID;
 						$country_slug = $country->post_name;
 						$country_title = $country->post_title;
-						$country_count = sponsor_count_by_country( $country_id, $sponsor_query );
+						$country_count = get_sponsor_count( 'country', $country_id, $sponsor_query );
 						$filter_url = $page_url . '?from=' . $country_slug;
 						if( $country_count != 0 ):
 							if( $country_param == $country_slug ):

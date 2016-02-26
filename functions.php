@@ -291,9 +291,11 @@ function event_column_orderby( $vars ) {
 			'orderby' => 'meta_value'
 		) );
 	endif;
-	$vars = array_merge( $vars, array (
-		'order' => $vars['order']
-	) );
+	if( isset($vars['order'] ) ):
+		$vars = array_merge( $vars, array (
+			'order' => $vars['order']
+		) );
+	endif;
 	return $vars;
 }
 add_filter( 'request', 'event_column_orderby' );
@@ -318,35 +320,35 @@ add_filter('manage_resident_posts_columns' , 'add_resident_columns');
 
 function custom_resident_column( $column, $post_id ) {
     switch ( $column ) {
-      case 'country':
-        $country = get_field( 'country', $post_id )[0]->post_title;
-        echo $country;
-        break;
+      	case 'country':
+	        $country = get_field( 'country', $post_id )[0]->post_title;
+	        echo $country;
+	        break;
 
-      case 'residency_program':
-        $program = get_post_meta( $post_id , 'residency_program' , true );
-        echo get_program_title( $program );
-        break;
+      	case 'residency_program':
+	        $program = get_post_meta( $post_id , 'residency_program' , true );
+	        echo get_program_title( $program );
+	        break;
 
-	case 'start_date':
-		$start_date = get_post_meta( $post_id , 'residency_dates_0_start_date' , true );
-		if($start_date && $start_date != '' && $start_date != 'Invalid date') {  
-			$start_date = new DateTime($start_date);
-			echo $start_date->format('Y/m/d');
-		} else {
-			echo '';
-		}
-		break;
+		case 'start_date':
+			$start_date = get_post_meta( $post_id , 'residency_dates_0_start_date' , true );
+			if($start_date && $start_date != '' && $start_date != 'Invalid date') {  
+				$start_date = new DateTime($start_date);
+				echo $start_date->format('Y/m/d');
+			} else {
+				echo '';
+			}
+			break;
 
-      case 'end_date':
-        $end_date = get_post_meta( $post_id , 'residency_dates_0_end_date' , true );
-        if($end_date && $end_date != '' && $end_date != 'Invalid date') {  
-        	$end_date = new DateTime($end_date);
-        	echo $end_date->format('Y/m/d');
-        } else {
-        	echo '';
-        }
-        break;
+      	case 'end_date':
+	        $end_date = get_post_meta( $post_id , 'residency_dates_0_end_date' , true );
+	        if($end_date && $end_date != '' && $end_date != 'Invalid date') {  
+	        	$end_date = new DateTime($end_date);
+	        	echo $end_date->format('Y/m/d');
+	        } else {
+	        	echo '';
+	        }
+	        break;
     }
 }
 add_action( 'manage_resident_posts_custom_column' , 'custom_resident_column', 10, 2 );
@@ -385,9 +387,11 @@ function resident_column_orderby( $vars ) {
 			'orderby' => 'meta_value_num'
 		) );
 	endif;
-	$vars = array_merge( $vars, array (
-		'order' => $vars['order']
-	) );
+	if( isset( $vars['order'] ) ):
+		$vars = array_merge( $vars, array (
+			'order' => $vars['order']
+		) );
+	endif;
 	return $vars;
 }
 add_filter( 'request', 'resident_column_orderby' );
@@ -987,7 +991,7 @@ function get_dimensions() {
 	endif;
 
 
-    return $ins . ' in (' . $cms . ' cm)';
+    return $ins . ' in. (' . $cms . ' cm)';
 }
 
 function convert_unit( $int, $unit ) {
@@ -1071,7 +1075,7 @@ function query_url( $key, $value, $url, $filter = null ) {
 	endif;
 
 	foreach($params as $_key => $_value):
-		if($url):
+		if( strpos($url, '?') ):
 			$url .= '&';
 		else:
 			$url .= '?';
@@ -1129,51 +1133,49 @@ function get_resident_count( $type, $value, $page_query = null ) {
 	return $count;
 }
 
-function event_count_by_type( $event_type ) {
-	$event_type_meta_query = array(
-		'key' => 'event_type',
-		'type' => 'CHAR',
-		'value' => $event_type,
-		'compare' => 'LIKE'
-	);
-	$event_type_query_args = array(
-		'post_type' => 'event',
-		'posts_per_page' => -1,
-		'post_status' => 'publish',
-		'meta_query' => array( $event_type_meta_query, $date_query )
-	);
-	$event_type_query = new WP_Query( $event_type_query_args );
-	$event_type_count = $event_type_query->found_posts;
-	return $event_type_count;
-}
+function get_event_count( $type, $value ) {
+	$meta_query = array();
 
+	if( $type == 'type' ):
+		$event_type_query = array(
+			'key' => 'event_type',
+			'type' => 'CHAR',
+			'value' => $value,
+			'compare' => 'LIKE'
+		);
+		$meta_query = array_merge( $meta_query, $event_type_query );
+	endif;
 
-function event_count_by_year( $year ) {
-	$year_begin = $year . '0101';
-	$year_end = $year . '1231';
-	$year_range = array( $year_begin, $year_end );
-	$year_meta_query = array(
-		'relation' => 'OR',
-		array(
-			'key' => 'start_date',
-			'type' => 'DATE',
-			'value' => $year_range,
-			'compare' => 'BETWEEN'
-		),
-		array(
-			'key' => 'end_date',
-			'type' => 'DATE',
-			'value' => $year_range,
-			'compare' => 'BETWEEN'
-		),
-		array(
-			'key' => 'date',
-			'type' => 'DATE',
-			'value' => $year_range,
-			'compare' => 'BETWEEN'
-		)
-	);
+	if( $type == 'year' ):
+		$year = $value;
+		$year_begin = $year . '0101';
+		$year_end = $year . '1231';
+		$year_range = array( $year_begin, $year_end );
+		$year_query = array(
+			'relation' => 'OR',
+			array(
+				'key' => 'start_date',
+				'type' => 'DATE',
+				'value' => $year_range,
+				'compare' => 'BETWEEN'
+			),
+			array(
+				'key' => 'end_date',
+				'type' => 'DATE',
+				'value' => $year_range,
+				'compare' => 'BETWEEN'
+			),
+			array(
+				'key' => 'date',
+				'type' => 'DATE',
+				'value' => $year_range,
+				'compare' => 'BETWEEN'
+			)
+		);
+		$meta_query = array_merge( $meta_query, $year_query );
+	endif;
 
+	//only filter past events
 	$today = date('Ymd');
 	$date_query = array(
 		'relation' => 'AND',
@@ -1189,32 +1191,40 @@ function event_count_by_year( $year ) {
 		)
 	);
 
-	$year_query_args = array(
+	$query_args = array(
 		'post_type' => 'event',
 		'posts_per_page' => -1,
 		'post_status' => 'publish',
-		'meta_query' => array( $year_meta_query, $date_query )
+		'meta_query' => array( $meta_query, $date_query )
 	);
-	$year_query = new WP_Query( $year_query_args );
-	$year_count = $year_query->found_posts;
-	return $year_count;
+
+	$query = new WP_Query( $query_args );
+	$count = $query->found_posts;
+	return $count;
 }
 
-function sponsor_count_by_country( $country_id, $page_query ) {
-	$country_meta_query = array(
-		'key' => 'country',
-		'value' => '"' . $country_id . '"',
-		'compare' => 'LIKE'
-	);
-	$country_query_args = array(
+
+function get_sponsor_count( $type, $value, $page_query ) {
+	$meta_query = array();
+
+	if( $type == 'country' ):
+		$country_query = array(
+			'key' => 'country',
+			'value' => '"' . $value . '"',
+			'compare' => 'LIKE'
+		);
+		$meta_query = array_merge( $meta_query, $year_query );
+	endif;
+
+	$query_args = array(
 		'post_type' => 'sponsor',
 		'posts_per_page' => -1,
 		'post_status' => 'publish',
-		'meta_query' => array( $country_meta_query, $page_query )
+		'meta_query' => array( $meta_query, $page_query )
 	);
-	$country_query = new WP_Query( $country_query_args );
-	$country_count = $country_query->found_posts;
-	return $country_count;
+	$query = new WP_Query( $query_args );
+	$count = $query->found_posts;
+	return $count;
 }
 
 add_filter( 'posts_orderby', function( $orderby, \WP_Query $q ) {

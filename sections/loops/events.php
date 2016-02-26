@@ -4,21 +4,26 @@ if(!$events_section):
 	$events_section = $GLOBALS['events_section'];
 endif;
 $today = date('Ymd');
+
 if( $events_section == 'past' ):
 	if( $event_type_param ):
-		$filter_key = 'event_type';
-		$filter_query = array(
+		$event_type_query = array(
 			'key' => 'event_type',
 			'type' => 'CHAR',
 			'value' => $event_type_param,
 			'compare' => 'LIKE'
 		);
-		$append_query = '?type=' . $event_type;
-	elseif( $year_param ):
+		$filter_query = array(
+			'relation' => 'AND',
+			$filter_query,
+			$event_type_query
+		);
+	endif;
+	if( $year_param ):
 		$year_begin = $year_param . '0101';
 		$year_end = $year_param . '1231';
 		$year_range = array( $year_begin, $year_end );
-		$filter_query = array(
+		$year_query = array(
 			'relation' => 'OR',
 			array(
 				'key' => 'start_date',
@@ -33,7 +38,11 @@ if( $events_section == 'past' ):
 				'compare' => 'BETWEEN'
 			)
 		);
-		$append_query = '?date=' . $year_param;
+		$filter_query = array(
+			'relation' => 'AND',
+			$filter_query,
+			$year_query
+		);
 	endif;
 	$date_query = array(
 		'relation' => 'AND',
@@ -66,6 +75,7 @@ else:
 		)
 	);
 endif;
+
 $events_query = array(
 	'post_type' => 'event',
 	'posts_per_page' => 12,
@@ -74,7 +84,11 @@ $events_query = array(
 	'order' => 'DESC',
 	'post_status' => 'publish',
 	'post__not_in' => $upcoming_ids,
-	'meta_query' => array( array( 'key'=>'start_date' ), $filter_query, $date_query )
+	'meta_query' => array(
+		array( 'key'=>'start_date' ),
+		$date_query,
+		$filter_query
+	)
 );
 $upcoming_ids = array();
 $events = new WP_Query( $events_query );
