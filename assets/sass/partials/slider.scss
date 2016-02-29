@@ -102,7 +102,6 @@
 			.image {
 				width: auto;
 				width: 100%;
-				display: block;
 				img {
 					width: auto;
                     max-width: 100%;
@@ -139,6 +138,7 @@
             .image {
                 width: calc(100% - 200px) !important;
                 margin: 100px;
+                display: block;
                 position: relative;
                 .captionWrap {
                     display: table;
@@ -170,31 +170,21 @@
         }
     }
     &:not(.full) {
-        img {
-            cursor: pointer;
-            max-height: 600px;
-            @include medium {
-                max-height: 300px;
-            }
-            @include small {
-                max-height: 200px;
+        .image {
+            display: table-cell;
+            vertical-align: middle;
+            img {
+                cursor: pointer;
+                max-height: 600px;
+                @include medium {
+                    max-height: 300px;
+                }
+                @include small {
+                    max-height: 200px;
+                }
             }
         }
     }
-	// &.bg {
- //        .cursor {
- //            background-image: url(../images/gallery-cursor-orange.svg);
- //        }
-	// 	.slide {
-	// 		display: block;
-	// 		.image {
-	// 			height: 100%;
-	// 			background-size: cover;
-	// 			background-repeat: no-repeat;
-	// 			background-position: center;
-	// 		}
-	// 	}
-	// }
 }
 
 body.mobile {

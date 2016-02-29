@@ -1,5 +1,5 @@
 <?php
-include(locate_template('sections/params/residents.php'));
+include( locate_template( 'sections/params/residents.php' ) );
 if( $country_param ):
 	$country_query = array(
 		'key' => 'country',
@@ -12,6 +12,7 @@ if( $country_param ):
 		$country_query
 	);
 endif;
+
 if( $year_param ):
 	$year_begin = $year_param . '0101';
 	$year_end = $year_param . '1231';

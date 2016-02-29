@@ -6,6 +6,7 @@ $today = new DateTime();
 $today = $today->format( 'Ymd' );
 $event_classes = $event_type_param . ' ' . $year_param;
 $page_url = get_the_permalink();
+$delay = $post->delay;
 $paged = 1;
 if( $query_vars ):
 	$slug = $query_vars['pagename'];

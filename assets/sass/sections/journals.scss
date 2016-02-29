@@ -1,5 +1,23 @@
 section.journal {
 	.content {
+		.bar {
+			transition: opacity 300ms ease-in-out;
+			&.hide {
+				opacity: 0;
+				.link:hover {
+					cursor: default;
+				}
+			}
+			.select {
+				margin: 0;
+				display: inline-block;
+				float: none;
+				vertical-align: bottom;
+				.swap {
+					margin-top: 0;
+				}
+			}
+		}
 		.journal {
 		    position: relative;
 		    overflow: hidden;
@@ -54,9 +72,6 @@ section.journal {
 		 		position: absolute;
 		 		bottom: 0;
 		 	}
-		}
-		.filter .select {
-			cursor: default;
 		}
 	}
 }

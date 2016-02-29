@@ -48,136 +48,133 @@ $about = get_page_by_path( 'about' );
 		
 		<script type="text/javascript">
 		function initMap() {
-			window.onload = function() {
-				var mapStyle = new google.maps.StyledMapType([
-				    {
-				        "featureType": "all",
-				        "elementType": "geometry.fill",
-				        "stylers": [
-				            {
-				                "color": "#ffffff"
-				            }
-				        ]
-				    },
-				    {
-				        "featureType": "all",
-				        "elementType": "geometry.stroke",
-				        "stylers": [
-				            {
-				                "color": "#ff5000"
-				            }
-				        ]
-				    },
-				    {
-				        "featureType": "all",
-				        "elementType": "labels.text.fill",
-				        "stylers": [
-				            {
-				                "color": "#14233E"
-				            }
-				        ]
-				    },
-				    {
-				        "featureType": "all",
-				        "elementType": "labels.text.stroke",
-				        "stylers": [
-				            {
-				                "color": "#ffffff"
-				            }
-				        ]
-				    },
-				    {
-				        "featureType": "road.arterial",
-				        "elementType": "geometry.fill",
-				        "stylers": [
-				            {
-				                "color": "#facab4"
-				            }
-				        ]
-				    },
-				    {
-				        "featureType": "road.local",
-				        "elementType": "geometry.fill",
-				        "stylers": [
-				            {
-				                "color": "#facab4"
-				            }
-				        ]
-				    },
-				    {
-				        "featureType": "road.highway.controlled_access",
-				        "elementType": "geometry.fill",
-				        "stylers": [
-				            {
-				                "color": "#facab4"
-				            }
-				        ]
-				    },
-				    {
-				        "featureType": "transit.line",
-				        "elementType": "geometry.fill",
-				        "stylers": [
-				            {
-				                "color": "#14233E"
-				            }
-				        ]
-				    },
-				    {
-				        "featureType": "transit.line",
-				        "elementType": "geometry.stroke",
-				        "stylers": [
-				            {
-				                "color": "#14233E"
-				            }
-				        ]
-				    },
-				    {
-				        "featureType": "water",
-				        "elementType": "geometry.fill",
-				        "stylers": [
-				            {
-				                "color": "#b3d1ff"
-				            }
-				        ]
-				    }
-				]);
-				var mapStyleId = 'orange';
-				var map;
-				var location = new google.maps.LatLng(40.714229, -73.934692);
-				map = new google.maps.Map(document.getElementById('map'), {
-					center: location,
-					zoom: 15,
-					scrollwheel: false,
-					navigationControl: false,
-					mapTypeControl: false,
-					scaleControl: false,
-					mapTypeId: mapStyleId
-				});
-				map.mapTypes.set(mapStyleId, mapStyle);
-				map.setMapTypeId(mapStyleId);
+			var mapStyle = new google.maps.StyledMapType([
+			    {
+			        "featureType": "all",
+			        "elementType": "geometry.fill",
+			        "stylers": [
+			            {
+			                "color": "#ffffff"
+			            }
+			        ]
+			    },
+			    {
+			        "featureType": "all",
+			        "elementType": "geometry.stroke",
+			        "stylers": [
+			            {
+			                "color": "#ff5000"
+			            }
+			        ]
+			    },
+			    {
+			        "featureType": "all",
+			        "elementType": "labels.text.fill",
+			        "stylers": [
+			            {
+			                "color": "#14233E"
+			            }
+			        ]
+			    },
+			    {
+			        "featureType": "all",
+			        "elementType": "labels.text.stroke",
+			        "stylers": [
+			            {
+			                "color": "#ffffff"
+			            }
+			        ]
+			    },
+			    {
+			        "featureType": "road.arterial",
+			        "elementType": "geometry.fill",
+			        "stylers": [
+			            {
+			                "color": "#facab4"
+			            }
+			        ]
+			    },
+			    {
+			        "featureType": "road.local",
+			        "elementType": "geometry.fill",
+			        "stylers": [
+			            {
+			                "color": "#facab4"
+			            }
+			        ]
+			    },
+			    {
+			        "featureType": "road.highway.controlled_access",
+			        "elementType": "geometry.fill",
+			        "stylers": [
+			            {
+			                "color": "#facab4"
+			            }
+			        ]
+			    },
+			    {
+			        "featureType": "transit.line",
+			        "elementType": "geometry.fill",
+			        "stylers": [
+			            {
+			                "color": "#14233E"
+			            }
+			        ]
+			    },
+			    {
+			        "featureType": "transit.line",
+			        "elementType": "geometry.stroke",
+			        "stylers": [
+			            {
+			                "color": "#14233E"
+			            }
+			        ]
+			    },
+			    {
+			        "featureType": "water",
+			        "elementType": "geometry.fill",
+			        "stylers": [
+			            {
+			                "color": "#b3d1ff"
+			            }
+			        ]
+			    }
+			]);
+			var mapStyleId = 'orange';
+			var map;
+			var location = new google.maps.LatLng(40.714229, -73.934692);
+			map = new google.maps.Map(document.getElementById('map'), {
+				center: location,
+				zoom: 15,
+				scrollwheel: false,
+				navigationControl: false,
+				mapTypeControl: false,
+				scaleControl: false,
+				mapTypeId: mapStyleId
+			});
+			map.mapTypes.set(mapStyleId, mapStyle);
+			map.setMapTypeId(mapStyleId);
 
-				<?php
-				$theme = get_template_directory_uri();
-				$marker = $theme .'/assets/images/marker.svg'
-				?>
+			<?php
+			$theme = get_template_directory_uri();
+			$marker = $theme .'/assets/images/marker.svg'
+			?>
 
-				var markerImage = new google.maps.MarkerImage('<?php echo $marker; ?>',
-				    new google.maps.Size(50, 50),
-				    new google.maps.Point(0, 0),
-				    new google.maps.Point(0, 50));
-				var marker = new google.maps.Marker({
-				    position: location,
-				    title: 'ISCP',
-				    map: map,
-				    icon: markerImage
-				});
+			var markerImage = new google.maps.MarkerImage('<?php echo $marker; ?>',
+			    new google.maps.Size(50, 50),
+			    new google.maps.Point(0, 0),
+			    new google.maps.Point(0, 50));
+			var marker = new google.maps.Marker({
+			    position: location,
+			    title: 'ISCP',
+			    map: map,
+			    icon: markerImage
+			});
 
-			  	google.maps.event.addDomListener(window, 'resize', function() {
-			  		google.maps.event.trigger(map, 'resize');
-				    map.setCenter(location);
-				});
-
-			}
+		  	google.maps.event.addDomListener(window, 'resize', function() {
+		  		google.maps.event.trigger(map, 'resize');
+			    map.setCenter(location);
+			});
 		}
 	    </script>
 	    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyApM4iQyAfb0hbmkeXc_zs58aA_Jy0SIac&callback=initMap"></script>

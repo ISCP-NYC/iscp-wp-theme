@@ -1287,8 +1287,8 @@ section {
       float: left;
       padding-bottom: 60px;
       margin-bottom: 60px;
-      -webkit-transition: color 150ms ease-in-out;
-              transition: color 150ms ease-in-out; }
+      -webkit-transition: color 150ms ease-in-out, opacity 300ms ease-in-out;
+              transition: color 150ms ease-in-out, opacity 300ms ease-in-out; }
       /* line 15, ../sass/partials/shelves.scss */
       section .shelves.grid .shelf-item * {
         -webkit-transition: color 150ms ease-in-out;
@@ -1832,40 +1832,47 @@ h4, .small {
   border-left: 5px solid #ff5000; }
 
 /* line 284, ../sass/styles.scss */
+.items.removing {
+  opacity: 0;
+  -webkit-transition: opacity 300ms ease-in-out;
+          transition: opacity 300ms ease-in-out; }
+
+/* line 288, ../sass/styles.scss */
 .item {
-  -webkit-transition: opacity 200ms ease-in-out;
-          transition: opacity 200ms ease-in-out; }
-  /* line 286, ../sass/styles.scss */
+  opacity: 1;
+  -webkit-transition: opacity 300ms ease-in-out;
+          transition: opacity 300ms ease-in-out; }
+  /* line 291, ../sass/styles.scss */
   .item.hide {
     opacity: 0; }
 
-/* line 290, ../sass/styles.scss */
+/* line 295, ../sass/styles.scss */
 body.login {
   background-color: #ff5000;
   color: #fff; }
-  /* line 293, ../sass/styles.scss */
+  /* line 298, ../sass/styles.scss */
   body.login main {
     width: 100% !important;
     display: table; }
-    /* line 296, ../sass/styles.scss */
+    /* line 301, ../sass/styles.scss */
     body.login main .login {
       width: 100%;
       display: table-cell;
       vertical-align: middle;
       text-align: center; }
-      /* line 302, ../sass/styles.scss */
+      /* line 307, ../sass/styles.scss */
       body.login main .login h1 {
         font-size: 90px;
         line-height: 110px;
         margin-bottom: 25px; }
-      /* line 307, ../sass/styles.scss */
+      /* line 312, ../sass/styles.scss */
       body.login main .login a {
         font-size: 18px;
         line-height: 21px;
         color: #fff;
         margin: 0 25px; }
         @media (max-width: 900px) {
-          /* line 307, ../sass/styles.scss */
+          /* line 312, ../sass/styles.scss */
           body.login main .login a {
             font-size: 16px;
             line-height: 20px; } }
@@ -1979,9 +1986,8 @@ body.login {
       /* line 102, ../sass/partials/slider.scss */
       .image_slider .slides .slide .image {
         width: auto;
-        width: 100%;
-        display: block; }
-        /* line 106, ../sass/partials/slider.scss */
+        width: 100%; }
+        /* line 105, ../sass/partials/slider.scss */
         .image_slider .slides .slide .image img {
           width: auto;
           max-width: 100%;
@@ -1989,7 +1995,7 @@ body.login {
           display: table;
           margin: auto;
           cursor: pointer; }
-      /* line 115, ../sass/partials/slider.scss */
+      /* line 114, ../sass/partials/slider.scss */
       .image_slider .slides .slide .caption {
         width: 100%;
         font-size: 18px;
@@ -1997,11 +2003,11 @@ body.login {
         text-align: center;
         padding-top: 10px; }
         @media (max-width: 900px) {
-          /* line 115, ../sass/partials/slider.scss */
+          /* line 114, ../sass/partials/slider.scss */
           .image_slider .slides .slide .caption {
             font-size: 16px;
             line-height: 20px; } }
-  /* line 123, ../sass/partials/slider.scss */
+  /* line 122, ../sass/partials/slider.scss */
   .image_slider.full {
     width: 100% !important;
     height: 100% !important;
@@ -2012,17 +2018,18 @@ body.login {
     z-index: 1000;
     cursor: none !important;
     display: table; }
-    /* line 133, ../sass/partials/slider.scss */
+    /* line 132, ../sass/partials/slider.scss */
     .image_slider.full .arrow {
       display: none; }
-    /* line 136, ../sass/partials/slider.scss */
+    /* line 135, ../sass/partials/slider.scss */
     .image_slider.full .piece {
       margin: 0 !important;
       display: table; }
-      /* line 139, ../sass/partials/slider.scss */
+      /* line 138, ../sass/partials/slider.scss */
       .image_slider.full .piece .image {
         width: calc(100% - 200px) !important;
         margin: 100px;
+        display: block;
         position: relative; }
         /* line 143, ../sass/partials/slider.scss */
         .image_slider.full .piece .image .captionWrap {
@@ -2060,22 +2067,26 @@ body.login {
               width: auto !important;
               height: auto !important; }
   /* line 173, ../sass/partials/slider.scss */
-  .image_slider:not(.full) img {
-    cursor: pointer;
-    max-height: 600px; }
-    @media (max-width: 900px) {
-      /* line 173, ../sass/partials/slider.scss */
-      .image_slider:not(.full) img {
-        max-height: 300px; } }
-    @media (max-width: 768px) {
-      /* line 173, ../sass/partials/slider.scss */
-      .image_slider:not(.full) img {
-        max-height: 200px; } }
+  .image_slider:not(.full) .image {
+    display: table-cell;
+    vertical-align: middle; }
+    /* line 176, ../sass/partials/slider.scss */
+    .image_slider:not(.full) .image img {
+      cursor: pointer;
+      max-height: 600px; }
+      @media (max-width: 900px) {
+        /* line 176, ../sass/partials/slider.scss */
+        .image_slider:not(.full) .image img {
+          max-height: 300px; } }
+      @media (max-width: 768px) {
+        /* line 176, ../sass/partials/slider.scss */
+        .image_slider:not(.full) .image img {
+          max-height: 200px; } }
 
-/* line 202, ../sass/partials/slider.scss */
+/* line 192, ../sass/partials/slider.scss */
 body.mobile .gallery .cursor {
   display: none !important; }
-/* line 206, ../sass/partials/slider.scss */
+/* line 196, ../sass/partials/slider.scss */
 body.mobile .gallery.full .arrow {
   display: block; }
 
@@ -3186,230 +3197,242 @@ section.single.event.cols_1 .gallery {
 .home .module.newsletter {
   padding: 0 !important; }
 
-/* line 2, ../sass/sections/map.scss */
-section#map #mapWrap {
-  width: 100%;
-  height: 100%; }
+/* line 1, ../sass/sections/map.scss */
+section#map {
+  opacity: 0; }
+  /* line 3, ../sass/sections/map.scss */
+  section#map.show {
+    opacity: 1; }
   /* line 6, ../sass/sections/map.scss */
-  section#map #mapWrap canvas {
-    cursor: -webkit-grab;
-    cursor: grab; }
-    /* line 8, ../sass/sections/map.scss */
-    section#map #mapWrap canvas.grabbing {
-      cursor: -webkit-grabbing;
-      cursor: grabbing; }
-  /* line 12, ../sass/sections/map.scss */
-  section#map #mapWrap .marker {
-    width: 30px;
-    height: 30px;
-    margin-left: -15px;
-    margin-top: -30px; }
-    /* line 17, ../sass/sections/map.scss */
-    section#map #mapWrap .marker:hover {
-      z-index: 200; }
-      /* line 20, ../sass/sections/map.scss */
-      section#map #mapWrap .marker:hover .swap .default {
-        opacity: 0; }
-      /* line 23, ../sass/sections/map.scss */
-      section#map #mapWrap .marker:hover .swap .hover {
-        opacity: 1; }
-  /* line 29, ../sass/sections/map.scss */
-  section#map #mapWrap .we-pm-icon {
-    background-image: none !important;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: contain;
-    color: #fff;
-    text-align: center;
-    display: table;
-    cursor: pointer;
-    margin: 0 !important; }
-    /* line 39, ../sass/sections/map.scss */
-    section#map #mapWrap .we-pm-icon .swap {
-      width: 100%;
-      height: 100%;
-      position: absolute;
-      top: 0;
-      left: 0; }
-      /* line 45, ../sass/sections/map.scss */
-      section#map #mapWrap .we-pm-icon .swap .default {
-        background-image: url(../images/bullet-orange.svg); }
+  section#map #mapWrap {
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    -webkit-transition: opacity 400ms cubic-bezier(0.77, 0, 0.175, 1);
+            transition: opacity 400ms cubic-bezier(0.77, 0, 0.175, 1); }
+    /* line 11, ../sass/sections/map.scss */
+    section#map #mapWrap.show {
+      opacity: 1; }
+    /* line 15, ../sass/sections/map.scss */
+    section#map #mapWrap canvas {
+      cursor: -webkit-grab;
+      cursor: grab; }
+      /* line 17, ../sass/sections/map.scss */
+      section#map #mapWrap canvas.grabbing {
+        cursor: -webkit-grabbing;
+        cursor: grabbing; }
+    /* line 21, ../sass/sections/map.scss */
+    section#map #mapWrap .marker {
+      width: 30px;
+      height: 30px;
+      margin-left: -15px;
+      margin-top: -30px; }
+      /* line 26, ../sass/sections/map.scss */
+      section#map #mapWrap .marker:hover {
+        z-index: 200; }
+        /* line 29, ../sass/sections/map.scss */
+        section#map #mapWrap .marker:hover .swap .default {
+          opacity: 0; }
+        /* line 32, ../sass/sections/map.scss */
+        section#map #mapWrap .marker:hover .swap .hover {
+          opacity: 1; }
+    /* line 38, ../sass/sections/map.scss */
+    section#map #mapWrap .we-pm-icon {
+      background-image: none !important;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: contain;
+      color: #fff;
+      text-align: center;
+      display: table;
+      cursor: pointer;
+      margin: 0 !important; }
       /* line 48, ../sass/sections/map.scss */
-      section#map #mapWrap .we-pm-icon .swap .hover {
-        background-image: url(../images/bullet-black.svg); }
-    /* line 52, ../sass/sections/map.scss */
-    section#map #mapWrap .we-pm-icon .count {
+      section#map #mapWrap .we-pm-icon .swap {
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        top: 0;
+        left: 0; }
+        /* line 54, ../sass/sections/map.scss */
+        section#map #mapWrap .we-pm-icon .swap .default {
+          background-image: url(../images/bullet-orange.svg); }
+        /* line 57, ../sass/sections/map.scss */
+        section#map #mapWrap .we-pm-icon .swap .hover {
+          background-image: url(../images/bullet-black.svg); }
+      /* line 61, ../sass/sections/map.scss */
+      section#map #mapWrap .we-pm-icon .count {
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        top: 0;
+        left: 0;
+        display: table; }
+        /* line 68, ../sass/sections/map.scss */
+        section#map #mapWrap .we-pm-icon .count span {
+          display: table-cell;
+          vertical-align: middle;
+          font-size: 18px;
+          line-height: 0; }
+  /* line 77, ../sass/sections/map.scss */
+  section#map .logo {
+    width: 70px;
+    height: 40px;
+    position: absolute;
+    top: 30px;
+    left: 20px;
+    z-index: 100; }
+    /* line 84, ../sass/sections/map.scss */
+    section#map .logo .icon {
+      background-size: 60px;
+      background-position: center;
+      background-repeat: no-repeat; }
+      /* line 88, ../sass/sections/map.scss */
+      section#map .logo .icon.default {
+        background-image: url(../images/logo-orange.svg); }
+      /* line 91, ../sass/sections/map.scss */
+      section#map .logo .icon.hover {
+        background-image: url(../images/logo-black.svg); }
+  /* line 96, ../sass/sections/map.scss */
+  section#map .buttons {
+    position: absolute;
+    top: 35px;
+    right: 20px;
+    z-index: 100; }
+    /* line 101, ../sass/sections/map.scss */
+    section#map .buttons .zoom {
+      float: left;
+      width: 30px;
+      height: 30px;
+      margin-left: 10px;
+      cursor: pointer; }
+      /* line 107, ../sass/sections/map.scss */
+      section#map .buttons .zoom .icon {
+        background-size: 30px 60px; }
+        /* line 109, ../sass/sections/map.scss */
+        section#map .buttons .zoom .icon.default {
+          background-image: url(../images/zoom-orange.svg); }
+        /* line 112, ../sass/sections/map.scss */
+        section#map .buttons .zoom .icon.hover {
+          background-image: url(../images/zoom-black.svg); }
+      /* line 116, ../sass/sections/map.scss */
+      section#map .buttons .zoom.in .icon {
+        background-position: top center; }
+      /* line 119, ../sass/sections/map.scss */
+      section#map .buttons .zoom.out .icon {
+        background-position: bottom center; }
+  /* line 124, ../sass/sections/map.scss */
+  section#map .residents {
+    width: 100%;
+    height: auto;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    z-index: 300;
+    background: #ff5000;
+    color: #fff;
+    -webkit-transition: -webkit-transform 500ms cubic-bezier(0.645, 0.045, 0.355, 1);
+            transition: transform 500ms cubic-bezier(0.645, 0.045, 0.355, 1);
+    overflow-y: hidden; }
+    /* line 135, ../sass/sections/map.scss */
+    section#map .residents.tease:not(.open) {
+      -webkit-transition-duration: 300ms;
+              transition-duration: 300ms;
+      -webkit-transform: translateY(calc(-24px - 60px));
+          -ms-transform: translateY(calc(-24px - 60px));
+              transform: translateY(calc(-24px - 60px)); }
+    /* line 140, ../sass/sections/map.scss */
+    section#map .residents.show .close {
+      opacity: 1; }
+    /* line 144, ../sass/sections/map.scss */
+    section#map .residents .head {
       width: 100%;
-      height: 100%;
       position: absolute;
       top: 0;
       left: 0;
-      display: table; }
-      /* line 59, ../sass/sections/map.scss */
-      section#map #mapWrap .we-pm-icon .count span {
-        display: table-cell;
-        vertical-align: middle;
-        font-size: 18px;
-        line-height: 0; }
-/* line 68, ../sass/sections/map.scss */
-section#map .logo {
-  width: 70px;
-  height: 40px;
-  position: absolute;
-  top: 30px;
-  left: 20px;
-  z-index: 100; }
-  /* line 75, ../sass/sections/map.scss */
-  section#map .logo .icon {
-    background-size: 60px;
-    background-position: center;
-    background-repeat: no-repeat; }
-    /* line 79, ../sass/sections/map.scss */
-    section#map .logo .icon.default {
-      background-image: url(../images/logo-orange.svg); }
-    /* line 82, ../sass/sections/map.scss */
-    section#map .logo .icon.hover {
-      background-image: url(../images/logo-black.svg); }
-/* line 87, ../sass/sections/map.scss */
-section#map .buttons {
-  position: absolute;
-  top: 35px;
-  right: 20px;
-  z-index: 100; }
-  /* line 92, ../sass/sections/map.scss */
-  section#map .buttons .zoom {
-    float: left;
-    width: 30px;
-    height: 30px;
-    margin-left: 10px;
-    cursor: pointer; }
-    /* line 98, ../sass/sections/map.scss */
-    section#map .buttons .zoom .icon {
-      background-size: 30px 60px; }
-      /* line 100, ../sass/sections/map.scss */
-      section#map .buttons .zoom .icon.default {
-        background-image: url(../images/zoom-orange.svg); }
-      /* line 103, ../sass/sections/map.scss */
-      section#map .buttons .zoom .icon.hover {
-        background-image: url(../images/zoom-black.svg); }
-    /* line 107, ../sass/sections/map.scss */
-    section#map .buttons .zoom.in .icon {
-      background-position: top center; }
-    /* line 110, ../sass/sections/map.scss */
-    section#map .buttons .zoom.out .icon {
-      background-position: bottom center; }
-/* line 115, ../sass/sections/map.scss */
-section#map .residents {
-  width: 100%;
-  height: auto;
-  position: absolute;
-  top: 100%;
-  left: 0;
-  z-index: 300;
-  background: #ff5000;
-  color: #fff;
-  -webkit-transition: -webkit-transform 500ms cubic-bezier(0.645, 0.045, 0.355, 1);
-          transition: transform 500ms cubic-bezier(0.645, 0.045, 0.355, 1);
-  overflow-y: hidden; }
-  /* line 126, ../sass/sections/map.scss */
-  section#map .residents.tease:not(.open) {
-    -webkit-transition-duration: 300ms;
-            transition-duration: 300ms;
-    -webkit-transform: translateY(calc(-24px - 60px));
-        -ms-transform: translateY(calc(-24px - 60px));
-            transform: translateY(calc(-24px - 60px)); }
-  /* line 131, ../sass/sections/map.scss */
-  section#map .residents.show .close {
-    opacity: 1; }
-  /* line 135, ../sass/sections/map.scss */
-  section#map .residents .head {
-    width: 100%;
-    position: absolute;
-    top: 0;
-    left: 0;
-    padding: 30px 0 25px 0;
-    font-size: 24px;
-    line-height: 24px;
-    text-align: center;
-    background-color: #ff5000;
-    display: block;
-    color: #fff;
-    box-shadow: 0px 0px 15px 5px #ff5000;
-    z-index: 300; }
-  /* line 150, ../sass/sections/map.scss */
-  section#map .residents .content {
-    width: 80%;
-    max-width: 1000px;
-    height: calc(100% - 24px - 65px);
-    padding: 0;
-    padding-top: calc(24px + 65px);
-    margin: auto;
-    overflow-y: scroll;
-    -webkit-overflow-scrolling: touch;
-    border: none; }
-    /* line 160, ../sass/sections/map.scss */
-    section#map .residents .content .titles {
-      width: 100%;
-      display: -webkit-box;
-      display: -webkit-flex;
-      display: -ms-flexbox;
-      display: flex;
-      margin-bottom: 10px; }
-      /* line 164, ../sass/sections/map.scss */
-      section#map .residents .content .titles .title {
-        display: inline-block; }
-        /* line 166, ../sass/sections/map.scss */
-        section#map .residents .content .titles .title.name {
-          width: 40%; }
-        /* line 169, ../sass/sections/map.scss */
-        section#map .residents .content .titles .title.years {
-          width: 20%; }
-        /* line 172, ../sass/sections/map.scss */
-        section#map .residents .content .titles .title.sponsors {
-          width: 40%; }
-    /* line 177, ../sass/sections/map.scss */
-    section#map .residents .content .list {
-      padding-bottom: 30px; }
-      /* line 179, ../sass/sections/map.scss */
-      section#map .residents .content .list .row {
-        padding: 0 0 5px 0; }
-        /* line 181, ../sass/sections/map.scss */
-        section#map .residents .content .list .row .value {
-          display: inline-block;
-          color: #fff; }
-          /* line 184, ../sass/sections/map.scss */
-          section#map .residents .content .list .row .value.name {
+      padding: 30px 0 25px 0;
+      font-size: 24px;
+      line-height: 24px;
+      text-align: center;
+      background-color: #ff5000;
+      display: block;
+      color: #fff;
+      box-shadow: 0px 0px 15px 5px #ff5000;
+      z-index: 300; }
+    /* line 159, ../sass/sections/map.scss */
+    section#map .residents .content {
+      width: 80%;
+      max-width: 1000px;
+      height: calc(100% - 24px - 65px);
+      padding: 0;
+      padding-top: calc(24px + 65px);
+      margin: auto;
+      overflow-y: scroll;
+      -webkit-overflow-scrolling: touch;
+      border: none; }
+      /* line 169, ../sass/sections/map.scss */
+      section#map .residents .content .titles {
+        width: 100%;
+        display: -webkit-box;
+        display: -webkit-flex;
+        display: -ms-flexbox;
+        display: flex;
+        margin-bottom: 10px; }
+        /* line 173, ../sass/sections/map.scss */
+        section#map .residents .content .titles .title {
+          display: inline-block; }
+          /* line 175, ../sass/sections/map.scss */
+          section#map .residents .content .titles .title.name {
             width: 40%; }
-          /* line 187, ../sass/sections/map.scss */
-          section#map .residents .content .list .row .value.years {
+          /* line 178, ../sass/sections/map.scss */
+          section#map .residents .content .titles .title.years {
             width: 20%; }
-          /* line 190, ../sass/sections/map.scss */
-          section#map .residents .content .list .row .value.sponsors {
+          /* line 181, ../sass/sections/map.scss */
+          section#map .residents .content .titles .title.sponsors {
             width: 40%; }
-      /* line 195, ../sass/sections/map.scss */
-      section#map .residents .content .list a, section#map .residents .content .list .link {
-        color: #fff; }
-  /* line 200, ../sass/sections/map.scss */
-  section#map .residents .close {
-    position: absolute;
-    width: 25px;
-    height: 25px;
-    right: 30px;
-    top: 30px;
-    z-index: 400;
-    cursor: pointer;
-    -webkit-transition: opacity 200ms ease-in-out;
-            transition: opacity 200ms ease-in-out;
-    opacity: 0; }
-    /* line 210, ../sass/sections/map.scss */
-    section#map .residents .close .icon {
-      background-position: contain; }
-      /* line 212, ../sass/sections/map.scss */
-      section#map .residents .close .icon.default {
-        background-image: url(../images/close-white.svg); }
-      /* line 215, ../sass/sections/map.scss */
-      section#map .residents .close .icon.hover {
-        background-image: url(../images/close-black.svg); }
+      /* line 186, ../sass/sections/map.scss */
+      section#map .residents .content .list {
+        padding-bottom: 30px; }
+        /* line 188, ../sass/sections/map.scss */
+        section#map .residents .content .list .row {
+          padding: 0 0 5px 0; }
+          /* line 190, ../sass/sections/map.scss */
+          section#map .residents .content .list .row .value {
+            display: inline-block;
+            color: #fff; }
+            /* line 193, ../sass/sections/map.scss */
+            section#map .residents .content .list .row .value.name {
+              width: 40%; }
+            /* line 196, ../sass/sections/map.scss */
+            section#map .residents .content .list .row .value.years {
+              width: 20%; }
+            /* line 199, ../sass/sections/map.scss */
+            section#map .residents .content .list .row .value.sponsors {
+              width: 40%; }
+        /* line 204, ../sass/sections/map.scss */
+        section#map .residents .content .list a, section#map .residents .content .list .link {
+          color: #fff; }
+    /* line 209, ../sass/sections/map.scss */
+    section#map .residents .close {
+      position: absolute;
+      width: 25px;
+      height: 25px;
+      right: 30px;
+      top: 30px;
+      z-index: 400;
+      cursor: pointer;
+      -webkit-transition: opacity 200ms ease-in-out;
+              transition: opacity 200ms ease-in-out;
+      opacity: 0; }
+      /* line 219, ../sass/sections/map.scss */
+      section#map .residents .close .icon {
+        background-position: contain; }
+        /* line 221, ../sass/sections/map.scss */
+        section#map .residents .close .icon.default {
+          background-image: url(../images/close-white.svg); }
+        /* line 224, ../sass/sections/map.scss */
+        section#map .residents .close .icon.hover {
+          background-image: url(../images/close-black.svg); }
 
 /* line 3, ../sass/sections/residents.scss */
 section.residents .content h4.title {
@@ -3698,62 +3721,78 @@ section.single.resident .center {
   z-index: 0; }
 
 /* line 3, ../sass/sections/journals.scss */
+section.journal .content .bar {
+  -webkit-transition: opacity 300ms ease-in-out;
+          transition: opacity 300ms ease-in-out; }
+  /* line 5, ../sass/sections/journals.scss */
+  section.journal .content .bar.hide {
+    opacity: 0; }
+    /* line 7, ../sass/sections/journals.scss */
+    section.journal .content .bar.hide .link:hover {
+      cursor: default; }
+  /* line 11, ../sass/sections/journals.scss */
+  section.journal .content .bar .select {
+    margin: 0;
+    display: inline-block;
+    float: none;
+    vertical-align: bottom; }
+    /* line 16, ../sass/sections/journals.scss */
+    section.journal .content .bar .select .swap {
+      margin-top: 0; }
+/* line 21, ../sass/sections/journals.scss */
 section.journal .content .journal {
   position: relative;
   overflow: hidden;
   clear: both; }
-  /* line 7, ../sass/sections/journals.scss */
+  /* line 25, ../sass/sections/journals.scss */
   section.journal .content .journal .journal-post {
     margin-bottom: 30px;
     padding-bottom: 30px; }
-    /* line 10, ../sass/sections/journals.scss */
+    /* line 28, ../sass/sections/journals.scss */
     section.journal .content .journal .journal-post a {
       display: table; }
-      /* line 12, ../sass/sections/journals.scss */
+      /* line 30, ../sass/sections/journals.scss */
       section.journal .content .journal .journal-post a.image {
         margin: auto; }
-    /* line 16, ../sass/sections/journals.scss */
+    /* line 34, ../sass/sections/journals.scss */
     section.journal .content .journal .journal-post h2.name {
       display: table;
       margin-bottom: 4px; }
-    /* line 20, ../sass/sections/journals.scss */
+    /* line 38, ../sass/sections/journals.scss */
     section.journal .content .journal .journal-post header {
       margin-bottom: 10px; }
-    /* line 23, ../sass/sections/journals.scss */
+    /* line 41, ../sass/sections/journals.scss */
     section.journal .content .journal .journal-post .image {
       margin-bottom: 10px; }
-      /* line 25, ../sass/sections/journals.scss */
+      /* line 43, ../sass/sections/journals.scss */
       section.journal .content .journal .journal-post .image img {
         width: 100%;
         display: table;
         margin: auto; }
-    /* line 31, ../sass/sections/journals.scss */
+    /* line 49, ../sass/sections/journals.scss */
     section.journal .content .journal .journal-post .tags {
       margin-top: 5px; }
-      /* line 33, ../sass/sections/journals.scss */
+      /* line 51, ../sass/sections/journals.scss */
       section.journal .content .journal .journal-post .tags a {
         display: inline-table; }
-  /* line 38, ../sass/sections/journals.scss */
+  /* line 56, ../sass/sections/journals.scss */
   section.journal .content .journal .journal-post, section.journal .content .journal .sizer {
     width: calc(33.333% - 20px); }
     @media (max-width: 1280px) {
-      /* line 38, ../sass/sections/journals.scss */
+      /* line 56, ../sass/sections/journals.scss */
       section.journal .content .journal .journal-post, section.journal .content .journal .sizer {
         width: calc(50% - 15px); } }
     @media (max-width: 900px) {
-      /* line 38, ../sass/sections/journals.scss */
+      /* line 56, ../sass/sections/journals.scss */
       section.journal .content .journal .journal-post, section.journal .content .journal .sizer {
         width: 100%; } }
-  /* line 50, ../sass/sections/journals.scss */
+  /* line 68, ../sass/sections/journals.scss */
   section.journal .content .journal .size {
     display: none; }
-  /* line 53, ../sass/sections/journals.scss */
+  /* line 71, ../sass/sections/journals.scss */
   section.journal .content .journal .load-more {
     position: absolute;
     bottom: 0; }
-/* line 58, ../sass/sections/journals.scss */
-section.journal .content .filter .select {
-  cursor: default; }
 
 /* line 3, ../sass/sections/journal.scss */
 section.journal-post .content .inner {
@@ -4305,51 +4344,51 @@ section#visit .module.directions {
         font-size: 16px;
         line-height: 20px; } }
 
-/* line 335, ../sass/styles.scss */
+/* line 340, ../sass/styles.scss */
 ::-webkit-scrollbar {
   display: none; }
 
-/* line 336, ../sass/styles.scss */
+/* line 341, ../sass/styles.scss */
 ::-moz-scrollbar {
   display: none; }
 
-/* line 337, ../sass/styles.scss */
+/* line 342, ../sass/styles.scss */
 ::-o-scrollbar {
   display: none; }
 
-/* line 338, ../sass/styles.scss */
+/* line 343, ../sass/styles.scss */
 ::-google-ms-scrollbar {
   display: none; }
 
-/* line 339, ../sass/styles.scss */
+/* line 344, ../sass/styles.scss */
 ::-khtml-scrollbar {
   display: none; }
 
 @media (max-width: 2560px) {
-  /* line 340, ../sass/styles.scss */
+  /* line 345, ../sass/styles.scss */
   #size {
     content: 'xxlarge'; } }
 @media (max-width: 1824px) {
-  /* line 340, ../sass/styles.scss */
+  /* line 345, ../sass/styles.scss */
   #size {
     content: 'xlarge'; } }
 @media (max-width: 1280px) {
-  /* line 340, ../sass/styles.scss */
+  /* line 345, ../sass/styles.scss */
   #size {
     content: 'large'; } }
 @media (max-width: 1040px) {
-  /* line 340, ../sass/styles.scss */
+  /* line 345, ../sass/styles.scss */
   #size {
     content: 'xmedium'; } }
 @media (max-width: 900px) {
-  /* line 340, ../sass/styles.scss */
+  /* line 345, ../sass/styles.scss */
   #size {
     content: 'medium'; } }
 @media (max-width: 768px) {
-  /* line 340, ../sass/styles.scss */
+  /* line 345, ../sass/styles.scss */
   #size {
     content: 'small'; } }
 @media (max-width: 480px) {
-  /* line 340, ../sass/styles.scss */
+  /* line 345, ../sass/styles.scss */
   #size {
     content: 'xsmall'; } }

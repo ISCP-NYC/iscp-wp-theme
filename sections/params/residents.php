@@ -6,6 +6,7 @@ $today = new DateTime();
 $today = $today->format( 'Ymd' );
 $paged = 1;
 $post_type = $post->post_type;
+$delay = $post->delay;
 $page_query = array(
 	'key' => 'residency_dates_0_end_date',
 	'type' => 'DATE',
@@ -22,6 +23,11 @@ if( $query_vars ):
 	$program_param = $query_vars['program'];
 else:
 	$page_param = get_query_var( 'filter' ) . '-residents';
+	if( $page_param == $slug || $post_type == 'sponsor' ):
+		$country_param = get_query_var( 'from' );
+		$year_param = get_query_var( 'date' );
+		$program_param = get_query_var( 'program' );
+	endif;
 endif;
 if( $slug == 'current-residents' ):
 	$page_query = array_merge(
@@ -57,15 +63,7 @@ elseif( $post_type == 'sponsor' || $page_type == 'sponsor' || $post_type == 'res
 		'order' => 'DESC'
 	);
 endif;
-$page_param = get_query_var( 'filter' ) . '-residents';
-if( $page_param == $slug || $post_type == 'sponsor' ):
-	$country_param = get_query_var( 'from' );
-	$year_param = get_query_var( 'date' );
-	$program_param = get_query_var( 'program' );
-endif;
 $country_param_obj = get_page_by_path( $country_param, OBJECT, 'country' );
 $country_param_title = $country_param_obj->post_title;
 $country_param_id = $country_param_obj->ID;
-$short_slug = str_replace('-residents', '', $slug);
-$page_url = get_the_permalink() . '?filter=' . $short_slug;
 ?>

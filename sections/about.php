@@ -39,19 +39,14 @@
 				while( has_sub_field( 'image_slider', $id ) ):
 					$image = get_sub_field( 'image', $id );
 			        $image_url = $image['url'];
-			        $image_id = $image['id'];
-			        $orientation = get_orientation( $image_id );
-			        $caption = label_art( $image_id );
+			        $orientation = get_orientation( $image['id'] );
+			        $caption = label_art( $the_ID );
 			        echo '<div class="piece slide">';
-			        echo '<div class="inner">';
 			        echo '<div class="image ' . $orientation . '">';
-			        echo '<div class="imageWrap">';
 			        echo '<div class="captionWrap">';
 			        echo '<img src="' . $image_url . '"/>';
 			        echo '<div class="caption">';
 			        echo $caption;
-			        echo '</div>';
-			        echo '</div>';
 			        echo '</div>';
 			        echo '</div>';
 			        echo '</div>';

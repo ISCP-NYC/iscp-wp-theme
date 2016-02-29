@@ -1,5 +1,5 @@
 <?php
-include(locate_template('sections/params/events.php'));
+include( locate_template( 'sections/params/events.php' ) );
 if(!$events_section):
 	$events_section = $GLOBALS['events_section'];
 endif;

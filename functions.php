@@ -138,6 +138,23 @@ function load_more() {
 add_action( 'wp_ajax_nopriv_load_more', 'load_more' );
 add_action( 'wp_ajax_load_more', 'load_more' );
 
+function insert_filter_list() {
+	$query_vars = json_decode( stripslashes( $_POST['query_vars'] ), true );
+    $query_vars['paged'] = $_POST['page'];
+    $slug = $query_vars['pagename'];
+    $page_type = $query_vars['pagetype'];
+    $post_type = $slug;
+    if( strstr( $slug, 'residents' ) || $page_type == 'sponsor' ):
+    	$post_type = 'residents';
+    elseif( $post_type == 'journal' ):
+    	$post_type .= 's';
+    endif;
+    include( locate_template( 'sections/filters/' . $post_type . '.php' ) );
+    die();
+}
+add_action( 'wp_ajax_nopriv_insert_filter_list', 'insert_filter_list' );
+add_action( 'wp_ajax_insert_filter_list', 'insert_filter_list' );
+
 function get_search_count() {
 	$query_vars = json_decode( stripslashes( $_POST['query_vars'] ), true );
 	include( locate_template( 'other/search-count.php' ) );
@@ -917,18 +934,15 @@ function label_art() {
     	$caption .= ', ' . $medium;
     endif;
     if( $dimensions && $dimensions != ' ' ):
-    	$caption .= ', ' . $dimensions;
+    	$caption .= ', ' . $dimensions . '.';
+    elseif( $caption ):
+    	$caption .= '.';
     endif;
     if( $credit && $credit != ' ' ):
-    	if( !$dimensions || $dimensions == ' ' ):
-    		$caption .= '.' . $dimensions;
-    	endif;
-    	$caption .= '. ' . $credit;
+    	$caption .= ' ' . $credit . '.';
     endif;
     if( $photo_credit && $photo_credit != ' ' ):
-    	$caption .= '. ' . $photo_credit . '.';
-    elseif( $credit && $credit != ' ' ):
-    	$caption .= '.';
+    	$caption .= ' ' . $photo_credit . '.';
     endif;
     return $caption;
 }
@@ -1073,9 +1087,8 @@ function query_url( $key, $value, $url, $filter = null ) {
 	else:
 		$params = $this_query;
 	endif;
-
 	foreach($params as $_key => $_value):
-		if( strpos($url, '?') ):
+		if( strpos($url, '?') !== FALSE ):
 			$url .= '&';
 		else:
 			$url .= '?';

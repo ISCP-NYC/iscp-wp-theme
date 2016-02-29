@@ -1,9 +1,15 @@
 jQuery(document).ready(function($) {
 var isMobile = false;
-$(window).load(function() {
+// $(window).load(function() {
 	mobileCheck();
 	setUp();
 	setImageSliderSize();
+	$masonry = $('.journal.grid').masonry({
+		columnWidth: '.sizer',
+		itemSelector: '.item',
+		gutter: 30,
+		transitionDuration: 0
+	});
 	$masonry.masonry('layout');
 	if($('.image_slider').length > 0) {
 		setUpImageSlider();
@@ -26,14 +32,21 @@ $(window).load(function() {
 		var scrollTop = item[0].offsetTop;
 		$('.center .content').scrollTo(scrollTop);
 	}
-});
+	if($('.items[data-delay]')) {
+		$('.items[data-delay]').each(function() {
+			var delay = $(this).attr('data-delay');
+			var container = $(this);
+			setTimeout(function() {
+				var slug = $(container).parents('section').attr('id');
+				var paged = 1;
+				loadMore(slug, paged);
+				insertFilterList(slug);
+			},delay*50);
+		})
+	}
+// });
 
-$masonry = $('.journal.grid').masonry({
-	columnWidth: '.sizer',
-	itemSelector: '.item',
-	gutter: 30,
-	transitionDuration: 0
-});
+
 
 //sets width for full slider field and each section within
 function setUp() {
@@ -294,7 +307,7 @@ function slideTo(index, animate) {
 			$('main').transition({
 				left: -pageWidth * index + (index*asideWidth),
 			}, duration, 'cubic-bezier(0.645, 0.045, 0.355, 1)', function() {
-				$('section:not(.center)').addClass('hide-shelves');
+				$('section:not(.center)').addClass('hide-shelves').removeClass('open-nav');
 				$('section:not(.center)').find('.content').scrollTop(0);
 				$('section:not(.center)').scrollTop(0);
 				$('main').removeClass('sliding');
@@ -401,11 +414,23 @@ $('body').on('click', 'aside .move', function(event) {
 /////////////////////////////////////////////////////////////
 $('body').on('click', '.load-more a', function(event) {
 	event.preventDefault();
-	var paged = parseInt($(this).parents('section').attr('data-page')) + 1;
 	var slug = $(this).parents('section').attr('id');
+	var paged = parseInt($(this).parents('section').attr('data-page')) + 1;
+	loadMore(slug, paged);
+});
+
+function loadMore(slug, paged) {
+	var section = $('section#'+slug);
+	var params = getParams();
 	var vars = ajaxpagination.query_vars;
-	var section = $(this).parents('section');
 	vars = JSON.parse(vars);
+	if(!vars.length) {
+		vars = {
+			'page': paged,
+			'pagename': slug
+		};
+	}
+	vars = $.extend(vars, params);
 	if($(section).is('.events')) {
 		var upcomingIds = [];
 		$(section).find('.item.upcoming').each(function() {
@@ -421,7 +446,6 @@ $('body').on('click', '.load-more a', function(event) {
 		vars['pagetype'] = 'sponsor';
 	}
 	vars['paged'] = paged;
-	console.log(vars);
 	vars = JSON.stringify(vars);
 	$.ajax({
 		url: ajaxpagination.ajaxurl,
@@ -435,15 +459,14 @@ $('body').on('click', '.load-more a', function(event) {
 			loading(vars, 'loading');
 		},
 		success: function(response) {
-			console.log(response);
 			addItems(response, vars);
 		}
 	});
-});
+}
+
 function loading(vars, classes) {
 	var vars = JSON.parse(vars);
 	var sectionSlug = vars.pagename;
-	if(sectionSlug == 'journals') {sectionSlug='journal';}
 	var section = $('section#'+sectionSlug);
 	$(section).addClass(classes);
 }
@@ -467,8 +490,7 @@ function addItems(html, vars) {
 		$(section).attr('data-page', paged);
 		$(section).removeClass('loading');
 		$(section).find('.load-more').remove();
-		$(html).each(function() {
-			var item = this;
+		$(html).each(function(i, item) {
 			if(!$(item).hasClass('load-more')) {
 				$(item).addClass('hide');
 			}
@@ -477,8 +499,10 @@ function addItems(html, vars) {
 			} else {
 				$(container).append($(item));
 			}
-			$(container).imagesLoaded(function() {
-				$(item).removeClass('hide');
+			$(item).imagesLoaded(function() {
+				setTimeout(function() {
+					$(item).removeClass('hide');
+				}, i*100);
 				$masonry.masonry('layout');
 			});
 		});
@@ -548,6 +572,35 @@ function getNeighbors(direction, type) {
 /////////////////////////////////////////////////////////////
 //////////////////////////FILTER/////////////////////////////
 /////////////////////////////////////////////////////////////
+function insertFilterList(slug) {
+	var section = $('section#'+slug);
+	var params = getParams();
+	var vars = ajaxpagination.query_vars;
+	vars = JSON.parse(vars);
+	if(!vars.length) {
+		vars = {
+			"pagename": slug
+		};
+	}
+	vars = $.extend(vars, params);
+	vars['pagename'] = slug;
+	if($(section).is('.sponsor')) {
+		vars['pagetype'] = 'sponsor';
+	}
+	vars = JSON.stringify(vars);
+	$.ajax({
+		url: ajaxpagination.ajaxurl,
+		type: 'post',
+		data: {
+			action: 'insert_filter_list',
+			query_vars: vars,
+		},
+		success: function(response) {
+			$(section).find('.filter-lists').html(response);
+		}
+	});
+}
+
 var filterVars = [
 	'when',
 	'date',
@@ -603,7 +656,34 @@ $('body').on('click', '.filter-list .option a', function(event) {
 	}
 	vars['pagename'] = slug;
 	updateCounts(option, vars);
-	console.log(vars);
+	filterQuery(vars, section, url);
+});
+
+$('body').on('click', '.bar:not(.hide) .tags a', function(event) {
+	event.preventDefault();
+	var section = $(this).parents('section');
+	var url = this.href;
+	var tag = getParam('tag', url);
+	var vars = ajaxpagination.query_vars;
+	vars = JSON.parse(vars);
+	vars['tag'] = tag;
+	$('#journal .bar.hide').removeClass('hide');
+	$('.select.tag span').html('&#34' + tag + '&#34');
+	filterQuery(vars, section, url);
+});
+
+$('body').on('click', '.bar:not(.hide) .select.tag', function(event) {
+	var section = $(this).parents('section');
+	var currentUrl = window.location.href;
+	var vars = ajaxpagination.query_vars;
+	vars = JSON.parse(vars);
+	delete vars['tag'];
+	$('#journal .bar').addClass('hide');
+	url = removeParam('tag', currentUrl);
+	filterQuery(vars, section, url);
+});
+
+function filterQuery(vars, section, url, option) {
 	vars = JSON.stringify(vars);
 	$.ajax({
 		url: ajaxpagination.ajaxurl,
@@ -614,23 +694,32 @@ $('body').on('click', '.filter-list .option a', function(event) {
 			page: 1
 		},
 		beforeSend: function() {
-			loading(vars, 'loading filtering');
 			var container = $(section).find('.filter-this');
 			var transitionEnd = 'transitionend webkitTransitionEnd oTransitionEnd';
+			var items = $(container).find('.item');
 			$(section).one(transitionEnd, function(e) {
-				$(container).html('');
+				$(container).removeClass('removing');
+				if($(section).is('.journal')) {
+					$(container).masonry('remove', items);	
+					$masonry.masonry('layout');
+				} else {
+					$(container).html('');
+				}
 				$(section).off(transitionEnd);
 			});
+			$(container).addClass('removing');
+			loading(vars, 'loading filtering');
 			window.history.pushState({path:url},'',url);
 			$(section).attr('data-permalink', url);
 		},
 		success: function(response) {
-			console.log(response);
-			updateFilterLinks(option, vars);
+			if(option) {
+				updateFilterLinks(option, vars);
+			}
 			filterThis(response, vars);
 		}
 	});
-});
+}
 
 function filterThis(html, vars) {
 	if(html.length > 0) {
@@ -651,8 +740,8 @@ function filterThis(html, vars) {
 		$(section).attr('data-page', paged);
 		$(section).removeClass('loading');
 		$(section).find('.load-more').remove();
-		$(html).each(function() {
-			var item = this;
+
+		$(html).each(function(i, item) {
 			if(!$(item).hasClass('load-more')) {
 				$(item).addClass('hide');
 			}
@@ -661,11 +750,14 @@ function filterThis(html, vars) {
 			} else {
 				$(container).append($(item));
 			}
-			$(container).imagesLoaded(function() {
-				$(item).removeClass('hide');
+			$(item).imagesLoaded(function() {
+				setTimeout(function() {
+					$(item).removeClass('hide');
+				}, i*100);
 				$masonry.masonry('layout');
 			});
 		});
+
 		$(section).removeClass('show-footer filtering');
 		$(content).animate({ scrollTop: contentScrollTop + sectionScrollTop }, 300, 'easeOutQuart');
 		$(section).animate({ scrollTop: 0 }, 300, 'easeOutQuart');
@@ -703,7 +795,7 @@ function renameFilterType(filterType) {
 	return filterType;
 }
 
-$('body').on('click', '.filter .select', function() {
+$('body').on('click', '.filter .select:not(.tag)', function() {
 	var slug = $(this).attr('data-slug');
 	var filterThis = $('.filter-this.'+slug);
 	if($(this).hasClass('view toggle')) {
@@ -714,6 +806,7 @@ $('body').on('click', '.filter .select', function() {
 		var property = $(this).attr('data-filter');
 		var filterList = $('.filter-list.'+property+'.'+slug);
 		var filterListOptions = $(filterList).children('.options');
+		if(!filterListOptions.length) {return;}
 		var filterListOptionsHeight = $(filterListOptions)[0].clientHeight;
 		if($(this).hasClass('dropped')) {
 			//toggle to hide this list
@@ -738,7 +831,7 @@ function getParam(paramType, url) {
     paramType = paramType.replace(/[\[\]]/g, "\\$&");
     var regex = new RegExp("[?&]" + paramType + "(=([^&#]*)|&|#|$)"),
         results = regex.exec(url);
-    if (!results) return null;
+    if (!results) return '';
     if (!results[2]) return '';
     return decodeURIComponent(results[2].replace(/\+/g, " "));
 }
@@ -981,17 +1074,21 @@ function setImageSliderSize() {
 	$(slides).each(function() {
 		$(this).css({
 			width:sliderWidth,
-			height: $(window).innerHeight()
 		});
-		$(this).find('.landscape').each(function() {
+		if($(slider).is('.full')) {
 			$(this).css({
-				'height': $(window).innerHeight() - 200
-			}).find('.captionWrap').css({
-				'max-height': $(window).innerHeight() - 200
-			}).find('img').css({
-				'max-height': $(window).innerHeight() - 200
+				height: $(window).innerHeight()
 			});
-		});
+			$(this).find('.landscape').each(function() {
+				$(this).css({
+					'height': $(window).innerHeight() - 200
+				}).find('.captionWrap').css({
+					'max-height': $(window).innerHeight() - 200
+				}).find('img').css({
+					'max-height': $(window).innerHeight() - 200
+				});
+			});
+		}
 	});
 
 	//don't allow transition on size
@@ -1118,6 +1215,11 @@ function closeFullSLider(slider) {
 	.find('.slides').attr('style','')
 	.find('.slide').attr('style','');
 	$(cursor).attr('style','');
+	$(slider).find('.landscape').each(function() {
+		$(this).attr('style','');
+		$(this).find('.captionWrap').attr('style','');
+		$(this).find('img').attr('style','');
+	});
 	if($(slider).hasClass('stack')) {
 		$(slider).removeClass('image_slider');
 	} else {
@@ -1166,6 +1268,10 @@ function setUpEarth() {
     var markerUrl = null;
     // themeUrl+'/assets/images/bullet-orange.svg';
     var markerTemp = $('#markerTemp').html();
+    $('section#map').addClass('show');
+    setTimeout(function() {
+    	$('#mapWrap').addClass('show');
+    },1000);
     $(countries).each(function(i, country) {
     	var name = country['name'];
     	var slug = country['slug'];

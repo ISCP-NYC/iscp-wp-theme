@@ -6,25 +6,27 @@
 		<h2 class="head"><?php the_title() ?></h2>
 		<div class="top">
 			<div class="filter">
-				<div class="bar">
-					<?php
-					if( $tag_param ):
-						$tag_name = get_term_by('slug', $tag_param, 'post_tag')->name;
-						echo '<div class="select tag">';
-						echo '<span>Tagged: "' . $tag_name . '"</span>';
-						echo '<a href="' . site_url( '/journal' ) . '" class="swap">';
-						echo '<div class="icon default"></div>';
-						echo '<div class="icon hover"></div>';
-						echo '</a>';
-						echo '</div>';
-					endif;
-					?>
-				</div>
+				<?php
+				if( $tag_param ):
+					$tag_name = get_term_by('slug', $tag_param, 'post_tag')->name;
+					echo '<div class="bar">';
+				else:
+					echo '<div class="bar hide">';
+				endif;
+				echo '<span>Tagged: </span>';
+				echo '<span class="select tag link">';
+				echo '<span>"' . $tag_name . '"</span>';
+				echo '<div class="swap">';
+				echo '<div class="icon default"></div>';
+				echo '<div class="icon hover"></div>';
+				echo '</div>';
+				echo '</span>';
+				echo '</div>';
+				?>
 			</div>
 		</div>
-		<div class="journal filter-this grid items">
+		<div class="journal filter-this grid items" data-delay="<?php echo $delay ?>">
 			<div class="sizer"></div>
-			<?php include( locate_template( 'sections/loops/journals.php' ) ); ?>	
 		</div>
 	</div>
 	<?php get_template_part( 'partials/footer' ); ?>
