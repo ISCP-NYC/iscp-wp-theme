@@ -1278,7 +1278,7 @@ function get_contributor_count( $type, $value, $page_query ) {
 	endif;
 
 	$query_args = array(
-		'post_type' => 'get_contributor',
+		'post_type' => 'contributor',
 		'posts_per_page' => -1,
 		'post_status' => 'publish',
 		'meta_query' => array( $meta_query, $page_query )

@@ -159,20 +159,6 @@ $('body').on('wheel', 'section', function(e) {
 	}
 });
 
-
-// $('body').on('mousewheel', 'aside.main', function(e) {
-// 	var section = $(this).parents('section');
-// 	if(!$(section).hasClass('show-footer')) {
-// 		var e = window.event || e;
-// 		var delta = e.deltaY;
-// 		var content = $(section).find('.content');
-// 		var scrollTop = $(content).scrollTop();
-// 		var scrollTo = scrollTop + delta;
-// 		$(content).scrollTop(scrollTo);
-// 	}
-// });
-
-
 /////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////
 ///////////////////////HEADER & FOOTER///////////////////////
@@ -643,6 +629,10 @@ $('body').on('click', '.filter-list .option a', function(event) {
 		$(section).find('.filter .select.' + optionType + ' .count').text('');
  		var currentUrl = window.location.href;
  		url = removeParam(optionType, currentUrl);
+ 		if (url.substring(url.length-1) == '?') {
+	        url = url.substring(0, url.length-1);
+	    }
+
 	} else {
 		$(section).find('.filter-list.'+optionType+' .option.selected').removeClass('selected');
 		$(option).addClass('selected');

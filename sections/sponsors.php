@@ -30,7 +30,7 @@
 			</div>
 		</div>	
 		<div class="filter-lists">
-			<div class="filter-list country <?php echo $slug ?>">
+			<div class="filter-list country <?php echo $slug ?>" data-filter="country">
 				<div class="options">
 					<?php
 					$countries = get_posts( array(

@@ -6,6 +6,7 @@ $country_param = get_query_var( 'from' );
 $paged = 1;
 $page_url = get_the_permalink();
 $page_param = $slug;
+$page_query = null;
 if( $query_vars ):
 	$slug = $query_vars['pagename'];
 	$paged = $query_vars['paged'];
