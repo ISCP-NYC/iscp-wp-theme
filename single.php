@@ -7,7 +7,6 @@ switch($post_type) {
 		$this_resident = $post;
 		$this_resident_id = $this_resident->ID;
 		if( is_current( $this_resident_id ) ):
-
 			// current residents list
 			$current_residents_page_id = get_page_by_path( 'current-residents' )->ID;
 			$post = get_post( $current_residents_page_id, OBJECT );
@@ -34,7 +33,6 @@ switch($post_type) {
 			setup_postdata( $post );
 			get_template_part( 'sections/residents' );
 			wp_reset_postdata();
-
 		elseif( is_past( $this_resident_id ) ):
 			$past_residents_page_id = get_page_by_path( 'past-residents' )->ID;
 			$post = get_post( $past_residents_page_id, OBJECT );
@@ -61,7 +59,6 @@ switch($post_type) {
 		get_template_part( 'sections/sponsor' );
 		break;
 	case 'journal':
-
 		//all journal posts
 		$journal_page_id = get_page_by_path( 'journal' )->ID;
 		$post = get_post( $journal_page_id, OBJECT );
@@ -89,8 +86,11 @@ switch($post_type) {
 		setup_postdata( $post );
 		get_template_part( 'sections/journals' );
 		wp_reset_postdata();
-
 		break;
+
+	default:
+		get_template_part( 'sections/error' );
 }
+
 get_footer();
 ?>

@@ -38,7 +38,7 @@
 					    	if ($parent_id == $id ) : 
 					    		echo '<div class="child-item ' . $child_slug . '">';
 					    		echo '<a href="' . $child_url . '">';
-					    		if( $slug == 'resident-resources' ):
+					    		if( $slug == 'greenroom' ):
 							    	echo '<div class="swap">';
 									echo '<div class="icon default"></div>';
 									echo '<div class="icon hover"></div>';

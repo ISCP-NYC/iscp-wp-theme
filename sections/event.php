@@ -10,6 +10,10 @@ $event_type_name = pretty( $event_type );
 $date = get_event_date( $id );
 $event_classes = 'event single ' . get_event_status( $id );
 $page_columns = get_field( 'page_columns', $id );
+$contributors = get_field( 'contributors' );
+$credits = get_field( 'credits' );
+$attachments = get_field( 'attachments' );
+$rsvp = get_field( 'rsvp' );
 if( $page_columns ):
 	$event_classes .= ' ' . $page_columns;
 else:
@@ -111,27 +115,49 @@ $upcoming_events = new WP_Query( $upcoming_query );
 			<div class="description">
 				<?php
 				echo $description;
-				$contributors = get_field( 'contributors' );
-				if( $contributors ):
-					$c_length = sizeof( $contributors );
-					echo $title . ' is made possible through the generous support of ';
-					foreach( $contributors as $index => $contributor ):
-						$contributor_name = $contributor->post_title;
-						if( $index > 0 && $index+1 != $c_length ):
-							echo ', ';
-						elseif( $index+1 == $c_length ):
-							echo ' & ';
-						endif;
-						echo $contributor_name;
-						if( $index+1 == $c_length ):
-							echo '.';
-						endif;
-					endforeach;
-				endif;
 				?>
 			</div>
+			<?php
+			if( $contributors ):
+				echo '<div class="contributors">';
+				$c_length = sizeof( $contributors );
+				echo '<em>' . $title .'</em>';
+				echo ' is made possible through the generous support of ';
+				foreach( $contributors as $index => $contributor ):
+					$contributor_name = $contributor->post_title;
+					if( $index > 0 && $index+1 != $c_length ):
+						echo ', ';
+					elseif( $index+1 == $c_length && $index!=0 ):
+						echo ' & ';
+					endif;
+					echo $contributor_name;
+					if( $index+1 == $c_length ):
+						echo '.';
+					endif;
+				endforeach;
+				echo '</div>';
+			endif;
+			if( $credits ):
+				echo '<div class="credits">';
+				echo $credits;
+				echo '</div>';
+			endif;
+
+			?>
 			<div class="links">
 				<a href="#" class="link bullet">Share</a>
+				<?php
+				if( $rsvp ):
+					echo '<a href="' . $rsvp . '" class="link bullet" target="_blank">RSVP</a>';
+				endif;
+				foreach( $attachments as $index => $attachment ):
+					$attachment_name = $attachment['name'];
+					$attachment_url = $attachment['file']['url'];
+					echo '<a href="' . $attachment_url . '" class="link bullet" target="_blank">';
+					echo $attachment_name;
+					echo'</a>';
+				endforeach;
+				?>
 			</div>
 			<?php
 			$residents = get_field( 'residents' );

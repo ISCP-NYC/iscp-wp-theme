@@ -2,10 +2,8 @@
 $resident_id = get_the_ID();
 $resident_slug = $post->post_name;
 $resident = get_post( $resident_id );
-$country = get_field( 'country', $resident_id )[0];
-$country_title = $country->post_title;
-$country_slug = $country->post_name;
-$country_id = $country->ID;
+$countries = get_countries( $resident_id );
+$countries_array = get_field( 'country', $resident_id );
 $name = get_the_title();
 $bio = get_field( 'bio', $resident_id );
 $website = get_field( 'website', $resident_id );
@@ -179,24 +177,37 @@ endif;
 		<?php
 		if( is_ground_floor( $resident_id ) ):
 			$relation_title = '<h4>Ground Floor Residents</h4>';
-			$meta_query = array(
+			$meta_query = array( array(
 				'key' => 'residency_program',
 				'value' => 'ground_floor',
 				'compare' => 'LIKE'
-			);
-		elseif( $country_id ):
-			$relation_title = '<h4>Residents from ' . $country_title . '</h4>';
+			) );
+		elseif( $countries_array ):
 			$meta_query = array(
-				'key' => 'country',
-				'value' => $country_id,
-				'compare' => 'LIKE'
+				'relation' => 'OR'
 			);
+			foreach ($countries_array as $key => $country) {
+				$country_name = $country->post_title;
+				$country_id = $country->ID;
+				$country_ids[] .= $country_id;
+				if( $key != 0 ):
+					$country_names .= ', ';
+				endif;
+				$country_names .= $country_name;
+				$country_query = array(
+					'key' => 'country',
+					'value' => $country_id,
+					'compare' => 'LIKE'
+				);
+				array_push( $meta_query, $country_query );
+			}
+			$relation_title = '<h4>Residents from ' . $country_names . '</h4>';
 		endif;
 		$residents_query = array(
 			'post_type'	=> 'resident',
 			'posts_per_page' => 3,
-			'post__not_in' => array($resident_id),
-			'meta_query' => array( $meta_query )
+			'post__not_in' => array( $resident_id ),
+			'meta_query' => $meta_query
 		);
 		$residents = new WP_Query( $residents_query );
 		$GLOBALS['wp_query'] = $residents;

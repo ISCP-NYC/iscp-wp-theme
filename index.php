@@ -1,5 +1,6 @@
 <?php
 get_header();
+global $post;
 // $visit_page_id = get_page_by_path( 'visit' )->ID;
 // $post = get_post( $visit_page_id, OBJECT );
 // setup_postdata( $post );

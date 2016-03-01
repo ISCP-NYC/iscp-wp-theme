@@ -15,8 +15,12 @@
 			   	echo '<div class="cell' . $classes . '">';
 				echo '<div class="inner">';
 				echo '<div class="overlay">';
-				echo '<a href="' . $item_url . '">';
-			    if( $item_slug == 'resident-resources' ):
+				if( $item_title === 'Past Events' ):
+					echo '<a href="' . $item_url . '#past">';
+				else:
+					echo '<a href="' . $item_url . '">';
+				endif;
+			    if( $item_slug == 'greenroom' ):
 			    	echo '<h1 class="link">';
 			    	echo '<div class="iconWrap">';
 			    	echo '<div class="swap">';

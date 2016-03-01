@@ -419,9 +419,9 @@ function event_column_select() {
   global $wpdb;
   if ( $_GET['post_type'] == 'event' ) {
 
-    $event_types = array( 'iscp-talk', 'exhibition', 'open-studios', 'event' );
+    $event_types = array( 'iscp-talk', 'exhibition', 'open-studios', 'event', 'off-site-project' );
     echo '<select name="event_type">';
-      echo '<option>' . __( 'Event Type', 'textdomain' ) . '</option>';
+      echo '<option value="">' . __( 'Event Type', 'textdomain' ) . '</option>';
     foreach( $event_types as $value ) {
       $selected = ( !empty( $_GET['event_type'] ) AND $_GET['event_type'] == $value ) ? 'selected="selected"' : '';
       echo '<option ' . $selected . 'value="' . $value . '">' . pretty( $value ) . '</option>';
@@ -859,6 +859,31 @@ function get_sponsors( $id ) {
 	return $sponsor_list;
 }
 
+function get_countries( $id ) {
+	$country_list = '';
+	$residents_id = get_page_by_path( 'past-residents' )->ID;
+	$residents_url = get_permalink( $residents_id );
+	if( have_rows( 'country', $id ) ):
+		$countries = get_field( 'country', $id );
+		if( $countries ):
+			foreach ($countries as $index=>$country):
+				if( $index != 0 ):
+					$country_list .= ', ';
+				endif;
+				$country_name = $country->post_title;
+				$country_slug = $country->post_name;
+				$url = $residents_url . '?filter=past&from=' . $country_slug;
+				if($url):
+					$country_list .= '<a href="' . $url . '">' . $country_name . '</a>';
+				else:
+					$country_list .= $country_name;
+				endif;
+			endforeach;
+		endif;
+	endif;
+	return $country_list;
+}
+
 function get_orientation( $id ) {
 	$imgmeta = wp_get_attachment_metadata( $id );
 	if ($imgmeta['width'] > $imgmeta['height']):
@@ -1226,11 +1251,34 @@ function get_sponsor_count( $type, $value, $page_query ) {
 			'value' => '"' . $value . '"',
 			'compare' => 'LIKE'
 		);
-		$meta_query = array_merge( $meta_query, $year_query );
+		$meta_query = array_merge( $meta_query, $country_query );
 	endif;
 
 	$query_args = array(
 		'post_type' => 'sponsor',
+		'posts_per_page' => -1,
+		'post_status' => 'publish',
+		'meta_query' => array( $meta_query, $page_query )
+	);
+	$query = new WP_Query( $query_args );
+	$count = $query->found_posts;
+	return $count;
+}
+
+function get_contributor_count( $type, $value, $page_query ) {
+	$meta_query = array();
+
+	if( $type == 'country' ):
+		$country_query = array(
+			'key' => 'country',
+			'value' => '"' . $value . '"',
+			'compare' => 'LIKE'
+		);
+		$meta_query = array_merge( $meta_query, $country_query );
+	endif;
+
+	$query_args = array(
+		'post_type' => 'get_contributor',
 		'posts_per_page' => -1,
 		'post_status' => 'publish',
 		'meta_query' => array( $meta_query, $page_query )
@@ -1298,7 +1346,7 @@ function wpdocs_register_my_custom_menu_page() {
 	$lock_icon = get_template_directory_uri() . '/assets/images/lock-white-small.svg';
 
 
-	$to_do_id = get_page_by_path( 'resident-resources/to-do' )->ID;
+	$to_do_id = get_page_by_path( 'greenroom/to-do' )->ID;
     add_menu_page(
         __( 'To-Do', 'textdomain' ),
         'To-Do',
@@ -1309,7 +1357,7 @@ function wpdocs_register_my_custom_menu_page() {
         10
     );
 
-    $staff_messages_id = get_page_by_path( 'resident-resources/staff-messages' )->ID;
+    $staff_messages_id = get_page_by_path( 'greenroom/staff-messages' )->ID;
     add_menu_page(
         __( 'Staff Messages', 'textdomain' ),
         'Staff Messages',
@@ -1320,7 +1368,7 @@ function wpdocs_register_my_custom_menu_page() {
         11
     );
 
-    $at_iscp_id = get_page_by_path( 'resident-resources/at-iscp' )->ID;
+    $at_iscp_id = get_page_by_path( 'greenroom/at-iscp' )->ID;
     add_menu_page(
         __( 'At ISCP', 'textdomain' ),
         'At ISCP',
@@ -1331,7 +1379,7 @@ function wpdocs_register_my_custom_menu_page() {
         12
     );
 
-    $in_nyc_id = get_page_by_path( 'resident-resources/in-nyc' )->ID;
+    $in_nyc_id = get_page_by_path( 'greenroom/in-nyc' )->ID;
     add_menu_page(
         __( 'In NYC', 'textdomain' ),
         'In NYC',

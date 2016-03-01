@@ -13,32 +13,19 @@ if( $parent != 0 ) {
 	$programs_id = $post->ID;
 }
 $programs_query = array(
-	'sort_order' => 'asc',
-	'sort_column' => 'post_title',
 	'post_type' => 'page',
+	'orderby' => 'menu_order',
+	'order' => 'DESC',
 	'child_of' => $programs_id,
 	'post_status' => 'publish'
 );
-$programs = get_pages( $programs_query ); 
+$programs = array_reverse( get_pages( $programs_query ) );  
 ?>
 <section <?php section_attr( $id, $slug, 'programs' ); ?>>
 	<?php get_template_part( 'partials/nav' ) ?>
 	<?php get_template_part( 'partials/side' ) ?>
 	<div class="content">
 		<h2 class="head"><?php echo $title ?></h2>
-		<div class="program-links">
-			<?php
-			foreach( $programs as $program ):
-				$full_title = get_field( 'full_title', $program );
-				if ( $full_title == '' ):
-					$full_title = get_post( $program )->post_title;
-				endif;
-				$slug = $program->post_name;
-				echo '<a class="bullet small" href="#' . $slug . '">' . $full_title . '</a></br>';
-			endforeach;
-			?>
-		</div>
-
 		<?php
 			if( have_rows( 'images', $programs_id ) ):
 			echo '<div class="images module">';
@@ -63,15 +50,15 @@ $programs = get_pages( $programs_query );
 			$title = $program->post_title;
 			$slug = $program->post_name;
 			$description = get_field( 'description', $program );
-			$apply_link = get_field( 'apply_link', $program );
-			$deadline = get_field( 'deadline', $program );
+			// $apply_link = get_field( 'apply_link', $program );
+			// $deadline = get_field( 'deadline', $program );
 
 			echo '<div class="module program" id="' . $slug . '">';
 			echo '<h3 class="title orange ' . $slug . '">' . $title . '</h3>';
 			echo '<div class="description">' . $description . '</div>';
-			echo '<a class="bullet apply" href="' . $apply_link . '">Apply</a>';
-			echo '<div class="deadline-notes">DEADLINES</br>' . $deadline . '</div>';
-
+			// echo '<a class="bullet apply" href="' . $apply_link . '">Apply</a>';
+			// echo '<div class="deadline-notes">Deadlines</br>' . $deadline . '</div>';
+			// echo '<h3 class="title orange">Deadlines</h3>';
 			if( have_rows( 'columns', $program ) ):
 			echo '<div class="columns">';
 			    while ( have_rows( 'columns', $program ) ) : the_row();

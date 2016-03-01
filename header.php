@@ -69,9 +69,9 @@
 		case 'past-residents':
 			$classes = 'past-residents residents';
 			break;
-		case 'resident-resources':
+		case 'greenroom':
 			if (is_user_logged_in()):
-				$classes = 'resident-resources';
+				$classes = 'greenroom';
 			else:
 				$classes = 'login';
 			endif;

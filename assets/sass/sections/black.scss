@@ -57,7 +57,7 @@ section.error {
 		.cell.search input.s {
 			color: $black !important;
 		}
-		.cell.resident-resources {
+		.cell.greenroom {
 			h1:hover .iconWrap {
 				color: $orange;	
 			}
@@ -154,7 +154,7 @@ section.error {
 				}
 			}
 		}
-		.resident-resources .login .swap .icon.hover {
+		.greenroom .login .swap .icon.hover {
 			background-image: url(../images/lock-orange.svg) !important;
 		}
 	}

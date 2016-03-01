@@ -39,8 +39,8 @@
 				while( has_sub_field( 'image_slider', $id ) ):
 					$image = get_sub_field( 'image', $id );
 			        $image_url = $image['url'];
+			        $caption = get_sub_field( 'caption', $id );
 			        $orientation = get_orientation( $image['id'] );
-			        $caption = label_art( $the_ID );
 			        echo '<div class="piece slide">';
 			        echo '<div class="image ' . $orientation . '">';
 			        echo '<div class="captionWrap">';
@@ -76,10 +76,10 @@
 					<div class="address">
 						<?php echo $address ?>
 					</div>
-					<div class="phone">
+					<div class="bullet phone">
 						<?php echo '<a href="tel:' . $phone . '">' . $phone . '</a>'; ?>
 					</div>
-					<div class="email">
+					<div class="bullet email">
 						<?php echo '<a href="mailto:' . $email . '">' . $email . '</a>'; ?>
 					</div>
 					<div class="bullet facebook">
@@ -109,16 +109,23 @@
 				</div>
 			</div>
 
-			<?php $history = get_field( 'history', $id ); ?>
-			<div class="module history">
-				<?php echo $history ?>
-			</div>
+			<?php 
+			$history = get_field( 'history', $id );
+			if( $history ):
+				echo '<div class="module history">';
+				echo '<h4 class="title orange">History</h4>';
+				echo '<div class="text">';
+				echo $history;
+				echo '</div>';
+				echo '</div>';
+			endif;
+			?>
 
 			<div class="module people">
 			<?php
 			if( get_field( 'staff', $id ) ):
 			echo '<div class="staff list">';
-			echo '<h4 class="orange">Staff</h4>';
+			echo '<h4 class="title orange">Staff</h4>';
 			echo '<ul>';
 			while( has_sub_field( 'staff', $id ) ):
 				$name = get_sub_field( 'name', $id );
@@ -133,7 +140,7 @@
 			endif;
 			if( get_field( 'board_members', $id ) ):
 			echo '<div class="board list">';
-			echo '<h4 class="orange">Board</h4>';
+			echo '<h4 class="title orange">Board</h4>';
 			echo '<ul>';
 			while( has_sub_field( 'board_members', $id ) ):
 				$name = get_sub_field( 'name', $id );

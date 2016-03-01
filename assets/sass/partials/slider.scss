@@ -34,7 +34,6 @@
 }
 .image_slider {
     height: 600px;
-	overflow: hidden;
 	display: block;
 	position: relative;
     @include medium {
@@ -81,7 +80,6 @@
 	.slides {
 		height: 100%;
 		display: block;
-		overflow: hidden;
 		position: absolute;
 		top: 0;
 		left: 0;

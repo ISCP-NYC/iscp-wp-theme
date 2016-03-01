@@ -1,10 +1,10 @@
-<?php include( locate_template( 'sections/params/sponsors.php' ) ); ?>
-<section <?php section_attr( $id, $slug, 'sponsors' ); ?> data-page="<?php echo $paged ?>">
+<?php include( locate_template( 'sections/params/contributors.php' ) ); ?>
+<section <?php section_attr( $id, $slug, 'contributors' ); ?> data-page="<?php echo $paged ?>">
 	<?php get_template_part( 'partials/nav' ) ?>
 	<?php get_template_part( 'partials/side' ) ?>
 	<div class="content">
 		<h2 class="head">
-			Sponsors
+			Contributors
 		</h2>
 
 		<div class="top">
@@ -13,7 +13,7 @@
 					<div class="select link dropdown country" data-filter="country" data-slug="<?php echo $slug ?>">
 						<?php
 						if($country_param):
-							$country_count = ': ' . $country_param_title . ' (' . get_sponsor_count( 'country', $country_param_id, $sponsor_query ) . ')';
+							$country_count = ': ' . $country_param_title . ' (' . get_contributor_count( 'country', $country_param_id, $contributor_query ) . ')';
 						endif;
 						echo '<span>Country</span><span class="showing">' . $country_count . '</span>';
 						?>
@@ -26,7 +26,7 @@
 				</div>
 			</div>
 			<div class="right type">
-				<?php echo ucwords( $sponsor_type ) ?>
+				<?php echo ucwords( $contributor_type ) ?>
 			</div>
 		</div>	
 		<div class="filter-lists">
@@ -44,7 +44,7 @@
 						$country_id = $country->ID;
 						$country_slug = $country->post_name;
 						$country_title = $country->post_title;
-						$country_count = get_sponsor_count( 'country', $country_id, $sponsor_query );
+						$country_count = get_contributor_count( 'country', $country_id, $contributor_query );
 						$filter_url = $page_url . '?from=' . $country_slug;
 						if( $country_count != 0 ):
 							if( $country_param == $country_slug ):
@@ -69,8 +69,8 @@
 			</div>
 		</div>
 
-		<div class="sponsors shelves filter-this list items <?php echo $slug ?>">
-			<?php include( locate_template( 'sections/loops/sponsors.php' ) ); ?>	
+		<div class="contributors shelves filter-this list items <?php echo $slug ?>">
+			<?php include( locate_template( 'sections/loops/contributors.php' ) ); ?>	
 		</div>
 	</div>
 	<?php get_template_part( 'partials/footer' ); ?>

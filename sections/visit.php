@@ -20,7 +20,6 @@ $about = get_page_by_path( 'about' );
 		$directions_link = $directions_base . $address;
 		$phone = get_field( 'phone', $about );
 		$email = get_field( 'email', $about );
-		$fax = get_field( 'fax', $about );
 
 		$directions = get_field( 'directions', $visit );
 		$directions_footnote = get_field( 'directions_footnote', $visit );
@@ -36,12 +35,11 @@ $about = get_page_by_path( 'about' );
 			<div class="inner" id="map"></div>
 			<div class="contact">
 				<h1>
-					<a class="black" href="call:<?php echo $phone ?>"><?php echo $phone ?></a>
+					<a href="call:<?php echo $phone ?>"><?php echo $phone ?></a>
 				</h1>
 				<h1>
-					<a class="black" href="mailto:<?php echo $email ?>"><?php echo $email ?></a>
+					<a href="mailto:<?php echo $email ?>"><?php echo $email ?></a>
 				</h1>
-				<h1><?php echo $fax ?></h1>
 			</div>
 		</div>
 

@@ -35,7 +35,6 @@ section.single.event {
 		float: left;
 		.description {
 			@include medium-fs;
-			padding-bottom: 50px;
 			a  {
 				text-decoration: underline;
 			}
@@ -44,13 +43,17 @@ section.single.event {
 				font-family: inherit !important;
 				line-height: inherit !important;
 			}
+			iframe {
+				max-width: 100%;
+	    		display: table;
+	    		margin: auto;
+	    	}
 		}
-		.footnote {
-			@include small-fs;
-			padding-bottom: 50px;
+		.contributors, .credits {
+			margin-top: 30px;
 		}
 		.links {
-			padding-bottom: 50px;
+			margin-top: 30px;
 			a {
 				display: table;
 				padding-left: 25px;
@@ -140,6 +143,7 @@ section.single.event {
 	.module {
 		&.residents {
 			@extend .border-top;
+			margin-top: 30px;
 			margin-bottom: 0 !important;
 			border-bottom: 0 !important;
 			.resident {

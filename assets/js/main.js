@@ -4,20 +4,22 @@ var isMobile = false;
 	mobileCheck();
 	setUp();
 	setImageSliderSize();
-	$masonry = $('.journal.grid').masonry({
-		columnWidth: '.sizer',
-		itemSelector: '.item',
-		gutter: 30,
-		transitionDuration: 0
-	});
-	$masonry.masonry('layout');
+	if($('.journal.grid')) {
+		$masonry = $('.journal.grid').masonry({
+			columnWidth: '.sizer',
+			itemSelector: '.item',
+			gutter: 30,
+			transitionDuration: 0
+		});
+		$masonry.masonry('layout');
+	}
 	if($('.image_slider').length > 0) {
 		setUpImageSlider();
 	}
 	if($('section#map').length) {
 		setUpEarth();
 	} 
-	if($('section.resident-resource').length) {
+	if($('section.resource').length) {
 		scrollToResourceItem();
 	} 
 	if($('section#events').length && (getParam('date') || getParam('type'))) {
@@ -25,7 +27,7 @@ var isMobile = false;
 		var pastWrapperTop = $(pastWrapper).offset().top - 130;
 		$('section#events .content').scrollTop(pastWrapperTop);
 	} 
-	if($('.center').is('.resident-resources')) {
+	if($('.center').is('.greenroom:not(#greenroom)')) {
 		var hash = parseInt(window.location.hash.replace('#', ''));
 		var index = hash + 1; 
 		var item = $('.item').eq(index);
@@ -503,7 +505,9 @@ function addItems(html, vars) {
 				setTimeout(function() {
 					$(item).removeClass('hide');
 				}, i*100);
-				$masonry.masonry('layout');
+				if($(container).hasClass('journal')) {
+					$masonry.masonry('layout');
+				}
 			});
 		});
 		$(section).removeClass('show-footer');
@@ -1442,7 +1446,7 @@ function getMapList(slug) {
 function scrollToResourceItem() {
 	var hash = parseInt(window.location.hash.replace('#', ''));
 	var index = hash - 1;
-	var section = $('section.resident-resource');
+	var section = $('section.resource');
 	var content = $(section).find('.content');
 	var item = $(section).find('.item').eq(index);
 	var offset;

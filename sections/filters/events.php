@@ -5,7 +5,7 @@ $year_param = $query_vars['date'];
 <div class="filter-list type <?php echo $slug ?>" data-filter="type">
 	<div class="options">
 		<?php
-		$event_types = array( 'exhibition', 'off-site-project', 'iscp-talk', 'open-studios' );
+		$event_types = array( 'exhibition', 'off-site-project', 'iscp-talk', 'open-studios', 'events' );
 		foreach( $event_types as $event_type ): 
 
 			$filter_url = query_url( 'type', $event_type, $page_url );

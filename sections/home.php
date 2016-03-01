@@ -1,5 +1,5 @@
 <?php
-global $post;
+$home_id = get_page_by_path( 'home' )->ID;
 ?>
 <section <?php section_attr( null, 'home', null ); ?> data-title="Home">
 	<?php get_template_part('partials/nav') ?>
@@ -73,9 +73,8 @@ global $post;
 		<div class="about module">
 			<h3 class="title">
 			<?php
-			$about = get_page_by_path( 'about' );
-			$about_id = $about->ID;
-			$description = get_field('description', $about_id);
+			$description = get_field('description', $home_id);
+			$about_id = get_page_by_path( 'about' )->ID;
 			$address = get_field('address', $about_id);
 			$visit_id = get_page_by_path( 'visit' )->ID;
 			$visit_permalink = get_the_permalink( $visit_id );
@@ -83,13 +82,12 @@ global $post;
 			?>
 			</h3>
 			<div class="text">
-				<?php echo strip_tags( $description ) ?>
+				<?php echo $description ?>
 			</div>
 		</div>
 
 
 		<?php
-		$home_id = get_page_by_path( 'home' );
 		$image_slider = get_field( 'image_slider', $home_id );
 		if( $image_slider ):
 			echo '<div class="module">';
@@ -135,15 +133,17 @@ global $post;
 		<div class="residency_program module">
 			<h3 class="title">
 				<?php
-				$programs = get_page_by_path( 'residency-programs' );
-				$programs_tagline = get_field('tagline', $programs) . ' <a href="#">Learn more.</a>';
-				$programs_id = $programs->ID;
+				$programs_text = get_field('residency_programs', $home_id);
+				$programs_id = get_page_by_path( 'residency-programs' )->ID;
 				$programs_permalink = get_the_permalink( $programs_id );
 				echo '<a href="' . $programs_permalink . '">Residency Programs</a>';
 				?>
 			</h3>
 			<div class="text">
-				<?php echo $programs_tagline ?>
+				<?php
+				echo strip_tags( $programs_text );
+				echo '<a href="' . $programs_permalink .'">Learn more.</a>';
+				?>
 			</div>
 		</div>
 

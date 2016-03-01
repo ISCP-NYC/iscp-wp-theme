@@ -1,5 +1,5 @@
-section.resident-resources,
-section.resident-resource {
+section.greenroom,
+section.resource {
 	@include medium-fs;
 	background-color: $light;
 	aside.main {
@@ -20,7 +20,7 @@ section.resident-resource {
 		background-color: $light !important;
 		nav {
 			background-color: $light !important;
-			.overlay, .placeholder {
+			.overlay, .placeholder, .cell {
 				background-color: $light !important;
 			}	
 		}

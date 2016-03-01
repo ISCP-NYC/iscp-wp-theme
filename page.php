@@ -56,6 +56,10 @@
 
 		get_template_part( 'sections/sponsors' );		
 
+	elseif( $page_slug == 'contributors' ):
+
+		get_template_part( 'sections/contributors' );		
+
 	elseif( $parent_slug == 'residency-programs' ):
 
 		$current_residents_page_id = get_page_by_path( 'current-residents' )->ID;
@@ -72,7 +76,7 @@
 		get_template_part( 'sections/apply' );
 		wp_reset_postdata();
 
-	elseif( $parent_slug == 'exhibition-programs' ):
+	elseif( $parent_slug == 'public-programs' ):
 
 		get_template_part( 'sections/programs' );
 	
@@ -106,10 +110,10 @@
 
 		get_template_part( 'sections/visit' );
 
-	elseif( $page_slug == 'resident-resources'):
+	elseif( $page_slug == 'greenroom'):
 
 		if (user_is_resident()):
-			get_template_part( 'sections/resources' );
+			get_template_part( 'sections/greenroom' );
 		else:
 			get_template_part( 'sections/login' );
 		endif;
@@ -117,14 +121,14 @@
 	elseif( in_array( $page_slug, array( 'at-iscp', 'in-nyc', 'staff-messages', 'to-do' ) ) ):
 
 		if (user_is_resident()):
-			$resources_page_id = get_page_by_path( 'resident-resources' )->ID;
-			$post = get_post( $resources_page_id, OBJECT );
+			$greenroom_page_id = get_page_by_path( 'greenroom' )->ID;
+			$post = get_post( $greenroom_page_id, OBJECT );
 			setup_postdata( $post );
-			get_template_part( 'sections/resources' );
+			get_template_part( 'sections/greenroom' );
 			wp_reset_postdata();
 
 			$page_slug = str_replace( '-', '_', $page_slug );
-			$resource_page_id = get_page_by_path( 'resident-resources/' . $page_slug )->ID;
+			$resource_page_id = get_page_by_path( 'greenroom/' . $page_slug )->ID;
 			$post = get_post( $resource_page_id, OBJECT );
 			setup_postdata( $post );
 			get_template_part( 'sections/resource' );
@@ -136,6 +140,10 @@
 	elseif ( $page_slug == 'map' ):
 
 		get_template_part( 'sections/map' );
+
+	else:
+
+		get_template_part( 'sections/error' );
 
 	endif;
 

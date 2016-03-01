@@ -4,7 +4,11 @@ $resource_slug = $post->post_name;
 setup_postdata( $post );
 $resource_permalink = get_the_permalink();
 echo '<div class="resource-list ' . $resource_slug . '">';
-echo '<h2>' . $resource_title . ':</h2>';
+echo '<h2>';
+echo '<a href="' . $resource_permalink . '">';
+echo $resource_title . ':';
+echo '</a>';
+echo '</h2>';
 if( have_rows( 'item' ) ):
 	$index = 0;
 	while ( have_rows('item') ) : the_row();
