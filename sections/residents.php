@@ -53,6 +53,20 @@ $filter = $_GET['filter'];
 							<div class="icon hover"></div>
 						</div>
 					</div>
+					<div class="select link dropdown type" data-filter="type" data-slug="<?php echo $slug ?>">
+						<?php
+						if( $type_param ):
+							$type_count = ': ' . ucwords( $type_param ) . ' (' . get_resident_count( 'type', $type_param, $page_query ) . ')';
+						else:
+							$type_count = null;
+						endif;
+						echo '<span>Resident Type</span><span class="count">' . $type_count . '</span>';
+						?>
+						<div class="swap">
+							<div class="icon default"></div>
+							<div class="icon hover"></div>
+						</div>
+					</div>
 					<div class="select link view toggle" data-slug="<?php echo $slug ?>">
 						<span class="option list">List</span>
 						<span class="option grid">Grid</span>

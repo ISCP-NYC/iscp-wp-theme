@@ -1,5 +1,6 @@
 .filter {
     width: 100%;
+    position: relative;
     @extend .noselect;
     .select {
         font-size: $small-fs;

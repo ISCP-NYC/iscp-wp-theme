@@ -184,6 +184,9 @@ section.error {
 	.module, .module h4 {
 		color: $black !important;
 	}
+	.loader div {
+		background: $black;
+	}
 }
 a.black, .link.black, .past .link {
 	&:hover {

@@ -80,7 +80,7 @@
 							if( have_rows( 'applications', $sponsor ) ):
 						    while ( have_rows( 'applications', $sponsor ) ) : the_row();
 						        $deadline_date = new DateTime( get_sub_field( 'deadline' ) );
-								$deadline = $deadline_date->format( 'M d, Y' );
+								$deadline = $deadline_date->format( 'M n, Y' );
 								$brief = get_sub_field( 'brief' );
 								echo '<div class="application row">';
 									echo '<div class="cell date">';

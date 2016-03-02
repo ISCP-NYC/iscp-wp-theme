@@ -5,6 +5,7 @@ $page_url = get_the_permalink() . '?filter=' . $short_slug;
 $country_param = $query_vars['from'];
 $year_param = $query_vars['date'];
 $program_param = $query_vars['program'];
+$type_param = $query_vars['type'];
 ?>
 <div class="filter-list country <?php echo $slug ?>" data-filter="country">
 	<div class="options">
@@ -102,6 +103,41 @@ $program_param = $query_vars['program'];
 				echo $program_title;
 				echo ' (<span class="count">';
 				echo $program_count;
+				echo '</span>)';
+				echo '<div class="swap">';
+				echo '<div class="icon default"></div>';
+				echo '<div class="icon hover"></div>';
+				echo '</div>';
+				echo '</a>';
+				echo '</div>';
+			endif;
+		endforeach;
+		?>
+	</div>
+</div>
+
+<div class="filter-list type <?php echo $slug ?>" data-filter="type">
+	<div class="options">
+		<?php
+		$resident_types = array(
+			'artist',
+			'curator'
+		);
+		foreach( $resident_types as $type ): 
+			$type_count = get_resident_count( 'type', $type, $page_query );
+			$filter_url = query_url( 'type', $type, $page_url, $short_slug );
+			$type_title = ucwords( $type );
+			if( $type_count != 0 ):
+				if( $type_param == $type ):
+					$selected = ' selected';
+				else: 
+					$selected = null;
+				endif;
+				echo '<div class="option' . $selected . '">';
+				echo '<a href="' . $filter_url . '" data-value="' . $type . '">';
+				echo $type_title;
+				echo ' (<span class="count">';
+				echo $type_count;
 				echo '</span>)';
 				echo '<div class="swap">';
 				echo '<div class="icon default"></div>';

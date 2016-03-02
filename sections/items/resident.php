@@ -7,13 +7,12 @@ $countries = get_countries( $resident_id );
 $resident_status = get_status( $resident_id );
 $residents_url = get_permalink( get_page_by_path( $resident_status . '-residents' ) );
 $studio_number = get_field( 'studio_number', $resident_id );
-$years_only = get_field( 'years_only', $resident_id );
 $residency_program = get_field( 'residency_program', $resident_id );
 $url = get_permalink();
 if( have_rows( 'residency_dates', $resident_id ) ):
 	while ( have_rows( 'residency_dates' ) ) : the_row();
 		$start_date_dt = new DateTime( get_sub_field( 'start_date', $resident_id ) );
-		$start_date = $start_date_dt->format( 'M d, Y' );
+		$start_date = $start_date_dt->format( 'M n, Y' );
 		$resident_year = $start_date_dt->format( 'Y' );
 	endwhile;
 endif;

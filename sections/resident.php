@@ -43,8 +43,8 @@ endif;
 			    	while ( have_rows( 'residency_dates' ) ) : the_row();
 						$start_date_dt = new DateTime( get_sub_field( 'start_date', $resident_id ) );
 						$end_date_dt = new DateTime( get_sub_field( 'end_date', $resident_id ) );
-						$start_date = $start_date_dt->format( 'M d, Y' );
-						$end_date = $end_date_dt->format( 'M d, Y' );
+						$start_date = $start_date_dt->format( 'M n, Y' );
+						$end_date = $end_date_dt->format( 'M n, Y' );
 						$year = $start_date_dt->format( 'Y' );
 						$sponsors = get_sub_field( 'sponsors', $resident_id );
 						$residency_object = (object) array(

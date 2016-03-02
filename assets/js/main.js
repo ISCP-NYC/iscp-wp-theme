@@ -252,8 +252,10 @@ function sectionContentScrollListener(content) {
 		var pastTop = past[0].offsetTop - 90;
 		if(scrollTop > pastTop) {
 			$(section).addClass('past');
+			updateFavicons('blue');
 		} else {
 			$(section).removeClass('past');
+			updateFavicons('orange');
 		}
 	}
 }
@@ -275,6 +277,12 @@ function slideTo(index, animate) {
 		var asideWidth = $(aside)[0].clientWidth;	
 	} else {
 		var asideWidth = 0;
+	}
+
+	if($(section).hasClass('past') || $(section).hasClass('error') || $(section).hasClass('past-residents')) {
+		updateFavicons('blue');
+	} else {
+		updateFavicons('orange');
 	}
 	
 	if(section.length) {
@@ -456,6 +464,11 @@ function loading(vars, classes) {
 	var vars = JSON.parse(vars);
 	var sectionSlug = vars.pagename;
 	var section = $('section#'+sectionSlug);
+	var filter = $(section).find('.filter');
+	var loader = '<div class="loader"><div></div><div></div><div></div></div>';
+	if(!$(filter).find('.loader').length) {
+		$(filter).append(loader);
+	}
 	$(section).addClass(classes);
 }
 //append section items to bottom of section content
@@ -1450,10 +1463,22 @@ function scrollToResourceItem() {
 
 /////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////
-/////////////////////////FOOTER//////////////////////////////
+/////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////
 
+function updateFavicons(newColor) {
+	$('link[data-update]').each(function() {
+		var href = $(this).attr('href');
+		if(newColor=='orange') {
+			currentColor = 'blue';
+		} else {
+			currentColor = 'orange';
+		}
+		var newHref = href.replace(currentColor, newColor);
+		$(this).attr('href', newHref);
+	});
+}
 
 function isNumeric(n) {
   return !isNaN(parseFloat(n)) && isFinite(n);

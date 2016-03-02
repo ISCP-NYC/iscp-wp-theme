@@ -115,6 +115,18 @@ function add_lat_lng( $post_id ) {
 }
 add_action( 'save_post', 'add_lat_lng' );
 
+
+function add_ground_floor_studio_num( $post_id ) {
+	$post_type = get_post_type( $post_id );
+	if( $post_type == 'resident' ):
+		$program = get_post_meta( $post_id, 'residency_program', true );
+		if( $program == 'ground_floor' ):
+	    	update_post_meta( $post_id, 'studio_number', 9999 );
+	    endif;
+	endif;
+}
+add_action( 'save_post', 'add_ground_floor_studio_num' );
+
 /////////////////////////////////////
 /////////////////////////////////////
 ///////////AJAX AJAX AJAX////////////
@@ -232,8 +244,20 @@ add_filter( 'query_vars', 'add_query_vars_filter' );
 /////////////////////////////////////
 /////////////////////////////////////
 
-// http://www.paulund.co.uk/add-custom-post-meta-data-to-list-post-table
-// add_filter( 'manage_${post_type}_posts_columns', 'add_new_columns');
+function event_order( $wp_query ) {
+	global $pagenow;
+  	if ( is_admin() && 'edit.php' == $pagenow && !isset( $_GET['orderby'] )) {
+  		$screen = get_current_screen();
+  		$post_type = $screen->post_type;
+  		if( $post_type == 'event' ):
+	    	$wp_query->set( 'order', 'DESC' );
+	    	$wp_query->set( 'meta_key', 'start_date' );
+	    	$wp_query->set( 'orderby',  'meta_value_num' );
+	    endif;
+  	}
+}
+add_filter('pre_get_posts', 'event_order' );
+
 
 function add_event_columns($columns) {
 	unset(
@@ -262,7 +286,7 @@ function custom_event_column( $column, $post_id ) {
 			$start_date = get_post_meta( $post_id , 'start_date' , true );
 			if($start_date && $start_date != '-' && $start_date != 'Invalid date'):
 				$start_date = new DateTime($start_date);
-				echo $start_date->format('m/d/Y');
+				echo $start_date->format('m/n/Y');
 			else:
 				echo '';
 			endif;
@@ -272,7 +296,7 @@ function custom_event_column( $column, $post_id ) {
 			$end_date = get_post_meta( $post_id , 'end_date' , true );
 			if($end_date && $end_date != '-' && $end_date != 'Invalid date'):  
 				$end_date = new DateTime($end_date);
-				echo $end_date->format('m/d/Y');
+				echo $end_date->format('m/n/Y');
 			else:
 				echo '';
 			endif;
@@ -316,6 +340,41 @@ function event_column_orderby( $vars ) {
 	return $vars;
 }
 add_filter( 'request', 'event_column_orderby' );
+
+function event_column_select() {
+  	global $wpdb;
+  	global $pagenow;
+  	if ( is_admin() && $_GET['post_type'] == 'event' && $pagenow == 'edit.php' ) {
+
+	    $event_types = array( 'iscp-talk', 'exhibition', 'open-studios', 'event', 'off-site-project' );
+	    echo '<select name="event_type">';
+	      echo '<option value="">' . __( 'Event Type', 'textdomain' ) . '</option>';
+	    foreach( $event_types as $value ) {
+	      $selected = ( !empty( $_GET['event_type'] ) && $_GET['event_type'] == $value ) ? 'selected="selected"' : '';
+	      echo '<option ' . $selected . 'value="' . $value . '">' . pretty( $value ) . '</option>';
+	    }
+	    echo '</select>';
+  	}
+}
+add_action( 'restrict_manage_posts', 'event_column_select' );
+
+function event_column_filter( $query ) {
+	global $pagenow;
+  	if( is_admin() && $query->query['post_type'] == 'event' && $pagenow == 'edit.php' ) {
+	    $qv = &$query->query_vars;
+	    $qv['meta_query'] = array();
+
+	    if( !empty( $_GET['event_type'] ) ) {
+	      $qv['meta_query'][] = array(
+	        'field' => 'event_type',
+	        'value' => $_GET['event_type'],
+	        'compare' => '=',
+	        'type' => 'CHAR'
+	      );
+    	}
+  	}
+}
+add_filter( 'parse_query','event_column_filter' );
 
 /////////////////////////////////////
 /////////////////////////////////////
@@ -413,41 +472,40 @@ function resident_column_orderby( $vars ) {
 }
 add_filter( 'request', 'resident_column_orderby' );
 
-
-add_action( 'restrict_manage_posts', 'event_column_select' );
-function event_column_select() {
+function resident_column_select() {
   global $wpdb;
-  if ( $_GET['post_type'] == 'event' ) {
+  global $pagenow;
+  if ( is_admin() && $_GET['post_type'] == 'resident' && $pagenow == 'edit.php' ) {
 
-    $event_types = array( 'iscp-talk', 'exhibition', 'open-studios', 'event', 'off-site-project' );
-    echo '<select name="event_type">';
-      echo '<option value="">' . __( 'Event Type', 'textdomain' ) . '</option>';
-    foreach( $event_types as $value ) {
-      $selected = ( !empty( $_GET['event_type'] ) AND $_GET['event_type'] == $value ) ? 'selected="selected"' : '';
-      echo '<option ' . $selected . 'value="' . $value . '">' . pretty( $value ) . '</option>';
+    $residency_programs = array( 'international', 'ground_floor' );
+    echo '<select name="residency_program">';
+      echo '<option value="">' . __( 'Residency Program', 'textdomain' ) . '</option>';
+    foreach( $residency_programs as $value ) {
+      $selected = ( !empty( $_GET['residency_program'] ) && $_GET['residency_program'] == $value ) ? 'selected="selected"' : '';
+      echo '<option ' . $selected . 'value="' . $value . '">' . get_program_title( $value ) . '</option>';
     }
     echo '</select>';
 
   }
 }
+add_action( 'restrict_manage_posts', 'resident_column_select' );
 
-
-add_filter( 'parse_query','event_column_filter' );
-function event_column_filter( $query ) {
-  if( is_admin() AND $query->query['post_type'] == 'event' ) {
-    $qv = &$query->query_vars;
-    $qv['meta_query'] = array();
-
-    if( !empty( $_GET['event_type'] ) ) {
-      $qv['meta_query'][] = array(
-        'field' => 'event_type',
-        'value' => $_GET['event_type'],
-        'compare' => '=',
-        'type' => 'CHAR'
-      );
-    }
-  }
+function resident_column_filter( $query ) {
+	global $pagenow;
+	if( is_admin() && $query->query['post_type'] == 'resident' && $pagenow == 'edit.php' ) {
+		$qv = &$query->query_vars;
+		$qv['meta_query'] = array();
+		if( !empty( $_GET['residency_program'] ) ) {
+		  $qv['meta_query'][] = array(
+		    'field' => 'residency_program',
+		    'value' => $_GET['residency_program'],
+		    'compare' => '=',
+		    'type' => 'CHAR'
+		  );
+	    }
+  	}
 }
+add_filter( 'parse_query','resident_column_filter' );
 
 
 /////////////////////////////////////
@@ -783,7 +841,7 @@ function get_event_date( $id ) {
 		$start_date = new DateTime( $_start_date );
 		$start_month = $start_date->format('F');
 		$start_day_word = $start_date->format('l');
-		$start_day = $start_date->format('d');
+		$start_day = $start_date->format('n');
 		$start_year = $start_date->format('Y');
 	endif;
 
@@ -791,7 +849,7 @@ function get_event_date( $id ) {
 		$end_date = new DateTime( $_end_date );
 		$end_month = $end_date->format('F');
 		$end_day_word = $end_date->format('l');
-		$end_day = $end_date->format('d');
+		$end_day = $end_date->format('n');
 		$end_year = $end_date->format('Y');
 	endif;
 
@@ -802,20 +860,16 @@ function get_event_date( $id ) {
 			$date_format = 'Through ' . $end_month . ' ' . $end_day;
 		else:
 			$date_format = $start_month . '&nbsp;' . $start_day;
-			if ( $start_year && $start_year != $today_year ):
+			if ( $end_year && $start_year != $end_year ):
 				$date_format .= ', ' . $start_year;
 			endif;
 			$date_format .= '&ndash;' . $end_month . '&nbsp;' . $end_day;
-			if ( $end_year && $end_year != $today_year ):
-				$date_format .= ',&nbsp;' . $end_year;
-			endif;
+			$date_format .= ',&nbsp;' . $end_year;
 		endif;
 	else:
 		$date_format = $start_month . ' ' . $start_day;
-		if($start_year && $start_year != $today_year):
-		 	$date_format .= ',&nbsp;' . $start_year;
-		endif;
-		if($time):
+		$date_format .= ',&nbsp;' . $start_year;
+		if( $time ):
 			$date_format .= '</br>' . $time;
 		endif;
 	endif;
@@ -1157,6 +1211,16 @@ function get_resident_count( $type, $value, $page_query = null ) {
 			'compare' => 'LIKE'
 		);
 		$meta_query = array_merge( $meta_query, $program_query );
+	endif;
+
+	if( $type == 'type' ):
+		$type_query = array(
+			'key' => 'resident_type',
+			'type' => 'CHAR',
+			'value' => $value,
+			'compare' => 'LIKE'
+		);
+		$meta_query = array_merge( $meta_query, $type_query );
 	endif;
 
 	$query_args = array(

@@ -4,7 +4,7 @@ setup_postdata( $post );
 $title = get_the_title();
 $slug = $post->post_name;
 $date = get_the_date('F d, Y');
-$featured_image = get_thumb( $joural_post_id, null, false );
+$featured_image = get_thumb( $joural_post_id, null );
 $featured_image_id = get_post_thumbnail_id();
 $id = get_the_ID();
 $event_classes = 'journal-post single';

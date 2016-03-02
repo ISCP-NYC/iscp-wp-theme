@@ -21,14 +21,17 @@ if( $query_vars ):
 	$country_param = $query_vars['from'];
 	$year_param = $query_vars['date'];
 	$program_param = $query_vars['program'];
+	$type_param = $query_vars['type'];
 else:
 	$page_param = get_query_var( 'filter' ) . '-residents';
 	if( $page_param == $slug || $post_type == 'sponsor' ):
 		$country_param = get_query_var( 'from' );
 		$year_param = get_query_var( 'date' );
 		$program_param = get_query_var( 'program' );
+		$type_param = get_query_var( 'type' );
 	endif;
 endif;
+
 if( $slug == 'current-residents' ):
 	$page_query = array_merge(
 		$page_query, array(

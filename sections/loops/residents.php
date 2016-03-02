@@ -29,6 +29,7 @@ if( $year_param ):
 		$year_query
 	);
 endif;
+
 if( $program_param ):
 	$program_query = array(
 		'key' => 'residency_program',
@@ -42,18 +43,34 @@ if( $program_param ):
 		$program_query
 	);
 endif;
+
 if( $sponsor_param ):
 	$sponsor_query = array(
 		'key' => 'residency_dates_0_sponsors',
 		'value' => '"' . $sponsor_id . '"',
 		'compare' => 'LIKE'
 	);
-	$sponsor_query = array(
+	$filter_query = array(
 		'relation' => 'AND',
 		$filter_query,
 		$sponsor_query
 	);
 endif;
+
+if( $type_param ):
+	$type_query = array(
+		'key' => 'resident_type',
+		'type' => 'CHAR',
+		'value' => $type_param,
+		'compare' => 'LIKE'
+	);
+	$filter_query = array(
+		'relation' => 'AND',
+		$filter_query,
+		$type_query
+	);
+endif;
+
 if( $post_type == 'sponsor' || $page_type == 'sponsor' ):
 	$sponsor_id = get_page_by_path( $slug, OBJECT, 'sponsor' )->ID;
 	$sponsor_query = array(

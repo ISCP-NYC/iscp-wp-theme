@@ -147,24 +147,27 @@ section {
 	}
 	.load-more {
 		width: 100%;
+		position: relative;
 		@include large-fs;
 		a {
 			display: table;
 			margin: auto;
 			color: $orange;
+			transition: opacity 100ms ease-out;
 		}
-		span {
-			display: none;
+		.loader {
 			margin: auto;
 		}
 	}
 	&.loading {
 		.load-more {
 			a {
-				display: none;
+				pointer-events: none;
+				opacity: 0;
 			}
-			span {
+			.loader {
 				display: table;
+				top: calc(50% - 15px/2);
 			}
 		}
 	}
@@ -191,6 +194,7 @@ section {
 	}
 	@import 'partials/filter';
 	@import 'partials/footer';
+	@import 'partials/loader';
 	@import 'partials/nav';
 	@import 'partials/shelves';
 	@import 'partials/side';

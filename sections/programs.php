@@ -59,9 +59,9 @@ $programs = array_reverse( get_pages( $programs_query ) );
 			// echo '<a class="bullet apply" href="' . $apply_link . '">Apply</a>';
 			// echo '<div class="deadline-notes">Deadlines</br>' . $deadline . '</div>';
 			// echo '<h3 class="title orange">Deadlines</h3>';
-			if( have_rows( 'columns', $program ) ):
+			if( have_rows( 'image_columns', $program ) ):
 			echo '<div class="columns">';
-			    while ( have_rows( 'columns', $program ) ) : the_row();
+			    while ( have_rows( 'image_columns', $program ) ) : the_row();
 			    	echo '<div class="column">';
 			    	echo '<div class="inner">';
 				        $col_image = get_sub_field( 'image' )['sizes']['thumb'];
