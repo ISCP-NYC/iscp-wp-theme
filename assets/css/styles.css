@@ -467,9 +467,8 @@ section {
         height: auto; } }
   /* line 1, ../sass/partials/filter.scss */
   section .filter {
-    width: 100%;
-    position: relative; }
-    /* line 5, ../sass/partials/filter.scss */
+    width: 100%; }
+    /* line 4, ../sass/partials/filter.scss */
     section .filter .select {
       font-size: 18px;
       line-height: 18px;
@@ -478,81 +477,82 @@ section {
       padding: 0;
       margin: 0 20px 5px 0;
       cursor: pointer; }
-      /* line 13, ../sass/partials/filter.scss */
+      /* line 12, ../sass/partials/filter.scss */
       section .filter .select:last-child {
         margin-right: 0; }
-      /* line 17, ../sass/partials/filter.scss */
+      /* line 16, ../sass/partials/filter.scss */
       section .filter .select.view.toggle .grid {
         display: none; }
-      /* line 19, ../sass/partials/filter.scss */
+      /* line 18, ../sass/partials/filter.scss */
       section .filter .select.view.toggle.grid span.grid {
         display: block; }
-      /* line 20, ../sass/partials/filter.scss */
+      /* line 19, ../sass/partials/filter.scss */
       section .filter .select.view.toggle.grid span.list {
         display: none; }
-      /* line 21, ../sass/partials/filter.scss */
+      /* line 20, ../sass/partials/filter.scss */
       section .filter .select.view.toggle.grid .icon {
         background-position: right bottom; }
-      /* line 23, ../sass/partials/filter.scss */
+      /* line 22, ../sass/partials/filter.scss */
       section .filter .select.view.toggle .swap {
         margin-top: 1px; }
-      /* line 27, ../sass/partials/filter.scss */
+      /* line 26, ../sass/partials/filter.scss */
       section .filter .select.view.toggle .icon.default {
         background-image: url(../images/view-toggle-orange.svg); }
-      /* line 30, ../sass/partials/filter.scss */
+      /* line 29, ../sass/partials/filter.scss */
       section .filter .select.view.toggle .icon.hover {
         background-image: url(../images/view-toggle-black.svg); }
-      /* line 37, ../sass/partials/filter.scss */
+      /* line 36, ../sass/partials/filter.scss */
       section .filter .select.dropdown .icon.default {
         background-image: url(../images/dropdown-orange.svg); }
-      /* line 40, ../sass/partials/filter.scss */
+      /* line 39, ../sass/partials/filter.scss */
       section .filter .select.dropdown .icon.hover {
         background-image: url(../images/dropdown-black.svg); }
-      /* line 45, ../sass/partials/filter.scss */
+      /* line 44, ../sass/partials/filter.scss */
       section .filter .select.dropdown.dropped .icon {
         background-position: right bottom; }
-      /* line 51, ../sass/partials/filter.scss */
+      /* line 50, ../sass/partials/filter.scss */
       section .filter .select.tag .swap .icon {
         background-size: 16px; }
-        /* line 53, ../sass/partials/filter.scss */
+        /* line 52, ../sass/partials/filter.scss */
         section .filter .select.tag .swap .icon.default {
           background-image: url(../images/close-orange.svg); }
-        /* line 56, ../sass/partials/filter.scss */
+        /* line 55, ../sass/partials/filter.scss */
         section .filter .select.tag .swap .icon.hover {
           background-image: url(../images/close-black.svg); }
-      /* line 62, ../sass/partials/filter.scss */
+      /* line 61, ../sass/partials/filter.scss */
       section .filter .select:hover .icon.default {
         opacity: 0; }
-      /* line 65, ../sass/partials/filter.scss */
+      /* line 64, ../sass/partials/filter.scss */
       section .filter .select:hover .icon.hover {
         opacity: 1; }
-      /* line 69, ../sass/partials/filter.scss */
+      /* line 68, ../sass/partials/filter.scss */
       section .filter .select span {
         float: left; }
-      /* line 72, ../sass/partials/filter.scss */
+      /* line 71, ../sass/partials/filter.scss */
       section .filter .select .swap {
         width: 16px;
         height: 16px;
         display: block;
         float: left;
         margin: 2px 0 0 5px; }
-        /* line 78, ../sass/partials/filter.scss */
+        /* line 77, ../sass/partials/filter.scss */
         section .filter .select .swap .icon {
           background-size: 16px 32px;
           background-position: right top;
           background-repeat: no-repeat; }
-    /* line 85, ../sass/partials/filter.scss */
+    /* line 84, ../sass/partials/filter.scss */
     section .filter .bar {
       width: 100%;
       display: table;
       margin-bottom: 20px; }
-      /* line 89, ../sass/partials/filter.scss */
+      /* line 88, ../sass/partials/filter.scss */
       section .filter .bar .select {
         float: left; }
-  /* line 94, ../sass/partials/filter.scss */
+  /* line 93, ../sass/partials/filter.scss */
   section .filter-lists {
     width: 100%;
-    display: block; }
+    display: block;
+    position: relative; }
     /* line 97, ../sass/partials/filter.scss */
     section .filter-lists .filter-list {
       height: 0px;
@@ -850,7 +850,7 @@ section {
     position: absolute;
     width: 75px;
     height: 15px;
-    top: calc(100% + 100px);
+    top: calc(100% + 55px);
     left: calc(50% - 75px/2);
     -webkit-transition: opacity 300ms ease-in-out;
             transition: opacity 300ms ease-in-out;
@@ -2061,19 +2061,18 @@ body.login {
           display: table;
           margin: auto;
           cursor: pointer; }
-      /* line 112, ../sass/partials/slider.scss */
-      .image_slider .slides .slide .caption {
-        width: 100%;
-        font-size: 18px;
-        line-height: 21px;
-        text-align: center;
-        padding-top: 10px; }
-        @media (max-width: 900px) {
-          /* line 112, ../sass/partials/slider.scss */
-          .image_slider .slides .slide .caption {
-            font-size: 16px;
-            line-height: 20px; } }
-  /* line 120, ../sass/partials/slider.scss */
+        /* line 111, ../sass/partials/slider.scss */
+        .image_slider .slides .slide .image .captionWrap {
+          display: table;
+          margin: auto;
+          position: relative; }
+          /* line 115, ../sass/partials/slider.scss */
+          .image_slider .slides .slide .image .captionWrap .caption {
+            width: 100%;
+            position: absolute;
+            top: calc(100% + 10px);
+            left: 0; }
+  /* line 125, ../sass/partials/slider.scss */
   .image_slider.full {
     width: 100% !important;
     height: 100% !important;
@@ -2084,31 +2083,20 @@ body.login {
     z-index: 1000;
     cursor: none !important;
     display: table; }
-    /* line 130, ../sass/partials/slider.scss */
+    /* line 135, ../sass/partials/slider.scss */
     .image_slider.full .arrow {
       display: none; }
-    /* line 133, ../sass/partials/slider.scss */
+    /* line 138, ../sass/partials/slider.scss */
     .image_slider.full .piece {
       margin: 0 !important;
       display: table; }
-      /* line 136, ../sass/partials/slider.scss */
+      /* line 141, ../sass/partials/slider.scss */
       .image_slider.full .piece .image {
         width: calc(100% - 200px) !important;
         margin: 100px;
         display: block;
         position: relative; }
-        /* line 141, ../sass/partials/slider.scss */
-        .image_slider.full .piece .image .captionWrap {
-          display: table;
-          margin: auto;
-          position: relative; }
-          /* line 145, ../sass/partials/slider.scss */
-          .image_slider.full .piece .image .captionWrap .caption {
-            width: 100%;
-            position: absolute;
-            top: 100%;
-            left: 0; }
-        /* line 152, ../sass/partials/slider.scss */
+        /* line 146, ../sass/partials/slider.scss */
         .image_slider.full .piece .image.portait {
           height: calc(100% - 200px) !important;
           display: -webkit-box;
@@ -2119,40 +2107,40 @@ body.login {
           -webkit-align-items: center;
               -ms-flex-align: center;
                   align-items: center; }
-        /* line 157, ../sass/partials/slider.scss */
+        /* line 151, ../sass/partials/slider.scss */
         .image_slider.full .piece .image.landscape {
           display: -webkit-box;
           display: -webkit-flex;
           display: -ms-flexbox;
           display: flex; }
-          /* line 159, ../sass/partials/slider.scss */
+          /* line 153, ../sass/partials/slider.scss */
           .image_slider.full .piece .image.landscape .captionWrap {
             display: block; }
-            /* line 161, ../sass/partials/slider.scss */
+            /* line 155, ../sass/partials/slider.scss */
             .image_slider.full .piece .image.landscape .captionWrap img {
               width: auto !important;
               height: auto !important; }
-  /* line 171, ../sass/partials/slider.scss */
+  /* line 165, ../sass/partials/slider.scss */
   .image_slider:not(.full) .image {
     display: table-cell;
     vertical-align: middle; }
-    /* line 174, ../sass/partials/slider.scss */
+    /* line 168, ../sass/partials/slider.scss */
     .image_slider:not(.full) .image img {
       cursor: pointer;
       max-height: 600px; }
       @media (max-width: 900px) {
-        /* line 174, ../sass/partials/slider.scss */
+        /* line 168, ../sass/partials/slider.scss */
         .image_slider:not(.full) .image img {
           max-height: 300px; } }
       @media (max-width: 768px) {
-        /* line 174, ../sass/partials/slider.scss */
+        /* line 168, ../sass/partials/slider.scss */
         .image_slider:not(.full) .image img {
           max-height: 200px; } }
 
-/* line 190, ../sass/partials/slider.scss */
+/* line 184, ../sass/partials/slider.scss */
 body.mobile .gallery .cursor {
   display: none !important; }
-/* line 194, ../sass/partials/slider.scss */
+/* line 188, ../sass/partials/slider.scss */
 body.mobile .gallery.full .arrow {
   display: block; }
 
@@ -2202,7 +2190,7 @@ section#about .info {
   section#about .info .bullet, section#about .info section.greenroom ul li, section.greenroom ul section#about .info li,
   section#about .info section.resource ul li,
   section.resource ul section#about .info li {
-    display: block; }
+    display: table; }
 /* line 32, ../sass/sections/about.scss */
 section#about .main .description {
   font-size: 24px;

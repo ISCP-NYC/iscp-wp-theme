@@ -22,9 +22,10 @@ var isMobile = false;
 	if($('section.resource').length) {
 		scrollToResourceItem();
 	} 
-	if($('section#events').length && (getParam('date') || getParam('type'))) {
+	if($('section#events').length && (getParam('date') || getParam('type') || window.location.hash == '#past')) {
 		var pastWrapper = $('.past.wrapper');
 		var pastWrapperTop = $(pastWrapper).offset().top - 130;
+		$(pastWrapper).height($(window).innerHeight());
 		$('section#events .content').scrollTop(pastWrapperTop);
 	} 
 	if($('.center').is('.greenroom:not(#greenroom)')) {
@@ -456,6 +457,9 @@ function loadMore(slug, paged) {
 		},
 		success: function(response) {
 			addItems(response, vars);
+			if($(section).is('#events')) {
+				$(section).find('.wrapper.past').attr('style','');
+			}
 		}
 	});
 }
@@ -464,10 +468,10 @@ function loading(vars, classes) {
 	var vars = JSON.parse(vars);
 	var sectionSlug = vars.pagename;
 	var section = $('section#'+sectionSlug);
-	var filter = $(section).find('.filter');
+	var filterLists = $(section).find('.filter-lists');
 	var loader = '<div class="loader"><div></div><div></div><div></div></div>';
-	if(!$(filter).find('.loader').length) {
-		$(filter).append(loader);
+	if(!$(filterLists).find('.loader').length) {
+		$(filterLists).append(loader);
 	}
 	$(section).addClass(classes);
 }
@@ -1143,14 +1147,11 @@ $('body').on('click', '.gallery:not(.full) img', function() {
 	var slidesLength = $(gallery).find('.slide').length;
 	setUpImageSlider();
 	$(cursor).css({'display':'none'});
-
 	if(isSmall()) {
 		var distance = 75;
 	} else {
 		var distance = 200;
 	}
-
-
 	$(gallery).on('mousemove', function(event) {
 		var x = event.pageX;
 		var y = event.pageY;
@@ -1273,7 +1274,6 @@ function setUpEarth() {
     var countries = window.countries;
     var themeUrl = window.wp_info['theme_url'];
     var markerUrl = null;
-    // themeUrl+'/assets/images/bullet-orange.svg';
     var markerTemp = $('#markerTemp').html();
     $('section#map').addClass('show');
     setTimeout(function() {
@@ -1295,9 +1295,6 @@ function setUpEarth() {
     		.attr('data-count', count)
     		.attr('data-lat', lat)
     		.attr('data-lng', lng);
-    		// setTimeout(function() {
-    		// 	$(markerHtml).addClass('show');
-    		// }, 1000+(i*10));
     		$(inner).html(markerTemp);
     		$(inner).find('.count span').text(count);
     	}
@@ -1494,7 +1491,7 @@ function winH() {
 
 function isSmall() {
 	var size = $('#size').css('content');
-	if(size == 'xsmall' || 'small') {
+	if(size == 'xsmall' || size == 'small') {
 		return true;
 	} else {
 		return false;

@@ -286,7 +286,7 @@ function custom_event_column( $column, $post_id ) {
 			$start_date = get_post_meta( $post_id , 'start_date' , true );
 			if($start_date && $start_date != '-' && $start_date != 'Invalid date'):
 				$start_date = new DateTime($start_date);
-				echo $start_date->format('m/n/Y');
+				echo $start_date->format('m/j/Y');
 			else:
 				echo '';
 			endif;
@@ -296,7 +296,7 @@ function custom_event_column( $column, $post_id ) {
 			$end_date = get_post_meta( $post_id , 'end_date' , true );
 			if($end_date && $end_date != '-' && $end_date != 'Invalid date'):  
 				$end_date = new DateTime($end_date);
-				echo $end_date->format('m/n/Y');
+				echo $end_date->format('m/j/Y');
 			else:
 				echo '';
 			endif;
@@ -841,7 +841,7 @@ function get_event_date( $id ) {
 		$start_date = new DateTime( $_start_date );
 		$start_month = $start_date->format('F');
 		$start_day_word = $start_date->format('l');
-		$start_day = $start_date->format('n');
+		$start_day = $start_date->format('j');
 		$start_year = $start_date->format('Y');
 	endif;
 
@@ -849,7 +849,7 @@ function get_event_date( $id ) {
 		$end_date = new DateTime( $_end_date );
 		$end_month = $end_date->format('F');
 		$end_day_word = $end_date->format('l');
-		$end_day = $end_date->format('n');
+		$end_day = $end_date->format('j');
 		$end_year = $end_date->format('Y');
 	endif;
 
@@ -857,7 +857,7 @@ function get_event_date( $id ) {
 
 	if ( $end_date ):
 		if ( $today > $start_date && $today < $end_date ):
-			$date_format = 'Through ' . $end_month . ' ' . $end_day;
+			$date_format = 'Through ' . $end_month . ' ' . $end_day . ', ' . $end_year;
 		else:
 			$date_format = $start_month . '&nbsp;' . $start_day;
 			if ( $end_year && $start_year != $end_year ):
@@ -986,13 +986,14 @@ function pretty_url( $url ) {
 	return $url;
 }
 
-function label_art() {
-	$artist = get_sub_field( 'artist' );
-	$title = get_sub_field( 'title' );
-    $year = get_sub_field( 'year' );
-    $medium = get_sub_field( 'medium' );
-    $credit = get_sub_field( 'credit' );
-    $photo_credit = get_sub_field( 'photo_credit' );
+function label_art( $image_id ) {
+	$caption_field = get_sub_field( 'caption', $image_id );
+	$artist = get_sub_field( 'artist', $image_id );
+	$title = get_sub_field( 'title', $image_id );
+    $year = get_sub_field( 'year', $image_id );
+    $medium = get_sub_field( 'medium', $image_id );
+    $credit = get_sub_field( 'credit', $image_id );
+    $photo_credit = get_sub_field( 'photo_credit', $image_id );
 	$post_type = get_post_type();
 	$dimensions = get_dimensions();
 
@@ -1022,6 +1023,9 @@ function label_art() {
     endif;
     if( $photo_credit && $photo_credit != ' ' ):
     	$caption .= ' ' . $photo_credit . '.';
+    endif;
+    if( !$caption ):
+    	$caption = $caption_field;
     endif;
     return $caption;
 }

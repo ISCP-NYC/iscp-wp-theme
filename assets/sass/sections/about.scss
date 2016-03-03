@@ -25,7 +25,7 @@ section#about {
 		@include medium-fs;
 		display: flex;
 		.bullet {
-			display: block;
+			display: table;
 		}
 	}
 	.main {

@@ -15,11 +15,7 @@
 			   	echo '<div class="cell' . $classes . '">';
 				echo '<div class="inner">';
 				echo '<div class="overlay">';
-				if( $item_title === 'Past Events' ):
-					echo '<a href="' . $item_url . '#past">';
-				else:
-					echo '<a href="' . $item_url . '">';
-				endif;
+				echo '<a href="' . $item_url . '">';
 			    if( $item_slug == 'greenroom' ):
 			    	echo '<h1 class="link">';
 			    	echo '<div class="iconWrap">';
@@ -40,10 +36,15 @@
 			    echo '<div class="sub-menu">';
 			    foreach ( (array) $menu_items as $key => $child_menu_item ) {
 			    	$child_title = $child_menu_item->title;
+			    	$slug = $child_menu_item->post_name;
 			    	$child_url = $child_menu_item->url;
 			    	$parent_id = $child_menu_item->menu_item_parent;
-			    	if ($parent_id == $item_id ) : 
-			    		echo '<a href="' . $child_url . '" class="child-item bullet">';
+			    	if ($parent_id == $item_id ) :
+			    		if($slug == 'past-events'):
+			    			echo '<a href="' . $child_url . '#past" class="child-item bullet">';
+			    		else:
+			    			echo '<a href="' . $child_url . '" class="child-item bullet">';
+			    		endif;
 			    		echo $child_title;
 			    		echo '</a>';
 			    	endif;

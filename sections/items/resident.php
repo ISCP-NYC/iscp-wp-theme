@@ -12,7 +12,7 @@ $url = get_permalink();
 if( have_rows( 'residency_dates', $resident_id ) ):
 	while ( have_rows( 'residency_dates' ) ) : the_row();
 		$start_date_dt = new DateTime( get_sub_field( 'start_date', $resident_id ) );
-		$start_date = $start_date_dt->format( 'M n, Y' );
+		$start_date = $start_date_dt->format( 'M j, Y' );
 		$resident_year = $start_date_dt->format( 'Y' );
 	endwhile;
 endif;

@@ -9,9 +9,10 @@ $country_query = array(
 $residents_query = array(
 	'post_type' => 'resident',
 	'posts_per_page' => -1,
-	'order' => 'ASC',
-	'ordrby' => 'last_name',
 	'post_status' => 'publish',
+	'meta_key' => 'residency_dates_0_start_date',
+	'orderby' => 'meta_value_num',
+	'order' => 'DESC',
 	'meta_query' => array( $country_query )
 );
 $residents = new WP_Query( $residents_query );

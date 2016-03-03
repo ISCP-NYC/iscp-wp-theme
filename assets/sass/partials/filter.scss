@@ -1,6 +1,5 @@
 .filter {
     width: 100%;
-    position: relative;
     @extend .noselect;
     .select {
         font-size: $small-fs;
@@ -94,6 +93,7 @@
 .filter-lists {
     width: 100%;
     display: block;
+    position: relative;
     .filter-list {
         height: 0px;
         display: block;

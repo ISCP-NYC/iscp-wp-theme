@@ -112,7 +112,6 @@ $home_id = get_page_by_path( 'home' )->ID;
 		        $caption = label_art( $image_id );
 		        $image_url = $image['url'];
 		        $orientation = get_orientation( $image['id'] );
-		        $caption = label_art( $the_ID );
 		        echo '<div class="piece slide">';
 		        echo '<div class="image ' . $orientation . '">';
 		        echo '<div class="captionWrap">';

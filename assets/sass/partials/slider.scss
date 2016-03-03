@@ -108,12 +108,17 @@
 					margin: auto;
 					cursor: pointer;
 				}
-			}
-			.caption {
-				width: 100%;
-				@include small-fs;
-				text-align: center;
-				padding-top: 10px;
+                .captionWrap {
+                    display: table;
+                    margin: auto;
+                    position: relative;
+                    .caption {
+                        width: 100%;
+                        position: absolute;
+                        top: calc(100% + 10px);
+                        left: 0;
+                    }
+                }
 			}
 		}
 	}
@@ -138,17 +143,6 @@
                 margin: 100px;
                 display: block;
                 position: relative;
-                .captionWrap {
-                    display: table;
-                    margin: auto;
-                    position: relative;
-                    .caption {
-                        width: 100%;
-                        position: absolute;
-                        top: 100%;
-                        left: 0;
-                    }
-                }
                 &.portait {
                     height: calc(100% - 200px) !important;
                     display: flex;
