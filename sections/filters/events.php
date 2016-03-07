@@ -1,4 +1,5 @@
 <?php
+$page_url = $query_vars['url'];
 $type_param = $query_vars['type'];
 $year_param = $query_vars['date'];
 ?>
@@ -6,12 +7,11 @@ $year_param = $query_vars['date'];
 	<div class="options">
 		<?php
 		$event_types = array( 'exhibition', 'off-site-project', 'iscp-talk', 'open-studios', 'events' );
-		foreach( $event_types as $event_type ): 
-
+		foreach( $event_types as $event_type ):
 			$filter_url = query_url( 'type', $event_type, $page_url );
 			$event_type_count = get_event_count( 'type', $event_type );
 			if( $event_type_count != 0 ):
-				if($event_type == $event_type_param):
+				if( $event_type == $type_param ):
 					$selected = 'selected';
 				else:
 					$selected = null;

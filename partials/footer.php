@@ -61,7 +61,7 @@
 		    			<div class="sub-menu">
 		    				<form role="search" method="get" class="searchform" class="searchform" autocomplete="off" action="<?php echo esc_url( home_url( '/' ) ); ?>">
 		    					<div class="placeholder"><span>Type here</span></div>
-								<input type="text" name="s" class="s" />
+								<input type="text" name="s" class="s" spellcheck="false"/>
 								<div class="counter"></div>
 							</form>
 		    			</div>
@@ -100,7 +100,7 @@
 		    			<div class="sub-menu">
 		    				<form role="search" method="get" class="newsletter" action="<?php echo esc_url( home_url( '/' ) ); ?>">
 		    					<div class="placeholder"><span>Subscribe</span></div>
-		    					<input type="text">
+		    					<input type="text" spellcheck="false">
 		    				</form>
 		    			</div>
 		    		</div>

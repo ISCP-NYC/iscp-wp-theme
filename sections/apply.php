@@ -18,124 +18,128 @@
 	<?php get_template_part('partials/side') ?>
 	<div class="content">
 		<h2 class="title"><?php echo $title ?></h2>
-
-		<div class="program-links">
-			<?php
-			foreach( $residency_programs as $program ):
-				setup_postdata($program);
-				$title = get_post( $program )->post_title;
-				$slug = $program->post_name;
-				echo '<a class="bullet small" href="#' . $slug . '">' . $title . '</a></br>';
-				wp_reset_postdata();
-			endforeach;
-			?>
-		</div>
-
-
-
 		<?php foreach( $residency_programs as $program ):
 			setup_postdata($program);
 			$title = get_post( $program )->post_title; 
 			$slug = get_post( $program )->post_name; 
 		?>
-			<div class="program border-top" id="<?php echo $slug ?>">
-				<div class="title">
-					<?php echo $title ?>
-				</div>
-				<div class="links">
-					<div class="bullet small link">
-						<a href="#">Read more about this residency program</a>
-					</div>
-					<div class="bullet small link">
-						<a href="#">Application FAQ</a>
-					</div>
-				</div>
-				<div class="inner">
+			<div class="program module" id="<?php echo $slug ?>">
+				<h3 class="title"><?php echo $title ?></h3>
+				<div class="info">
 					<?php $intro = get_field( 'intro', $program ); ?>
 					<div class="intro">
 						<?php echo $intro ?>
 					</div>
 
-					<h5>Upcoming Application Deadlines</h5>
-					<div class="applications">
-						<?php
-						$sponsors = get_posts( array(
-							'posts_per_page' => 20,
-							'post_type' => 'sponsor',
-							'post_status' => 'publish',
-							'orderby' => 'title',
-							'sort_order' => 'asc',
-							'meta_query' => array( array(
-								'key' => 'deadlines',
-								'value' => array(''),
-								'compare' => 'NOT IN'
-							) )
-						) ); 
-						foreach( $sponsors as $sponsor ): 
-							setup_postdata($sponsor);
-							$country = get_field( 'country', $sponsor )[0]->post_title;
-							$sponsor_id = $sponsor->ID;
-							$sponsor_title = get_the_title( $sponsor );
-							$sponsor_website = get_field( 'website', $sponsor_id );
-							if( have_rows( 'applications', $sponsor ) ):
-						    while ( have_rows( 'applications', $sponsor ) ) : the_row();
-						        $deadline_date = new DateTime( get_sub_field( 'deadline' ) );
-								$deadline = $deadline_date->format( 'M j, Y' );
-								$brief = get_sub_field( 'brief' );
-								echo '<div class="application row">';
-									echo '<div class="cell date">';
-										echo $deadline;
-									echo '</div>';
-									echo '<div class="cell country">';
-										echo $country;
-									echo '</div>';
-									echo '<div class="cell brief">';
-									if( $sponsor_title ):
-										echo '<a href="' . $sponsor_website . '">';
-											echo $sponsor_title;
-										echo '</a>';
-									endif;
-									if( $brief ):
-										echo ' – ';
-										echo $brief;
-									endif;
-									echo '</div>';
-								echo '</div>';
-							endwhile;
-							endif;
-							wp_reset_postdata();
-						endforeach;
-						?>
-					</div>
+					<?php if($slug == 'international'): ?>
+						<h3 class="title">Upcoming Application Deadlines</h3>
+						<div class="applications">
+							<?php
+							$today = new DateTime();
+							$sponsors = get_posts( array(
+								'posts_per_page' => -1,
+								'post_type' => 'sponsor',
+								'post_status' => 'publish',
+								'orderby' => 'title',
+								'sort_order' => 'asc',
+								'meta_query' => array(
+									'relation' => 'AND',
+								    array(
+								        'key' => 'applications',
+								        'compare' => 'NOT IN',
+								        'value'   => array('')
+								    )
+								)
+							) );
 
-					<div class="filter">
-						Or choose a sponsor by
-						<div class="select link dropdown country" data-filter="country" data-slug="<?php echo $slug ?>">Country</div>
-					</div>
-					<div class="filter-list sub country <? echo $slug ?>">
-						<?php
-							$page_url = get_the_permalink();
+							if( sizeof( $sponsors ) != 0 ):
+								foreach( $sponsors as $sponsor ): 
+									setup_postdata($sponsor);
+									$country = get_field( 'country', $sponsor )[0]->post_title;
+									$sponsor_id = $sponsor->ID;
+									$sponsor_title = get_the_title( $sponsor );
+									$sponsor_website = get_field( 'website', $sponsor_id );
+									if( have_rows( 'applications', $sponsor ) ):
+									    while ( have_rows( 'applications', $sponsor ) ) : the_row();
+									        $deadline_date = new DateTime( get_sub_field( 'deadline' ) );
+											$deadline = $deadline_date->format( 'M j, Y' );
+											if( $deadline_date >= $today ):
+												$brief = get_sub_field( 'brief' );
+												echo '<div class="application row">';
+													echo '<div class="cell date">';
+														echo $deadline;
+													echo '</div>';
+													echo '<div class="cell country">';
+														echo $country;
+													echo '</div>';
+													echo '<div class="cell brief">';
+													if( $sponsor_title ):
+														echo '<a href="' . $sponsor_website . '">';
+															echo $sponsor_title;
+														echo '</a>';
+													endif;
+													if( $brief ):
+														echo ' – ';
+														echo $brief;
+													endif;
+													echo '</div>';
+												echo '</div>';
+											endif;
+										endwhile;
+									endif;
+									wp_reset_postdata();
+								endforeach;
+							else:
+								echo 'No upcoming applications available.';
+							endif;
+							?>
+						</div>
+
+						<div class="filter">
+							<div class="bar">
+								<span>Or select by&nbsp;</span>
+								<div class="select link dropdown country" data-filter="country" data-slug="<?php echo $slug ?>">
+									<?php
+									echo '<span>Country</span>';
+									?>
+									</span>
+									<div class="swap">
+										<div class="icon default"></div>
+										<div class="icon hover"></div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="filter-list country <?php echo $slug ?>" data-filter="country">
+							<div class="options">
+							<?php
 							$countries = get_posts( array(
-								'posts_per_page'	=> 1000,
+								'posts_per_page'	=> -1,
 								'post_type'			=> 'country',
 								'orderby' 			=> 'title',
-								'order' 			=> 'ASC'
+								'order' 			=> 'ASC',
+								'post_status' 		=> 'publish'
 							) );
 							foreach( $countries as $country ): 
-							setup_postdata($country);
-								$id = $country->ID;
-								$filter_country_name = get_the_title( $id );
-								//need to rewrite this with relationship
-								$filter_url =  $page_url . '?country_temp=' . $filter_country_name;
+								$country_id = $country->ID;
+								$country_slug = $country->post_name;
+								$country_title = $country->post_title;
+								$page_url = get_permalink( get_page_by_path('support/sponsors')->ID );
+								$filter_url = query_url( 'from', $country_slug, $page_url );
 								echo '<div class="option">';
-								echo '<a href="' . $filter_url . '">';
-								echo ucwords( $filter_country_name );
+								echo '<a href="' . $filter_url . '" data-value="' . $country_slug . '">';
+								echo $country_title;
+								echo '<div class="swap">';
+								echo '<div class="icon default"></div>';
+								echo '<div class="icon hover"></div>';
+								echo '</div>';
 								echo '</a>';
 								echo '</div>';
-							wp_reset_postdata();
 							endforeach;
-						?>
-					</div>
+							?>
+							</div>
+						</div>
+					<?php endif; ?>
 				</div>
 			</div>
 

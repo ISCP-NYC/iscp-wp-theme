@@ -172,6 +172,16 @@ section.error {
                 color: $orange;
             }
         }
+        .shelf-item.nolink:hover .inner {
+            .link, a {
+                color: $black !important;
+            }
+        }
+        .shelf-item.nolink .inner {
+            .link:hover, a:hover {
+                color: $black !important;
+            }
+        }
 	}
 	.image_slider.full {
 		background-color: $black;

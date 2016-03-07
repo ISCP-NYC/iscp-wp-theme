@@ -1,7 +1,12 @@
 <?php 
 !isset( $slug ) && $name = $query_vars['pagename'];
 $short_slug = str_replace('-residents', '', $slug);
-$page_url = get_the_permalink() . '?filter=' . $short_slug;
+$page_url = $page_url = $query_vars['url'];
+
+// if( strpos($page_url, 'filter') === false ):
+// 	$page_url .= '?filter=' . $short_slug;	
+// endif;
+
 $country_param = $query_vars['from'];
 $year_param = $query_vars['date'];
 $program_param = $query_vars['program'];

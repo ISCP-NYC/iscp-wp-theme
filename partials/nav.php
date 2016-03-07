@@ -41,7 +41,7 @@
 			    	$parent_id = $child_menu_item->menu_item_parent;
 			    	if ($parent_id == $item_id ) :
 			    		if($slug == 'past-events'):
-			    			echo '<a href="' . $child_url . '#past" class="child-item bullet">';
+			    			echo '<a href="' . $child_url . '/#past" class="child-item bullet">';
 			    		else:
 			    			echo '<a href="' . $child_url . '" class="child-item bullet">';
 			    		endif;

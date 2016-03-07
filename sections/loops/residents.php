@@ -18,7 +18,7 @@ if( $year_param ):
 	$year_end = $year_param . '1231';
 	$year_range = array( $year_begin, $year_end );
 	$year_query = array(
-		'key' => 'residency_dates_0_start_date',
+		'key' => 'residency_dates_0_end_date',
 		'type' => 'DATE',
 		'value' => $year_range,
 		'compare' => 'BETWEEN'

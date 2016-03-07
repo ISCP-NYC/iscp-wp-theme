@@ -14,7 +14,7 @@
 		echo '</h3>';
 	endif;
 	echo '<form role="search" method="get" class="searchform" class="searchform" autocomplete="off" action="' . esc_url( home_url( '/' ) ) . '">';
-	echo '<input type="text" data-placeholder="Search" value="Search" name="s" class="s main-search" />';
+	echo '<input type="text" data-placeholder="Search" value="Search" name="s" class="s main-search" spellcheck="false" />';
 	echo '</form>';
 	echo '<div class="counter"></div>';
 	echo '<div class="shelves results list">';

@@ -197,7 +197,7 @@ $about = get_page_by_path( 'about' );
 		<div class="module newsletter">
 			<form role="subscribe" method="get" class="newsletter">
 				<div class="placeholder"><span>Subscribe to our newsletter</span></div>
-				<input type="text" value/>
+				<input type="text" value spellcheck="false"/>
 			</form>
 		</div>
 		

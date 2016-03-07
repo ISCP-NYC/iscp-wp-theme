@@ -40,7 +40,7 @@ if( $slug == 'current-residents' ):
 	);
 	$orderby_array = array(
 		'meta_key' => 'studio_number',
-		'orderby' => 'meta_value_num',
+		'orderby' => 'meta_value_num post_title',
 		'order' => 'ASC'
 	);
 	$resident_status = 'current';
@@ -52,8 +52,8 @@ elseif( $slug == 'past-residents' ):
 		)
 	);
 	$orderby_array = array(
-		'meta_key' => 'residency_dates_0_start_date',
-		'orderby' => 'meta_value_num',
+		'meta_key' => 'residency_dates_0_end_date',
+		'orderby' => 'meta_value_num post_title',
 		'order' => 'DESC'
 	);
 	$resident_status = 'past';
@@ -61,8 +61,8 @@ elseif( $slug == 'past-residents' ):
 elseif( $post_type == 'sponsor' || $page_type == 'sponsor' || $post_type == 'residents' ):
 	$page_query = null;
 	$orderby_array = array(
-		'meta_key' => 'residency_dates_0_start_date',
-		'orderby' => 'meta_value_num',
+		'meta_key' => 'residency_dates_0_end_date',
+		'orderby' => 'meta_value_num post_title',
 		'order' => 'DESC'
 	);
 endif;

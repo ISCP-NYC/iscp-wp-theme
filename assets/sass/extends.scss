@@ -27,11 +27,12 @@
     user-select: auto !important;
 }
 .bullet {
-    padding: 1px 0 1px 25px;
-    background-size: 15px;
-    background-repeat: no-repeat;
-    background-position: left center;
+    margin: 3px 0;
     background-image: url(../images/bullet-black.svg);
+    background-position: left 5px;
+    background-repeat: no-repeat;
+    background-size: 15px;
+    text-indent: 20px;
     &.link {
         background-image: url(../images/bullet-orange.svg);
         &:hover {
@@ -40,7 +41,7 @@
     }
     &.small {
         @include small-fs;
-        padding: 4px 0 1px 19px;
+        background-position: left 2px;
         background-size: 12px;
     }
 }

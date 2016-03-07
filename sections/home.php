@@ -153,38 +153,36 @@ $home_id = get_page_by_path( 'home' )->ID;
 			$instagram_handle = str_replace('@', '', get_field( 'instagram', $about_id ) );
 			$instagram_url = 'http://instagram.com/' . $instagram_handle;
 			?>
-
-			<div class="links">
-				<div class="link medium facebook half-border-right">
-					<a href="<?php echo $facebook_url ?>" target="_blank">
-						<h3>
-							<div class="swap">
-								<div class="icon default"></div>
-								<div class="icon hover"></div>
-							</div>
-							Facebook
-						</h3>
-					</a>
-				</div>
-				<div class="link medium instagram half-border-left">
-					<a href="<?php echo $instagram_url ?>" target="_blank">
-						<h3>
-							<div class="swap">
-								<div class="icon default"></div>
-								<div class="icon hover"></div>
-							</div>
-							Instagram
-						</h3>
-					</a>
-				</div>
+		</div>
+		<div class="module links">
+			<div class="link medium facebook half-border-right">
+				<a href="<?php echo $facebook_url ?>" target="_blank">
+					<h3>
+						<div class="swap">
+							<div class="icon default"></div>
+							<div class="icon hover"></div>
+						</div>
+						Facebook
+					</h3>
+				</a>
+			</div>
+			<div class="link medium instagram half-border-left">
+				<a href="<?php echo $instagram_url ?>" target="_blank">
+					<h3>
+						<div class="swap">
+							<div class="icon default"></div>
+							<div class="icon hover"></div>
+						</div>
+						Instagram
+					</h3>
+				</a>
 			</div>
 		</div>
 		<?php $newsletter_url = get_field( 'newsletter', $about_id ); ?>
-
 		<div class="module newsletter">
 			<form role="subscribe" method="get" class="newsletter">
 				<div class="placeholder"><span>Subscribe to our newsletter</span></div>
-				<input type="text" value/>
+				<input type="text" value spellcheck="false"/>
 			</form>
 		</div>
 	</div>

@@ -34,20 +34,20 @@
                 }
                 .image {
                     width: 100%;
+                    margin-bottom: 15px;
                     img {
                         width: 100%;
                         height: 100%;
                         // min-height: 100px;
-                        margin-bottom: 5px;
                         vertical-align: bottom;
                     }
                 }
                 span {
-                    margin-top: 5px;
+                    margin-bottom: 5px;
                     display: block;
                 }
                 .value {
-                    margin-top: 3px;
+                    margin-bottom: 3px;
                     font-size: $small-fs;
                     line-height: calc(#{$small-lh} - 2px);
                 }
@@ -143,6 +143,16 @@
                     display: table;
                     width: auto !important;
                     margin: auto !important;
+                }
+            }
+            &.nolink:hover .inner {
+                .link, a {
+                    color: $orange !important;
+                }
+            }
+            &.nolink .inner {
+                .link:hover, a:hover {
+                    color: $orange !important;
                 }
             }
         }

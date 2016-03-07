@@ -3,60 +3,20 @@ section.apply {
 		margin-top: 30px;
 	}
 	.program {
-		display: table;
-		margin-top: 30px;
-		padding-top: 30px;
-		position: relative;
-		.title {
-			width: 140px;
-			position: absolute;
-			top: 30px;
-			left: 0;
-			@include small {
-				width: 100% !important;
-				text-align: center;
-				position: static;
-			}
-		}
 		.links {
-			width: 140px;
-			position: absolute;
-			top: 30px;
-			right: 0;
+			display: none;
+			width: 33.333%;
+			float: left;
 			.bullet {
 				display: inline;
 			}
 			@include small {
-				width: 100% !important;
-				position: static;
-				margin: 20px 0;
-				.bullet {
-					width: 100%;
-					display: block;
-				}
+
 			}
 		}
-		.inner {
-			@include width('100% - 300px');
-			margin: 0 150px;
-			@include small {
-				width: 100%;
-				margin: 0;
-			}
-			.intro {
-				p {
-					text-indent: 0;
-					@include medium-fs;
-				}
-				h3 {
-					width: 100%;
-				    text-transform: uppercase;
-				    padding: 20px 0;
-				    text-align: center;
-				}
-			}
-			h5 {
-				margin-bottom: 20px;
+		.info {
+			h3.title {
+				margin-top: 30px;
 			}
 			.applications {
 				width: 100%;
@@ -96,30 +56,10 @@ section.apply {
 				}
 			}
 		}
-		.select {
-			color: $orange;
-			cursor: pointer;
-			display: inline;
-		}
 		.filter {
-			@include medium-fs;
-			.select {
-				@include medium-fs;
-				padding-right: 40px;
-			    margin-right: 20px;
-			    background-size: 29px 58px;
-			}
-		}
-		.filter-list {
-			display: none;
-			margin-top: 20px;
-			@include small-fs;
-	  		&.show {
-	  			display: block;
-	  		}
-			.option {
+			span {
+				@include small-fs;
 				float: left;
-				margin: 0 10px 10px 0;
 			}
 		}
 	}

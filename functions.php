@@ -45,7 +45,7 @@ function iscp_scripts() {
 	wp_register_script( 'jquery-ui', get_template_directory_uri() . '/assets/js/jquery-ui.min.js', array( 'jquery' ) );
 	wp_register_script( 'imagesloaded', get_template_directory_uri() . '/assets/js/imagesloaded.pkgd.min.js', array( 'jquery' ) );
 	wp_register_script( 'masonry', get_template_directory_uri() . '/assets/js/masonry.pkgd.min.js', array( 'jquery' ) );
-	wp_register_script( 'main', get_template_directory_uri() . '/assets/js/main.js', array( 'jquery' ) );
+	wp_register_script( 'main', get_template_directory_uri() . '/assets/js/main.js', array( 'jquery', 'masonry', 'transit', 'jquery-ui' ) );
 	wp_enqueue_script( 'webglearth', 'http://www.webglearth.com/v2/api.js' );
 	wp_enqueue_script( 'transit' );
 	wp_enqueue_script( 'jquery-ui' );
@@ -121,7 +121,10 @@ function add_ground_floor_studio_num( $post_id ) {
 	if( $post_type == 'resident' ):
 		$program = get_post_meta( $post_id, 'residency_program', true );
 		if( $program == 'ground_floor' ):
-	    	update_post_meta( $post_id, 'studio_number', 9999 );
+			global $wpdb;
+		    $query = "SELECT max(cast(meta_value as unsigned)) FROM wp_postmeta WHERE meta_key='studio_number'";
+		    $new_num = $wpdb->get_var( $query ) + 1;
+	    	update_post_meta( $post_id, 'studio_number', $new_num );
 	    endif;
 	endif;
 }
@@ -286,7 +289,7 @@ function custom_event_column( $column, $post_id ) {
 			$start_date = get_post_meta( $post_id , 'start_date' , true );
 			if($start_date && $start_date != '-' && $start_date != 'Invalid date'):
 				$start_date = new DateTime($start_date);
-				echo $start_date->format('m/j/Y');
+				echo $start_date->format('m/n/Y');
 			else:
 				echo '';
 			endif;
@@ -296,7 +299,7 @@ function custom_event_column( $column, $post_id ) {
 			$end_date = get_post_meta( $post_id , 'end_date' , true );
 			if($end_date && $end_date != '-' && $end_date != 'Invalid date'):  
 				$end_date = new DateTime($end_date);
-				echo $end_date->format('m/j/Y');
+				echo $end_date->format('m/n/Y');
 			else:
 				echo '';
 			endif;
@@ -382,11 +385,12 @@ add_filter( 'parse_query','event_column_filter' );
 /////////////////////////////////////
 /////////////////////////////////////
 function add_resident_columns($columns) {
-	unset(
-		$columns['date']
-	);
+	// unset(
+	// 	$columns['date']
+	// );
     return array_merge($columns, array(
     	'country' =>__( 'Country'),
+    	'sponsors' =>__( 'Sponsors'),
     	'residency_program' =>__( 'Program'),
 		'start_date' => __('Start Date'),
 	    'end_date' =>__( 'End Date'),
@@ -400,6 +404,22 @@ function custom_resident_column( $column, $post_id ) {
 	        $country = get_field( 'country', $post_id )[0]->post_title;
 	        echo $country;
 	        break;
+
+	    case 'sponsors':
+	        $sponsor_list = '';
+			if( have_rows( 'residency_dates', $post_id ) ):
+				$sponsors = get_field( 'residency_dates', $post_id )[0]['sponsors'];
+				if( $sponsors ):
+					foreach ($sponsors as $index=>$sponsor):
+						if( $index != 0 ):
+							echo ', ';
+						endif;
+						$sponsor_name = $sponsor->post_title;
+						echo $sponsor_name;
+					endforeach;
+				endif;
+			endif;
+			break;
 
       	case 'residency_program':
 	        $program = get_post_meta( $post_id , 'residency_program' , true );
@@ -510,6 +530,31 @@ add_filter( 'parse_query','resident_column_filter' );
 
 /////////////////////////////////////
 /////////////////////////////////////
+/////////SPONSOR FILTERING///////////
+/////////////////////////////////////
+/////////////////////////////////////
+
+
+function add_sponsor_columns($columns) {
+    return array_merge($columns, array(
+		'country' => __( 'Country' )
+    ));
+}
+add_filter('manage_sponsor_posts_columns' , 'add_sponsor_columns');
+
+function custom_sponsor_column( $column, $post_id ) {
+    switch ( $column ) {
+		case 'country':
+			$country = get_field( 'country', $post_id )[0]->post_title;
+			echo $country;
+			break;
+    }
+}
+add_action( 'manage_sponsor_posts_custom_column' , 'custom_sponsor_column', 10, 2 );
+
+
+/////////////////////////////////////
+/////////////////////////////////////
 //////////HELPER QUESTIONS///////////
 /////////////////////////////////////
 /////////////////////////////////////
@@ -582,6 +627,13 @@ function section_attr( $id, $slug, $classes, $title = null ) {
 	if( $id ):
 		echo 'data-id="' . $id . '" ';
 		$permalink = get_the_permalink( $id );
+
+		if( $slug === 'current-residents' ):
+			$permalink .= '?filter=current';
+		elseif( $slug === 'past-residents' ):
+			$permalink .= '?filter=past';
+		endif;
+
 		if( !$title ):
 			$title = get_the_title( $id );
 		endif;
@@ -644,6 +696,7 @@ add_action( 'wp_ajax_get_neighbor_journal_posts', 'get_neighbor_journal_posts' )
 function insert_neighbor_journal_posts( $post_id, $direction, $count = 3 ) {
 	$post = get_post( $post_id );
 	$post_date = $post->post_date;
+
 	if( $direction == 'new' ):
 		$compare = '>';
 		$order = 'ASC';
@@ -653,6 +706,7 @@ function insert_neighbor_journal_posts( $post_id, $direction, $count = 3 ) {
 		$order = 'DESC';
 		$when = 'before';
 	endif;
+
 	$posts_args = array(
 		'post_type' => 'journal',
 		'posts_per_page' => $count,
@@ -662,6 +716,7 @@ function insert_neighbor_journal_posts( $post_id, $direction, $count = 3 ) {
 		'order' => $order,
 		'orderby' => 'post_date'
 	);
+
 	$posts = new WP_Query( $posts_args );
 	$last_page = $posts->max_num_pages;
 
@@ -682,30 +737,125 @@ function insert_neighbor_journal_posts( $post_id, $direction, $count = 3 ) {
 }
 
 
+function insert_neighbor_events( $event_id, $direction, $count = 3 ) {
+	$post = get_post( $event_id );
+	$event_date = get_post_meta( $event_id , 'start_date', true );
+	$today = new DateTime();
+	$today = $today->format( 'Ymd' );
+	if( $direction == 'new' ):
+		// $compare = '>=';
+		// $order = 'ASC';
+		// $when = 'after';
+	elseif ( $direction == 'old' ):
+		// $compare = '<=';
+		$order = 'DESC';
+		$when = 'before';
+	endif;
+
+	$date_query = array(
+		'relation' => 'AND',
+		array(
+			'key' => 'start_date',
+			'compare' => '<',
+			'value' => $today
+		),
+		array(
+			'key' => 'end_date',
+			'compare' => '<',
+			'value' => $today
+		)
+	);
+
+	$posts_args = array(
+		'post_type' => 'event',
+		'posts_per_page' => $count,
+		'type' => 'DATE',
+		'date_query' => array( $when => $event_date ),
+		'post__not_in' => array( $event_id ),
+		'orderby' => 'meta_value post_title',
+		'order' => $order,
+		'post_status' => 'publish',
+		'meta_query' => array(
+			array( 'key'=>'start_date' ),
+			$date_query
+		)
+	);
+	$posts = new WP_Query( $posts_args );
+	$last_page = $posts->max_num_pages;
+
+	if ( $direction == 'new' ):
+		$reverse_posts = array_reverse( $posts->posts );
+		$posts->posts = $reverse_posts;
+	endif;
+
+	if( $posts->have_posts() ):
+		while ( $posts->have_posts() ) : $posts->the_post();
+			global $post;
+			setup_postdata( $post );
+			get_template_part( 'sections/event' );
+			wp_reset_postdata();
+		endwhile;
+	endif;
+
+	wp_reset_query();
+}
+
+
+
+
 function get_neighbor_residents() {
 	$query_vars = json_decode( stripslashes( $_POST['query_vars'] ), true );
     $resident_id = $query_vars['id'];
     $direction = $query_vars['direction'];
     $count = 1;
-	insert_neighbor_residents( $resident_id, $direction, $count );   	
+	insert_neighbor_residents( $resident_id, $direction, $count, $not );   	
     die();
 }
 add_action( 'wp_ajax_nopriv_get_neighbor_residents', 'get_neighbor_residents' );
 add_action( 'wp_ajax_get_neighbor_residents', 'get_neighbor_residents' );
 
 function insert_neighbor_residents( $resident_id, $direction, $count ) {
-	$resident_end_date = get_resident_end_date( $resident_id );
+	$resident_name = get_the_title( $resident_id );
+	$resident_end_date = get_post_meta( $resident_id , 'residency_dates_0_end_date', true );
+	$resident_start_date = get_post_meta( $resident_id , 'residency_dates_0_start_date', true );
 	$resident_studio = get_field( 'studio_number', $resident_id );
 	$today = new DateTime();
 	$today = $today->format( 'Ymd' );
+
 	if( is_current( $resident_id ) ):
-		$date_compare = '>=';
+
+		$date_compare = '>';
+		$direction_type = 'NUMERIC';
 		$direction_key = 'studio_number';
 		$direction_value = $resident_studio;
-		$resident_orderby = 'meta_value_num';
+		$resident_orderby = 'meta_value_num post_title';
 		$resident_meta_key = 'studio_number';
+
+		if( $direction == 'prev' ):
+			$direction_compare = '<';
+			$order = 'DESC';
+		elseif ( $direction == 'next' ):
+			$direction_compare = '>';
+			$order = 'ASC';
+		endif;
+
 	else:
+
 		$date_compare = '<=';
+		$direction_type = 'DATE';
+		$direction_key = 'residency_dates_0_end_date';
+		$direction_value = $resident_end_date;
+		$resident_orderby = 'meta_value_num post_title';
+		$resident_meta_key = 'residency_dates_0_end_date';
+
+		if( $direction == 'prev' ):
+			$direction_compare = '>=';
+			$order = 'ASC';
+		elseif ( $direction == 'next' ):
+			// $direction_compare = '>=';
+			// $order = 'DESC';
+		endif;
+
 	endif;
 
 	$date_args = array(
@@ -715,16 +865,15 @@ function insert_neighbor_residents( $resident_id, $direction, $count ) {
 		'value' => $today
 	);
 
-	if( $direction == 'prev' ):
-		$direction_compare = '<';
-		$order = 'DESC';
-	elseif ( $direction == 'next' ):
-		$direction_compare = '>';
-		$order = 'ASC';
-	endif;
+	$has_bio = array(
+		'type' => 'CHAR',
+		'key' => 'bio',
+		'compare' => '!=',
+		'value' => ''
+	);
 
 	$direction_args = array(
-		'type' => 'NUMERIC',
+		'type' => $direction_type,
 		'key' => $direction_key,
 		'compare' => $direction_compare,
 		'value' => $direction_value
@@ -735,7 +884,13 @@ function insert_neighbor_residents( $resident_id, $direction, $count ) {
 		'order' => $order,
 		'orderby' => $resident_orderby,
 		'meta_key' => $resident_meta_key,
-		'meta_query' => array( $date_args, $direction_args )
+		'post__not_in' => array( $resident_id ),
+		'meta_query' => array( 
+			'relation' => 'AND',
+			$has_bio,
+			$date_args,
+			$direction_args
+		)
 	);
 	$residents = new WP_Query( $resident_args );
 	$last_page = $residents->max_num_pages;
@@ -857,7 +1012,7 @@ function get_event_date( $id ) {
 
 	if ( $end_date ):
 		if ( $today > $start_date && $today < $end_date ):
-			$date_format = 'Through ' . $end_month . ' ' . $end_day . ', ' . $end_year;
+			$date_format = 'Through ' . $end_month . ' ' . $end_day;
 		else:
 			$date_format = $start_month . '&nbsp;' . $start_day;
 			if ( $end_year && $start_year != $end_year ):
@@ -986,14 +1141,13 @@ function pretty_url( $url ) {
 	return $url;
 }
 
-function label_art( $image_id ) {
-	$caption_field = get_sub_field( 'caption', $image_id );
-	$artist = get_sub_field( 'artist', $image_id );
-	$title = get_sub_field( 'title', $image_id );
-    $year = get_sub_field( 'year', $image_id );
-    $medium = get_sub_field( 'medium', $image_id );
-    $credit = get_sub_field( 'credit', $image_id );
-    $photo_credit = get_sub_field( 'photo_credit', $image_id );
+function label_art() {
+	$artist = get_sub_field( 'artist' );
+	$title = get_sub_field( 'title' );
+    $year = get_sub_field( 'year' );
+    $medium = get_sub_field( 'medium' );
+    $credit = get_sub_field( 'credit' );
+    $photo_credit = get_sub_field( 'photo_credit' );
 	$post_type = get_post_type();
 	$dimensions = get_dimensions();
 
@@ -1023,9 +1177,6 @@ function label_art( $image_id ) {
     endif;
     if( $photo_credit && $photo_credit != ' ' ):
     	$caption .= ' ' . $photo_credit . '.';
-    endif;
-    if( !$caption ):
-    	$caption = $caption_field;
     endif;
     return $caption;
 }
@@ -1159,18 +1310,15 @@ function user_is_resident() {
 }
 
 function query_url( $key, $value, $url, $filter = null ) {
-	$params = $_GET;
 	$this_query = array( $key => $value );
-	if( $params['filter'] == $filter ):
-		unset( $params['filter'] );
-		if( array_key_exists( $key, $params ) ):
+	$parsed_url = parse_url($url);
+	parse_str($parsed_url['query'], $params);
+	$params = array_merge( $params, $this_query );
+	$url = strtok($url, '?');
+	foreach($params as $_key => $_value):
+		if( array_key_exists( $_key, $params ) ):
 			unset( $params[$key] );
 		endif;
-		$params = array_merge( $this_query, $params );
-	else:
-		$params = $this_query;
-	endif;
-	foreach($params as $_key => $_value):
 		if( strpos($url, '?') !== FALSE ):
 			$url .= '&';
 		else:
