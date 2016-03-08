@@ -721,6 +721,9 @@ $('body').on('click', 'section:not(#apply) .filter-list .option a', function(eve
 	}
 	vars['pagename'] = slug;
 	updateCounts(option, vars);
+	if(isSmall()) {
+		$(section).find('.select[data-filter="'+filterType+'"]').click();
+	}
 	filterQuery(vars, section, url, option);
 });
 

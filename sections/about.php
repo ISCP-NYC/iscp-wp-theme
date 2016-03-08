@@ -73,7 +73,7 @@
 				$internships_id = get_page_by_path( 'about/internships' )->ID;
 				$internships_permalink = get_the_permalink( $internships_id );
 			?>
-			<div class="info module">
+			<div class="info module" id="contact">
 				<div class="half left">
 					<div class="address">
 						<?php echo $address ?>
@@ -112,7 +112,7 @@
 			<?php 
 			$history = get_field( 'history', $id );
 			if( $history ):
-				echo '<div class="module history">';
+				echo '<div class="module history" id="history">';
 				echo '<h4 class="title orange">History</h4>';
 				echo '<div class="text">';
 				echo $history;
@@ -121,10 +121,10 @@
 			endif;
 			?>
 
-			<div class="module people">
+			<div class="module people" id="staff">
 			<?php
 			if( get_field( 'staff', $id ) ):
-			echo '<div class="staff list">';
+			echo '<div class="staff list half">';
 			echo '<h4 class="title orange">Staff</h4>';
 			echo '<ul>';
 			while( has_sub_field( 'staff', $id ) ):
@@ -139,7 +139,7 @@
 			echo '</div>';
 			endif;
 			if( get_field( 'board_members', $id ) ):
-			echo '<div class="board list">';
+			echo '<div class="board list half">';
 			echo '<h4 class="title orange">Board</h4>';
 			echo '<ul>';
 			while( has_sub_field( 'board_members', $id ) ):

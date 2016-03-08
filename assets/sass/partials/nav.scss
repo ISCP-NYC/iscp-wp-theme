@@ -6,7 +6,7 @@ header.main {
 	top: 0;
 	z-index: 100;
 	background-color: $white;
-	border-bottom: 10px solid $orange;	
+	border-bottom: 10px solid $orange;
 	transition: transform 600ms cubic-bezier(0.645, 0.045, 0.355, 1), border-color 150ms ease-in-out;
 	&:not(.static) {
 		transform: translateY(calc(-100% + 110px));
@@ -148,7 +148,7 @@ header.main {
 							@include large-fs;
 							padding: 10px;
 							border: 0;
-							outline: none; 
+							outline: none;
 							text-align: center;
 							background-color: inherit;
 						}
@@ -167,7 +167,7 @@ header.main {
 				$lock-icon: calc(#{$large-fs} - 10px);
 				.iconWrap {
 					display: table;
-					margin: auto; 
+					margin: auto;
 					position: relative;
 					.swap {
 						width: $lock-icon;
@@ -261,7 +261,7 @@ header.main {
 				&.search {
 					display: table;
 					.inner {
-						width: 100%;					
+						width: 100%;
 						display: table-cell;
 						vertical-align: middle;
 						form {

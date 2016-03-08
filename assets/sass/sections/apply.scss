@@ -7,7 +7,6 @@ section.apply {
 			width: calc(25% - 35px);
 			padding: 0 20px 0 15px;
 			float: left;
-			// @include small-fs;
 			a {
 				display: block;
 			}
@@ -57,7 +56,19 @@ section.apply {
 				}
 			}
 		}
+		@include small {
+			.links, .info {
+				width: calc(100% - 40px);
+				padding: 0 20px;
+				float: none;
+			}
+			.links {
+				margin-top: 20px;
+			}
+		}
 		.filter {
+			width: 100%;
+			padding: 0;
 			span {
 				@include small-fs;
 				float: left;

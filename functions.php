@@ -1032,7 +1032,7 @@ function get_event_date( $id ) {
 	return $date_format;
 }
 
-function get_thumb( $id, $size = undefined, $orange = true ) {
+function get_thumb( $id, $size = undefined ) {
 	$thumbnail = get_display_image( $id );
 	if($size == undefined):
 		$size = 'thumb';
@@ -1040,8 +1040,8 @@ function get_thumb( $id, $size = undefined, $orange = true ) {
 	if( !$thumbnail ):
 		$thumbnail = get_field( 'gallery', $id )[0]['image']['sizes'][$size];
 	endif;
-	if( !$thumbnail && $orange == true ):
-		$thumbnail = get_template_directory_uri() . '/assets/images/placeholder.svg';
+	if( !$thumbnail ):
+		$thumbnail = false;
 	endif;
 	return $thumbnail;
 }

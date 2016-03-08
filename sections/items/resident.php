@@ -32,7 +32,7 @@ echo '<a class="wrap value name" href="' . $url . '">';
 endif;
 echo '<h2 class="link title name">' . $title . '</h2>';
 echo '<div class="image">';
-if( $bio ):
+if( $bio && $thumb ):
 	echo '<img src="' . $thumb . '"/>';
 endif;
 echo '</div>';

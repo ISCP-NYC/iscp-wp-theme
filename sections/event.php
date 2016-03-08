@@ -145,7 +145,7 @@ $upcoming_events = new WP_Query( $upcoming_query );
 
 			?>
 			<div class="links">
-				<a href="#" class="link bullet">Share</a>
+				<!-- <a href="#" class="link bullet">Share</a> -->
 				<?php
 				if( $rsvp ):
 					echo '<a href="' . $rsvp . '" class="link bullet" target="_blank">RSVP</a>';
