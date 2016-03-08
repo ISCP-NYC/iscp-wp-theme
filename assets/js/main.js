@@ -949,13 +949,13 @@ function getCount(vars) {
 /////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////
 $('body').on('mouseenter click touchstart', 'form', function() {
-	var input = $(this).find('input');
+	var input = $(this).find('input:not(.no)');
 	var value = $(input).attr('value');
 	var placeholder = $(this).find('.placeholder');
 	$(placeholder).css({'opacity':0});
 	$(input).focus();
 }).on('mouseleave','form', function() {
-	var input = $(this).find('input');
+	var input = $(this).find('input:not(.no)');
 	var value = $(input).attr('value');
 	var placeholder = $(this).find('.placeholder');
 	if (!/\S/.test(value)) {
@@ -968,7 +968,7 @@ $('body').on('mouseenter click touchstart', 'form', function() {
 });
 
 var navTimer;
-$('body').on('keydown', 'form input', function() {
+$('body').on('keydown', 'form input:not(.no)', function() {
 	var input = this;
 	var value = input.value;
 	var placeholder = $(input).attr('data-placeholder');
@@ -978,7 +978,7 @@ $('body').on('keydown', 'form input', function() {
 	}
 });
 
-$('body').on('keyup', 'nav .search input', function() {
+$('body').on('keyup', 'nav .search input:not(.no)', function() {
 	clearTimeout(navTimer);
 	var input = this;
 	var form = $(input).parents('form');

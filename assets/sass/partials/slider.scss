@@ -114,9 +114,10 @@
                     position: relative;
                     .caption {
                         width: 100%;
-                        position: absolute;
-                        top: calc(100% + 10px);
-                        left: 0;
+                        padding-top: 15px;
+                        // position: absolute;
+                        // top: calc(100% + 10px);
+                        // left: 0;
                     }
                 }
 			}
@@ -125,6 +126,7 @@
 	&.full {
         width: 100% !important;
         height: 100% !important;
+        padding: 0 !important;
         position: fixed;
         top: 0;
         left: 0; 

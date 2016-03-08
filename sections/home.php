@@ -178,12 +178,8 @@ $home_id = get_page_by_path( 'home' )->ID;
 				</a>
 			</div>
 		</div>
-		<?php $newsletter_url = get_field( 'newsletter', $about_id ); ?>
 		<div class="module newsletter">
-			<form role="subscribe" method="get" class="newsletter">
-				<div class="placeholder"><span>Subscribe to our newsletter</span></div>
-				<input type="text" value spellcheck="false"/>
-			</form>
+			<?php get_template_part('partials/newsletter') ?>
 		</div>
 	</div>
 	<?php get_template_part('partials/footer') ?>

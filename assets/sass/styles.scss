@@ -90,19 +90,22 @@ section {
 		border-color: $orange;
 		transition: border-color 150ms ease-in-out;
 		@include small {
-			width: calc(100% - 60px);
+			width: 100%;
+			padding: 130px 0px;
 			margin-left: 0;
 			border-width: 0;
 		}
 		@include xsmall {
-			width: calc(100% - 30px);
-			padding: 130px 15px;
 		}
 		.module {
-			width: calc(100% - 60px);
-    		padding: 30px 30px 60px 30px;
+			width: calc(100% - 40px);
+    		padding: 30px 20px 60px 20px;
 			margin-bottom: 30px;
 		    display: table;
+		    @include small {
+		    	width: calc(100% - 60px);
+    			padding: 30px 30px 60px 30px;
+		    }
 			@extend .border-bottom;
 			h2.title {
 				padding: 0;
@@ -128,7 +131,8 @@ section {
 		}
 	}
 	h2.head {
-		width: 100%;
+		width: calc(100% - 60px);
+		padding: 0 30px;
 		text-align: center;
 		color: $orange;
 		margin-bottom: 20px;
@@ -240,7 +244,7 @@ ul li {
 	@extend .bullet;
 }
 p {
-	// text-indent: 60px;
+	word-wrap: break-word;
 	margin-top: 30px;
 	span {
 		line-height: inherit !important;

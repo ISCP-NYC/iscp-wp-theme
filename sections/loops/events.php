@@ -24,13 +24,6 @@ if( $events_section == 'past' ):
 		$year_end = $year_param . '1231';
 		$year_range = array( $year_begin, $year_end );
 		$year_query = array(
-			'relation' => 'OR',
-			array(
-				'key' => 'start_date',
-				'type' => 'DATE',
-				'value' => $year_range,
-				'compare' => 'BETWEEN'
-			),
 			array(
 				'key' => 'end_date',
 				'type' => 'DATE',
@@ -85,7 +78,7 @@ $events_query = array(
 	'post_status' => 'publish',
 	'post__not_in' => $upcoming_ids,
 	'meta_query' => array(
-		array( 'key'=>'start_date' ),
+		array( 'key' => 'end_date' ),
 		$date_query,
 		$filter_query
 	)

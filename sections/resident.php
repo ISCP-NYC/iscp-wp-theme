@@ -45,7 +45,7 @@ endif;
 						$end_date_dt = new DateTime( get_sub_field( 'end_date', $resident_id ) );
 						$start_date = $start_date_dt->format( 'M j, Y' );
 						$end_date = $end_date_dt->format( 'M j, Y' );
-						$year = $start_date_dt->format( 'Y' );
+						$year = $end_date_dt->format( 'Y' );
 						$sponsors = get_sub_field( 'sponsors', $resident_id );
 						$residency_object = (object) array(
 							'start_date_dt' => $start_date_dt,

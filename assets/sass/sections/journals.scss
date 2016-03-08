@@ -22,6 +22,8 @@ section.journal {
 		    position: relative;
 		    overflow: hidden;
 		    clear: both;
+		    width: calc(100% - 40px);
+		    margin: 0 20px;
 		    .journal-post {
 		    	margin-bottom: 30px;
 		    	padding-bottom: 30px;

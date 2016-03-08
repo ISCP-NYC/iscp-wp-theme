@@ -92,20 +92,21 @@ header.main {
 				display: none;
 			}
 			.sub-menu {
-				width: calc(100% - 6px);
-				height: calc(100% - 6px);
+				width: calc(100% - 10px);
+				height: calc(100% - 10px);
 				position: absolute;
 				display: flex;
 				flex-direction: column;
 				flex-wrap: wrap;
 				overflow: hidden;
-				padding: 3px;
+				padding: 5px;
 				z-index: 101;
 				.child-item {
 					margin: 2px 10px 0 0;
 					display: table;
 					float: left;
 					@include large-fs;
+					background-position: left 14px;
 					&:hover {
 						background-image: url(../images/bullet-black.svg);
 						a {
@@ -113,6 +114,7 @@ header.main {
 						}
 					}
 					@include large {
+						background-position: left 5px;
 						@include medium-fs;
 					}
 				}

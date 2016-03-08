@@ -50,7 +50,7 @@ footer {
 						}
 						form {
 							position: relative;
-							input[type="text"] {
+							input[type="text"], input[type="email"] {
 								width: calc(100% - 12px);
 								padding-left: 10px;
 								outline: none;

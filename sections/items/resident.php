@@ -58,11 +58,7 @@ if( is_current( $resident_id ) ) {
 	endif;
 } elseif( is_past( $resident_id ) ) {
 	echo '<div class="value year">';
-	if( $start_year == $end_year ):
-		echo $start_year;
-	else:
-		echo $start_year . '–' . $end_year;
-	endif;
+	echo $end_year;
 	echo '</div>';
 }
 echo '</div>';

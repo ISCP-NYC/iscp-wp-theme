@@ -98,10 +98,7 @@
 		    		<div class="cell-inner">
 		    			<div class="title">Newsletter</div>
 		    			<div class="sub-menu">
-		    				<form role="search" method="get" class="newsletter" action="<?php echo esc_url( home_url( '/' ) ); ?>">
-		    					<div class="placeholder"><span>Subscribe</span></div>
-		    					<input type="text" spellcheck="false">
-		    				</form>
+		    				<?php get_template_part('partials/newsletter') ?>
 		    			</div>
 		    		</div>
 		    	</div>
