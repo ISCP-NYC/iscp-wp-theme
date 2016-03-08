@@ -70,6 +70,8 @@
 				$facebook_url = 'http://www.facebook.com/' . $facebook;
 				$instagram = get_field( 'instagram', $id );
 				$instagram_url = 'http://www.instagram.com/' . $instagram;
+				$internships_id = get_page_by_path( 'about/internships' )->ID;
+				$internships_permalink = get_the_permalink( $internships_id );
 			?>
 			<div class="info module">
 				<div class="half left">
@@ -103,9 +105,7 @@
 				</div>
 				<div class="half right">
 					<a class="bullet" href="<?php echo $directions ?>" target="_blank">Map &amp; Directions</a>
-					<a class="bullet" href="<?php echo $newsletter ?>" target="_blank">Newsletter Sign-Up</a>
-					<a class="bullet" href="#" target="_blank">Internships</a>
-					<a class="bullet" href="#" target="_blank">Space Rental</a>
+					<a class="bullet" href="<?php echo $internships_permalink ?>">Internships</a>
 				</div>
 			</div>
 

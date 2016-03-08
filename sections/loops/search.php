@@ -1,12 +1,12 @@
 <?php
 if( $query_vars ):
-	$text = $query_vars['s'];
+	$s = $query_vars['s'];
 	$paged = $query_vars['paged'];
 else:
-	$text = get_query_var( 's' );
+	$s = get_query_var( 's' );
 endif;
 $search_query = new WP_Query( array(
-	's' => $text,
+	's' => $s,
 	'posts_per_page' => 24,
 	'paged' => $paged,
 	'post_status' => 'publish'

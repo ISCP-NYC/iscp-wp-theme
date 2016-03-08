@@ -87,6 +87,7 @@ $filter = $_GET['filter'];
 						</div>
 					</a>
 				</div>
+				<div class="filter-lists"></div>
 			</div>
 			<div class="right alt <?php echo $alt_slug ?>">
 				<?php
@@ -98,12 +99,9 @@ $filter = $_GET['filter'];
 			</div>
 		</div>
 
-		<div class="filter-lists">
-			
-		</div>
+		
 
 		<div class="residents shelves filter-this grid items <?php echo $slug ?>" data-delay="<?php echo $delay ?>">
-			
 		</div>
 	</div>
 	<?php get_template_part('partials/footer'); ?>

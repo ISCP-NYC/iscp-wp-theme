@@ -1,6 +1,6 @@
 .filter {
-    width: calc(100% - 60px);
-    padding: 0 30px;
+    width: calc(100% - 40px);
+    padding: 0 20px 60px 20px;
     @extend .noselect;
     .select {
         font-size: $small-fs;
@@ -92,14 +92,11 @@
     }
 }
 .filter-lists {
-    width: 100%;
     display: block;
     position: relative;
 }
 .filter-list {
-    width: calc(100% - 60px);
     height: 0px;
-    padding: 0 30px;
     display: block;
     overflow: hidden;
     transition: height 500ms cubic-bezier(0.645, 0.045, 0.355, 1);

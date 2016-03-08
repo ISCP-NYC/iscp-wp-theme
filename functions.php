@@ -1025,7 +1025,7 @@ function get_event_date( $id ) {
 		$date_format = $start_month . ' ' . $start_day;
 		$date_format .= ',&nbsp;' . $start_year;
 		if( $time ):
-			$date_format .= '</br>' . $time;
+			$date_format .= ', ' . $time;
 		endif;
 	endif;
 

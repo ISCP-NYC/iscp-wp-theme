@@ -4,17 +4,18 @@ section.apply {
 	}
 	.program {
 		.links {
-			display: none;
-			width: 33.333%;
+			width: calc(25% - 35px);
+			padding: 0 20px 0 15px;
 			float: left;
-			.bullet {
-				display: inline;
-			}
-			@include small {
-
+			// @include small-fs;
+			a {
+				display: block;
 			}
 		}
 		.info {
+			width: calc(75% - 35px);
+			padding: 0 15px 30px 20px;
+			float: left;
 			h3.title {
 				margin-top: 30px;
 			}

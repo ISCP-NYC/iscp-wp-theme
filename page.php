@@ -9,21 +9,21 @@
 	
 	if( $page_slug == 'current-residents' ):
 
-		$programs_page_id = get_page_by_path( 'residency-programs' )->ID;
-		$post = get_post( $programs_page_id, OBJECT );
-		setup_postdata( $post );
-		get_template_part( 'sections/programs' );
-		wp_reset_postdata();
+		// $programs_page_id = get_page_by_path( 'residency-programs' )->ID;
+		// $post = get_post( $programs_page_id, OBJECT );
+		// setup_postdata( $post );
+		// get_template_part( 'sections/programs' );
+		// wp_reset_postdata();
 
 		$post->delay = 0;
 		get_template_part( 'sections/residents' );
 
-		$past_residents_page_id = get_page_by_path( 'past-residents' )->ID;
-		$post = get_post( $past_residents_page_id, OBJECT );
-		$post->delay = 1;
-		setup_postdata( $post );
-		get_template_part( 'sections/residents' );
-		wp_reset_postdata();
+		// $past_residents_page_id = get_page_by_path( 'past-residents' )->ID;
+		// $post = get_post( $past_residents_page_id, OBJECT );
+		// $post->delay = 1;
+		// setup_postdata( $post );
+		// get_template_part( 'sections/residents' );
+		// wp_reset_postdata();
 
 	elseif ( $page_slug == 'past-residents' ):
 
@@ -109,6 +109,14 @@
 	elseif( $page_slug == 'visit' ):
 
 		get_template_part( 'sections/visit' );
+
+	elseif( $page_slug == 'donate' ):
+
+		get_template_part( 'sections/donate' );
+
+	elseif( $page_slug == 'faq' ):
+
+		get_template_part( 'sections/faq' );
 
 	elseif( $page_slug == 'greenroom'):
 

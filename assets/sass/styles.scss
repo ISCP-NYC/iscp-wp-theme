@@ -241,7 +241,6 @@ em, i {
 }
 ul li {
 	list-style: none;
-	@extend .bullet;
 }
 p {
 	word-wrap: break-word;

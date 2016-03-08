@@ -64,7 +64,7 @@ switch($post_type) {
 		get_template_part( 'sections/event' );
 		wp_reset_postdata();
 
-		insert_neighbor_events( $this_event_id, 'old', 3 );
+		// insert_neighbor_events( $this_event_id, 'old', 3 );
 
 		break;
 	case 'sponsor':

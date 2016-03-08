@@ -213,6 +213,13 @@ $upcoming_events = new WP_Query( $upcoming_query );
 		
 		<?php 
 		$related = get_field( 'related' );
+		usort($related, function($a, $b) {
+		   return strcasecmp( 
+            	get_field( 'start_date', $b->ID ), 
+            	get_field( 'start_date', $a->ID ) 
+        	);
+		});
+
 		if( $related || $upcoming_events ):
 			echo '<div class="bottom-modules">';
 			$GLOBALS['wp_query'] = $upcoming_events;

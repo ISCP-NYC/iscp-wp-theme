@@ -78,11 +78,12 @@ $events_query = array(
 	'post_status' => 'publish',
 	'post__not_in' => $upcoming_ids,
 	'meta_query' => array(
-		array( 'key' => 'end_date' ),
+		array( 'key' => 'start_date' ),
 		$date_query,
 		$filter_query
 	)
 );
+
 $upcoming_ids = array();
 $events = new WP_Query( $events_query );
 $GLOBALS['wp_query'] = $events;
