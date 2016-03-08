@@ -276,17 +276,20 @@ h3, .small {
 		padding: 5px 0 40px 0;
 	}
 	@include medium {
-		@include medium-fs;
+		@include small-fs;
 	}
 }
 .content h4.title:first-child {
 	margin-bottom: 60px;
 }
 h4, .small {
-	@include small-fs;
+	@include medium-fs;
 	&.title {
 		text-align: center;
 		padding: 3px 0;
+	}
+	@include medium {
+		@include small-fs;
 	}
 }
 .orange {color: $orange;}
