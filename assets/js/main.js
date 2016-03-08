@@ -143,6 +143,22 @@ function setUp() {
 	slideTo(centerIndex, false);
 }
 
+function fixScroll(section, content) {
+	var scrollHeight = content[0].scrollHeight;
+	var contentHeight = $(content)[0].clientHeight;
+	// if content is same height as window
+	if(contentHeight == $(window).innerHeight()) {
+		if(scrollHeight <= contentHeight) {
+			$(section).addClass('show-footer');
+		} else {
+			$(section).removeClass('show-footer');
+		}
+	}
+	// if content is too short to scroll -> scroll to footer
+	else if(scrollHeight <= contentHeight && scrollHeight != 0) {
+		$(section).addClass('show-footer');
+	}
+}
 
 $('body').on('mouseenter', '.shelf-item .wrap', function() {
 	$(this).parents('.shelf-item').addClass('hover');
@@ -743,9 +759,13 @@ function filterQuery(vars, section, url, option) {
 			page: 1
 		},
 		beforeSend: function() {
+			
+		},
+		success: function(response) {
 			var container = $(section).find('.filter-this');
 			var transitionEnd = 'transitionend webkitTransitionEnd oTransitionEnd';
 			var items = $(container).find('.item');
+			$(container).addClass('removing');
 			$(section).one(transitionEnd, function(e) {
 				$(container).removeClass('removing');
 				if($(section).is('.journal')) {
@@ -753,28 +773,25 @@ function filterQuery(vars, section, url, option) {
 					$masonry.masonry('layout');
 				} else {
 					$(container).html('');
+					if($(option).length) {
+						updateFilterLinks(option, vars);
+					}
+					filterThis(response, vars);
+					if($(section).is('#events') && $(response).find('.item').length != 0) {
+						$(section).find('.wrapper.past').attr('style','');
+					}
 				}
 				$(section).off(transitionEnd);
 			});
-			$(container).addClass('removing');
 			loading(vars, 'loading filtering');
 			window.history.pushState({path:url},'',url);
 			$(section).attr('data-permalink', url);
-		},
-		success: function(response) {
-			if($(option).length) {
-				updateFilterLinks(option, vars);
-			}
-			filterThis(response, vars);
-			if($(section).is('#events') && $(response).find('.item').length != 0) {
-				$(section).find('.wrapper.past').attr('style','');
-			}
 		}
 	});
 }
 
 function filterThis(html, vars) {
-	if(html.length > 0) {
+	if($(html).length > 0) {
 		var vars = JSON.parse(vars);
 		var sectionSlug = vars.pagename;
 		if(sectionSlug == 'journals') {sectionSlug='journal';}
@@ -791,7 +808,6 @@ function filterThis(html, vars) {
 		$(section).attr('data-page', 1);
 		$(section).removeClass('loading');
 		$(section).find('.load-more').remove();
-
 		$(html).each(function(i, item) {
 			if(!$(item).hasClass('load-more')) {
 				$(item).addClass('hide');
@@ -814,6 +830,11 @@ function filterThis(html, vars) {
 		$(section).removeClass('show-footer filtering');
 		$(content).animate({ scrollTop: contentScrollTop + sectionScrollTop }, 300, 'easeOutQuart');
 		$(section).animate({ scrollTop: 0 }, 300, 'easeOutQuart');
+		// keep content scrolled to bottom when footer is visible
+		if($(section).hasClass('show-footer')) {
+			$(content).scrollTop(scrollHeight);
+		}
+		fixScroll(section, content);
 	}
 }
 
@@ -851,10 +872,13 @@ function renameFilterType(filterType) {
 $('body').on('click', '.filter .select:not(.tag)', function() {
 	var slug = $(this).attr('data-slug');
 	var filterThis = $('.filter-this.'+slug);
+	var section = $(filterThis).parents('section');
+	var content = $(section).find('.content');
 	if($(this).hasClass('view toggle')) {
 		//toggle view style
 		$(filterThis).toggleClass('list').toggleClass('grid');
 		$(this).toggleClass('list').toggleClass('grid');
+		fixScroll(section, content);
 	} else if($(this).hasClass('dropdown')) {
 		var property = $(this).attr('data-filter');
 		var filterList = $('.filter-list.'+property+'.'+slug);
@@ -865,6 +889,9 @@ $('body').on('click', '.filter .select:not(.tag)', function() {
 			//toggle to hide this list
 			$(this).removeClass('dropped');
 			$(filterList).removeClass('show').css({height : 0});
+			$(filterList).one('transitionend webkitTransitionEnd oTransitionEnd MSTransitionEnd', function() {
+				fixScroll(section, content);
+			});
 		} else {
 			//hide already opened filter list
 			$('.dropdown').removeClass('dropped');
@@ -873,6 +900,7 @@ $('body').on('click', '.filter .select:not(.tag)', function() {
 			$(this).addClass('dropped');
 			$(filterList).addClass('show growing').css({height : filterListOptionsHeight});
 			$(filterList).one('transitionend webkitTransitionEnd oTransitionEnd MSTransitionEnd', function() {
+				fixScroll(section, content);
 				$(filterList).removeClass('growing');
 			});
 		}

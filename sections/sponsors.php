@@ -16,7 +16,7 @@
 							$country_count = ': ' . $country_param_title;
 							 // . ' (' . get_sponsor_count( 'country', $country_param_id, $sponsor_query ) . ')';
 						endif;
-						echo '<span>Country</span><span class="showing">' . $country_count . '</span>';
+						echo '<span>Country</span><span class="count">' . $country_count . '</span>';
 						?>
 						</span>
 						<div class="swap">

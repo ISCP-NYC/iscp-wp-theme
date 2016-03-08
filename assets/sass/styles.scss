@@ -23,6 +23,7 @@ body {
 #mfPreviewBar, #mfPreviewBarShow {
 	display: none !important;
 }
+
 a, .link {
 	text-decoration: none;
 	color: $orange;
@@ -37,6 +38,7 @@ a, .link {
 		}	
 	}
 }
+	
 input {
 	-webkit-appearance: none;
 	border-radius: 0;

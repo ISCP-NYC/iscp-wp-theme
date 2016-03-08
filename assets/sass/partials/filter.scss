@@ -1,6 +1,6 @@
 .filter {
     width: calc(100% - 40px);
-    padding: 0 20px 60px 20px;
+    padding: 0 20px;
     @extend .noselect;
     .select {
         font-size: $small-fs;

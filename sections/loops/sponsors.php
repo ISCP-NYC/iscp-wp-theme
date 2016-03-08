@@ -29,7 +29,7 @@ if( have_posts() ):
 		$country_permalink = get_field('country', $sponsor_id )[0]->permalink;
 		$permalink = get_permalink();
 		$website = get_field('website', $sponsor_id );
-		$pretty_website = pretty_url( $website );
+		$pretty_website = explode( '/', pretty_url( $website ) )[0];
 		echo '<div class="sponsor shelf-item border-bottom"><div class="inner">';
 		echo '<a class="value name" href="' . $permalink . '">';
 		echo '<h3 class="link">' . $title . '</h3>';

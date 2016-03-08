@@ -22,7 +22,6 @@ if( have_rows( 'residency_dates', $resident_id ) ):
 endif;
 if( !$bio ):
 	$no_link = 'nolink';
-
 endif;
 
 $thumb = get_thumb( $resident_id );
@@ -33,7 +32,9 @@ echo '<a class="wrap value name" href="' . $url . '">';
 endif;
 echo '<h2 class="link title name">' . $title . '</h2>';
 echo '<div class="image">';
-echo '<img src="' . $thumb . '"/>';
+if( $bio ):
+	echo '<img src="' . $thumb . '"/>';
+endif;
 echo '</div>';
 if( $bio ):
 echo '</a>';
