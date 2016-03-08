@@ -28,7 +28,7 @@
                     background-image: url(../images/view-toggle-orange.svg);
                 }
                 &.hover {
-                    background-image: url(../images/view-toggle-black.svg);   
+                    background-image: url(../images/view-toggle-black.svg);
                 }
             }
         }
@@ -38,7 +38,7 @@
                     background-image: url(../images/dropdown-orange.svg);
                 }
                 &.hover {
-                    background-image: url(../images/dropdown-black.svg);   
+                    background-image: url(../images/dropdown-black.svg);
                 }
             }
             &.dropped {
@@ -85,7 +85,8 @@
     .bar {
         width: 100%;
         display: table;
-        margin-bottom: 20px;
+        margin-top: -20px;
+        margin-bottom: 0px;
         .select {
             float: left;
         }

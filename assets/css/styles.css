@@ -318,7 +318,7 @@ body {
   font-family: 'Life Rounded', Times;
   font-size: 24px;
   line-height: 28px;
-  color: #142328;
+  color: #13172F;
 }
 @media (max-width: 1040px) {
   /* line 11, ../sass/styles.scss */
@@ -347,11 +347,11 @@ a, .link {
 }
 /* line 30, ../sass/styles.scss */
 a:hover, .link:hover {
-  color: #142328 !important;
+  color: #13172F !important;
 }
 /* line 33, ../sass/styles.scss */
 a.past, .link.past {
-  color: #142328 !important;
+  color: #13172F !important;
 }
 /* line 35, ../sass/styles.scss */
 a.past:hover, .link.past:hover {
@@ -499,11 +499,11 @@ section.show-footer .content {
 }
 /* line 157, ../sass/styles.scss */
 section.hover-right .content {
-  border-right-color: #142328;
+  border-right-color: #13172F;
 }
 /* line 162, ../sass/styles.scss */
 section.hover-left .content {
-  border-left-color: #142328;
+  border-left-color: #13172F;
 }
 /* line 166, ../sass/styles.scss */
 section.static * {
@@ -671,19 +671,20 @@ section .filter .select .swap .icon {
 section .filter .bar {
   width: 100%;
   display: table;
-  margin-bottom: 20px;
+  margin-top: -20px;
+  margin-bottom: 0px;
 }
-/* line 89, ../sass/partials/filter.scss */
+/* line 90, ../sass/partials/filter.scss */
 section .filter .bar .select {
   float: left;
 }
-/* line 94, ../sass/partials/filter.scss */
+/* line 95, ../sass/partials/filter.scss */
 section .filter-lists {
   width: 100%;
   display: block;
   position: relative;
 }
-/* line 99, ../sass/partials/filter.scss */
+/* line 100, ../sass/partials/filter.scss */
 section .filter-list {
   width: calc(100% - 60px);
   height: 0px;
@@ -693,12 +694,12 @@ section .filter-list {
   transition: height 500ms cubic-bezier(0.645, 0.045, 0.355, 1);
   position: relative;
 }
-/* line 107, ../sass/partials/filter.scss */
+/* line 108, ../sass/partials/filter.scss */
 section .filter-list .options {
   column-width: 200px;
   column-gap: 10px;
 }
-/* line 110, ../sass/partials/filter.scss */
+/* line 111, ../sass/partials/filter.scss */
 section .filter-list .options .option {
   width: 200px;
   display: inline-flex;
@@ -707,18 +708,18 @@ section .filter-list .options .option {
   line-height: 21px;
 }
 @media (max-width: 1040px) {
-  /* line 110, ../sass/partials/filter.scss */
+  /* line 111, ../sass/partials/filter.scss */
   section .filter-list .options .option {
     font-size: 16px;
     line-height: 20px;
   }
 }
-/* line 115, ../sass/partials/filter.scss */
+/* line 116, ../sass/partials/filter.scss */
 section .filter-list .options .option a {
   padding-right: 18px;
   position: relative;
 }
-/* line 118, ../sass/partials/filter.scss */
+/* line 119, ../sass/partials/filter.scss */
 section .filter-list .options .option a .swap {
   width: 18px;
   height: 18px;
@@ -728,51 +729,51 @@ section .filter-list .options .option a .swap {
   display: inline-block;
   vertical-align: middle;
 }
-/* line 126, ../sass/partials/filter.scss */
+/* line 127, ../sass/partials/filter.scss */
 section .filter-list .options .option a .swap .icon {
   background-position: center;
   background-size: 80%;
 }
-/* line 129, ../sass/partials/filter.scss */
+/* line 130, ../sass/partials/filter.scss */
 section .filter-list .options .option a .swap .icon.default {
   background-image: url(../images/close-orange.svg);
 }
-/* line 132, ../sass/partials/filter.scss */
+/* line 133, ../sass/partials/filter.scss */
 section .filter-list .options .option a .swap .icon.hover {
   background-image: url(../images/close-black.svg);
 }
-/* line 138, ../sass/partials/filter.scss */
+/* line 139, ../sass/partials/filter.scss */
 section .filter-list .options .option a:hover .icon.default {
   opacity: 0;
 }
-/* line 141, ../sass/partials/filter.scss */
+/* line 142, ../sass/partials/filter.scss */
 section .filter-list .options .option a:hover .icon.hover {
   opacity: 1;
 }
-/* line 146, ../sass/partials/filter.scss */
+/* line 147, ../sass/partials/filter.scss */
 section .filter-list .options .option:not(.selected) .swap .icon {
   opacity: 0 !important;
 }
 @media (max-width: 1040px) {
-  /* line 107, ../sass/partials/filter.scss */
+  /* line 108, ../sass/partials/filter.scss */
   section .filter-list .options {
     column-width: 180px;
     column-gap: 5px;
   }
-  /* line 153, ../sass/partials/filter.scss */
+  /* line 154, ../sass/partials/filter.scss */
   section .filter-list .options .option {
     width: 180px;
   }
 }
-/* line 160, ../sass/partials/filter.scss */
+/* line 161, ../sass/partials/filter.scss */
 section .filter-list.program .options {
   column-width: 250px;
 }
-/* line 162, ../sass/partials/filter.scss */
+/* line 163, ../sass/partials/filter.scss */
 section .filter-list.program .options .option {
   width: 250px;
 }
-/* line 167, ../sass/partials/filter.scss */
+/* line 168, ../sass/partials/filter.scss */
 section .filter-list::before {
   content: '';
   display: block;
@@ -786,7 +787,7 @@ section .filter-list::before {
   transition: box-shadow 300ms 0ms cubic-bezier(0.645, 0.045, 0.355, 1);
   box-shadow: inset 0px -100px 45px -50px #fff;
 }
-/* line 180, ../sass/partials/filter.scss */
+/* line 181, ../sass/partials/filter.scss */
 section .filter-list.show::before {
   transition: box-shadow 500ms 200ms cubic-bezier(0.645, 0.045, 0.355, 1);
   box-shadow: inset 0px 0px 45px -50px #fff;
@@ -1078,7 +1079,7 @@ section header.main:not(.static) {
 }
 /* line 18, ../sass/partials/nav.scss */
 section header.main:hover {
-  border-bottom-color: #142328;
+  border-bottom-color: #13172F;
 }
 /* line 21, ../sass/partials/nav.scss */
 section header.main nav {
@@ -1104,7 +1105,7 @@ section header.main nav .cell {
 }
 /* line 39, ../sass/partials/nav.scss */
 section header.main nav .cell:hover .overlay {
-  color: #142328;
+  color: #13172F;
 }
 /* line 42, ../sass/partials/nav.scss */
 section header.main nav .cell:nth-child(odd) {
@@ -1209,7 +1210,7 @@ section header.main nav .cell .sub-menu .child-item:hover {
 }
 /* line 112, ../sass/partials/nav.scss */
 section header.main nav .cell .sub-menu .child-item:hover a {
-  color: #142328;
+  color: #13172F;
 }
 @media (min-width: 1041px) and (max-width: 1600px) {
   /* line 104, ../sass/partials/nav.scss */
@@ -1490,7 +1491,7 @@ section:not(.open-nav) header.main {
 }
 /* line 335, ../sass/partials/nav.scss */
 section.tease-nav header.main {
-  border-color: #142328;
+  border-color: #13172F;
   transition: transform 300ms ease-out, border-color 150ms ease-in-out;
   transform: translateY(calc(-100% + 120px));
 }
@@ -1554,8 +1555,8 @@ section .shelves {
 section .shelves.grid .shelf-item {
   width: 33.333%;
   float: left;
-  padding-bottom: 60px;
-  margin-bottom: 60px;
+  padding-bottom: 50px;
+  margin-bottom: 48px;
   transition: color 150ms ease-in-out, opacity 300ms ease-in-out;
 }
 /* line 15, ../sass/partials/shelves.scss */
@@ -1573,7 +1574,7 @@ section .shelves.grid .shelf-item .inner a.wrap {
 }
 /* line 23, ../sass/partials/shelves.scss */
 section .shelves.grid .shelf-item .inner a.wrap:hover * {
-  color: #142328;
+  color: #13172F;
 }
 /* line 27, ../sass/partials/shelves.scss */
 section .shelves.grid .shelf-item .inner h3 {
@@ -1602,7 +1603,7 @@ section .shelves.grid .shelf-item .inner span {
 }
 /* line 49, ../sass/partials/shelves.scss */
 section .shelves.grid .shelf-item .inner .value {
-  margin-bottom: 3px;
+  margin-bottom: 5px;
   font-size: 18px;
   line-height: calc(21px - 3px);
 }
@@ -1628,27 +1629,27 @@ section .shelves.grid .shelf-item.current .inner *, section .shelves.grid .shelf
 }
 /* line 71, ../sass/partials/shelves.scss */
 section .shelves.grid .shelf-item.current .inner a:hover, section .shelves.grid .shelf-item.current .inner .link:hover, section .shelves.grid .shelf-item.current .inner .wrap:hover, section .shelves.grid .shelf-item.upcoming .inner a:hover, section .shelves.grid .shelf-item.upcoming .inner .link:hover, section .shelves.grid .shelf-item.upcoming .inner .wrap:hover {
-  color: #142328 !important;
+  color: #13172F !important;
 }
 /* line 73, ../sass/partials/shelves.scss */
 section .shelves.grid .shelf-item.current .inner a:hover h2, section .shelves.grid .shelf-item.current .inner .link:hover h2, section .shelves.grid .shelf-item.current .inner .wrap:hover h2, section .shelves.grid .shelf-item.upcoming .inner a:hover h2, section .shelves.grid .shelf-item.upcoming .inner .link:hover h2, section .shelves.grid .shelf-item.upcoming .inner .wrap:hover h2 {
-  color: #142328 !important;
+  color: #13172F !important;
 }
 /* line 78, ../sass/partials/shelves.scss */
 section .shelves.grid .shelf-item.current.hover, section .shelves.grid .shelf-item.upcoming.hover {
-  color: #142328 !important;
+  color: #13172F !important;
 }
 /* line 80, ../sass/partials/shelves.scss */
 section .shelves.grid .shelf-item.current.hover *, section .shelves.grid .shelf-item.upcoming.hover * {
-  color: #142328 !important;
+  color: #13172F !important;
 }
 /* line 85, ../sass/partials/shelves.scss */
 section .shelves.grid .shelf-item.past {
-  color: #142328 !important;
+  color: #13172F !important;
 }
 /* line 88, ../sass/partials/shelves.scss */
 section .shelves.grid .shelf-item.past .inner * {
-  color: #142328 !important;
+  color: #13172F !important;
 }
 /* line 91, ../sass/partials/shelves.scss */
 section .shelves.grid .shelf-item.past .inner a:hover, section .shelves.grid .shelf-item.past .inner .link:hover, section .shelves.grid .shelf-item.past .inner .wrap:hover {
@@ -1676,11 +1677,11 @@ section .shelves.grid .shelf-item.no-image * {
 }
 /* line 112, ../sass/partials/shelves.scss */
 section .shelves.grid .shelf-item.hover {
-  color: #142328;
+  color: #13172F;
 }
 /* line 114, ../sass/partials/shelves.scss */
 section .shelves.grid .shelf-item.hover a, section .shelves.grid .shelf-item.hover .link {
-  color: #142328;
+  color: #13172F;
 }
 @media (max-width: 1040px) {
   /* line 8, ../sass/partials/shelves.scss */
@@ -1794,7 +1795,7 @@ section .shelves.list .load-more {
 }
 /* line 198, ../sass/partials/shelves.scss */
 section .shelves .shelf-item.past .inner *, section .shelves .shelf-item.past-residents .inner * {
-  color: #142328;
+  color: #13172F;
 }
 /* line 201, ../sass/partials/shelves.scss */
 section .shelves .shelf-item.past .inner a:hover, section .shelves .shelf-item.past .inner .link:hover, section .shelves .shelf-item.past .inner .wrap:hover, section .shelves .shelf-item.past-residents .inner a:hover, section .shelves .shelf-item.past-residents .inner .link:hover, section .shelves .shelf-item.past-residents .inner .wrap:hover {
@@ -1930,11 +1931,11 @@ section aside.main .logo .icon.hover {
 }
 /* line 36, ../sass/partials/side.scss */
 section aside.main.hover {
-  border-color: #142328;
+  border-color: #13172F;
 }
 /* line 38, ../sass/partials/side.scss */
 section aside.main.hover .logo {
-  border-color: #142328;
+  border-color: #13172F;
 }
 /* line 40, ../sass/partials/side.scss */
 section aside.main.hover .logo .icon.default {
@@ -2003,7 +2004,7 @@ section aside.footer {
 }
 /* line 92, ../sass/partials/side.scss */
 section aside.footer.hover {
-  border-color: #142328;
+  border-color: #13172F;
 }
 /* line 95, ../sass/partials/side.scss */
 section aside.footer .logo {
@@ -2283,7 +2284,7 @@ h4.title, .small.title {
 
 /* line 293, ../sass/styles.scss */
 .black {
-  color: #142328;
+  color: #13172F;
 }
 
 /* line 294, ../sass/styles.scss */
@@ -2845,7 +2846,7 @@ section.past *,
 section.past-residents *,
 section.events .past.wrapper *,
 section.error * {
-  border-color: #142328 !important;
+  border-color: #13172F !important;
 }
 /* line 9, ../sass/sections/black.scss */
 section.sponsor a, section.sponsor .link,
@@ -2857,7 +2858,7 @@ section.events .past.wrapper a,
 section.events .past.wrapper .link,
 section.error a,
 section.error .link {
-  color: #142328;
+  color: #13172F;
 }
 /* line 12, ../sass/sections/black.scss */
 section.sponsor a:hover, section.sponsor .link:hover,
@@ -2895,7 +2896,7 @@ section.events .past.wrapper nav *,
 section.events .past.wrapper header.main nav a.overlay *,
 section.error nav *,
 section.error header.main nav a.overlay * {
-  color: #142328;
+  color: #13172F;
 }
 /* line 22, ../sass/sections/black.scss */
 section.sponsor aside.main,
@@ -2903,7 +2904,7 @@ section.past aside.main,
 section.past-residents aside.main,
 section.events .past.wrapper aside.main,
 section.error aside.main {
-  border-color: #142328 !important;
+  border-color: #13172F !important;
 }
 /* line 24, ../sass/sections/black.scss */
 section.sponsor aside.main .icon.default,
@@ -2983,7 +2984,7 @@ section.past header.main nav .cell.search input.s,
 section.past-residents header.main nav .cell.search input.s,
 section.events .past.wrapper header.main nav .cell.search input.s,
 section.error header.main nav .cell.search input.s {
-  color: #142328 !important;
+  color: #13172F !important;
 }
 /* line 61, ../sass/sections/black.scss */
 section.sponsor header.main nav .cell.greenroom h1:hover .iconWrap,
@@ -3179,7 +3180,7 @@ section.events .past.wrapper h3,
 section.error h1,
 section.error h2,
 section.error h3 {
-  color: #142328 !important;
+  color: #13172F !important;
 }
 /* line 136, ../sass/sections/black.scss */
 section.sponsor footer,
@@ -3187,7 +3188,7 @@ section.past footer,
 section.past-residents footer,
 section.events .past.wrapper footer,
 section.error footer {
-  background-color: #142328 !important;
+  background-color: #13172F !important;
 }
 /* line 138, ../sass/sections/black.scss */
 section.sponsor footer *,
@@ -3195,7 +3196,7 @@ section.past footer *,
 section.past-residents footer *,
 section.events .past.wrapper footer *,
 section.error footer * {
-  background-color: #142328 !important;
+  background-color: #13172F !important;
   color: #fff !important;
   border-color: #fff !important;
 }
@@ -3261,7 +3262,7 @@ section.past .shelves,
 section.past-residents .shelves,
 section.events .past.wrapper .shelves,
 section.error .shelves {
-  color: #142328;
+  color: #13172F;
 }
 /* line 169, ../sass/sections/black.scss */
 section.sponsor .shelves .shelf-item.hover,
@@ -3293,7 +3294,7 @@ section.events .past.wrapper .shelves .shelf-item.nolink:hover .inner .link,
 section.events .past.wrapper .shelves .shelf-item.nolink:hover .inner a,
 section.error .shelves .shelf-item.nolink:hover .inner .link,
 section.error .shelves .shelf-item.nolink:hover .inner a {
-  color: #142328 !important;
+  color: #13172F !important;
 }
 /* line 181, ../sass/sections/black.scss */
 section.sponsor .shelves .shelf-item.nolink .inner .link:hover, section.sponsor .shelves .shelf-item.nolink .inner a:hover,
@@ -3305,7 +3306,7 @@ section.events .past.wrapper .shelves .shelf-item.nolink .inner .link:hover,
 section.events .past.wrapper .shelves .shelf-item.nolink .inner a:hover,
 section.error .shelves .shelf-item.nolink .inner .link:hover,
 section.error .shelves .shelf-item.nolink .inner a:hover {
-  color: #142328 !important;
+  color: #13172F !important;
 }
 /* line 186, ../sass/sections/black.scss */
 section.sponsor .image_slider.full,
@@ -3313,7 +3314,7 @@ section.past .image_slider.full,
 section.past-residents .image_slider.full,
 section.events .past.wrapper .image_slider.full,
 section.error .image_slider.full {
-  background-color: #142328;
+  background-color: #13172F;
   color: #fff;
 }
 /* line 190, ../sass/sections/black.scss */
@@ -3322,7 +3323,7 @@ section.past ::selection,
 section.past-residents ::selection,
 section.events .past.wrapper ::selection,
 section.error ::selection {
-  background-color: #142328;
+  background-color: #13172F;
   color: #fff;
 }
 /* line 194, ../sass/sections/black.scss */
@@ -3335,7 +3336,7 @@ section.events .past.wrapper .module,
 section.events .past.wrapper .module h4,
 section.error .module,
 section.error .module h4 {
-  color: #142328 !important;
+  color: #13172F !important;
 }
 /* line 197, ../sass/sections/black.scss */
 section.sponsor .loader div,
@@ -3343,7 +3344,7 @@ section.past .loader div,
 section.past-residents .loader div,
 section.events .past.wrapper .loader div,
 section.error .loader div {
-  background: #142328;
+  background: #13172F;
 }
 
 /* line 202, ../sass/sections/black.scss */
@@ -3364,7 +3365,7 @@ section#error h1 {
 
 /* line 2, ../sass/sections/events.scss */
 section#events .content .shelves.events {
-  margin-top: 50px;
+  margin-top: 37px;
 }
 /* line 5, ../sass/sections/events.scss */
 section#events .content .shelves.events .event h3 {
@@ -3417,7 +3418,7 @@ section#events .content .events.list .event .event-type a {
 }
 /* line 43, ../sass/sections/events.scss */
 section#events .content .wrapper.upcoming {
-  margin-bottom: 60px;
+  margin-bottom: 20px;
 }
 
 /* line 2, ../sass/sections/event.scss */
@@ -3640,7 +3641,7 @@ section.single.event.cols_1 .gallery {
 
 /* line 2, ../sass/sections/home.scss */
 .home h2.head {
-  color: #142328;
+  color: #13172F;
   margin-bottom: 48px;
 }
 /* line 6, ../sass/sections/home.scss */

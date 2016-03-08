@@ -9,8 +9,8 @@
             @extend .noselect;
             width: 33.333%;
             float: left;
-            padding-bottom: 60px;
-            margin-bottom: 60px;
+            padding-bottom: 50px;
+            margin-bottom: 48px;
             transition: color 150ms ease-in-out, opacity 300ms ease-in-out;;
             * {
                 transition: color 150ms ease-in-out;
@@ -47,7 +47,7 @@
                     display: block;
                 }
                 .value {
-                    margin-bottom: 3px;
+                    margin-bottom: 5px;
                     font-size: $small-fs;
                     line-height: calc(#{$small-lh} - 3px);
                 }
