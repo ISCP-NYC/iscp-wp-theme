@@ -30,7 +30,7 @@
                 h2 {
                     @extend .yesselect;
                     text-align: center;
-                    margin-bottom: 5px;
+                    margin-bottom: 10px;
                 }
                 .image {
                     width: 100%;
@@ -49,7 +49,7 @@
                 .value {
                     margin-bottom: 3px;
                     font-size: $small-fs;
-                    line-height: calc(#{$small-lh} - 2px);
+                    line-height: calc(#{$small-lh} - 3px);
                 }
             }
             &:nth-child(3n+1) .inner {
@@ -61,7 +61,7 @@
             &:nth-child(3n+3) .inner {
                 margin: 0 0 0 13.333px;
             }
-            
+
             &.current, &.upcoming {
                 color: $orange !important;
                 .inner {
@@ -115,7 +115,7 @@
                     color: $black;
                 }
             }
-            @include xmedium {
+            @include medium {
                 width: 50% !important;
                 margin-left: 0 !important;
                 margin-right: 0 !important;
@@ -273,7 +273,7 @@
                 .inner {
                     @include width('50% - 20px');
                 }
-            } 
+            }
         }
     }
 }

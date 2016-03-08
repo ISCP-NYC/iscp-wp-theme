@@ -5,10 +5,18 @@
 	}
 	h3.title {
 		color: $orange;
+		font-size: $medium-fs;
+		line-height: $medium-lh;
+	}
+	@include medium {
+		h3.title {
+			font-size: $small-fs;
+			line-height: $small-lh;
+		}
 	}
 	.events.upcoming {
 		display: table;
-		padding-top: 10px !important;
+		padding-top: 0px !important;
 		.eventsWrap {
 			width: 100%;
 			display: table;
@@ -86,7 +94,7 @@
 				}
 			}
 		}
-		@include xmedium {
+		@include medium {
 			.shelf-item.event {
 				width: 50% !important;
 				.inner {
@@ -121,7 +129,7 @@
 					margin: 0 !important;
 				}
 			}
-		}	
+		}
 	}
 
 	.image_slider {
@@ -144,7 +152,7 @@
 	.social.module {
 		margin-bottom: 0 !important;
 		.twitter {
-			
+
 		}
 	}
 	.links.module {
@@ -169,14 +177,20 @@
 					display: table;
 					margin: auto;
 					.swap {
-						width: 18px;
-						height: 18px;
+						width: 24px;
+						height: 24px;
 						margin-right: 5px;
 						float: left;
 						.icon {
 							background-position: center;
 							background-repeat: no-repeat;
 						    background-size: contain;
+						}
+					}
+					@include medium {
+						.swap {
+							width: 18px;
+							height: 18px;
 						}
 					}
 				}
@@ -194,7 +208,7 @@
 					background-image: url(../images/facebook-orange.svg);
 				}
 				.hover.icon {
-					background-image: url(../images/facebook-black.svg);	
+					background-image: url(../images/facebook-black.svg);
 				}
 			}
 			&.instagram .swap {
@@ -202,7 +216,7 @@
 					background-image: url(../images/instagram-orange.svg);
 				}
 				.hover.icon {
-					background-image: url(../images/instagram-black.svg);	
+					background-image: url(../images/instagram-black.svg);
 				}
 			}
 		}

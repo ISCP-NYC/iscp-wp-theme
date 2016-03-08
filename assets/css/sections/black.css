@@ -1,0 +1,90 @@
+/*
+Error: Undefined variable: "$black".
+        on line 7 of /Users/studio/Desktop/WEB/iscp/wp-content/themes/iscp/assets/sass/sections/black.scss
+
+2: section.past,
+3: section.past-residents,
+4: section.events .past.wrapper,
+5: section.error {
+6: 	* {
+7: 		border-color: $black !important;
+8: 	}
+9: 	a, .link {
+10: 		color: $black;
+11: 	}
+12: 	a:hover, .link:hover {
+
+Backtrace:
+/Users/studio/Desktop/WEB/iscp/wp-content/themes/iscp/assets/sass/sections/black.scss:7
+/Users/studio/.rvm/gems/ruby-2.2.1/gems/sass-3.4.21/lib/sass/script/tree/variable.rb:49:in `_perform'
+/Users/studio/.rvm/gems/ruby-2.2.1/gems/sass-3.4.21/lib/sass/script/tree/node.rb:50:in `perform'
+/Users/studio/.rvm/gems/ruby-2.2.1/gems/sass-3.4.21/lib/sass/script/tree/list_literal.rb:63:in `block in _perform'
+/Users/studio/.rvm/gems/ruby-2.2.1/gems/sass-3.4.21/lib/sass/script/tree/list_literal.rb:63:in `map'
+/Users/studio/.rvm/gems/ruby-2.2.1/gems/sass-3.4.21/lib/sass/script/tree/list_literal.rb:63:in `_perform'
+/Users/studio/.rvm/gems/ruby-2.2.1/gems/sass-3.4.21/lib/sass/script/tree/node.rb:50:in `perform'
+/Users/studio/.rvm/gems/ruby-2.2.1/gems/sass-3.4.21/lib/sass/tree/visitors/perform.rb:395:in `visit_prop'
+/Users/studio/.rvm/gems/ruby-2.2.1/gems/sass-3.4.21/lib/sass/tree/visitors/base.rb:36:in `visit'
+/Users/studio/.rvm/gems/ruby-2.2.1/gems/sass-3.4.21/lib/sass/tree/visitors/perform.rb:158:in `block in visit'
+/Users/studio/.rvm/gems/ruby-2.2.1/gems/sass-3.4.21/lib/sass/stack.rb:79:in `block in with_base'
+/Users/studio/.rvm/gems/ruby-2.2.1/gems/sass-3.4.21/lib/sass/stack.rb:115:in `with_frame'
+/Users/studio/.rvm/gems/ruby-2.2.1/gems/sass-3.4.21/lib/sass/stack.rb:79:in `with_base'
+/Users/studio/.rvm/gems/ruby-2.2.1/gems/sass-3.4.21/lib/sass/tree/visitors/perform.rb:158:in `visit'
+/Users/studio/.rvm/gems/ruby-2.2.1/gems/sass-3.4.21/lib/sass/tree/visitors/perform.rb:431:in `block (2 levels) in visit_rule'
+/Users/studio/.rvm/gems/ruby-2.2.1/gems/sass-3.4.21/lib/sass/tree/visitors/perform.rb:431:in `map'
+/Users/studio/.rvm/gems/ruby-2.2.1/gems/sass-3.4.21/lib/sass/tree/visitors/perform.rb:431:in `block in visit_rule'
+/Users/studio/.rvm/gems/ruby-2.2.1/gems/sass-3.4.21/lib/sass/tree/visitors/perform.rb:179:in `with_environment'
+/Users/studio/.rvm/gems/ruby-2.2.1/gems/sass-3.4.21/lib/sass/tree/visitors/perform.rb:429:in `visit_rule'
+/Users/studio/.rvm/gems/ruby-2.2.1/gems/sass-3.4.21/lib/sass/tree/visitors/base.rb:36:in `visit'
+/Users/studio/.rvm/gems/ruby-2.2.1/gems/sass-3.4.21/lib/sass/tree/visitors/perform.rb:158:in `block in visit'
+/Users/studio/.rvm/gems/ruby-2.2.1/gems/sass-3.4.21/lib/sass/stack.rb:79:in `block in with_base'
+/Users/studio/.rvm/gems/ruby-2.2.1/gems/sass-3.4.21/lib/sass/stack.rb:115:in `with_frame'
+/Users/studio/.rvm/gems/ruby-2.2.1/gems/sass-3.4.21/lib/sass/stack.rb:79:in `with_base'
+/Users/studio/.rvm/gems/ruby-2.2.1/gems/sass-3.4.21/lib/sass/tree/visitors/perform.rb:158:in `visit'
+/Users/studio/.rvm/gems/ruby-2.2.1/gems/sass-3.4.21/lib/sass/tree/visitors/perform.rb:431:in `block (2 levels) in visit_rule'
+/Users/studio/.rvm/gems/ruby-2.2.1/gems/sass-3.4.21/lib/sass/tree/visitors/perform.rb:431:in `map'
+/Users/studio/.rvm/gems/ruby-2.2.1/gems/sass-3.4.21/lib/sass/tree/visitors/perform.rb:431:in `block in visit_rule'
+/Users/studio/.rvm/gems/ruby-2.2.1/gems/sass-3.4.21/lib/sass/tree/visitors/perform.rb:179:in `with_environment'
+/Users/studio/.rvm/gems/ruby-2.2.1/gems/sass-3.4.21/lib/sass/tree/visitors/perform.rb:429:in `visit_rule'
+/Users/studio/.rvm/gems/ruby-2.2.1/gems/sass-3.4.21/lib/sass/tree/visitors/base.rb:36:in `visit'
+/Users/studio/.rvm/gems/ruby-2.2.1/gems/sass-3.4.21/lib/sass/tree/visitors/perform.rb:158:in `block in visit'
+/Users/studio/.rvm/gems/ruby-2.2.1/gems/sass-3.4.21/lib/sass/stack.rb:79:in `block in with_base'
+/Users/studio/.rvm/gems/ruby-2.2.1/gems/sass-3.4.21/lib/sass/stack.rb:115:in `with_frame'
+/Users/studio/.rvm/gems/ruby-2.2.1/gems/sass-3.4.21/lib/sass/stack.rb:79:in `with_base'
+/Users/studio/.rvm/gems/ruby-2.2.1/gems/sass-3.4.21/lib/sass/tree/visitors/perform.rb:158:in `visit'
+/Users/studio/.rvm/gems/ruby-2.2.1/gems/sass-3.4.21/lib/sass/tree/visitors/base.rb:52:in `block in visit_children'
+/Users/studio/.rvm/gems/ruby-2.2.1/gems/sass-3.4.21/lib/sass/tree/visitors/base.rb:52:in `map'
+/Users/studio/.rvm/gems/ruby-2.2.1/gems/sass-3.4.21/lib/sass/tree/visitors/base.rb:52:in `visit_children'
+/Users/studio/.rvm/gems/ruby-2.2.1/gems/sass-3.4.21/lib/sass/tree/visitors/perform.rb:167:in `block in visit_children'
+/Users/studio/.rvm/gems/ruby-2.2.1/gems/sass-3.4.21/lib/sass/tree/visitors/perform.rb:179:in `with_environment'
+/Users/studio/.rvm/gems/ruby-2.2.1/gems/sass-3.4.21/lib/sass/tree/visitors/perform.rb:166:in `visit_children'
+/Users/studio/.rvm/gems/ruby-2.2.1/gems/sass-3.4.21/lib/sass/tree/visitors/base.rb:36:in `block in visit'
+/Users/studio/.rvm/gems/ruby-2.2.1/gems/sass-3.4.21/lib/sass/tree/visitors/perform.rb:186:in `visit_root'
+/Users/studio/.rvm/gems/ruby-2.2.1/gems/sass-3.4.21/lib/sass/tree/visitors/base.rb:36:in `visit'
+/Users/studio/.rvm/gems/ruby-2.2.1/gems/sass-3.4.21/lib/sass/tree/visitors/perform.rb:157:in `visit'
+/Users/studio/.rvm/gems/ruby-2.2.1/gems/sass-3.4.21/lib/sass/tree/visitors/perform.rb:8:in `visit'
+/Users/studio/.rvm/gems/ruby-2.2.1/gems/sass-3.4.21/lib/sass/tree/root_node.rb:36:in `css_tree'
+/Users/studio/.rvm/gems/ruby-2.2.1/gems/sass-3.4.21/lib/sass/tree/root_node.rb:20:in `render'
+/Users/studio/.rvm/gems/ruby-2.2.1/gems/sass-3.4.21/lib/sass/engine.rb:278:in `render'
+/Users/studio/.rvm/gems/ruby-2.2.1/gems/sass-3.4.21/lib/sass/plugin/compiler.rb:492:in `update_stylesheet'
+/Users/studio/.rvm/gems/ruby-2.2.1/gems/sass-3.4.21/lib/sass/plugin/compiler.rb:215:in `block in update_stylesheets'
+/Users/studio/.rvm/gems/ruby-2.2.1/gems/sass-3.4.21/lib/sass/plugin/compiler.rb:209:in `each'
+/Users/studio/.rvm/gems/ruby-2.2.1/gems/sass-3.4.21/lib/sass/plugin/compiler.rb:209:in `update_stylesheets'
+/Users/studio/.rvm/gems/ruby-2.2.1/gems/sass-3.4.21/lib/sass/plugin/compiler.rb:293:in `watch'
+/Users/studio/.rvm/gems/ruby-2.2.1/gems/compass-1.0.3/lib/compass/sass_compiler.rb:46:in `watch!'
+/Users/studio/.rvm/gems/ruby-2.2.1/gems/compass-1.0.3/lib/compass/commands/watch_project.rb:41:in `perform'
+/Users/studio/.rvm/gems/ruby-2.2.1/gems/compass-1.0.3/lib/compass/commands/base.rb:18:in `execute'
+/Users/studio/.rvm/gems/ruby-2.2.1/gems/compass-1.0.3/lib/compass/commands/project_base.rb:19:in `execute'
+/Users/studio/.rvm/gems/ruby-2.2.1/gems/compass-1.0.3/lib/compass/exec/sub_command_ui.rb:43:in `perform!'
+/Users/studio/.rvm/gems/ruby-2.2.1/gems/compass-1.0.3/lib/compass/exec/sub_command_ui.rb:15:in `run!'
+/Users/studio/.rvm/gems/ruby-2.2.1/gems/compass-1.0.3/bin/compass:30:in `block in <top (required)>'
+/Users/studio/.rvm/gems/ruby-2.2.1/gems/compass-1.0.3/bin/compass:44:in `call'
+/Users/studio/.rvm/gems/ruby-2.2.1/gems/compass-1.0.3/bin/compass:44:in `<top (required)>'
+/Users/studio/.rvm/gems/ruby-2.2.1/bin/compass:22:in `load'
+/Users/studio/.rvm/gems/ruby-2.2.1/bin/compass:22:in `<main>'
+/Users/studio/.rvm/gems/ruby-2.2.1/bin/ruby_executable_hooks:15:in `eval'
+/Users/studio/.rvm/gems/ruby-2.2.1/bin/ruby_executable_hooks:15:in `<main>'
+*/
+body:before {
+  white-space: pre;
+  font-family: monospace;
+  content: "Error: Undefined variable: \"$black\".\A         on line 7 of /Users/studio/Desktop/WEB/iscp/wp-content/themes/iscp/assets/sass/sections/black.scss\A \A 2: section.past,\A 3: section.past-residents,\A 4: section.events .past.wrapper,\A 5: section.error {\A 6: 	* {\A 7: 		border-color: $black !important;\A 8: 	}\A 9: 	a, .link {\A 10: 		color: $black;\A 11: 	}\A 12: 	a:hover, .link:hover {"; }

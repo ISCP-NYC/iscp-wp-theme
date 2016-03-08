@@ -44,7 +44,7 @@ section#about {
 				display: block;
 				column-count: 2;
 				column-gap: 2em;
-				@include xmedium {
+				@include medium {
 					column-count: 1;
 				}
 			}

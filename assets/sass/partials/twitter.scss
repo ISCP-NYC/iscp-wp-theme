@@ -35,7 +35,20 @@
 			}
 		}
 	}
-	@include large {
+	@include small {
+		.tweets {
+			max-width: 800px;
+			margin: auto;
+			.tweet {
+				width: 100%;
+				max-width: 600px;
+				margin: 0 auto 10px 0 !important;
+				float: none;
+				max-width: none;
+			}
+		}
+	}
+	@include medium {
 		.tweets {
 			max-width: 800px;
 			margin: auto;

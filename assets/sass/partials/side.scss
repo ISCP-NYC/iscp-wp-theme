@@ -18,7 +18,7 @@ aside {
 		}
 	}
 	&.main {
-		top: 0;	
+		top: 0;
 		height: 100%;
 		border-color: $orange;
 		.logo {
@@ -78,12 +78,12 @@ aside {
 	&.left .move {
 		bottom: -120px;
     	left: 0px;
-		transform: rotate(-90deg); 
+		transform: rotate(-90deg);
 	}
 	&.right .move {
 		top: 110px;
 	    left: 120px;
-		transform: rotate(90deg); 
+		transform: rotate(90deg);
 	}
 	&.footer {
 		top: 30px;
