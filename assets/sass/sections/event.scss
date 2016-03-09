@@ -53,7 +53,7 @@ section.single.event {
 		.contributors, .credits {
 			margin-top: 30px;
 		}
-		.links {
+		.bullets {
 			margin-top: 30px;
 			a {
 				display: table;
@@ -73,6 +73,9 @@ section.single.event {
 				}
 			}
 		}
+	}
+	.gallery .caption {
+		@include small-fs;
 	}
 	.gallery.stack:not(.image_slider) {
 		width: calc(33.333% - 35px);

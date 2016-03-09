@@ -18,17 +18,17 @@ $search_count = $wp_query->found_posts;
 	<div class="content">
 	<?php
 	if( $search_value ):
-		echo '<h3 class="title head">';
-		echo '<span class="counter">' . $search_count . '</span>';
-		echo ' results for ';
-		echo '&ldquo;<span class="value">'. $search_value . '</span>&rdquo;';
-		echo '</h3>';
+		// echo '<h3 class="title head">';
+		// echo '<span class="counter">' . $search_count . '</span>';
+		// echo ' results for ';
+		// echo '&ldquo;<span class="value">'. $search_value . '</span>&rdquo;';
+		// echo '</h3>';
 	endif;
 	echo '<form role="search" method="get" class="searchform" class="searchform" autocomplete="off" action="' . esc_url( home_url( '/' ) ) . '">';
-	echo '<input type="text" data-placeholder="Search" value="Search" name="s" class="s main-search" spellcheck="false" />';
+	echo '<div class="placeholder"><span>Search</span></div>';
+	echo '<input type="text" value="" name="s" class="s main-search" spellcheck="false" />';
 	echo '</form>';
-	echo '<div class="counter"></div>';
-	echo '<div class="shelves results list">';
+	echo '<div class="shelves items results list">';
 	if ( have_posts() ) :
 		include( locate_template( 'sections/loops/search.php' ) );
 	endif;

@@ -16,41 +16,41 @@ $small-width: 768px;
 $medium-width: 900px;
 $xmedium-width: 1040px;
 $large-width: 1280px;
-$xlarge-width: 1824px;
-$xxlarge-width: 2560px;
-
-@mixin xxlarge {
-  @media (max-width: #{$xxlarge-width}) {
-    @content;
-  }
-}
+$xlarge-width: 1600px;
+// $xxlarge-width: 2560px;
+//
+// @mixin xxlarge {
+//   @media (max-width: #{$xxlarge-width}) {
+//     @content;
+//   }
+// }
 
 @mixin xlarge {
-  @media (max-width: #{$xlarge-width}) {
+	@media (min-width: 1601px) {
     @content;
   }
 }
 
 @mixin large {
-  @media (max-width: #{$large-width}) {
+	@media (min-width: 1041px) and (max-width: #{$xlarge-width}) {
     @content;
   }
 }
 
-@mixin xmedium {
-  @media (max-width: #{$xmedium-width}) {
-    @content;
-  }
-}
+// @mixin xmedium {
+// 	@media (min-width: 1041px) and (max-width: #{$large-width}) {
+//     @content;
+//   }
+// }
 
 @mixin medium {
-  @media (max-width: #{$medium-width}) {
+	@media (max-width: #{$xmedium-width}) {
     @content;
   }
 }
 
 @mixin small {
-  @media (max-width: #{$small-width}) {
+	@media (max-width: #{$medium-width}) {
     @content;
   }
 }
@@ -132,12 +132,12 @@ $xxlarge-width: 2560px;
      @content;
   }
   &:-moz-placeholder {
-     @content; 
+     @content;
   }
   &::-moz-placeholder {
-     @content; 
+     @content;
   }
-  &:-ms-input-placeholder {  
-     @content; 
-  } 
+  &:-ms-input-placeholder {
+     @content;
+  }
 }

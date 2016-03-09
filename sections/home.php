@@ -149,7 +149,7 @@ $home_id = get_page_by_path( 'home' )->ID;
 		<div class="module social">
 			<?php
 			get_tweets( 3 );
-			$facebook_url = get_field( 'facebook', $about_id );
+			$facebook_url = 'http://facebook.com/' . get_field( 'facebook', $about_id );
 			$instagram_handle = str_replace('@', '', get_field( 'instagram', $about_id ) );
 			$instagram_url = 'http://instagram.com/' . $instagram_handle;
 			?>

@@ -29,13 +29,12 @@ if( have_posts() ):
 		$country = get_field('country', $contributor_id )[0]->post_title;
 		$country_slug = get_field('country', $contributor_id )[0]->post_name;
 		$country_permalink = query_url( 'from', $country_slug, $url );
-		$permalink = get_permalink();
 		$website = get_field('website', $contributor_id );
 		$pretty_website = pretty_url( $website );
 		echo '<div class="contributor shelf-item border-bottom"><div class="inner">';
-		echo '<a class="value name" href="' . $permalink . '">';
-		echo '<h3 class="link">' . $title . '</h3>';
-		echo '</a>';
+		echo '<div class="value name">';
+		echo '<h3>' . $title . '</h3>';
+		echo '</div>';
 		echo '<div class="value country"><a href="' . $country_permalink . '">' . $country . '</a></div>';
 		if($website):
 			echo '<div class="value website">';

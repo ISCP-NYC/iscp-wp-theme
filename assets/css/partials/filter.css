@@ -3,8 +3,8 @@ Error: Undefined variable: "$small-fs".
         on line 6 of /Users/studio/Desktop/WEB/iscp/wp-content/themes/iscp/assets/sass/partials/filter.scss
 
 1: .filter {
-2:     width: calc(100% - 60px);
-3:     padding: 0 30px;
+2:     width: calc(100% - 40px);
+3:     padding: 0 20px;
 4:     @extend .noselect;
 5:     .select {
 6:         font-size: $small-fs;
@@ -78,4 +78,4 @@ Backtrace:
 body:before {
   white-space: pre;
   font-family: monospace;
-  content: "Error: Undefined variable: \"$small-fs\".\A         on line 6 of /Users/studio/Desktop/WEB/iscp/wp-content/themes/iscp/assets/sass/partials/filter.scss\A \A 1: .filter {\A 2:     width: calc(100% - 60px);\A 3:     padding: 0 30px;\A 4:     @extend .noselect;\A 5:     .select {\A 6:         font-size: $small-fs;\A 7:         line-height: $small-fs;\A 8:         display: table;\A 9:         color: $orange;\A 10:         padding: 0;\A 11:         margin: 0 20px 5px 0;"; }
+  content: "Error: Undefined variable: \"$small-fs\".\A         on line 6 of /Users/studio/Desktop/WEB/iscp/wp-content/themes/iscp/assets/sass/partials/filter.scss\A \A 1: .filter {\A 2:     width: calc(100% - 40px);\A 3:     padding: 0 20px;\A 4:     @extend .noselect;\A 5:     .select {\A 6:         font-size: $small-fs;\A 7:         line-height: $small-fs;\A 8:         display: table;\A 9:         color: $orange;\A 10:         padding: 0;\A 11:         margin: 0 20px 5px 0;"; }

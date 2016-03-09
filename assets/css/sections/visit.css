@@ -9,8 +9,8 @@ Error: Undefined mixin 'medium-fs'.
 31: 				margin: auto;
 32: 				.step {
 33: 					@include medium-fs;
-34: 					// list-style-type:decimal;
-35: 					// padding-left: 20px;
+34: 					list-style-type:decimal;
+35: 					padding-left: 20px;
 36: 					margin: 0 0 20px 30px;
 37: 				}
 38: 			}
@@ -115,4 +115,4 @@ Backtrace:
 body:before {
   white-space: pre;
   font-family: monospace;
-  content: "Error: Undefined mixin 'medium-fs'.\A         on line 33 of /Users/studio/Desktop/WEB/iscp/wp-content/themes/iscp/assets/sass/sections/visit.scss, in `medium-fs'\A         from line 33 of /Users/studio/Desktop/WEB/iscp/wp-content/themes/iscp/assets/sass/sections/visit.scss\A \A 28: 				width: 100%;\A 29: 				max-width: 600px;\A 30: 				display: table;\A 31: 				margin: auto;\A 32: 				.step {\A 33: 					@include medium-fs;\A 34: 					// list-style-type:decimal;\A 35: 					// padding-left: 20px;\A 36: 					margin: 0 0 20px 30px;\A 37: 				}\A 38: 			}"; }
+  content: "Error: Undefined mixin 'medium-fs'.\A         on line 33 of /Users/studio/Desktop/WEB/iscp/wp-content/themes/iscp/assets/sass/sections/visit.scss, in `medium-fs'\A         from line 33 of /Users/studio/Desktop/WEB/iscp/wp-content/themes/iscp/assets/sass/sections/visit.scss\A \A 28: 				width: 100%;\A 29: 				max-width: 600px;\A 30: 				display: table;\A 31: 				margin: auto;\A 32: 				.step {\A 33: 					@include medium-fs;\A 34: 					list-style-type:decimal;\A 35: 					padding-left: 20px;\A 36: 					margin: 0 0 20px 30px;\A 37: 				}\A 38: 			}"; }

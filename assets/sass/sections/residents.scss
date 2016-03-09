@@ -67,6 +67,15 @@ section.residents {
 				.wrap.name {
 					width: 40%;
 				}
+				&.nolink {
+					h2.title {
+						width: 40%;	
+						text-align: left;	
+					}
+					.link {
+						pointer-events: none;
+					}
+				}
 				.details {
 					width: 60%;
 					display: flex;

@@ -1,6 +1,6 @@
 /*
-Error: Undefined mixin 'large'.
-        on line 11 of /Users/studio/Desktop/WEB/iscp/wp-content/themes/iscp/assets/sass/sections/about.scss, in `large'
+Error: Undefined mixin 'small'.
+        on line 11 of /Users/studio/Desktop/WEB/iscp/wp-content/themes/iscp/assets/sass/sections/about.scss, in `small'
         from line 11 of /Users/studio/Desktop/WEB/iscp/wp-content/themes/iscp/assets/sass/sections/about.scss
 
 6: 			margin-right: 15px;
@@ -8,15 +8,15 @@ Error: Undefined mixin 'large'.
 8: 		&.right {
 9: 			margin-left: 15px;
 10: 		}
-11: 		@include large {
+11: 		@include small {
 12: 			width: 100%;
 13: 			float: none;
-14: 			margin: 0 !important;
-15: 		}
-16: 	}
+14: 			margin: 0;
+15: 			&.right {
+16: 				margin: 10px 0 0 0;
 
 Backtrace:
-/Users/studio/Desktop/WEB/iscp/wp-content/themes/iscp/assets/sass/sections/about.scss:11:in `large'
+/Users/studio/Desktop/WEB/iscp/wp-content/themes/iscp/assets/sass/sections/about.scss:11:in `small'
 /Users/studio/Desktop/WEB/iscp/wp-content/themes/iscp/assets/sass/sections/about.scss:11
 /Users/studio/.rvm/gems/ruby-2.2.1/gems/sass-3.4.21/lib/sass/tree/visitors/perform.rb:349:in `block in visit_mixin'
 /Users/studio/.rvm/gems/ruby-2.2.1/gems/sass-3.4.21/lib/sass/stack.rb:98:in `block in with_mixin'
@@ -82,4 +82,4 @@ Backtrace:
 body:before {
   white-space: pre;
   font-family: monospace;
-  content: "Error: Undefined mixin 'large'.\A         on line 11 of /Users/studio/Desktop/WEB/iscp/wp-content/themes/iscp/assets/sass/sections/about.scss, in `large'\A         from line 11 of /Users/studio/Desktop/WEB/iscp/wp-content/themes/iscp/assets/sass/sections/about.scss\A \A 6: 			margin-right: 15px;\A 7: 		}\A 8: 		&.right {\A 9: 			margin-left: 15px;\A 10: 		}\A 11: 		@include large {\A 12: 			width: 100%;\A 13: 			float: none;\A 14: 			margin: 0 !important;\A 15: 		}\A 16: 	}"; }
+  content: "Error: Undefined mixin 'small'.\A         on line 11 of /Users/studio/Desktop/WEB/iscp/wp-content/themes/iscp/assets/sass/sections/about.scss, in `small'\A         from line 11 of /Users/studio/Desktop/WEB/iscp/wp-content/themes/iscp/assets/sass/sections/about.scss\A \A 6: 			margin-right: 15px;\A 7: 		}\A 8: 		&.right {\A 9: 			margin-left: 15px;\A 10: 		}\A 11: 		@include small {\A 12: 			width: 100%;\A 13: 			float: none;\A 14: 			margin: 0;\A 15: 			&.right {\A 16: 				margin: 10px 0 0 0;"; }

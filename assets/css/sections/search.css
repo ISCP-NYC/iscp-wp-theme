@@ -1,21 +1,21 @@
 /*
 Error: Undefined variable: "$orange".
-        on line 11 of /Users/studio/Desktop/WEB/iscp/wp-content/themes/iscp/assets/sass/sections/search.scss
+        on line 14 of /Users/studio/Desktop/WEB/iscp/wp-content/themes/iscp/assets/sass/sections/search.scss
 
-6: 			margin: 50px 0;
-7: 			input.s {
-8: 				width: 100%;
-9: 				padding: 0 0 10px 0;
-10: 				margin: 0;
-11: 			    color: $orange;
-12: 			    @include large-fs;
-13: 			    border: 0; 
-14: 			    border-bottom: 10px solid $orange;
-15: 			    outline: none;
-16: 			    text-align: center;
+9: 			margin: 50px 0;
+10: 			input.s {
+11: 				width: 100%;
+12: 				padding: 0 0 10px 0;
+13: 				margin: 0;
+14: 			    color: $orange;
+15: 			    @include large-fs;
+16: 			    border: 0; 
+17: 			    border-bottom: 10px solid $orange;
+18: 			    outline: none;
+19: 			    text-align: center;
 
 Backtrace:
-/Users/studio/Desktop/WEB/iscp/wp-content/themes/iscp/assets/sass/sections/search.scss:11
+/Users/studio/Desktop/WEB/iscp/wp-content/themes/iscp/assets/sass/sections/search.scss:14
 /Users/studio/.rvm/gems/ruby-2.2.1/gems/sass-3.4.21/lib/sass/script/tree/variable.rb:49:in `_perform'
 /Users/studio/.rvm/gems/ruby-2.2.1/gems/sass-3.4.21/lib/sass/script/tree/node.rb:50:in `perform'
 /Users/studio/.rvm/gems/ruby-2.2.1/gems/sass-3.4.21/lib/sass/tree/visitors/perform.rb:395:in `visit_prop'
@@ -100,4 +100,4 @@ Backtrace:
 body:before {
   white-space: pre;
   font-family: monospace;
-  content: "Error: Undefined variable: \"$orange\".\A         on line 11 of /Users/studio/Desktop/WEB/iscp/wp-content/themes/iscp/assets/sass/sections/search.scss\A \A 6: 			margin: 50px 0;\A 7: 			input.s {\A 8: 				width: 100%;\A 9: 				padding: 0 0 10px 0;\A 10: 				margin: 0;\A 11: 			    color: $orange;\A 12: 			    @include large-fs;\A 13: 			    border: 0; \A 14: 			    border-bottom: 10px solid $orange;\A 15: 			    outline: none;\A 16: 			    text-align: center;"; }
+  content: "Error: Undefined variable: \"$orange\".\A         on line 14 of /Users/studio/Desktop/WEB/iscp/wp-content/themes/iscp/assets/sass/sections/search.scss\A \A 9: 			margin: 50px 0;\A 10: 			input.s {\A 11: 				width: 100%;\A 12: 				padding: 0 0 10px 0;\A 13: 				margin: 0;\A 14: 			    color: $orange;\A 15: 			    @include large-fs;\A 16: 			    border: 0; \A 17: 			    border-bottom: 10px solid $orange;\A 18: 			    outline: none;\A 19: 			    text-align: center;"; }

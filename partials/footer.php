@@ -30,9 +30,15 @@
 					    	echo '<a href="' . $url . '">' . $html_title . '</a>';
 					    endif;
 					    echo '<div class="sub-menu">';
-					    foreach ( (array) $menu_items as $key => $child_menu_item ) {
+					    foreach ( (array) $menu_items as $key => $child_menu_item ):
 					    	$child_title = $child_menu_item->title;
 					    	$child_url = $child_menu_item->url;
+					    	$child_slug = $child_menu_item->post_name;
+					    	if($child_title == 'Past Events'):
+					    		$child_url .= '#past';
+					    	elseif( substr( $child_url, 0, 1 ) === '#' ):
+					    		$child_url = $url . '/' . $child_url; 
+					    	endif;
 					    	$child_slug = str_replace('#','-',basename($child_url));
 					    	$parent_id = $child_menu_item->menu_item_parent;
 					    	if ($parent_id == $id ) : 
@@ -48,7 +54,7 @@
 					    		echo '</a>';
 					    		echo '</div>';
 					    	endif;
-					    }
+					    endforeach;
 					   	echo '</div>';
 					   	echo '</div>';
 					   	echo '</div>';

@@ -8,7 +8,7 @@ Error: Undefined variable: "$white".
 6: 	top: 0;
 7: 	z-index: 100;
 8: 	background-color: $white;
-9: 	border-bottom: 10px solid $orange;	
+9: 	border-bottom: 10px solid $orange;
 10: 	transition: transform 600ms cubic-bezier(0.645, 0.045, 0.355, 1), border-color 150ms ease-in-out;
 11: 	&:not(.static) {
 12: 		transform: translateY(calc(-100% + 110px));
@@ -67,4 +67,4 @@ Backtrace:
 body:before {
   white-space: pre;
   font-family: monospace;
-  content: "Error: Undefined variable: \"$white\".\A         on line 8 of /Users/studio/Desktop/WEB/iscp/wp-content/themes/iscp/assets/sass/partials/nav.scss\A \A 3: 	height: 100%;\A 4: 	position: absolute;\A 5: 	left: 140px;\A 6: 	top: 0;\A 7: 	z-index: 100;\A 8: 	background-color: $white;\A 9: 	border-bottom: 10px solid $orange;	\A 10: 	transition: transform 600ms cubic-bezier(0.645, 0.045, 0.355, 1), border-color 150ms ease-in-out;\A 11: 	&:not(.static) {\A 12: 		transform: translateY(calc(-100% + 110px));\A 13: 	}"; }
+  content: "Error: Undefined variable: \"$white\".\A         on line 8 of /Users/studio/Desktop/WEB/iscp/wp-content/themes/iscp/assets/sass/partials/nav.scss\A \A 3: 	height: 100%;\A 4: 	position: absolute;\A 5: 	left: 140px;\A 6: 	top: 0;\A 7: 	z-index: 100;\A 8: 	background-color: $white;\A 9: 	border-bottom: 10px solid $orange;\A 10: 	transition: transform 600ms cubic-bezier(0.645, 0.045, 0.355, 1), border-color 150ms ease-in-out;\A 11: 	&:not(.static) {\A 12: 		transform: translateY(calc(-100% + 110px));\A 13: 	}"; }

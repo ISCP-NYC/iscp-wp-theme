@@ -1,20 +1,21 @@
 /*
 Error: Undefined variable: "$orange".
-        on line 5 of /Users/studio/Desktop/WEB/iscp/wp-content/themes/iscp/assets/sass/sections/resident.scss
+        on line 6 of /Users/studio/Desktop/WEB/iscp/wp-content/themes/iscp/assets/sass/sections/resident.scss
 
 1: section.single.resident {
 2: 	header.sub {
-3: 		width: 100%;
-4: 		display: table;
-5: 		color: $orange;
-6: 	    display: flex;
-7: 		.left, .center, .right {
-8: 			float: left;
-9: 		    flex-wrap: wrap;
-10: 		}
+3: 		width: calc(100% - 40px);
+4: 		padding: 0 20px;
+5: 		display: table;
+6: 		color: $orange;
+7: 	    display: flex;
+8: 		.left, .center, .right {
+9: 			float: left;
+10: 		    flex-wrap: wrap;
+11: 		}
 
 Backtrace:
-/Users/studio/Desktop/WEB/iscp/wp-content/themes/iscp/assets/sass/sections/resident.scss:5
+/Users/studio/Desktop/WEB/iscp/wp-content/themes/iscp/assets/sass/sections/resident.scss:6
 /Users/studio/.rvm/gems/ruby-2.2.1/gems/sass-3.4.21/lib/sass/script/tree/variable.rb:49:in `_perform'
 /Users/studio/.rvm/gems/ruby-2.2.1/gems/sass-3.4.21/lib/sass/script/tree/node.rb:50:in `perform'
 /Users/studio/.rvm/gems/ruby-2.2.1/gems/sass-3.4.21/lib/sass/tree/visitors/perform.rb:395:in `visit_prop'
@@ -77,4 +78,4 @@ Backtrace:
 body:before {
   white-space: pre;
   font-family: monospace;
-  content: "Error: Undefined variable: \"$orange\".\A         on line 5 of /Users/studio/Desktop/WEB/iscp/wp-content/themes/iscp/assets/sass/sections/resident.scss\A \A 1: section.single.resident {\A 2: 	header.sub {\A 3: 		width: 100%;\A 4: 		display: table;\A 5: 		color: $orange;\A 6: 	    display: flex;\A 7: 		.left, .center, .right {\A 8: 			float: left;\A 9: 		    flex-wrap: wrap;\A 10: 		}"; }
+  content: "Error: Undefined variable: \"$orange\".\A         on line 6 of /Users/studio/Desktop/WEB/iscp/wp-content/themes/iscp/assets/sass/sections/resident.scss\A \A 1: section.single.resident {\A 2: 	header.sub {\A 3: 		width: calc(100% - 40px);\A 4: 		padding: 0 20px;\A 5: 		display: table;\A 6: 		color: $orange;\A 7: 	    display: flex;\A 8: 		.left, .center, .right {\A 9: 			float: left;\A 10: 		    flex-wrap: wrap;\A 11: 		}"; }

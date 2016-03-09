@@ -8,22 +8,24 @@ section#about {
 		&.right {
 			margin-left: 15px;
 		}
-		@include large {
+		@include small {
 			width: 100%;
 			float: none;
-			margin: 0 !important;
+			margin: 0;
+			&.right {
+				margin: 10px 0 0 0;
+			}
 		}
 	}
 	h4 {
 		width: 100%;
 		padding: 0 0 20px 0;
 		text-align: center;
-		@include small-fs;
+		margin-top: 5px;
+		@include medium-fs;
 	}
 	.info {
-		width: 100%;
 		@include medium-fs;
-		display: flex;
 		.bullet {
 			display: table;
 		}
@@ -44,14 +46,12 @@ section#about {
 				display: block;
 				column-count: 2;
 				column-gap: 2em;
-				@include xmedium {
+				@include medium {
 					column-count: 1;
 				}
 			}
 		}
 		.list {
-			width: 50%;
-			float: left;
 			@include medium-fs;
 			&.staff {
 				li {
@@ -59,19 +59,6 @@ section#about {
 					em {
 						display: block;
 					}
-				}
-			}
-			@include small {
-				width: calc(50% - 5px);
-				float: left;
-				&.board {
-					margin-right: 5px;
-					ul {
-						padding-left: 20px;
-					}
-				}
-				&.staff {
-					margin-left: 5px;
 				}
 			}
 		}

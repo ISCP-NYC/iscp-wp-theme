@@ -1,5 +1,6 @@
 jQuery(document).ready(function($) {
 var isMobile = false;
+var loader = '<div class="loader"><div></div><div></div><div></div></div>';
 // $(window).load(function() {
 	mobileCheck();
 	setUp();
@@ -44,7 +45,7 @@ var isMobile = false;
 				$(this).parent('section').attr('data-page', 1);
 				loadMore(slug, 1);
 				insertFilterList(slug);
-			},delay);
+			},delay*100);
 		})
 	}
 // });
@@ -133,12 +134,31 @@ function setUp() {
 	});
 	var centerSlug = $('main').attr('data-center-slug');
 	var centerIndex = $('section#' + centerSlug).index();
+	if(centerIndex == -1) {
+		centerIndex = $('section#error').index();
+	}
 	if(window.location.search.length) {
 		$('section#' + centerSlug).attr('data-permalink', window.location);
 	}
 	slideTo(centerIndex, false);
 }
 
+function fixScroll(section, content) {
+	var scrollHeight = content[0].scrollHeight;
+	var contentHeight = $(content)[0].clientHeight;
+	// if content is same height as window
+	if(contentHeight == $(window).innerHeight()) {
+		if(scrollHeight <= contentHeight) {
+			$(section).addClass('show-footer');
+		} else {
+			$(section).removeClass('show-footer');
+		}
+	}
+	// if content is too short to scroll -> scroll to footer
+	else if(scrollHeight <= contentHeight && scrollHeight != 0) {
+		$(section).addClass('show-footer');
+	}
+}
 
 $('body').on('mouseenter', '.shelf-item .wrap', function() {
 	$(this).parents('.shelf-item').addClass('hover');
@@ -477,7 +497,6 @@ function loading(vars, classes) {
 	var sectionSlug = vars.pagename;
 	var section = $('section#'+sectionSlug);
 	var filterLists = $(section).find('.filter-lists');
-	var loader = '<div class="loader"><div></div><div></div><div></div></div>';
 	if(!$(filterLists).find('.loader').length) {
 		$(filterLists).append(loader);
 	}
@@ -702,6 +721,9 @@ $('body').on('click', 'section:not(#apply) .filter-list .option a', function(eve
 	}
 	vars['pagename'] = slug;
 	updateCounts(option, vars);
+	if(isSmall()) {
+		$(section).find('.select[data-filter="'+filterType+'"]').click();
+	}
 	filterQuery(vars, section, url, option);
 });
 
@@ -740,9 +762,13 @@ function filterQuery(vars, section, url, option) {
 			page: 1
 		},
 		beforeSend: function() {
+			
+		},
+		success: function(response) {
 			var container = $(section).find('.filter-this');
 			var transitionEnd = 'transitionend webkitTransitionEnd oTransitionEnd';
 			var items = $(container).find('.item');
+			$(container).addClass('removing');
 			$(section).one(transitionEnd, function(e) {
 				$(container).removeClass('removing');
 				if($(section).is('.journal')) {
@@ -750,28 +776,25 @@ function filterQuery(vars, section, url, option) {
 					$masonry.masonry('layout');
 				} else {
 					$(container).html('');
+					if($(option).length) {
+						updateFilterLinks(option, vars);
+					}
+					filterThis(response, vars);
+					if($(section).is('#events') && $(response).find('.item').length != 0) {
+						$(section).find('.wrapper.past').attr('style','');
+					}
 				}
 				$(section).off(transitionEnd);
 			});
-			$(container).addClass('removing');
 			loading(vars, 'loading filtering');
 			window.history.pushState({path:url},'',url);
 			$(section).attr('data-permalink', url);
-		},
-		success: function(response) {
-			if($(option).length) {
-				updateFilterLinks(option, vars);
-			}
-			filterThis(response, vars);
-			if($(section).is('#events') && $(response).find('.item').length != 0) {
-				$(section).find('.wrapper.past').attr('style','');
-			}
 		}
 	});
 }
 
 function filterThis(html, vars) {
-	if(html.length > 0) {
+	if($(html).length > 0) {
 		var vars = JSON.parse(vars);
 		var sectionSlug = vars.pagename;
 		if(sectionSlug == 'journals') {sectionSlug='journal';}
@@ -788,7 +811,6 @@ function filterThis(html, vars) {
 		$(section).attr('data-page', 1);
 		$(section).removeClass('loading');
 		$(section).find('.load-more').remove();
-
 		$(html).each(function(i, item) {
 			if(!$(item).hasClass('load-more')) {
 				$(item).addClass('hide');
@@ -811,6 +833,11 @@ function filterThis(html, vars) {
 		$(section).removeClass('show-footer filtering');
 		$(content).animate({ scrollTop: contentScrollTop + sectionScrollTop }, 300, 'easeOutQuart');
 		$(section).animate({ scrollTop: 0 }, 300, 'easeOutQuart');
+		// keep content scrolled to bottom when footer is visible
+		if($(section).hasClass('show-footer')) {
+			$(content).scrollTop(scrollHeight);
+		}
+		fixScroll(section, content);
 	}
 }
 
@@ -848,10 +875,13 @@ function renameFilterType(filterType) {
 $('body').on('click', '.filter .select:not(.tag)', function() {
 	var slug = $(this).attr('data-slug');
 	var filterThis = $('.filter-this.'+slug);
+	var section = $(filterThis).parents('section');
+	var content = $(section).find('.content');
 	if($(this).hasClass('view toggle')) {
 		//toggle view style
 		$(filterThis).toggleClass('list').toggleClass('grid');
 		$(this).toggleClass('list').toggleClass('grid');
+		fixScroll(section, content);
 	} else if($(this).hasClass('dropdown')) {
 		var property = $(this).attr('data-filter');
 		var filterList = $('.filter-list.'+property+'.'+slug);
@@ -862,6 +892,9 @@ $('body').on('click', '.filter .select:not(.tag)', function() {
 			//toggle to hide this list
 			$(this).removeClass('dropped');
 			$(filterList).removeClass('show').css({height : 0});
+			$(filterList).one('transitionend webkitTransitionEnd oTransitionEnd MSTransitionEnd', function() {
+				fixScroll(section, content);
+			});
 		} else {
 			//hide already opened filter list
 			$('.dropdown').removeClass('dropped');
@@ -870,6 +903,7 @@ $('body').on('click', '.filter .select:not(.tag)', function() {
 			$(this).addClass('dropped');
 			$(filterList).addClass('show growing').css({height : filterListOptionsHeight});
 			$(filterList).one('transitionend webkitTransitionEnd oTransitionEnd MSTransitionEnd', function() {
+				fixScroll(section, content);
 				$(filterList).removeClass('growing');
 			});
 		}
@@ -1018,24 +1052,26 @@ $('body').on('keyup', 'section#search .content input.s', function() {
 	var vars = ajaxpagination.query_vars;
 	vars = JSON.parse(vars);
 	vars['s'] = text;
+	vars.pagename = 'search';
 	vars = JSON.stringify(vars);
 	if(/\S/.test(text)) {
 		mainTimer = setTimeout(function() {
-			$.ajax({
-				url: ajaxpagination.ajaxurl,
-				type: 'post',
-				data: {
-					action: 'get_search_count',
-					query_vars: vars
-				},
-				success: function(count) {
-					var counter = $(section).find('.title .counter');
-					var value = $(section).find('.title .value');
-					$(counter).text(count);
-					$(value).text(text);
-				}
-			});
 
+			// $.ajax({
+			// 	url: ajaxpagination.ajaxurl,
+			// 	type: 'post',
+			// 	data: {
+			// 		action: 'get_search_count',
+			// 		query_vars: vars
+			// 	},
+			// 	success: function(count) {
+			// 		var counter = $(section).find('.title .counter');
+			// 		var value = $(section).find('.title .value');
+			// 		$(counter).text(count);
+			// 		$(value).text(text);
+			// 	}
+			// });
+			
 			$.ajax({
 				url: ajaxpagination.ajaxurl,
 				type: 'post',
@@ -1043,18 +1079,23 @@ $('body').on('keyup', 'section#search .content input.s', function() {
 					action: 'update_search_results',
 					query_vars: vars
 				},
+				beforeSend: function() {
+					$(section).addClass('loading');
+					$(section).find('.results').html(loader);
+				},
 				success: function(response) {
-					$(section).find('.results').html(response);
-					$(section).find('.head').css({opacity:1});
+					$(section).removeClass('loading');
+					addItems(response, vars);
 					if (history.pushState) {
-					    var newurl = window.location.protocol + "//" + window.location.host + window.location.pathname + '?s=' + text;
+						var s = JSON.parse(vars)['s'];
+					    var newurl = window.location.protocol + "//" + window.location.host + window.location.pathname + '?s=' + s;
 					    window.history.pushState({path:newurl},'',newurl);
 					}
 				}
 			});
 		}, 200);
 	} else {
-		var newurl = window.location.protocol + "//" + window.location.host + window.location.pathname + '?s=' + text;
+		var newurl = window.location.protocol + "//" + window.location.host + window.location.pathname + '?s=' + '';
 		window.history.pushState({path:newurl},'',newurl);
 		$(section).find('.results').children().fadeOut(500);
 		$(section).find('.head').css({opacity:0});

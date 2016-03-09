@@ -1,4 +1,7 @@
 section#search, section#error {
+	.loader {
+		top: 0 !important;
+	}
 	.content {
 		form.searchform {
 			width: 100%;
@@ -16,11 +19,22 @@ section#search, section#error {
 			    text-align: center;
 			    float: left;
 			}
+			.placeholder {
+				height: calc(100% - 10px);
+	            @include large-fs;
+	            color: #ff5000;
+	            background: $white;
+	            span {
+	                width: 100%;
+	                text-align: center;
+	            }
+	        }
 		}
 		.list {
+			position: relative;
 			.shelf-item {
 				@include large-fs;
-				padding: 0;
+				padding: 0px 20px;
 				a {
 					width: 100%;
 					padding: 20px 0;
@@ -40,6 +54,14 @@ section#search, section#error {
 						width: calc(20% - 20px);
 						justify-content: flex-end;
 						text-transform: capitalize;
+					}
+				}
+				&.nothumb {
+					.title {
+						width: calc(80% - 20px);	
+					}
+					.post-type {
+						width: 20%;
 					}
 				}
 			}
