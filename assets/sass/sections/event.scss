@@ -74,6 +74,9 @@ section.single.event {
 			}
 		}
 	}
+	.gallery .caption {
+		@include small-fs;
+	}
 	.gallery.stack:not(.image_slider) {
 		width: calc(33.333% - 35px);
 		padding: 0 20px 0 15px;

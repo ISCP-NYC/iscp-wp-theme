@@ -65,6 +65,9 @@ section.single.resident {
 			}
 		}
 	}
+	.gallery .caption {
+		@include small-fs;
+	}
 	.gallery {
 		width: calc(33.333% - 35px);
 		padding: 0 20px 0 15px;

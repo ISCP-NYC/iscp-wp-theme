@@ -12,6 +12,9 @@ echo '<div class="inner">';
 echo '<a class="value wrap" href="' . $permalink . '">';
 if($thumb):
 	echo '<div class="thumb" style="background-image:url(' . $thumb . ')"></div>';
+	echo '<div class="title">' . $title . '</div>';
+else:
+	echo '<div class="title long">' . $title . '</div>';
 endif;
 echo '<div class="title">' . $title . '</div>';
 echo '<div class="value post-type">' . $post_type . '</div>';
