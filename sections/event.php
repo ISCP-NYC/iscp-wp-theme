@@ -17,6 +17,9 @@ $rsvp = get_field( 'rsvp', $id );
 $venue = get_field( 'venue_name', $id );
 $location = get_field( 'venue_location', $id );
 $time = get_field( 'time', $id );
+$opening_reception = new DateTime( get_field( 'opening_reception', $id ) );
+$opening_reception = $opening_reception->format('M d, Y');
+$opening_reception_hours = get_field( 'opening_reception_hours', $id );
 if( $page_columns ):
 	$event_classes .= ' ' . $page_columns;
 else:
@@ -165,6 +168,15 @@ $upcoming_events = new WP_Query( $upcoming_query );
 					if($location):
 						echo '<div class="bullet">' . $location . '</div>';
 					endif;
+				elseif( $event_type == 'exhibition' || $event_type == 'open-studios' ):
+					if( $opening_reception ):
+						echo '<div class="bullet">Opening Reception: ';
+						echo $opening_reception;
+						if( $opening_reception_hours ):
+							echo ', ' . $opening_reception_hours;
+						endif;
+						echo '</div>';
+					endif;
 				endif;
 				if( $rsvp ):
 					echo '<a href="' . $rsvp . '" class="link bullet" target="_blank">RSVP</a>';
@@ -189,10 +201,15 @@ $upcoming_events = new WP_Query( $upcoming_query );
 					$resident_id = $resident->ID;
 					$resident_permalink = get_permalink( $resident_id );
 					$resident_status = get_status( $resident_id );
-					echo '<div class="resident">';
-					echo '<a class="'. $resident_status .'" href="' . $resident_permalink . '">';
-					echo $resident_name;
-					echo '</a>';
+					$resident_bio = get_field( 'bio', $resident_id );
+					echo '<div class="resident '. $resident_status .'">';
+					if( $resident_bio ):
+						echo '<a href="' . $resident_permalink . '">';
+						echo $resident_name;
+						echo '</a>';
+					else:
+						echo $resident_name;
+					endif;
 					echo '</div>';
 				endforeach;
 				echo '</div>';
