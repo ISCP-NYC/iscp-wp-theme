@@ -108,7 +108,7 @@
         .option {
             width: 200px;
             display: inline-flex;
-            margin: 0 0 10px 0;
+            margin: 0 0 2px 0;
             @include small-fs;
             a {
                 padding-right: $small-fs;
@@ -118,7 +118,7 @@
                     height: $small-fs;
                     position: absolute;
                     top: 0;
-                    right: 0;
+                    right: -5px;
                     display: inline-block;
                     vertical-align: middle;
                     .icon {

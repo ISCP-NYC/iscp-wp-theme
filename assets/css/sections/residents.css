@@ -1,23 +1,23 @@
 /*
 Error: Undefined mixin 'width'.
-        on line 50 of /Users/studio/Desktop/WEB/iscp/wp-content/themes/iscp/assets/sass/sections/residents.scss, in `width'
-        from line 50 of /Users/studio/Desktop/WEB/iscp/wp-content/themes/iscp/assets/sass/sections/residents.scss
+        on line 51 of /Users/studio/Desktop/WEB/iscp/wp-content/themes/iscp/assets/sass/sections/residents.scss, in `width'
+        from line 51 of /Users/studio/Desktop/WEB/iscp/wp-content/themes/iscp/assets/sass/sections/residents.scss
 
-45: 					display: flex;
-46: 					.left {
-47: 						width: 70%;
-48: 					}
-49: 		            .right {
-50: 		            	@include width('30% - 5px');
-51: 		            	display: block;
-52: 		            	padding-left: 5px;
-53: 		            	text-align: right;
-54: 		            	.value {
-55: 		            		float: right;
+46: 					display: flex;
+47: 					.left {
+48: 						width: 70%;
+49: 					}
+50: 		            .right {
+51: 		            	@include width('30% - 5px');
+52: 		            	display: block;
+53: 		            	padding-left: 5px;
+54: 		            	text-align: right;
+55: 		            	.value {
+56: 		            		float: right;
 
 Backtrace:
-/Users/studio/Desktop/WEB/iscp/wp-content/themes/iscp/assets/sass/sections/residents.scss:50:in `width'
-/Users/studio/Desktop/WEB/iscp/wp-content/themes/iscp/assets/sass/sections/residents.scss:50
+/Users/studio/Desktop/WEB/iscp/wp-content/themes/iscp/assets/sass/sections/residents.scss:51:in `width'
+/Users/studio/Desktop/WEB/iscp/wp-content/themes/iscp/assets/sass/sections/residents.scss:51
 /Users/studio/.rvm/gems/ruby-2.2.1/gems/sass-3.4.21/lib/sass/tree/visitors/perform.rb:349:in `block in visit_mixin'
 /Users/studio/.rvm/gems/ruby-2.2.1/gems/sass-3.4.21/lib/sass/stack.rb:98:in `block in with_mixin'
 /Users/studio/.rvm/gems/ruby-2.2.1/gems/sass-3.4.21/lib/sass/stack.rb:115:in `with_frame'
@@ -126,4 +126,4 @@ Backtrace:
 body:before {
   white-space: pre;
   font-family: monospace;
-  content: "Error: Undefined mixin 'width'.\A         on line 50 of /Users/studio/Desktop/WEB/iscp/wp-content/themes/iscp/assets/sass/sections/residents.scss, in `width'\A         from line 50 of /Users/studio/Desktop/WEB/iscp/wp-content/themes/iscp/assets/sass/sections/residents.scss\A \A 45: 					display: flex;\A 46: 					.left {\A 47: 						width: 70%;\A 48: 					}\A 49: 		            .right {\A 50: 		            	@include width('30% - 5px');\A 51: 		            	display: block;\A 52: 		            	padding-left: 5px;\A 53: 		            	text-align: right;\A 54: 		            	.value {\A 55: 		            		float: right;"; }
+  content: "Error: Undefined mixin 'width'.\A         on line 51 of /Users/studio/Desktop/WEB/iscp/wp-content/themes/iscp/assets/sass/sections/residents.scss, in `width'\A         from line 51 of /Users/studio/Desktop/WEB/iscp/wp-content/themes/iscp/assets/sass/sections/residents.scss\A \A 46: 					display: flex;\A 47: 					.left {\A 48: 						width: 70%;\A 49: 					}\A 50: 		            .right {\A 51: 		            	@include width('30% - 5px');\A 52: 		            	display: block;\A 53: 		            	padding-left: 5px;\A 54: 		            	text-align: right;\A 55: 		            	.value {\A 56: 		            		float: right;"; }
