@@ -49,14 +49,19 @@ section#search, section#error {
 					.title {
 						width: calc(80% - 120px);
 						margin-right: 20px;
-						&.long {
-							width: calc(80% - 20px);
-						}
 					}
 					.post-type {
 						width: calc(20% - 20px);
 						justify-content: flex-end;
 						text-transform: capitalize;
+					}
+				}
+				&.nothumb {
+					.title {
+						width: calc(80% - 20px);	
+					}
+					.post-type {
+						width: 20%;
 					}
 				}
 			}

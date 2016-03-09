@@ -5,7 +5,7 @@
 	$slug = $post->post_name;
 ?>
 
-<section  <?php section_attr( $id, $slug, 'support about' ); ?>>
+<section  <?php section_attr( $id, $slug, 'about' ); ?>>
 	<?php get_template_part('partials/nav') ?>
 	<?php get_template_part('partials/side') ?>
 	<div class="content">

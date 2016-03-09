@@ -21,7 +21,8 @@ section#about {
 		width: 100%;
 		padding: 0 0 20px 0;
 		text-align: center;
-		@include small-fs;
+		margin-top: 5px;
+		@include medium-fs;
 	}
 	.info {
 		@include medium-fs;

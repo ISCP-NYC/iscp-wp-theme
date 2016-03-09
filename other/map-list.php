@@ -26,12 +26,17 @@ if( have_posts() ):
 		$url = get_permalink( $id );
 		$end_date = new DateTime( get_resident_end_date( $id ) );
 		$year = $end_date->format('Y');
+		$bio = get_field( 'bio', $resident_id );
 		echo '<div class="row shelf-item resident">';
 		echo '<div class="inner">';
 		echo '<div class="value name">';
-		echo '<a href="' . $url . '">';
-		echo $name;
-		echo '</a>';
+		if($bio):
+			echo '<a href="' . $url . '">';
+			echo $name;
+			echo '</a>';
+		else:
+			echo $name;
+		endif;
 		echo '</div>';
 		echo '<div class="value years">' . $year . '</div>';
 		echo '<div class="value sponsors">' . get_sponsors( $id ) . '</div>';

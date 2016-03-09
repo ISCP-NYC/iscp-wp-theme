@@ -118,6 +118,10 @@
 
 		get_template_part( 'sections/faq' );
 
+	elseif( $page_slug == 'internships' ):
+
+		get_template_part( 'sections/internships' );
+
 	elseif( $page_slug == 'greenroom'):
 
 		if (user_is_resident()):
