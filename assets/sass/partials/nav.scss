@@ -96,7 +96,7 @@ header.main {
 			&.residencies .sub-menu,
 			&.about .sub-menu {
 				height: calc(100% - 10px);
-				padding-top: 0px; 
+				padding-top: 0px;
 			}
 			.sub-menu {
 				width: calc(100% - 10px);
@@ -179,8 +179,9 @@ header.main {
 						height: $lock-icon;
 						display: inline-block;
 						.icon {
-							background-size: 80%;
+							background-size: 100%;
 							background-position: center;
+							left: -5px;
 							&.default {
 								background-image: url(../images/lock-orange.svg);
 							}

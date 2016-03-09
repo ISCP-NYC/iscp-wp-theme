@@ -1318,39 +1318,40 @@ section header.main nav .cell.greenroom .iconWrap .swap {
 }
 /* line 181, ../sass/partials/nav.scss */
 section header.main nav .cell.greenroom .iconWrap .swap .icon {
-  background-size: 80%;
+  background-size: 100%;
   background-position: center;
+  left: -5px;
 }
-/* line 184, ../sass/partials/nav.scss */
+/* line 185, ../sass/partials/nav.scss */
 section header.main nav .cell.greenroom .iconWrap .swap .icon.default {
   background-image: url(../images/lock-orange.svg);
 }
-/* line 187, ../sass/partials/nav.scss */
+/* line 188, ../sass/partials/nav.scss */
 section header.main nav .cell.greenroom .iconWrap .swap .icon.hover {
   opacity: 0;
   background-image: url(../images/lock-black.svg);
 }
 @media (max-width: 1040px) {
-  /* line 194, ../sass/partials/nav.scss */
+  /* line 195, ../sass/partials/nav.scss */
   section header.main nav .cell.greenroom .iconWrap .swap {
     width: 24px;
     height: 24px;
   }
-  /* line 197, ../sass/partials/nav.scss */
+  /* line 198, ../sass/partials/nav.scss */
   section header.main nav .cell.greenroom .iconWrap .swap .icon {
     margin-top: 3px;
   }
 }
-/* line 204, ../sass/partials/nav.scss */
+/* line 205, ../sass/partials/nav.scss */
 section header.main nav .cell.greenroom h1:hover .iconWrap .swap .icon.default {
   opacity: 0 !important;
 }
-/* line 207, ../sass/partials/nav.scss */
+/* line 208, ../sass/partials/nav.scss */
 section header.main nav .cell.greenroom h1:hover .iconWrap .swap .icon.hover {
   opacity: 1 !important;
 }
 @media (max-width: 500px) {
-  /* line 217, ../sass/partials/nav.scss */
+  /* line 218, ../sass/partials/nav.scss */
   section header.main nav {
     height: auto;
     position: fixed;
@@ -1358,7 +1359,7 @@ section header.main nav .cell.greenroom h1:hover .iconWrap .swap .icon.hover {
     padding: 0 !important;
     border-top: 10px solid #ff5000;
   }
-  /* line 223, ../sass/partials/nav.scss */
+  /* line 224, ../sass/partials/nav.scss */
   section header.main nav .cell {
     opacity: 0;
     width: 100% !important;
@@ -1370,7 +1371,7 @@ section header.main nav .cell.greenroom h1:hover .iconWrap .swap .icon.hover {
     border-bottom: 10px solid #ff5000;
     transition: opacity 100ms ease-in-out;
   }
-  /* line 233, ../sass/partials/nav.scss */
+  /* line 234, ../sass/partials/nav.scss */
   section header.main nav .cell .inner {
     width: 100%;
     height: auto;
@@ -1379,16 +1380,16 @@ section header.main nav .cell.greenroom h1:hover .iconWrap .swap .icon.hover {
     margin-right: 0 !important;
     border: 0 !important;
   }
-  /* line 240, ../sass/partials/nav.scss */
+  /* line 241, ../sass/partials/nav.scss */
   section header.main nav .cell .inner .overlay {
     padding: 0;
     left: 0 !important;
   }
-  /* line 243, ../sass/partials/nav.scss */
+  /* line 244, ../sass/partials/nav.scss */
   section header.main nav .cell .inner .overlay a {
     width: 100%;
   }
-  /* line 247, ../sass/partials/nav.scss */
+  /* line 248, ../sass/partials/nav.scss */
   section header.main nav .cell .inner .sub-menu {
     width: calc(100% - 20px);
     padding: 0 10px;
@@ -1396,41 +1397,41 @@ section header.main nav .cell.greenroom h1:hover .iconWrap .swap .icon.hover {
     height: auto;
     margin: 20px 0;
   }
-  /* line 255, ../sass/partials/nav.scss */
+  /* line 256, ../sass/partials/nav.scss */
   section header.main nav .cell.parent:hover .inner .overlay {
     display: block !important;
   }
-  /* line 258, ../sass/partials/nav.scss */
+  /* line 259, ../sass/partials/nav.scss */
   section header.main nav .cell.parent .overlay {
     height: auto;
     margin-top: 20px;
     position: relative;
   }
-  /* line 262, ../sass/partials/nav.scss */
+  /* line 263, ../sass/partials/nav.scss */
   section header.main nav .cell.parent .overlay a {
     position: relative;
   }
-  /* line 266, ../sass/partials/nav.scss */
+  /* line 267, ../sass/partials/nav.scss */
   section header.main nav .cell.search {
     display: table;
   }
-  /* line 268, ../sass/partials/nav.scss */
+  /* line 269, ../sass/partials/nav.scss */
   section header.main nav .cell.search .inner {
     width: 100%;
     display: table-cell;
     vertical-align: middle;
   }
-  /* line 272, ../sass/partials/nav.scss */
+  /* line 273, ../sass/partials/nav.scss */
   section header.main nav .cell.search .inner form {
     display: block;
   }
-  /* line 282, ../sass/partials/nav.scss */
+  /* line 283, ../sass/partials/nav.scss */
   section.open-nav header.main nav .cell {
     transition: opacity 100ms 500ms ease-in-out;
     opacity: 1;
   }
 }
-/* line 289, ../sass/partials/nav.scss */
+/* line 290, ../sass/partials/nav.scss */
 section .mobile.logo {
   width: 110px;
   height: 100px;
@@ -1440,27 +1441,27 @@ section .mobile.logo {
   z-index: 101;
   transition: transform 600ms cubic-bezier(0.645, 0.045, 0.355, 1), opacity 150ms 400ms ease-in-out;
 }
-/* line 297, ../sass/partials/nav.scss */
+/* line 298, ../sass/partials/nav.scss */
 section .mobile.logo .icon {
   background-size: 60px;
   background-position: center;
   background-repeat: no-repeat;
 }
-/* line 301, ../sass/partials/nav.scss */
+/* line 302, ../sass/partials/nav.scss */
 section .mobile.logo .icon.default {
   background-image: url(../images/logo-orange.svg);
 }
-/* line 304, ../sass/partials/nav.scss */
+/* line 305, ../sass/partials/nav.scss */
 section .mobile.logo .icon.hover {
   background-image: url(../images/logo-black.svg);
 }
 @media (min-width: 768px) {
-  /* line 289, ../sass/partials/nav.scss */
+  /* line 290, ../sass/partials/nav.scss */
   section .mobile.logo {
     display: none;
   }
 }
-/* line 312, ../sass/partials/nav.scss */
+/* line 313, ../sass/partials/nav.scss */
 section .nav-toggle {
   width: 30px;
   height: 30px;
@@ -1471,59 +1472,59 @@ section .nav-toggle {
   cursor: pointer;
   transition: transform 600ms cubic-bezier(0.645, 0.045, 0.355, 1), opacity 200ms ease-in-out;
 }
-/* line 321, ../sass/partials/nav.scss */
+/* line 322, ../sass/partials/nav.scss */
 section .nav-toggle .icon {
   background-size: 30px;
   background-position: top;
   background-repeat: no-repeat;
 }
-/* line 326, ../sass/partials/nav.scss */
+/* line 327, ../sass/partials/nav.scss */
 section .nav-toggle .default {
   background-image: url(../images/burger-orange.svg);
 }
-/* line 329, ../sass/partials/nav.scss */
+/* line 330, ../sass/partials/nav.scss */
 section .nav-toggle .hover {
   background-image: url(../images/burger-black.svg);
 }
 @media (max-width: 900px) {
-  /* line 312, ../sass/partials/nav.scss */
+  /* line 313, ../sass/partials/nav.scss */
   section .nav-toggle {
     right: 35px;
   }
 }
-/* line 337, ../sass/partials/nav.scss */
+/* line 338, ../sass/partials/nav.scss */
 section:not(.open-nav) header.main {
   cursor: pointer;
 }
-/* line 342, ../sass/partials/nav.scss */
+/* line 343, ../sass/partials/nav.scss */
 section.tease-nav header.main {
   border-color: #13172F;
   transition: transform 300ms ease-out, border-color 150ms ease-in-out;
   transform: translateY(calc(-100% + 120px));
 }
-/* line 348, ../sass/partials/nav.scss */
+/* line 349, ../sass/partials/nav.scss */
 section.tease-nav .nav-toggle .default {
   opacity: 0;
 }
-/* line 351, ../sass/partials/nav.scss */
+/* line 352, ../sass/partials/nav.scss */
 section.tease-nav .nav-toggle .hover {
   opacity: 1;
 }
-/* line 357, ../sass/partials/nav.scss */
+/* line 358, ../sass/partials/nav.scss */
 section.open-nav header.main {
   transition-duration: 600ms;
   transform: translateY(0) !important;
 }
-/* line 360, ../sass/partials/nav.scss */
+/* line 361, ../sass/partials/nav.scss */
 section.open-nav header.main nav {
   transform: translateY(0) !important;
 }
-/* line 365, ../sass/partials/nav.scss */
+/* line 366, ../sass/partials/nav.scss */
 section.open-nav .nav-toggle .icon {
   background-position: bottom;
 }
 @media (max-width: 900px) {
-  /* line 372, ../sass/partials/nav.scss */
+  /* line 373, ../sass/partials/nav.scss */
   section.open-nav .mobile.logo {
     opacity: 0;
     transform: translateY(100vh) !important;
@@ -1531,21 +1532,21 @@ section.open-nav .nav-toggle .icon {
   }
 }
 @media (max-width: 500px) {
-  /* line 372, ../sass/partials/nav.scss */
+  /* line 373, ../sass/partials/nav.scss */
   section.open-nav .mobile.logo {
     opacity: 1;
     transform: none !important;
   }
 }
-/* line 387, ../sass/partials/nav.scss */
+/* line 388, ../sass/partials/nav.scss */
 section.hide-header header.main:not(.static) {
   transform: translateY(calc(-100% - 50px)) !important;
 }
-/* line 391, ../sass/partials/nav.scss */
+/* line 392, ../sass/partials/nav.scss */
 section.hide-header .nav-toggle {
   transform: translateY(-250px) !important;
 }
-/* line 394, ../sass/partials/nav.scss */
+/* line 395, ../sass/partials/nav.scss */
 section.hide-header .mobile.logo {
   transform: translateY(-250px) !important;
 }
