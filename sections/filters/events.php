@@ -9,8 +9,8 @@ $year_param = $query_vars['date'];
 		$event_types = array( 'exhibition', 'off-site-project', 'iscp-talk', 'open-studios', 'events' );
 		foreach( $event_types as $event_type ):
 			$filter_url = query_url( 'type', $event_type, $page_url );
-			// $event_type_count = get_event_count( 'type', $event_type );
-			// if( $event_type_count != 0 ):
+			$event_type_count = get_event_count( 'type', $event_type );
+			if( $event_type_count != 0 ):
 				if( $event_type == $type_param ):
 					$selected = 'selected';
 				else:
@@ -29,7 +29,7 @@ $year_param = $query_vars['date'];
 				echo '</div>';
 				echo '</a>';
 				echo '</div>';
-			// endif;
+			endif;
 		endforeach;
 		?>
 	</div>
@@ -38,13 +38,13 @@ $year_param = $query_vars['date'];
 <div class="filter-list sub year <?php echo $slug ?>" data-filter="year">
 	<div class="options">
 		<?php
-		$start_date = 1994;
-		$end_date = date( "Y" );
+		$start_date = 2010;
+		$end_date = date( 'Y' );
 		$years = array_reverse( range( $start_date, $end_date ) );
 		foreach( $years as $year ): 
 			$filter_url = query_url( 'date', $year, $page_url );
-			// $year_count = get_event_count( 'year', $year );
-			// if( $year_count != 0 ):
+			$year_count = get_event_count( 'year', $year );
+			if( $year_count != 0 ):
 				if( $year == $year_param ):
 					$selected = 'selected';
 				else:
@@ -62,7 +62,7 @@ $year_param = $query_vars['date'];
 				echo '</div>';
 				echo '</a>';
 				echo '</div>';
-			// endif;
+			endif;
 		endforeach;
 		?>
 	</div>

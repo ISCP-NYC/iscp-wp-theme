@@ -1,20 +1,20 @@
 <?php 
-	global $post;
-	$id = $post->ID;
-	$title = get_post( $post )->post_title;
-	$slug = get_post( $post )->post_name;
-	$faq_id = get_page_by_path('apply/faq')->ID;
-	$faq_link = get_permalink( $faq_id );
-	$programs_link = get_permalink( get_page_by_path('residency-programs')->ID );
-	$residency_programs_query = array(
-		'post_type' => 'page',
-		'post__not_in' => array( $faq_id ),
-		'child_of' => get_page_by_path('apply')->ID,
-		'post_status' => 'publish',
-		'orderby' => 'menu_order',
-		'sort_order' => 'desc',
-	); 
-	$residency_programs = get_pages( $residency_programs_query ); 
+global $post;
+$id = $post->ID;
+$title = get_post( $post )->post_title;
+$slug = get_post( $post )->post_name;
+$faq_id = get_page_by_path('apply/faq')->ID;
+$faq_link = get_permalink( $faq_id );
+$programs_link = get_permalink( get_page_by_path('residency-programs')->ID );
+$residency_programs_query = array(
+	'post_type' => 'page',
+	'post__not_in' => array( $faq_id ),
+	'child_of' => get_page_by_path('apply')->ID,
+	'post_status' => 'publish',
+	'orderby' => 'menu_order',
+	'sort_order' => 'desc',
+); 
+$residency_programs = get_pages( $residency_programs_query ); 
 ?>
 <section <?php section_attr( $id, $slug, 'apply' ); ?>>
 	<?php get_template_part('partials/nav') ?>
@@ -146,8 +146,10 @@
 				<?php endif; ?>
 			</div>
 			<div class="links">
-				<a class="bullet small" href="<?php echo $faq_link ?>">Read more about this Residency Program</a>
-				<a class="bullet small" href="<?php echo $programs_link ?>">Application FAQ</a>
+				<?php if( $slug == 'international' ): ?>
+					<a class="bullet small" href="<?php echo $faq_link ?>">Application FAQ</a>
+				<? endif; ?>
+				<a class="bullet small" href="<?php echo $programs_link . '#' . $slug ?>">Read more about this Residency Program</a>
 			</div>
 		</div>
 		<?php wp_reset_postdata(); ?>

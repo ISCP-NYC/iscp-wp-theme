@@ -1,6 +1,7 @@
 .filter {
     width: calc(100% - 40px);
     padding: 0 20px;
+    margin-bottom: 50px;
     @extend .noselect;
     .select {
         font-size: $small-fs;
@@ -103,6 +104,7 @@
     transition: height 500ms cubic-bezier(0.645, 0.045, 0.355, 1);
     position: relative;
     .options {
+        padding-top: 20px;
         column-width: 200px;
         column-gap: 10px;
         .option {
@@ -175,8 +177,10 @@
         transition: box-shadow 300ms 0ms cubic-bezier(0.645, 0.045, 0.355, 1);
         box-shadow: inset 0px -100px 45px -50px $white;
     }
-    &.show::before {
-        transition: box-shadow 500ms 200ms cubic-bezier(0.645, 0.045, 0.355, 1);
-        box-shadow: inset 0px 0px 45px -50px $white;
+    &.show {
+        &::before {
+            transition: box-shadow 500ms 200ms cubic-bezier(0.645, 0.045, 0.355, 1);
+            box-shadow: inset 0px 0px 45px -50px $white;
+        }
     }
 }

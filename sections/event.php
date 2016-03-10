@@ -249,12 +249,14 @@ $upcoming_events = new WP_Query( $upcoming_query );
 		
 		<?php 
 		$related = get_field( 'related' );
-		usort($related, function($a, $b) {
-		   return strcasecmp( 
-            	get_field( 'start_date', $b->ID ), 
-            	get_field( 'start_date', $a->ID ) 
-        	);
-		});
+		if( $related ):
+			usort($related, function($a, $b) {
+			   return strcasecmp( 
+	            	get_field( 'start_date', $b->ID ), 
+	            	get_field( 'start_date', $a->ID ) 
+	        	);
+			});
+		endif;
 
 		if( $related || $upcoming_events ):
 			echo '<div class="bottom-modules">';

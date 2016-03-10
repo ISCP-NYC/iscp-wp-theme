@@ -135,7 +135,8 @@ endif;
 					$event_id = $event->ID;
 					$event_name =  get_the_title( $event_id );
 					$event_url =  get_the_permalink( $event_id );
-					echo '<a class="event" href="' . $event_url . '">';
+					$event_status = get_event_status( $event_id );
+					echo '<a class="' . $event_status . ' event" href="' . $event_url . '">';
 					echo '<div class="name">' . $event_name . '</div>';
 					echo '<div class="date">' . get_event_date( $event_id ) . '</div>';
 					echo '</a>';
@@ -175,7 +176,7 @@ endif;
 
 		<?php
 		if( is_ground_floor( $resident_id ) ):
-			$relation_title = '<h4>Ground Floor Residents</h4>';
+			$relation_title = 'Ground Floor Residents';
 			$meta_query = array( array(
 				'key' => 'residency_program',
 				'value' => 'ground_floor',
@@ -208,7 +209,7 @@ endif;
 				);
 				array_push( $meta_query, $country_query );
 			}
-			$relation_title = '<h4>Residents from ' . $country_names . '</h4>';
+			$relation_title = 'Residents from ' . $country_names;
 		endif;
 		$residents_query = array(
 			'post_type'	=> 'resident',
@@ -225,7 +226,7 @@ endif;
 		$residents = new WP_Query( $residents_query );
 		$GLOBALS['wp_query'] = $residents;
 		if( $residents->have_posts() && $meta_query ):
-			echo '<div class="relations border-top">';
+			echo '<div class="relations border-top module">';
 			echo '<h3 class="title">' . $relation_title . '</h3>';
 			echo '<div class="inner residents shelves grid">';
 			while ( $residents->have_posts() ) : 

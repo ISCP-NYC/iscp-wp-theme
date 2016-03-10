@@ -7,7 +7,7 @@ $page_url = get_the_permalink();
 	<?php get_template_part('partials/side') ?>
 	<div class="content">
 		<div class="wrapper upcoming">
-			<h2 class="title head">Upcoming Events &amp; Exhibitions</h2>
+			<h2 class="title head">Current and Upcoming Events &amp; Exhibitions</h2>
 			<div class="events shelves grid items residents upcoming">
 				<?php 
 				$GLOBALS['events_section'] = 'upcoming';

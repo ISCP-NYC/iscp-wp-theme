@@ -90,8 +90,7 @@ $home_id = get_page_by_path( 'home' )->ID;
 		<?php
 		$image_slider = get_field( 'image_slider', $home_id );
 		if( $image_slider ):
-			echo '<div class="module">';
-			echo '<div class="image_slider gallery">';
+			echo '<div class="module image_slider gallery">';
 			echo '<div class="cursor"></div>';
 			if( count( $image_slider ) > 1 ):
 				echo '<div class="left arrow swap">';
@@ -123,7 +122,6 @@ $home_id = get_page_by_path( 'home' )->ID;
 		        echo '</div>';
 		        echo '</div>';
 			endwhile;
-			echo '</div>';
 			echo '</div>';
 			echo '</div>';
 		endif;

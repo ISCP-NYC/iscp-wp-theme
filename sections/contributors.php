@@ -40,9 +40,9 @@
 								$country_id = $country->ID;
 								$country_slug = $country->post_name;
 								$country_title = $country->post_title;
-								// $country_count = get_contributor_count( 'country', $country_id, $page_query );
+								$country_count = get_contributor_count( 'country', $country_id, $page_query );
 								$filter_url = query_url( 'from', $country_slug, $page_url, $short_slug );
-								// if( $country_count != 0 ):
+								if( $country_count != 0 ):
 									if( $country_param == $country_slug ):
 										$selected = ' selected';
 									else:
@@ -60,7 +60,7 @@
 									echo '</div>';
 									echo '</a>';
 									echo '</div>';
-								// endif;
+								endif;
 							endforeach;
 							?>
 						</div>
