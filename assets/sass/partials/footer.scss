@@ -3,18 +3,24 @@ footer {
 	position: relative;
 	margin-top: 30px;
 	padding-top: 30px;
+	@include xsmall {
+		padding-top: 40px;
+	}
 	background: $orange;
 	color: $white;
 	@include small-fs;
 	a {
 		color: $white;
 	}
-	.wrapper {	
+	.wrapper {
 	    width: calc(100% - 280px);
 	    height: calc(100% - 260px);
 	    margin-left: 120px;
 	    overflow-y: hidden;
 	    padding: 0 10px;
+			@include xsmall {
+				padding: 0px;
+			}
 	    border-width: 0 10px;
 	    border-color: #fff;
 	    border-style: solid;
@@ -146,12 +152,16 @@ footer {
 			border-width: 0;
 			.bottom {
 				height: auto;
+				border-top: 8px solid $white;
+				width: calc(100% - 20px);
+				margin: auto;
 				.half {
 					width: 100%;
 					height: auto;
-					margin-top: 10px;
+					margin-top: 20px;
 					&:last-child {
-						margin-bottom: 10px;
+						margin-top: 0px;
+						margin-bottom: 20px;
 					}
 				}
 			}
