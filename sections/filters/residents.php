@@ -26,9 +26,9 @@ $type_param = $query_vars['type'];
 		$country_id = $country->ID;
 		$country_slug = $country->post_name;
 		$country_title = $country->post_title;
-		$country_count = get_resident_count( 'country', $country_id, $page_query );
+		// $country_count = get_resident_count( 'country', $country_id, $page_query );
 		$filter_url = query_url( 'from', $country_slug, $page_url, $short_slug );
-		if( $country_count != 0 ):
+		// if( $country_count != 0 ):
 			if( $country_param == $country_slug ):
 				$selected = ' selected';
 			else:
@@ -37,16 +37,16 @@ $type_param = $query_vars['type'];
 			echo '<div class="option' . $selected . '">';
 			echo '<a href="' . $filter_url . '" data-value="' . $country_slug . '">';
 			echo $country_title;
-			echo ' (<span class="count">';
-			echo $country_count;
-			echo '</span>)';
+			// echo ' (<span class="count">';
+			// echo $country_count;
+			// echo '</span>)';
 			echo '<div class="swap">';
 			echo '<div class="icon default"></div>';
 			echo '<div class="icon hover"></div>';
 			echo '</div>';
 			echo '</a>';
 			echo '</div>';
-		endif;
+		// endif;
 	endforeach;
 	?>
 	</div>
@@ -59,9 +59,9 @@ $type_param = $query_vars['type'];
 	$end_date = date( "Y" );
 	$years = array_reverse( range( $start_date, $end_date ) );
 	foreach( $years as $year ): 
-		$year_count = get_resident_count( 'year', $year, $page_query );
+		// $year_count = get_resident_count( 'year', $year, $page_query );
 		$filter_url = query_url( 'date', $year, $page_url, $short_slug );
-		if( $year_count  != 0 ):
+		// if( $year_count  != 0 ):
 			if( $year_param == $year ):
 				$selected = ' selected';
 			else:
@@ -70,16 +70,16 @@ $type_param = $query_vars['type'];
 			echo '<div class="option' . $selected . '">';
 			echo '<a href="' . $filter_url . '" data-value="' . $year . '">';
 			echo $year;
-			echo ' (<span class="count">';
-			echo $year_count;
-			echo '</span>)';
+			// echo ' (<span class="count">';
+			// echo $year_count;
+			// echo '</span>)';
 			echo '<div class="swap">';
 			echo '<div class="icon default"></div>';
 			echo '<div class="icon hover"></div>';
 			echo '</div>';
 			echo '</a>';
 			echo '</div>';
-		endif;
+		// endif;
 	endforeach;
 	?>
 	</div>
@@ -94,10 +94,10 @@ $type_param = $query_vars['type'];
 			'ground_floor'
 		);
 		foreach( $residency_programs as $program ): 
-			$program_count = get_resident_count( 'program', $program, $page_query );
+			// $program_count = get_resident_count( 'program', $program, $page_query );
 			$filter_url = query_url( 'program', $program, $page_url, $short_slug );
 			$program_title = get_program_title( $program );
-			if( $program_count != 0 ):
+			// if( $program_count != 0 ):
 				if( $program_param == $program ):
 					$selected = ' selected';
 				else: 
@@ -106,16 +106,16 @@ $type_param = $query_vars['type'];
 				echo '<div class="option' . $selected . '">';
 				echo '<a href="' . $filter_url . '" data-value="' . $program . '">';
 				echo $program_title;
-				echo ' (<span class="count">';
-				echo $program_count;
-				echo '</span>)';
+				// echo ' (<span class="count">';
+				// echo $program_count;
+				// echo '</span>)';
 				echo '<div class="swap">';
 				echo '<div class="icon default"></div>';
 				echo '<div class="icon hover"></div>';
 				echo '</div>';
 				echo '</a>';
 				echo '</div>';
-			endif;
+			// endif;
 		endforeach;
 		?>
 	</div>
@@ -129,10 +129,10 @@ $type_param = $query_vars['type'];
 			'curator'
 		);
 		foreach( $resident_types as $type ): 
-			$type_count = get_resident_count( 'type', $type, $page_query );
+			// $type_count = get_resident_count( 'type', $type, $page_query );
 			$filter_url = query_url( 'type', $type, $page_url, $short_slug );
 			$type_title = ucwords( $type );
-			if( $type_count != 0 ):
+			// if( $type_count != 0 ):
 				if( $type_param == $type ):
 					$selected = ' selected';
 				else: 
@@ -141,16 +141,16 @@ $type_param = $query_vars['type'];
 				echo '<div class="option' . $selected . '">';
 				echo '<a href="' . $filter_url . '" data-value="' . $type . '">';
 				echo $type_title;
-				echo ' (<span class="count">';
-				echo $type_count;
-				echo '</span>)';
+				// echo ' (<span class="count">';
+				// echo $type_count;
+				// echo '</span>)';
 				echo '<div class="swap">';
 				echo '<div class="icon default"></div>';
 				echo '<div class="icon hover"></div>';
 				echo '</div>';
 				echo '</a>';
 				echo '</div>';
-			endif;
+			// endif;
 		endforeach;
 		?>
 	</div>

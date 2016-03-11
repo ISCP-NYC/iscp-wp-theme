@@ -66,7 +66,9 @@ elseif( $post_type == 'sponsor' || $page_type == 'sponsor' || $post_type == 'res
 		'order' => 'DESC'
 	);
 endif;
-$country_param_obj = get_page_by_path( $country_param, OBJECT, 'country' );
-$country_param_title = $country_param_obj->post_title;
-$country_param_id = $country_param_obj->ID;
+if($country_param):
+	$country_param_obj = get_page_by_path( $country_param, OBJECT, 'country' );
+	$country_param_title = $country_param_obj->post_title;
+	$country_param_id = $country_param_obj->ID;
+endif;
 ?>

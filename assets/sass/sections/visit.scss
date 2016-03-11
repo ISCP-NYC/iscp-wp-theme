@@ -31,8 +31,8 @@ section#visit {
 				margin: auto;
 				.step {
 					@include medium-fs;
-					// list-style-type:decimal;
-					// padding-left: 20px;
+					list-style-type:decimal;
+					padding-left: 20px;
 					margin: 0 0 20px 30px;
 				}
 			}

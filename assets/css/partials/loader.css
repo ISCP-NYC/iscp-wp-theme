@@ -1,6 +1,6 @@
 /*
 Error: Base-level rules cannot contain the parent-selector-referencing character '&'.
-        on line 1 of /Users/studio/Desktop/WEB/iscp/wp-content/themes/iscp/assets/sass/partials/loader.scss
+        on line 1 of /Users/traveler/Desktop/iscp/wp-content/themes/iscp/assets/sass/partials/loader.scss
 
 1: &.loading {
 2: 	.loader {
@@ -10,49 +10,47 @@ Error: Base-level rules cannot contain the parent-selector-referencing character
 6: }
 
 Backtrace:
-/Users/studio/Desktop/WEB/iscp/wp-content/themes/iscp/assets/sass/partials/loader.scss:1
-/Users/studio/.rvm/gems/ruby-2.2.1/gems/sass-3.4.21/lib/sass/selector/comma_sequence.rb:29:in `resolve_parent_refs'
-/Users/studio/.rvm/gems/ruby-2.2.1/gems/sass-3.4.21/lib/sass/tree/visitors/perform.rb:426:in `visit_rule'
-/Users/studio/.rvm/gems/ruby-2.2.1/gems/sass-3.4.21/lib/sass/tree/visitors/base.rb:36:in `visit'
-/Users/studio/.rvm/gems/ruby-2.2.1/gems/sass-3.4.21/lib/sass/tree/visitors/perform.rb:158:in `block in visit'
-/Users/studio/.rvm/gems/ruby-2.2.1/gems/sass-3.4.21/lib/sass/stack.rb:79:in `block in with_base'
-/Users/studio/.rvm/gems/ruby-2.2.1/gems/sass-3.4.21/lib/sass/stack.rb:115:in `with_frame'
-/Users/studio/.rvm/gems/ruby-2.2.1/gems/sass-3.4.21/lib/sass/stack.rb:79:in `with_base'
-/Users/studio/.rvm/gems/ruby-2.2.1/gems/sass-3.4.21/lib/sass/tree/visitors/perform.rb:158:in `visit'
-/Users/studio/.rvm/gems/ruby-2.2.1/gems/sass-3.4.21/lib/sass/tree/visitors/base.rb:52:in `block in visit_children'
-/Users/studio/.rvm/gems/ruby-2.2.1/gems/sass-3.4.21/lib/sass/tree/visitors/base.rb:52:in `map'
-/Users/studio/.rvm/gems/ruby-2.2.1/gems/sass-3.4.21/lib/sass/tree/visitors/base.rb:52:in `visit_children'
-/Users/studio/.rvm/gems/ruby-2.2.1/gems/sass-3.4.21/lib/sass/tree/visitors/perform.rb:167:in `block in visit_children'
-/Users/studio/.rvm/gems/ruby-2.2.1/gems/sass-3.4.21/lib/sass/tree/visitors/perform.rb:179:in `with_environment'
-/Users/studio/.rvm/gems/ruby-2.2.1/gems/sass-3.4.21/lib/sass/tree/visitors/perform.rb:166:in `visit_children'
-/Users/studio/.rvm/gems/ruby-2.2.1/gems/sass-3.4.21/lib/sass/tree/visitors/base.rb:36:in `block in visit'
-/Users/studio/.rvm/gems/ruby-2.2.1/gems/sass-3.4.21/lib/sass/tree/visitors/perform.rb:186:in `visit_root'
-/Users/studio/.rvm/gems/ruby-2.2.1/gems/sass-3.4.21/lib/sass/tree/visitors/base.rb:36:in `visit'
-/Users/studio/.rvm/gems/ruby-2.2.1/gems/sass-3.4.21/lib/sass/tree/visitors/perform.rb:157:in `visit'
-/Users/studio/.rvm/gems/ruby-2.2.1/gems/sass-3.4.21/lib/sass/tree/visitors/perform.rb:8:in `visit'
-/Users/studio/.rvm/gems/ruby-2.2.1/gems/sass-3.4.21/lib/sass/tree/root_node.rb:36:in `css_tree'
-/Users/studio/.rvm/gems/ruby-2.2.1/gems/sass-3.4.21/lib/sass/tree/root_node.rb:20:in `render'
-/Users/studio/.rvm/gems/ruby-2.2.1/gems/sass-3.4.21/lib/sass/engine.rb:278:in `render'
-/Users/studio/.rvm/gems/ruby-2.2.1/gems/sass-3.4.21/lib/sass/plugin/compiler.rb:492:in `update_stylesheet'
-/Users/studio/.rvm/gems/ruby-2.2.1/gems/sass-3.4.21/lib/sass/plugin/compiler.rb:215:in `block in update_stylesheets'
-/Users/studio/.rvm/gems/ruby-2.2.1/gems/sass-3.4.21/lib/sass/plugin/compiler.rb:209:in `each'
-/Users/studio/.rvm/gems/ruby-2.2.1/gems/sass-3.4.21/lib/sass/plugin/compiler.rb:209:in `update_stylesheets'
-/Users/studio/.rvm/gems/ruby-2.2.1/gems/sass-3.4.21/lib/sass/plugin/compiler.rb:293:in `watch'
-/Users/studio/.rvm/gems/ruby-2.2.1/gems/compass-1.0.3/lib/compass/sass_compiler.rb:46:in `watch!'
-/Users/studio/.rvm/gems/ruby-2.2.1/gems/compass-1.0.3/lib/compass/commands/watch_project.rb:41:in `perform'
-/Users/studio/.rvm/gems/ruby-2.2.1/gems/compass-1.0.3/lib/compass/commands/base.rb:18:in `execute'
-/Users/studio/.rvm/gems/ruby-2.2.1/gems/compass-1.0.3/lib/compass/commands/project_base.rb:19:in `execute'
-/Users/studio/.rvm/gems/ruby-2.2.1/gems/compass-1.0.3/lib/compass/exec/sub_command_ui.rb:43:in `perform!'
-/Users/studio/.rvm/gems/ruby-2.2.1/gems/compass-1.0.3/lib/compass/exec/sub_command_ui.rb:15:in `run!'
-/Users/studio/.rvm/gems/ruby-2.2.1/gems/compass-1.0.3/bin/compass:30:in `block in <top (required)>'
-/Users/studio/.rvm/gems/ruby-2.2.1/gems/compass-1.0.3/bin/compass:44:in `call'
-/Users/studio/.rvm/gems/ruby-2.2.1/gems/compass-1.0.3/bin/compass:44:in `<top (required)>'
-/Users/studio/.rvm/gems/ruby-2.2.1/bin/compass:22:in `load'
-/Users/studio/.rvm/gems/ruby-2.2.1/bin/compass:22:in `<main>'
-/Users/studio/.rvm/gems/ruby-2.2.1/bin/ruby_executable_hooks:15:in `eval'
-/Users/studio/.rvm/gems/ruby-2.2.1/bin/ruby_executable_hooks:15:in `<main>'
+/Users/traveler/Desktop/iscp/wp-content/themes/iscp/assets/sass/partials/loader.scss:1
+/Library/Ruby/Gems/2.0.0/gems/sass-3.4.21/lib/sass/selector/comma_sequence.rb:29:in `resolve_parent_refs'
+/Library/Ruby/Gems/2.0.0/gems/sass-3.4.21/lib/sass/tree/visitors/perform.rb:426:in `visit_rule'
+/Library/Ruby/Gems/2.0.0/gems/sass-3.4.21/lib/sass/tree/visitors/base.rb:36:in `visit'
+/Library/Ruby/Gems/2.0.0/gems/sass-3.4.21/lib/sass/tree/visitors/perform.rb:158:in `block in visit'
+/Library/Ruby/Gems/2.0.0/gems/sass-3.4.21/lib/sass/stack.rb:79:in `block in with_base'
+/Library/Ruby/Gems/2.0.0/gems/sass-3.4.21/lib/sass/stack.rb:115:in `with_frame'
+/Library/Ruby/Gems/2.0.0/gems/sass-3.4.21/lib/sass/stack.rb:79:in `with_base'
+/Library/Ruby/Gems/2.0.0/gems/sass-3.4.21/lib/sass/tree/visitors/perform.rb:158:in `visit'
+/Library/Ruby/Gems/2.0.0/gems/sass-3.4.21/lib/sass/tree/visitors/base.rb:52:in `block in visit_children'
+/Library/Ruby/Gems/2.0.0/gems/sass-3.4.21/lib/sass/tree/visitors/base.rb:52:in `map'
+/Library/Ruby/Gems/2.0.0/gems/sass-3.4.21/lib/sass/tree/visitors/base.rb:52:in `visit_children'
+/Library/Ruby/Gems/2.0.0/gems/sass-3.4.21/lib/sass/tree/visitors/perform.rb:167:in `block in visit_children'
+/Library/Ruby/Gems/2.0.0/gems/sass-3.4.21/lib/sass/tree/visitors/perform.rb:179:in `with_environment'
+/Library/Ruby/Gems/2.0.0/gems/sass-3.4.21/lib/sass/tree/visitors/perform.rb:166:in `visit_children'
+/Library/Ruby/Gems/2.0.0/gems/sass-3.4.21/lib/sass/tree/visitors/base.rb:36:in `block in visit'
+/Library/Ruby/Gems/2.0.0/gems/sass-3.4.21/lib/sass/tree/visitors/perform.rb:186:in `visit_root'
+/Library/Ruby/Gems/2.0.0/gems/sass-3.4.21/lib/sass/tree/visitors/base.rb:36:in `visit'
+/Library/Ruby/Gems/2.0.0/gems/sass-3.4.21/lib/sass/tree/visitors/perform.rb:157:in `visit'
+/Library/Ruby/Gems/2.0.0/gems/sass-3.4.21/lib/sass/tree/visitors/perform.rb:8:in `visit'
+/Library/Ruby/Gems/2.0.0/gems/sass-3.4.21/lib/sass/tree/root_node.rb:36:in `css_tree'
+/Library/Ruby/Gems/2.0.0/gems/sass-3.4.21/lib/sass/tree/root_node.rb:20:in `render'
+/Library/Ruby/Gems/2.0.0/gems/sass-3.4.21/lib/sass/engine.rb:278:in `render'
+/Library/Ruby/Gems/2.0.0/gems/sass-3.4.21/lib/sass/plugin/compiler.rb:492:in `update_stylesheet'
+/Library/Ruby/Gems/2.0.0/gems/sass-3.4.21/lib/sass/plugin/compiler.rb:215:in `block in update_stylesheets'
+/Library/Ruby/Gems/2.0.0/gems/sass-3.4.21/lib/sass/plugin/compiler.rb:209:in `each'
+/Library/Ruby/Gems/2.0.0/gems/sass-3.4.21/lib/sass/plugin/compiler.rb:209:in `update_stylesheets'
+/Library/Ruby/Gems/2.0.0/gems/sass-3.4.21/lib/sass/plugin/compiler.rb:293:in `watch'
+/Library/Ruby/Gems/2.0.0/gems/compass-1.0.3/lib/compass/sass_compiler.rb:46:in `watch!'
+/Library/Ruby/Gems/2.0.0/gems/compass-1.0.3/lib/compass/commands/watch_project.rb:41:in `perform'
+/Library/Ruby/Gems/2.0.0/gems/compass-1.0.3/lib/compass/commands/base.rb:18:in `execute'
+/Library/Ruby/Gems/2.0.0/gems/compass-1.0.3/lib/compass/commands/project_base.rb:19:in `execute'
+/Library/Ruby/Gems/2.0.0/gems/compass-1.0.3/lib/compass/exec/sub_command_ui.rb:43:in `perform!'
+/Library/Ruby/Gems/2.0.0/gems/compass-1.0.3/lib/compass/exec/sub_command_ui.rb:15:in `run!'
+/Library/Ruby/Gems/2.0.0/gems/compass-1.0.3/bin/compass:30:in `block in <top (required)>'
+/Library/Ruby/Gems/2.0.0/gems/compass-1.0.3/bin/compass:44:in `call'
+/Library/Ruby/Gems/2.0.0/gems/compass-1.0.3/bin/compass:44:in `<top (required)>'
+/usr/bin/compass:23:in `load'
+/usr/bin/compass:23:in `<main>'
 */
 body:before {
   white-space: pre;
   font-family: monospace;
-  content: "Error: Base-level rules cannot contain the parent-selector-referencing character '&'.\A         on line 1 of /Users/studio/Desktop/WEB/iscp/wp-content/themes/iscp/assets/sass/partials/loader.scss\A \A 1: &.loading {\A 2: 	.loader {\A 3: 		opacity: 1;\A 4: 		transition-delay: 200ms;\A 5: 	}\A 6: }"; }
+  content: "Error: Base-level rules cannot contain the parent-selector-referencing character '&'.\A         on line 1 of /Users/traveler/Desktop/iscp/wp-content/themes/iscp/assets/sass/partials/loader.scss\A \A 1: &.loading {\A 2: 	.loader {\A 3: 		opacity: 1;\A 4: 		transition-delay: 200ms;\A 5: 	}\A 6: }"; }

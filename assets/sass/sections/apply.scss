@@ -4,17 +4,17 @@ section.apply {
 	}
 	.program {
 		.links {
-			display: none;
-			width: 33.333%;
+			width: calc(25% - 35px);
+			padding: 0 20px 0 15px;
 			float: left;
-			.bullet {
-				display: inline;
-			}
-			@include small {
-
+			a {
+				display: block;
 			}
 		}
 		.info {
+			width: calc(75% - 35px);
+			padding: 0 15px 30px 20px;
+			float: left;
 			h3.title {
 				margin-top: 30px;
 			}
@@ -56,7 +56,19 @@ section.apply {
 				}
 			}
 		}
+		@include small {
+			.links, .info {
+				width: calc(100% - 40px);
+				padding: 0 20px;
+				float: none;
+			}
+			.links {
+				margin-top: 20px;
+			}
+		}
 		.filter {
+			width: 100%;
+			padding: 0;
 			span {
 				@include small-fs;
 				float: left;

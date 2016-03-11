@@ -27,13 +27,8 @@ endif;
 		<header class="sub">
 			<div class="left">
 				<?php
-				if($country):
-					$country_url = $past_residents_url . '?filter=past&from=' . $country_slug;
-					echo '<h2>';
-					echo '<a href="' . $country_url . '">';
-					echo $country_title;
-					echo '</a>';
-					echo '</h2>';
+				if($countries_array):
+					echo $countries;
 				endif;
 				?>
 			</div>
@@ -120,7 +115,11 @@ endif;
 			<?php
 			$events = get_posts(array(
 				'post_type' => 'event',
+				'orderby' => 'meta_value',
+				'order' => 'DESC',
+				'post_status' => 'publish',
 				'meta_query' => array(
+					array( 'key' => 'start_date' ),
 					array(
 						'key' => 'residents',
 						'value' => '"' . $resident_id . '"',
@@ -195,9 +194,17 @@ endif;
 				endif;
 				$country_names .= $country_name;
 				$country_query = array(
-					'key' => 'country',
-					'value' => $country_id,
-					'compare' => 'LIKE'
+					'relation' => 'AND',
+					array(
+						'key' => 'country',
+						'value' => $country_id,
+						'compare' => 'LIKE'
+					),
+					array(
+						'key' => 'residency_program',
+						'value' => 'international',
+						'compare' => 'LIKE'
+					)
 				);
 				array_push( $meta_query, $country_query );
 			}
@@ -206,8 +213,14 @@ endif;
 		$residents_query = array(
 			'post_type'	=> 'resident',
 			'posts_per_page' => 3,
+			'post_status' => 'publish',
 			'post__not_in' => array( $resident_id ),
-			'meta_query' => $meta_query
+			'orderby' => 'meta_value',
+			'order' => 'DESC',
+			'meta_query' => array(
+				array( 'key' => 'residency_dates_0_start_date' ),
+				$meta_query
+			)
 		);
 		$residents = new WP_Query( $residents_query );
 		$GLOBALS['wp_query'] = $residents;

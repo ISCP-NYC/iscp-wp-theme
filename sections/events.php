@@ -22,7 +22,8 @@ $page_url = get_the_permalink();
 					<div class="select link dropdown type" data-filter="type" data-slug="<?php echo $slug ?>">
 						<?php
 						if($event_type_param):
-							$event_type_count = ': ' . pretty( $event_type_param ) . ' (' . get_event_count( 'type', $event_type_param ) . ')';
+							$event_type_count = ': ' . pretty( $event_type_param );
+							 // . ' (' . get_event_count( 'type', $event_type_param ) . ')';
 						else:
 							$event_type_count = null;
 						endif;
@@ -36,7 +37,8 @@ $page_url = get_the_permalink();
 					<div class="select link dropdown year" data-filter="year" data-slug="<?php echo $slug ?>">
 						<?php
 						if($year_param):
-							$year_count = ': ' . $year_param . ' (' . get_event_count( 'year', $year_param ) . ')';
+							$year_count = ': ' . $year_param;
+							 // . ' (' . get_event_count( 'year', $year_param ) . ')';
 						else:
 							$year_count = null;
 						endif;

@@ -23,6 +23,7 @@ body {
 #mfPreviewBar, #mfPreviewBarShow {
 	display: none !important;
 }
+
 a, .link {
 	text-decoration: none;
 	color: $orange;
@@ -37,6 +38,7 @@ a, .link {
 		}
 	}
 }
+
 input {
 	-webkit-appearance: none;
 	border-radius: 0;
@@ -167,6 +169,7 @@ section {
 		transition: none !important;
 	}
 	.load-more {
+		margin-top: -5px;
 		width: 100%;
 		position: relative;
 		@include large-fs;
@@ -242,7 +245,6 @@ em, i {
 }
 ul li {
 	list-style: none;
-	@extend .bullet;
 }
 p {
 	word-wrap: break-word;
@@ -265,7 +267,7 @@ h2, .medium {
 	@include medium-fs;
 	&.title {
 		text-align: center;
-		padding: 3px 0;
+		padding: 0 0 3px 0;
 		color: $orange;
 	}
 }

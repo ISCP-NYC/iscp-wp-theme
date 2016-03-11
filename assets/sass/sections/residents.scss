@@ -5,6 +5,7 @@ section.residents {
 		}
 		.top {
 		    display: flex;
+				margin-top: -4px;
 		    .filter {
 		    	// width: 70%;
 		    	float: left;
@@ -19,7 +20,7 @@ section.residents {
 		    				background-image: url(../images/earth1.png);
 		    			}
 		    			&.hover {
-		    				background-image: url(../images/bullet-black.svg);	
+		    				background-image: url(../images/bullet-black.svg);
 		    			}
 		    		}
 		    	}
@@ -39,7 +40,7 @@ section.residents {
 		    }
 		}
 		.residents {
-			margin-top: 50px;
+			margin-top: 40px;
 			.resident {
 				.details {
 					display: flex;
@@ -67,6 +68,15 @@ section.residents {
 				.wrap.name {
 					width: 40%;
 				}
+				&.nolink {
+					h2.title {
+						width: 40%;
+						text-align: left;
+					}
+					.link {
+						pointer-events: none;
+					}
+				}
 				.details {
 					width: 60%;
 					display: flex;
@@ -86,7 +96,7 @@ section.residents {
 						}
 					}
 				}
-				
+
 			}
 		}
 	}

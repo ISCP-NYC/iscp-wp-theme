@@ -5,15 +5,21 @@ $slug = $post->post_name;
 $id = $post->ID;
 $description = get_field( 'description', $id );
 $footnote = get_field( 'footnote', $id );
-$event_type = get_field( 'event_type' );
+$event_type = get_field( 'event_type', $id );
 $event_type_name = pretty( $event_type );
 $date = get_event_date( $id );
 $event_classes = 'event single ' . get_event_status( $id );
 $page_columns = get_field( 'page_columns', $id );
-$contributors = get_field( 'contributors' );
-$credits = get_field( 'credits' );
-$attachments = get_field( 'attachments' );
-$rsvp = get_field( 'rsvp' );
+$contributors = get_field( 'contributors', $id );
+$credits = get_field( 'credits', $id );
+$attachments = get_field( 'attachments', $id );
+$rsvp = get_field( 'rsvp', $id );
+$venue = get_field( 'venue_name', $id );
+$location = get_field( 'venue_location', $id );
+$time = get_field( 'time', $id );
+$opening_reception = new DateTime( get_field( 'opening_reception', $id ) );
+$opening_reception = $opening_reception->format('M d, Y');
+$opening_reception_hours = get_field( 'opening_reception_hours', $id );
 if( $page_columns ):
 	$event_classes .= ' ' . $page_columns;
 else:
@@ -67,9 +73,14 @@ $upcoming_events = new WP_Query( $upcoming_query );
 
 	<div class="content">
 		<h2 class="title">
-			<?php echo $event_type_name; ?>
-			</br>
-			<?php echo $date; ?>
+			<?php
+			echo $event_type_name;
+			echo '</br>';
+			echo $date;
+			if( $time ):
+				echo ', ' . $time;
+			endif;
+			?>
 		</h2>	
 
 		<h1 class="title"><?php echo $title ?></h1>
@@ -144,9 +155,29 @@ $upcoming_events = new WP_Query( $upcoming_query );
 			endif;
 
 			?>
-			<div class="links">
-				<a href="#" class="link bullet">Share</a>
+			<div class="bullets">
+				<!-- <a href="#" class="link bullet">Share</a> -->
 				<?php
+				if( $time ):
+					echo '<div class="bullet">' . $time . '</div>';
+				endif;
+				if( $event_type == 'off-site-project' ):
+					if( $venue ):
+						echo '<div class="bullet">' . $venue . '</div>';
+					endif;
+					if($location):
+						echo '<div class="bullet">' . $location . '</div>';
+					endif;
+				elseif( $event_type == 'exhibition' || $event_type == 'open-studios' ):
+					if( $opening_reception ):
+						echo '<div class="bullet">Opening Reception: ';
+						echo $opening_reception;
+						if( $opening_reception_hours ):
+							echo ', ' . $opening_reception_hours;
+						endif;
+						echo '</div>';
+					endif;
+				endif;
 				if( $rsvp ):
 					echo '<a href="' . $rsvp . '" class="link bullet" target="_blank">RSVP</a>';
 				endif;
@@ -170,10 +201,15 @@ $upcoming_events = new WP_Query( $upcoming_query );
 					$resident_id = $resident->ID;
 					$resident_permalink = get_permalink( $resident_id );
 					$resident_status = get_status( $resident_id );
-					echo '<div class="resident">';
-					echo '<a class="'. $resident_status .'" href="' . $resident_permalink . '">';
-					echo $resident_name;
-					echo '</a>';
+					$resident_bio = get_field( 'bio', $resident_id );
+					echo '<div class="resident '. $resident_status .'">';
+					if( $resident_bio ):
+						echo '<a href="' . $resident_permalink . '">';
+						echo $resident_name;
+						echo '</a>';
+					else:
+						echo $resident_name;
+					endif;
 					echo '</div>';
 				endforeach;
 				echo '</div>';
@@ -213,6 +249,13 @@ $upcoming_events = new WP_Query( $upcoming_query );
 		
 		<?php 
 		$related = get_field( 'related' );
+		usort($related, function($a, $b) {
+		   return strcasecmp( 
+            	get_field( 'start_date', $b->ID ), 
+            	get_field( 'start_date', $a->ID ) 
+        	);
+		});
+
 		if( $related || $upcoming_events ):
 			echo '<div class="bottom-modules">';
 			$GLOBALS['wp_query'] = $upcoming_events;

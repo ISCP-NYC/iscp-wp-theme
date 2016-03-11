@@ -124,7 +124,7 @@ section.error {
 			border-left-color: $orange !important;
 		}
 	}
-	.bullet {
+	.bullet.link, a.bullet {
 		background-image: url(../images/bullet-black.svg) !important;
 		&:hover {
 			background-image: url(../images/bullet-orange.svg) !important;
