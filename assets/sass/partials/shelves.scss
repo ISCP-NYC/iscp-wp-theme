@@ -134,7 +134,7 @@
                     margin: 0 0 0 15px !important;
                 }
                 &:nth-child(2n+1):nth-last-child(-n+2):last-child {
-                    width: 100%;
+                    width: 100% !important;
                     margin-bottom: 0 !important;
                     .inner {
                         width: calc(50% - 15px);

@@ -1,6 +1,7 @@
 .filter {
     width: calc(100% - 40px);
     padding: 0 20px;
+    margin-bottom: 40px;
     @extend .noselect;
     .select {
         font-size: $small-fs;
@@ -87,11 +88,25 @@
         display: table;
         margin-top: -20px;
         margin-bottom: 0px;
+        position: relative;
         .select {
             float: left;
         }
+        .loading {
+            @include small-fs;
+            position: absolute;
+            top: calc(100% + 10px);
+            left: 0px;
+            color: $orange;
+            opacity: 0;
+            transition: opacity 300ms ease-in-out;
+            &.show {
+                opacity: 1;
+            }
+        }
     }
 }
+
 .filter-lists {
     display: block;
     position: relative;
@@ -103,6 +118,7 @@
     transition: height 500ms cubic-bezier(0.645, 0.045, 0.355, 1);
     position: relative;
     .options {
+        padding-top: 20px;
         column-width: 200px;
         column-gap: 10px;
         .option {
@@ -118,7 +134,7 @@
                     height: $small-fs;
                     position: absolute;
                     top: 0;
-                    right: -5px;
+                    right: 0;
                     display: inline-block;
                     vertical-align: middle;
                     .icon {
@@ -143,6 +159,9 @@
             }
             &:not(.selected) .swap .icon {
                 opacity: 0 !important;
+            }
+            &.hide {
+                display: none;
             }
         }
         @include medium {
@@ -175,8 +194,10 @@
         transition: box-shadow 300ms 0ms cubic-bezier(0.645, 0.045, 0.355, 1);
         box-shadow: inset 0px -100px 45px -50px $white;
     }
-    &.show::before {
-        transition: box-shadow 500ms 200ms cubic-bezier(0.645, 0.045, 0.355, 1);
-        box-shadow: inset 0px 0px 45px -50px $white;
+    &.show {
+        &::before {
+            transition: box-shadow 500ms 200ms cubic-bezier(0.645, 0.045, 0.355, 1);
+            box-shadow: inset 0px 0px 45px -50px $white;
+        }
     }
 }

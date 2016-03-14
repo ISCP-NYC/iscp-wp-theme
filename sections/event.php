@@ -168,7 +168,7 @@ $upcoming_events = new WP_Query( $upcoming_query );
 					if($location):
 						echo '<div class="bullet">' . $location . '</div>';
 					endif;
-				elseif( $event_type == 'exhibition' || $event_type == 'open-studios' ):
+				elseif( $event_type == 'exhibition' || $event_type == 'open-studios' || $event_type == 'off-site-project' ):
 					if( $opening_reception ):
 						echo '<div class="bullet">Opening Reception: ';
 						echo $opening_reception;
@@ -249,12 +249,14 @@ $upcoming_events = new WP_Query( $upcoming_query );
 		
 		<?php 
 		$related = get_field( 'related' );
-		usort($related, function($a, $b) {
-		   return strcasecmp( 
-            	get_field( 'start_date', $b->ID ), 
-            	get_field( 'start_date', $a->ID ) 
-        	);
-		});
+		if( $related ):
+			usort($related, function($a, $b) {
+			   return strcasecmp( 
+	            	get_field( 'start_date', $b->ID ), 
+	            	get_field( 'start_date', $a->ID ) 
+	        	);
+			});
+		endif;
 
 		if( $related || $upcoming_events ):
 			echo '<div class="bottom-modules">';

@@ -1046,10 +1046,10 @@ function get_thumb( $id, $size = undefined ) {
 	return $thumbnail;
 }
 
-function get_sponsors( $id ) {
+function get_sponsors( $id, $index = 0 ) {
 	$sponsor_list = '';
 	if( have_rows( 'residency_dates', $id ) ):
-		$sponsors = get_field( 'residency_dates', $id )[0]['sponsors'];
+		$sponsors = get_field( 'residency_dates', $id )[$index]['sponsors'];
 		if( $sponsors ):
 			foreach ($sponsors as $index=>$sponsor):
 				if( $index != 0 ):
@@ -1309,12 +1309,16 @@ function user_is_resident() {
 	endif;
 }
 
-function query_url( $key, $value, $url, $filter = null ) {
+function query_url( $key, $value, $url, $filter = null, $remove = false ) {
 	$this_query = array( $key => $value );
+	$url = explode('#', $url)[0];
 	$parsed_url = parse_url($url);
 	parse_str($parsed_url['query'], $params);
 	$params = array_merge( $params, $this_query );
 	$url = strtok($url, '?');
+	if( $remove ):
+		unset( $params[$key] );
+	endif;
 	foreach($params as $_key => $_value):
 		if( array_key_exists( $_key, $params ) ):
 			unset( $params[$key] );
@@ -1329,9 +1333,10 @@ function query_url( $key, $value, $url, $filter = null ) {
 	return $url;
 }
 
-function get_resident_count( $type, $value, $page_query = null ) {
+function get_resident_count( $type, $value, $query = null ) {
 	$meta_query = array();
-
+	unset( $query['paged'] );
+	$query['posts_per_page'] = -1;
 	if( $type == 'country' ):
 		$country_query = array(
 			'key' => 'country',
@@ -1373,16 +1378,10 @@ function get_resident_count( $type, $value, $page_query = null ) {
 			'compare' => 'LIKE'
 		);
 		$meta_query = array_merge( $meta_query, $type_query );
-	endif;
-
-	$query_args = array(
-		'post_type' => 'resident',
-		'posts_per_page' => -1,
-		'post_status' => 'publish',
-		'meta_query' => array( $meta_query, $page_query )
-	);
-
-	$query = new WP_Query( $query_args );
+	endif;	
+	$empty_index = sizeof( $query['meta_query'] ) + 1;
+	$query['meta_query'][$empty_index] = $meta_query;
+	$query = new WP_Query( $query );
 	$count = $query->found_posts;
 	return $count;
 }
@@ -1458,23 +1457,20 @@ function get_event_count( $type, $value ) {
 }
 
 
-function get_sponsor_count( $type, $value, $page_query ) {
-	$meta_query = array();
-
+function get_sponsor_count( $type, $value ) {
 	if( $type == 'country' ):
 		$country_query = array(
 			'key' => 'country',
 			'value' => '"' . $value . '"',
 			'compare' => 'LIKE'
 		);
-		$meta_query = array_merge( $meta_query, $country_query );
 	endif;
 
 	$query_args = array(
 		'post_type' => 'sponsor',
 		'posts_per_page' => -1,
 		'post_status' => 'publish',
-		'meta_query' => array( $meta_query, $page_query )
+		'meta_query' => array( $country_query )
 	);
 	$query = new WP_Query( $query_args );
 	$count = $query->found_posts;
@@ -1502,6 +1498,23 @@ function get_contributor_count( $type, $value, $page_query ) {
 	$query = new WP_Query( $query_args );
 	$count = $query->found_posts;
 	return $count;
+}
+
+function unsetRepeat( $query = null, $value ) {
+	if( $query['meta_query'] ):
+		foreach( $query['meta_query'] as $index=>$array ):
+			if( is_array( $array ) ):			
+				if( array_key_exists( 'key', $array ) ):
+					foreach( $array as $key=>$nestedValue ):
+						if( $key == 'key' && $nestedValue == $value ):
+							unset( $query['meta_query'][$index] );
+						endif;
+					endforeach;
+				endif;
+			endif;
+		endforeach;
+		return $query;
+	endif;
 }
 
 add_filter( 'posts_orderby', function( $orderby, \WP_Query $q ) {
@@ -1607,3 +1620,20 @@ function wpdocs_register_my_custom_menu_page() {
     );
 }
 add_action( 'admin_menu', 'wpdocs_register_my_custom_menu_page' );
+
+function greenroom_login_redirect( $redirect_to, $request, $user ) {
+	global $user;
+	if ( isset( $user->roles ) && is_array( $user->roles ) ) {
+		if ( in_array( 'resident', $user->roles ) ) {
+			$greenroom_id = get_page_by_path( 'greenroom' )->ID;
+			$greenroom_url = get_permalink( $greenroom_id );
+			return $greenroom_url;
+		} else {
+			return $redirect_to;
+		}
+	} else {
+		return $redirect_to;
+	}
+}
+
+add_filter( 'login_redirect', 'greenroom_login_redirect', 10, 3 );

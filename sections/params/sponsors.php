@@ -16,4 +16,20 @@ endif;
 $country_param_obj = get_page_by_path( $country_param, OBJECT, 'country' );
 $country_param_title = $country_param_obj->post_title;
 $country_param_id = $country_param_obj->ID;
+if( $country_param ):
+	$filter_query = array(
+		'key' => 'country',
+		'value' => '"' . $country_param_id . '"',
+		'compare' => 'LIKE'
+	);
+endif;
+$sponsors_query = array(
+	'post_type' => 'sponsor',
+	'posts_per_page' => 18,
+	'orderby' => 'name',
+	'order' => 'ASC',
+	'paged' => $paged,
+	'post_status' => 'publish',
+	'meta_query' => array( $filter_query )
+);
 ?>

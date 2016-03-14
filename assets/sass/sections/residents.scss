@@ -5,9 +5,7 @@ section.residents {
 		}
 		.top {
 		    display: flex;
-				margin-top: -4px;
 		    .filter {
-		    	// width: 70%;
 		    	float: left;
 		    	.link.map {
 		    		cursor: pointer !important;
@@ -40,7 +38,6 @@ section.residents {
 		    }
 		}
 		.residents {
-			margin-top: 40px;
 			.resident {
 				.details {
 					display: flex;

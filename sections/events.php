@@ -7,7 +7,7 @@ $page_url = get_the_permalink();
 	<?php get_template_part('partials/side') ?>
 	<div class="content">
 		<div class="wrapper upcoming">
-			<h2 class="title head">Upcoming Events &amp; Exhibitions</h2>
+			<h2 class="title head">Current and Upcoming Events &amp; Exhibitions</h2>
 			<div class="events shelves grid items residents upcoming">
 				<?php 
 				$GLOBALS['events_section'] = 'upcoming';
@@ -21,13 +21,12 @@ $page_url = get_the_permalink();
 				<div class="bar">
 					<div class="select link dropdown type" data-filter="type" data-slug="<?php echo $slug ?>">
 						<?php
-						if($event_type_param):
-							$event_type_count = ': ' . pretty( $event_type_param );
-							 // . ' (' . get_event_count( 'type', $event_type_param ) . ')';
+						if( $event_type_param ):
+							$selected = ': ' . $event_type_param_title;
 						else:
-							$event_type_count = null;
+							$selected = null;
 						endif;
-						echo '<span>Event Type</span><span class="count">' . $event_type_count . '</span>';
+						echo '<span class="label">Event Type</span><span class="value">' . $selected . '</span>';
 						?>
 						<div class="swap">
 							<div class="icon default"></div>
@@ -36,13 +35,12 @@ $page_url = get_the_permalink();
 					</div>
 					<div class="select link dropdown year" data-filter="year" data-slug="<?php echo $slug ?>">
 						<?php
-						if($year_param):
-							$year_count = ': ' . $year_param;
-							 // . ' (' . get_event_count( 'year', $year_param ) . ')';
+						if( $year_param ):
+							$selected = ': ' . $year_param;
 						else:
-							$year_count = null;
+							$selected = null;
 						endif;
-						echo '<span>Year</span><span class="count">' . $year_count . '</span>';
+						echo '<span class="label">Year</span><span class="value">' . $selected . '</span>';
 						?>
 						<div class="swap">
 							<div class="icon default"></div>

@@ -21,13 +21,15 @@
 		</div>
 		<?php
 		if( have_rows( 'item' ) ):
+			$index = 1;
 			while ( have_rows('item') ) : the_row();
 				$title = get_sub_field( 'title' );
 				$text = get_sub_field( 'text' );
-				echo '<div class="module item">';
+				echo '<div class="module item" id="' . $index . '">';
 				echo '<h3 class="title">' . $title . '</h3>';
 				echo $text;
 				echo '</div>';
+				$index++;
 			endwhile;
 		endif;
 		?>

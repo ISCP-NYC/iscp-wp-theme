@@ -92,5 +92,5 @@
 	<meta name="theme-color" content="#ff5000">
 	<?php wp_head(); ?>
 </head>
-<body <?php body_class(); ?>>
+<body>
 	<main data-center-slug="<?php echo $page_slug ?>" data-center-id="<?php echo $page_id ?>">

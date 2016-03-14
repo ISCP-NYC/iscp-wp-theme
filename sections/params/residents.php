@@ -12,6 +12,7 @@ $page_query = array(
 	'type' => 'DATE',
 	'value' => $today,
 );
+$filter_query = array();
 if( $query_vars ):
 	$slug = $query_vars['pagename'];
 	$page_type = $query_vars['pagetype'];
@@ -66,9 +67,91 @@ elseif( $post_type == 'sponsor' || $page_type == 'sponsor' || $post_type == 'res
 		'order' => 'DESC'
 	);
 endif;
-if($country_param):
+if( $country_param ):
 	$country_param_obj = get_page_by_path( $country_param, OBJECT, 'country' );
 	$country_param_title = $country_param_obj->post_title;
 	$country_param_id = $country_param_obj->ID;
 endif;
+
+if( $country_param ):
+	$country_query = array(
+		'key' => 'country',
+		'value' => '"' . $country_param_id . '"',
+		'compare' => 'LIKE'
+	);
+	$filter_query = array_merge( $filter_query, $country_query );
+endif;
+
+if( $year_param ):
+	$year_begin = $year_param . '0101';
+	$year_end = $year_param . '1231';
+	$year_range = array( $year_begin, $year_end );
+	$year_query = array(
+		'key' => 'residency_dates_0_end_date',
+		'type' => 'DATE',
+		'value' => $year_range,
+		'compare' => 'BETWEEN'
+	);
+	$filter_query = array_merge( $filter_query, $year_query );
+endif;
+
+if( $program_param ):
+	$program_query = array(
+		'key' => 'residency_program',
+		'type' => 'CHAR',
+		'value' => $program_param,
+		'compare' => 'LIKE'
+	);
+	$filter_query = array_merge( $filter_query, $program_query );
+endif;
+
+if( $sponsor_param ):
+	$sponsor_query = array(
+		'key' => 'residency_dates_0_sponsors',
+		'value' => '"' . $sponsor_id . '"',
+		'compare' => 'LIKE'
+	);
+	$filter_query = array_merge( $filter_query, $sponsor_query );
+endif;
+
+if( $type_param ):
+	$type_query = array(
+		'key' => 'resident_type',
+		'type' => 'CHAR',
+		'value' => $type_param,
+		'compare' => 'LIKE'
+	);
+	$filter_query = array_merge( $filter_query, $type_query );
+endif;
+
+if( $post_type == 'sponsor' || $page_type == 'sponsor' ):
+	$sponsor_id = get_page_by_path( $slug, OBJECT, 'sponsor' )->ID;
+	$sponsor_query = array(
+		'key' => 'residency_dates_0_sponsors',
+		'value' => '"' . $sponsor_id . '"',
+		'compare' => 'LIKE'
+	);
+	$filter_query = array_merge( $filter_query, $sponsor_query );
+endif;
+$query = array(
+	'post_type' => 'resident',
+	'posts_per_page' => 12,
+	'paged' => $paged,
+	'post_status' => 'publish',
+	'meta_query' => array(
+		'relation' => 'AND',
+		$page_query,
+		$filter_query
+	)
+);
+$count_query = array(
+	'post_type' => 'resident',
+	'posts_per_page' => -1,
+	'post_status' => 'publish',
+	'meta_query' => array(
+		'relation' => 'AND',
+		$page_query,
+		$sponsor_query
+	)
+);
 ?>

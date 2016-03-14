@@ -19,7 +19,7 @@
 						$title = $menu_item->title;
 						$id = $menu_item->ID;
 						$url = $menu_item->url;
-						$no_link = array( 'residencies' );
+						$no_link = array( 'residencies', 'support' );
 						$slug = basename($url);
 					    echo '<div class="cell ' . $slug . '">';
 						echo '<div class="cell-inner">';
@@ -77,7 +77,7 @@
 		    	<?php
 					$twitter_handle = str_replace( '@', '', get_field( 'twitter', $about_id ) );
 					$twitter_url = 'http://twitter.com/' . $twitter_handle;
-					$facebook_url = get_field( 'facebook', $about_id );
+					$facebook_url = 'http://facebook.com/' . get_field( 'facebook', $about_id );
 					$instagram_handle = str_replace('@', '', get_field( 'instagram', $about_id ) );
 					$instagram_url = 'http://instagram.com/' . $instagram_handle;
 					$newsletter_url = get_field( 'newsletter', $about_id );
@@ -88,13 +88,13 @@
 	    				<div class="title">Connect</div>
 		    			<div class="sub-menu">
 		    				<div class="child-item twitter">
-		    					<a href="<?php echo $twitter_url ?>">Twitter</a>
+		    					<a href="<?php echo $twitter_url ?>" target="_blank">Twitter</a>
 		    				</div>
 		    				<div class="child-item facebook">
-		    					<a href="<?php echo $facebook_url ?>">Facebook</a>
+		    					<a href="<?php echo $facebook_url ?>" target="_blank">Facebook</a>
 		    				</div>
 		    				<div class="child-item instagram">
-		    					<a href="<?php echo $instagram_url ?>">Instagram</a>
+		    					<a href="<?php echo $instagram_url ?>" target="_blank">Instagram</a>
 		    				</div>
 		    			</div>
 		    		</div>

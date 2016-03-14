@@ -11,5 +11,4 @@
   ga('send', 'pageview');
 
 </script>
-<?php wp_footer(); ?>
 </html>
