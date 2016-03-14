@@ -203,23 +203,28 @@ $('body').on('click', 'section:not(.open-nav) .nav-hover', function() {
 	var section = $(this).parent('section');
 	$(section).addClass('open-nav').removeClass('tease-nav');
 	//mobile menu fix screen
-	if($('body').hasClass('mobile')) {
+	if(isSmall()) {
 	  $('section.open-nav header.main').css('position', 'fixed');
+		//toggle mobile sub-menu;
 	}
 }).on('click', '.open-nav .nav-toggle', function() {
 	var section = $(this).parent('section');
 	$(section).removeClass('open-nav');
-	if($('body').hasClass('mobile')) {
+	//mobile menu unfix screen
+	if(isSmall()) {
 		$('section header.main').css('position', 'absolute');
 	}
 });
-
-
 
 $('body').on('click', 'nav .parent .overlay a', function(e) {
 	e.preventDefault();
 });
 
+$('body').on('click', 'nav .parent .overlay', function(e) {
+	if(isSmall()) {
+		$(this).siblings('.sub-menu').slideToggle('100', 'easeInOutQuad');
+	}
+});
 //toggle header visibility with scroll behavior
 function sectionScrollListener(section) {
 	var scrollTop = $(section).scrollTop();
@@ -1579,7 +1584,7 @@ function winH() {
 }
 
 function isSmall() {
-	var size = $('#size').css('content');
+	var size = $('#size').css('content').replace(/"/g, '');
 	if(size == 'xsmall' || size == 'small') {
 		return true;
 	} else {
