@@ -133,6 +133,7 @@ if( $post_type == 'sponsor' || $page_type == 'sponsor' ):
 	);
 	$filter_query = array_merge( $filter_query, $sponsor_query );
 endif;
+
 $query = array(
 	'post_type' => 'resident',
 	'posts_per_page' => 12,
@@ -144,6 +145,7 @@ $query = array(
 		$filter_query
 	)
 );
+$query = array_merge( $query, $orderby_array );
 $count_query = array(
 	'post_type' => 'resident',
 	'posts_per_page' => -1,

@@ -1522,8 +1522,7 @@ section {
         section .shelves.grid .shelf-item .inner .image {
           width: 100%;
           margin-bottom: 14px;
-          min-height: 100px;
-          background-color: #ff5000; }
+          min-height: 100px; }
           /* line 40, ../sass/partials/shelves.scss */
           section .shelves.grid .shelf-item .inner .image img {
             width: 100%;

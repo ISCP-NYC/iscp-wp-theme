@@ -1,6 +1,7 @@
 jQuery(document).ready(function($) {
 var isMobile = false;
 var loader = '<div class="loader"><div></div><div></div><div></div></div>';
+var transitionEnd = 'transitionend webkitTransitionEnd oTransitionEnd';
 // $(window).load(function() {
 	mobileCheck();
 	setUp();
@@ -673,6 +674,7 @@ function insertFilterList(slug) {
 		},
 		success: function(response) {
 			$(section).find('.filter-lists').html(response);
+			$(section).find('.filter').trigger('loaded');
 		}
 	});
 }
@@ -711,7 +713,7 @@ $('body').on('click', 'section:not(#apply) .filter-list .option a', function(eve
 	var url = $(this).attr('href');
 	if($(option).is('.selected')) {
 		$(option).removeClass('selected');
-		$(section).find('.filter .select.' + optionType + ' .count').text('');
+		$(section).find('.filter .select.' + optionType + ' .value').text('');
  		var currentUrl = window.location.href;
  		url = removeParam(optionType, currentUrl);
  		if (url.substring(url.length-1) == '?') {
@@ -722,8 +724,7 @@ $('body').on('click', 'section:not(#apply) .filter-list .option a', function(eve
 		$(section).find('.filter-list.'+optionType+' .option.selected').removeClass('selected');
 		$(option).addClass('selected');
 		var filterType = $(this).parents('.filter-list').attr('data-filter');
-		var filterCount = $(section).find('.select[data-filter="'+filterType+'"]').find('.count');
-		$(filterCount).text(': '+optionText);
+		$(section).find('.select[data-filter="'+filterType+'"]').find('.value').text(': '+optionText);
 	}
 	var params = getParams(url);
 	$.each(params, function(key, value) {
@@ -734,7 +735,7 @@ $('body').on('click', 'section:not(#apply) .filter-list .option a', function(eve
 		vars['pagetype'] = 'sponsor';
 	}
 	vars['pagename'] = slug;
-	updateCounts(option, vars);
+	// updateCounts(option, vars);
 	if(isSmall()) {
 		$(section).find('.select[data-filter="'+filterType+'"]').click();
 	}
@@ -888,8 +889,11 @@ function renameFilterType(filterType) {
 
 $('body').on('click', '.filter .select:not(.tag)', function() {
 	var slug = $(this).attr('data-slug');
+	var filter = $(this).parents('.filter');
 	var filterThis = $('.filter-this.'+slug);
 	var section = $(filterThis).parents('section');
+	var filterLists = $(section).find('.filter-lists');
+	var bar = $(section).find('.bar');
 	var content = $(section).find('.content');
 	if($(this).hasClass('view toggle')) {
 		//toggle view style
@@ -899,31 +903,55 @@ $('body').on('click', '.filter .select:not(.tag)', function() {
 	} else if($(this).hasClass('dropdown')) {
 		var property = $(this).attr('data-filter');
 		var filterList = $('.filter-list.'+property+'.'+slug);
-		var filterListOptions = $(filterList).children('.options');
-		if(!filterListOptions.length) {return;}
-		var filterListOptionsHeight = $(filterListOptions)[0].clientHeight;
-		if($(this).hasClass('dropped')) {
-			//toggle to hide this list
-			$(this).removeClass('dropped');
-			$(filterList).removeClass('show').css({height : 0});
-			$(filterList).one('transitionend webkitTransitionEnd oTransitionEnd MSTransitionEnd', function() {
-				fixScroll(section, content);
-			});
+		if($(filterList).length) {
+			dropDown(property, slug);	
 		} else {
-			//hide already opened filter list
-			$('.dropdown').removeClass('dropped');
-			$('.filter-list.show'+'.'+slug).removeClass('show').css({height : 0});
-			//open this filter list
-			$(this).addClass('dropped');
-			$(filterList).addClass('show growing').css({height : filterListOptionsHeight});
-			$(filterList).one('transitionend webkitTransitionEnd oTransitionEnd MSTransitionEnd', function() {
-				fixScroll(section, content);
-				$(filterList).removeClass('growing');
+			var loadingText = $('<div class="loading">Loading...</div>');
+			$(bar).append(loadingText);
+			loadingText = $(bar).find('.loading');
+			setTimeout(function() {
+				$(loadingText).addClass('show');
+			});
+			$(filter).on('loaded', function() {
+				$(loadingText).one(transitionEnd, function() {
+					dropDown(property, slug);
+					$(filter).off('loaded');
+					$(loadingText).off();
+					$(loadingText).remove();
+				});
+				$(loadingText).removeClass('show');
 			});
 		}
-
 	}
 });
+
+function dropDown(property, slug) {
+	var filterList = $('.filter-list.'+property+'.'+slug);
+	var filterListOptions = $(filterList).children('.options');
+	var filterListOptionsHeight = $(filterListOptions)[0].clientHeight;
+	var section = $(filterList).parents('section');
+	var content = $(section).find('.content');
+	var select = $(section).find('.select[data-slug="'+slug+'"][data-filter="'+property+'"]');
+	if($(select).hasClass('dropped')) {
+		//toggle to hide this list
+		$(select).removeClass('dropped');
+		$(filterList).removeClass('show').css({height : 0});
+		$(filterList).one('transitionend webkitTransitionEnd oTransitionEnd MSTransitionEnd', function() {
+			fixScroll(section, content);
+		});
+	} else {
+		//hide already opened filter list
+		$('.dropdown').removeClass('dropped');
+		$('.filter-list.show'+'.'+slug).removeClass('show').css({height : 0});
+		//open this filter list
+		$(select).addClass('dropped');
+		$(filterList).addClass('show growing').css({height : filterListOptionsHeight});
+		$(filterList).one('transitionend webkitTransitionEnd oTransitionEnd MSTransitionEnd', function() {
+			fixScroll(section, content);
+			$(filterList).removeClass('growing');
+		});
+	}
+}
 function getParam(paramType, url) {
     if (!url) url = window.location.href;
     paramType = paramType.replace(/[\[\]]/g, "\\$&");
@@ -962,7 +990,7 @@ function removeParam(paramType, url) {
     }
     return rtn;
 }
-function updateCounts(option, vars) {
+// function updateCounts(option, vars) {
 	// var section = $(option).parents('section');
 	// var filterType = $(option).parents('.filter-list').attr('data-filter');
 	// var filterValue = $(option).find('a').attr('data-value');
@@ -974,23 +1002,23 @@ function updateCounts(option, vars) {
 	// var option = this;
 	// vars = JSON.stringify(vars);
 	// getCount(vars);
-}
-function getCount(vars) {
-	$.ajax({
-		url: ajaxpagination.ajaxurl,
-		type: 'post',
-		data: {
-			action: 'get_filter_count',
-			query_vars: vars
-		},
-		beforeSend: function() {
+// }
+// function getCount(vars) {
+// 	$.ajax({
+// 		url: ajaxpagination.ajaxurl,
+// 		type: 'post',
+// 		data: {
+// 			action: 'get_filter_count',
+// 			query_vars: vars
+// 		},
+// 		beforeSend: function() {
 
-		},
-		success: function(response) {
+// 		},
+// 		success: function(response) {
 
-		}
-	});
-}
+// 		}
+// 	});
+// }
 /////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////
 //////////////////////////SEARCH/////////////////////////////
