@@ -13,7 +13,7 @@ $filter = $_GET['filter'];
 					<div class="select link dropdown country" data-filter="country" data-slug="<?php echo $slug ?>">
 						<?php
 						if( $country_param ):
-							$country_count = ': ' . $country_param_title . ' (' . get_resident_count( 'country', $country_param_id, $page_query ) . ')';
+							$country_count = ': ' . $country_param_title . ' (' . get_resident_count( 'country', $country_param_id, $query ) . ')';
 						endif;
 						echo '<span>Country</span><span class="count">' . $country_count . '</span>';
 						?>
@@ -27,7 +27,7 @@ $filter = $_GET['filter'];
 					<div class="select link dropdown date" data-filter="date" data-slug="<?php echo $slug ?>">
 						<?php
 						if( $year_param ):
-							$year_count = ': ' . $year_param . ' (' . get_resident_count( 'year', $year_param, $page_query ) . ')';
+							$year_count = ': ' . $year_param . ' (' . get_resident_count( 'year', $year_param, $query ) . ')';
 						else:
 							$year_count = null;
 						endif;
@@ -42,7 +42,7 @@ $filter = $_GET['filter'];
 					<div class="select link dropdown program" data-filter="program" data-slug="<?php echo $slug ?>">
 						<?php
 						if( $program_param ):
-							$program_count = ': ' . get_program_title( $program_param ) . ' (' . get_resident_count( 'program', $program_param, $page_query ) . ')';
+							$program_count = ': ' . get_program_title( $program_param ) . ' (' . get_resident_count( 'program', $program_param, $query ) . ')';
 						else:
 							$program_count = null;
 						endif;
@@ -56,7 +56,7 @@ $filter = $_GET['filter'];
 					<div class="select link dropdown type" data-filter="type" data-slug="<?php echo $slug ?>">
 						<?php
 						if( $type_param ):
-							$type_count = ': ' . ucwords( $type_param ) . ' (' . get_resident_count( 'type', $type_param, $page_query ) . ')';
+							$type_count = ': ' . ucwords( $type_param ) . ' (' . get_resident_count( 'type', $type_param, $query ) . ')';
 						else:
 							$type_count = null;
 						endif;

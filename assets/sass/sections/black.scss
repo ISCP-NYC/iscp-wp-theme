@@ -101,6 +101,9 @@ section.error {
 			}
 		}
 	}
+	.filter-lists .loading {
+		color: $black;
+	}
 	.filter-list {
 		.options .option a .swap .icon {
 			&.default {

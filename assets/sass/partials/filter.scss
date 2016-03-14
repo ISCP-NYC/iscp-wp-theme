@@ -1,7 +1,7 @@
 .filter {
     width: calc(100% - 40px);
     padding: 0 20px;
-    margin-bottom: 50px;
+    margin-bottom: 40px;
     @extend .noselect;
     .select {
         font-size: $small-fs;
@@ -88,11 +88,25 @@
         display: table;
         margin-top: -20px;
         margin-bottom: 0px;
+        position: relative;
         .select {
             float: left;
         }
+        .loading {
+            @include small-fs;
+            position: absolute;
+            top: calc(100% + 10px);
+            left: 0px;
+            color: $orange;
+            opacity: 0;
+            transition: opacity 300ms ease-in-out;
+            &.show {
+                opacity: 1;
+            }
+        }
     }
 }
+
 .filter-lists {
     display: block;
     position: relative;
@@ -110,7 +124,7 @@
         .option {
             width: 200px;
             display: inline-flex;
-            margin: 0 0 10px 0;
+            margin: 0 0 2px 0;
             @include small-fs;
             a {
                 padding-right: $small-fs;
@@ -145,6 +159,9 @@
             }
             &:not(.selected) .swap .icon {
                 opacity: 0 !important;
+            }
+            &.hide {
+                display: none;
             }
         }
         @include medium {

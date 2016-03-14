@@ -1,5 +1,6 @@
 section.greenroom,
-section.resource {
+section.resource,
+section.resident-resource {
 	@include medium-fs;
 	background-color: $light;
 	aside.main {
@@ -10,10 +11,13 @@ section.resource {
 	.content {
 		position: relative;	
 	}
+	table {
+		width: 100%;
+	}
 	.user-info {
 		position: absolute;
-		right: 20px;
-		top: 130px;
+		right: 30px;
+    	top: 145px;
 		@include small-fs;
 	}
 	header.main {
@@ -26,19 +30,30 @@ section.resource {
 		}
 	}
 	.hello {
-		width: calc(100% - 60px);
-		padding: 0 30px;
 		@include large-fs;
-		margin-bottom: 50px;
+		border: 0 !important;
 	}
-	.half {
-		float: left;
-		width: calc(50% - 15px);
-		&.left {
-			margin-right: 15px;
+	.dashboard {
+		display: flex;
+		.half {
+			float: left;
+			width: calc(50% - 15px);
+			&.left {
+				margin-right: 15px;
+			}
+			&.right {
+				margin-left: 15px;
+			}
+			.resource-list {
+				margin-bottom: 10px;
+			}
 		}
-		&.right {
-			margin-left: 15px;
+		@include medium {
+			display: block;
+			.half {
+				width: 100% !important;
+				margin: 0 !important;
+			}
 		}
 	}
 	ul {
@@ -47,13 +62,6 @@ section.resource {
 			background-position: left 7px;
 			padding: 0;
 			text-indent: 25px;
-		}
-	}
-	.dashboard {
-		width: 100%;
-		display: flex;
-		.resource-list {
-			padding-bottom: 15px;
 		}
 	}
 	h4 {

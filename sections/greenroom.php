@@ -17,12 +17,21 @@
 		<div class="user-info">
 			<a href="<?php echo wp_logout_url( home_url() ); ?>">Logout</a>
 		</div>
-		<h1 class="hello">
+		<div class="module hello">
 			Hello, <?php echo $name ?>
-		</h1>
+		</div>
 		<div class="dashboard module">
 			<div class="half left">
 				<?php 
+				$sign_up = get_field( 'sign_up', $id );
+				echo '<div class="resource-list signup">';
+				echo '<h2>';
+				echo '<a target="_blank" href="' . $sign_up . '">';
+				echo 'Sign Up';
+				echo '</a>';
+				echo '</h2>';
+				echo '</div>';
+				
 				$to_do_page_id = get_page_by_path( $slug . '/to-do' )->ID;
 				$post = get_post( $to_do_page_id, OBJECT );
 				setup_postdata( $post );

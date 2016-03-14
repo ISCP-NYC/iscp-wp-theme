@@ -21,9 +21,6 @@ var transitionEnd = 'transitionend webkitTransitionEnd oTransitionEnd';
 	if($('section#map').length) {
 		setUpEarth();
 	} 
-	if($('section.resource').length) {
-		scrollToResourceItem();
-	}
 	if($('section#events').length && (getParam('date') || getParam('type') || window.location.hash == '#past')) {
 		var pastWrapper = $('.past.wrapper');
 		var pastWrapperTop = $(pastWrapper).offset().top - 130;
@@ -134,31 +131,19 @@ function setUp() {
 		});
 	});
 	var centerSlug = $('main').attr('data-center-slug');
-	var centerIndex = $('section#' + centerSlug).index();
+	var centerSection = $('section#' + centerSlug);
+	var centerIndex = $(centerSection).index();
 	if(centerIndex == -1) {
 		centerIndex = $('section#error').index();
 	}
 	if(window.location.search.length) {
-		$('section#' + centerSlug).attr('data-permalink', window.location);
+		$(centerSection).attr('data-permalink', window.location);
+	}
+	if(window.location.hash.length) {
+		$(centerSection).attr('data-permalink', window.location);
+		scrollToHash(centerSection);
 	}
 	slideTo(centerIndex, false);
-}
-
-function fixScroll(section, content) {
-	var scrollHeight = content[0].scrollHeight;
-	var contentHeight = $(content)[0].clientHeight;
-	// if content is same height as window
-	if(contentHeight == $(window).innerHeight()) {
-		if(scrollHeight <= contentHeight) {
-			$(section).addClass('show-footer');
-		} else {
-			$(section).removeClass('show-footer');
-		}
-	}
-	// if content is too short to scroll -> scroll to footer
-	else if(scrollHeight <= contentHeight && scrollHeight != 0) {
-		$(section).addClass('show-footer');
-	}
 }
 
 $('body').on('mouseenter', '.shelf-item .wrap', function() {
@@ -166,7 +151,6 @@ $('body').on('mouseenter', '.shelf-item .wrap', function() {
 }).on('mouseleave', '.shelf-item .wrap', function() {
 	$(this).parents('.shelf-item').removeClass('hover');
 });
-
 
 $('body').on('wheel', 'section', function(e) {
 	var section = $(this);
@@ -323,7 +307,12 @@ function slideTo(index, animate) {
 		}).addClass('center');
 		$(section).next().addClass('right');
 		$(section).prev().addClass('left');
+		var url = $(section).attr('data-permalink');
+		var id = $(section).attr('data-id');
+		var slug = $(section).attr('data-slug');
+		$('main').attr('data-center-id', id).attr('data-center-slug', slug);
 		if(animate) {
+			window.history.replaceState({page: index}, null, url);
 			$('main').transition({
 				left: -pageWidth * index + (index*asideWidth),
 			}, duration, 'cubic-bezier(0.645, 0.045, 0.355, 1)', function() {
@@ -346,11 +335,6 @@ function slideTo(index, animate) {
 			$('section:not(.center)').scrollTop(0).removeClass('show-footer');
 			$('main').removeClass('sliding');
 		}
-		var url = $(section).attr('data-permalink');
-		var id = $(section).attr('data-id');
-		var slug = $(section).attr('data-slug');
-		$('main').attr('data-center-id', id).attr('data-center-slug', slug);
-		window.history.replaceState({page: index}, null, url);
 		if($(section).hasClass('past') || $(section).hasClass('error') || $(section).hasClass('past-residents')) {
 			updateFavicons('blue');
 		} else {
@@ -635,38 +619,6 @@ function getNeighbors(direction, type, slug) {
 /////////////////////////////////////////////////////////////
 //////////////////////////FILTER/////////////////////////////
 /////////////////////////////////////////////////////////////
-function insertFilterList(slug) {
-	var section = $('section#'+slug);
-	$(section).addClass('loading-filter');
-	var params = getParams();
-	var vars = ajaxpagination.query_vars;
-	vars = JSON.parse(vars);
-	if(!vars.length) {
-		vars = {
-			'pagename': slug
-		};
-	}
-	vars = $.extend(vars, params);
-	vars['pagename'] = slug;
-	vars['url'] = $(section).attr('data-permalink');
-	if($(section).is('.sponsor')) {
-		vars['pagetype'] = 'sponsor';
-	}
-	vars = JSON.stringify(vars);
-	$.ajax({
-		url: ajaxpagination.ajaxurl,
-		type: 'post',
-		data: {
-			action: 'insert_filter_list',
-			query_vars: vars,
-		},
-		success: function(response) {
-			$(section).find('.filter-lists').html(response);
-			$(section).find('.filter').trigger('loaded');
-		}
-	});
-}
-
 var filterVars = [
 	'when',
 	'date',
@@ -676,60 +628,7 @@ var filterVars = [
 	'type',
 	'filter'
 ];
-$('body').on('click', 'section:not(#apply) .filter-list .option a', function(event) {
-	event.preventDefault();
-	var option = $(this).parents('.option');
-	var optionText = $(this).text();
-	var optionType = $(this).parents('.filter-list').attr('data-filter');
-	var optionValue = $(this).attr('data-value');
-	var slug = $(this).parents('section').attr('id');
-	var section = $(this).parents('section');
-	var vars = ajaxpagination.query_vars;
-	vars = JSON.parse(vars);
-	$(filterVars).each(function() {
-		delete vars[this];
-	});
-	if($(section).is('.events')) {
-		var upcomingIds = [];
-		$(section).find('.item.upcoming').each(function() {
-			var upcomingId = $(this).attr('data-id');
-			upcomingIds.push(upcomingId);
-		});
-		vars['upcoming_ids'] = upcomingIds; 
-		vars['events_section'] = 'past'; 
-	}
-	var url = $(this).attr('href');
-	if($(option).is('.selected')) {
-		$(option).removeClass('selected');
-		$(section).find('.filter .select.' + optionType + ' .count').text('');
- 		var currentUrl = window.location.href;
- 		url = removeParam(optionType, currentUrl);
- 		if (url.substring(url.length-1) == '?') {
-	        url = url.substring(0, url.length-1);
-	    }
 
-	} else {
-		$(section).find('.filter-list.'+optionType+' .option.selected').removeClass('selected');
-		$(option).addClass('selected');
-		var filterType = $(this).parents('.filter-list').attr('data-filter');
-		var filterCount = $(section).find('.select[data-filter="'+filterType+'"]').find('.count');
-		$(filterCount).text(': '+optionText);
-	}
-	var params = getParams(url);
-	$.each(params, function(key, value) {
-		vars[key] = value;
-	});
-	vars['filter_params'] = JSON.stringify(params);
-	if($(section).is('.sponsor')) {
-		vars['pagetype'] = 'sponsor';
-	}
-	vars['pagename'] = slug;
-	updateCounts(option, vars);
-	if(isSmall()) {
-		$(section).find('.select[data-filter="'+filterType+'"]').click();
-	}
-	filterQuery(vars, section, url, option);
-});
 
 $('body').on('click', '.bar:not(.hide) .tags a', function(event) {
 	event.preventDefault();
@@ -753,6 +652,100 @@ $('body').on('click', '.bar:not(.hide) .select.tag', function(event) {
 	$('#journal .bar').addClass('hide');
 	url = removeParam('tag', currentUrl);
 	filterQuery(vars, section, url);
+});
+
+$('body').on('click', '.filter .select:not(.tag)', function() {
+	var slug = $(this).attr('data-slug');
+	var filter = $(this).parents('.filter');
+	var filterThis = $('.filter-this.'+slug);
+	var section = $(filterThis).parents('section');
+	var filterLists = $(section).find('.filter-lists');
+	var bar = $(section).find('.bar');
+	var content = $(section).find('.content');
+	if($(this).hasClass('view toggle')) {
+		$(filterThis).toggleClass('list').toggleClass('grid');
+		$(this).toggleClass('list').toggleClass('grid');
+		fixScroll(section, content);
+	} else if($(this).hasClass('dropdown')) {
+		var property = $(this).attr('data-filter');
+		var filterList = $('.filter-list.'+property+'.'+slug);
+		if($(filterList).length) {
+			dropDown(property, slug);	
+		} else {
+			var loadingText = $('<div class="loading">Loading...</div>');
+			$(bar).append(loadingText);
+			loadingText = $(bar).find('.loading');
+			setTimeout(function() {
+				$(loadingText).addClass('show');
+			});
+			$(filter).on('loaded', function() {
+				$(loadingText).one(transitionEnd, function() {
+					dropDown(property, slug);
+					$(filter).off('loaded');
+					$(loadingText).off();
+					$(loadingText).remove();
+				});
+				$(loadingText).removeClass('show');
+			});
+		}
+	}
+});
+
+$('body').on('click', 'section:not(#apply) .filter-list .option a', function(event) {
+	event.preventDefault();
+	var option = $(this).parents('.option');
+	var optionText = $(this).text();
+	var optionType = $(this).parents('.filter-list').attr('data-filter');
+	var optionValue = $(this).attr('data-value');
+	var slug = $(this).parents('section').attr('id');
+	var section = $(this).parents('section');
+	var vars = ajaxpagination.query_vars;
+	vars = JSON.parse(vars);
+	$(filterVars).each(function() {
+		delete vars[this];
+	});
+	if($(section).is('.events')) {
+		var upcomingIds = [];
+		$(section).find('.item.upcoming').each(function() {
+			var upcomingId = $(this).attr('data-id');
+			upcomingIds.push(upcomingId);
+		});
+		vars['upcoming_ids'] = upcomingIds; 
+		vars['events_section'] = 'past'; 
+	}
+	var url = $(this).attr('href');
+	var filterType = $(this).parents('.filter-list').attr('data-filter');
+	var filterCount = $(section).find('.select[data-filter="'+filterType+'"]').find('.count');
+	if($(option).is('.selected')) {
+		$(option).removeClass('selected');
+		if (url.indexOf('?')) {
+			var sym = '&';
+		} else {	
+			var sym = '?';
+		}
+		newUrl = url+sym+optionType+'='+optionValue;
+		$(filterCount).text('');
+	} else {
+		$(section).find('.filter-list.'+optionType+' .option.selected').removeClass('selected');
+		$(option).addClass('selected');
+		newUrl = removeParam(optionType, url);
+		$(filterCount).text(': '+optionText);
+	}
+	this.href = newUrl;
+	var params = getParams(url);
+	$.each(params, function(key, value) {
+		vars[key] = value;
+	});
+	vars['filter_params'] = JSON.stringify(params);
+	if($(section).is('.sponsor')) {
+		vars['pagetype'] = 'sponsor';
+	}
+	vars['pagename'] = slug;
+	updateCounts(option, vars);
+	if(isSmall()) {
+		$(section).find('.select[data-filter="'+filterType+'"]').click();
+	}
+	filterQuery(vars, section, url, option);
 });
 
 function filterQuery(vars, section, url, option) {
@@ -844,23 +837,125 @@ function filterThis(html, vars) {
 	}
 }
 
-function updateFilterLinks(option) {
-	var selected = $(option).is('.selected');
+function insertFilterList(slug) {
+	var section = $('section#'+slug);
+	$(section).addClass('loading-filter');
+	var params = getParams();
+	var vars = ajaxpagination.query_vars;
+	vars = JSON.parse(vars);
+	if(!vars.length) {
+		vars = {
+			'pagename': slug
+		};
+	}
+	vars = $.extend(vars, params);
+	vars['pagename'] = slug;
+	vars['url'] = $(section).attr('data-permalink');
+	if($(section).is('.sponsor')) {
+		vars['pagetype'] = 'sponsor';
+	}
+	vars = JSON.stringify(vars);
+	$.ajax({
+		url: ajaxpagination.ajaxurl,
+		type: 'post',
+		data: {
+			action: 'insert_filter_list',
+			query_vars: vars,
+		},
+		success: function(response) {
+			$(section).find('.filter-lists').html(response);
+			$(section).find('.filter').trigger('loaded');
+		}
+	});
+}
+
+function updateFilterLinks(option, vars) {
 	var section = $(option).parents('section');
-	var thisList = $(option).parents('.filter-list').attr('data-filter');
+	var optionType = $(option).parents('.filter-list').attr('data-filter');
+	var optionValue = renameFilterType($(option).find('a').attr('data-value'));
+	$(section).find('.filter-list .option a').each(function() {
+		var link = this;
+		var url = $(link).attr('href');
+		var option = $(link).parents('.option');
+		var type = renameFilterType($(this).parents('.filter-list').attr('data-filter'));
+		var value = $(this).attr('data-value');
+		var gotParam = getParam(optionType, url);
+		var newUrl;
+		if(optionType != type) {
+			if(gotParam) {
+				// console.log('*');
+				if(gotParam != optionValue) {
+					newUrl = removeParam(optionType, url);
+					newUrl = addParam(optionType, optionValue, newUrl);
+				} else {
+					// console.log('*');
+					newUrl = addParam(optionType, optionValue, url);
+				}
+			} else {
+				// console.log('*');
+				newUrl = removeParam(optionType, url);
+			}
+		} else if(!$(option).is('.selected')) {
+			// console.log('*');
+			newUrl = addParam(type, value, url);
+		}
+		if(newUrl) { $(link).attr('href', newUrl); }
+	});
+}
+
+function updateCounts(option, vars) {	
+	var section = $(option).parents('section');
 	var filterType = $(option).parents('.filter-list').attr('data-filter');
 	var filterValue = $(option).find('a').attr('data-value');
-	$(section).find('.filter-list:not([data-filter="' + thisList + '"]) .option a').each(function() {
-		var url = $(this).attr('href');
-		filterType = renameFilterType(filterType);
-		if(getParam(filterType, url)) {
-			url = removeParam(filterType, url);
+	var url = $(option).find('a').attr('href');
+	var params = getParams(url);
+	var options = {};
+	$(section).find('.filter-list:not(.' + filterType + ') .option a').each(function(i, optionLink) {
+		var thisType = $(optionLink).parents('.filter-list').attr('data-filter');
+		var thisValue = $(optionLink).attr('data-value');
+		if(!params.hasOwnProperty(thisType)) {
+			options[i] = {
+				'type': thisType,
+				'value': thisValue
+			}
 		}
-		if(selected) {
-			url = url + '&' + filterType + '=' + filterValue;	
-		}
-		$(this).attr('href', url);
 	});
+	vars['options'] = options;
+	var varsString = JSON.stringify(vars);
+	getCount(section, varsString);
+}
+function getCount(section, vars) {
+	$.ajax({
+		url: ajaxpagination.ajaxurl,
+		type: 'post',
+		data: {
+			action: 'get_filter_count',
+			query_vars: vars
+		},
+		beforeSend: function() {
+
+		},
+		success: function(response) {
+			var counts = JSON.parse(response);
+			updateOptionsWithCount(section, counts);
+		}
+	});
+}
+function updateOptionsWithCount(section, counts) {
+	// console.log(counts);
+	for(var i = 0; i < counts.length; i++) {
+		var countObj = counts[i];
+		var type = countObj['type'];
+		var value = countObj['value'];
+		var count = parseInt(countObj['count']);
+		var option = $(section).find('.filter-list.'+type+' .option.'+value);
+		$(option).find('.count').html(count);
+		if(count > 0) {
+			$(option).removeClass('hide');
+		} else {
+			$(option).addClass('hide');
+		}
+	}
 }
 
 function renameFilterType(filterType) {
@@ -874,30 +969,6 @@ function renameFilterType(filterType) {
 	}
 	return filterType;
 }
-
-$('body').on('click', '.filter .select:not(.tag)', function() {
-	var slug = $(this).attr('data-slug');
-	var filter = $(this).parents('.filter');
-	var filterThis = $('.filter-this.'+slug);
-	var section = $(filterThis).parents('section');
-	var content = $(section).find('.content');
-	if($(this).hasClass('view toggle')) {
-		$(filterThis).toggleClass('list').toggleClass('grid');
-		$(this).toggleClass('list').toggleClass('grid');
-		fixScroll(section, content);
-	} else if($(this).hasClass('dropdown')) {
-		var property = $(this).attr('data-filter');
-		var filterList = $('.filter-list.'+property+'.'+slug);
-		if($(filterList).length) {
-			dropDown(property, slug);	
-		} else {
-			$(filter).on('loaded', function() {
-				dropDown(property, slug);
-				$(filter).off('loaded');
-			});
-		}
-	}
-});
 
 // $('.filter').on('loaded', function() {
 // 	dropDown(property, slug);
@@ -968,34 +1039,15 @@ function removeParam(paramType, url) {
     }
     return rtn;
 }
-function updateCounts(option, vars) {	
-	// var section = $(option).parents('section');
-	// var filterType = $(option).parents('.filter-list').attr('data-filter');
-	// var filterValue = $(option).find('a').attr('data-value');
-	// var url = $(option).find('a').attr('href');
-	// var params = getParams(url);
-	// $(section).find('.filter-list .option a').each(function() {
-
-	// });
-	// var option = this;
-	// vars = JSON.stringify(vars);
-	// getCount(vars);
-}
-function getCount(vars) {
-	$.ajax({
-		url: ajaxpagination.ajaxurl,
-		type: 'post',
-		data: {
-			action: 'get_filter_count',
-			query_vars: vars
-		},
-		beforeSend: function() {
-			
-		},
-		success: function(response) {
-			
-		}
-	});
+function addParam(type, value, url) {
+	if (url.indexOf('?')) {
+		var sym = '&';
+	} else {	
+		var sym = '?';
+	}
+	type = renameFilterType(type);
+	var newUrl = url+sym+type+'='+value;
+	return newUrl;
 }
 /////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////
@@ -1575,6 +1627,41 @@ function scrollToResourceItem() {
 /////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////
+function scrollToHash(section) {
+	var hash = window.location.hash;
+	var content = $(section).find('.content');
+	var module = $(hash);
+	if(!$(module).length){return}
+	var moduleTop = $(module).offset().top - 110;
+	setTimeout(function() {
+		$(content).scrollTop(moduleTop);
+		fixScroll(section, content);
+	},100);
+}
+
+function fixScroll(section, content) {
+	var sectionScrollHeight = section[0].scrollHeight;
+	var sectionHeight = $(section)[0].clientHeight;
+	var sectionScroll = $(section).scrollTop();
+	var contentScrollHeight = content[0].scrollHeight;
+	var contentHeight = $(content)[0].clientHeight;
+	// if content is same height as window
+	if(contentHeight == $(window).innerHeight()) {
+		if(contentScrollHeight <= contentHeight) {
+			$(section).addClass('show-footer');
+		} else if(sectionScroll) {
+			$(section).addClass('show-footer');
+		} else {
+			$(section).removeClass('show-footer');
+		}
+	}
+	// if content is too short to scroll -> scroll to footer
+	else if(contentScrollHeight <= contentHeight && contentScrollHeight != 0) {
+		$(section).addClass('show-footer');
+	} else {
+		
+	}
+}
 
 function updateFavicons(newColor) {
 	$('link[data-update]').each(function() {

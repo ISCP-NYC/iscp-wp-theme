@@ -50,19 +50,26 @@ section.single.resident {
 				line-height: inherit !important;
 			}
 		}
-		.events {
+		.list {
 			padding-top: 20px;
 			border-top: 10px solid $orange;
 			margin-top: 52px;
 			h3.title {
 				color: $orange;
 			}
-			a.event {
-				@include medium-fs;
-				display: table;
-				margin-bottom: 40px;
-				div {
+			&.residencies {
+				.residency {
 					margin-bottom: 5px;
+				}
+			}
+			&.events {
+				a.event {
+					@include medium-fs;
+					display: table;
+					margin-bottom: 40px;
+					div {
+						margin-bottom: 5px;
+					}
 				}
 			}
 		}

@@ -6,7 +6,6 @@ section.residents {
 		.top {
 		    display: flex;
 		    .filter {
-		    	// width: 70%;
 		    	float: left;
 		    	.link.map {
 		    		cursor: pointer !important;
@@ -19,7 +18,7 @@ section.residents {
 		    				background-image: url(../images/earth1.png);
 		    			}
 		    			&.hover {
-		    				background-image: url(../images/bullet-black.svg);	
+		    				background-image: url(../images/bullet-black.svg);
 		    			}
 		    		}
 		    	}
@@ -68,8 +67,8 @@ section.residents {
 				}
 				&.nolink {
 					h2.title {
-						width: 40%;	
-						text-align: left;	
+						width: 40%;
+						text-align: left;
 					}
 					.link {
 						pointer-events: none;
@@ -94,7 +93,7 @@ section.residents {
 						}
 					}
 				}
-				
+
 			}
 		}
 	}

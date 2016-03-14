@@ -17,7 +17,7 @@ switch($post_type) {
 			wp_reset_postdata();
 
 			//previous current residents by studio number
-			// insert_neighbor_residents( $this_resident_id, 'prev', 3 );
+			insert_neighbor_residents( $this_resident_id, 'prev', 3 );
 
 			//opened current resident
 			setup_postdata( $this_resident );
@@ -25,7 +25,7 @@ switch($post_type) {
 			wp_reset_postdata();
 
 			//next current residents by studio number
-			// insert_neighbor_residents( $this_resident_id, 'next', 3 );
+			insert_neighbor_residents( $this_resident_id, 'next', 3 );
 
 			// current residents list
 			$current_residents_page_id = get_page_by_path( 'past-residents' )->ID;

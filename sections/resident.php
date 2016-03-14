@@ -53,18 +53,26 @@ endif;
 						);
 						array_push( $residencies, $residency_object );
 					endwhile;
+					usort($residencies, function($a, $b) {
+						$ad = $a->start_date_dt;
+						$bd = $b->start_date_dt;
+						if ($ad == $bd) {
+							return 0;
+						}
+						return $ad > $bd ? -1 : 1;
+					});
 				endif;
 				if( is_past( $resident_id ) ):
 					echo '<h2>';
-					echo 'Past Resident: ';
+					echo 'Past Resident</br>';
 					foreach ($residencies as $index=>$residency):
 						if( $index != 0 ):
-							echo ', ';
+							echo '</br>';
 						endif;
 						$year = $residency->year;
 						echo $year;
-						echo '</br>';
-						echo get_sponsors( $resident_id );
+						echo ': ';
+						echo get_sponsors( $resident_id, $index );
 					endforeach;
 					echo '</h2>';
 				elseif( is_current( $resident_id ) ):
@@ -128,8 +136,23 @@ endif;
 				)
 			));
 
+			if( is_current( $resident_id ) && sizeof($residencies) > 1 ): 
+				echo '<div class="residencies list">';
+				echo '<h3 class="title">Past Residencies</h3>';
+				$index = 0;
+				foreach( $residencies as $residency ): 
+					echo '<div class="residency">';
+					echo $residency->date_range;
+					echo '</br>';
+					echo get_sponsors( $resident_id, $index );
+					echo '</div>';
+					$index++;
+				endforeach;
+				echo '</div>';
+			endif;
+
 			if($events):
-				echo '<div class="events">';
+				echo '<div class="events list">';
 				echo '<h3 class="title">Events &amp; Exhibitions</h3>';
 				foreach( $events as $event ): 
 					$event_id = $event->ID;

@@ -35,7 +35,7 @@ section#search, section#error {
 			.shelf-item {
 				@include large-fs;
 				padding: 0px 20px;
-				a {
+				.wrap {
 					width: 100%;
 					padding: 20px 0;
 					.thumb {

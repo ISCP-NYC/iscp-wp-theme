@@ -38,7 +38,7 @@ a, .link {
 		}
 	}
 }
-	
+
 input {
 	-webkit-appearance: none;
 	border-radius: 0;
@@ -169,6 +169,7 @@ section {
 		transition: none !important;
 	}
 	.load-more {
+		margin-top: -5px;
 		width: 100%;
 		position: relative;
 		@include large-fs;
@@ -266,7 +267,7 @@ h2, .medium {
 	@include medium-fs;
 	&.title {
 		text-align: center;
-		padding: 3px 0;
+		padding: 0 0 3px 0;
 		color: $orange;
 	}
 }
@@ -331,25 +332,23 @@ h4, .small {
 		opacity: 0;
 	}
 }
-body.login {
-	background-color: $orange;
-	color: $white;
-	main {
-		width: 100% !important;
+section.login {
+	background: $orange;
+	.login {
+		height: 100%;
 		display: table;
-		.login {
-			width: 100%;
+		margin: auto;
+		.wrap {
 			display: table-cell;
 			vertical-align: middle;
 			text-align: center;
-
 			h1 {
-				font-size: 90px;
-				line-height: 110px;
-				margin-bottom: 25px;
+				color: $white;
+				@include large-fs;
+				margin-bottom: 20px;
 			}
 			a {
-				@include small-fs;
+				@include medium-fs;
 				color: $white;
 				margin: 0 25px;
 			}
