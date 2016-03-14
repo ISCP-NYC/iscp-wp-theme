@@ -768,6 +768,9 @@ $('body').on('click', '.bar:not(.hide) .select.tag', function(event) {
 
 function filterQuery(vars, section, url, option) {
 	vars = JSON.stringify(vars);
+	var container = $(section).find('.filter-this');
+	var transitionEnd = 'transitionend webkitTransitionEnd oTransitionEnd';
+	var items = $(container).find('.item');
 	$.ajax({
 		url: ajaxpagination.ajaxurl,
 		type: 'post',
@@ -777,13 +780,12 @@ function filterQuery(vars, section, url, option) {
 			page: 1
 		},
 		beforeSend: function() {
-
+			$(container).addClass('removing');
+			loading(vars, 'loading filtering');
+			window.history.pushState({path:url},'',url);
+			$(section).attr('data-permalink', url);
 		},
 		success: function(response) {
-			var container = $(section).find('.filter-this');
-			var transitionEnd = 'transitionend webkitTransitionEnd oTransitionEnd';
-			var items = $(container).find('.item');
-			$(container).addClass('removing');
 			$(section).one(transitionEnd, function(e) {
 				$(container).removeClass('removing');
 				if($(section).is('.journal')) {
@@ -801,9 +803,6 @@ function filterQuery(vars, section, url, option) {
 				}
 				$(section).off(transitionEnd);
 			});
-			loading(vars, 'loading filtering');
-			window.history.pushState({path:url},'',url);
-			$(section).attr('data-permalink', url);
 		}
 	});
 }
