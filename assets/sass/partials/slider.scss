@@ -176,8 +176,9 @@
                 @include medium {
                     max-height: 300px;
                 }
-                @include small {
+                @include xsmall {
                     max-height: 200px;
+                    max-width: calc(100% - 60px;)
                 }
             }
         }

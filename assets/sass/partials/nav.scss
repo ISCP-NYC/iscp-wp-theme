@@ -123,6 +123,11 @@ header.main {
 							color: $black;
 						}
 					}
+					@include xlarge {
+						background-position: left 12px;
+						background-size: 20px;
+						text-indent: 30px;
+					}
 					@include large {
 						background-position: left 5px;
 						@include medium-fs;

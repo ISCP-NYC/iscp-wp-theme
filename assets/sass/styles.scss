@@ -112,6 +112,9 @@ section {
 						width: 100%;
 						padding-left: 0px !important;
 					}
+					&.image_slider {
+						padding: 40px 30px 40px 30px;
+					}
 		    }
 			@extend .border-bottom;
 			h2.title {
