@@ -9,18 +9,6 @@
 	<!--[if lt IE 9]>
 	<script src="<?php echo esc_url( get_template_directory_uri() ); ?>/js/html5.js"></script>
 	<![endif]-->
-	<script type="text/javascript">
-	    (function() {
-	        var path = '//easy.myfonts.net/v2/js?sid=4892(font-family=Life+Regular)&sid=4894(font-family=Life+Italic)&sid=5004(font-family=Life+Rounded)&key=xrgToixtG4',
-	            protocol = ('https:' == document.location.protocol ? 'https:' : 'http:'),
-	            trial = document.createElement('script');
-	        trial.type = 'text/javascript';
-	        trial.async = true;
-	        trial.src = protocol + path;
-	        var head = document.getElementsByTagName("head")[0];
-	        head.appendChild(trial);
-	    })();
-	</script>
 	<?php 
 	$user = wp_get_current_user();
 	$classes;

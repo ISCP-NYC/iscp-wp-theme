@@ -161,7 +161,7 @@ $about = get_page_by_path( 'about' );
 			var markerImage = new google.maps.MarkerImage('<?php echo $marker; ?>',
 			    new google.maps.Size(50, 50),
 			    new google.maps.Point(0, 0),
-			    new google.maps.Point(0, 50));
+			    new google.maps.Point(25, 25));
 			var marker = new google.maps.Marker({
 			    position: location,
 			    title: 'ISCP',
