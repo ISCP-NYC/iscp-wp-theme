@@ -234,7 +234,7 @@ header.main {
 				width: 100% !important;
 				height: auto;
 				display: inline-flex;
-				min-height: 60px;
+				min-height: 56px;
 				border-left: 0 !important;
 				border-right: 0 !important;
 				border-bottom: 8px solid $orange;
@@ -255,10 +255,11 @@ header.main {
 					}
 					.sub-menu {
 						width: calc(100% - 20px);
-    					padding: 0 10px;
+    				padding: 0 10px;
 						position: relative;
 						height: auto;
 						margin: 20px 0;
+						display: none;
 					}
 				}
 				&.parent:hover .inner .overlay {
@@ -268,6 +269,9 @@ header.main {
 					height: auto;
 					margin-top: 20px;
 					position: relative;
+					@include xsmall {
+						margin-top: 15px;
+					}
 					a {
 						position: relative;
 					}
