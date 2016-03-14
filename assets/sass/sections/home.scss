@@ -2,6 +2,9 @@
 	h2.head {
 		color: $black;
 		margin-bottom: 48px;
+		@include xsmall {
+			margin-bottom: 0px;
+		}
 	}
 	h3.title {
 		color: $orange;
@@ -100,6 +103,31 @@
 				.inner {
 					width: calc(100% - 15px) !important;
 				}
+				&:nth-child(1) .inner {
+					margin: 0 15px 0 0 !important;
+				}
+				&:nth-child(2) .inner {
+					margin: 0 0 0 15px !important;
+				}
+			}
+			&.cols_3 {
+				.shelf-item:nth-child(1), .shelf-item:nth-child(2) {
+					padding-bottom: 60px;
+					@include xsmall {
+							padding-bottom: 45px;
+					}
+				}
+				.shelf-item:nth-child(2n+1):nth-last-child(-n+2):last-child {
+					width: 50% !important;
+					.inner {
+						margin: 0 !important;
+					}
+				}
+				.shelf-item:last-child {
+					@include xsmall {
+						padding-bottom: 25px;
+					}
+				}
 			}
 			// &.cols_3 {
 			// 	.shelf-item:nth-child(1), .shelf-item:nth-child(2) {
@@ -132,11 +160,17 @@
 	.about {
 		.text {
 			@include large-fs;
+			@include xsmall {
+				margin-top: 4px;
+			}
 		}
 	}
 	.residency_program {
 		h3.title {
 			margin-bottom: 10px;
+			@include xsmall {
+				margin-bottom: 4px;
+			}
 		}
 		.text {
 			@include large-fs;

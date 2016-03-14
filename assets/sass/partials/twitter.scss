@@ -23,6 +23,9 @@
 			    padding: 1px 0 1px 25px;
 			    background-image: url(../images/bullet-black.svg);
 			    background-position: left 8px;
+					@include xsmall {
+						background-position: left 3px;
+					}
 			    background-size: 15px;
 			    background-repeat: no-repeat;
 			    word-wrap: break-word;
@@ -32,6 +35,19 @@
 				padding: 5px 0 0 25px;
 				@include small-fs;
 				color: $orange;
+			}
+		}
+	}
+	@include medium {
+		.tweets {
+			max-width: 800px;
+			margin: auto;
+			.tweet {
+				width: 100%;
+				max-width: 600px;
+				margin: 0 auto 10px 0 !important;
+				float: none;
+				max-width: none;
 			}
 		}
 	}
@@ -48,16 +64,10 @@
 			}
 		}
 	}
-	@include medium {
+	@include xsmall {
 		.tweets {
-			max-width: 800px;
-			margin: auto;
 			.tweet {
-				width: 100%;
-				max-width: 600px;
-				margin: 0 auto 10px 0 !important;
-				float: none;
-				max-width: none;
+				margin-top: 6px !important;
 			}
 		}
 	}

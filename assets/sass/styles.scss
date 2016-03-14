@@ -94,9 +94,9 @@ section {
 		border-color: $orange;
 		transition: border-color 150ms ease-in-out;
 		@include small {
-			width: 100%;
-			padding: 130px 0px;
-			margin-left: 0;
+			width: calc(100% - 20px) !important;
+			padding: 75px 0px 10px 0px;
+			margin-left: 10px;
 			border-width: 0;
 		}
 		@include xsmall {
@@ -107,9 +107,16 @@ section {
 				margin-bottom: 0px;
 				margin-top: 5px;
 		    display: table;
-		    @include small {
+		    @include xsmall {
 		    	width: calc(100% - 60px);
-    			padding: 30px 30px 60px 30px;
+    			padding: 13px 30px 23px 30px;
+					&.newsletter {
+						width: 100%;
+						padding-left: 0px !important;
+					}
+					&.image_slider {
+						padding: 40px 30px 40px 30px;
+					}
 		    }
 			@extend .border-bottom;
 			h2.title {
@@ -138,6 +145,9 @@ section {
 	h2.head {
 		width: 100%;
 		padding: 10px 0 30px;
+		@include xsmall {
+			padding: 16px 0 42px;
+		}
 		text-align: center;
 		color: $orange;
 		margin-bottom: 20px;
@@ -278,6 +288,9 @@ h3, .small {
 	&.title {
 		text-align: center;
 		padding: 5px 0 40px 0;
+		@include xsmall {
+			padding: 5px 0 10px 0;
+		}
 	}
 	@include medium {
 		@include small-fs;
@@ -310,6 +323,20 @@ h4, .small {
 }
 .border-bottom {
 	border-bottom: 10px solid $orange;
+}
+@include xsmall {
+	.border-top {
+		border-top: 8px solid $orange;
+	}
+	.border-bottom {
+		border-bottom: 8px solid $orange;
+	}
+	.half-border-right {
+		border-right: 4px solid $orange;
+	}
+	.half-border-left {
+		border-left: 4px solid $orange;
+	}
 }
 .border-right {
 	border-right: 10px solid $orange;
