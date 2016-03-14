@@ -1,22 +1,6 @@
 <?php
-include(locate_template('sections/params/sponsors.php'));
-if( $country_param ):
-	$filter_query = array(
-		'key' => 'country',
-		'value' => '"' . $country_param_id . '"',
-		'compare' => 'LIKE'
-	);
-	$append_query = '?from=' . $country_param;
-endif;
-$sponsors_query = array(
-	'post_type' => 'sponsor',
-	'posts_per_page' => 18,
-	'orderby' => 'name',
-	'order' => 'ASC',
-	'paged' => $paged,
-	'post_status' => 'publish',
-	'meta_query' => array( $sponsors_query, $filter_query )
-);
+include( locate_template( 'sections/params/sponsors.php' ) );
+$url = get_permalink();
 $sponsors = new WP_Query( $sponsors_query );
 $GLOBALS['wp_query'] = $sponsors;
 $last_page = $sponsors->max_num_pages;
@@ -26,7 +10,8 @@ if( have_posts() ):
 		$sponsor_id = $the_ID;
 		$title = get_the_title( $sponsor_id );
 		$country = get_field('country', $sponsor_id )[0]->post_title;
-		$country_permalink = get_field('country', $sponsor_id )[0]->permalink;
+		$country_slug = get_field('country', $sponsor_id )[0]->post_name;
+		$country_permalink = query_url( 'from', $country_slug, $url );
 		$permalink = get_permalink();
 		$website = get_field('website', $sponsor_id );
 		$pretty_website = explode( '/', pretty_url( $website ) )[0];

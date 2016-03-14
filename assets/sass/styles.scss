@@ -356,7 +356,6 @@ section.login {
 	}
 }
 @import 'partials/slider';
-
 @import 'sections/about';
 @import 'sections/apply';
 @import 'sections/black';
@@ -375,6 +374,7 @@ section.login {
 @import 'sections/supporters';
 @import 'sections/sponsor';
 @import 'sections/visit';
+
 ::-webkit-scrollbar {display:none;}
 ::-moz-scrollbar {display:none;}
 ::-o-scrollbar {display:none;}

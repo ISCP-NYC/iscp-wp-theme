@@ -21,4 +21,5 @@ else:
 	$event_type_param = get_query_var( 'type' );
 	$year_param = get_query_var( 'date' );
 endif;
+$event_type_param_title = pretty( $event_type_param );
 ?>

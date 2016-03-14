@@ -1309,8 +1309,9 @@ function user_is_resident() {
 	endif;
 }
 
-function query_url( $key, $value, $url, $filter = null, $remove ) {
+function query_url( $key, $value, $url, $filter = null, $remove = false ) {
 	$this_query = array( $key => $value );
+	$url = explode('#', $url)[0];
 	$parsed_url = parse_url($url);
 	parse_str($parsed_url['query'], $params);
 	$params = array_merge( $params, $this_query );
@@ -1342,7 +1343,6 @@ function get_resident_count( $type, $value, $query = null ) {
 			'value' => '"' . $value . '"',
 			'compare' => 'LIKE'
 		);
-		$query = unsetRepeat( $query, 'country' );
 		$meta_query = array_merge( $meta_query, $country_query );
 	endif;
 
@@ -1357,7 +1357,6 @@ function get_resident_count( $type, $value, $query = null ) {
 			'value' => $year_range,
 			'compare' => 'BETWEEN'
 		);
-		$query = unsetRepeat( $query, 'year' );
 		$meta_query = array_merge( $meta_query, $year_query );
 	endif;
 
@@ -1368,7 +1367,6 @@ function get_resident_count( $type, $value, $query = null ) {
 			'value' => $value,
 			'compare' => 'LIKE'
 		);
-		$query = unsetRepeat( $query, 'residency_program' );
 		$meta_query = array_merge( $meta_query, $program_query );
 	endif;
 
@@ -1379,7 +1377,6 @@ function get_resident_count( $type, $value, $query = null ) {
 			'value' => $value,
 			'compare' => 'LIKE'
 		);
-		$query = unsetRepeat( $query, 'type' );
 		$meta_query = array_merge( $meta_query, $type_query );
 	endif;	
 	$empty_index = sizeof( $query['meta_query'] ) + 1;
@@ -1460,23 +1457,20 @@ function get_event_count( $type, $value ) {
 }
 
 
-function get_sponsor_count( $type, $value, $page_query ) {
-	$meta_query = array();
-
+function get_sponsor_count( $type, $value ) {
 	if( $type == 'country' ):
 		$country_query = array(
 			'key' => 'country',
 			'value' => '"' . $value . '"',
 			'compare' => 'LIKE'
 		);
-		$meta_query = array_merge( $meta_query, $country_query );
 	endif;
 
 	$query_args = array(
 		'post_type' => 'sponsor',
 		'posts_per_page' => -1,
 		'post_status' => 'publish',
-		'meta_query' => array( $meta_query, $page_query )
+		'meta_query' => array( $country_query )
 	);
 	$query = new WP_Query( $query_args );
 	$count = $query->found_posts;

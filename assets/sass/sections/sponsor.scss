@@ -25,20 +25,5 @@ section.sponsor {
 				@include medium-fs;
 			}
 		}
-		.top {
-			.filter {
-				width: 70%;
-				float: left;
-			}
-			.right.type {
-				width: 30%;
-				float: left;
-				white-space: nowrap;
-				text-align: right;
-			}
-		}
-		.residents.shelves.list {
-			margin-top: 0;
-		}
 	}
 }

@@ -260,7 +260,7 @@ function sectionContentScrollListener(content) {
 		var pastTop = past[0].offsetTop - 170;
 		if(scrollTop > pastTop) {
 			$(section).addClass('past');
-			if(window.location.hash != '#past') {
+			if(window.location.hash != '#past' && !window.location.search.length) {
 				history.pushState('', document.title, window.location.href + '#past');
 			}
 			updateFavicons('blue');
@@ -715,7 +715,8 @@ $('body').on('click', 'section:not(#apply) .filter-list .option a', function(eve
 	}
 	var url = $(this).attr('href');
 	var filterType = $(this).parents('.filter-list').attr('data-filter');
-	var filterCount = $(section).find('.select[data-filter="'+filterType+'"]').find('.count');
+	var filterLabel = $(this).find('.label');
+	var filterValue = $(section).find('.select.'+filterType).find('.value');
 	if($(option).is('.selected')) {
 		$(option).removeClass('selected');
 		if (url.indexOf('?')) {
@@ -723,15 +724,16 @@ $('body').on('click', 'section:not(#apply) .filter-list .option a', function(eve
 		} else {	
 			var sym = '?';
 		}
-		newUrl = url+sym+optionType+'='+optionValue;
-		$(filterCount).text('');
+		// newUrl = addParam(optionType, optionValue, url);
+		$(filterValue).text('');
 	} else {
 		$(section).find('.filter-list.'+optionType+' .option.selected').removeClass('selected');
 		$(option).addClass('selected');
 		newUrl = removeParam(optionType, url);
-		$(filterCount).text(': '+optionText);
+		newUrl = newUrl.replace(/\?$/, '');
+		this.href = newUrl;
+		$(filterValue).text(': '+optionText);
 	}
-	this.href = newUrl;
 	var params = getParams(url);
 	$.each(params, function(key, value) {
 		vars[key] = value;
@@ -741,7 +743,7 @@ $('body').on('click', 'section:not(#apply) .filter-list .option a', function(eve
 		vars['pagetype'] = 'sponsor';
 	}
 	vars['pagename'] = slug;
-	updateCounts(option, vars);
+	// updateCounts(option, vars);
 	if(isSmall()) {
 		$(section).find('.select[data-filter="'+filterType+'"]').click();
 	}
@@ -750,6 +752,8 @@ $('body').on('click', 'section:not(#apply) .filter-list .option a', function(eve
 
 function filterQuery(vars, section, url, option) {
 	vars = JSON.stringify(vars);
+	var container = $(section).find('.filter-this');
+	var items = $(container).find('.item');
 	$.ajax({
 		url: ajaxpagination.ajaxurl,
 		type: 'post',
@@ -759,12 +763,12 @@ function filterQuery(vars, section, url, option) {
 			page: 1
 		},
 		beforeSend: function() {
-			
+			$(container).addClass('removing');
+			loading(vars, 'loading filtering');
+			window.history.pushState({path:url},'',url);
+			$(section).attr('data-permalink', url);
 		},
 		success: function(response) {
-			var container = $(section).find('.filter-this');
-			var items = $(container).find('.item');
-			$(container).addClass('removing');
 			$(section).one(transitionEnd, function(e) {
 				$(container).removeClass('removing');
 				if($(section).is('.journal')) {
@@ -782,9 +786,6 @@ function filterQuery(vars, section, url, option) {
 				}
 				$(section).off(transitionEnd);
 			});
-			loading(vars, 'loading filtering');
-			window.history.pushState({path:url},'',url);
-			$(section).attr('data-permalink', url);
 		}
 	});
 }
@@ -871,8 +872,8 @@ function insertFilterList(slug) {
 
 function updateFilterLinks(option, vars) {
 	var section = $(option).parents('section');
-	var optionType = $(option).parents('.filter-list').attr('data-filter');
-	var optionValue = renameFilterType($(option).find('a').attr('data-value'));
+	var optionType = renameFilterType($(option).parents('.filter-list').attr('data-filter'));
+	var optionValue = $(option).find('a').attr('data-value');
 	$(section).find('.filter-list .option a').each(function() {
 		var link = this;
 		var url = $(link).attr('href');
@@ -883,80 +884,77 @@ function updateFilterLinks(option, vars) {
 		var newUrl;
 		if(optionType != type) {
 			if(gotParam) {
-				// console.log('*');
 				if(gotParam != optionValue) {
 					newUrl = removeParam(optionType, url);
 					newUrl = addParam(optionType, optionValue, newUrl);
 				} else {
-					// console.log('*');
-					newUrl = addParam(optionType, optionValue, url);
+					newUrl = removeParam(optionType, url);
 				}
 			} else {
-				// console.log('*');
-				newUrl = removeParam(optionType, url);
+				newUrl = addParam(optionType, optionValue, url);
 			}
 		} else if(!$(option).is('.selected')) {
-			// console.log('*');
-			newUrl = addParam(type, value, url);
+			newUrl = removeParam(optionType, url);
+			newUrl = addParam(type, value, newUrl);
 		}
 		if(newUrl) { $(link).attr('href', newUrl); }
 	});
 }
 
-function updateCounts(option, vars) {	
-	var section = $(option).parents('section');
-	var filterType = $(option).parents('.filter-list').attr('data-filter');
-	var filterValue = $(option).find('a').attr('data-value');
-	var url = $(option).find('a').attr('href');
-	var params = getParams(url);
-	var options = {};
-	$(section).find('.filter-list:not(.' + filterType + ') .option a').each(function(i, optionLink) {
-		var thisType = $(optionLink).parents('.filter-list').attr('data-filter');
-		var thisValue = $(optionLink).attr('data-value');
-		if(!params.hasOwnProperty(thisType)) {
-			options[i] = {
-				'type': thisType,
-				'value': thisValue
-			}
-		}
-	});
-	vars['options'] = options;
-	var varsString = JSON.stringify(vars);
-	getCount(section, varsString);
-}
-function getCount(section, vars) {
-	$.ajax({
-		url: ajaxpagination.ajaxurl,
-		type: 'post',
-		data: {
-			action: 'get_filter_count',
-			query_vars: vars
-		},
-		beforeSend: function() {
+// function updateCounts(option, vars) {	
+// 	var section = $(option).parents('section');
+// 	var filterType = $(option).parents('.filter-list').attr('data-filter');
+// 	var filterValue = $(option).find('a').attr('data-value');
+// 	var url = $(option).find('a').attr('href');
+// 	var params = getParams(url);
+// 	var options = {};
+// 	$(section).find('.filter-list:not(.' + filterType + ') .option a').each(function(i, optionLink) {
+// 		var thisType = $(optionLink).parents('.filter-list').attr('data-filter');
+// 		var thisValue = $(optionLink).attr('data-value');
+// 		if(!params.hasOwnProperty(thisType)) {
+// 			options[i] = {
+// 				'type': thisType,
+// 				'value': thisValue
+// 			}
+// 		}
+// 	});
+// 	vars['options'] = options;
+// 	var varsString = JSON.stringify(vars);
+// 	getCount(section, varsString);
+// }
+// function getCount(section, vars) {
+// 	$.ajax({
+// 		url: ajaxpagination.ajaxurl,
+// 		type: 'post',
+// 		data: {
+// 			action: 'get_filter_count',
+// 			query_vars: vars
+// 		},
+// 		beforeSend: function() {
 
-		},
-		success: function(response) {
-			var counts = JSON.parse(response);
-			updateOptionsWithCount(section, counts);
-		}
-	});
-}
-function updateOptionsWithCount(section, counts) {
-	// console.log(counts);
-	for(var i = 0; i < counts.length; i++) {
-		var countObj = counts[i];
-		var type = countObj['type'];
-		var value = countObj['value'];
-		var count = parseInt(countObj['count']);
-		var option = $(section).find('.filter-list.'+type+' .option.'+value);
-		$(option).find('.count').html(count);
-		if(count > 0) {
-			$(option).removeClass('hide');
-		} else {
-			$(option).addClass('hide');
-		}
-	}
-}
+// 		},
+// 		success: function(response) {
+// 			var counts = JSON.parse(response);
+// 			updateOptionsWithCount(section, counts);
+// 		}
+// 	});
+// }
+// function updateOptionsWithCount(section, counts) {
+// 	// console.log(counts);
+// 	for(var i = 0; i < counts.length; i++) {
+// 		var countObj = counts[i];
+// 		var type = countObj['type'];
+// 		var value = countObj['value'];
+// 		var count = parseInt(countObj['count']);
+// 		var option = $(section).find('.filter-list.'+type+' .option.'+value);
+// 		$(option).find('.count').html(count);
+// 		if(count > 0) {
+// 			$(option).removeClass('hide');
+// 		} else {
+// 			$(option).addClass('hide');
+// 		}
+// 	}
+// }
 
 function renameFilterType(filterType) {
 	switch(filterType) {
@@ -1020,30 +1018,34 @@ function getParams(url) {
     }
     return params;
 }
-function removeParam(paramType, url) {
-	if(paramType=='year'){paramType='date';}
-	if(paramType=='country'){paramType='from';}
-    var rtn = url.split("?")[0],
+function removeParam(type, url) {
+	type = renameFilterType(type);
+    var rtn = url.split('?')[0],
         param,
         params_arr = [],
-        queryString = (url.indexOf("?") !== -1) ? url.split("?")[1] : "";
-    if (queryString !== "") {
-        params_arr = queryString.split("&");
+        queryString = (url.indexOf('?') !== -1) ? url.split('?')[1] : '';
+    if(queryString !== '') {
+        params_arr = queryString.split('&');
         for (var i = params_arr.length - 1; i >= 0; i -= 1) {
-            param = params_arr[i].split("=")[0];
-            if (param === paramType) {
+            param = params_arr[i].split('=')[0];
+            if (param === type) {
                 params_arr.splice(i, 1);
             }
         }
-        rtn = rtn + "?" + params_arr.join("&");
+        rtn = rtn + '?' + params_arr.join('&');
     }
     return rtn;
 }
 function addParam(type, value, url) {
-	if (url.indexOf('?')) {
-		var sym = '&';
-	} else {	
-		var sym = '?';
+	type = renameFilterType(type);
+	if(url.indexOf('?') != url.length-1) {
+		if (url.indexOf('?')) {
+			var sym = '&';
+		} else {
+			var sym = '?';
+		}
+	} else {
+		var sym = '';
 	}
 	type = renameFilterType(type);
 	var newUrl = url+sym+type+'='+value;

@@ -79,12 +79,13 @@ $paged = 1;
 				<div class="bar">
 					<div class="select link dropdown country" data-filter="country" data-slug="<?php echo $sponsor_slug ?>">
 						<?php
-						if($country_param):
-							$country_count = ': ' . $country_param_title . ' (' . get_resident_count( 'country', $country_param_id, $sponsor_query ) . ')';
+						if( $country_param ):
+							$selected = ': ' . $country_param_title;
+						else:
+							$selected = null;
 						endif;
-						echo '<span>Country</span><span class="showing">' . $country_count . '</span>';
+						echo '<span class="label">Country</span><span class="value">' . $selected . '</span>';
 						?>
-						</span>
 						<div class="swap">
 							<div class="icon default"></div>
 							<div class="icon hover"></div>
@@ -92,12 +93,12 @@ $paged = 1;
 					</div>
 					<div class="select link dropdown date" data-filter="date" data-slug="<?php echo $sponsor_slug ?>">
 						<?php
-						if($year_param):
-							$year_count = ': ' . $year_param . ' (' . get_resident_count( 'year', $year_param, $sponsor_query ) . ')';
+						if( $year_param ):
+							$selected = ': ' . $year_param;
 						else:
-							$year_count = null;
+							$selected = null;
 						endif;
-						echo '<span>Year</span><span class="showing">' . $year_count . '</span>';
+						echo '<span class="label">Year</span><span class="value">' . $selected . '</span>';
 						?>
 						<div class="swap">
 							<div class="icon default"></div>
@@ -106,12 +107,26 @@ $paged = 1;
 					</div>
 					<div class="select link dropdown program" data-filter="program" data-slug="<?php echo $sponsor_slug ?>">
 						<?php
-						if($program_param):
-							$program_count = ': ' . get_program_title( $program_param ) . ' (' . get_resident_count( 'program', $program_param, $sponsor_query ) . ')';
+						if( $program_param ):
+							$selected = ': ' . get_program_title( $program );
 						else:
-							$program_count = null;
+							$selected = null;
 						endif;
-						echo '<span>Residency Program</span><span class="showing">' . $program_count . '</span>';
+						echo '<span class="label">Residency Program</span><span class="value">' . $selected . '</span>';
+						?>
+						<div class="swap">
+							<div class="icon default"></div>
+							<div class="icon hover"></div>
+						</div>
+					</div>
+					<div class="select link dropdown type" data-filter="type" data-slug="<?php echo $sponsor_slug ?>">
+						<?php
+						if( $type_param ):
+							$selected = ': ' . ucwords( $type_param );
+						else:
+							$selected = null;
+						endif;
+						echo '<span class="label">Resident Type</span><span class="value">' . $selected . '</span>';
 						?>
 						<div class="swap">
 							<div class="icon default"></div>
@@ -137,123 +152,14 @@ $paged = 1;
 							<div class="icon hover"></div>
 						</div>
 					</a>
-				</div>
-			</div>
-		</div>	
-		<div class="filter-lists">
-			<div class="filter-list country <?php echo $sponsor_slug ?>" data-filter="country">
-				<div class="options">
-				<?php
-				$countries = get_posts( array(
-					'posts_per_page'	=> -1,
-					'post_type'			=> 'country',
-					'orderby' 			=> 'title',
-					'order' 			=> 'ASC',
-					'post_status' 		=> 'publish'
-				) );
-				foreach( $countries as $country ): 
-					$country_id = $country->ID;
-					$country_slug = $country->post_name;
-					$country_title = $country->post_title;
-					$country_count = get_resident_count( 'country', $country_id, $sponsor_query );
-					$filter_url = $page_url . '?from=' . $country_slug;
-					if( $country_count != 0 ):
-						if( $country_param == $country_slug ):
-							$selected = ' selected';
-						else:
-							$selected = null;
-						endif;
-						echo '<div class="option' . $selected . '">';
-						echo '<a data-from="' . $country_slug . '" href="' . $filter_url . '">';
-						echo ucwords( $country_title );
-						echo ' (<span class="count">';
-						echo $country_count;
-						echo '</span>)';
-						echo '<div class="swap">';
-						echo '<div class="icon default"></div>';
-						echo '<div class="icon hover"></div>';
-						echo '</div>';
-						echo '</a>';
-						echo '</div>';
-					endif;
-				endforeach;
-				?>
-				</div>
-			</div>
-			<div class="filter-list date <?php echo $sponsor_slug ?>" data-filter="date">
-				<div class="options">
-				<?php
-				$start_date = 1994;
-				$end_date = date( "Y" );
-				$years = array_reverse( range( $start_date, $end_date ) );
-				foreach( $years as $year ): 
-					$year_count = get_resident_count( 'year', $year, $sponsor_query );
-					$filter_url = $page_url . '?date=' . $year;
-					if( $year_count  != 0 ):
-						if( $year_param == $year ):
-							$selected = ' selected';
-						else:
-							$selected = null;
-						endif;
-						echo '<div class="option' . $selected . '">';
-						echo '<a data-date="' . $year . '" href="' . $filter_url . '">';
-						echo $year;
-						echo ' (<span class="count">';
-						echo $year_count;
-						echo '</span>)';
-						echo '<div class="swap">';
-						echo '<div class="icon default"></div>';
-						echo '<div class="icon hover"></div>';
-						echo '</div>';
-						echo '</a>';
-						echo '</div>';
-					endif;
-				endforeach;
-				?>
-				</div>
-			</div>
-			<div class="filter-list program <?php echo $sponsor_slug ?>" data-filter="program">
-				<div class="options">
-					<?php
-					$residency_programs = array(
-						'international',
-						'ground_floor'
-					);
-					foreach( $residency_programs as $program ): 
-						$program_count = get_resident_count( 'program', $program, $sponsor_query );
-						$filter_url = $page_url . '?program=' . $program;
-						$program_title = get_program_title( $program );
-						if( $program_count != 0 ):
-							if( $program_param == $program ):
-								$selected = ' selected';
-							else: 
-								$selected = null;
-							endif;
-							echo '<div class="option' . $selected . '">';
-							echo '<a data-program="' . $program . '" href="' . $filter_url . '">';
-							echo $program_title;
-							echo ' (<span class="count">';
-							echo $program_count;
-							echo '</span>)';
-							echo '<div class="swap">';
-							echo '<div class="icon default"></div>';
-							echo '<div class="icon hover"></div>';
-							echo '</div>';
-							echo '</a>';
-							echo '</div>';
-						endif;
-					endforeach;
-					?>
+				</div>	
+
+				<div class="filter-lists">
 				</div>
 			</div>
 		</div>
-
-		<div class="residents shelves filter-this grid items <?php echo $sponsor_slug ?>">
-			<?php
-			$sponsor_param = $sponsor;
-			$sponsor_param_id = $sponsor_id;
-			include(locate_template('sections/loops/residents.php'));
-			?>
+		
+		<div class="residents shelves filter-this grid items sponsor <?php echo $sponsor_slug ?>" data-delay="<?php echo $delay ?>">
 		</div>
 	</div>
 	<?php get_template_part('partials/footer'); ?>

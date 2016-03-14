@@ -13,11 +13,12 @@ $filter = $_GET['filter'];
 					<div class="select link dropdown country" data-filter="country" data-slug="<?php echo $slug ?>">
 						<?php
 						if( $country_param ):
-							$country_count = ': ' . $country_param_title . ' (' . get_resident_count( 'country', $country_param_id, $query ) . ')';
+							$selected = ': ' . $country_param_title;
+						else:
+							$selected = null;
 						endif;
-						echo '<span>Country</span><span class="count">' . $country_count . '</span>';
+						echo '<span class="label">Country</span><span class="value">' . $selected . '</span>';
 						?>
-						</span>
 						<div class="swap">
 							<div class="icon default"></div>
 							<div class="icon hover"></div>
@@ -27,11 +28,11 @@ $filter = $_GET['filter'];
 					<div class="select link dropdown date" data-filter="date" data-slug="<?php echo $slug ?>">
 						<?php
 						if( $year_param ):
-							$year_count = ': ' . $year_param . ' (' . get_resident_count( 'year', $year_param, $query ) . ')';
+							$selected = ': ' . $year_param;
 						else:
-							$year_count = null;
+							$selected = null;
 						endif;
-						echo '<span>Year</span><span class="count">' . $year_count . '</span>';
+						echo '<span class="label">Year</span><span class="value">' . $selected . '</span>';
 						?>
 						<div class="swap">
 							<div class="icon default"></div>
@@ -42,11 +43,11 @@ $filter = $_GET['filter'];
 					<div class="select link dropdown program" data-filter="program" data-slug="<?php echo $slug ?>">
 						<?php
 						if( $program_param ):
-							$program_count = ': ' . get_program_title( $program_param ) . ' (' . get_resident_count( 'program', $program_param, $query ) . ')';
+							$selected = ': ' . get_program_title( $program );
 						else:
-							$program_count = null;
+							$selected = null;
 						endif;
-						echo '<span>Residency Program</span><span class="count">' . $program_count . '</span>';
+						echo '<span class="label">Residency Program</span><span class="value">' . $selected . '</span>';
 						?>
 						<div class="swap">
 							<div class="icon default"></div>
@@ -56,11 +57,11 @@ $filter = $_GET['filter'];
 					<div class="select link dropdown type" data-filter="type" data-slug="<?php echo $slug ?>">
 						<?php
 						if( $type_param ):
-							$type_count = ': ' . ucwords( $type_param ) . ' (' . get_resident_count( 'type', $type_param, $query ) . ')';
+							$selected = ': ' . ucwords( $type_param );
 						else:
-							$type_count = null;
+							$selected = null;
 						endif;
-						echo '<span>Resident Type</span><span class="count">' . $type_count . '</span>';
+						echo '<span class="label">Resident Type</span><span class="value">' . $selected . '</span>';
 						?>
 						<div class="swap">
 							<div class="icon default"></div>
@@ -89,18 +90,8 @@ $filter = $_GET['filter'];
 				</div>
 				<div class="filter-lists"></div>
 			</div>
-			<div class="right alt <?php echo $alt_slug ?>">
-				<?php
-				$alt_page = get_page_by_path( $alt_slug );
-				$alt_url = get_the_permalink( $alt_page );
-				$alt_title = get_the_title( $alt_page );
-				?>
-				<!-- <a href="<?php echo $alt_url; ?>">View <?php echo $alt_title ?></a> -->
-			</div>
 		</div>
-
 		
-
 		<div class="residents shelves filter-this grid items <?php echo $slug ?>" data-delay="<?php echo $delay ?>">
 		</div>
 	</div>

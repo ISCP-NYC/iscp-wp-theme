@@ -12,11 +12,12 @@
 				<div class="bar">
 					<div class="select link dropdown country" data-filter="country" data-slug="<?php echo $slug ?>">
 						<?php
-						if($country_param):
-							$country_count = ': ' . $country_param_title;
-							 // . ' (' . get_sponsor_count( 'country', $country_param_id, $sponsor_query ) . ')';
+						if( $country_param ):
+							$selected = ': ' . $country_param_title;
+						else:
+							$selected = null;
 						endif;
-						echo '<span>Country</span><span class="count">' . $country_count . '</span>';
+						echo '<span class="label">Country</span><span class="value">' . $selected . '</span>';
 						?>
 						</span>
 						<div class="swap">
@@ -40,18 +41,18 @@
 								$country_id = $country->ID;
 								$country_slug = $country->post_name;
 								$country_title = $country->post_title;
-								$country_count = get_sponsor_count( 'country', $country_id, $sponsor_query );
-								$filter_url = $page_url . '?from=' . $country_slug;
+								$country_count = get_sponsor_count( 'country', $country_id );
 								if( $country_count != 0 ):
 									if( $country_param == $country_slug ):
+										$filter_url = $page_url;
 										$selected = ' selected';
 									else:
+										$filter_url = $page_url . '?from=' . $country_slug;
 										$selected = null;
 									endif;
 									echo '<div class="option' . $selected . '">';
-									echo '<a href="' . $filter_url . '">';
+									echo '<a href="' . $filter_url . '" data-value="' . $country_slug . '">';
 									echo $country_title;
-									// echo ' (' . $country_count . ')';
 									echo '<div class="swap">';
 									echo '<div class="icon default"></div>';
 									echo '<div class="icon hover"></div>';

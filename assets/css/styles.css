@@ -4559,19 +4559,6 @@ section.sponsor .content .info {
       section.sponsor .content .info .block {
         font-size: 18px;
         line-height: 21px; } }
-/* line 29, ../sass/sections/sponsor.scss */
-section.sponsor .content .top .filter {
-  width: 70%;
-  float: left; }
-/* line 33, ../sass/sections/sponsor.scss */
-section.sponsor .content .top .right.type {
-  width: 30%;
-  float: left;
-  white-space: nowrap;
-  text-align: right; }
-/* line 40, ../sass/sections/sponsor.scss */
-section.sponsor .content .residents.shelves.list {
-  margin-top: 0; }
 
 /* line 3, ../sass/sections/visit.scss */
 section#visit .module.info {

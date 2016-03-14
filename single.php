@@ -71,6 +71,7 @@ switch($post_type) {
 		$sponsors_page_id = get_page_by_path( 'support/sponsors' )->ID;
 		$post = get_post( $sponsors_page_id, OBJECT );
 		setup_postdata( $post );
+		$post->delay = 0;
 		get_template_part( 'sections/sponsors' );
 		wp_reset_postdata();
 

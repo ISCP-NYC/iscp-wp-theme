@@ -144,4 +144,14 @@ $query = array(
 		$filter_query
 	)
 );
+$count_query = array(
+	'post_type' => 'resident',
+	'posts_per_page' => -1,
+	'post_status' => 'publish',
+	'meta_query' => array(
+		'relation' => 'AND',
+		$page_query,
+		$sponsor_query
+	)
+);
 ?>
