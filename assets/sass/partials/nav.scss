@@ -96,6 +96,10 @@ header.main {
 			&.search:hover .inner .overlay {
 				opacity: 0;
 				pointer-events: none;
+				@include xsmall {
+					opacity: 1;
+					pointer-events: all;
+				}
 			}
 			&.residencies .sub-menu,
 			&.about .sub-menu {
@@ -229,7 +233,9 @@ header.main {
 @include xsmall {
 	header.main {
 		nav {
-			height: auto;
+			height: calc(100% - 60px);
+			overflow-y: scroll;
+			-webkit-overflow-scrolling: touch;
 			position: fixed;
 			margin-top: 60px;
 			padding: 0 !important;
@@ -239,7 +245,7 @@ header.main {
 				width: 100% !important;
 				height: auto;
 				display: inline-flex;
-				min-height: 60px;
+				min-height: 56px;
 				border-left: 0 !important;
 				border-right: 0 !important;
 				border-bottom: 8px solid $orange;
@@ -260,10 +266,13 @@ header.main {
 					}
 					.sub-menu {
 						width: calc(100% - 20px);
-    					padding: 0 10px;
+    				padding: 0 10px;
 						position: relative;
 						height: auto;
-						margin: 20px 0;
+						margin: 7px 0 15px 0;
+						display: none;
+						// opacity: 0;
+						transition: opacity 100ms ease-in-out;
 					}
 				}
 				&.parent:hover .inner .overlay {
@@ -273,6 +282,9 @@ header.main {
 					height: auto;
 					margin-top: 20px;
 					position: relative;
+					@include xsmall {
+						margin-top: 15px;
+					}
 					a {
 						position: relative;
 					}
