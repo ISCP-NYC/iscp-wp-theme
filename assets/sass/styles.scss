@@ -107,7 +107,7 @@ section {
 				margin-bottom: 0px;
 				margin-top: 5px;
 		    display: table;
-		    @include xsmall {
+		    @include small {
 		    	width: calc(100% - 60px);
     			padding: 13px 30px 23px 30px;
 					&.newsletter {
@@ -145,7 +145,7 @@ section {
 	h2.head {
 		width: 100%;
 		padding: 10px 0 30px;
-		@include xsmall {
+		@include small {
 			padding: 16px 0 42px;
 		}
 		text-align: center;
@@ -259,7 +259,7 @@ ul li {
 	list-style: none;
 }
 .description ul li {
-	margin: 25px 0 0 0;
+	margin: 0 0 25px 0;
 	background-image: url(../images/bullet-black.svg);
 	background-position: left 7px;
 	background-repeat: no-repeat;
@@ -275,7 +275,8 @@ ul li {
 }
 p {
 	word-wrap: break-word;
-	margin-top: 30px;
+	margin-bottom: 28px;
+	display: inline-block;
 	span {
 		line-height: inherit !important;
 	}
@@ -303,7 +304,7 @@ h3, .small {
 	&.title {
 		text-align: center;
 		padding: 5px 0 40px 0;
-		@include xsmall {
+		@include small {
 			padding: 5px 0 10px 0;
 		}
 	}
@@ -339,7 +340,7 @@ h4, .small {
 .border-bottom {
 	border-bottom: 10px solid $orange;
 }
-@include xsmall {
+@include small {
 	.border-top {
 		border-top: 8px solid $orange;
 	}

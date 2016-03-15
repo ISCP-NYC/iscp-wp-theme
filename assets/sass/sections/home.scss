@@ -2,7 +2,7 @@
 	h2.head {
 		color: $black;
 		margin-bottom: 48px;
-		@include xsmall {
+		@include small {
 			margin-bottom: 0px;
 		}
 	}
@@ -113,7 +113,7 @@
 			&.cols_3 {
 				.shelf-item:nth-child(1), .shelf-item:nth-child(2) {
 					padding-bottom: 60px;
-					@include xsmall {
+					@include small {
 							padding-bottom: 45px;
 					}
 				}
@@ -124,7 +124,7 @@
 					}
 				}
 				.shelf-item:last-child {
-					@include xsmall {
+					@include small {
 						padding-bottom: 25px;
 					}
 				}
@@ -160,7 +160,7 @@
 	.about {
 		.text {
 			@include large-fs;
-			@include xsmall {
+			@include small {
 				margin-top: 4px;
 			}
 		}
@@ -168,7 +168,7 @@
 	.residency_program {
 		h3.title {
 			margin-bottom: 10px;
-			@include xsmall {
+			@include small {
 				margin-bottom: 4px;
 			}
 		}

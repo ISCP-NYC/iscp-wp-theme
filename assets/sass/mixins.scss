@@ -32,7 +32,7 @@ $xlarge-width: 1600px;
 }
 
 @mixin large {
-	@media (min-width: 1041px) and (max-width: #{$xlarge-width}) {
+	@media (max-width: #{$xlarge-width}) {
     @content;
   }
 }
@@ -44,7 +44,7 @@ $xlarge-width: 1600px;
 // }
 
 @mixin medium {
-	@media (max-width: #{$xmedium-width}) {
+	@media (max-width: #{$medium-width}) {
     @content;
   }
 }

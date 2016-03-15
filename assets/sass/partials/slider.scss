@@ -39,10 +39,10 @@
     padding-top: 30px !important;
     padding-bottom: 30px !important;
     @include medium {
-        // height: 300px;
+        height: 300px;
     }
     @include small {
-        // height: 200px;
+        height: 200px;
     }
     .arrow {
         width: 30px;
