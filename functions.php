@@ -698,17 +698,16 @@ function insert_neighbor_journal_posts( $post_id, $direction, $count = 3 ) {
 	$post_date = $post->post_date;
 
 	if( $direction == 'new' ):
-		$compare = '>';
 		$order = 'ASC';
 		$when = 'after';
 	elseif ( $direction == 'old' ):
-		$compare = '<';
 		$order = 'DESC';
 		$when = 'before';
 	endif;
 
 	$posts_args = array(
 		'post_type' => 'journal',
+		'post_status' => 'publish',
 		'posts_per_page' => $count,
 		'type' => 'DATE',
 		'date_query' => array( $when => $post_date ),
@@ -736,60 +735,57 @@ function insert_neighbor_journal_posts( $post_id, $direction, $count = 3 ) {
 	wp_reset_query();
 }
 
+function get_neighbor_events() {
+	$query_vars = json_decode( stripslashes( $_POST['query_vars'] ), true );
+    $post_id = $query_vars['id'];
+    $direction = $query_vars['direction'];
+    $not_in = $query_vars['not_in'];
+    $count = 1;
+	insert_neighbor_journal_posts( $post_id, $direction, $count, $not_in );   	
+    die();
+}
+add_action( 'wp_ajax_nopriv_get_neighbor_journal_posts', 'get_neighbor_journal_posts' );
+add_action( 'wp_ajax_get_neighbor_journal_posts', 'get_neighbor_journal_posts' );
 
-function insert_neighbor_events( $event_id, $direction, $count = 3 ) {
-	$post = get_post( $event_id );
+
+function insert_neighbor_events( $event_id, $direction, $count = 3, $not_in = array() ) {
+	$event = get_post( $event_id );
 	$event_date = get_post_meta( $event_id , 'start_date', true );
 	$today = new DateTime();
 	$today = $today->format( 'Ymd' );
+	$not_in[] = $event_id;
 	if( $direction == 'new' ):
-		// $compare = '>=';
-		// $order = 'ASC';
-		// $when = 'after';
+		$compare = '>';
+		$order = 'ASC';
 	elseif ( $direction == 'old' ):
-		// $compare = '<=';
+		$compare = '<=';
 		$order = 'DESC';
-		$when = 'before';
 	endif;
 
-	$date_query = array(
-		'relation' => 'AND',
-		array(
-			'key' => 'start_date',
-			'compare' => '<',
-			'value' => $today
-		),
-		array(
-			'key' => 'end_date',
-			'compare' => '<',
-			'value' => $today
-		)
-	);
-
-	$posts_args = array(
+	$events_args = array(
 		'post_type' => 'event',
 		'posts_per_page' => $count,
-		'type' => 'DATE',
-		'date_query' => array( $when => $event_date ),
-		'post__not_in' => array( $event_id ),
-		'orderby' => 'meta_value post_title',
-		'order' => $order,
-		'post_status' => 'publish',
+		'orderby' => 'meta_value_num post_title',
+		'meta_key' => 'start_date',
+		'post__not_in' => $not_in,
 		'meta_query' => array(
-			array( 'key' => 'start_date' ),
-			$date_query
+			'type' => 'DATE',
+			'key' => 'start_date',
+			'compare' => $compare,
+			'value' => $event_date
 		)
 	);
-	$posts = new WP_Query( $posts_args );
-	$last_page = $posts->max_num_pages;
 
-	if ( $direction == 'new' ):
-		$reverse_posts = array_reverse( $posts->posts );
-		$posts->posts = $reverse_posts;
-	endif;
+	$events = new WP_Query( $events_args );
+	$last_page = $events->max_num_pages;
 
-	if( $posts->have_posts() ):
-		while ( $posts->have_posts() ) : $posts->the_post();
+	// if ( $direction == 'new' ):
+		// $reverse_events = array_reverse( $events->posts );
+		// $events->posts = $reverse_events;
+	// endif;
+
+	if( $events->have_posts() ):
+		while ( $events->have_posts() ) : $events->the_post();
 			global $post;
 			setup_postdata( $post );
 			get_template_part( 'sections/event' );
@@ -807,20 +803,22 @@ function get_neighbor_residents() {
 	$query_vars = json_decode( stripslashes( $_POST['query_vars'] ), true );
     $resident_id = $query_vars['id'];
     $direction = $query_vars['direction'];
+    $not_in = $query_vars['not_in'];
     $count = 1;
-	insert_neighbor_residents( $resident_id, $direction, $count, $not );   	
+	insert_neighbor_residents( $resident_id, $direction, $count, $not_in );   	
     die();
 }
 add_action( 'wp_ajax_nopriv_get_neighbor_residents', 'get_neighbor_residents' );
 add_action( 'wp_ajax_get_neighbor_residents', 'get_neighbor_residents' );
 
-function insert_neighbor_residents( $resident_id, $direction, $count ) {
+function insert_neighbor_residents( $resident_id, $direction, $count, $not_in = array() ) {
 	$resident_name = get_the_title( $resident_id );
 	$resident_end_date = get_post_meta( $resident_id , 'residency_dates_0_end_date', true );
 	$resident_start_date = get_post_meta( $resident_id , 'residency_dates_0_start_date', true );
 	$resident_studio = get_field( 'studio_number', $resident_id );
 	$today = new DateTime();
 	$today = $today->format( 'Ymd' );
+	$not_in[] = $resident_id;
 
 	if( is_current( $resident_id ) ):
 
@@ -828,7 +826,6 @@ function insert_neighbor_residents( $resident_id, $direction, $count ) {
 		$direction_type = 'NUMERIC';
 		$direction_key = 'studio_number';
 		$direction_value = $resident_studio;
-		$resident_orderby = 'meta_value_num post_title';
 		$resident_meta_key = 'studio_number';
 
 		if( $direction == 'prev' ):
@@ -839,14 +836,19 @@ function insert_neighbor_residents( $resident_id, $direction, $count ) {
 			$order = 'ASC';
 		endif;
 
+		$resident_orderby = array(
+			'meta_value_num' => $order,
+			'post_title' => $order
+		);
+
 	else:
 
 		if( $direction == 'prev' ):
-			$direction_compare = '>=';
+			$direction_compare = '>';
 			$date_order = 'ASC';
 			$alpha_order = 'DESC';
 		elseif ( $direction == 'next' ):
-			$direction_compare = '>=';
+			$direction_compare = '<=';
 			$date_order = 'DESC';
 			$alpha_order = 'ASC';
 		endif;
@@ -860,13 +862,6 @@ function insert_neighbor_residents( $resident_id, $direction, $count ) {
 			'post_title' => $alpha_order
 		);
 		$resident_meta_key = 'residency_dates_0_end_date';
-
-		$alpha_args = array(
-			'type' => 'CHAR',
-			'key' => 'post_title',
-			'compare' => '>',
-			'value' => $resident_name
-		);
 
 	endif;
 
@@ -900,19 +895,18 @@ function insert_neighbor_residents( $resident_id, $direction, $count ) {
 	$resident_args = array(
 		'post_type' => 'resident',
 		'posts_per_page' => $count,
-		'order' => $order,
 		'orderby' => $resident_orderby,
 		'meta_key' => $resident_meta_key,
-		'post__not_in' => array( $resident_id ),
-		'meta_query' => array( 
-			'relation' => 'AND',
-			$has_bio,
-			$date_args,
-			$direction_args
-			// $alpha_args
+		'post__not_in' => $not_in,
+		'meta_query' => array(
+			array( 
+				'relation' => 'AND',
+				$has_bio,
+				$date_args,
+				$direction_args
+			)
 		)
 	);
-	// print_r($resident_args);
 	$residents = new WP_Query( $resident_args );
 	$last_page = $residents->max_num_pages;
 	if ( $direction == 'prev' ):

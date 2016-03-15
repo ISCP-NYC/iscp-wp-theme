@@ -423,8 +423,7 @@ $('body').on('click', 'aside .move', function(event) {
 	if($(aside).hasClass('left')) {
 		var nextIndex = index - 1;
 		var direction = 'prev';
-	}
-	else {
+	} else {
 		var nextIndex = index + 1;
 		var direction = 'next';
 	}
@@ -433,11 +432,7 @@ $('body').on('click', 'aside .move', function(event) {
 	var sectionsLength = $('section.'+type).length;
 	var slug = $(nextUp).attr('id');
 	if(sectionsLength > 0) {
-		if(direction == 'prev') {
-			getNeighbors(direction, type, slug);
-		} else if(direction == 'next') {
-			getNeighbors(direction, type, slug);
-		}
+		getNeighbors(direction, type, slug);
 	}
 	slideTo(nextIndex, true);
 	$(this).removeClass('.clicked');
@@ -565,6 +560,7 @@ function addItems(html, vars) {
 var loadedFrom = [];
 var click = 0;
 //query wordpress for section 'neighbor' and insert them into main wrapper
+var existingIds = [];
 function getNeighbors(direction, type, slug) {
 	click++;
 	if(direction == 'prev') {
@@ -573,14 +569,20 @@ function getNeighbors(direction, type, slug) {
 		var section = $('section.'+type).last();
 	}
 	var id = $(section).attr('data-id');
-	// if(loadedFrom.indexOf(id) != -1) {
-	// 	return;
-	// }
+	
+	$('section.'+type).each(function() {
+		var existingId = $(this).attr('data-id');
+		if(existingIds.indexOf(existingId) < 0) {
+			existingIds.push(existingId);
+		}
+	});
+	
 	loadedFrom.push(id);
 	var vars = ajaxpagination.query_vars;
 	vars = JSON.parse(vars);
 	vars['id'] = id;
 	vars['direction'] = direction;
+	vars['not_in'] = existingIds;
 	vars = JSON.stringify(vars);
 	var action = 'get_neighbor_' + type.replace(/[-]/g, '_') + 's';
 	$.ajax({

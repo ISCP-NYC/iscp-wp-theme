@@ -50,7 +50,7 @@ $xlarge-width: 1600px;
 }
 
 @mixin small {
-	@media (max-width: #{$medium-width}) {
+	@media (max-width: #{$small-width}) {
     @content;
   }
 }

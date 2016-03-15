@@ -45,20 +45,22 @@ switch($post_type) {
 			wp_reset_postdata();
 
 			//previous past residents by studio number
-			// insert_neighbor_residents( $this_resident_id, 'prev', 3 );
+			insert_neighbor_residents( $this_resident_id, 'prev', 3 );
 
 			setup_postdata( $this_resident );
 			get_template_part( 'sections/resident' );
 			wp_reset_postdata();
 
 			//next past residents by studio number
-			// insert_neighbor_residents( $this_resident_id, 'next', 3 );
+			insert_neighbor_residents( $this_resident_id, 'next', 3 );
 		endif;
 
 		break;
 	case 'event':
 		$this_event = $post;
 		$this_event_id = $this_event->ID;
+
+		// insert_neighbor_events( $this_event_id, 'new', 3 );
 
 		setup_postdata( $this_event );
 		get_template_part( 'sections/event' );
