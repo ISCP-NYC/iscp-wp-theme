@@ -9,7 +9,10 @@ section.error {
 	a, .link {
 		color: $black;
 	}
-	a:hover, .link:hover {
+	a div {
+		transition: color 150ms ease-in-out;
+	}
+	a:hover, .link:hover, a div:hover {
 		color: $orange !important;
 	}
 	nav,
@@ -59,7 +62,7 @@ section.error {
 		}
 		.cell.greenroom {
 			h1:hover .iconWrap {
-				color: $orange;	
+				color: $orange;
 			}
 			.swap .icon.default {
 				background-image: url(../images/lock-black.svg);
@@ -72,7 +75,7 @@ section.error {
 	&.tease-nav header.main {
 		border-color: $orange !important;
 	}
-	.filter { 
+	.filter {
 		.bar {
 			.select.dropdown {
 				.icon {
@@ -80,7 +83,7 @@ section.error {
 			            background-image: url(../images/dropdown-black.svg);
 			        }
 			        &.hover {
-			            background-image: url(../images/dropdown-orange.svg);   
+			            background-image: url(../images/dropdown-orange.svg);
 			        }
 			    }
 			}
@@ -90,13 +93,13 @@ section.error {
 			            background-image: url(../images/view-toggle-black.svg);
 			        }
 			        &.hover {
-			            background-image: url(../images/view-toggle-orange.svg);   
+			            background-image: url(../images/view-toggle-orange.svg);
 			        }
 			    }
 		    }
 			.link.map {
 				.icon.hover {
-					background-image: url(../images/bullet-orange.svg) !important;	
+					background-image: url(../images/bullet-orange.svg) !important;
 				}
 			}
 		}
@@ -139,12 +142,12 @@ section.error {
 	footer {
 		background-color: $black !important;
 		* {
-			background-color: $black !important;		
+			background-color: $black !important;
 			color: $white !important;
-			border-color: $white !important;	
+			border-color: $white !important;
 		}
 		a:hover {
-			color: $white;
+			color: $orange;
 		}
 		aside.footer {
 			border-color: $white !important;
