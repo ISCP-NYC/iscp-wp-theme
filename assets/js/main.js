@@ -640,7 +640,7 @@ function getNeighbors(direction, type, slug) {
 				});
 				setUp();
 			}
-			$('main').removeClass('waiting ' + direction);
+			$('main').removeClass('waiting '+direction);
 		}
 	});
 }
@@ -1244,7 +1244,6 @@ function setImageSliderSize() {
 	$(slideWrapper).css({
 		'left' : -sliderWidth * showIndex
 	}, 600);
-	(slider).find('.show img').transition({opacity:1}, 500);
 }
 
 
@@ -1275,7 +1274,8 @@ $('body').on('mousemove', '.gallery:not(.full) ', function(e) {
 $('body').on('click', '.gallery:not(.full) img', function() {
 	var index = $(this).parents('.slide').index();
 	var gallery = $(this).parents('.gallery');
-	$(gallery).find('.show img').transition({opacity:0}, 500, function() {
+	var thisImage = this;
+	$(thisImage).addClass('clicked').transition({opacity:0}, 500, function() {
 		$(gallery).attr('data-show', index).addClass('full resizing image_slider').css({'cursor':'none'});
 		var cursor = $(gallery).find('.cursor');
 		var slidesLength = $(gallery).find('.slide').length;
@@ -1283,6 +1283,7 @@ $('body').on('click', '.gallery:not(.full) img', function() {
 		$(cursor).css({'display':'none'});
 		var distance = $(window).innerWidth()/4;
 		setImageSliderSize();
+		$(thisImage).transition({opacity:1}, 500).removeClass('clicked');
 		$(gallery).on('mousemove', function(event) {
 			var x = event.pageX;
 			var y = event.pageY;
@@ -1314,7 +1315,8 @@ $('body').on('click', '.gallery:not(.full) img', function() {
 				case 'close':
 					$(this).off('click');
 					$(this).off('mousemove');
-					closeFullSlider(this);
+					$(showingSlide).find('img').addClass('clicked');
+					closeFullSlider(gallery);
 					break;
 				case 'right':
 					var nextIndex = showIndex + 1;
@@ -1341,7 +1343,7 @@ $('body').on('click', '.gallery:not(.full) img', function() {
 			if(isMobile && !$(event.target).is('.arrow') && !$(event.target).is('.icon')) {
 				$(this).off('click');
 				$(this).off('mousemove');
-				closeFullSlider(this);
+				closeFullSlider(gallery);
 			}
 
 		});
@@ -1349,7 +1351,7 @@ $('body').on('click', '.gallery:not(.full) img', function() {
 });
 
 function closeFullSlider(slider) {
-	$(slider).find('.show img').transition({opacity:0}, 500, function() {
+	$(slider).find('img.clicked').transition({opacity:0}, 500, function() {
 		var cursor = $(slider).find('.cursor');
 		$(slider).removeClass('full')
 		.attr('style','')
@@ -1366,6 +1368,8 @@ function closeFullSlider(slider) {
 		} else {
 			setUpImageSlider();
 		}
+		$('img.clicked').transition({opacity:1}, 500);
+		$('img.clicked').removeClass('clicked');
 	});
 }
 
