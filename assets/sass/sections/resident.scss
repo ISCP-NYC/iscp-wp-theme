@@ -4,10 +4,19 @@ section.single.resident {
 		padding: 0 20px;
 		display: table;
 		color: $orange;
-	    display: flex;
+	  display: flex;
+		@include medium-fs;
+		h2 {
+			@include large {
+				@include small-fs;
+			}
+		}
+		@include large {
+			@include small-fs;
+		}
 		.left, .center, .right {
 			float: left;
-		    flex-wrap: wrap;
+		  flex-wrap: wrap;
 		}
 		.left {
 			width: 20%;
@@ -59,16 +68,15 @@ section.single.resident {
 			}
 			&.residencies {
 				.residency {
-					margin-bottom: 5px;
+					margin-bottom: 25px;
 				}
 			}
 			&.events {
 				a.event {
 					@include medium-fs;
 					display: table;
-					margin-bottom: 40px;
-					div {
-						margin-bottom: 5px;
+					.date {
+						margin-bottom: 25px;
 					}
 				}
 			}
@@ -76,6 +84,7 @@ section.single.resident {
 	}
 	.gallery .caption {
 		@include small-fs;
+		margin-top: 5px;
 	}
 	.gallery {
 		width: calc(33.333% - 35px);
@@ -85,7 +94,7 @@ section.single.resident {
 			.piece {
 				margin-bottom: 20px;
 				.image {
-					width: 100%;				
+					width: 100%;
 					img {
 						width: 100%;
 						height: auto;
