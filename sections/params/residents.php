@@ -49,13 +49,15 @@ if( $slug == 'current-residents' ):
 elseif( $slug == 'past-residents' ):
 	$page_query = array_merge(
 		$page_query, array(
-			'compare' => '<='
+			'compare' => '<'
 		)
 	);
 	$orderby_array = array(
 		'meta_key' => 'residency_dates_0_end_date',
-		'orderby' => 'meta_value_num post_title',
-		'order' => 'DESC'
+		'orderby' => array(
+			'meta_value_num' => 'DESC',
+			'post_title' => 'ASC'
+		)
 	);
 	$resident_status = 'past';
 	$alt_slug = 'current-residents';
@@ -63,8 +65,10 @@ elseif( $post_type == 'sponsor' || $page_type == 'sponsor' || $post_type == 'res
 	$page_query = null;
 	$orderby_array = array(
 		'meta_key' => 'residency_dates_0_end_date',
-		'orderby' => 'meta_value_num post_title',
-		'order' => 'DESC'
+		'orderby' => array(
+			'meta_value_num' => 'DESC',
+			'post_title' => 'ASC'
+		)
 	);
 endif;
 if( $country_param ):

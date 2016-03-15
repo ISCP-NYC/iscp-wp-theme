@@ -18,43 +18,6 @@ section.apply {
 			h3.title {
 				margin-top: 30px;
 			}
-			.applications {
-				width: 100%;
-				.application.row {
-					width: 100%;
-					display: table;
-					padding: 0 0 20px 0;
-					@include small-fs;
-					color: $orange;
-					.cell {
-						float: left;
-						&.date {
-							width: 25%;
-							@include small {
-								width: 50%;
-							}
-						}
-						&.country {
-							width: 25%;
-							@include small {
-								width: 50%;
-							}
-						}
-						&.brief {
-							width: 50%;
-							@include small {
-								margin-top: 10px;
-								width: 100%;
-							}
-							.sponsor {
-								a {
-
-								}
-							}
-						}
-					}
-				}
-			}
 		}
 		@include small {
 			.links, .info {
@@ -66,14 +29,37 @@ section.apply {
 				margin-top: 20px;
 			}
 		}
-		.filter {
-			width: 100%;
-			padding: 0;
-			margin: 20px 0 0 0;
-			span {
+	}
+	.applications {
+		border: 0;
+		.rows {
+			.application.row {
+				width: 100%;
+				display: table;
+				padding: 0 0 20px 0;
 				@include small-fs;
-				float: left;
+				color: $orange;
+				.cell {
+					float: left;
+					width: 25%;
+				}
+				.brief {
+					color: $black;
+					padding-top: 10px;
+					float: none;
+					clear: both;
+					width: 100%;
+				}
 			}
+		}
+	}
+	.filter {
+		width: 100%;
+		padding: 0;
+		margin: 20px 0 0 0;
+		span {
+			@include small-fs;
+			float: left;
 		}
 	}
 }

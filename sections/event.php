@@ -77,9 +77,6 @@ $upcoming_events = new WP_Query( $upcoming_query );
 			echo $event_type_name;
 			echo '</br>';
 			echo $date;
-			if( $time ):
-				echo ', ' . $time;
-			endif;
 			?>
 		</h2>	
 
@@ -132,8 +129,8 @@ $upcoming_events = new WP_Query( $upcoming_query );
 			if( $contributors ):
 				echo '<div class="contributors">';
 				$c_length = sizeof( $contributors );
-				echo '<em>' . $title .'</em>';
-				echo ' is made possible through the generous support of ';
+				// echo '<em>' . $title .'</em>';
+				echo 'This program is supported, in part, by ';
 				foreach( $contributors as $index => $contributor ):
 					$contributor_name = $contributor->post_title;
 					if( $index > 0 && $index+1 != $c_length ):

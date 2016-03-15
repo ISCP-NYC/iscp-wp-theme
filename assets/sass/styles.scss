@@ -251,7 +251,7 @@ section {
 		transform: translate3d(-2px, 2px, 0px);
 	}
 }
-em, i {
+em, i, em *, i * {
 	display: inline;
     font-family: 'Life Italic';
 }

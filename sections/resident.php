@@ -70,9 +70,12 @@ endif;
 							echo '</br>';
 						endif;
 						$year = $residency->year;
+						$sponsors = get_sponsors( $resident_id, $index );
 						echo $year;
-						echo ': ';
-						echo get_sponsors( $resident_id, $index );
+						if( $sponsors ):
+							echo ': ';
+							echo $sponsors;
+						endif;
 					endforeach;
 					echo '</h2>';
 				elseif( is_current( $resident_id ) ):
@@ -140,9 +143,15 @@ endif;
 				echo '<div class="residencies list">';
 				echo '<h3 class="title">Past Residencies</h3>';
 				$index = 0;
-				foreach( $residencies as $residency ): 
+				foreach( $residencies as $i=>$residency ):
+					if ( $i == 0 && is_current( $resident_id ) ) continue; 
+					$start_year = $residency->start_date_dt->format('Y');
+					$end_year = $residency->end_date_dt->format('Y');
 					echo '<div class="residency">';
-					echo $residency->date_range;
+					echo $start_year;
+					if( $start_year != $end_year ):
+						echo '&ndash;' . $start_year;
+					endif;
 					echo '</br>';
 					echo get_sponsors( $resident_id, $index );
 					echo '</div>';

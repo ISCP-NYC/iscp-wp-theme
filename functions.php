@@ -564,7 +564,7 @@ function is_current( $id ) {
 	$resident = get_post( $id );
 	$end_date = get_resident_end_date( $id );
 	if($end_date):
-		if($end_date > $today):
+		if($end_date >= $today):
 			return true;
 		else:
 			return false;
@@ -776,7 +776,7 @@ function insert_neighbor_events( $event_id, $direction, $count = 3 ) {
 		'order' => $order,
 		'post_status' => 'publish',
 		'meta_query' => array(
-			array( 'key'=>'start_date' ),
+			array( 'key' => 'start_date' ),
 			$date_query
 		)
 	);
@@ -824,7 +824,7 @@ function insert_neighbor_residents( $resident_id, $direction, $count ) {
 
 	if( is_current( $resident_id ) ):
 
-		$date_compare = '>';
+		$date_compare = '>=';
 		$direction_type = 'NUMERIC';
 		$direction_key = 'studio_number';
 		$direction_value = $resident_studio;
@@ -841,28 +841,47 @@ function insert_neighbor_residents( $resident_id, $direction, $count ) {
 
 	else:
 
-		$date_compare = '<=';
+		if( $direction == 'prev' ):
+			$direction_compare = '>=';
+			$date_order = 'ASC';
+			$alpha_order = 'DESC';
+		elseif ( $direction == 'next' ):
+			$direction_compare = '>=';
+			$date_order = 'DESC';
+			$alpha_order = 'ASC';
+		endif;
+
+		$date_compare = '<';
 		$direction_type = 'DATE';
 		$direction_key = 'residency_dates_0_end_date';
 		$direction_value = $resident_end_date;
-		$resident_orderby = 'meta_value_num post_title';
+		$resident_orderby = array(
+			'meta_value_num' => $date_order,
+			'post_title' => $alpha_order
+		);
 		$resident_meta_key = 'residency_dates_0_end_date';
 
-		if( $direction == 'prev' ):
-			$direction_compare = '>=';
-			$order = 'ASC';
-		elseif ( $direction == 'next' ):
-			// $direction_compare = '>=';
-			// $order = 'DESC';
-		endif;
+		$alpha_args = array(
+			'type' => 'CHAR',
+			'key' => 'post_title',
+			'compare' => '>',
+			'value' => $resident_name
+		);
 
 	endif;
 
 	$date_args = array(
-		'type' => 'DATE',
 		'key' => 'residency_dates_0_end_date',
+		'type' => 'DATE',
 		'compare' => $date_compare,
 		'value' => $today
+	);
+
+	$title_args = array(
+		'key' => 'post_title',
+		'type' => 'CHAR',
+		'compare' => $direction_compare,
+		'value' => $resident_name
 	);
 
 	$has_bio = array(
@@ -890,8 +909,10 @@ function insert_neighbor_residents( $resident_id, $direction, $count ) {
 			$has_bio,
 			$date_args,
 			$direction_args
+			// $alpha_args
 		)
 	);
+	// print_r($resident_args);
 	$residents = new WP_Query( $resident_args );
 	$last_page = $residents->max_num_pages;
 	if ( $direction == 'prev' ):
@@ -1334,6 +1355,13 @@ function query_url( $key, $value, $url, $filter = null, $remove = false ) {
 }
 
 function get_resident_count( $type, $value, $query = null ) {
+	if( !$query ):
+		$query = array(
+			'post_type' => 'resident',
+			'posts_per_page' => -1,
+			'post_status' => 'publish',
+		);
+	endif;
 	$meta_query = array();
 	unset( $query['paged'] );
 	$query['posts_per_page'] = -1;
