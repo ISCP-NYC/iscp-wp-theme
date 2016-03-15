@@ -33,7 +33,7 @@ $residency_programs = get_pages( $residency_programs_query );
 			<div class="info">
 				<?php $intro = get_field( 'intro', $program ); ?>
 				<div class="intro">
-					<?php #echo $intro ?>
+					<?php echo $intro ?>
 				</div>
 			</div>
 			<div class="links">

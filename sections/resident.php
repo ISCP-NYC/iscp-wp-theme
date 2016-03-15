@@ -215,33 +215,33 @@ endif;
 				'compare' => 'LIKE'
 			) );
 		elseif( $countries_array ):
-			$meta_query = array(
-				'relation' => 'OR'
-			);
-			foreach ($countries_array as $key => $country) {
-				$country_name = $country->post_title;
-				$country_id = $country->ID;
-				$country_ids[] .= $country_id;
-				if( $key != 0 ):
-					$country_names .= ', ';
-				endif;
-				$country_names .= $country_name;
-				$country_query = array(
-					'relation' => 'AND',
-					array(
-						'key' => 'country',
-						'value' => $country_id,
-						'compare' => 'LIKE'
-					),
-					array(
-						'key' => 'residency_program',
-						'value' => 'international',
-						'compare' => 'LIKE'
-					)
-				);
-				array_push( $meta_query, $country_query );
-			}
-			$relation_title = 'Residents from ' . $country_names;
+			// $meta_query = array(
+			// 	'relation' => 'OR'
+			// );
+			// foreach ($countries_array as $key => $country) {
+			// 	$country_name = $country->post_title;
+			// 	$country_id = $country->ID;
+			// 	$country_ids[] .= $country_id;
+			// 	if( $key != 0 ):
+			// 		$country_names .= ', ';
+			// 	endif;
+			// 	$country_names .= $country_name;
+			// 	$country_query = array(
+			// 		'relation' => 'AND',
+			// 		array(
+			// 			'key' => 'country',
+			// 			'value' => $country_id,
+			// 			'compare' => 'LIKE'
+			// 		),
+			// 		array(
+			// 			'key' => 'residency_program',
+			// 			'value' => 'international',
+			// 			'compare' => 'LIKE'
+			// 		)
+			// 	);
+			// 	array_push( $meta_query, $country_query );
+			// }
+			// $relation_title = 'Residents from ' . $country_names;
 		endif;
 		$residents_query = array(
 			'post_type'	=> 'resident',

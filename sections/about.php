@@ -20,43 +20,6 @@
 				<?php echo $description ?>
 			</div>
 			<?php
-			$image_slider = get_field( 'image_slider', $id );
-			if( $image_slider ):
-				echo '<div class="module image_slider gallery">';
-				echo '<div class="cursor"></div>';
-				if( count( $image_slider ) > 1 ):
-					echo '<div class="left arrow swap">';
-					echo '<div class="icon default"></div>';
-					echo '<div class="icon hover"></div>';
-					echo '</div>';
-					echo '<div class="right arrow swap">';
-					echo '<div class="icon default"></div>';
-					echo '<div class="icon hover"></div>';
-					echo '</div>';
-				endif;
-				echo '<div class="slides">';
-				while( has_sub_field( 'image_slider', $id ) ):
-					$image = get_sub_field( 'image', $id );
-			        $image_url = $image['url'];
-			        $caption = get_sub_field( 'caption', $id );
-			        $orientation = get_orientation( $image['id'] );
-			        echo '<div class="piece slide">';
-			        echo '<div class="image ' . $orientation . '">';
-			        echo '<div class="captionWrap">';
-			        echo '<img src="' . $image_url . '"/>';
-			        echo '<div class="caption">';
-			        echo $caption;
-			        echo '</div>';
-			        echo '</div>';
-			        echo '</div>';
-			        echo '</div>';
-				endwhile;
-				echo '</div>';
-				echo '</div>';
-			endif;
-			?>
-
-			<?php
 				$address = get_field( 'address', $id );
 				$directions_base = 'https://www.google.com/maps/dir//';
 				$directions = $directions_base . strip_tags( $address );
@@ -114,6 +77,41 @@
 				echo '<h4 class="title orange">History</h4>';
 				echo '<div class="text">';
 				echo $history;
+				echo '</div>';
+				echo '</div>';
+			endif;
+			
+			$image_slider = get_field( 'image_slider', $id );
+			if( $image_slider ):
+				echo '<div class="module image_slider gallery">';
+				echo '<div class="cursor"></div>';
+				if( count( $image_slider ) > 1 ):
+					echo '<div class="left arrow swap">';
+					echo '<div class="icon default"></div>';
+					echo '<div class="icon hover"></div>';
+					echo '</div>';
+					echo '<div class="right arrow swap">';
+					echo '<div class="icon default"></div>';
+					echo '<div class="icon hover"></div>';
+					echo '</div>';
+				endif;
+				echo '<div class="slides">';
+				while( has_sub_field( 'image_slider', $id ) ):
+					$image = get_sub_field( 'image', $id );
+			        $image_url = $image['url'];
+			        $caption = get_sub_field( 'caption', $id );
+			        $orientation = get_orientation( $image['id'] );
+			        echo '<div class="piece slide">';
+			        echo '<div class="image ' . $orientation . '">';
+			        echo '<div class="captionWrap">';
+			        echo '<img src="' . $image_url . '"/>';
+			        echo '<div class="caption">';
+			        echo $caption;
+			        echo '</div>';
+			        echo '</div>';
+			        echo '</div>';
+			        echo '</div>';
+				endwhile;
 				echo '</div>';
 				echo '</div>';
 			endif;

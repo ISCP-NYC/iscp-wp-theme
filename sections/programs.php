@@ -47,18 +47,14 @@ $programs = array_reverse( get_pages( $programs_query ) );
 
 		<?php
 		foreach( $programs as $program ):
-			$title = $program->post_title;
-			$slug = $program->post_name;
-			$description = get_field( 'description', $program );
-			// $apply_link = get_field( 'apply_link', $program );
-			// $deadline = get_field( 'deadline', $program );
-
-			echo '<div class="module program" id="' . $slug . '">';
-			echo '<h3 class="title orange ' . $slug . '">' . $title . '</h3>';
-			echo '<div class="description">' . $description . '</div>';
-			// echo '<a class="bullet apply" href="' . $apply_link . '">Apply</a>';
-			// echo '<div class="deadline-notes">Deadlines</br>' . $deadline . '</div>';
-			// echo '<h3 class="title orange">Deadlines</h3>';
+			$program_title = $program->post_title;
+			$program_slug = $program->post_name;
+			$program_description = get_field( 'description', $program );
+			echo '<div class="module program" id="' . $program_slug . '">';
+			if( $slug == 'public_programs' ):
+				echo '<h3 class="title ' . $program_slug . '">' . $program_title . '</h3>';
+			endif;
+			echo '<div class="description">' . $program_description . '</div>';
 			if( have_rows( 'image_columns', $program ) ):
 			echo '<div class="columns">';
 			    while ( have_rows( 'image_columns', $program ) ) : the_row();
@@ -78,9 +74,9 @@ $programs = array_reverse( get_pages( $programs_query ) );
 				        if( have_rows( 'links', $program ) ):
 				        echo '<div class="links">';
 				       	while ( have_rows( 'links', $program ) ) : the_row();
-				       		$title = get_sub_field( 'title' );
+				       		$link_title = get_sub_field( 'title' );
 				       		$link = get_sub_field( 'link' );
-				     		echo '<a href="' . $link . '">' . $title . '</a>';
+				     		echo '<a href="' . $link . '">' . $link_title . '</a>';
 			     		endwhile;
 				     	echo '</div>';
 				     	endif;

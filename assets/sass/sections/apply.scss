@@ -29,9 +29,11 @@ section.apply {
 				margin-top: 20px;
 			}
 		}
+		&#international {
+			border: 0 !important;
+		}
 	}
 	.applications {
-		border: 0;
 		.rows {
 			.application.row {
 				width: 100%;
