@@ -1,6 +1,4 @@
 .gallery {
-    padding-top: 30px !important;
-    padding-bottom: 30px !important;
     .cursor {
         width: 30px;
         height: 30px;
@@ -38,6 +36,8 @@
     height: 600px;
     display: block;
     position: relative;
+    padding-top: 30px !important;
+    padding-bottom: 30px !important;
     @include medium {
         // height: 300px;
     }
@@ -130,7 +130,7 @@
         border: 0 !important;
         position: fixed;
         top: 0;
-        left: 0; 
+        left: 0;
         background-color: white;
         z-index: 1000;
         cursor: none !important;
@@ -158,7 +158,7 @@
         //         opacity: 1 !important;
         //     }
         // }
-    }   
+    }
     &:not(.full) {
         .image {
             display: table-cell;
