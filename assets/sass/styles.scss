@@ -1,8 +1,8 @@
 /*
 Theme Name: ISCPT
 */
-@font-face {font-family: 'Life Italic';src: url('../fonts/3095D6_0_0.eot');src: url('../fonts/3095D6_0_0.eot?#iefix') format('embedded-opentype'),url('../fonts/3095D6_0_0.woff2') format('woff2'),url('../fonts/3095D6_0_0.woff') format('woff'),url('../fonts/3095D6_0_0.ttf') format('truetype');}
-@font-face {font-family: 'Life Rounded';src: url('../fonts/3095D6_1_0.eot');src: url('../fonts/3095D6_1_0.eot?#iefix') format('embedded-opentype'),url('../fonts/3095D6_1_0.woff2') format('woff2'),url('../fonts/3095D6_1_0.woff') format('woff'),url('../fonts/3095D6_1_0.ttf') format('truetype');}
+@font-face {font-family: 'Life Italic';src: url('http://www.iscp-nyc.org/wp-content/assets/fonts/3095D6_0_0.eot');src: url('http://www.iscp-nyc.org/wp-content/assets/fonts/3095D6_0_0.eot?#iefix') format('embedded-opentype'),url('http://www.iscp-nyc.org/wp-content/assets/fonts/3095D6_0_0.woff2') format('woff2'),url('http://www.iscp-nyc.org/wp-content/assets/fonts/3095D6_0_0.woff') format('woff'),url('http://www.iscp-nyc.org/wp-content/assets/fonts/3095D6_0_0.ttf') format('truetype');}
+@font-face {font-family: 'Life Rounded';src: url('http://www.iscp-nyc.org/wp-content/assets/fonts/3095D6_1_0.eot');src: url('http://www.iscp-nyc.org/wp-content/assets/fonts/3095D6_1_0.eot?#iefix') format('embedded-opentype'),url('http://www.iscp-nyc.org/wp-content/assets/fonts/3095D6_1_0.woff2') format('woff2'),url('http://www.iscp-nyc.org/wp-content/assets/fonts/3095D6_1_0.woff') format('woff'),url('http://www.iscp-nyc.org/wp-content/assets/fonts/3095D6_1_0.ttf') format('truetype');}
 @import 'compass';
 @import 'compass/reset';
 @import 'vars';
@@ -98,8 +98,6 @@ section {
 			padding: 75px 0px 10px 0px;
 			margin-left: 10px;
 			border-width: 0;
-		}
-		@include xsmall {
 		}
 		.module {
 			width: calc(100% - 40px);
@@ -270,12 +268,17 @@ ul li {
 		background-position: left 4px;
 	}
 	@include small {
-		background-position: left 2px;
+		background-position: left 6px;
+		margin: 0 0 14px 0;
+		background-size: 12px;
 	}
 }
 p {
 	word-wrap: break-word;
 	margin-bottom: 28px;
+	@include small {
+		margin-bottom: 16px;
+	}
 	display: inline-block;
 	span {
 		line-height: inherit !important;
@@ -297,6 +300,9 @@ h2, .medium {
 		text-align: center;
 		padding: 0 0 3px 0;
 		color: $orange;
+		@include small {
+			padding: 16px 0 42px;
+		}
 	}
 }
 h3, .small {
@@ -306,6 +312,8 @@ h3, .small {
 		padding: 5px 0 40px 0;
 		@include small {
 			padding: 5px 0 10px 0;
+			font-size: $small-fs !important;
+			line-height: $small-lh !important;
 		}
 	}
 	@include medium {
@@ -314,6 +322,9 @@ h3, .small {
 }
 .content h4.title:first-child {
 	margin-bottom: 60px;
+	@include small {
+		margin-bottom: 0px;
+	}
 }
 h4, .small {
 	@include medium-fs;
