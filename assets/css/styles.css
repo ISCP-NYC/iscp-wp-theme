@@ -9,7 +9,7 @@ Theme Name: ISCPT
   font-family: 'Life Rounded';
   src: url("../fonts/3095D6_1_0.eot");
   src: url("../fonts/3095D6_1_0.eot?#iefix") format("embedded-opentype"), url("../fonts/3095D6_1_0.woff2") format("woff2"), url("../fonts/3095D6_1_0.woff") format("woff"), url("../fonts/3095D6_1_0.ttf") format("truetype"); }
-/* line 5, ../../../../../../../../Downloads/Koala.app/Contents/Resources/app.nw/rubygems/gems/compass-core-1.0.1/stylesheets/compass/reset/_utilities.scss */
+/* line 5, ../../../../../../../../../../Applications/Koala.app/Contents/Resources/app.nw/rubygems/gems/compass-core-1.0.1/stylesheets/compass/reset/_utilities.scss */
 html, body, div, span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
 a, abbr, acronym, address, big, cite, code,
@@ -30,38 +30,38 @@ time, mark, audio, video {
   font-size: 100%;
   vertical-align: baseline; }
 
-/* line 22, ../../../../../../../../Downloads/Koala.app/Contents/Resources/app.nw/rubygems/gems/compass-core-1.0.1/stylesheets/compass/reset/_utilities.scss */
+/* line 22, ../../../../../../../../../../Applications/Koala.app/Contents/Resources/app.nw/rubygems/gems/compass-core-1.0.1/stylesheets/compass/reset/_utilities.scss */
 html {
   line-height: 1; }
 
-/* line 24, ../../../../../../../../Downloads/Koala.app/Contents/Resources/app.nw/rubygems/gems/compass-core-1.0.1/stylesheets/compass/reset/_utilities.scss */
+/* line 24, ../../../../../../../../../../Applications/Koala.app/Contents/Resources/app.nw/rubygems/gems/compass-core-1.0.1/stylesheets/compass/reset/_utilities.scss */
 ol, ul {
   list-style: none; }
 
-/* line 26, ../../../../../../../../Downloads/Koala.app/Contents/Resources/app.nw/rubygems/gems/compass-core-1.0.1/stylesheets/compass/reset/_utilities.scss */
+/* line 26, ../../../../../../../../../../Applications/Koala.app/Contents/Resources/app.nw/rubygems/gems/compass-core-1.0.1/stylesheets/compass/reset/_utilities.scss */
 table {
   border-collapse: collapse;
   border-spacing: 0; }
 
-/* line 28, ../../../../../../../../Downloads/Koala.app/Contents/Resources/app.nw/rubygems/gems/compass-core-1.0.1/stylesheets/compass/reset/_utilities.scss */
+/* line 28, ../../../../../../../../../../Applications/Koala.app/Contents/Resources/app.nw/rubygems/gems/compass-core-1.0.1/stylesheets/compass/reset/_utilities.scss */
 caption, th, td {
   text-align: left;
   font-weight: normal;
   vertical-align: middle; }
 
-/* line 30, ../../../../../../../../Downloads/Koala.app/Contents/Resources/app.nw/rubygems/gems/compass-core-1.0.1/stylesheets/compass/reset/_utilities.scss */
+/* line 30, ../../../../../../../../../../Applications/Koala.app/Contents/Resources/app.nw/rubygems/gems/compass-core-1.0.1/stylesheets/compass/reset/_utilities.scss */
 q, blockquote {
   quotes: none; }
-  /* line 103, ../../../../../../../../Downloads/Koala.app/Contents/Resources/app.nw/rubygems/gems/compass-core-1.0.1/stylesheets/compass/reset/_utilities.scss */
+  /* line 103, ../../../../../../../../../../Applications/Koala.app/Contents/Resources/app.nw/rubygems/gems/compass-core-1.0.1/stylesheets/compass/reset/_utilities.scss */
   q:before, q:after, blockquote:before, blockquote:after {
     content: "";
     content: none; }
 
-/* line 32, ../../../../../../../../Downloads/Koala.app/Contents/Resources/app.nw/rubygems/gems/compass-core-1.0.1/stylesheets/compass/reset/_utilities.scss */
+/* line 32, ../../../../../../../../../../Applications/Koala.app/Contents/Resources/app.nw/rubygems/gems/compass-core-1.0.1/stylesheets/compass/reset/_utilities.scss */
 a img {
   border: none; }
 
-/* line 116, ../../../../../../../../Downloads/Koala.app/Contents/Resources/app.nw/rubygems/gems/compass-core-1.0.1/stylesheets/compass/reset/_utilities.scss */
+/* line 116, ../../../../../../../../../../Applications/Koala.app/Contents/Resources/app.nw/rubygems/gems/compass-core-1.0.1/stylesheets/compass/reset/_utilities.scss */
 article, aside, details, figcaption, figure, footer, header, hgroup, main, menu, nav, section, summary {
   display: block; }
 
@@ -2453,7 +2453,6 @@ section.login {
   /* line 127, ../sass/partials/slider.scss */
   .image_slider.full {
     width: 100% !important;
-    min-width: 500px;
     height: 100% !important;
     padding: 0 !important;
     margin: 0 !important;
@@ -2465,39 +2464,39 @@ section.login {
     z-index: 1000;
     cursor: none !important;
     display: table; }
-    /* line 141, ../sass/partials/slider.scss */
+    /* line 140, ../sass/partials/slider.scss */
     .image_slider.full .arrow {
       display: none; }
-    /* line 144, ../sass/partials/slider.scss */
+    /* line 143, ../sass/partials/slider.scss */
     .image_slider.full .slides {
       height: calc(100% - 60px) !important;
       padding: 30px 0 !important; }
-      /* line 147, ../sass/partials/slider.scss */
+      /* line 146, ../sass/partials/slider.scss */
       .image_slider.full .slides .slide {
         margin: 0 !important; }
-        /* line 149, ../sass/partials/slider.scss */
+        /* line 148, ../sass/partials/slider.scss */
         .image_slider.full .slides .slide .image {
           max-width: calc(100% - 60px) !important;
           vertical-align: middle;
           display: table-cell; }
-          /* line 153, ../sass/partials/slider.scss */
+          /* line 152, ../sass/partials/slider.scss */
           .image_slider.full .slides .slide .image img {
             width: auto !important; }
-  /* line 166, ../sass/partials/slider.scss */
+  /* line 165, ../sass/partials/slider.scss */
   .image_slider:not(.full) .image {
     display: table-cell;
     vertical-align: middle; }
-    /* line 169, ../sass/partials/slider.scss */
+    /* line 168, ../sass/partials/slider.scss */
     .image_slider:not(.full) .image img {
       cursor: pointer; }
 
-/* line 185, ../sass/partials/slider.scss */
+/* line 184, ../sass/partials/slider.scss */
 body.mobile .gallery .cursor {
   display: none !important; }
-/* line 188, ../sass/partials/slider.scss */
+/* line 187, ../sass/partials/slider.scss */
 body.mobile .gallery .arrow {
   display: none !important; }
-/* line 192, ../sass/partials/slider.scss */
+/* line 191, ../sass/partials/slider.scss */
 body.mobile .gallery.full .arrow {
   display: block; }
 

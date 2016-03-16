@@ -1225,10 +1225,8 @@ function setImageSliderSize() {
 			var caption = $(captionWrap).find('.caption');
 			var captionHeight = $(caption).outerHeight();
 
-			if(isSmall()) {
-
+			if(isSmall() && !$(slider).is('.full')) {
 				var newImageWidth = sliderWidth;
-
 				$(image).css({
 					width: newImageWidth,
 					height: 'auto'
@@ -1238,7 +1236,8 @@ function setImageSliderSize() {
 					tallest = imageHeight + 20;
 					$(slides).each(function() {
 						$(this).css({
-							height: tallest
+							height: tallest,
+							width: ''
 						});
 					});	
 					$(slider).css({
@@ -1247,7 +1246,6 @@ function setImageSliderSize() {
 				}
 
 			} else {
-
 				var newImageHeight = sliderHeight - captionHeight - 60;
 				if(newImageHeight > imageHeight) {
 					newImageHeight = imageHeight;
@@ -1264,7 +1262,8 @@ function setImageSliderSize() {
 				$(slider).attr('style','');
 			}
 			$(slide).css({
-				width: sliderWidth
+				width: sliderWidth,
+				height: ''
 			});
 			
 		});
@@ -1436,8 +1435,6 @@ function mobileSlideSwipe(slider, e) {
 				$(slides).css({
 					'left' : -sliderWidth * nextIndex
 				});
-				console.log($(slides));
-				console.log(-sliderWidth * nextIndex);
 				setTimeout(function(){
 					lastX = false;
 					$('body').on('touchmove', '.image_slider', function(e) {
