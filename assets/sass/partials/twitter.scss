@@ -23,8 +23,10 @@
 			    padding: 1px 0 1px 25px;
 			    background-image: url(../images/bullet-black.svg);
 			    background-position: left 8px;
-					@include xsmall {
-						background-position: left 3px;
+					@include small {
+						padding: 1px 0 1px 20px;
+						background-position: left 4px;
+						background-size: 12px;
 					}
 			    background-size: 15px;
 			    background-repeat: no-repeat;

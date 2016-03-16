@@ -11,7 +11,11 @@
             float: left;
             padding-bottom: 55px;
             margin-bottom: 50px;
-            transition: color 150ms ease-in-out, opacity 300ms ease-in-out;;
+            @include small {
+              padding-bottom: 34px;
+              margin-bottom: 17px;
+            }
+            transition: color 150ms ease-in-out, opacity 300ms ease-in-out;
             * {
                 transition: color 150ms ease-in-out;
             }
@@ -190,7 +194,10 @@
                 display: -ms-flexbox;
                 display: flex;
                 h2 {
-                    @include small-fs;
+                  @include small-fs;
+                  .title {
+                    padding: 0;
+                  }
                 }
                 .image {display: none;}
                 .value {
@@ -201,6 +208,41 @@
                     word-break: break-word;
                 }
             }
+          @include small {
+            .inner {
+              display: block;
+              h2.title {
+                padding: 0 !important;
+                width: 100% !important;
+                text-align: left;
+                font-size: $small-fs !important;
+                line-height: $small-lh !important;
+              }
+              .details {
+                display: block !important;
+                width: 100% !important;
+              }
+              .value {
+                display: block !important;
+                float: none !important;
+                clear: both !important;
+                padding: 0 0 12px 0 !important;
+                width: 100% !important;
+                font-size: $small-fs !important;
+                line-height: $small-lh !important;
+              }
+              .value.year, .value.event-type {
+                padding: 0 !important;
+              }
+              .right {
+                padding: 0 !important;
+                text-align: left;
+              }
+              .left {
+                display: block !important;
+              }
+            }
+          }
         }
         .load-more {
             margin-top: 60px;

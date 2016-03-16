@@ -1,6 +1,9 @@
 section#events .content {
 	.shelves.events {
 		margin-top: 43px;
+		@include small {
+			margin-top: 0;
+		}
 		.event {
 			h3 {
 				margin-bottom: 5px;
@@ -12,6 +15,11 @@ section#events .content {
 			}
 			.details {
 				@include small-fs;
+			}
+		}
+		h2.title {
+			@include small {
+				padding-bottom: 4px;
 			}
 		}
 	}

@@ -99,8 +99,6 @@ section {
 			margin-left: 10px;
 			border-width: 0;
 		}
-		@include xsmall {
-		}
 		.module {
 			width: calc(100% - 40px);
     		padding: 20px 20px 52px 20px;
@@ -181,7 +179,7 @@ section {
 		transition: none !important;
 	}
 	.load-more {
-		margin-top: -5px;
+		margin-top: 0;
 		width: 100%;
 		position: relative;
 		@include large-fs;
@@ -270,13 +268,17 @@ ul li {
 		background-position: left 4px;
 	}
 	@include small {
-		background-position: left 2px;
+		background-position: left 6px;
+		margin: 0 0 14px 0;
+		background-size: 12px;
 	}
 }
 p {
 	word-wrap: break-word;
 	margin-bottom: 28px;
-	display: inline-block;
+	@include small {
+		margin-bottom: 16px;
+	}
 	span {
 		line-height: inherit !important;
 	}
@@ -297,6 +299,9 @@ h2, .medium {
 		text-align: center;
 		padding: 0 0 3px 0;
 		color: $orange;
+		@include small {
+			padding: 16px 0 42px;
+		}
 	}
 }
 h3, .small {
@@ -306,6 +311,8 @@ h3, .small {
 		padding: 5px 0 40px 0;
 		@include small {
 			padding: 5px 0 10px 0;
+			font-size: $small-fs !important;
+			line-height: $small-lh !important;
 		}
 	}
 	@include medium {
@@ -314,6 +321,9 @@ h3, .small {
 }
 .content h4.title:first-child {
 	margin-bottom: 60px;
+	@include small {
+		margin-bottom: 0px;
+	}
 }
 h4, .small {
 	@include medium-fs;

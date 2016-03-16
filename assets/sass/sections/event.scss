@@ -25,6 +25,9 @@ section.single.event {
 	h1.title {
 		width: 100%;
 		margin: 50px 0;
+		@include small {
+			margin: 0 0 45px;
+		}
 		color: $orange;
 		@include large-fs;
 		text-align: center;
@@ -55,6 +58,9 @@ section.single.event {
 		}
 		.bullets {
 			margin-top: 30px;
+			@include small {
+				margin-top: 20px;
+			}
 			a {
 				display: table;
 			}
@@ -85,7 +91,7 @@ section.single.event {
 			.piece {
 				margin-bottom: 20px;
 				.image {
-					width: 100%;				
+					width: 100%;
 					img {
 						width: 100%;
 						height: auto;
@@ -165,14 +171,21 @@ section.single.event {
 		margin-bottom: 30px;
 	}
 	&.one_col {
-		
+
 	}
 	&.two_col {
-		
+
 	}
 	&.cols_1 {
 		.gallery {
 			display: none;
+		}
+	}
+	.upcoming {
+		h3.title {
+			@include small {
+				padding-bottom: 45px;
+			}
 		}
 	}
 }
