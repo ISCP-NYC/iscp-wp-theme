@@ -75,15 +75,23 @@ form {
     }
 }
 .share {
+    display: table;
+    cursor: pointer;
     .links {
         display: none;
     }
-    &.show {
+    &:hover {
         .toggle {
             display: none;
         }
         .links {
             display: block;
+            span {
+                display: inline;
+                a {
+                    display: inherit !important;
+                }
+            }
         }
     }
 }

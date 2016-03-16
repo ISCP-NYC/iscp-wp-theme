@@ -15,10 +15,10 @@ $footnote = get_field('footnote', $id);
 	<div class="content">
 		<h2 class="head"><?php echo $title ?></h2>
 		<div class="module">
-			<?php echo $content ?>
-			</br>
-			<form id="donate" action="https://www.paypal.com/cgi-bin/webscr" method="post" target="blank"><input alt="PayPal - The safer, easier way to pay online!" name="submit" src="https://www.paypal.com/en_US/i/btn/btn_donate_LG.gif" type="image" /> <img src="https://www.paypal.com/en_US/i/scr/pixel.gif" alt="" width="1" height="1" border="0" />
-			</br>
+			<?php echo $content ?>	
+			<a href="<?php echo $paypal ?>" class="paypal" target="_blank">
+				<img src="https://www.paypalobjects.com/en_US/i/btn/btn_donate_LG.gif" border="0" alt="PayPal - The safer, easier way to pay online!">
+			</a>
 			<?php echo $footnote ?>
 		</div>
 	</div>

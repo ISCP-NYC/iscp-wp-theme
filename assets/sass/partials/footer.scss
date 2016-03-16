@@ -102,6 +102,11 @@ footer {
 					&:nth-child(6) {
 						clear: both;
 					}
+					&.credits {
+						a {
+							display: inline;
+						}
+					}
 					@include large {
 						width: calc( (100%/4) - 30px);
 						&:nth-child(5) {

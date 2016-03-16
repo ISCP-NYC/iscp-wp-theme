@@ -115,8 +115,8 @@
                         padding: 10px 0;
                     }
                     .caption {
-                        max-width: 100%;
-                        padding: 20px 0 0 0;
+                        max-width: calc(100% - 60px);
+                        padding: 20px 30px 0 30px;
                         display: block;
                         text-align: left;
                     }

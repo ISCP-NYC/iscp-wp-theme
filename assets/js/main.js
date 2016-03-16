@@ -1226,7 +1226,7 @@ function setImageSliderSize() {
 			var captionHeight = $(caption).outerHeight();
 
 			if(isSmall() && !$(slider).is('.full')) {
-				var newImageWidth = sliderWidth;
+				var newImageWidth = sliderWidth - 60;
 				$(image).css({
 					width: newImageWidth,
 					height: 'auto'
@@ -1237,7 +1237,6 @@ function setImageSliderSize() {
 					$(slides).each(function() {
 						$(this).css({
 							height: tallest,
-							// width: ''
 						});
 					});	
 					$(slider).css({
@@ -1401,19 +1400,18 @@ function mobileSlideSwipe(slider, e) {
 		var elm = $(slider).offset();
 		var x = touch.pageX;
 		var y = touch.pageY;
-		var scrollAmount = y - lastY;
-		console.log(scrollAmount);
-		// if(scrollAmount > 10 || scrollAmount < -10) {
-			return;
-		// } else {
-			e.preventDefault();
-		// }
+		var xShift = x - lastX;
 		if(lastX) {
+			if(xShift > 10 || xShift < -10) {
+				e.preventDefault();
+			} else {
+				lastX = false;
+				return;
+			}
 			var slides = $(slider).find('.slides');
 			var sliderWidth = $(slider).innerWidth();
-			var shift = x - lastX;
 			var left = parseInt($(slides).css('left').replace('px',''));
-			var newLeft = left + shift;
+			var newLeft = left + xShift;
 			$(slides).addClass('static').css({'left':newLeft});
 			var slide = $(slider).find('.slide.show')[0];
 			var slideIndex = $(slide).index();
@@ -1715,6 +1713,11 @@ function scrollToResourceItem() {
 /////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////
+var copyLink = new Clipboard('.share .copy');
+$('body').on('click', '.share .copy', function() {
+	var permalink = $(this).attr('data-clipboard-text');
+	console.log(permalink);
+});
 
 function updateFavicons(newColor) {
 	$('link[data-update]').each(function() {

@@ -108,6 +108,15 @@
 		    			</div>
 		    		</div>
 		    	</div>
+
+		    	<div class="cell credits">
+		    		<div class="cell-inner">
+		    			<div class="sub-menu">
+		    				<div>Design by <a href="othermeans.us" target="_blank">Other Means</a></div>
+		    			</div>
+		    		</div>
+		    	</div>
+
 	    	</nav>
 		</div>
 		<div class="bottom">

@@ -10,7 +10,7 @@ section.error {
 		color: $black;
 	}
 	a:hover, .link:hover, a div:hover {
-		// color: $orange !important;
+		color: $orange !important;
 	}
 	nav,
 	header.main nav a.overlay {
@@ -204,6 +204,9 @@ section.error {
 	}
 	.loader div {
 		background: $black;
+	}
+	.share.link, .share.link:hover {
+		color: $black !important;
 	}
 }
 a.black, .link.black, .past .link {

@@ -59,6 +59,9 @@
 	else:
 		$fav_dir = 'favicons/orange';
 	endif;
+
+	$permalink = get_the_permalink($page_id);
+	$thumb = get_thumb( $page_id );
 	?>
 	<link rel="apple-touch-icon" sizes="57x57" href="<?php echo $theme; ?>/assets/images/favicons/orange/apple-touch-icon-57x57.png">
 	<link rel="apple-touch-icon" sizes="60x60" href="<?php echo $theme; ?>/assets/images/favicons/orange/apple-touch-icon-60x60.png">

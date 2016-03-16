@@ -3,6 +3,7 @@ global $post;
 $title = $post->post_title;
 $slug = $post->post_name;
 $id = $post->ID;
+$permalink = get_the_permalink( $id );
 $description = get_field( 'description', $id );
 $footnote = get_field( 'footnote', $id );
 $event_type = get_field( 'event_type', $id );
@@ -153,14 +154,15 @@ $upcoming_events = new WP_Query( $upcoming_query );
 
 			?>
 			<div class="bullets">
-				<!-- <div class="share bullet">
-					<span class="link toggle">Share</span>
+				
+				<div class="share bullet link">
+					<span class="toggle">Share</span>
 					<div class="links">
-						<a href="#" target="_blank">Twitter</a>
-						<a href="#" target="_blank">Facebook</a>
-						<span class="copy link">Copy link</span>
+						<span><a href="https://twitter.com/share?url=<?php echo urlencode( $permalink ) ?>&text=<?php echo urlencode( $title ) ?>" target="_blank">Twitter</a>,</span>
+						<span><a href="https://www.facebook.com/sharer/sharer.php?sdk=joey&u=<?php echo $permalink ?>" target="_blank">Facebook</a>,</span>
+						<span class="copy link" data-clipboard-text="<?php echo $permalink ?>">Copy link</span>
 					</div>
-				</div> -->
+				</div>
 				<?php
 				if( $time ):
 					echo '<div class="bullet">' . $time . '</div>';

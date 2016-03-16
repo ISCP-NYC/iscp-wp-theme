@@ -43,14 +43,16 @@ function iscp_scripts() {
 	wp_enqueue_style( 'style', get_template_directory_uri() . '/assets/css/styles.css' );
 	wp_register_script( 'transit', get_template_directory_uri() . '/assets/js/jquery.transit.min.js', array( 'jquery' ) );
 	wp_register_script( 'jquery-ui', get_template_directory_uri() . '/assets/js/jquery-ui.min.js', array( 'jquery' ) );
-	wp_register_script( 'imagesloaded', get_template_directory_uri() . '/assets/js/imagesloaded.pkgd.min.js', array( 'jquery' ) );
 	wp_register_script( 'masonry', get_template_directory_uri() . '/assets/js/masonry.pkgd.min.js', array( 'jquery' ) );
+	wp_register_script( 'imagesloaded', get_template_directory_uri() . '/assets/js/imagesloaded.pkgd.min.js', array( 'jquery' ) );
+	wp_register_script( 'clipboard', get_template_directory_uri() . '/assets/js/clipboard.min.js', array( 'jquery' ) );
 	wp_register_script( 'main', get_template_directory_uri() . '/assets/js/main.js', array( 'jquery', 'masonry', 'transit', 'jquery-ui' ) );
 	wp_enqueue_script( 'webglearth', 'http://www.webglearth.com/v2/api.js' );
 	wp_enqueue_script( 'transit' );
 	wp_enqueue_script( 'jquery-ui' );
 	wp_enqueue_script( 'masonry' );
 	wp_enqueue_script( 'imagesloaded' );
+	wp_enqueue_script( 'clipboard' );
 	wp_enqueue_script( 'main' );
 	global $post;
 	$page_slug = $post->post_name;
