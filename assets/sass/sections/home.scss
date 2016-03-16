@@ -95,6 +95,12 @@
 				&:nth-child(2) .inner {
 					margin: 0 0 0 15px !important;
 				}
+				@include small {
+					&:nth-child(1) .inner,
+					&:nth-child(2) .inner {
+						margin: 0 !important;
+					}
+				}
 			}
 		}
 		@include medium {
@@ -114,7 +120,7 @@
 				.shelf-item:nth-child(1), .shelf-item:nth-child(2) {
 					padding-bottom: 60px;
 					@include small {
-							padding-bottom: 45px;
+						padding-bottom: 45px;
 					}
 				}
 				.shelf-item:nth-child(2n+1):nth-last-child(-n+2):last-child {
@@ -143,7 +149,6 @@
 		}
 		@include small {
 			.shelf-item.event:nth-child(n),
-
 			.shelf-item.event:nth-child(2n+1):nth-last-child(-n+2):last-child {
 				width: 100% !important;
 				.inner {

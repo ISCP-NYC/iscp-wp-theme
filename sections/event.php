@@ -153,7 +153,14 @@ $upcoming_events = new WP_Query( $upcoming_query );
 
 			?>
 			<div class="bullets">
-				<!-- <a href="#" class="link bullet">Share</a> -->
+				<!-- <div class="share bullet">
+					<span class="link toggle">Share</span>
+					<div class="links">
+						<a href="#" target="_blank">Twitter</a>
+						<a href="#" target="_blank">Facebook</a>
+						<span class="copy link">Copy link</span>
+					</div>
+				</div> -->
 				<?php
 				if( $time ):
 					echo '<div class="bullet">' . $time . '</div>';

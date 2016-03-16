@@ -74,3 +74,16 @@ form {
         display: none;
     }
 }
+.share {
+    .links {
+        display: none;
+    }
+    &.show {
+        .toggle {
+            display: none;
+        }
+        .links {
+            display: block;
+        }
+    }
+}

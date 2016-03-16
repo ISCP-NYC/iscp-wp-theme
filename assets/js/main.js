@@ -1213,6 +1213,7 @@ function setImageSliderSize() {
 	//size slide wrapper to fit all slides
 	$(slideWrapper).css({width:sliderWidth*slidesLength});
 	//size all slides to fit in viewport
+	var tallest = 0;
 	$(slides).each(function() {
 		var slide = this;
 		$(this).imagesLoaded(function() {
@@ -1223,24 +1224,50 @@ function setImageSliderSize() {
 			var captionWrap = $(slide).find('.captionWrap');
 			var caption = $(captionWrap).find('.caption');
 			var captionHeight = $(caption).outerHeight();
-			var newImageHeight = sliderHeight - captionHeight - 60;
-			if(newImageHeight > imageHeight) {
-				newImageHeight = imageHeight;
-			}
-			if(newImageHeight*imageRatio >= sliderWidth) {
-				var newImageWidth = sliderWidth - 60;
-				newImageHeight = newImageWidth/imageRatio;
-			}
-			$(image).css({
-				height: newImageHeight
-			});
 
+			if(isSmall() && !$(slider).is('.full')) {
+				var newImageWidth = sliderWidth;
+				$(image).css({
+					width: newImageWidth,
+					height: 'auto'
+				});
+				var imageHeight = $(image).height() + captionHeight;
+				if(imageHeight > tallest) {
+					tallest = imageHeight + 20;
+					$(slides).each(function() {
+						$(this).css({
+							height: tallest,
+							width: ''
+						});
+					});	
+					$(slider).css({
+						height: tallest
+					});
+				}
+
+			} else {
+				var newImageHeight = sliderHeight - captionHeight - 60;
+				if(newImageHeight > imageHeight) {
+					newImageHeight = imageHeight;
+				}
+				if(newImageHeight*imageRatio >= sliderWidth) {
+					var newImageWidth = sliderWidth - 60;
+					newImageHeight = newImageWidth/imageRatio;
+				}
+				$(image).css({
+					width: 'auto',
+					height: newImageHeight
+				});
+
+				$(slider).attr('style','');
+			}
 			$(slide).css({
-				width: sliderWidth
+				width: sliderWidth,
+				height: ''
 			});
+			
 		});
 	});
-
 	//don't allow transition on size
 	$(slideWrapper).addClass('static');
 	if(startIndex != undefined) {
@@ -1357,6 +1384,76 @@ $('body').on('click', '.gallery:not(.full) img', function() {
 		});
 	});
 });
+
+var lastX;
+$('body').on('touchstart', '.image_slider', function(e) {
+	var lastX = false;
+});
+$('body').on('touchmove', '.image_slider', function(e) {
+	mobileSlideSwipe(this, e);
+});
+
+function mobileSlideSwipe(slider, e) {
+	if(isMobile) {
+		e.preventDefault();
+		$(slider).off('touchend');
+		var touch = e.originalEvent.touches[0] || e.originalEvent.changedTouches[0];
+		var elm = $(slider).offset();
+		var x = touch.pageX;
+		if(lastX) {
+			var slides = $(slider).find('.slides');
+			var sliderWidth = $(slider).innerWidth();
+			var shift = x - lastX;
+			var left = parseInt($(slides).css('left').replace('px',''));
+			var newLeft = left + shift;
+			$(slides).addClass('static').css({'left':newLeft});
+			var slide = $(slider).find('.slide.show')[0];
+			var slideIndex = $(slide).index();
+			var tresh = $(slider).innerWidth()/6;
+			var slideLeft = $(slide).offset().left;
+			var slidesLength = $(slider).find('.slide').length;
+			if(slideLeft > tresh) {
+				var nextIndex = slideIndex - 1;
+				if(nextIndex == -1) {
+					nextIndex = null;
+				}
+			} else if(slideLeft < -tresh) {
+				var nextIndex = slideIndex + 1;
+				if(nextIndex == slidesLength) {
+					nextIndex = null;
+				}
+			} else {
+				nextIndex = null
+			}
+			if(nextIndex != null) {
+				$('body').off('touchmove');
+				var nextSlide = $(slides).find('.slide')[nextIndex];
+				$(slide).removeClass('show');
+				$(nextSlide).addClass('show');
+				$(slider).attr('data-show', nextIndex);
+				$(slides).removeClass('static');
+				$(slides).css({
+					'left' : -sliderWidth * nextIndex
+				});
+				setTimeout(function(){
+					lastX = false;
+					$('body').on('touchmove', '.image_slider', function(e) {
+						mobileSlideSwipe(slider, e);
+					});
+				}, 500);
+				return;
+
+			}
+		}
+		lastX = x;
+		$(slider).on('touchend', function(e) {
+			lastX = false;
+			$(slides).removeClass('static');
+			$(slides).css({'left':-sliderWidth * slideIndex});
+		});		
+	}
+}
+
 
 function closeFullSlider(slider) {
 	$(slider).find('img.clicked').transition({opacity:0}, 500, function() {
