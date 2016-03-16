@@ -1815,30 +1815,33 @@ section {
       section aside.main.hover {
         border-color: #13172F; }
         /* line 38, ../sass/partials/side.scss */
+        section aside.main.hover label {
+          color: #ff5000; }
+        /* line 41, ../sass/partials/side.scss */
         section aside.main.hover .logo {
           border-color: #13172F; }
-          /* line 40, ../sass/partials/side.scss */
+          /* line 43, ../sass/partials/side.scss */
           section aside.main.hover .logo .icon.default {
             opacity: 0 !important; }
-          /* line 43, ../sass/partials/side.scss */
+          /* line 46, ../sass/partials/side.scss */
           section aside.main.hover .logo .icon.hover {
             opacity: 1 !important; }
-        /* line 47, ../sass/partials/side.scss */
+        /* line 50, ../sass/partials/side.scss */
         section aside.main.hover .move {
           cursor: pointer; }
-    /* line 52, ../sass/partials/side.scss */
+    /* line 55, ../sass/partials/side.scss */
     section aside.left {
       left: 0; }
-      /* line 54, ../sass/partials/side.scss */
+      /* line 57, ../sass/partials/side.scss */
       section aside.left .logo {
         left: 0; }
-    /* line 58, ../sass/partials/side.scss */
+    /* line 61, ../sass/partials/side.scss */
     section aside.right {
       right: 0; }
-      /* line 60, ../sass/partials/side.scss */
+      /* line 63, ../sass/partials/side.scss */
       section aside.right .logo {
         left: 10px; }
-    /* line 64, ../sass/partials/side.scss */
+    /* line 67, ../sass/partials/side.scss */
     section aside .move {
       width: auto;
       background: #fff;
@@ -1849,63 +1852,70 @@ section {
           -ms-transform-origin: left top 0;
               transform-origin: left top 0;
       text-align: center; }
-      /* line 72, ../sass/partials/side.scss */
+      /* line 75, ../sass/partials/side.scss */
+      section aside .move:hover {
+        color: inherit !important; }
+      /* line 78, ../sass/partials/side.scss */
       section aside .move .label {
+        padding: 0 10px;
         -webkit-transition: opacity 300ms ease-in-out;
                 transition: opacity 300ms ease-in-out;
         font-size: 24px;
         line-height: 28px; }
-    /* line 78, ../sass/partials/side.scss */
+    /* line 85, ../sass/partials/side.scss */
+    section aside a.move:hover {
+      color: inherit !important; }
+    /* line 88, ../sass/partials/side.scss */
     section aside.left .move {
       bottom: -120px;
       left: 0px;
       -webkit-transform: rotate(-90deg);
           -ms-transform: rotate(-90deg);
               transform: rotate(-90deg); }
-    /* line 83, ../sass/partials/side.scss */
+    /* line 93, ../sass/partials/side.scss */
     section aside.right .move {
       top: 110px;
       left: 120px;
       -webkit-transform: rotate(90deg);
           -ms-transform: rotate(90deg);
               transform: rotate(90deg); }
-    /* line 88, ../sass/partials/side.scss */
+    /* line 98, ../sass/partials/side.scss */
     section aside.footer {
       top: 30px;
       height: -ms-calc(100% - 30px);
       height: calc(100% - 30px);
       border-color: #fff; }
-      /* line 92, ../sass/partials/side.scss */
+      /* line 102, ../sass/partials/side.scss */
       section aside.footer.hover {
         border-color: #13172F; }
-      /* line 95, ../sass/partials/side.scss */
+      /* line 105, ../sass/partials/side.scss */
       section aside.footer .logo {
         bottom: 0;
         border-bottom: none;
         border-top: 10px solid #fff; }
-        /* line 100, ../sass/partials/side.scss */
+        /* line 110, ../sass/partials/side.scss */
         section aside.footer .logo .icon.default {
           background-image: url(../images/logo-white.svg); }
-        /* line 103, ../sass/partials/side.scss */
+        /* line 113, ../sass/partials/side.scss */
         section aside.footer .logo .icon.hover {
           background-image: url(../images/logo-black.svg); }
     @media (max-width: 768px) {
       /* line 1, ../sass/partials/side.scss */
       section aside {
         display: none; } }
-  /* line 114, ../sass/partials/side.scss */
+  /* line 124, ../sass/partials/side.scss */
   section:not(.center) aside {
     opacity: 0; }
-  /* line 119, ../sass/partials/side.scss */
+  /* line 129, ../sass/partials/side.scss */
   section.center aside {
     opacity: 1; }
-  /* line 124, ../sass/partials/side.scss */
+  /* line 134, ../sass/partials/side.scss */
   section.left aside.right .logo {
     left: 0; }
-  /* line 129, ../sass/partials/side.scss */
+  /* line 139, ../sass/partials/side.scss */
   section.right aside.left .logo {
     left: 10px; }
-  /* line 134, ../sass/partials/side.scss */
+  /* line 144, ../sass/partials/side.scss */
   section.new aside .move .label {
     opacity: 0; }
   /* line 2, ../sass/partials/twitter.scss */
@@ -2623,30 +2633,7 @@ section.events .past.wrapper .link,
 section.error a,
 section.error .link {
   color: #13172F; }
-/* line 12, ../sass/sections/black.scss */
-section.sponsor a div,
-section.past a div,
-section.past-residents a div,
-section.events .past.wrapper a div,
-section.error a div {
-  -webkit-transition: color 150ms ease-in-out;
-          transition: color 150ms ease-in-out; }
 /* line 15, ../sass/sections/black.scss */
-section.sponsor a:hover, section.sponsor .link:hover, section.sponsor a div:hover,
-section.past a:hover,
-section.past .link:hover,
-section.past a div:hover,
-section.past-residents a:hover,
-section.past-residents .link:hover,
-section.past-residents a div:hover,
-section.events .past.wrapper a:hover,
-section.events .past.wrapper .link:hover,
-section.events .past.wrapper a div:hover,
-section.error a:hover,
-section.error .link:hover,
-section.error a div:hover {
-  color: #ff5000 !important; }
-/* line 18, ../sass/sections/black.scss */
 section.sponsor nav,
 section.sponsor header.main nav a.overlay,
 section.past nav,
@@ -2658,7 +2645,7 @@ section.events .past.wrapper header.main nav a.overlay,
 section.error nav,
 section.error header.main nav a.overlay {
   background-color: #fff !important; }
-  /* line 21, ../sass/sections/black.scss */
+  /* line 18, ../sass/sections/black.scss */
   section.sponsor nav *,
   section.sponsor header.main nav a.overlay *,
   section.past nav *,
@@ -2670,189 +2657,196 @@ section.error header.main nav a.overlay {
   section.error nav *,
   section.error header.main nav a.overlay * {
     color: #13172F; }
-/* line 25, ../sass/sections/black.scss */
+/* line 22, ../sass/sections/black.scss */
 section.sponsor aside.main,
 section.past aside.main,
 section.past-residents aside.main,
 section.events .past.wrapper aside.main,
 section.error aside.main {
   border-color: #13172F !important; }
-  /* line 27, ../sass/sections/black.scss */
+  /* line 24, ../sass/sections/black.scss */
   section.sponsor aside.main .icon.default,
   section.past aside.main .icon.default,
   section.past-residents aside.main .icon.default,
   section.events .past.wrapper aside.main .icon.default,
   section.error aside.main .icon.default {
     background-image: url(../images/logo-black.svg) !important; }
-  /* line 30, ../sass/sections/black.scss */
+  /* line 27, ../sass/sections/black.scss */
   section.sponsor aside.main .icon.hover,
   section.past aside.main .icon.hover,
   section.past-residents aside.main .icon.hover,
   section.events .past.wrapper aside.main .icon.hover,
   section.error aside.main .icon.hover {
     background-image: url(../images/logo-orange.svg) !important; }
-  /* line 33, ../sass/sections/black.scss */
+  /* line 30, ../sass/sections/black.scss */
   section.sponsor aside.main.hover .logo,
   section.past aside.main.hover .logo,
   section.past-residents aside.main.hover .logo,
   section.events .past.wrapper aside.main.hover .logo,
   section.error aside.main.hover .logo {
     border-color: #ff5000 !important; }
-/* line 38, ../sass/sections/black.scss */
+  /* line 34, ../sass/sections/black.scss */
+  section.sponsor aside.main.hover .move,
+  section.past aside.main.hover .move,
+  section.past-residents aside.main.hover .move,
+  section.events .past.wrapper aside.main.hover .move,
+  section.error aside.main.hover .move {
+    color: #ff5000 !important; }
+/* line 40, ../sass/sections/black.scss */
 section.sponsor .logo.mobile .icon.default,
 section.past .logo.mobile .icon.default,
 section.past-residents .logo.mobile .icon.default,
 section.events .past.wrapper .logo.mobile .icon.default,
 section.error .logo.mobile .icon.default {
   background-image: url(../images/logo-black.svg) !important; }
-/* line 41, ../sass/sections/black.scss */
+/* line 43, ../sass/sections/black.scss */
 section.sponsor .logo.mobile .icon.hover,
 section.past .logo.mobile .icon.hover,
 section.past-residents .logo.mobile .icon.hover,
 section.events .past.wrapper .logo.mobile .icon.hover,
 section.error .logo.mobile .icon.hover {
   background-image: url(../images/logo-orange.svg) !important; }
-/* line 46, ../sass/sections/black.scss */
+/* line 48, ../sass/sections/black.scss */
 section.sponsor .nav-toggle .icon.default,
 section.past .nav-toggle .icon.default,
 section.past-residents .nav-toggle .icon.default,
 section.events .past.wrapper .nav-toggle .icon.default,
 section.error .nav-toggle .icon.default {
   background-image: url(../images/burger-black.svg) !important; }
-/* line 49, ../sass/sections/black.scss */
+/* line 51, ../sass/sections/black.scss */
 section.sponsor .nav-toggle .icon.hover,
 section.past .nav-toggle .icon.hover,
 section.past-residents .nav-toggle .icon.hover,
 section.events .past.wrapper .nav-toggle .icon.hover,
 section.error .nav-toggle .icon.hover {
   background-image: url(../images/burger-orange.svg) !important; }
-/* line 54, ../sass/sections/black.scss */
+/* line 56, ../sass/sections/black.scss */
 section.sponsor header.main nav .cell .sub-menu .child-item,
 section.past header.main nav .cell .sub-menu .child-item,
 section.past-residents header.main nav .cell .sub-menu .child-item,
 section.events .past.wrapper header.main nav .cell .sub-menu .child-item,
 section.error header.main nav .cell .sub-menu .child-item {
   background-image: url(../images/bullet-black.svg) !important; }
-  /* line 56, ../sass/sections/black.scss */
+  /* line 58, ../sass/sections/black.scss */
   section.sponsor header.main nav .cell .sub-menu .child-item:hover,
   section.past header.main nav .cell .sub-menu .child-item:hover,
   section.past-residents header.main nav .cell .sub-menu .child-item:hover,
   section.events .past.wrapper header.main nav .cell .sub-menu .child-item:hover,
   section.error header.main nav .cell .sub-menu .child-item:hover {
     background-image: url(../images/bullet-orange.svg) !important; }
-/* line 60, ../sass/sections/black.scss */
+/* line 62, ../sass/sections/black.scss */
 section.sponsor header.main nav .cell.search input.s,
 section.past header.main nav .cell.search input.s,
 section.past-residents header.main nav .cell.search input.s,
 section.events .past.wrapper header.main nav .cell.search input.s,
 section.error header.main nav .cell.search input.s {
   color: #13172F !important; }
-/* line 64, ../sass/sections/black.scss */
+/* line 66, ../sass/sections/black.scss */
 section.sponsor header.main nav .cell.greenroom h1:hover .iconWrap,
 section.past header.main nav .cell.greenroom h1:hover .iconWrap,
 section.past-residents header.main nav .cell.greenroom h1:hover .iconWrap,
 section.events .past.wrapper header.main nav .cell.greenroom h1:hover .iconWrap,
 section.error header.main nav .cell.greenroom h1:hover .iconWrap {
   color: #ff5000; }
-/* line 67, ../sass/sections/black.scss */
+/* line 69, ../sass/sections/black.scss */
 section.sponsor header.main nav .cell.greenroom .swap .icon.default,
 section.past header.main nav .cell.greenroom .swap .icon.default,
 section.past-residents header.main nav .cell.greenroom .swap .icon.default,
 section.events .past.wrapper header.main nav .cell.greenroom .swap .icon.default,
 section.error header.main nav .cell.greenroom .swap .icon.default {
   background-image: url(../images/lock-black.svg); }
-/* line 70, ../sass/sections/black.scss */
+/* line 72, ../sass/sections/black.scss */
 section.sponsor header.main nav .cell.greenroom .swap .icon.hover,
 section.past header.main nav .cell.greenroom .swap .icon.hover,
 section.past-residents header.main nav .cell.greenroom .swap .icon.hover,
 section.events .past.wrapper header.main nav .cell.greenroom .swap .icon.hover,
 section.error header.main nav .cell.greenroom .swap .icon.hover {
   background-image: url(../images/lock-orange.svg); }
-/* line 75, ../sass/sections/black.scss */
+/* line 77, ../sass/sections/black.scss */
 section.sponsor.tease-nav header.main,
 section.past.tease-nav header.main,
 section.past-residents.tease-nav header.main,
 section.events .past.wrapper.tease-nav header.main,
 section.error.tease-nav header.main {
   border-color: #ff5000 !important; }
-/* line 82, ../sass/sections/black.scss */
+/* line 84, ../sass/sections/black.scss */
 section.sponsor .filter .bar .select.dropdown .icon.default,
 section.past .filter .bar .select.dropdown .icon.default,
 section.past-residents .filter .bar .select.dropdown .icon.default,
 section.events .past.wrapper .filter .bar .select.dropdown .icon.default,
 section.error .filter .bar .select.dropdown .icon.default {
   background-image: url(../images/dropdown-black.svg); }
-/* line 85, ../sass/sections/black.scss */
+/* line 87, ../sass/sections/black.scss */
 section.sponsor .filter .bar .select.dropdown .icon.hover,
 section.past .filter .bar .select.dropdown .icon.hover,
 section.past-residents .filter .bar .select.dropdown .icon.hover,
 section.events .past.wrapper .filter .bar .select.dropdown .icon.hover,
 section.error .filter .bar .select.dropdown .icon.hover {
   background-image: url(../images/dropdown-orange.svg); }
-/* line 92, ../sass/sections/black.scss */
+/* line 94, ../sass/sections/black.scss */
 section.sponsor .filter .bar .select.view.toggle .icon.default,
 section.past .filter .bar .select.view.toggle .icon.default,
 section.past-residents .filter .bar .select.view.toggle .icon.default,
 section.events .past.wrapper .filter .bar .select.view.toggle .icon.default,
 section.error .filter .bar .select.view.toggle .icon.default {
   background-image: url(../images/view-toggle-black.svg); }
-/* line 95, ../sass/sections/black.scss */
+/* line 97, ../sass/sections/black.scss */
 section.sponsor .filter .bar .select.view.toggle .icon.hover,
 section.past .filter .bar .select.view.toggle .icon.hover,
 section.past-residents .filter .bar .select.view.toggle .icon.hover,
 section.events .past.wrapper .filter .bar .select.view.toggle .icon.hover,
 section.error .filter .bar .select.view.toggle .icon.hover {
   background-image: url(../images/view-toggle-orange.svg); }
-/* line 101, ../sass/sections/black.scss */
+/* line 103, ../sass/sections/black.scss */
 section.sponsor .filter .bar .link.map .icon.hover,
 section.past .filter .bar .link.map .icon.hover,
 section.past-residents .filter .bar .link.map .icon.hover,
 section.events .past.wrapper .filter .bar .link.map .icon.hover,
 section.error .filter .bar .link.map .icon.hover {
   background-image: url(../images/bullet-orange.svg) !important; }
-/* line 107, ../sass/sections/black.scss */
+/* line 109, ../sass/sections/black.scss */
 section.sponsor .filter-lists .loading,
 section.past .filter-lists .loading,
 section.past-residents .filter-lists .loading,
 section.events .past.wrapper .filter-lists .loading,
 section.error .filter-lists .loading {
   color: #13172F; }
-/* line 112, ../sass/sections/black.scss */
+/* line 114, ../sass/sections/black.scss */
 section.sponsor .filter-list .options .option a .swap .icon.default,
 section.past .filter-list .options .option a .swap .icon.default,
 section.past-residents .filter-list .options .option a .swap .icon.default,
 section.events .past.wrapper .filter-list .options .option a .swap .icon.default,
 section.error .filter-list .options .option a .swap .icon.default {
   background-image: url(../images/close-black.svg); }
-/* line 115, ../sass/sections/black.scss */
+/* line 117, ../sass/sections/black.scss */
 section.sponsor .filter-list .options .option a .swap .icon.hover,
 section.past .filter-list .options .option a .swap .icon.hover,
 section.past-residents .filter-list .options .option a .swap .icon.hover,
 section.events .past.wrapper .filter-list .options .option a .swap .icon.hover,
 section.error .filter-list .options .option a .swap .icon.hover {
   background-image: url(../images/close-orange.svg); }
-/* line 120, ../sass/sections/black.scss */
+/* line 122, ../sass/sections/black.scss */
 section.sponsor .residents .resident .image,
 section.past .residents .resident .image,
 section.past-residents .residents .resident .image,
 section.events .past.wrapper .residents .resident .image,
 section.error .residents .resident .image {
   background-color: white; }
-/* line 124, ../sass/sections/black.scss */
+/* line 126, ../sass/sections/black.scss */
 section.sponsor.hover-right .content,
 section.past.hover-right .content,
 section.past-residents.hover-right .content,
 section.events .past.wrapper.hover-right .content,
 section.error.hover-right .content {
   border-right-color: #ff5000 !important; }
-/* line 129, ../sass/sections/black.scss */
+/* line 131, ../sass/sections/black.scss */
 section.sponsor.hover-left .content,
 section.past.hover-left .content,
 section.past-residents.hover-left .content,
 section.events .past.wrapper.hover-left .content,
 section.error.hover-left .content {
   border-left-color: #ff5000 !important; }
-/* line 133, ../sass/sections/black.scss */
+/* line 135, ../sass/sections/black.scss */
 section.sponsor .bullet.link, section.sponsor section.greenroom ul li.link, section.greenroom ul section.sponsor li.link,
 section.sponsor section.resource ul li.link,
 section.resource ul section.sponsor li.link,
@@ -2891,7 +2885,7 @@ section.error section.resident-resource ul li.link,
 section.resident-resource ul section.error li.link,
 section.error a.bullet {
   background-image: url(../images/bullet-black.svg) !important; }
-  /* line 135, ../sass/sections/black.scss */
+  /* line 137, ../sass/sections/black.scss */
   section.sponsor .bullet.link:hover, section.sponsor section.greenroom ul li.link:hover, section.greenroom ul section.sponsor li.link:hover,
   section.sponsor section.resource ul li.link:hover,
   section.resource ul section.sponsor li.link:hover,
@@ -2930,7 +2924,7 @@ section.error a.bullet {
   section.resident-resource ul section.error li.link:hover,
   section.error a.bullet:hover {
     background-image: url(../images/bullet-orange.svg) !important; }
-/* line 139, ../sass/sections/black.scss */
+/* line 141, ../sass/sections/black.scss */
 section.sponsor h1, section.sponsor h2, section.sponsor h3,
 section.past h1,
 section.past h2,
@@ -2945,14 +2939,14 @@ section.error h1,
 section.error h2,
 section.error h3 {
   color: #13172F !important; }
-/* line 142, ../sass/sections/black.scss */
+/* line 144, ../sass/sections/black.scss */
 section.sponsor footer,
 section.past footer,
 section.past-residents footer,
 section.events .past.wrapper footer,
 section.error footer {
   background-color: #13172F !important; }
-  /* line 144, ../sass/sections/black.scss */
+  /* line 146, ../sass/sections/black.scss */
   section.sponsor footer *,
   section.past footer *,
   section.past-residents footer *,
@@ -2961,70 +2955,70 @@ section.error footer {
     background-color: #13172F !important;
     color: #fff !important;
     border-color: #fff !important; }
-  /* line 149, ../sass/sections/black.scss */
+  /* line 151, ../sass/sections/black.scss */
   section.sponsor footer a:hover,
   section.past footer a:hover,
   section.past-residents footer a:hover,
   section.events .past.wrapper footer a:hover,
   section.error footer a:hover {
     color: #ff5000; }
-  /* line 152, ../sass/sections/black.scss */
+  /* line 154, ../sass/sections/black.scss */
   section.sponsor footer aside.footer,
   section.past footer aside.footer,
   section.past-residents footer aside.footer,
   section.events .past.wrapper footer aside.footer,
   section.error footer aside.footer {
     border-color: #fff !important; }
-    /* line 155, ../sass/sections/black.scss */
+    /* line 157, ../sass/sections/black.scss */
     section.sponsor footer aside.footer .icon.default,
     section.past footer aside.footer .icon.default,
     section.past-residents footer aside.footer .icon.default,
     section.events .past.wrapper footer aside.footer .icon.default,
     section.error footer aside.footer .icon.default {
       background-image: url(../images/logo-white.svg); }
-    /* line 158, ../sass/sections/black.scss */
+    /* line 160, ../sass/sections/black.scss */
     section.sponsor footer aside.footer .icon.hover,
     section.past footer aside.footer .icon.hover,
     section.past-residents footer aside.footer .icon.hover,
     section.events .past.wrapper footer aside.footer .icon.hover,
     section.error footer aside.footer .icon.hover {
       background-image: url(../images/logo-orange.svg); }
-  /* line 163, ../sass/sections/black.scss */
+  /* line 165, ../sass/sections/black.scss */
   section.sponsor footer .greenroom .login .swap .icon.hover,
   section.past footer .greenroom .login .swap .icon.hover,
   section.past-residents footer .greenroom .login .swap .icon.hover,
   section.events .past.wrapper footer .greenroom .login .swap .icon.hover,
   section.error footer .greenroom .login .swap .icon.hover {
     background-image: url(../images/lock-orange.svg) !important; }
-/* line 167, ../sass/sections/black.scss */
+/* line 169, ../sass/sections/black.scss */
 section.sponsor .wrap:hover,
 section.past .wrap:hover,
 section.past-residents .wrap:hover,
 section.events .past.wrapper .wrap:hover,
 section.error .wrap:hover {
   color: #ff5000 !important; }
-  /* line 169, ../sass/sections/black.scss */
+  /* line 171, ../sass/sections/black.scss */
   section.sponsor .wrap:hover .link,
   section.past .wrap:hover .link,
   section.past-residents .wrap:hover .link,
   section.events .past.wrapper .wrap:hover .link,
   section.error .wrap:hover .link {
     color: #ff5000 !important; }
-/* line 173, ../sass/sections/black.scss */
+/* line 175, ../sass/sections/black.scss */
 section.sponsor .shelves,
 section.past .shelves,
 section.past-residents .shelves,
 section.events .past.wrapper .shelves,
 section.error .shelves {
   color: #13172F; }
-  /* line 175, ../sass/sections/black.scss */
+  /* line 177, ../sass/sections/black.scss */
   section.sponsor .shelves .shelf-item.hover,
   section.past .shelves .shelf-item.hover,
   section.past-residents .shelves .shelf-item.hover,
   section.events .past.wrapper .shelves .shelf-item.hover,
   section.error .shelves .shelf-item.hover {
     color: #ff5000; }
-    /* line 177, ../sass/sections/black.scss */
+    /* line 179, ../sass/sections/black.scss */
     section.sponsor .shelves .shelf-item.hover a, section.sponsor .shelves .shelf-item.hover .link,
     section.past .shelves .shelf-item.hover a,
     section.past .shelves .shelf-item.hover .link,
@@ -3035,7 +3029,7 @@ section.error .shelves {
     section.error .shelves .shelf-item.hover a,
     section.error .shelves .shelf-item.hover .link {
       color: #ff5000; }
-  /* line 182, ../sass/sections/black.scss */
+  /* line 184, ../sass/sections/black.scss */
   section.sponsor .shelves .shelf-item.nolink:hover .inner .link, section.sponsor .shelves .shelf-item.nolink:hover .inner a,
   section.past .shelves .shelf-item.nolink:hover .inner .link,
   section.past .shelves .shelf-item.nolink:hover .inner a,
@@ -3046,7 +3040,7 @@ section.error .shelves {
   section.error .shelves .shelf-item.nolink:hover .inner .link,
   section.error .shelves .shelf-item.nolink:hover .inner a {
     color: #13172F !important; }
-  /* line 187, ../sass/sections/black.scss */
+  /* line 189, ../sass/sections/black.scss */
   section.sponsor .shelves .shelf-item.nolink .inner .link:hover, section.sponsor .shelves .shelf-item.nolink .inner a:hover,
   section.past .shelves .shelf-item.nolink .inner .link:hover,
   section.past .shelves .shelf-item.nolink .inner a:hover,
@@ -3057,7 +3051,7 @@ section.error .shelves {
   section.error .shelves .shelf-item.nolink .inner .link:hover,
   section.error .shelves .shelf-item.nolink .inner a:hover {
     color: #13172F !important; }
-/* line 192, ../sass/sections/black.scss */
+/* line 194, ../sass/sections/black.scss */
 section.sponsor .image_slider.full,
 section.past .image_slider.full,
 section.past-residents .image_slider.full,
@@ -3065,7 +3059,7 @@ section.events .past.wrapper .image_slider.full,
 section.error .image_slider.full {
   background-color: #13172F;
   color: #fff; }
-/* line 196, ../sass/sections/black.scss */
+/* line 198, ../sass/sections/black.scss */
 section.sponsor ::-moz-selection,
 section.past ::-moz-selection,
 section.past-residents ::-moz-selection,
@@ -3080,7 +3074,7 @@ section.events .past.wrapper ::selection,
 section.error ::selection {
   background-color: #13172F;
   color: #fff; }
-/* line 200, ../sass/sections/black.scss */
+/* line 202, ../sass/sections/black.scss */
 section.sponsor .module, section.sponsor .module h4,
 section.past .module,
 section.past .module h4,
@@ -3091,7 +3085,7 @@ section.events .past.wrapper .module h4,
 section.error .module,
 section.error .module h4 {
   color: #13172F !important; }
-/* line 203, ../sass/sections/black.scss */
+/* line 205, ../sass/sections/black.scss */
 section.sponsor .loader div,
 section.past .loader div,
 section.past-residents .loader div,
@@ -3099,10 +3093,10 @@ section.events .past.wrapper .loader div,
 section.error .loader div {
   background: #13172F; }
 
-/* line 208, ../sass/sections/black.scss */
+/* line 210, ../sass/sections/black.scss */
 a.black:hover, .link.black:hover, .past .link:hover {
   color: #ff5000 !important; }
-  /* line 210, ../sass/sections/black.scss */
+  /* line 212, ../sass/sections/black.scss */
   a.black:hover.wrap *, .link.black:hover.wrap *, .past .link:hover.wrap * {
     color: #ff5000 !important; }
 

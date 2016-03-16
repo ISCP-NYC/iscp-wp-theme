@@ -35,6 +35,9 @@ aside {
 		}
 		&.hover {
 			border-color: $black;
+			label {
+				color: $orange;
+			}
 			.logo {
 				border-color: $black;
 				.icon.default {
@@ -69,11 +72,18 @@ aside {
 	    display: table;
 		transform-origin: left top 0;
 		text-align: center;
+		&:hover {
+			color: inherit !important;
+		}
 		.label {
+			padding: 0 10px;
 			transition: opacity 300ms ease-in-out;
 			font-size: $medium-fs;
 			line-height: $medium-lh;
 		}
+	}
+	a.move:hover {
+		color: inherit !important;
 	}
 	&.left .move {
 		bottom: -120px;

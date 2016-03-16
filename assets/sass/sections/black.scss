@@ -9,11 +9,8 @@ section.error {
 	a, .link {
 		color: $black;
 	}
-	a div {
-		transition: color 150ms ease-in-out;
-	}
 	a:hover, .link:hover, a div:hover {
-		color: $orange !important;
+		// color: $orange !important;
 	}
 	nav,
 	header.main nav a.overlay {
@@ -32,6 +29,11 @@ section.error {
 		}
 		&.hover .logo {
 			border-color: $orange !important;
+		}
+		&.hover {
+			.move {
+				color: $orange !important;
+			}
 		}
 	}
 	.logo.mobile {
