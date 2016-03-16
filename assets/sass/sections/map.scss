@@ -36,7 +36,7 @@ section#map {
 			}
 		}
 		.we-pm-icon {
-			background-image: none !important; 
+			background-image: none !important;
 			background-position: center;
 			background-repeat: no-repeat;
 			background-size: contain;
@@ -92,6 +92,13 @@ section#map {
 				background-image: url(../images/logo-black.svg);
 			}
 		}
+		@include small {
+		top: 11px;
+		left: 15px;
+			.icon {
+					background-size: 48px;
+			}
+		}
 	}
 	.buttons {
 		position: absolute;
@@ -118,6 +125,20 @@ section#map {
 			}
 			&.out .icon {
 				background-position: bottom center;
+			}
+		}
+		@include small {
+			top: 15px;
+			right: 25px;
+			.icon {
+				background-size: 20px 50px !important;
+			}
+			.zoom {
+				width: 25px !important;
+				height: 25px !important;
+			}
+			.zoom.out {
+				margin-top: 5px;
 			}
 		}
 	}
@@ -149,6 +170,9 @@ section#map {
 			padding: 30px 0 25px 0;
 			font-size: $medium-fs;
 			line-height: $medium-fs;
+			@include small {
+				@include medium-fs;
+			}
 			text-align: center;
 			background-color: $orange;
 			display: block;
@@ -189,16 +213,18 @@ section#map {
 					width: 100%;
 					padding: 0 0 5px 0;
 					.value {
-						display: inline-block;
+						display: inline-block !important;
 						color: $white;
+						float: left !important;
+						clear: none !important;
 						&.name {
-							width: 40%;
+							width: 40% !important;
 						}
 						&.years {
-							width: 20%;
+							width: 20% !important;
 						}
 						&.sponsors {
-							width: 40%;
+							width: 40% !important;
 						}
 					}
 				}
@@ -211,6 +237,11 @@ section#map {
 			position: absolute;
 			width: 25px;
 		    height: 25px;
+				@include small {
+					width: 16px;
+					height: 16px;
+				  right: 28px;
+				}
 		    right: 30px;
 		    top: 30px;
 		    z-index: 400;
@@ -218,7 +249,7 @@ section#map {
 		    transition: opacity 200ms ease-in-out;
 		    opacity: 0;
 		    .icon {
-		    	background-position: contain; 
+		    	background-position: contain;
 			    &.default {
 					background-image: url(../images/close-white.svg);
 				}

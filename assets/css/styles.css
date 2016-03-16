@@ -3721,35 +3721,58 @@ section#map {
       /* line 91, ../sass/sections/map.scss */
       section#map .logo .icon.hover {
         background-image: url(../images/logo-black.svg); }
-  /* line 96, ../sass/sections/map.scss */
+    @media (max-width: 768px) {
+      /* line 77, ../sass/sections/map.scss */
+      section#map .logo {
+        top: 11px;
+        left: 15px; }
+        /* line 98, ../sass/sections/map.scss */
+        section#map .logo .icon {
+          background-size: 48px; } }
+  /* line 103, ../sass/sections/map.scss */
   section#map .buttons {
     position: absolute;
     top: 35px;
     right: 20px;
     z-index: 100; }
-    /* line 101, ../sass/sections/map.scss */
+    /* line 108, ../sass/sections/map.scss */
     section#map .buttons .zoom {
       float: left;
       width: 30px;
       height: 30px;
       margin-left: 10px;
       cursor: pointer; }
-      /* line 107, ../sass/sections/map.scss */
+      /* line 114, ../sass/sections/map.scss */
       section#map .buttons .zoom .icon {
         background-size: 30px 60px; }
-        /* line 109, ../sass/sections/map.scss */
+        /* line 116, ../sass/sections/map.scss */
         section#map .buttons .zoom .icon.default {
           background-image: url(../images/zoom-orange.svg); }
-        /* line 112, ../sass/sections/map.scss */
+        /* line 119, ../sass/sections/map.scss */
         section#map .buttons .zoom .icon.hover {
           background-image: url(../images/zoom-black.svg); }
-      /* line 116, ../sass/sections/map.scss */
+      /* line 123, ../sass/sections/map.scss */
       section#map .buttons .zoom.in .icon {
         background-position: top center; }
-      /* line 119, ../sass/sections/map.scss */
+      /* line 126, ../sass/sections/map.scss */
       section#map .buttons .zoom.out .icon {
         background-position: bottom center; }
-  /* line 124, ../sass/sections/map.scss */
+    @media (max-width: 768px) {
+      /* line 103, ../sass/sections/map.scss */
+      section#map .buttons {
+        top: 15px;
+        right: 25px; }
+        /* line 133, ../sass/sections/map.scss */
+        section#map .buttons .icon {
+          background-size: 20px 50px !important; }
+        /* line 136, ../sass/sections/map.scss */
+        section#map .buttons .zoom {
+          width: 25px !important;
+          height: 25px !important; }
+        /* line 140, ../sass/sections/map.scss */
+        section#map .buttons .zoom.out {
+          margin-top: 5px; } }
+  /* line 145, ../sass/sections/map.scss */
   section#map .residents {
     width: 100%;
     height: auto;
@@ -3762,17 +3785,17 @@ section#map {
     -webkit-transition: -webkit-transform 500ms cubic-bezier(0.645, 0.045, 0.355, 1);
             transition: transform 500ms cubic-bezier(0.645, 0.045, 0.355, 1);
     overflow-y: hidden; }
-    /* line 135, ../sass/sections/map.scss */
+    /* line 156, ../sass/sections/map.scss */
     section#map .residents.tease:not(.open) {
       -webkit-transition-duration: 300ms;
               transition-duration: 300ms;
       -webkit-transform: translateY(calc(-24px - 60px));
           -ms-transform: translateY(calc(-24px - 60px));
               transform: translateY(calc(-24px - 60px)); }
-    /* line 140, ../sass/sections/map.scss */
+    /* line 161, ../sass/sections/map.scss */
     section#map .residents.show .close {
       opacity: 1; }
-    /* line 144, ../sass/sections/map.scss */
+    /* line 165, ../sass/sections/map.scss */
     section#map .residents .head {
       width: 100%;
       position: absolute;
@@ -3787,7 +3810,18 @@ section#map {
       color: #fff;
       box-shadow: 0px 0px 15px 5px #ff5000;
       z-index: 300; }
-    /* line 159, ../sass/sections/map.scss */
+      @media (max-width: 768px) {
+        /* line 165, ../sass/sections/map.scss */
+        section#map .residents .head {
+          font-size: 24px;
+          line-height: 28px; } }
+  @media (max-width: 768px) and (max-width: 900px) {
+    /* line 165, ../sass/sections/map.scss */
+    section#map .residents .head {
+      font-size: 18px;
+      line-height: 21px; } }
+
+    /* line 183, ../sass/sections/map.scss */
     section#map .residents .content {
       width: 80%;
       max-width: 1000px;
@@ -3798,7 +3832,7 @@ section#map {
       overflow-y: scroll;
       -webkit-overflow-scrolling: touch;
       border: none; }
-      /* line 169, ../sass/sections/map.scss */
+      /* line 193, ../sass/sections/map.scss */
       section#map .residents .content .titles {
         width: 100%;
         display: -webkit-box;
@@ -3806,42 +3840,44 @@ section#map {
         display: -ms-flexbox;
         display: flex;
         margin-bottom: 10px; }
-        /* line 173, ../sass/sections/map.scss */
+        /* line 197, ../sass/sections/map.scss */
         section#map .residents .content .titles .title {
           display: inline-block; }
-          /* line 175, ../sass/sections/map.scss */
+          /* line 199, ../sass/sections/map.scss */
           section#map .residents .content .titles .title.name {
             width: 40%; }
-          /* line 178, ../sass/sections/map.scss */
+          /* line 202, ../sass/sections/map.scss */
           section#map .residents .content .titles .title.years {
             width: 20%; }
-          /* line 181, ../sass/sections/map.scss */
+          /* line 205, ../sass/sections/map.scss */
           section#map .residents .content .titles .title.sponsors {
             width: 40%; }
-      /* line 186, ../sass/sections/map.scss */
+      /* line 210, ../sass/sections/map.scss */
       section#map .residents .content .list {
         padding-bottom: 30px; }
-        /* line 188, ../sass/sections/map.scss */
+        /* line 212, ../sass/sections/map.scss */
         section#map .residents .content .list .row {
           width: 100%;
           padding: 0 0 5px 0; }
-          /* line 191, ../sass/sections/map.scss */
+          /* line 215, ../sass/sections/map.scss */
           section#map .residents .content .list .row .value {
-            display: inline-block;
-            color: #fff; }
-            /* line 194, ../sass/sections/map.scss */
+            display: inline-block !important;
+            color: #fff;
+            float: left !important;
+            clear: none !important; }
+            /* line 220, ../sass/sections/map.scss */
             section#map .residents .content .list .row .value.name {
-              width: 40%; }
-            /* line 197, ../sass/sections/map.scss */
+              width: 40% !important; }
+            /* line 223, ../sass/sections/map.scss */
             section#map .residents .content .list .row .value.years {
-              width: 20%; }
-            /* line 200, ../sass/sections/map.scss */
+              width: 20% !important; }
+            /* line 226, ../sass/sections/map.scss */
             section#map .residents .content .list .row .value.sponsors {
-              width: 40%; }
-        /* line 205, ../sass/sections/map.scss */
+              width: 40% !important; }
+        /* line 231, ../sass/sections/map.scss */
         section#map .residents .content .list a, section#map .residents .content .list .link {
           color: #fff; }
-    /* line 210, ../sass/sections/map.scss */
+    /* line 236, ../sass/sections/map.scss */
     section#map .residents .close {
       position: absolute;
       width: 25px;
@@ -3853,13 +3889,19 @@ section#map {
       -webkit-transition: opacity 200ms ease-in-out;
               transition: opacity 200ms ease-in-out;
       opacity: 0; }
-      /* line 220, ../sass/sections/map.scss */
+      @media (max-width: 768px) {
+        /* line 236, ../sass/sections/map.scss */
+        section#map .residents .close {
+          width: 16px;
+          height: 16px;
+          right: 28px; } }
+      /* line 251, ../sass/sections/map.scss */
       section#map .residents .close .icon {
         background-position: contain; }
-        /* line 222, ../sass/sections/map.scss */
+        /* line 253, ../sass/sections/map.scss */
         section#map .residents .close .icon.default {
           background-image: url(../images/close-white.svg); }
-        /* line 225, ../sass/sections/map.scss */
+        /* line 256, ../sass/sections/map.scss */
         section#map .residents .close .icon.hover {
           background-image: url(../images/close-black.svg); }
 
