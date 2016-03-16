@@ -1511,107 +1511,112 @@ section {
       margin-bottom: 50px;
       -webkit-transition: color 150ms ease-in-out, opacity 300ms ease-in-out;
               transition: color 150ms ease-in-out, opacity 300ms ease-in-out; }
-      /* line 15, ../sass/partials/shelves.scss */
+      @media (max-width: 768px) {
+        /* line 8, ../sass/partials/shelves.scss */
+        section .shelves.grid .shelf-item {
+          padding-bottom: 17px;
+          margin-bottom: 34px; } }
+      /* line 19, ../sass/partials/shelves.scss */
       section .shelves.grid .shelf-item * {
         -webkit-transition: color 150ms ease-in-out;
                 transition: color 150ms ease-in-out; }
-      /* line 18, ../sass/partials/shelves.scss */
+      /* line 22, ../sass/partials/shelves.scss */
       section .shelves.grid .shelf-item .inner {
         width: calc(100% - 33.333px); }
-        /* line 20, ../sass/partials/shelves.scss */
+        /* line 24, ../sass/partials/shelves.scss */
         section .shelves.grid .shelf-item .inner a.wrap {
           width: 100%;
           display: table; }
-          /* line 23, ../sass/partials/shelves.scss */
+          /* line 27, ../sass/partials/shelves.scss */
           section .shelves.grid .shelf-item .inner a.wrap:hover * {
             color: #13172F; }
-        /* line 27, ../sass/partials/shelves.scss */
+        /* line 31, ../sass/partials/shelves.scss */
         section .shelves.grid .shelf-item .inner h3 {
           text-align: center; }
-        /* line 30, ../sass/partials/shelves.scss */
+        /* line 34, ../sass/partials/shelves.scss */
         section .shelves.grid .shelf-item .inner h2 {
           text-align: center;
           margin-bottom: 10px; }
-        /* line 35, ../sass/partials/shelves.scss */
+        /* line 39, ../sass/partials/shelves.scss */
         section .shelves.grid .shelf-item .inner .image {
           width: 100%;
           margin-bottom: 14px;
           min-height: 100px; }
-          /* line 40, ../sass/partials/shelves.scss */
+          /* line 44, ../sass/partials/shelves.scss */
           section .shelves.grid .shelf-item .inner .image img {
             width: 100%;
             height: 100%;
             vertical-align: bottom; }
-        /* line 47, ../sass/partials/shelves.scss */
+        /* line 51, ../sass/partials/shelves.scss */
         section .shelves.grid .shelf-item .inner span {
           margin-bottom: 5px;
           display: block; }
-        /* line 51, ../sass/partials/shelves.scss */
+        /* line 55, ../sass/partials/shelves.scss */
         section .shelves.grid .shelf-item .inner .value {
           margin-bottom: 0px;
           font-size: 18px;
           line-height: calc(21px - 1px); }
-          /* line 55, ../sass/partials/shelves.scss */
+          /* line 59, ../sass/partials/shelves.scss */
           section .shelves.grid .shelf-item .inner .value.sponsors {
             margin-top: 8px; }
-      /* line 60, ../sass/partials/shelves.scss */
+      /* line 64, ../sass/partials/shelves.scss */
       section .shelves.grid .shelf-item:nth-child(3n+1) .inner {
         margin: 0 0 0 20px; }
-      /* line 63, ../sass/partials/shelves.scss */
+      /* line 67, ../sass/partials/shelves.scss */
       section .shelves.grid .shelf-item:nth-child(3n+2) .inner {
         margin: 0 16.666px; }
-      /* line 66, ../sass/partials/shelves.scss */
+      /* line 70, ../sass/partials/shelves.scss */
       section .shelves.grid .shelf-item:nth-child(3n+3) .inner {
         margin: 0 0 0 13.333px; }
-      /* line 70, ../sass/partials/shelves.scss */
+      /* line 74, ../sass/partials/shelves.scss */
       section .shelves.grid .shelf-item.current, section .shelves.grid .shelf-item.upcoming {
         color: #ff5000 !important; }
-        /* line 73, ../sass/partials/shelves.scss */
+        /* line 77, ../sass/partials/shelves.scss */
         section .shelves.grid .shelf-item.current .inner *, section .shelves.grid .shelf-item.upcoming .inner * {
           color: #ff5000 !important; }
-        /* line 76, ../sass/partials/shelves.scss */
+        /* line 80, ../sass/partials/shelves.scss */
         section .shelves.grid .shelf-item.current .inner a:hover, section .shelves.grid .shelf-item.current .inner .link:hover, section .shelves.grid .shelf-item.current .inner .wrap:hover, section .shelves.grid .shelf-item.upcoming .inner a:hover, section .shelves.grid .shelf-item.upcoming .inner .link:hover, section .shelves.grid .shelf-item.upcoming .inner .wrap:hover {
           color: #13172F !important; }
-          /* line 78, ../sass/partials/shelves.scss */
+          /* line 82, ../sass/partials/shelves.scss */
           section .shelves.grid .shelf-item.current .inner a:hover h2, section .shelves.grid .shelf-item.current .inner .link:hover h2, section .shelves.grid .shelf-item.current .inner .wrap:hover h2, section .shelves.grid .shelf-item.upcoming .inner a:hover h2, section .shelves.grid .shelf-item.upcoming .inner .link:hover h2, section .shelves.grid .shelf-item.upcoming .inner .wrap:hover h2 {
             color: #13172F !important; }
-        /* line 83, ../sass/partials/shelves.scss */
+        /* line 87, ../sass/partials/shelves.scss */
         section .shelves.grid .shelf-item.current.hover, section .shelves.grid .shelf-item.upcoming.hover {
           color: #13172F !important; }
-          /* line 85, ../sass/partials/shelves.scss */
+          /* line 89, ../sass/partials/shelves.scss */
           section .shelves.grid .shelf-item.current.hover *, section .shelves.grid .shelf-item.upcoming.hover * {
             color: #13172F !important; }
-      /* line 90, ../sass/partials/shelves.scss */
+      /* line 94, ../sass/partials/shelves.scss */
       section .shelves.grid .shelf-item.past {
         color: #13172F !important; }
-        /* line 93, ../sass/partials/shelves.scss */
+        /* line 97, ../sass/partials/shelves.scss */
         section .shelves.grid .shelf-item.past .inner * {
           color: #13172F !important; }
-        /* line 96, ../sass/partials/shelves.scss */
+        /* line 100, ../sass/partials/shelves.scss */
         section .shelves.grid .shelf-item.past .inner a:hover, section .shelves.grid .shelf-item.past .inner .link:hover, section .shelves.grid .shelf-item.past .inner .wrap:hover {
           color: #ff5000 !important; }
-          /* line 98, ../sass/partials/shelves.scss */
+          /* line 102, ../sass/partials/shelves.scss */
           section .shelves.grid .shelf-item.past .inner a:hover h2, section .shelves.grid .shelf-item.past .inner .link:hover h2, section .shelves.grid .shelf-item.past .inner .wrap:hover h2 {
             color: #ff5000 !important; }
-        /* line 103, ../sass/partials/shelves.scss */
+        /* line 107, ../sass/partials/shelves.scss */
         section .shelves.grid .shelf-item.past.hover {
           color: #ff5000 !important; }
-          /* line 105, ../sass/partials/shelves.scss */
+          /* line 109, ../sass/partials/shelves.scss */
           section .shelves.grid .shelf-item.past.hover * {
             color: #ff5000 !important; }
-      /* line 110, ../sass/partials/shelves.scss */
+      /* line 114, ../sass/partials/shelves.scss */
       section .shelves.grid .shelf-item.no-image {
         display: -webkit-box;
         display: -webkit-flex;
         display: -ms-flexbox;
         display: flex; }
-        /* line 113, ../sass/partials/shelves.scss */
+        /* line 117, ../sass/partials/shelves.scss */
         section .shelves.grid .shelf-item.no-image * {
           text-align: center; }
-      /* line 117, ../sass/partials/shelves.scss */
+      /* line 121, ../sass/partials/shelves.scss */
       section .shelves.grid .shelf-item.hover {
         color: #13172F; }
-        /* line 119, ../sass/partials/shelves.scss */
+        /* line 123, ../sass/partials/shelves.scss */
         section .shelves.grid .shelf-item.hover a, section .shelves.grid .shelf-item.hover .link {
           color: #13172F; }
       @media (max-width: 900px) {
@@ -1620,77 +1625,77 @@ section {
           width: 50% !important;
           margin-left: 0 !important;
           margin-right: 0 !important; }
-          /* line 127, ../sass/partials/shelves.scss */
+          /* line 131, ../sass/partials/shelves.scss */
           section .shelves.grid .shelf-item .inner {
             width: calc(100% - 35px); }
-          /* line 130, ../sass/partials/shelves.scss */
+          /* line 134, ../sass/partials/shelves.scss */
           section .shelves.grid .shelf-item:nth-child(odd) .inner {
             margin: 0 0 0 20px; }
-          /* line 133, ../sass/partials/shelves.scss */
+          /* line 137, ../sass/partials/shelves.scss */
           section .shelves.grid .shelf-item:nth-child(even) .inner {
             margin: 0 0 0 15px !important; }
-          /* line 136, ../sass/partials/shelves.scss */
+          /* line 140, ../sass/partials/shelves.scss */
           section .shelves.grid .shelf-item:nth-child(2n+1):nth-last-child(-n+2):last-child {
             width: 100% !important;
             margin-bottom: 0 !important; }
-            /* line 139, ../sass/partials/shelves.scss */
+            /* line 143, ../sass/partials/shelves.scss */
             section .shelves.grid .shelf-item:nth-child(2n+1):nth-last-child(-n+2):last-child .inner {
               width: calc(50% - 15px); } }
       @media (max-width: 768px) {
-        /* line 145, ../sass/partials/shelves.scss */
+        /* line 149, ../sass/partials/shelves.scss */
         section .shelves.grid .shelf-item .inner {
           width: calc(100% - 45px); }
-        /* line 148, ../sass/partials/shelves.scss */
+        /* line 152, ../sass/partials/shelves.scss */
         section .shelves.grid .shelf-item:nth-child(odd) .inner {
           margin: 0 0 0 30px; }
-        /* line 151, ../sass/partials/shelves.scss */
+        /* line 155, ../sass/partials/shelves.scss */
         section .shelves.grid .shelf-item:nth-child(even) .inner {
           margin: 0 0 0 15px; } }
       @media (max-width: 500px) {
         /* line 8, ../sass/partials/shelves.scss */
         section .shelves.grid .shelf-item {
           width: 100% !important; }
-          /* line 157, ../sass/partials/shelves.scss */
+          /* line 161, ../sass/partials/shelves.scss */
           section .shelves.grid .shelf-item .inner, section .shelves.grid .shelf-item.item .inner {
             width: calc(100% - 30px) !important;
             margin: auto;
             display: table; } }
-      /* line 164, ../sass/partials/shelves.scss */
+      /* line 168, ../sass/partials/shelves.scss */
       section .shelves.grid .shelf-item.nolink .image {
         width: calc(100% - 20px);
         height: 200px;
         border-left: 10px solid;
         border-right: 10px solid; }
-      /* line 172, ../sass/partials/shelves.scss */
+      /* line 176, ../sass/partials/shelves.scss */
       section .shelves.grid .shelf-item.nolink:hover .inner .link, section .shelves.grid .shelf-item.nolink:hover .inner a {
         color: #ff5000 !important; }
-      /* line 177, ../sass/partials/shelves.scss */
+      /* line 181, ../sass/partials/shelves.scss */
       section .shelves.grid .shelf-item.nolink .inner .link:hover, section .shelves.grid .shelf-item.nolink .inner a:hover {
         color: #ff5000 !important; }
-    /* line 184, ../sass/partials/shelves.scss */
+    /* line 188, ../sass/partials/shelves.scss */
     section .shelves.list .shelf-item {
       width: calc(100% - 40px);
       text-align: left;
       padding: 20px 20px; }
-      /* line 188, ../sass/partials/shelves.scss */
+      /* line 192, ../sass/partials/shelves.scss */
       section .shelves.list .shelf-item .inner {
         display: -webkit-flex;
         display: -ms-flexbox;
         display: -webkit-box;
         display: flex; }
-        /* line 192, ../sass/partials/shelves.scss */
+        /* line 196, ../sass/partials/shelves.scss */
         section .shelves.list .shelf-item .inner h2 {
           font-size: 18px;
           line-height: 21px; }
           @media (max-width: 900px) {
-            /* line 192, ../sass/partials/shelves.scss */
+            /* line 196, ../sass/partials/shelves.scss */
             section .shelves.list .shelf-item .inner h2 {
               font-size: 16px;
               line-height: 20px; } }
-        /* line 195, ../sass/partials/shelves.scss */
+        /* line 199, ../sass/partials/shelves.scss */
         section .shelves.list .shelf-item .inner .image {
           display: none; }
-        /* line 196, ../sass/partials/shelves.scss */
+        /* line 200, ../sass/partials/shelves.scss */
         section .shelves.list .shelf-item .inner .value {
           float: left;
           text-align: left;
@@ -1702,72 +1707,72 @@ section {
           display: flex;
           word-break: break-word; }
           @media (max-width: 900px) {
-            /* line 196, ../sass/partials/shelves.scss */
+            /* line 200, ../sass/partials/shelves.scss */
             section .shelves.list .shelf-item .inner .value {
               font-size: 16px;
               line-height: 20px; } }
-    /* line 205, ../sass/partials/shelves.scss */
+    /* line 209, ../sass/partials/shelves.scss */
     section .shelves.list .load-more {
       margin-top: 60px; }
-    /* line 212, ../sass/partials/shelves.scss */
+    /* line 216, ../sass/partials/shelves.scss */
     section .shelves .shelf-item.past .inner *, section .shelves .shelf-item.past-residents .inner * {
       color: #13172F; }
-    /* line 215, ../sass/partials/shelves.scss */
+    /* line 219, ../sass/partials/shelves.scss */
     section .shelves .shelf-item.past .inner a:hover, section .shelves .shelf-item.past .inner .link:hover, section .shelves .shelf-item.past .inner .wrap:hover, section .shelves .shelf-item.past-residents .inner a:hover, section .shelves .shelf-item.past-residents .inner .link:hover, section .shelves .shelf-item.past-residents .inner .wrap:hover {
       color: #ff5000 !important; }
-      /* line 217, ../sass/partials/shelves.scss */
+      /* line 221, ../sass/partials/shelves.scss */
       section .shelves .shelf-item.past .inner a:hover h2, section .shelves .shelf-item.past .inner .link:hover h2, section .shelves .shelf-item.past .inner .wrap:hover h2, section .shelves .shelf-item.past-residents .inner a:hover h2, section .shelves .shelf-item.past-residents .inner .link:hover h2, section .shelves .shelf-item.past-residents .inner .wrap:hover h2 {
         color: #ff5000 !important; }
-  /* line 226, ../sass/partials/shelves.scss */
+  /* line 230, ../sass/partials/shelves.scss */
   section.hide-shelves .shelves {
     display: none; }
-  /* line 231, ../sass/partials/shelves.scss */
+  /* line 235, ../sass/partials/shelves.scss */
   section.filtering .filter-this {
     opacity: 0; }
-  /* line 236, ../sass/partials/shelves.scss */
+  /* line 240, ../sass/partials/shelves.scss */
   section .module .shelf-item.item, section .module.shelves .shelf-item.item {
     width: 33.333% !important; }
-    /* line 238, ../sass/partials/shelves.scss */
+    /* line 242, ../sass/partials/shelves.scss */
     section .module .shelf-item.item .inner, section .module.shelves .shelf-item.item .inner {
       width: calc(100% - 20px) !important; }
-    /* line 241, ../sass/partials/shelves.scss */
+    /* line 245, ../sass/partials/shelves.scss */
     section .module .shelf-item.item:nth-child(3n+1) .inner, section .module.shelves .shelf-item.item:nth-child(3n+1) .inner {
       margin: 0 !important; }
-    /* line 244, ../sass/partials/shelves.scss */
+    /* line 248, ../sass/partials/shelves.scss */
     section .module .shelf-item.item:nth-child(3n+2) .inner, section .module.shelves .shelf-item.item:nth-child(3n+2) .inner {
       margin: 0 10px !important; }
-    /* line 247, ../sass/partials/shelves.scss */
+    /* line 251, ../sass/partials/shelves.scss */
     section .module .shelf-item.item:nth-child(3n+3) .inner, section .module.shelves .shelf-item.item:nth-child(3n+3) .inner {
       margin: 0 0 0 20px !important; }
     @media (max-width: 900px) {
-      /* line 251, ../sass/partials/shelves.scss */
+      /* line 255, ../sass/partials/shelves.scss */
       section .module .shelf-item.item:nth-child(n), section .module .shelf-item.item:first-child, section .module .shelf-item.item:last-child, section .module.shelves .shelf-item.item:nth-child(n), section .module.shelves .shelf-item.item:first-child, section .module.shelves .shelf-item.item:last-child {
         width: 100% !important; }
-        /* line 255, ../sass/partials/shelves.scss */
+        /* line 259, ../sass/partials/shelves.scss */
         section .module .shelf-item.item:nth-child(n) .inner, section .module .shelf-item.item:first-child .inner, section .module .shelf-item.item:last-child .inner, section .module.shelves .shelf-item.item:nth-child(n) .inner, section .module.shelves .shelf-item.item:first-child .inner, section .module.shelves .shelf-item.item:last-child .inner {
           width: 100% !important;
           padding: 0 !important;
           margin: 0 !important; } }
   @media (min-width: 1040px) {
-    /* line 269, ../sass/partials/shelves.scss */
+    /* line 273, ../sass/partials/shelves.scss */
     section:not(.home) .shelves.grid .shelf-item.border-bottom:nth-child(3n+1):nth-last-child(-n+3), section:not(.home) .shelves.grid .content .shelf-item.module:nth-child(3n+1):nth-last-child(-n+3), section:not(.home) .content .shelves.grid .shelf-item.module:nth-child(3n+1):nth-last-child(-n+3), section:not(.home) .shelves.grid section.sponsor .content .shelf-item.info:nth-child(3n+1):nth-last-child(-n+3), section.sponsor .content section:not(.home) .shelves.grid .shelf-item.info:nth-child(3n+1):nth-last-child(-n+3) {
       margin-bottom: 0 !important; }
-      /* line 272, ../sass/partials/shelves.scss */
+      /* line 276, ../sass/partials/shelves.scss */
       section:not(.home) .shelves.grid .shelf-item.border-bottom:nth-child(3n+1):nth-last-child(-n+3) ~ .shelf-item, section:not(.home) .shelves.grid .content .shelf-item.module:nth-child(3n+1):nth-last-child(-n+3) ~ .shelf-item, section:not(.home) .content .shelves.grid .shelf-item.module:nth-child(3n+1):nth-last-child(-n+3) ~ .shelf-item, section:not(.home) .shelves.grid section.sponsor .content .shelf-item.info:nth-child(3n+1):nth-last-child(-n+3) ~ .shelf-item, section.sponsor .content section:not(.home) .shelves.grid .shelf-item.info:nth-child(3n+1):nth-last-child(-n+3) ~ .shelf-item {
         margin-bottom: 0 !important; }
-    /* line 278, ../sass/partials/shelves.scss */
+    /* line 282, ../sass/partials/shelves.scss */
     section:not(.home) .shelves.grid .shelf-item.border-bottom:nth-child(3n+1):nth-last-child(-n+3):last-child, section:not(.home) .shelves.grid .content .shelf-item.module:nth-child(3n+1):nth-last-child(-n+3):last-child, section:not(.home) .content .shelves.grid .shelf-item.module:nth-child(3n+1):nth-last-child(-n+3):last-child, section:not(.home) .shelves.grid section.sponsor .content .shelf-item.info:nth-child(3n+1):nth-last-child(-n+3):last-child, section.sponsor .content section:not(.home) .shelves.grid .shelf-item.info:nth-child(3n+1):nth-last-child(-n+3):last-child {
       width: -ms-calc(100%);
       width: calc(100%); }
-      /* line 280, ../sass/partials/shelves.scss */
+      /* line 284, ../sass/partials/shelves.scss */
       section:not(.home) .shelves.grid .shelf-item.border-bottom:nth-child(3n+1):nth-last-child(-n+3):last-child .inner, section:not(.home) .shelves.grid .content .shelf-item.module:nth-child(3n+1):nth-last-child(-n+3):last-child .inner, section:not(.home) .content .shelves.grid .shelf-item.module:nth-child(3n+1):nth-last-child(-n+3):last-child .inner, section:not(.home) .shelves.grid section.sponsor .content .shelf-item.info:nth-child(3n+1):nth-last-child(-n+3):last-child .inner, section.sponsor .content section:not(.home) .shelves.grid .shelf-item.info:nth-child(3n+1):nth-last-child(-n+3):last-child .inner {
         width: -ms-calc(100%/3 - 20px);
         width: calc(100%/3 - 20px); }
-    /* line 285, ../sass/partials/shelves.scss */
+    /* line 289, ../sass/partials/shelves.scss */
     section:not(.home) .shelves.grid .shelf-item.border-bottom:nth-child(3n+1):nth-last-child(-n+2) + .shelf-item, section:not(.home) .shelves.grid .content .shelf-item.module:nth-child(3n+1):nth-last-child(-n+2) + .shelf-item, section:not(.home) .content .shelves.grid .shelf-item.module:nth-child(3n+1):nth-last-child(-n+2) + .shelf-item, section:not(.home) .shelves.grid section.sponsor .content .shelf-item.info:nth-child(3n+1):nth-last-child(-n+2) + .shelf-item, section.sponsor .content section:not(.home) .shelves.grid .shelf-item.info:nth-child(3n+1):nth-last-child(-n+2) + .shelf-item {
       width: -ms-calc(100% / 1.5);
       width: calc(100% / 1.5); }
-      /* line 287, ../sass/partials/shelves.scss */
+      /* line 291, ../sass/partials/shelves.scss */
       section:not(.home) .shelves.grid .shelf-item.border-bottom:nth-child(3n+1):nth-last-child(-n+2) + .shelf-item .inner, section:not(.home) .shelves.grid .content .shelf-item.module:nth-child(3n+1):nth-last-child(-n+2) + .shelf-item .inner, section:not(.home) .content .shelves.grid .shelf-item.module:nth-child(3n+1):nth-last-child(-n+2) + .shelf-item .inner, section:not(.home) .shelves.grid section.sponsor .content .shelf-item.info:nth-child(3n+1):nth-last-child(-n+2) + .shelf-item .inner, section.sponsor .content section:not(.home) .shelves.grid .shelf-item.info:nth-child(3n+1):nth-last-child(-n+2) + .shelf-item .inner {
         width: -ms-calc(50% - 20px);
         width: calc(50% - 20px); } }
@@ -3816,97 +3821,101 @@ section#map {
 /* line 3, ../sass/sections/residents.scss */
 section.residents .content h4.title {
   margin-bottom: 20px; }
-/* line 6, ../sass/sections/residents.scss */
+@media (max-width: 768px) {
+  /* line 6, ../sass/sections/residents.scss */
+  section.residents .content h2.title {
+    padding-bottom: 4px; } }
+/* line 11, ../sass/sections/residents.scss */
 section.residents .content .top {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex; }
-  /* line 8, ../sass/sections/residents.scss */
+  /* line 13, ../sass/sections/residents.scss */
   section.residents .content .top .filter {
     float: left; }
-    /* line 10, ../sass/sections/residents.scss */
+    /* line 15, ../sass/sections/residents.scss */
     section.residents .content .top .filter .link.map {
       cursor: pointer !important; }
-      /* line 12, ../sass/sections/residents.scss */
+      /* line 17, ../sass/sections/residents.scss */
       section.residents .content .top .filter .link.map .swap {
         margin-top: 1px; }
-      /* line 15, ../sass/sections/residents.scss */
+      /* line 20, ../sass/sections/residents.scss */
       section.residents .content .top .filter .link.map .icon {
         background-size: 16px; }
-        /* line 17, ../sass/sections/residents.scss */
+        /* line 22, ../sass/sections/residents.scss */
         section.residents .content .top .filter .link.map .icon.default {
           background-image: url(../images/earth1.png); }
-        /* line 20, ../sass/sections/residents.scss */
+        /* line 25, ../sass/sections/residents.scss */
         section.residents .content .top .filter .link.map .icon.hover {
           background-image: url(../images/bullet-black.svg); }
-  /* line 26, ../sass/sections/residents.scss */
+  /* line 31, ../sass/sections/residents.scss */
   section.residents .content .top .right.alt {
     float: left;
     white-space: nowrap; }
-    /* line 30, ../sass/sections/residents.scss */
+    /* line 35, ../sass/sections/residents.scss */
     section.residents .content .top .right.alt a {
       float: right; }
   @media (max-width: 510px) {
-    /* line 35, ../sass/sections/residents.scss */
+    /* line 40, ../sass/sections/residents.scss */
     section.residents .content .top .right.alt {
       display: none; } }
-/* line 42, ../sass/sections/residents.scss */
+/* line 47, ../sass/sections/residents.scss */
 section.residents .content .residents .resident .details {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex; }
-  /* line 44, ../sass/sections/residents.scss */
+  /* line 49, ../sass/sections/residents.scss */
   section.residents .content .residents .resident .details .left {
     width: 70%; }
-  /* line 47, ../sass/sections/residents.scss */
+  /* line 52, ../sass/sections/residents.scss */
   section.residents .content .residents .resident .details .right {
     width: -ms-calc(30% - 5px);
     width: calc(30% - 5px);
     display: block;
     padding-left: 5px;
     text-align: right; }
-    /* line 52, ../sass/sections/residents.scss */
+    /* line 57, ../sass/sections/residents.scss */
     section.residents .content .residents .resident .details .right .value {
       float: right;
       display: block; }
-      /* line 54, ../sass/sections/residents.scss */
+      /* line 59, ../sass/sections/residents.scss */
       section.residents .content .residents .resident .details .right .value.studio-number {
         white-space: nowrap; }
-/* line 65, ../sass/sections/residents.scss */
+/* line 70, ../sass/sections/residents.scss */
 section.residents .content .residents.list .resident .wrap.name {
   width: 40%; }
-/* line 69, ../sass/sections/residents.scss */
+/* line 74, ../sass/sections/residents.scss */
 section.residents .content .residents.list .resident.nolink h2.title {
   width: 40%;
   text-align: left; }
-/* line 73, ../sass/sections/residents.scss */
+/* line 78, ../sass/sections/residents.scss */
 section.residents .content .residents.list .resident.nolink .link {
   pointer-events: none; }
-/* line 77, ../sass/sections/residents.scss */
+/* line 82, ../sass/sections/residents.scss */
 section.residents .content .residents.list .resident .details {
   width: 60%;
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex; }
-  /* line 80, ../sass/sections/residents.scss */
+  /* line 85, ../sass/sections/residents.scss */
   section.residents .content .residents.list .resident .details .left {
     width: 100%;
     display: -webkit-box;
     display: -webkit-flex;
     display: -ms-flexbox;
     display: flex; }
-    /* line 83, ../sass/sections/residents.scss */
+    /* line 88, ../sass/sections/residents.scss */
     section.residents .content .residents.list .resident .details .left .country {
       width: 30%;
       padding-left: 15px; }
-    /* line 87, ../sass/sections/residents.scss */
+    /* line 92, ../sass/sections/residents.scss */
     section.residents .content .residents.list .resident .details .left .sponsors {
       width: 60%;
       padding-left: 15px; }
-    /* line 91, ../sass/sections/residents.scss */
+    /* line 96, ../sass/sections/residents.scss */
     section.residents .content .residents.list .resident .details .left .studio-number, section.residents .content .residents.list .resident .details .left .year {
       width: 10%; }
 

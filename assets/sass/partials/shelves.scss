@@ -11,7 +11,11 @@
             float: left;
             padding-bottom: 55px;
             margin-bottom: 50px;
-            transition: color 150ms ease-in-out, opacity 300ms ease-in-out;;
+            @include small {
+              padding-bottom: 17px;
+              margin-bottom: 34px;
+            }
+            transition: color 150ms ease-in-out, opacity 300ms ease-in-out;
             * {
                 transition: color 150ms ease-in-out;
             }
