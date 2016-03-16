@@ -256,13 +256,13 @@ em, i, em *, i * {
 ul li {
 	list-style: none;
 }
-.description ul li {
+.description ul li, .info ul li {
 	margin: 0 0 25px 0;
 	background-image: url(../images/bullet-black.svg);
 	background-position: left 7px;
 	background-repeat: no-repeat;
 	background-size: 15px;
-	display: inline-block;
+	display: block;
 	padding: 1px 0 1px 25px;
 	@include medium {
 		background-position: left 4px;
