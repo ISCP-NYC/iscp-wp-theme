@@ -60,13 +60,13 @@ switch($post_type) {
 		$this_event = $post;
 		$this_event_id = $this_event->ID;
 
-		// insert_neighbor_events( $this_event_id, 'new', 3 );
+		insert_neighbor_events( $this_event_id, 'prev', 3 );
 
 		setup_postdata( $this_event );
 		get_template_part( 'sections/event' );
 		wp_reset_postdata();
 
-		// insert_neighbor_events( $this_event_id, 'old', 3 );
+		insert_neighbor_events( $this_event_id, 'next', 3 );
 
 		break;
 	case 'sponsor':

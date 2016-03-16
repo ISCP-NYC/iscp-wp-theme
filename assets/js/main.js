@@ -337,7 +337,14 @@ function slideTo(index, animate) {
 		}).addClass('center');
 		$(section).next().addClass('right');
 		$(section).prev().addClass('left');
+		var url = $(section).attr('data-permalink');
+		var id = $(section).attr('data-id');
+		var title = $(section).attr('data-title');
+		var slug = $(section).attr('data-slug');
+		$('main').attr('data-center-id', id).attr('data-center-slug', slug);
+		$('title').html(title + ' | International Studio &amp; Curatorial Program');
 		if(animate) {
+			window.history.replaceState({page: index}, null, url);
 			$('main').transition({
 				left: -pageWidth * index + (index*asideWidth),
 			}, duration, 'cubic-bezier(0.645, 0.045, 0.355, 1)', function() {
@@ -360,11 +367,7 @@ function slideTo(index, animate) {
 			$('section:not(.center)').scrollTop(0).removeClass('show-footer');
 			$('main').removeClass('sliding');
 		}
-		var url = $(section).attr('data-permalink');
-		var id = $(section).attr('data-id');
-		var slug = $(section).attr('data-slug');
-		$('main').attr('data-center-id', id).attr('data-center-slug', slug);
-		window.history.replaceState({page: index}, null, url);
+
 		if($(section).hasClass('past') || $(section).hasClass('error') || $(section).hasClass('past-residents')) {
 			updateFavicons('blue');
 		} else {
@@ -418,6 +421,8 @@ $('body').on('click', 'aside .move', function(event) {
 		var type = 'resident';
 	} else if($(section).is('.journal-post')) {
 		var type = 'journal-post';
+	} else if($(section).is('.event')) {
+		var type = 'event';
 	}
 
 	if($(aside).hasClass('left')) {
@@ -428,9 +433,11 @@ $('body').on('click', 'aside .move', function(event) {
 		var direction = 'next';
 	}
 	var nextUp = $('section')[nextIndex];
+	var nextId = $(nextUp).attr('id');
 	if(nextUp == undefined) { return; }
 	var sectionsLength = $('section.'+type).length;
 	var slug = $(nextUp).attr('id');
+
 	if(sectionsLength > 0) {
 		getNeighbors(direction, type, slug);
 	}
@@ -569,7 +576,6 @@ function getNeighbors(direction, type, slug) {
 		var section = $('section.'+type).last();
 	}
 	var id = $(section).attr('data-id');
-	
 	$('section.'+type).each(function() {
 		var existingId = $(this).attr('data-id');
 		if(existingIds.indexOf(existingId) < 0) {

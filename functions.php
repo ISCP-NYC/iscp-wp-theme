@@ -741,11 +741,11 @@ function get_neighbor_events() {
     $direction = $query_vars['direction'];
     $not_in = $query_vars['not_in'];
     $count = 1;
-	insert_neighbor_journal_posts( $post_id, $direction, $count, $not_in );   	
+	insert_neighbor_events( $post_id, $direction, $count, $not_in );   	
     die();
 }
-add_action( 'wp_ajax_nopriv_get_neighbor_journal_posts', 'get_neighbor_journal_posts' );
-add_action( 'wp_ajax_get_neighbor_journal_posts', 'get_neighbor_journal_posts' );
+add_action( 'wp_ajax_nopriv_get_neighbor_events', 'get_neighbor_events' );
+add_action( 'wp_ajax_get_neighbor_events', 'get_neighbor_events' );
 
 
 function insert_neighbor_events( $event_id, $direction, $count = 3, $not_in = array() ) {
@@ -754,10 +754,10 @@ function insert_neighbor_events( $event_id, $direction, $count = 3, $not_in = ar
 	$today = new DateTime();
 	$today = $today->format( 'Ymd' );
 	$not_in[] = $event_id;
-	if( $direction == 'new' ):
+	if( $direction == 'prev' ):
 		$compare = '>';
 		$order = 'ASC';
-	elseif ( $direction == 'old' ):
+	elseif ( $direction == 'next' ):
 		$compare = '<=';
 		$order = 'DESC';
 	endif;
@@ -765,8 +765,9 @@ function insert_neighbor_events( $event_id, $direction, $count = 3, $not_in = ar
 	$events_args = array(
 		'post_type' => 'event',
 		'posts_per_page' => $count,
-		'orderby' => 'meta_value_num post_title',
 		'meta_key' => 'start_date',
+		'orderby' => 'meta_value_num post_title',
+		'order' => $order,
 		'post__not_in' => $not_in,
 		'meta_query' => array(
 			'type' => 'DATE',
@@ -779,11 +780,10 @@ function insert_neighbor_events( $event_id, $direction, $count = 3, $not_in = ar
 	$events = new WP_Query( $events_args );
 	$last_page = $events->max_num_pages;
 
-	// if ( $direction == 'new' ):
-		// $reverse_events = array_reverse( $events->posts );
-		// $events->posts = $reverse_events;
-	// endif;
-
+	if ( $direction == 'prev' ):
+		$reverse_events = array_reverse( $events->posts );
+		$events->posts = $reverse_events;
+	endif;
 	if( $events->have_posts() ):
 		while ( $events->have_posts() ) : $events->the_post();
 			global $post;
