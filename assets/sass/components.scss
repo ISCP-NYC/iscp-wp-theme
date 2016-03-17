@@ -75,6 +75,9 @@ form {
     }
 }
 .share {
+    @include small {
+      display: none;
+    }
     display: table;
     cursor: pointer;
     .links {

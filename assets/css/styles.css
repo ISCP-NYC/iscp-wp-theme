@@ -290,19 +290,23 @@ form {
 .share {
   display: table;
   cursor: pointer; }
-  /* line 80, ../sass/components.scss */
+  @media (max-width: 768px) {
+    /* line 77, ../sass/components.scss */
+    .share {
+      display: none; } }
+  /* line 83, ../sass/components.scss */
   .share .links {
     display: none; }
-  /* line 84, ../sass/components.scss */
+  /* line 87, ../sass/components.scss */
   .share:hover .toggle {
     display: none; }
-  /* line 87, ../sass/components.scss */
+  /* line 90, ../sass/components.scss */
   .share:hover .links {
     display: block; }
-    /* line 89, ../sass/components.scss */
+    /* line 92, ../sass/components.scss */
     .share:hover .links span {
       display: inline; }
-      /* line 91, ../sass/components.scss */
+      /* line 94, ../sass/components.scss */
       .share:hover .links span a {
         display: inherit !important; }
 
@@ -3592,7 +3596,7 @@ section.single.event.cols_1 .gallery {
       .home .events.upcoming .shelf-item.event:nth-child(n) .inner,
       .home .events.upcoming .shelf-item.event:nth-child(2n+1):nth-last-child(-n+2):last-child .inner {
         width: 100% !important;
-        margin: 0 !important; } }
+        margin: 0 0 25px 0 !important; } }
 /* line 162, ../sass/sections/home.scss */
 .home .image_slider {
   width: 100%; }
