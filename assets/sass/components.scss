@@ -91,7 +91,20 @@ form {
                 a {
                     display: inherit !important;
                 }
+                &:not(:last-child)::after {
+                    content: ', ';
+                }
             }
+        }
+    }
+}
+@include small {
+    .share {
+        display: none !important
+    }
+    .bullets {
+        .mobileOnly.link {
+            display: table !important;
         }
     }
 }

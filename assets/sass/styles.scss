@@ -391,6 +391,9 @@ h4, .small {
 	margin: 30px 0;
 	display: block;
 }
+.mobileOnly {
+	display: none;
+}
 section.login {
 	background: $orange;
 	.login {

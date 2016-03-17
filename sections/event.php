@@ -158,11 +158,14 @@ $upcoming_events = new WP_Query( $upcoming_query );
 				<div class="share bullet link">
 					<span class="toggle">Share</span>
 					<div class="links">
-						<span><a href="https://twitter.com/share?url=<?php echo urlencode( $permalink ) ?>&text=<?php echo urlencode( $title ) ?>" target="_blank">Twitter</a>,</span>
-						<span><a href="https://www.facebook.com/sharer/sharer.php?sdk=joey&u=<?php echo $permalink ?>" target="_blank">Facebook</a>,</span>
+						<span><a href="https://twitter.com/share?url=<?php echo urlencode( $permalink ) ?>&text=<?php echo urlencode( $title ) ?>" target="_blank">Twitter</a></span>
+						<span><a href="https://www.facebook.com/sharer/sharer.php?sdk=joey&u=<?php echo $permalink ?>" target="_blank">Facebook</a></span>
 						<span class="copy link" data-clipboard-text="<?php echo $permalink ?>">Copy link</span>
 					</div>
 				</div>
+				<div class="bullet mobileOnly link"><a href="https://twitter.com/share?url=<?php echo urlencode( $permalink ) ?>&text=<?php echo urlencode( $title ) ?>" target="_blank">Twitter</a></div>
+				<div class="bullet mobileOnly link"><a href="https://www.facebook.com/sharer/sharer.php?sdk=joey&u=<?php echo $permalink ?>" target="_blank">Facebook</a></div>
+				<div class="bullet mobileOnly link" class="copy link" data-clipboard-text="<?php echo $permalink ?>">Copy link</div>
 				<?php
 				if( $time ):
 					echo '<div class="bullet">' . $time . '</div>';

@@ -1714,7 +1714,7 @@ function scrollToResourceItem() {
 /////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////
 var copyLink = new Clipboard('.share .copy');
-$('body').on('click', '.share .copy', function() {
+$('body').on('click touchstart', '.share .copy', function() {
 	var permalink = $(this).attr('data-clipboard-text');
 	console.log(permalink);
 });
