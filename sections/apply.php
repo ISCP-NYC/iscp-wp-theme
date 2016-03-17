@@ -78,6 +78,7 @@ $residency_programs = get_pages( $residency_programs_query );
 								$application_title = get_sub_field( 'title' );
 						        $deadline_date = new DateTime( get_sub_field( 'deadline' ) );
 								$deadline = $deadline_date->format( 'M j, Y' );
+								$attachment = get_sub_field( 'attachment' );
 								if( $deadline_date >= $today ):
 									$brief = get_sub_field( 'brief' );
 									echo '<div class="application row">';
@@ -97,6 +98,9 @@ $residency_programs = get_pages( $residency_programs_query );
 										echo '</div>';
 										echo '<div class="brief">';
 											echo $brief;
+											if($attachment):
+												echo '&nbsp;<a href="' . $attachment . '" class="attachment">Download PDF</a>';
+											endif;
 										echo '</div>';
 									echo '</div>';
 								endif;
