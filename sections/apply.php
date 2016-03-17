@@ -1,4 +1,4 @@
-<?php 
+<?php
 global $post;
 $id = $post->ID;
 $title = get_post( $post )->post_title;
@@ -13,8 +13,8 @@ $residency_programs_query = array(
 	'post_status' => 'publish',
 	'orderby' => 'menu_order',
 	'sort_order' => 'desc',
-); 
-$residency_programs = get_pages( $residency_programs_query ); 
+);
+$residency_programs = get_pages( $residency_programs_query );
 ?>
 <section <?php section_attr( $id, $slug, 'apply' ); ?>>
 	<?php get_template_part('partials/nav') ?>
@@ -23,9 +23,9 @@ $residency_programs = get_pages( $residency_programs_query );
 		<h2 class="title"><?php echo $title ?></h2>
 		<?php foreach( $residency_programs as $program ):
 		setup_postdata($program);
-		$title = get_post( $program )->post_title; 
-		$slug = get_post( $program )->post_name; 
-		$id = get_post( $program )->ID; 
+		$title = get_post( $program )->post_title;
+		$slug = get_post( $program )->post_name;
+		$id = get_post( $program )->ID;
 		if($id!=$faq_id):
 		?>
 		<div class="program module" id="<?php echo $slug ?>">
@@ -66,7 +66,7 @@ $residency_programs = get_pages( $residency_programs_query );
 
 				if( sizeof( $sponsors ) != 0 ):
 					echo '<div class="rows">';
-					foreach( $sponsors as $sponsor ): 
+					foreach( $sponsors as $sponsor ):
 						setup_postdata($sponsor);
 						$country = get_field( 'country', $sponsor )[0]->post_title;
 						$sponsor_id = $sponsor->ID;
@@ -78,14 +78,15 @@ $residency_programs = get_pages( $residency_programs_query );
 								$application_title = get_sub_field( 'title' );
 						        $deadline_date = new DateTime( get_sub_field( 'deadline' ) );
 								$deadline = $deadline_date->format( 'M j, Y' );
+								$attachment = get_sub_field( 'attachment' );
 								if( $deadline_date >= $today ):
 									$brief = get_sub_field( 'brief' );
 									echo '<div class="application row">';
+										echo '<div class="date">';
+											echo $deadline;
+										echo '</div>';
 										echo '<div class="cell title">';
 											echo $application_title;
-										echo '</div>';
-										echo '<div class="cell date">';
-											echo $deadline;
 										echo '</div>';
 										echo '<div class="cell country">';
 											echo $country;
@@ -95,6 +96,11 @@ $residency_programs = get_pages( $residency_programs_query );
 												echo $sponsor_title;
 											echo '</a>';
 										echo '</div>';
+										if($attachment):
+											echo '<div class="links">';
+											echo '<a class="bullet small" href="' . $attachment . '" class="attachment">Download PDF</a>';
+											echo '</div>';
+										endif;
 										echo '<div class="brief">';
 											echo $brief;
 										echo '</div>';
@@ -135,7 +141,7 @@ $residency_programs = get_pages( $residency_programs_query );
 						'order' 			=> 'ASC',
 						'post_status' 		=> 'publish'
 					) );
-					foreach( $countries as $country ): 
+					foreach( $countries as $country ):
 						$country_id = $country->ID;
 						$country_slug = $country->post_name;
 						$country_title = $country->post_title;
@@ -157,7 +163,7 @@ $residency_programs = get_pages( $residency_programs_query );
 			</div>
 		<?php endif; ?>
 		<?php wp_reset_postdata(); ?>
-		<?php 
+		<?php
 		endif;
 		endforeach;
 		?>

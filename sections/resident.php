@@ -150,7 +150,7 @@ endif;
 					echo '<div class="residency">';
 					echo $start_year;
 					if( $start_year != $end_year ):
-						echo '&ndash;' . $start_year;
+						echo '&ndash;' . $end_year;
 					endif;
 					echo '</br>';
 					echo get_sponsors( $resident_id, $index );
