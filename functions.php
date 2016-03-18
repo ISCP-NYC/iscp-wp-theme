@@ -698,7 +698,7 @@ function get_neighbor_journal_posts() {
 add_action( 'wp_ajax_nopriv_get_neighbor_journal_posts', 'get_neighbor_journal_posts' );
 add_action( 'wp_ajax_get_neighbor_journal_posts', 'get_neighbor_journal_posts' );
 
-function insert_neighbor_journal_posts( $post_id, $direction, $count = 3 ) {
+function insert_neighbor_journal_posts( $post_id, $direction, $count = 1 ) {
 	$post = get_post( $post_id );
 	$post_date = $post->post_date;
 
@@ -753,7 +753,7 @@ add_action( 'wp_ajax_nopriv_get_neighbor_events', 'get_neighbor_events' );
 add_action( 'wp_ajax_get_neighbor_events', 'get_neighbor_events' );
 
 
-function insert_neighbor_events( $event_id, $direction, $count = 3, $not_in = array() ) {
+function insert_neighbor_events( $event_id, $direction, $count = 1, $not_in = array() ) {
 	$event = get_post( $event_id );
 	$event_date = get_post_meta( $event_id , 'start_date', true );
 	$today = new DateTime();

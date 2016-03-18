@@ -39,7 +39,7 @@ $residency_programs = get_pages( $residency_programs_query );
 			<div class="links">
 				<?php if( $slug == 'international' ): ?>
 					<a class="bullet small" href="<?php echo $faq_link ?>">Application FAQ</a>
-				<? endif; ?>
+				<?php endif; ?>
 				<a class="bullet small" href="<?php echo $programs_link . '#' . $slug ?>">Read more about this Residency Program</a>
 			</div>
 		</div>
@@ -98,7 +98,7 @@ $residency_programs = get_pages( $residency_programs_query );
 										echo '</div>';
 										if($attachment):
 											echo '<div class="links">';
-											echo '<a class="bullet small" href="' . $attachment . '" class="attachment">Download PDF</a>';
+											echo '<a class="bullet small" href="' . $attachment . '" class="attachment">Download Application</a>';
 											echo '</div>';
 										endif;
 										echo '<div class="brief">';
@@ -163,10 +163,8 @@ $residency_programs = get_pages( $residency_programs_query );
 			</div>
 		<?php endif; ?>
 		<?php wp_reset_postdata(); ?>
-		<?php
-		endif;
-		endforeach;
-		?>
+		<?php endif; ?>
+		<?php endforeach; ?>
 	</div>
 	<?php get_template_part('partials/footer') ?>
 </section>

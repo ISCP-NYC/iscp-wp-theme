@@ -8,7 +8,7 @@ $name = get_the_title();
 $bio = get_field( 'bio', $resident_id );
 $website = get_field( 'website', $resident_id );
 $studio_number = get_field( 'studio_number', $resident_id );
-$resident_type = ucfirst( get_field( 'resident_type', $resident_id ) );
+$resident_type = get_field( 'resident_type', $resident_id );
 $residencies = array();
 $resident_classes = 'resident single';
 $past_residents_id = get_page_by_path( 'past-residents' )->ID;
@@ -107,7 +107,12 @@ endif;
 					endif;
 				endif;
 				?>
-				<h2 class="resident-type"><?php echo $resident_type ?></h2>
+				<?php $type_url = $past_residents_url . '?filter=past&type=' . $resident_type; ?>
+				<h2 class="resident-type">
+					<a href="<?php echo $type_url ?>">
+						<?php echo ucfirst( $resident_type ) ?>
+					</a>
+				</h2>
 			</div>
 		</header>
 
