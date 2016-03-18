@@ -24,9 +24,10 @@
 		echo ' results for ';
 		echo '&ldquo;<span class="value">'. $search_value . '</span>&rdquo;';
 		echo '</h3>';
+		$placeholder_opacity = ' style="opacity: 0"';
 	endif;
 	echo '<form role="search" method="get" class="searchform" class="searchform" autocomplete="off" action="' . esc_url( home_url( '/' ) ) . '">';
-	echo '<div class="placeholder"><span>Search</span></div>';
+	echo '<div class="placeholder"' . $placeholder_opacity . '><span>Search</span></div>';
 	echo '<input type="text" value="' . $search_value . '" name="s" class="s main-search" spellcheck="false" />';
 	echo '</form>';
 	echo '<div class="counter"></div>';

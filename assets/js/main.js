@@ -448,7 +448,7 @@ $('body').on('click', 'aside .move', function(event) {
 	var slug = $(nextUp).attr('id');
 
 	if(sectionsLength > 0) {
-		// getNeighbors(direction, type, slug);
+		getNeighbors(direction, type, slug);
 	}
 	slideTo(nextIndex, true);
 	$(this).removeClass('.clicked');

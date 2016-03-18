@@ -17,7 +17,7 @@ switch($post_type) {
 			wp_reset_postdata();
 
 			//previous current residents by studio number
-			// insert_neighbor_residents( $this_resident_id, 'prev', 3 );
+			insert_neighbor_residents( $this_resident_id, 'prev', 3 );
 
 			//opened current resident
 			setup_postdata( $this_resident );
@@ -25,7 +25,7 @@ switch($post_type) {
 			wp_reset_postdata();
 
 			//next current residents by studio number
-			// insert_neighbor_residents( $this_resident_id, 'next', 3 );
+			insert_neighbor_residents( $this_resident_id, 'next', 3 );
 
 			// current residents list
 			$current_residents_page_id = get_page_by_path( 'past-residents' )->ID;
@@ -45,14 +45,14 @@ switch($post_type) {
 			wp_reset_postdata();
 
 			//previous past residents by studio number
-			// insert_neighbor_residents( $this_resident_id, 'prev', 3 );
+			insert_neighbor_residents( $this_resident_id, 'prev', 3 );
 
 			setup_postdata( $this_resident );
 			get_template_part( 'sections/resident' );
 			wp_reset_postdata();
 
 			//next past residents by studio number
-			// insert_neighbor_residents( $this_resident_id, 'next', 3 );
+			insert_neighbor_residents( $this_resident_id, 'next', 3 );
 		endif;
 
 		break;
@@ -60,13 +60,13 @@ switch($post_type) {
 		$this_event = $post;
 		$this_event_id = $this_event->ID;
 
-		// insert_neighbor_events( $this_event_id, 'prev', 3 );
+		insert_neighbor_events( $this_event_id, 'prev', 3 );
 
 		setup_postdata( $this_event );
 		get_template_part( 'sections/event' );
 		wp_reset_postdata();
 
-		// insert_neighbor_events( $this_event_id, 'next', 3 );
+		insert_neighbor_events( $this_event_id, 'next', 3 );
 
 		break;
 	case 'sponsor':
@@ -91,7 +91,7 @@ switch($post_type) {
 		$this_post_id = $this_post->ID;
 
 		//newer journal posts
-		// insert_neighbor_journal_posts( $this_post_id, 'new' );
+		insert_neighbor_journal_posts( $this_post_id, 'new' );
 
 		//opened journal post
 		setup_postdata( $this_post );
@@ -99,7 +99,7 @@ switch($post_type) {
 		wp_reset_postdata();
 
 		//older journal posts
-		// insert_neighbor_journal_posts( $this_post_id, 'old' );
+		insert_neighbor_journal_posts( $this_post_id, 'old' );
 
 		//all journal posts
 		$journal_page_id = get_page_by_path('journal')->ID;
