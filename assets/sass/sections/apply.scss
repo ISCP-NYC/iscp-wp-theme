@@ -35,29 +35,46 @@ section.apply {
 	}
 	.applications {
 		.rows {
+			.links {
+				width: calc(25% - 35px);
+				padding: 0 20px 0 15px;
+				float: left;
+				margin-top: -3px;
+				a {
+					display: block;
+				}
+			}
 			.application.row {
-				width: 100%;
+				width: calc(100% - 35px);
 				display: table;
-				padding: 0 0 20px 0;
+				padding: 0 15px 30px 20px;
 				@include small-fs;
 				color: $orange;
+				float: left;
+				.date {
+					padding-bottom: 15px;
+				}
 				.cell {
 					float: left;
 					width: 25%;
 				}
 				.brief {
+					@include small-fs;
 					color: $black;
-					padding-top: 10px;
+					padding-top: 17px;
 					float: none;
 					clear: both;
-					width: 100%;
+					width: calc(75% - 35px);
+					p {
+						margin-bottom: 15px;
+					}
 				}
 			}
 		}
 	}
 	.filter {
-		width: 100%;
-		padding: 0;
+		width: calc(100% - 35px);
+		padding: 0 15px 0 20px;
 		margin: 20px 0 0 0;
 		span {
 			@include small-fs;

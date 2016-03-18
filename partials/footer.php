@@ -1,9 +1,9 @@
-<?php 
+<?php
 	$menu_items = wp_get_nav_menu_items( 'footer' );
 	$about = get_page_by_path( 'about' );
 	$about_id = $about->ID;
 	$address = get_field( 'address', $about_id );
-?> 
+?>
 <footer>
 	<aside class="left footer">
 		<a href="<?php echo site_url() ?>" class="logo swap">
@@ -37,11 +37,11 @@
 					    	if($child_title == 'Past Events'):
 					    		$child_url .= '#past';
 					    	elseif( substr( $child_url, 0, 1 ) === '#' ):
-					    		$child_url = $url . '/' . $child_url; 
+					    		$child_url = $url . '/' . $child_url;
 					    	endif;
 					    	$child_slug = str_replace('#','-',basename($child_url));
 					    	$parent_id = $child_menu_item->menu_item_parent;
-					    	if ($parent_id == $id ) : 
+					    	if ($parent_id == $id ) :
 					    		echo '<div class="child-item ' . $child_slug . '">';
 					    		echo '<a href="' . $child_url . '">';
 					    		if( $slug == 'greenroom' ):
@@ -111,8 +111,9 @@
 
 		    	<div class="cell credits">
 		    		<div class="cell-inner">
+							<div class="title">Site Credits</div>
 		    			<div class="sub-menu">
-		    				<div>Design by <a href="othermeans.us" target="_blank">Other Means</a></div>
+		    				<div>Design by <a href="http://othermeans.us" target="_blank">Other Means</a></div>
 		    			</div>
 		    		</div>
 		    	</div>

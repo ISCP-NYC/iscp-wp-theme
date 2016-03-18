@@ -18,11 +18,11 @@ $search_count = $wp_query->found_posts;
 	<div class="content">
 	<?php
 	if( $search_value ):
-		// echo '<h3 class="title head">';
-		// echo '<span class="counter">' . $search_count . '</span>';
-		// echo ' results for ';
-		// echo '&ldquo;<span class="value">'. $search_value . '</span>&rdquo;';
-		// echo '</h3>';
+		echo '<h3 class="title head">';
+		echo '<span class="counter">' . $search_count . '</span>';
+		echo ' results for ';
+		echo '&ldquo;<span class="value">'. $search_value . '</span>&rdquo;';
+		echo '</h3>';
 	endif;
 	echo '<form role="search" method="get" class="searchform" class="searchform" autocomplete="off" action="' . esc_url( home_url( '/' ) ) . '">';
 	echo '<div class="placeholder"><span>Search</span></div>';

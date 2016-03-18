@@ -1668,3 +1668,15 @@ function greenroom_login_redirect( $redirect_to, $request, $user ) {
 }
 
 add_filter( 'login_redirect', 'greenroom_login_redirect', 10, 3 );
+
+
+function search_broken_link() {
+	$search_value = null;
+	if( sizeof( $_SERVER['REQUEST_URI'] ) ):
+		$url = $_SERVER['REQUEST_URI'];
+		$url = trim( chop( $url, '.html' ) );
+		$search_value = explode( '/', $url )[1];
+		return $search_value;
+	endif;
+	return $search_value;
+}

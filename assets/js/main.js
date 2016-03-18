@@ -213,7 +213,7 @@ $('body').on('click', 'section:not(.open-nav) .nav-hover', function() {
 	$(section).removeClass('open-nav');
 	//mobile menu unfix screen
 	if(isSmall()) {
-		$('section header.main').css('position', 'absolute');
+		$('section header.main').css('position', 'fixed');
 	}
 });
 
@@ -228,6 +228,8 @@ $('body').on('click', 'nav .parent .overlay', function(e) {
 });
 //toggle header visibility with scroll behavior
 function sectionScrollListener(section) {
+	var content = $(section).find('.content');
+	var scrollHeight = content[0].scrollHeight;
 	var scrollTop = $(section).scrollTop();
 	var footer = $(section).find('footer');
 	var footerMargin = parseInt($(footer).css('marginTop').replace('px', ''));
@@ -241,8 +243,6 @@ function sectionScrollListener(section) {
 		var scrollTop = section.scrollTop;
 		var scrollHeight = section.scrollHeight;
 		var footerHeight = footer.clientHeight;
-		var content = $(section).find('.content');
-		var scrollHeight = content[0].scrollHeight;
 		//scrolled to top of footer -> scroll in content
 		if(scrollTop <= 0 && scrollHeight != $(window).innerHeight()) {
 			$(section).removeClass('show-footer');
@@ -252,9 +252,16 @@ function sectionScrollListener(section) {
 	if(isSmall()) {
 		var navTop = $(section).find('header.main nav').offset().top;
 		var navHeight = $(section).find('header.main nav').height();
+		var footerTop = $(footer).offset().top;
 		if(navTop + navHeight < 0) {
 			$(section).removeClass('open-nav');
 		}
+		if($(footer).innerHeight()+scrollTop >= scrollHeight) {
+			$(section).addClass('hide-header');	
+		} else {
+			$(section).removeClass('hide-header');
+		}
+
 	}
 }
 $('section').scroll(function() {
@@ -342,7 +349,9 @@ function slideTo(index, animate) {
 		var title = $(section).attr('data-title');
 		var slug = $(section).attr('data-slug');
 		$('main').attr('data-center-id', id).attr('data-center-slug', slug);
-		$('title').html(title + ' | International Studio &amp; Curatorial Program');
+		if(title) {
+			$('title').html(title + ' | International Studio &amp; Curatorial Program');
+		}
 		if(animate) {
 			window.history.replaceState({page: index}, null, url);
 			$('main').transition({
