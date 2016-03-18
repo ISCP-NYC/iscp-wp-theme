@@ -99,7 +99,7 @@ $residency_programs = get_pages( $residency_programs_query );
 										echo '<div class="brief">';
 											echo $brief;
 											if($attachment):
-												echo '&nbsp;<a href="' . $attachment . '" class="attachment">Download PDF</a>';
+												echo '&nbsp;<a href="' . $attachment . '" class="attachment">Download Application</a>';
 											endif;
 										echo '</div>';
 									echo '</div>';

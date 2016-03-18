@@ -290,12 +290,12 @@ function sectionContentScrollListener(content) {
 		var pastTop = past[0].offsetTop - 170;
 		if(scrollTop > pastTop) {
 			$(section).addClass('past');
-			if(window.location.hash != '#past') {
+			if(window.location.hash != '#past' && !window.location.search.length) {
 				history.pushState('', document.title, window.location.href + '#past');
 			}
 			updateFavicons('blue');
 		} else {
-			if(window.location.hash == '#past') {
+			if(window.location.hash == '#past' && !window.location.search.length) {
 				history.pushState('', document.title, window.location.href.replace('#past',''));
 			}
 			$(section).removeClass('past');
@@ -439,7 +439,7 @@ $('body').on('click', 'aside .move', function(event) {
 	var slug = $(nextUp).attr('id');
 
 	if(sectionsLength > 0) {
-		getNeighbors(direction, type, slug);
+		// getNeighbors(direction, type, slug);
 	}
 	slideTo(nextIndex, true);
 	$(this).removeClass('.clicked');
@@ -1716,7 +1716,6 @@ function scrollToResourceItem() {
 var copyLink = new Clipboard('.share .copy');
 $('body').on('click touchstart', '.share .copy', function() {
 	var permalink = $(this).attr('data-clipboard-text');
-	console.log(permalink);
 });
 
 function updateFavicons(newColor) {

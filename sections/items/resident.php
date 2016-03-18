@@ -1,7 +1,7 @@
 <?php
 global $post;
 setup_postdata( $post );
-$resident_id = $the_ID;
+$resident_id = $post->ID;
 $title = get_the_title( $resident_id );
 $countries = get_countries( $resident_id );
 $resident_status = get_status( $resident_id );

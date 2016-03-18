@@ -40,6 +40,7 @@ add_action( 'wp_head', 'twentyfifteen_javascript_detection', 0 );
  * @since Twenty Fifteen 1.0
  */
 function iscp_scripts() {
+	global $post;
 	wp_enqueue_style( 'style', get_template_directory_uri() . '/assets/css/styles.css' );
 	wp_register_script( 'transit', get_template_directory_uri() . '/assets/js/jquery.transit.min.js', array( 'jquery' ) );
 	wp_register_script( 'jquery-ui', get_template_directory_uri() . '/assets/js/jquery-ui.min.js', array( 'jquery' ) );
@@ -54,7 +55,6 @@ function iscp_scripts() {
 	wp_enqueue_script( 'imagesloaded' );
 	wp_enqueue_script( 'clipboard' );
 	wp_enqueue_script( 'main' );
-	global $post;
 	$page_slug = $post->post_name;
 	$with_map = array('map', 'past-residents', 'current-residents');
 	if(in_array( $page_slug, $with_map ) ):
@@ -209,7 +209,10 @@ function filter_items() {
     elseif( $post_type == 'journal' ):
     	$post_type .= 's';
     endif;
-    include( locate_template( 'sections/loops/' . $post_type . '.php' ) );
+    $template = locate_template( 'sections/loops/' . $post_type . '.php' );
+	// if ( !empty( $template ) ):
+		include( $template );
+	// endif;
     die();
 }
 add_action( 'wp_ajax_nopriv_filter_items', 'filter_items' );
@@ -990,7 +993,7 @@ function get_tweets( $count ) {
 		    $url = 'http://twitter.com/' . $handle . '/status/' . $id;
 		    echo '<div class="tweet">';
 		    echo '<div class="text">';
-			echo utf8_encode( $text );
+			echo $text;
 			echo '</div>';
 			echo '<a href="' . $url . '" target="_blank" class="timestamp">';
 			echo $elapsed;
@@ -1049,9 +1052,9 @@ function get_event_date( $id ) {
 	return $date_format;
 }
 
-function get_thumb( $id, $size = undefined ) {
+function get_thumb( $id, $size = null ) {
 	$thumbnail = get_display_image( $id );
-	if($size == undefined):
+	if($size == null):
 		$size = 'thumb';
 	endif;
 	if( !$thumbnail ):
@@ -1402,8 +1405,12 @@ function get_resident_count( $type, $value, $query = null ) {
 			'compare' => 'LIKE'
 		);
 		$meta_query = array_merge( $meta_query, $type_query );
-	endif;	
-	$empty_index = sizeof( $query['meta_query'] ) + 1;
+	endif;
+	if( array_key_exists( 'meta_query', $query ) ):
+		$empty_index = sizeof( $query['meta_query'] ) + 1;
+	else:
+		$empty_index = 0;
+	endif;
 	$query['meta_query'][$empty_index] = $meta_query;
 	$query = new WP_Query( $query );
 	$count = $query->found_posts;

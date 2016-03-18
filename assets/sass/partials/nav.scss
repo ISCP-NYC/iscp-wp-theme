@@ -241,11 +241,11 @@ header.main {
 }
 @include xsmall {
 	header.main {
+		position: fixed;
 		nav {
 			height: calc(100% - 60px);
 			overflow-y: scroll;
 			-webkit-overflow-scrolling: touch;
-			position: fixed;
 			margin-top: 60px;
 			padding: 0 !important;
 			border-top: 8px solid $orange;
@@ -275,7 +275,7 @@ header.main {
 					}
 					.sub-menu {
 						width: calc(100% - 20px);
-    				padding: 0 10px;
+    					padding: 0 10px;
 						position: relative;
 						height: auto;
 						margin: 7px 0 15px 0;

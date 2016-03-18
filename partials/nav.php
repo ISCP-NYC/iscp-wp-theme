@@ -3,6 +3,7 @@
 	<nav>
 		<?php 
 		$menu_items = add_parent_class( $menu_items );
+		$classes_array = array();
 		foreach ( (array) $menu_items as $key => $menu_item ):
 			if ( $menu_item->menu_item_parent == 0 ):
 				$item_title = $menu_item->title;

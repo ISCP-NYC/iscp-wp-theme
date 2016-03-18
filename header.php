@@ -1,8 +1,10 @@
+<?php header('Content-Type: text/html; charset=UTF-8'); ?>
 <!DOCTYPE html>
 <html <?php language_attributes(); ?> class="no-js">
 <head>
 	<title><?php if(!is_home()){wp_title('',true); echo ' | ';} bloginfo('name') ?></title>
 	<meta charset="<?php bloginfo( 'charset' ); ?>">
+	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
 	<meta name="viewport" content="width=device-width">
 	<link rel="profile" href="http://gmpg.org/xfn/11">
 	<link rel="pingback" href="<?php bloginfo( 'pingback_url' ); ?>">
@@ -11,7 +13,7 @@
 	<![endif]-->
 	<?php 
 	$user = wp_get_current_user();
-	$classes;
+	$classes = '';
 	if( is_home() ):
 		$page_slug = 'home';
 		$page_id = null;

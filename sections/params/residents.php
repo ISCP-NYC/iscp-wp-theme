@@ -1,4 +1,4 @@
-<?php 
+<?php
 $title = get_the_title();
 $slug = $post->post_name;
 $id = $post->ID;
@@ -71,13 +71,13 @@ elseif( $post_type == 'sponsor' || $page_type == 'sponsor' || $post_type == 'res
 		)
 	);
 endif;
-if( $country_param ):
+if( isset( $country_param ) ):
 	$country_param_obj = get_page_by_path( $country_param, OBJECT, 'country' );
 	$country_param_title = $country_param_obj->post_title;
 	$country_param_id = $country_param_obj->ID;
 endif;
 
-if( $country_param ):
+if( isset( $country_param ) ):
 	$country_query = array(
 		'key' => 'country',
 		'value' => '"' . $country_param_id . '"',
@@ -86,7 +86,7 @@ if( $country_param ):
 	$filter_query = array_merge( $filter_query, $country_query );
 endif;
 
-if( $year_param ):
+if( isset( $year_param ) ):
 	$year_begin = $year_param . '0101';
 	$year_end = $year_param . '1231';
 	$year_range = array( $year_begin, $year_end );
@@ -99,7 +99,7 @@ if( $year_param ):
 	$filter_query = array_merge( $filter_query, $year_query );
 endif;
 
-if( $program_param ):
+if( isset( $program_param ) ):
 	$program_query = array(
 		'key' => 'residency_program',
 		'type' => 'CHAR',
@@ -109,7 +109,7 @@ if( $program_param ):
 	$filter_query = array_merge( $filter_query, $program_query );
 endif;
 
-if( $sponsor_param ):
+if( isset( $sponsor_param ) ):
 	$sponsor_query = array(
 		'key' => 'residency_dates_0_sponsors',
 		'value' => '"' . $sponsor_id . '"',
