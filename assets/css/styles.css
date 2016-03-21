@@ -4592,7 +4592,7 @@ section.programs .program {
           width: 100%;
           margin: 0 !important; } }
 
-/* line 1, ../sass/sections/resources.scss */
+/* line 1, ../sass/sections/greenroom.scss */
 section.greenroom,
 section.resource,
 section.resident-resource {
@@ -4600,30 +4600,30 @@ section.resident-resource {
   line-height: 28px;
   background-color: #facab4; }
   @media (max-width: 900px) {
-    /* line 1, ../sass/sections/resources.scss */
+    /* line 1, ../sass/sections/greenroom.scss */
     section.greenroom,
     section.resource,
     section.resident-resource {
       font-size: 18px;
       line-height: 21px; } }
-  /* line 7, ../sass/sections/resources.scss */
+  /* line 7, ../sass/sections/greenroom.scss */
   section.greenroom aside.main .icon, section.greenroom aside.main .label,
   section.resource aside.main .icon,
   section.resource aside.main .label,
   section.resident-resource aside.main .icon,
   section.resident-resource aside.main .label {
     background-color: #facab4; }
-  /* line 11, ../sass/sections/resources.scss */
+  /* line 11, ../sass/sections/greenroom.scss */
   section.greenroom .content,
   section.resource .content,
   section.resident-resource .content {
     position: relative; }
-  /* line 14, ../sass/sections/resources.scss */
+  /* line 14, ../sass/sections/greenroom.scss */
   section.greenroom table,
   section.resource table,
   section.resident-resource table {
     width: 100%; }
-  /* line 17, ../sass/sections/resources.scss */
+  /* line 17, ../sass/sections/greenroom.scss */
   section.greenroom .user-info,
   section.resource .user-info,
   section.resident-resource .user-info {
@@ -4633,23 +4633,23 @@ section.resident-resource {
     font-size: 18px;
     line-height: 21px; }
     @media (max-width: 900px) {
-      /* line 17, ../sass/sections/resources.scss */
+      /* line 17, ../sass/sections/greenroom.scss */
       section.greenroom .user-info,
       section.resource .user-info,
       section.resident-resource .user-info {
         font-size: 16px;
         line-height: 20px; } }
-  /* line 23, ../sass/sections/resources.scss */
+  /* line 23, ../sass/sections/greenroom.scss */
   section.greenroom header.main,
   section.resource header.main,
   section.resident-resource header.main {
     background-color: #facab4 !important; }
-    /* line 25, ../sass/sections/resources.scss */
+    /* line 25, ../sass/sections/greenroom.scss */
     section.greenroom header.main nav,
     section.resource header.main nav,
     section.resident-resource header.main nav {
       background-color: #facab4 !important; }
-      /* line 27, ../sass/sections/resources.scss */
+      /* line 27, ../sass/sections/greenroom.scss */
       section.greenroom header.main nav .overlay, section.greenroom header.main nav .placeholder, section.greenroom header.main nav .cell,
       section.resource header.main nav .overlay,
       section.resource header.main nav .placeholder,
@@ -4658,7 +4658,7 @@ section.resident-resource {
       section.resident-resource header.main nav .placeholder,
       section.resident-resource header.main nav .cell {
         background-color: #facab4 !important; }
-  /* line 32, ../sass/sections/resources.scss */
+  /* line 32, ../sass/sections/greenroom.scss */
   section.greenroom .hello,
   section.resource .hello,
   section.resident-resource .hello {
@@ -4666,13 +4666,13 @@ section.resident-resource {
     line-height: 46px;
     border: 0 !important; }
     @media (max-width: 900px) {
-      /* line 32, ../sass/sections/resources.scss */
+      /* line 32, ../sass/sections/greenroom.scss */
       section.greenroom .hello,
       section.resource .hello,
       section.resident-resource .hello {
         font-size: 24px;
         line-height: 28px; } }
-  /* line 36, ../sass/sections/resources.scss */
+  /* line 36, ../sass/sections/greenroom.scss */
   section.greenroom .dashboard,
   section.resource .dashboard,
   section.resident-resource .dashboard {
@@ -4680,47 +4680,68 @@ section.resident-resource {
     display: -webkit-flex;
     display: -ms-flexbox;
     display: flex; }
-    /* line 38, ../sass/sections/resources.scss */
+    /* line 38, ../sass/sections/greenroom.scss */
     section.greenroom .dashboard .half,
     section.resource .dashboard .half,
     section.resident-resource .dashboard .half {
       float: left;
       width: calc(50% - 15px); }
-      /* line 41, ../sass/sections/resources.scss */
+      /* line 41, ../sass/sections/greenroom.scss */
       section.greenroom .dashboard .half.left,
       section.resource .dashboard .half.left,
       section.resident-resource .dashboard .half.left {
         margin-right: 15px; }
-      /* line 44, ../sass/sections/resources.scss */
+      /* line 44, ../sass/sections/greenroom.scss */
       section.greenroom .dashboard .half.right,
       section.resource .dashboard .half.right,
       section.resident-resource .dashboard .half.right {
         margin-left: 15px; }
-      /* line 47, ../sass/sections/resources.scss */
+      /* line 47, ../sass/sections/greenroom.scss */
       section.greenroom .dashboard .half .resource-list,
       section.resource .dashboard .half .resource-list,
       section.resident-resource .dashboard .half .resource-list {
         margin-bottom: 10px; }
+        /* line 49, ../sass/sections/greenroom.scss */
+        section.greenroom .dashboard .half .resource-list .bullet, section.greenroom .dashboard .half .resource-list ul li, section.greenroom ul .dashboard .half .resource-list li,
+        section.greenroom .dashboard .half .resource-list section.resource ul li,
+        section.resource ul section.greenroom .dashboard .half .resource-list li,
+        section.greenroom .dashboard .half .resource-list section.resident-resource ul li,
+        section.resident-resource ul section.greenroom .dashboard .half .resource-list li,
+        section.resource .dashboard .half .resource-list .bullet,
+        section.resource .dashboard .half .resource-list section.greenroom ul li,
+        section.greenroom ul section.resource .dashboard .half .resource-list li,
+        section.resource .dashboard .half .resource-list ul li,
+        section.resource ul .dashboard .half .resource-list li,
+        section.resource .dashboard .half .resource-list section.resident-resource ul li,
+        section.resident-resource ul section.resource .dashboard .half .resource-list li,
+        section.resident-resource .dashboard .half .resource-list .bullet,
+        section.resident-resource .dashboard .half .resource-list section.greenroom ul li,
+        section.greenroom ul section.resident-resource .dashboard .half .resource-list li,
+        section.resident-resource .dashboard .half .resource-list section.resource ul li,
+        section.resource ul section.resident-resource .dashboard .half .resource-list li,
+        section.resident-resource .dashboard .half .resource-list ul li,
+        section.resident-resource ul .dashboard .half .resource-list li {
+          display: inline-block; }
     @media (max-width: 900px) {
-      /* line 36, ../sass/sections/resources.scss */
+      /* line 36, ../sass/sections/greenroom.scss */
       section.greenroom .dashboard,
       section.resource .dashboard,
       section.resident-resource .dashboard {
         display: block; }
-        /* line 53, ../sass/sections/resources.scss */
+        /* line 56, ../sass/sections/greenroom.scss */
         section.greenroom .dashboard .half,
         section.resource .dashboard .half,
         section.resident-resource .dashboard .half {
           width: 100% !important;
           margin: 0 !important; } }
-  /* line 60, ../sass/sections/resources.scss */
+  /* line 63, ../sass/sections/greenroom.scss */
   section.greenroom ul li,
   section.resource ul li,
   section.resident-resource ul li {
     background-position: left 7px;
     padding: 0;
     text-indent: 25px; }
-  /* line 67, ../sass/sections/resources.scss */
+  /* line 70, ../sass/sections/greenroom.scss */
   section.greenroom h4,
   section.resource h4,
   section.resident-resource h4 {
@@ -4731,13 +4752,13 @@ section.resident-resource {
     font-size: 18px;
     line-height: 21px; }
     @media (max-width: 900px) {
-      /* line 67, ../sass/sections/resources.scss */
+      /* line 70, ../sass/sections/greenroom.scss */
       section.greenroom h4,
       section.resource h4,
       section.resident-resource h4 {
         font-size: 16px;
         line-height: 20px; } }
-  /* line 81, ../sass/sections/resources.scss */
+  /* line 84, ../sass/sections/greenroom.scss */
   section.greenroom .staff .members,
   section.resource .staff .members,
   section.resident-resource .staff .members {
@@ -4748,7 +4769,7 @@ section.resident-resource {
     -webkit-flex-wrap: wrap;
         -ms-flex-wrap: wrap;
             flex-wrap: wrap; }
-    /* line 84, ../sass/sections/resources.scss */
+    /* line 87, ../sass/sections/greenroom.scss */
     section.greenroom .staff .members .staff-member,
     section.resource .staff .members .staff-member,
     section.resident-resource .staff .members .staff-member {
@@ -4759,52 +4780,52 @@ section.resident-resource {
       display: flex;
       float: left;
       margin-bottom: 60px; }
-      /* line 89, ../sass/sections/resources.scss */
+      /* line 92, ../sass/sections/greenroom.scss */
       section.greenroom .staff .members .staff-member .name,
       section.resource .staff .members .staff-member .name,
       section.resident-resource .staff .members .staff-member .name {
         padding: 10px 0;
         text-align: center; }
-      /* line 93, ../sass/sections/resources.scss */
+      /* line 96, ../sass/sections/greenroom.scss */
       section.greenroom .staff .members .staff-member .image,
       section.resource .staff .members .staff-member .image,
       section.resident-resource .staff .members .staff-member .image {
         width: 100%; }
-        /* line 95, ../sass/sections/resources.scss */
+        /* line 98, ../sass/sections/greenroom.scss */
         section.greenroom .staff .members .staff-member .image img,
         section.resource .staff .members .staff-member .image img,
         section.resident-resource .staff .members .staff-member .image img {
           width: 100%;
           vertical-align: bottom; }
-      /* line 100, ../sass/sections/resources.scss */
+      /* line 103, ../sass/sections/greenroom.scss */
       section.greenroom .staff .members .staff-member:nth-child(3n+2),
       section.resource .staff .members .staff-member:nth-child(3n+2),
       section.resident-resource .staff .members .staff-member:nth-child(3n+2) {
         margin: 0 30px; }
       @media (max-width: 900px) {
-        /* line 84, ../sass/sections/resources.scss */
+        /* line 87, ../sass/sections/greenroom.scss */
         section.greenroom .staff .members .staff-member,
         section.resource .staff .members .staff-member,
         section.resident-resource .staff .members .staff-member {
           width: calc(50% - 20px); }
-          /* line 105, ../sass/sections/resources.scss */
+          /* line 108, ../sass/sections/greenroom.scss */
           section.greenroom .staff .members .staff-member:nth-child(odd),
           section.resource .staff .members .staff-member:nth-child(odd),
           section.resident-resource .staff .members .staff-member:nth-child(odd) {
             margin: 0 20px 0 0; }
-          /* line 108, ../sass/sections/resources.scss */
+          /* line 111, ../sass/sections/greenroom.scss */
           section.greenroom .staff .members .staff-member:nth-child(even),
           section.resource .staff .members .staff-member:nth-child(even),
           section.resident-resource .staff .members .staff-member:nth-child(even) {
             margin: 0 0 0 20px; } }
       @media (max-width: 500px) {
-        /* line 84, ../sass/sections/resources.scss */
+        /* line 87, ../sass/sections/greenroom.scss */
         section.greenroom .staff .members .staff-member,
         section.resource .staff .members .staff-member,
         section.resident-resource .staff .members .staff-member {
           width: 100% !important;
           margin: 0 !important; } }
-      /* line 116, ../sass/sections/resources.scss */
+      /* line 119, ../sass/sections/greenroom.scss */
       section.greenroom .staff .members .staff-member .info,
       section.resource .staff .members .staff-member .info,
       section.resident-resource .staff .members .staff-member .info {
@@ -4812,18 +4833,18 @@ section.resident-resource {
         line-height: 21px;
         padding-top: 10px; }
         @media (max-width: 900px) {
-          /* line 116, ../sass/sections/resources.scss */
+          /* line 119, ../sass/sections/greenroom.scss */
           section.greenroom .staff .members .staff-member .info,
           section.resource .staff .members .staff-member .info,
           section.resident-resource .staff .members .staff-member .info {
             font-size: 16px;
             line-height: 20px; } }
-        /* line 119, ../sass/sections/resources.scss */
+        /* line 122, ../sass/sections/greenroom.scss */
         section.greenroom .staff .members .staff-member .info .role,
         section.resource .staff .members .staff-member .info .role,
         section.resident-resource .staff .members .staff-member .info .role {
           width: 100%; }
-        /* line 124, ../sass/sections/resources.scss */
+        /* line 127, ../sass/sections/greenroom.scss */
         section.greenroom .staff .members .staff-member .info .description,
         section.resource .staff .members .staff-member .info .description,
         section.resident-resource .staff .members .staff-member .info .description {

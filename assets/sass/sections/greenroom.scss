@@ -46,6 +46,9 @@ section.resident-resource {
 			}
 			.resource-list {
 				margin-bottom: 10px;
+				.bullet {
+					display: inline-block;
+				}
 			}
 		}
 		@include medium {
