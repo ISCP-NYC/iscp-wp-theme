@@ -21,9 +21,9 @@ endif;
 echo '<div class="result item shelf-item border-bottom ' . $classes . '">';
 echo '<div class="inner">';
 if( $permalink ):
-	echo '<a class="value wrap" href="' . $permalink . '">';
+	echo '<a class="wrap" href="' . $permalink . '">';
 else:
-	echo '<div class="value wrap">';
+	echo '<div class="wrap">';
 endif;
 if( $thumb ):
 	echo '<div class="thumb" style="background-image:url(' . $thumb . ')"></div>';

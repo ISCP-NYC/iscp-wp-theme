@@ -2,54 +2,52 @@ jQuery(document).ready(function($) {
 var isMobile = false;
 var loader = '<div class="loader"><div></div><div></div><div></div></div>';
 var transitionEnd = 'transitionend webkitTransitionEnd oTransitionEnd';
-// $(window).load(function() {
-	mobileCheck();
-	setUp();
-	setImageSliderSize();
-	if($('.journal.grid').length) {
-		$masonry = $('.journal.grid').masonry({
-			columnWidth: '.sizer',
-			itemSelector: '.item',
-			gutter: 30,
-			transitionDuration: 0
-		});
-		$masonry.masonry('layout');
-	}
-	if($('.image_slider').length > 0) {
-		setUpImageSlider();
-	}
-	if($('section#map').length) {
-		setUpEarth();
-	}
-	if($('section.resource').length) {
-		scrollToResourceItem();
-	}
-	if($('section#events').length && (getParam('date') || getParam('type') || window.location.hash == '#past')) {
-		var pastWrapper = $('.past.wrapper');
-		var pastWrapperTop = $(pastWrapper).offset().top - 130;
-		$(pastWrapper).height($(window).innerHeight());
-		$('section#events .content').scrollTop(pastWrapperTop);
-	}
-	if($('.center').is('.greenroom:not(#greenroom)')) {
-		var hash = parseInt(window.location.hash.replace('#', ''));
-		var index = hash + 1;
-		var item = $('.item').eq(index);
-		var scrollTop = item[0].offsetTop;
-		$('.center .content').scrollTo(scrollTop);
-	}
-	if($('.items[data-delay]')) {
-		$('.items[data-delay]').each(function() {
-			var delay = $(this).attr('data-delay');
-			var container = $(this);
-			setTimeout(function() {
-				var slug = $(container).parents('section').attr('id');
-				$(this).parent('section').attr('data-page', 1);
-				loadMore(slug, 1);
-				insertFilterList(slug);
-			},delay*100);
-		})
-	}
-// });
+mobileCheck();
+setUp();
+setImageSliderSize();
+if($('.journal.grid').length) {
+	$masonry = $('.journal.grid').masonry({
+		columnWidth: '.sizer',
+		itemSelector: '.item',
+		gutter: 30,
+		transitionDuration: 0
+	});
+	$masonry.masonry('layout');
+}
+if($('.image_slider').length > 0) {
+	setUpImageSlider();
+}
+if($('section#map').length) {
+	setUpEarth();
+}
+if($('section.resource').length) {
+	scrollToResourceItem();
+}
+if($('section#events').length && (getParam('date') || getParam('type') || window.location.hash == '#past')) {
+	var pastWrapper = $('.past.wrapper');
+	var pastWrapperTop = $(pastWrapper).offset().top - 130;
+	$(pastWrapper).height($(window).innerHeight());
+	$('section#events .content').scrollTop(pastWrapperTop);
+}
+if($('.center').is('.greenroom:not(#greenroom)')) {
+	var hash = parseInt(window.location.hash.replace('#', ''));
+	var index = hash + 1;
+	var item = $('.item').eq(index);
+	var scrollTop = item[0].offsetTop;
+	$('.center .content').scrollTo(scrollTop);
+}
+if($('.items[data-delay]')) {
+	$('.items[data-delay]').each(function() {
+		var delay = $(this).attr('data-delay');
+		var container = $(this);
+		setTimeout(function() {
+			var slug = $(container).parents('section').attr('id');
+			$(this).parent('section').attr('data-page', 1);
+			loadMore(slug, 1);
+			insertFilterList(slug);
+		},delay*100);
+	})
+}
 
 
 
@@ -256,7 +254,7 @@ function sectionScrollListener(section) {
 		if(navTop + navHeight < 0) {
 			$(section).removeClass('open-nav');
 		}
-		if($(footer).innerHeight()+scrollTop >= scrollHeight) {
+		if($(footer).outerHeight()+scrollTop >= scrollHeight) {
 			$(section).addClass('hide-header');	
 		} else {
 			$(section).removeClass('hide-header');
@@ -507,7 +505,7 @@ function loadMore(slug, paged) {
 			page: paged
 		},
 		beforeSend: function() {
-			loading(vars, 'loading');
+			loading(slug);
 		},
 		success: function(response) {
 			addItems(response, vars);
@@ -518,13 +516,16 @@ function loadMore(slug, paged) {
 	});
 }
 
-function loading(vars, classes) {
-	var vars = JSON.parse(vars);
-	var sectionSlug = vars.pagename;
-	var section = $('section#'+sectionSlug);
-	var filterLists = $(section).find('.filter-lists');
-	if(!$(filterLists).find('.loader').length) {
-		$(filterLists).append(loader);
+function loading(slug, classes) {
+	if(classes) {
+		classes += ' loading';
+	} else {
+		var classes = 'loading';
+	}
+	var section = $('section#'+slug);
+	var filter = $(section).find('.filter');
+	if(!$(filter).find('.loader').length) {
+		$(filter).append(loader);
 	}
 	$(section).addClass(classes);
 }
@@ -566,8 +567,11 @@ function addItems(html, vars) {
 			});
 		});
 		$(section).removeClass('show-footer');
-		$(content).animate({ scrollTop: contentScrollTop + sectionScrollTop }, 300, 'easeOutQuart');
-		$(section).animate({ scrollTop: 0 }, 300, 'easeOutQuart');
+		if(!isMobile) {
+			$(content).animate({ scrollTop: contentScrollTop + sectionScrollTop }, 300, 'easeOutQuart');
+			$(section).animate({ scrollTop: 0 }, 300, 'easeOutQuart');
+		}
+		fixScroll(section, content);
 	}
 }
 /////////////////////////////////////////////////////////////
@@ -798,7 +802,7 @@ function filterQuery(vars, section, url, option) {
 		},
 		beforeSend: function() {
 			$(container).addClass('removing');
-			loading(vars, 'loading filtering');
+			loading(vars['pagename'], 'filtering');
 			window.history.pushState({path:url},'',url);
 			$(section).attr('data-permalink', url);
 		},
@@ -1006,35 +1010,7 @@ function removeParam(paramType, url) {
     }
     return rtn;
 }
-// function updateCounts(option, vars) {
-	// var section = $(option).parents('section');
-	// var filterType = $(option).parents('.filter-list').attr('data-filter');
-	// var filterValue = $(option).find('a').attr('data-value');
-	// var url = $(option).find('a').attr('href');
-	// var params = getParams(url);
-	// $(section).find('.filter-list .option a').each(function() {
 
-	// });
-	// var option = this;
-	// vars = JSON.stringify(vars);
-	// getCount(vars);
-// }
-// function getCount(vars) {
-// 	$.ajax({
-// 		url: ajaxpagination.ajaxurl,
-// 		type: 'post',
-// 		data: {
-// 			action: 'get_filter_count',
-// 			query_vars: vars
-// 		},
-// 		beforeSend: function() {
-
-// 		},
-// 		success: function(response) {
-
-// 		}
-// 	});
-// }
 /////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////
 //////////////////////////SEARCH/////////////////////////////
@@ -1114,22 +1090,6 @@ $('body').on('keyup', 'section#search .content input.s', function() {
 	vars = JSON.stringify(vars);
 	if(/\S/.test(text)) {
 		mainTimer = setTimeout(function() {
-
-			// $.ajax({
-			// 	url: ajaxpagination.ajaxurl,
-			// 	type: 'post',
-			// 	data: {
-			// 		action: 'get_search_count',
-			// 		query_vars: vars
-			// 	},
-			// 	success: function(count) {
-			// 		var counter = $(section).find('.title .counter');
-			// 		var value = $(section).find('.title .value');
-			// 		$(counter).text(count);
-			// 		$(value).text(text);
-			// 	}
-			// });
-
 			$.ajax({
 				url: ajaxpagination.ajaxurl,
 				type: 'post',

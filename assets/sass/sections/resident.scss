@@ -107,6 +107,9 @@ section.single.resident {
 				}
 			}
 		}
+		&.stack:not(.image_slider) {
+			padding-bottom: 52px;
+		}
 	}
 	@include large {
 		.info, .gallery {
