@@ -82,46 +82,6 @@
                 margin: 0 0 0 13.333px;
             }
 
-            &.current, &.upcoming {
-                color: $orange !important;
-                .inner {
-                    * {
-                        color: $orange !important;
-                    }
-                    a:hover, .link:hover, .wrap:hover {
-                        color: $black !important;
-                        h2 {
-                            color: $black !important;
-                        }
-                    }
-                }
-                &.hover {
-                    color: $black !important;
-                    * {
-                        color: $black !important;
-                    }
-                }
-            }
-            &.past {
-                color: $black !important;
-                .inner {
-                    * {
-                        color: $black !important;
-                    }
-                    a:hover, .link:hover, .wrap:hover {
-                        color: $orange !important;
-                        h2 {
-                            color: $orange !important;
-                        }
-                    }
-                }
-                &.hover {
-                    color: $orange !important;
-                    * {
-                        color: $orange !important;
-                    }
-                }
-            }
             &.no-image {
                 display: flex;
                 // align-items: center;
@@ -184,12 +144,7 @@
                 }
             }
             &.nolink:hover .inner {
-                .link, a {
-                    color: $orange !important;
-                }
-            }
-            &.nolink .inner {
-                .link:hover, a:hover {
+                h2.link {
                     color: $orange !important;
                 }
             }
@@ -205,10 +160,11 @@
                 display: -ms-flexbox;
                 display: flex;
                 h2 {
-                  @include small-fs;
-                  .title {
-                    padding: 0;
-                  }
+                    text-align: left;
+                    @include small-fs;
+                    .title {
+                        padding: 0;
+                    }
                 }
                 .image {display: none;}
                 .value {
@@ -260,10 +216,31 @@
         }
     }
     .shelf-item {
-        &.past, &.past-residents {
+        &.current, &.upcoming {
+            color: $orange !important;
             .inner {
                 * {
-                    color: $black;
+                    color: $orange !important;
+                }
+                a:hover, .link:hover, .wrap:hover {
+                    color: $black !important;
+                    h2 {
+                        color: $black !important;
+                    }
+                }
+            }
+            &.hover {
+                color: $black !important;
+                * {
+                    color: $black !important;
+                }
+            }
+        }
+        &.past, &.past-residents {
+            color: $black !important;
+            .inner {
+                * {
+                    color: $black !important;
                 }
                 a:hover, .link:hover, .wrap:hover {
                     color: $orange !important;
@@ -272,7 +249,14 @@
                     }
                 }
             }
+            &.hover {
+                color: $orange !important;
+                * {
+                    color: $orange !important;
+                }
+            }
         }
+        
     }
 }
 &.hide-shelves {
