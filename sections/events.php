@@ -8,12 +8,22 @@ $page_url = get_the_permalink();
 	<div class="content">
 		<div class="wrapper upcoming">
 			<h2 class="title head">Current and Upcoming Events &amp; Exhibitions</h2>
-			<div class="events shelves grid items residents upcoming">
-				<?php 
-				$GLOBALS['events_section'] = 'upcoming';
-				get_template_part('sections/loops/events');
-				?>
-			</div>
+			<?php 
+			$sorted_events = sort_upcoming_events();
+			$count = sizeof( $sorted_events );
+			if ( $count ):
+				echo '<div class="events shelves grid items residents upcoming">';
+				foreach( $sorted_events as $event ):
+					$post = $event;
+					global $post;
+					get_template_part( 'sections/items/event' );
+				endforeach;
+				echo '</div>';
+			else:
+				get_template_part( 'partials/no-posts' );
+			endif;
+			wp_reset_query();
+			?>
 		</div>
 		<div class="wrapper past">
 			<h2 class="title head">Past Events &amp; Exhibitions</h2>

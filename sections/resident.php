@@ -11,8 +11,8 @@ $studio_number = get_field( 'studio_number', $resident_id );
 $resident_type = get_field( 'resident_type', $resident_id );
 $residencies = array();
 $resident_classes = 'resident single';
-$past_residents_id = get_page_by_path( 'past-residents' )->ID;
-$past_residents_url = preg_replace( '{/$}', '', get_permalink( $past_residents_id ) );
+$residents_id = get_page_by_path( 'residents' )->ID;
+$residents_url = preg_replace( '{/$}', '', get_permalink( $residents_id ) );
 if( is_past( $resident_id ) ):
 	$resident_classes .= ' past';
 endif;
@@ -85,7 +85,7 @@ endif;
 					echo 'Current Resident: ' . $date_range;
 					echo '</br>';
 					echo '</h2>';
-					echo '<h2>';
+					echo '<h2 class="sponsors">';
 					echo get_sponsors( $resident_id );
 					echo '</h2>';
 				endif;
@@ -96,7 +96,7 @@ endif;
 				<?php
 				if( is_current( $resident_id ) ): 
 					if( is_ground_floor( $resident_id )  ):
-						$ground_floor_url = $past_residents_url . '?filter=past&program=ground_floor';
+						$ground_floor_url = $residents_url . '?filter=all&program=ground_floor';
 						echo '<h2 class="value">';
 						echo '<a href="' . $ground_floor_url . '">';
 						echo 'Ground Floor';
@@ -107,7 +107,7 @@ endif;
 					endif;
 				endif;
 				?>
-				<?php $type_url = $past_residents_url . '?filter=past&type=' . $resident_type; ?>
+				<?php $type_url = $residents_url . '?filter=all&type=' . $resident_type; ?>
 				<h2 class="resident-type">
 					<a href="<?php echo $type_url ?>">
 						<?php echo ucfirst( $resident_type ) ?>
@@ -147,7 +147,6 @@ endif;
 			if( is_current( $resident_id ) && sizeof($residencies) > 1 ): 
 				echo '<div class="residencies list">';
 				echo '<h3 class="title">Past Residencies</h3>';
-				$index = 0;
 				foreach( $residencies as $i=>$residency ):
 					if ( $i == 0 && is_current( $resident_id ) ) continue; 
 					$start_year = $residency->start_date_dt->format('Y');
@@ -158,9 +157,8 @@ endif;
 						echo '&ndash;' . $end_year;
 					endif;
 					echo '</br>';
-					echo get_sponsors( $resident_id, $index );
+					echo get_sponsors( $resident_id, $i );
 					echo '</div>';
-					$index++;
 				endforeach;
 				echo '</div>';
 			endif;
@@ -220,32 +218,32 @@ endif;
 				'compare' => 'LIKE'
 			) );
 		elseif( $countries_array ):
+			$rand_index = array_rand( $countries_array, 1 );
+			$country = $countries_array[$rand_index];
 			$meta_query = array(
 				'relation' => 'OR'
 			);
-			foreach ($countries_array as $key => $country) {
-				$country_name = $country->post_title;
-				$country_id = $country->ID;
-				$country_ids[] .= $country_id;
-				if( $key != 0 ):
-					$country_names .= ', ';
-				endif;
-				$country_names .= $country_name;
-				$country_query = array(
-					'relation' => 'AND',
-					array(
-						'key' => 'country',
-						'value' => $country_id,
-						'compare' => 'LIKE'
-					),
-					array(
-						'key' => 'residency_program',
-						'value' => 'international',
-						'compare' => 'LIKE'
-					)
-				);
-				array_push( $meta_query, $country_query );
-			}
+			$country_name = $country->post_title;
+			$country_id = $country->ID;
+			$country_ids[] .= $country_id;
+			if( $key != 0 ):
+				$country_names .= ', ';
+			endif;
+			$country_names .= $country_name;
+			$country_query = array(
+				'relation' => 'AND',
+				array(
+					'key' => 'country',
+					'value' => $country_id,
+					'compare' => 'LIKE'
+				),
+				array(
+					'key' => 'residency_program',
+					'value' => 'international',
+					'compare' => 'LIKE'
+				)
+			);
+			array_push( $meta_query, $country_query );
 			$relation_title = 'Residents from ' . $country_names;
 		endif;
 		$residents_query = array(

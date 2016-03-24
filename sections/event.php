@@ -153,20 +153,18 @@ $upcoming_events = new WP_Query( $upcoming_query );
 			endif;
 
 			?>
-			<div class="bullets">
-				
-				<div class="share bullet link">
-					<span class="toggle">Share</span>
-					<div class="links">
-						<span><a href="https://twitter.com/share?url=<?php echo urlencode( $permalink ) ?>&text=<?php echo urlencode( $title ) ?>" target="_blank">Twitter</a></span>
-						<span><a href="https://www.facebook.com/sharer/sharer.php?sdk=joey&u=<?php echo $permalink ?>" target="_blank">Facebook</a></span>
-						<span class="copy link" data-clipboard-text="<?php echo $permalink ?>">Copy link</span>
-					</div>
-				</div>
-				<div class="bullet mobileOnly link"><a href="https://twitter.com/share?url=<?php echo urlencode( $permalink ) ?>&text=<?php echo urlencode( $title ) ?>" target="_blank">Twitter</a></div>
-				<div class="bullet mobileOnly link"><a href="https://www.facebook.com/sharer/sharer.php?sdk=joey&u=<?php echo $permalink ?>" target="_blank">Facebook</a></div>
-				<div class="bullet mobileOnly link" class="copy link" data-clipboard-text="<?php echo $permalink ?>">Copy link</div>
+			<div class="bullets">	
 				<?php
+				if( $event_type == 'exhibition' || $event_type == 'open-studios' || $event_type == 'off-site-project' ):
+					if( $opening_reception ):
+						echo '<div class="bullet">Opening Reception: ';
+						echo $opening_reception;
+						if( $opening_reception_hours ):
+							echo ', ' . $opening_reception_hours;
+						endif;
+						echo '</div>';
+					endif;
+				endif;
 				if( $time ):
 					echo '<div class="bullet">' . $time . '</div>';
 				endif;
@@ -176,15 +174,6 @@ $upcoming_events = new WP_Query( $upcoming_query );
 					endif;
 					if($location):
 						echo '<div class="bullet">' . $location . '</div>';
-					endif;
-				elseif( $event_type == 'exhibition' || $event_type == 'open-studios' || $event_type == 'off-site-project' ):
-					if( $opening_reception ):
-						echo '<div class="bullet">Opening Reception: ';
-						echo $opening_reception;
-						if( $opening_reception_hours ):
-							echo ', ' . $opening_reception_hours;
-						endif;
-						echo '</div>';
 					endif;
 				endif;
 				if( $rsvp ):
@@ -198,6 +187,17 @@ $upcoming_events = new WP_Query( $upcoming_query );
 					echo'</a>';
 				endforeach;
 				?>
+				<div class="share bullet link">
+					<span class="toggle">Share</span>
+					<div class="links">
+						<span><a href="https://twitter.com/share?url=<?php echo urlencode( $permalink ) ?>&text=<?php echo urlencode( $title ) ?>" target="_blank">Twitter</a></span>
+						<span><a href="https://www.facebook.com/sharer/sharer.php?sdk=joey&u=<?php echo $permalink ?>" target="_blank">Facebook</a></span>
+						<span class="copy link" data-clipboard-text="<?php echo $permalink ?>">Copy link</span>
+					</div>
+				</div>
+				<div class="bullet mobileOnly link"><a href="https://twitter.com/share?url=<?php echo urlencode( $permalink ) ?>&text=<?php echo urlencode( $title ) ?>" target="_blank">Twitter</a></div>
+				<div class="bullet mobileOnly link"><a href="https://www.facebook.com/sharer/sharer.php?sdk=joey&u=<?php echo $permalink ?>" target="_blank">Facebook</a></div>
+				<div class="bullet mobileOnly link" class="copy link" data-clipboard-text="<?php echo $permalink ?>">Copy link</div>
 			</div>
 			<?php
 			$residents = get_field( 'residents' );
@@ -272,7 +272,7 @@ $upcoming_events = new WP_Query( $upcoming_query );
 			$GLOBALS['wp_query'] = $upcoming_events;
 			if ( have_posts() ):
 				echo '<div class="upcoming module">';
-				echo '<h3 class="title">Upcoming Events &amp; Exhibitions</h3>';
+				echo '<h3 class="title">Current and Upcoming Events &amp; Exhibitions</h3>';
 				echo '<div class="shelves grid">';
 				while ( have_posts() ) :
 					the_post();

@@ -8,21 +8,19 @@ $year_param = $query_vars['date'];
 		<?php
 		$event_types = array( 'exhibition', 'off-site-project', 'iscp-talk', 'open-studios', 'events' );
 		foreach( $event_types as $event_type ):
-			$filter_url = query_url( 'type', $event_type, $page_url );
 			$event_type_count = get_event_count( 'type', $event_type );
-			if( $event_type_count != 0 ):
+			if( $event_type_count ):
+				$filter_url = query_url( 'type', $event_type, $page_url );
 				if( $event_type == $type_param ):
-					$selected = 'selected';
+					$classes = 'selected ';
 				else:
-					$selected = null;
+					$classes = null;
 				endif;
-				echo '<div class="option ' . $selected . '">';
+				$classes .= $event_type;
+				echo '<div class="option ' . $classes . '">';
 				echo '<a href="' . $filter_url . '" data-value="' . $event_type . '">';
 				$event_type = pretty( $event_type );
 				echo $event_type;
-				// echo ' (<span class="count">';
-				// echo $event_type_count;
-				// echo '</span>)';
 				echo '<div class="swap">';
 				echo '<div class="icon default"></div>';
 				echo '<div class="icon hover"></div>';
@@ -45,17 +43,13 @@ $year_param = $query_vars['date'];
 			$filter_url = query_url( 'date', $year, $page_url );
 			$year_count = get_event_count( 'year', $year );
 			if( $year_count != 0 ):
+				$classes = 'year';
 				if( $year == $year_param ):
-					$selected = 'selected';
-				else:
-					$selected = null;
+					$classes .= ' selected';
 				endif;
-				echo '<div class="option ' . $selected . '">';
+				echo '<div class="option ' . $classes . '">';
 				echo '<a href="' . $filter_url . '" data-value="' . $year . '">';
 				echo $year;
-				// echo ' (<span class="count">';
-				// echo $year_count;
-				// echo '</span>)';
 				echo '<div class="swap">';
 				echo '<div class="icon default"></div>';
 				echo '<div class="icon hover"></div>';

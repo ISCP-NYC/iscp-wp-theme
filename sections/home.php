@@ -1,7 +1,7 @@
 <?php
 $home_id = get_page_by_path( 'home' )->ID;
 ?>
-<section <?php section_attr( null, 'home', null ); ?> data-title="Home">
+<section <?php section_attr( null, 'home', null, 'International Studio &amp; Curatorial Program' ); ?> data-title="Home">
 	<?php get_template_part('partials/nav') ?>
 	<?php get_template_part('partials/side') ?>
 	<div class="content">
@@ -16,60 +16,24 @@ $home_id = get_page_by_path( 'home' )->ID;
 			?>
 		</h3>
 		<?php 
-			$today = new DateTime();
-			$today = $today->format('Y-m-d H:i:s');
-			$events_query = array(
-				'post_type' => 'event',
-				'posts_per_page' => 3,
-				'meta_query' => array(
-					'relation' => 'OR',
-					array(
-						'key' => 'start_date',
-						'compare' => '>=',
-						'value' => $today,
-						'type' => 'DATE',
-						'orderby' => 'meta_value',
-						'order' => 'DESC'
-					),
-					array(
-						'key' => 'end_date',
-						'compare' => '>=',
-						'value' => $today,
-						'type' => 'DATE',
-						'orderby' => 'meta_value',
-						'order' => 'DESC'
-					),
-					array(
-						'key' => 'date',
-						'compare' => '>=',
-						'value' => $today,
-						'type' => 'DATE',
-						'orderby' => 'meta_value',
-						'order' => 'DESC'
-					),
-				),
-				'orderby' => 'meta_value',
-			    'order' => 'ASC'
-			);
-
-			$upcoming_events = new WP_Query( $events_query );
-			$count = $upcoming_events->found_posts;
-			$count_class = 'cols_' . $count;
-			$GLOBALS['wp_query'] = $upcoming_events;
-			if ( have_posts() ):
-				echo '<div class="events module shelves grid upcoming ' . $count_class . '">';
-				echo '<div class="eventsWrap">';
-				while ( have_posts() ) :
-					the_post();
-					get_template_part( 'sections/items/event' );
-				endwhile;
-				echo '</div>';
-				echo '</div>';
-			else:
-				get_template_part( 'partials/no-posts' );
-			endif;
-			wp_reset_query();
-			?>
+		$sorted_events = array_slice( sort_upcoming_events(), 0, 3 );
+		$count = sizeof( $sorted_events );
+		$count_class = 'cols_' . $count;
+		if ( $count ):
+			echo '<div class="events module shelves grid upcoming ' . $count_class . '">';
+			echo '<div class="eventsWrap">';
+			foreach( $sorted_events as $event ):
+				$post = $event;
+				global $post;
+				get_template_part( 'sections/items/event' );
+			endforeach;
+			echo '</div>';
+			echo '</div>';
+		else:
+			get_template_part( 'partials/no-posts' );
+		endif;
+		wp_reset_query();
+		?>
 		<div class="about module">
 			<h3 class="title">
 			<?php

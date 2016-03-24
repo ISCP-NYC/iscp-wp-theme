@@ -119,6 +119,22 @@ aside {
 	@include small {
 		display: none;
 	}
+	.loader {
+		width: 15px;
+		height: 65px;
+		top: calc(110px + (50% - 110px/2) - 65px/2);
+		left: calc(50% - 15px/2);
+		div {
+			float: none;
+			margin: 5px 0;
+		}
+	}
+	&.loading {
+		.loader {
+			opacity: 1;
+			transition-delay: 200ms;
+		}
+	}
 }
 &:not(.center) {
 	aside {

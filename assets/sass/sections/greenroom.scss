@@ -89,6 +89,9 @@ section.resident-resource {
 			    display: flex;
 				float: left;
 				margin-bottom: 60px;
+				.inner {
+					width: 100%;
+				}
 				.name {
 					padding: 10px 0;
 					text-align: center;

@@ -37,6 +37,27 @@
 		$post->delay = 0;
 		get_template_part( 'sections/residents' );
 
+	elseif ( $page_slug == 'residents' ):
+
+		$past_residents_page_id = get_page_by_path( 'past-residents' )->ID;
+		$post = get_post( $past_residents_page_id, OBJECT );
+		setup_postdata( $post );
+		$post->delay = 1;
+		get_template_part( 'sections/residents' );
+		wp_reset_postdata();
+
+		$post->delay = 0;
+		get_template_part( 'sections/residents' );
+
+		$current_residents_page_id = get_page_by_path( 'current-residents' )->ID;
+		$post = get_post( $current_residents_page_id, OBJECT );
+		setup_postdata( $post );
+		$post->delay = 1;
+		get_template_part( 'sections/residents' );
+		wp_reset_postdata();
+
+
+
 	elseif( $page_slug == 'events' ):
 
 		$post->delay = 0;

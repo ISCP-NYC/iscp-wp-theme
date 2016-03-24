@@ -1,8 +1,9 @@
-<?php header('Content-Type: text/html; charset=UTF-8'); ?>
+<?php header('Content-Type: text/html; charset=UTF-8');
+$page_id = get_the_ID();
+?>
 <!DOCTYPE html>
 <html <?php language_attributes(); ?> class="no-js">
 <head>
-	<title><?php if(!is_home()){wp_title('',true); echo ' | ';} bloginfo('name') ?></title>
 	<meta charset="<?php bloginfo( 'charset' ); ?>">
 	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
 	<meta name="viewport" content="width=device-width">
@@ -25,7 +26,6 @@
 		$page_id = null;
 	else:
 		$page_slug = get_post( $post )->post_name;
-		$page_id = get_the_ID();
 	endif;
 	$post_type = get_post_type();
 	switch($page_slug) {
@@ -83,7 +83,26 @@
 	<meta name="msapplication-TileColor" content="#ff5000">
 	<meta name="msapplication-TileImage" content="<?php echo $theme; ?>/assets/images/favicons/orange/mstile-144x144.png">
 	<meta name="theme-color" content="#ff5000">
+	<meta property="description" content="<?php get_meta_description( $page_id ) ?>" />
+	<meta property="og:type" content="website" />
+	<meta property="og:title" content="<?php rtrim( wp_title('',true) ) ?>" />
+	<meta property="og:description" content="<?php get_meta_description( $page_id ) ?>" />
+	<meta property="og:image" content="<?php echo get_thumb( $page_id, 'thumb' ) ?>" />
+	<meta property="og:image:width" content="200" />
+	<meta property="og:image:height" content="200" />
+	<meta property="fb:app_id" content="1007372126002973" />
 	<?php wp_head(); ?>
+	<title><?php
+		if(is_search()):
+			echo 'Search results for ';
+			the_search_query();
+			echo ' | ';
+		elseif($page_slug != 'home'):
+			wp_title('',true);
+			echo ' | ';
+		endif;
+		bloginfo('name');
+	?></title>
 </head>
 <body>
 	<main data-center-slug="<?php echo $page_slug ?>" data-center-id="<?php echo $page_id ?>">

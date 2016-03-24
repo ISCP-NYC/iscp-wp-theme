@@ -6,7 +6,35 @@ include( locate_template( 'sections/params/residents.php' ) );
 	<?php get_template_part('partials/nav') ?>
 	<?php get_template_part('partials/side') ?>
 	<div class="content">
-		<h2 class="head"><?php the_title() ?></h2>
+		<h2 class="head">
+		<?php
+		if($slug == 'residents'):
+
+			if( $program_param ):
+				if( $program_param == 'ground_floor' ):
+					echo 'Ground Floor ';
+				else:
+					echo 'International ';
+				endif;
+			endif;
+
+			if( $type_param ):
+				echo ucwords( $type_param ) . 's';
+			else:
+				echo 'Residents';
+			endif;
+
+			if( $country_param ):
+				echo $resident_title . ' from ' . $country_param_title;
+			endif;
+			if( $year_param ):
+				echo $resident_title . ' in ' . $year_param;
+			endif;
+		else:
+			the_title();
+		endif;
+		?>
+		</h2>
 		<div class="top">
 			<div class="filter">
 				<div class="bar">
@@ -24,21 +52,21 @@ include( locate_template( 'sections/params/residents.php' ) );
 							<div class="icon hover"></div>
 						</div>
 					</div>
-					<?php if($slug == 'past-residents'): ?>
-					<div class="select link dropdown date" data-filter="date" data-slug="<?php echo $slug ?>">
-						<?php
-						if( $year_param ):
-							$selected = ': ' . $year_param;
-						else:
-							$selected = null;
-						endif;
-						echo '<span class="label">Year</span><span class="value">' . $selected . '</span>';
-						?>
-						<div class="swap">
-							<div class="icon default"></div>
-							<div class="icon hover"></div>
+					<?php if($slug != 'current-residents'): ?>
+						<div class="select link dropdown date" data-filter="date" data-slug="<?php echo $slug ?>">
+							<?php
+							if( $year_param ):
+								$selected = ': ' . $year_param;
+							else:
+								$selected = null;
+							endif;
+							echo '<span class="label">Year</span><span class="value">' . $selected . '</span>';
+							?>
+							<div class="swap">
+								<div class="icon default"></div>
+								<div class="icon hover"></div>
+							</div>
 						</div>
-					</div>
 					<?php endif; ?>
 					<div class="select link dropdown program" data-filter="program" data-slug="<?php echo $slug ?>">
 						<?php

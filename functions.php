@@ -56,8 +56,7 @@ function iscp_scripts() {
 	wp_enqueue_script( 'clipboard' );
 	wp_enqueue_script( 'main' );
 	$page_slug = $post->post_name;
-	$with_map = array('map', 'past-residents', 'current-residents');
-	if(in_array( $page_slug, $with_map ) ):
+	if( $page_slug == 'map' ):
 		$countries_query = array(
 			'post_type' => 'country',
 			'posts_per_page' => -1,
@@ -624,6 +623,71 @@ function get_event_status( $id ) {
 	endif;
 	return $status;
 }
+function sort_upcoming_events() {
+	$today = date('Ymd');
+	$next_week = date('Ymd', strtotime('+1 week'));
+	$events_query = array(
+		'post_type' => 'event',
+		'posts_per_page' => -1,
+		'orderby' => 'meta_value post_title',
+		'order' => 'ASC',
+		'post_status' => 'publish',
+		'meta_query' => array(
+			array( 'key' => 'start_date' ),
+			array(
+				'relation' => 'OR',
+				array(
+					'key' => 'start_date',
+					'compare' => '>=',
+					'value' => $today
+				),
+				array(
+					'key' => 'end_date',
+					'compare' => '>=',
+					'value' => $today
+				)
+			)
+		)
+	);
+	$upcoming_events_query = new WP_Query( $events_query );
+	$upcoming_events_posts = $upcoming_events_query->posts;
+	$long_events = array();
+	$events = array();
+	$sorted_events = array();
+	$upcoming_events = array();
+	$later_events = array();
+
+	foreach( $upcoming_events_posts as $event ):
+		$event_id = $event->ID;
+		$event_sd = get_field( 'start_date', $event_id );
+		if( ( $event_sd >= $today ) && ( $event_sd <= $next_week ) ):
+			array_push( $sorted_events, $event );
+		else:
+			array_push( $later_events, $event );
+		endif;
+	endforeach;
+
+	foreach( $later_events as $event ):
+		$event_id = $event->ID;
+		$event_ed = get_field( 'end_date', $event_id );
+		if( $event_ed ):
+			array_push( $long_events, $event );
+		else:
+			array_push( $events, $event );
+		endif;
+	endforeach;
+
+	foreach( array_reverse( $long_events ) as $long_event ):
+		array_push( $sorted_events, $long_event );
+	endforeach;
+
+	foreach( $events as $event ):
+		array_push( $sorted_events, $event );
+	endforeach;
+
+	return $sorted_events;
+}
+
 function section_attr( $id, $slug, $classes, $title = null ) {
 	$classes .= ' static';
 	echo 'class="' . $slug . ' ' . $classes . '"';
@@ -637,14 +701,20 @@ function section_attr( $id, $slug, $classes, $title = null ) {
 			$permalink .= '?filter=current';
 		elseif( $slug === 'past-residents' ):
 			$permalink .= '?filter=past';
+		elseif( $slug === 'residents' ):
+			$permalink .= '?filter=all';
 		endif;
 
 		if( !$title ):
 			$title = get_the_title( $id );
 		endif;
+
 		echo 'data-permalink="' . $permalink . '" ';
-		echo 'data-title="' . $title . '"';
 	endif;
+	if( $slug == 'search'):
+		$title = 'Search results for "' . $title . '"';
+	endif;
+	echo 'data-title="' . $title . '"';
 }
 function get_start_date_value( $id ) {
 	$post_type = get_post_type( $id );
@@ -1090,18 +1160,18 @@ function get_sponsors( $id, $index = 0 ) {
 
 function get_countries( $id ) {
 	$country_list = '';
-	$residents_id = get_page_by_path( 'past-residents' )->ID;
+	$residents_id = get_page_by_path( 'residents' )->ID;
 	$residents_url = get_permalink( $residents_id );
 	if( have_rows( 'country', $id ) ):
 		$countries = get_field( 'country', $id );
 		if( $countries ):
 			foreach ($countries as $index=>$country):
 				if( $index != 0 ):
-					$country_list .= ', ';
+					$country_list .= '<span>,&nbsp;</span>';
 				endif;
 				$country_name = $country->post_title;
 				$country_slug = $country->post_name;
-				$url = $residents_url . '?filter=past&from=' . $country_slug;
+				$url = $residents_url . '?filter=all&from=' . $country_slug;
 				if($url):
 					$country_list .= '<a href="' . $url . '">' . $country_name . '</a>';
 				else:
@@ -1679,4 +1749,16 @@ function search_broken_link() {
 		return $search_value;
 	endif;
 	return $search_value;
+}
+
+function get_meta_description( $id ) {
+	$type = get_post_type( $post_id );
+	if( $type == 'event' ):
+		$value = trim(rtrim(substr(strip_tags(get_field( 'description', $id)), 0, 200))) . '...';
+	else:
+		$value = bloginfo('description');
+	endif;
+	if( $value ):
+		echo $value;
+	endif;
 }

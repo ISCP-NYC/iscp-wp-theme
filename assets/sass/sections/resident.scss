@@ -20,14 +20,19 @@ section.single.resident {
 		.left {
 			width: 20%;
 			text-align: left;
+			color: $orange;
 		}
 		.center {
 			width: 60%;
 			text-align: center;
+			.sponsors {
+				color: $orange;
+			}
 		}
 		.right {
 			width: 20%;
 			text-align: right;
+			color: $orange;
 		}
 	}
 	h1.title {
@@ -81,10 +86,6 @@ section.single.resident {
 			}
 		}
 	}
-	.gallery .caption {
-		@include small-fs;
-		margin-top: 5px;
-	}
 	.gallery {
 		width: calc(33.333% - 35px);
 		padding: 0 20px 0 15px;
@@ -101,9 +102,7 @@ section.single.resident {
 				}
 				.description {
 					text-align: left;
-					margin: 5px 0 0 0;
-					@include small-fs;
-					color: $orange;
+					margin-top: 5px;
 				}
 			}
 		}

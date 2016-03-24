@@ -122,6 +122,7 @@ section.error {
 	.residents .resident .image {
 		background-color: white;
 	}
+
 	&.hover-right {
 		.content {
 			border-right-color: $orange !important;
@@ -180,11 +181,6 @@ section.error {
                 color: $orange;
             }
         }
-        .shelf-item.nolink:hover .inner {
-            h2.link {
-                color: $orange !important;
-            }
-        }
 	}
 	.image_slider.full {
 		background-color: $black;
@@ -201,6 +197,14 @@ section.error {
 		background: $black;
 	}
 	.share.link, .share.link:hover {
+		color: $black !important;
+	}
+	header.sub {
+		.left, .right, .center .sponsors {
+			color: $black !important;
+		}
+	}
+	.share .links {
 		color: $black !important;
 	}
 }

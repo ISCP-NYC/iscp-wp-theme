@@ -76,6 +76,7 @@ section.apply {
 		width: calc(100% - 35px);
 		padding: 0 15px 0 20px;
 		margin: 20px 0 0 0;
+		display: table;
 		span {
 			@include small-fs;
 			float: left;

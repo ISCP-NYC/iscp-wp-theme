@@ -331,7 +331,7 @@ header.main {
 	transition: transform 600ms cubic-bezier(0.645, 0.045, 0.355, 1), opacity 150ms 400ms ease-in-out;
 	.icon {
 		background-size: 48px;
-    	background-position: center;
+    	background-position: 25px center;
     	background-repeat: no-repeat;
 		&.default {
 			background-image: url(../images/logo-orange.svg);

@@ -6,6 +6,8 @@ endif;
 $today = date('Ymd');
 
 if( $events_section == 'past' ):
+	$order = 'DESC';
+	$count = '12';
 	if( $event_type_param ):
 		$event_type_query = array(
 			'key' => 'event_type',
@@ -41,12 +43,12 @@ if( $events_section == 'past' ):
 		'relation' => 'AND',
 		array(
 			'key' => 'start_date',
-			'compare' => '<',
+			'compare' => '<=',
 			'value' => $today
 		),
 		array(
 			'key' => 'end_date',
-			'compare' => '<',
+			'compare' => '<=',
 			'value' => $today
 		)
 	);
@@ -54,6 +56,8 @@ if( $events_section == 'past' ):
 		$upcoming_ids = $GLOBALS['upcoming_ids'];
 	endif;
 else:
+	$order = 'ASC';
+	$count = '12';
 	$date_query = array(
 		'relation' => 'OR',
 		array(
@@ -74,7 +78,7 @@ $events_query = array(
 	'posts_per_page' => 12,
 	'paged' => $paged,
 	'orderby' => 'meta_value post_title',
-	'order' => 'DESC',
+	'order' => $order,
 	'post_status' => 'publish',
 	'post__not_in' => $upcoming_ids,
 	'meta_query' => array(

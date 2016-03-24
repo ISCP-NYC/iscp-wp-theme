@@ -167,14 +167,21 @@
             }
         }
         @include medium {
-            column-width: 180px;
+            column-width: 150px;
             column-gap: 5px;
             .option {
-                width: 180px;
+                width: 150px;
             }
         }
     }
-
+    &.year {
+        .options {
+            column-width: 100px;
+            .option {
+                width: 100px;
+            }
+        }
+    }
     &.program {
         .options {
             column-width: 250px;

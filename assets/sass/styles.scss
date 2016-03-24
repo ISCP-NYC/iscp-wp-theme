@@ -16,11 +16,12 @@ body {
 	height: 100%;
 	overflow: hidden;
 	font-family: 'Life Rounded', Times;
-	@include medium-fs;
 	color: $black;
+	@include medium-fs;
 	* {
 		font-family: 'Life Rounded', Times;
 	}
+	-webkit-text-size-adjust:100%
 }
 #mfPreviewBar, #mfPreviewBarShow {
 	display: none !important;
@@ -40,7 +41,6 @@ a, .link {
 		}
 	}
 }
-
 input {
 	-webkit-appearance: none;
 	border-radius: 0;
@@ -62,14 +62,14 @@ main {
 			cursor: default;
 			pointer-events: none;
 			.label {
-				opacity: 0.4;
+				opacity: 0;
 			}
 		}
 		&.next aside.right .move {
 			cursor: default;
 			pointer-events: none;
 			.label {
-				opacity: 0.4;
+				opacity: 0;
 			}
 		}
 	}
@@ -252,6 +252,7 @@ section {
 em, i, em *, i * {
 	display: inline;
     font-family: 'Life Italic';
+    text-decoration: none !important;
 }
 ul li {
 	list-style: none;
@@ -352,16 +353,16 @@ h4, .small {
 }
 @include small {
 	.border-top {
-		border-top: 8px solid $orange;
+		border-top-width: 8px !important;
 	}
 	.border-bottom {
-		border-bottom: 8px solid $orange;
+		border-bottom-width: 8px !important;
 	}
 	.half-border-right {
-		border-right: 4px solid $orange;
+		border-right-width: 4px !important;
 	}
 	.half-border-left {
-		border-left: 4px solid $orange;
+		border-left-width: 4px !important;
 	}
 }
 .border-right {

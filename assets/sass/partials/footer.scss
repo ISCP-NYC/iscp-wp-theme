@@ -3,14 +3,17 @@ footer {
 	position: relative;
 	margin-top: 30px;
 	padding-top: 30px;
-	@include xsmall {
-		padding-top: 40px;
-	}
 	background: $orange;
 	color: $white;
 	@include small-fs;
 	a {
 		color: $white;
+	}
+	@include small {
+		z-index: 999;
+	}
+	@include xsmall {
+		padding-top: 40px;
 	}
 	.wrapper {
 	    width: calc(100% - 280px);

@@ -86,8 +86,8 @@ $xlarge-width: 1600px;
   font-size: $small-fs;
   line-height: $small-lh;
   @include medium {
-    font-size: $xsmall-fs;
-    line-height: $xsmall-lh;
+    font-size: $xsmall-fs !important;
+    line-height: $xsmall-lh !important;
   }
 }
 
@@ -95,8 +95,8 @@ $xlarge-width: 1600px;
   font-size: $medium-fs;
   line-height: $medium-lh;
   @include medium {
-    font-size: $small-fs;
-    line-height: $small-lh;
+    font-size: $small-fs !important;
+    line-height: $small-lh !important;
   }
 }
 
@@ -104,8 +104,8 @@ $xlarge-width: 1600px;
   font-size: $large-fs;
   line-height: $large-lh;
   @include medium {
-    font-size: $medium-fs;
-    line-height: $medium-lh;
+    font-size: $medium-fs !important;
+    line-height: $medium-lh !important;
   }
 }
 

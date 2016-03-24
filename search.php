@@ -12,7 +12,7 @@ endif;
 // global $wp_query;
 $search_count = $wp_query->found_posts;
 ?>
-<section <?php section_attr( null, 'search', '' ); ?> data-page="<?php echo $paged ?>">
+<section <?php section_attr( null, 'search', null, $search_value ); ?> data-page="<?php echo $paged ?>">
 	<?php get_template_part( 'partials/nav' ) ?>
 	<?php get_template_part( 'partials/side' ) ?>
 	<div class="content">
