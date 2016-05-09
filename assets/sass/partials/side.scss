@@ -80,6 +80,11 @@ aside {
 			transition: opacity 300ms ease-in-out;
 			font-size: $medium-fs;
 			line-height: $medium-lh;
+			span {
+				max-width: 800px;
+				display: table;
+				margin: auto;
+			}
 		}
 	}
 	a.move:hover {

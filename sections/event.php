@@ -21,6 +21,7 @@ $time = get_field( 'time', $id );
 $opening_reception = new DateTime( get_field( 'opening_reception', $id ) );
 $opening_reception = $opening_reception->format('M d, Y');
 $opening_reception_hours = get_field( 'opening_reception_hours', $id );
+$logos = get_field( 'logos', $id );
 if( $page_columns ):
 	$event_classes .= ' ' . $page_columns;
 else:
@@ -32,41 +33,6 @@ else:
 endif;
 $today = new DateTime();
 $today = $today->format('Y-m-d H:i:s');
-$upcoming_query = array(
-	'post_type' => 'event',
-	'posts_per_page' => 3,
-	'meta_query' => array(
-		'relation' => 'OR',
-		array(
-			'key' => 'start_date',
-			'compare' => '>=',
-			'value' => $today,
-			'type' => 'DATE',
-			'orderby' => 'meta_value',
-			'order' => 'DESC'
-		),
-		array(
-			'key' => 'end_date',
-			'compare' => '>=',
-			'value' => $today,
-			'type' => 'DATE',
-			'orderby' => 'meta_value',
-			'order' => 'DESC'
-		),
-		array(
-			'key' => 'date',
-			'compare' => '>=',
-			'value' => $today,
-			'type' => 'DATE',
-			'orderby' => 'meta_value',
-			'order' => 'DESC'
-		),
-	),
-	'orderby' => 'meta_value',
-    'order' => 'ASC',
-    'post__not_in' => array($id)
-);
-$upcoming_events = new WP_Query( $upcoming_query );
 ?>
 <section <?php section_attr( $id, $slug, $event_classes ); ?>>
 	<?php get_template_part('partials/nav') ?>
@@ -85,41 +51,41 @@ $upcoming_events = new WP_Query( $upcoming_query );
 		<?php 
 		if( $page_columns == 'one_col' ):
 			if( have_rows( 'gallery' ) ):
-				echo '<div class="image_slider gallery">';
+				echo '<div class="gallery image_slider">';
 				echo '<div class="cursor"></div>';
-				if( count( get_field( 'gallery' ) ) > 1 ):
-					echo '<div class="left arrow swap">';
-					echo '<div class="icon default"></div>';
-					echo '<div class="icon hover"></div>';
-					echo '</div>';
-					echo '<div class="right arrow swap">';
-					echo '<div class="icon default"></div>';
-					echo '<div class="icon hover"></div>';
-					echo '</div>';
-				endif;
 				echo '<div class="images slides">';
 			    while ( have_rows( 'gallery' ) ) : the_row();
-			        $image = get_sub_field( 'image' );
-			        if( $image ):
-				        $image_url = $image['url'];
-				        $orientation = get_orientation( $image['id'] );
-				        $caption = label_art( $the_ID );
-				        echo '<div class="piece slide">';
-				        echo '<div class="image ' . $orientation . '">';
-				        echo '<div class="captionWrap">';
-				        echo '<img src="' . $image_url . '"/>';
-				        echo '<div class="caption">';
-				        echo $caption;
-				        echo '</div>';
-				        echo '</div>';
-				        echo '</div>';
-				        echo '</div>';
-				    endif;
+						$media_type = get_sub_field( 'media_type', $home_id );
+		        if( $media_type == 'video' ):
+		        	$video = get_sub_field( 'vimeo_id', $home_id );
+			      	$orientation = 'landscape';
+			      else:
+			      	$image = get_sub_field( 'image' );
+			      	$image_id = $image['id'];
+			        $image_url = $image['url'];
+			        $orientation = get_orientation( $image['id'] );
+			      endif;
+			      $caption = label_art( $the_ID );
+		        echo '<div class="piece slide">';
+		        echo '<div class="image ' . $orientation . '">';
+		        echo '<div class="captionWrap">';
+		        if( $media_type == 'video' ):
+		        	echo embed_vimeo( $video );
+		        else:
+		        	echo '<img src="' . $image_url . '"/>';
+		       	endif;
+		        echo '<div class="caption">';
+		        echo $caption;
+		        echo '</div>';
+		        echo '</div>';
+		        echo '</div>';
+		        echo '</div>';
 			    endwhile;
-			    echo '</div>';
-			    echo '</div>';
+		    echo '</div>';
+		    echo '</div>';
 			endif;
-		endif; ?>
+		endif;
+		?>
 		<div class="info">
 			<div class="description">
 				<?php
@@ -130,14 +96,13 @@ $upcoming_events = new WP_Query( $upcoming_query );
 			if( $contributors ):
 				echo '<div class="contributors">';
 				$c_length = sizeof( $contributors );
-				// echo '<em>' . $title .'</em>';
 				echo 'This program is supported, in part, by ';
 				foreach( $contributors as $index => $contributor ):
 					$contributor_name = $contributor->post_title;
 					if( $index > 0 && $index+1 != $c_length ):
 						echo ', ';
 					elseif( $index+1 == $c_length && $index!=0 ):
-						echo ' & ';
+						echo ' and ';
 					endif;
 					echo $contributor_name;
 					if( $index+1 == $c_length ):
@@ -149,6 +114,13 @@ $upcoming_events = new WP_Query( $upcoming_query );
 			if( $credits ):
 				echo '<div class="credits">';
 				echo $credits;
+				echo '</div>';
+			endif;
+			if( $logos ):
+				echo '<div class="logos">';
+				foreach( $logos as $logo ):
+					echo '<img class="logo" src="' . $logo['logo'] . '"/>';
+				endforeach;
 				echo '</div>';
 			endif;
 
@@ -234,25 +206,34 @@ $upcoming_events = new WP_Query( $upcoming_query );
 				echo '<div class="cursor"></div>';
 				echo '<div class="images slides">';
 			    while ( have_rows( 'gallery' ) ) : the_row();
-			        $image = get_sub_field( 'image' );
-			        if( $image ):
-				        $image_url = $image['url'];
-				        $orientation = get_orientation( $image['id'] );
-				        $caption = label_art( $the_ID );
-				        echo '<div class="piece slide">';
-				        echo '<div class="image ' . $orientation . '">';
-				        echo '<div class="captionWrap">';
-				        echo '<img src="' . $image_url . '"/>';
-				        echo '<div class="caption">';
-				        echo $caption;
-				        echo '</div>';
-				        echo '</div>';
-				        echo '</div>';
-				        echo '</div>';
-				    endif;
+						$media_type = get_sub_field( 'media_type', $home_id );
+		        if( $media_type == 'video' ):
+		        	$video = get_sub_field( 'vimeo_id', $home_id );
+			      	$orientation = 'landscape';
+			      else:
+			      	$image = get_sub_field( 'image' );
+			      	$image_id = $image['id'];
+			        $image_url = $image['url'];
+			        $orientation = get_orientation( $image['id'] );
+			      endif;
+			      $caption = label_art( $the_ID );
+		        echo '<div class="piece slide">';
+		        echo '<div class="image ' . $orientation . '">';
+		        echo '<div class="captionWrap">';
+		        if( $media_type == 'video' ):
+		        	echo embed_vimeo( $video );
+		        else:
+		        	echo '<img src="' . $image_url . '"/>';
+		       	endif;
+		        echo '<div class="caption">';
+		        echo $caption;
+		        echo '</div>';
+		        echo '</div>';
+		        echo '</div>';
+		        echo '</div>';
 			    endwhile;
-			    echo '</div>';
-			    echo '</div>';
+		    echo '</div>';
+		    echo '</div>';
 			endif;
 		endif; ?>
 		
@@ -260,26 +241,31 @@ $upcoming_events = new WP_Query( $upcoming_query );
 		$related = get_field( 'related' );
 		if( $related ):
 			usort($related, function($a, $b) {
-			   return strcasecmp( 
-	            	get_field( 'start_date', $b->ID ), 
-	            	get_field( 'start_date', $a->ID ) 
-	        	);
+		    return strcasecmp( 
+        	get_field( 'start_date', $b->ID ), 
+        	get_field( 'start_date', $a->ID ) 
+        );
 			});
 		endif;
 
+
+		$upcoming_events = array_slice( sort_upcoming_events(), 0, 3 );
 		if( $related || $upcoming_events ):
 			echo '<div class="bottom-modules">';
-			$GLOBALS['wp_query'] = $upcoming_events;
-			if ( have_posts() ):
-				echo '<div class="upcoming module">';
+			$count = sizeof( $upcoming_events );
+			if ( $count ):
+				echo '<div class="events module shelves grid upcoming ' . $count_class . '">';
 				echo '<h3 class="title">Current and Upcoming Events &amp; Exhibitions</h3>';
-				echo '<div class="shelves grid">';
-				while ( have_posts() ) :
-					the_post();
+				echo '<div class="eventsWrap">';
+				foreach( $upcoming_events as $event ):
+					$post = $event;
+					global $post;
 					get_template_part( 'sections/items/event' );
-				endwhile;
+				endforeach;
 				echo '</div>';
 				echo '</div>';
+			else:
+				get_template_part( 'partials/no-posts' );
 			endif;
 			wp_reset_query();
 

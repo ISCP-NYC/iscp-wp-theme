@@ -151,6 +151,10 @@
 			get_template_part( 'sections/login' );
 		endif;
 
+	elseif( $page_slug == 'visiting-critics'):
+
+		get_template_part( 'sections/critics' );
+
 	elseif( in_array( $page_slug, array( 'at-iscp', 'in-nyc', 'staff-messages', 'to-do' ) ) ):
 
 		if (user_is_resident()):

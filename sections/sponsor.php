@@ -56,14 +56,18 @@ $paged = 1;
 							$app_title = get_sub_field( 'title', $sponsor_id );
 							$app_deadline = get_sub_field( 'deadline', $sponsor_id );
 							$app_deadline_dt = new DateTime( $app_deadline );
-							$app_deadline_format = $app_deadline_dt->format('M. dS Y');
+							$app_deadline_format = $app_deadline_dt->format('F d, Y');
 							$app_brief = get_sub_field( 'brief', $sponsor_id );
 							$app_link = get_sub_field( 'link', $sponsor_id );
 							if( $app_deadline > $today ):
-								echo '<a href="' . $app_link . '">';
-								echo '<div>Application Deadline</div>';
-								echo '<div>' . $app_deadline_format . '</div>';
-								echo '</a>';
+								if( $app_link ):
+									echo '<a href="' . $app_link . '">';
+								endif;
+								echo '<div>' . $app_title . '</div>';
+								echo '<div>Deadline: ' . $app_deadline_format . '</div>';
+								if( $app_link ):
+									echo '</a>';
+								endif;
 							endif;
 						endwhile;
 					else:

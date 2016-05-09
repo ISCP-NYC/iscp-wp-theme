@@ -167,13 +167,6 @@
           @include small {
             .inner {
               display: block;
-              h2.title {
-                text-align: center;
-                padding: 0 !important;
-                width: 100% !important;
-                font-size: $small-fs !important;
-                line-height: $small-lh !important;
-              }
               .details {
                 display: block !important;
                 width: 100% !important;
@@ -182,10 +175,25 @@
                 display: block !important;
                 float: none !important;
                 clear: both !important;
+                text-align: left !important;
                 padding: 0 0 12px 0 !important;
                 width: 100% !important;
                 font-size: $small-fs !important;
                 line-height: $small-lh !important;
+                a {
+                    float: none !important;
+                    text-align: left !important;
+                }
+              }
+              h2 {
+                text-align: center;
+                padding: 0 !important;
+                width: 100% !important;
+                a {
+                    display: table;
+                    margin: auto;
+                    text-align: center;
+                }
               }
               .value.year, .value.event-type {
                 padding: 0 !important;

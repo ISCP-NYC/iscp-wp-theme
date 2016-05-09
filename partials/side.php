@@ -4,10 +4,10 @@
 		<div class="icon hover"></div>
 	</a>
 	<a class="move left">
-		<div class="label vertical-align"></div>
+		<div class="label vertical-align"><span></span></div>
 	</a>
 	<a class="move right">
-		<div class="label vertical-align"></div>
+		<div class="label vertical-align"><span></span></div>
 	</a>
 </aside>
 <aside id="<?php echo $slug ?>" class="right main">
@@ -16,9 +16,9 @@
 		<div class="icon hover"></div>
 	</a>
 	<a class="move left">
-		<div class="label vertical-align"></div>
+		<div class="label vertical-align"><span></span></div>
 	</a>
 	<a class="move right">
-		<div class="label vertical-align"></div>
+		<div class="label vertical-align"><span></span></div>
 	</a>
 </aside>

@@ -118,10 +118,9 @@ $residency_programs = get_pages( $residency_programs_query );
 
 				<div class="filter">
 					<div class="bar">
-						<span>Or select by&nbsp;</span>
-						<div class="select link dropdown country" data-filter="country" data-slug="<?php echo $slug ?>">
+						<div class="select link dropdown country" data-filter="country" data-slug="apply">
 							<?php
-							echo '<span>Country</span>';
+							echo '<span>Browse other sponsors from this country</span>';
 							?>
 							</span>
 							<div class="swap">
@@ -130,34 +129,36 @@ $residency_programs = get_pages( $residency_programs_query );
 							</div>
 						</div>
 					</div>
-				</div>
-				<div class="filter-list country <?php echo $slug ?>" data-filter="country">
-					<div class="options">
-					<?php
-					$countries = get_posts( array(
-						'posts_per_page'	=> -1,
-						'post_type'			=> 'country',
-						'orderby' 			=> 'title',
-						'order' 			=> 'ASC',
-						'post_status' 		=> 'publish'
-					) );
-					foreach( $countries as $country ):
-						$country_id = $country->ID;
-						$country_slug = $country->post_name;
-						$country_title = $country->post_title;
-						$page_url = get_permalink( get_page_by_path('support/sponsors')->ID );
-						$filter_url = query_url( 'from', $country_slug, $page_url );
-						echo '<div class="option">';
-						echo '<a href="' . $filter_url . '" data-value="' . $country_slug . '">';
-						echo $country_title;
-						echo '<div class="swap">';
-						echo '<div class="icon default"></div>';
-						echo '<div class="icon hover"></div>';
-						echo '</div>';
-						echo '</a>';
-						echo '</div>';
-					endforeach;
-					?>
+					<div class="filter-lists">
+						<div class="filter-list country <?php echo $slug ?>" data-filter="country">
+							<div class="options">
+							<?php
+							$countries = get_posts( array(
+								'posts_per_page'	=> -1,
+								'post_type'			=> 'country',
+								'orderby' 			=> 'title',
+								'order' 			=> 'ASC',
+								'post_status' 		=> 'publish'
+							) );
+							foreach( $countries as $country ):
+								$country_id = $country->ID;
+								$country_slug = $country->post_name;
+								$country_title = $country->post_title;
+								$page_url = get_permalink( get_page_by_path('support/sponsors')->ID );
+								$filter_url = query_url( 'from', $country_slug, $page_url );
+								echo '<div class="option">';
+								echo '<a href="' . $filter_url . '" data-value="' . $country_slug . '">';
+								echo $country_title;
+								echo '<div class="swap">';
+								echo '<div class="icon default"></div>';
+								echo '<div class="icon hover"></div>';
+								echo '</div>';
+								echo '</a>';
+								echo '</div>';
+							endforeach;
+							?>
+							</div>
+						</div>
 					</div>
 				</div>
 			</div>

@@ -42,6 +42,9 @@ section.single.resident {
 		@include large-fs;
 		text-align: center;
 	}
+	.caption {
+		@include small-fs;
+	}
 	.info {
 		width: calc(66.666% - 35px);
 		padding: 0 15px 30px 20px;

@@ -4,16 +4,13 @@
 	$title = $post->post_title;
 	$slug = $post->post_name;
 ?>
-
 <section  <?php section_attr( $id, $slug, 'about' ); ?>>
 	<?php get_template_part('partials/nav') ?>
 	<?php get_template_part('partials/side') ?>
 	<div class="content">
 		<h2 class="head"><?php echo $title ?></h2>
 
-		<?php
-			$description = get_field( 'description', $id );
-		?>
+		<?php $description = get_field( 'description', $id ); ?>
 
 		<div class="main">
 			<div class="module description">
@@ -36,7 +33,7 @@
 			?>
 			<div class="info module" id="contact">
 				<div class="half left">
-					<div class="address">
+					<div class="bullet address">
 						<?php echo $address ?>
 					</div>
 					<div class="bullet phone">
@@ -74,7 +71,7 @@
 			$history = get_field( 'history', $id );
 			if( $history ):
 				echo '<div class="module history" id="history">';
-				echo '<h4 class="title orange">History</h4>';
+				echo '<h3 class="title orange">History</h3>';
 				echo '<div class="text">';
 				echo $history;
 				echo '</div>';
@@ -121,7 +118,7 @@
 			<?php
 			if( get_field( 'staff', $id ) ):
 			echo '<div class="staff list half">';
-			echo '<h4 class="title orange">Staff</h4>';
+			echo '<h3 class="title orange">Staff</h3>';
 			echo '<ul>';
 			while( has_sub_field( 'staff', $id ) ):
 				$name = get_sub_field( 'name', $id );
@@ -136,7 +133,7 @@
 			endif;
 			if( get_field( 'board_members', $id ) ):
 			echo '<div class="board list half">';
-			echo '<h4 class="title orange">Board</h4>';
+			echo '<h3 class="title orange">Board</h3>';
 			echo '<ul>';
 			while( has_sub_field( 'board_members', $id ) ):
 				$name = get_sub_field( 'name', $id );

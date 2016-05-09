@@ -1,11 +1,11 @@
 <?php
 get_header();
 global $post;
-// $visit_page_id = get_page_by_path( 'visit' )->ID;
-// $post = get_post( $visit_page_id, OBJECT );
-// setup_postdata( $post );
-// get_template_part( 'sections/visit' );
-// wp_reset_postdata();
+$visit_page_id = get_page_by_path( 'visit' )->ID;
+$post = get_post( $visit_page_id, OBJECT );
+setup_postdata( $post );
+get_template_part( 'sections/visit' );
+wp_reset_postdata();
 
 get_template_part( 'sections/home' );
 

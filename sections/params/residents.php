@@ -17,8 +17,8 @@ if( $query_vars ):
 	$slug = $query_vars['pagename'];
 	$filter_param = $query_vars['filter'];
 	$page_param = $filter_param . '-residents';
-	if( $page_param == $slug || $post_type == 'sponsor' || $page_param == 'all-'.$slug ):
-		$page_type = $query_vars['pagetype'];
+	$page_type = $query_vars['pagetype'];
+	if( $page_param == $slug || $page_type == 'sponsor' || $page_param == 'all-'.$slug ):
 		$paged = $query_vars['paged'];
 		$post = get_page_by_path( $slug, OBJECT, 'page' );
 		$page_param = $slug;

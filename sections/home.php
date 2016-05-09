@@ -8,18 +8,16 @@ $home_id = get_page_by_path( 'home' )->ID;
 		<h2 class="head">
 			International Studio &amp; Curatorial Program
 		</h2>
-		<h3 class="title">
-			<?php
-			$events_id = get_page_by_path( 'events' )->ID;
-			$events_permalink = get_the_permalink( $events_id );
-			echo '<a href="' . $events_permalink . '">Events &amp; Exhibitions</a>';
-			?>
-		</h3>
 		<?php 
 		$sorted_events = array_slice( sort_upcoming_events(), 0, 3 );
 		$count = sizeof( $sorted_events );
 		$count_class = 'cols_' . $count;
 		if ( $count ):
+			echo '<h3 class="title">';
+			$events_id = get_page_by_path( 'events' )->ID;
+			$events_permalink = get_the_permalink( $events_id );
+			echo '<a href="' . $events_permalink . '">Events &amp; Exhibitions</a>';
+			echo '</h3>';
 			echo '<div class="events module shelves grid upcoming ' . $count_class . '">';
 			echo '<div class="eventsWrap">';
 			foreach( $sorted_events as $event ):
@@ -29,8 +27,6 @@ $home_id = get_page_by_path( 'home' )->ID;
 			endforeach;
 			echo '</div>';
 			echo '</div>';
-		else:
-			get_template_part( 'partials/no-posts' );
 		endif;
 		wp_reset_query();
 		?>
@@ -67,25 +63,35 @@ $home_id = get_page_by_path( 'home' )->ID;
 				echo '</div>';
 			endif;
 			echo '<div class="slides">';
-			while( has_sub_field( 'image_slider', $home_id ) ):
-				$image = get_sub_field( 'image', $home_id );
-		        $image_url = $image['url'];
-		        $image_id = $image['id'];
-		        $orientation = get_orientation( $image_id );
-		        $caption = label_art( $image_id );
-		        $image_url = $image['url'];
-		        $orientation = get_orientation( $image['id'] );
-		        echo '<div class="piece slide">';
-		        echo '<div class="image ' . $orientation . '">';
-		        echo '<div class="captionWrap">';
-		        echo '<img src="' . $image_url . '"/>';
-		        echo '<div class="caption">';
-		        echo $caption;
-		        echo '</div>';
-		        echo '</div>';
-		        echo '</div>';
-		        echo '</div>';
-			endwhile;
+			while ( have_rows( 'image_slider', $home_id ) ) : the_row();
+				$media_type = get_sub_field( 'media_type', $home_id );
+				$caption = label_art( $the_ID );
+
+        if( $media_type == 'video' ):
+        	$video = get_sub_field( 'vimeo_id', $home_id );
+	      	$orientation = 'landscape';
+	      else:
+	      	$image = get_sub_field( 'image', $home_id );
+	      	$image_id = $image['id'];
+	        $image_url = $image['url'];
+	        $orientation = get_orientation( $image['id'] );
+	      endif;
+	      
+        echo '<div class="piece slide">';
+        echo '<div class="image ' . $orientation . '">';
+        echo '<div class="captionWrap">';
+        if( $media_type == 'video' ):
+        	echo embed_vimeo( $video );
+        else:
+        	echo '<img src="' . $image_url . '"/>';
+       	endif;
+        echo '<div class="caption">';
+        echo $caption;
+        echo '</div>';
+        echo '</div>';
+        echo '</div>';
+        echo '</div>';
+	    endwhile;
 			echo '</div>';
 			echo '</div>';
 		endif;

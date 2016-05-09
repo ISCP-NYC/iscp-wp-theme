@@ -31,6 +31,11 @@
             pointer-events: none;
         }
     }
+    iframe {
+        max-width: 100%;
+        display: table;
+        margin: 0 auto 10px auto;
+    }
 }
 .image_slider {
     height: 600px;
@@ -87,6 +92,7 @@
         left: 0;
         margin: 0 !important;
         transition: left 500ms cubic-bezier(0.645, 0.045, 0.355, 1);
+        overflow: hidden;
         @extend .noselect;
         .slide {
             height: 100%;
@@ -119,6 +125,9 @@
                         padding: 20px 30px 0 30px;
                         display: block;
                         text-align: left;
+                    }
+                    iframe {
+                        max-width: 100%;
                     }
                 }
             }

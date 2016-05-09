@@ -1,0 +1,26 @@
+section.critics {
+	.shelves {
+		h3.name {
+			margin-right: 5px;
+			@include width('30% - 5px');
+		}
+		.value {
+			margin-right: 5px;
+			&.title {
+				@include width('30% - 5px');
+			}
+			&.institution {
+				@include width('30% - 5px');
+			}
+			&.years {
+				@include width('10% - 5px');
+				text-align: right !important;
+			}
+		}
+		@include small {
+			h3, .value {
+				width: 100% !important;
+			}
+		}
+	}
+}

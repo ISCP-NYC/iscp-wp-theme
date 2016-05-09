@@ -18,6 +18,11 @@ else:
 	$classes .= ' nothumb';
 endif;
 
+if( $post_type == 'country' ):
+	$residents_url = get_permalink( get_page_by_path( 'residents' )->ID);
+	$permalink = $residents_url . '?filter=all&from=' . $slug;
+endif;
+
 echo '<div class="result item shelf-item border-bottom ' . $classes . '">';
 echo '<div class="inner">';
 if( $permalink ):

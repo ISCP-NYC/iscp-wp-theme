@@ -3,13 +3,13 @@ section.sponsors, section.contributors {
 		.value {
 			margin-right: 5px;
 			&.name {
-				@include width('50% - 5px');
+				width: calc(50% - 5px) !important;
 			}
 			&.country {
-				@include width('25% - 5px');
+				width: calc(25% - 5px) !important;
 			}
 			&.website {
-				@include width('25% - 5px');
+				width: calc(25% - 5px) !important;
 				justify-content: flex-end;
 				a {
 					float: right;

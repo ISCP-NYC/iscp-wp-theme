@@ -6,7 +6,7 @@ $countries = get_countries( $resident_id );
 $countries_array = get_field( 'country', $resident_id );
 $name = get_the_title();
 $bio = get_field( 'bio', $resident_id );
-$website = get_field( 'website', $resident_id );
+$website = http( get_field( 'website', $resident_id ) );
 $studio_number = get_field( 'studio_number', $resident_id );
 $resident_type = get_field( 'resident_type', $resident_id );
 $residencies = array();
@@ -187,25 +187,34 @@ endif;
 			echo '<div class="cursor"></div>';
 			echo '<div class="images slides">';
 		    while ( have_rows( 'gallery' ) ) : the_row();
-		        $image = get_sub_field( 'image' );
-		        if( $image ):
-			        $image_url = $image['url'];
-			        $orientation = get_orientation( $image['id'] );
-			        $caption = label_art( $the_ID );
-			        echo '<div class="piece slide">';
-			        echo '<div class="image ' . $orientation . '">';
-			        echo '<div class="captionWrap">';
-			        echo '<img src="' . $image_url . '"/>';
-			        echo '<div class="caption">';
-			        echo $caption;
-			        echo '</div>';
-			        echo '</div>';
-			        echo '</div>';
-			        echo '</div>';
-			    endif;
+					$media_type = get_sub_field( 'media_type', $home_id );
+	        if( $media_type == 'video' ):
+	        	$video = get_sub_field( 'vimeo_id', $home_id );
+		      	$orientation = 'landscape';
+		      else:
+		      	$image = get_sub_field( 'image' );
+		      	$image_id = $image['id'];
+		        $image_url = $image['url'];
+		        $orientation = get_orientation( $image['id'] );
+		      endif;
+		      $caption = label_art( $the_ID );
+	        echo '<div class="piece slide">';
+	        echo '<div class="image ' . $orientation . '">';
+	        echo '<div class="captionWrap">';
+	        if( $media_type == 'video' ):
+	        	echo embed_vimeo( $video );
+	        else:
+	        	echo '<img src="' . $image_url . '"/>';
+	       	endif;
+	        echo '<div class="caption">';
+	        echo $caption;
+	        echo '</div>';
+	        echo '</div>';
+	        echo '</div>';
+	        echo '</div>';
 		    endwhile;
-		    echo '</div>';
-		    echo '</div>';
+	    echo '</div>';
+	    echo '</div>';
 		endif;
 		?>
 

@@ -320,20 +320,20 @@ h3, .small {
 		@include small-fs;
 	}
 }
+h4 {
+	@include medium-fs;
+	text-align: center;
+	padding: 5px 0 40px 0;
+	@include small {
+		padding: 5px 0 10px 0;
+		font-size: $small-fs !important;
+		line-height: $small-lh !important;
+	}
+}
 .content h4.title:first-child {
 	margin-bottom: 60px;
 	@include small {
 		margin-bottom: 0px;
-	}
-}
-h4, .small {
-	@include medium-fs;
-	&.title {
-		text-align: center;
-		padding: 3px 0;
-	}
-	@include medium {
-		@include small-fs;
 	}
 }
 .orange {color: $orange;}
@@ -422,6 +422,7 @@ section.login {
 @import 'sections/about';
 @import 'sections/apply';
 @import 'sections/black';
+@import 'sections/critics';
 @import 'sections/error';
 @import 'sections/events';
 @import 'sections/event';

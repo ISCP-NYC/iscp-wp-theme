@@ -27,6 +27,9 @@ header.main {
 		width: 100%;
 		height: calc(100% - 20px);
 		min-height: 500px;
+		@include small {
+			min-height: 0;
+		}
 		padding: 10px 0 !important;
 		background-color: $white;
 		transform: translateY(calc(-100% - 150px));

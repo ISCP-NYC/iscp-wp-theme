@@ -100,13 +100,6 @@ switch($post_type) {
 
 		//older journal posts
 		insert_neighbor_journal_posts( $this_post_id, 'old', 1 );
-
-		//all journal posts
-		$journal_page_id = get_page_by_path('journal')->ID;
-		$post = get_post( $journal_page_id, OBJECT );
-		setup_postdata( $post );
-		get_template_part( 'sections/journals' );
-		wp_reset_postdata();
 		break;
 
 	default:

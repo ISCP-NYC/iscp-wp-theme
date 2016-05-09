@@ -61,10 +61,7 @@ section#search, section#error {
 				}
 				&.nothumb {
 					.title {
-						width: calc(80% - 20px);	
-					}
-					.post-type {
-						width: 20%;
+						width: calc(80%);	
 					}
 				}
 				@include small {

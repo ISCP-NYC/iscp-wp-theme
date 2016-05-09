@@ -4,7 +4,7 @@ $id = $post->ID;
 $slug = $post->post_name;
 $title = $post->post_title;
 ?>
-<section <?php section_attr( $id, $slug, 'sponsors' ); ?> data-page="<?php echo $paged ?>">
+<section <?php section_attr( $id, $slug, 'faq' ); ?> data-page="<?php echo $paged ?>">
 	<?php get_template_part( 'partials/nav' ) ?>
 	<?php get_template_part( 'partials/side' ) ?>
 	<div class="content">
@@ -18,9 +18,9 @@ $title = $post->post_title;
 					$question = get_sub_field( 'question', $id );
 					$answer = get_sub_field( 'answer', $id );
 					echo '<div class="question module">';
-					echo '<h4 class="title">';
+					echo '<h3 class="title">';
 					echo $question;
-					echo '</h4>';
+					echo '</h3>';
 					echo '<div class="answer">';
 					echo $answer;
 					echo '</div>';

@@ -7,10 +7,10 @@
 	$id = get_the_ID();
 	$slug = get_post( $post )->post_name;
 	$title = get_the_title();
-	$section_classes = 'resident-resource';
+	$section_classes = 'greenroom';
 ?>
 
-<section <?php section_attr( $id, $slug, $section_classes ); ?>>
+<section <?php section_attr( $id, $slug, $section_classes, $title ); ?>>
 	<?php get_template_part('partials/nav') ?>
 	<?php get_template_part('partials/side') ?>
 	<div class="content">
@@ -25,7 +25,7 @@
 			while ( have_rows('item') ) : the_row();
 				$title = get_sub_field( 'title' );
 				$text = get_sub_field( 'text' );
-				echo '<div class="module item" id="' . $index . '">';
+				echo '<div class="module item">';
 				echo '<h3 class="title">' . $title . '</h3>';
 				echo $text;
 				echo '</div>';

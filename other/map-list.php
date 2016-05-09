@@ -1,6 +1,8 @@
 <?php
 $country = get_page_by_path($country_slug, OBJECT, 'country');
 $country_id = $country->ID;
+$residents_id = get_page_by_path( 'residents' )->ID;
+$residents_url = get_permalink( $residents_id );
 $country_query = array(
 	'key' => 'country',
 	'value' => '"' . $country_id . '"',
@@ -26,6 +28,8 @@ if( have_posts() ):
 		$url = get_permalink( $id );
 		$end_date = new DateTime( get_resident_end_date( $id ) );
 		$year = $end_date->format('Y');
+		$year_url = $residents_url . '?filter=all&date=' . $year;
+		$year = '<a href="' . $year_url . '">' . $year . '</a>';
 		$bio = get_field( 'bio', $resident_id );
 		echo '<div class="row shelf-item resident">';
 		echo '<div class="inner">';

@@ -147,6 +147,8 @@ function load_more() {
     	$post_type = 'residents';
     elseif( $post_type == 'journal' ):
     	$post_type .= 's';
+    elseif( $post_type == 'visiting-critics' ):
+    	$post_type = 'critics';
     endif;
     include( locate_template( 'sections/loops/' . $post_type . '.php' ) );
     die();
@@ -616,7 +618,7 @@ function get_event_status( $id ) {
 	$today = $today->format('Ymd');
 	$start_date = get_field( 'start_date', $id );
 	$end_date = get_field( 'end_date', $id );
-	if( $start_date > $today || $end_date > $today ):
+	if( $start_date >= $today || $end_date >= $today ):
 		$status = 'upcoming';
 	else:
 		$status = 'past';
@@ -651,7 +653,7 @@ function sort_upcoming_events() {
 	);
 	$upcoming_events_query = new WP_Query( $events_query );
 	$upcoming_events_posts = $upcoming_events_query->posts;
-	$long_events = array();
+	$current_events = array();
 	$events = array();
 	$sorted_events = array();
 	$upcoming_events = array();
@@ -670,15 +672,23 @@ function sort_upcoming_events() {
 	foreach( $later_events as $event ):
 		$event_id = $event->ID;
 		$event_ed = get_field( 'end_date', $event_id );
-		if( $event_ed ):
-			array_push( $long_events, $event );
+		$event_sd = get_field( 'start_date', $event_id );
+		if( $event_ed && $event_sd < $today ):
+			array_push( $current_events, $event );
 		else:
 			array_push( $events, $event );
 		endif;
 	endforeach;
 
-	foreach( array_reverse( $long_events ) as $long_event ):
-		array_push( $sorted_events, $long_event );
+	usort($current_events, function($a, $b) {
+	   return strcasecmp( 
+        	get_field( 'end_date', $a->ID ), 
+        	get_field( 'end_date', $b->ID ) 
+    	);
+	});
+
+	foreach( $current_events as $current_event ):
+		array_push( $sorted_events, $current_event );
 	endforeach;
 
 	foreach( $events as $event ):
@@ -690,9 +700,6 @@ function sort_upcoming_events() {
 
 function section_attr( $id, $slug, $classes, $title = null ) {
 	$classes .= ' static';
-	echo 'class="' . $slug . ' ' . $classes . '"';
-	echo 'id="' . $slug . '" '; 
-	echo 'data-slug="' . $slug . '" ';
 	if( $id ):
 		echo 'data-id="' . $id . '" ';
 		$permalink = get_the_permalink( $id );
@@ -703,14 +710,22 @@ function section_attr( $id, $slug, $classes, $title = null ) {
 			$permalink .= '?filter=past';
 		elseif( $slug === 'residents' ):
 			$permalink .= '?filter=all';
+			$classes .= ' past';
+		elseif( $slug === 'home' ):
+			$permalink = site_url();
 		endif;
 
 		if( !$title ):
 			$title = get_the_title( $id );
 		endif;
-
+		echo 'data-permalink="' . $permalink . '" ';
+	elseif( $slug === 'home' ):
+		$permalink = site_url();
 		echo 'data-permalink="' . $permalink . '" ';
 	endif;
+	echo 'class="' . $slug . ' ' . $classes . '"';
+	echo 'id="' . $slug . '" '; 
+	echo 'data-slug="' . $slug . '" ';
 	if( $slug == 'search'):
 		$title = 'Search results for "' . $title . '"';
 	endif;
@@ -1030,13 +1045,11 @@ function makeClickableLinks( $s ) {
 function get_tweets( $count ) {
 	$about = get_page_by_path( 'about' );
 	$handle = get_field( 'twitter', $about );
-
 	include_once( get_template_directory() . '/libraries/twitteroauth/twitteroauth.php' );
-
-	$twitter_customer_key           = 'w6jdx2IiW59vScHvUyYR6LJ5i';
-	$twitter_customer_secret        = '4kYwLxdDXyIPi5ndLAht3Ln1oFX3iRTHxYqakghmeAGEVglTpY';
-	$twitter_access_token           = '4343711140-4bb6E3bLjnIChxGwtD71disJm3C6H3Oo2u4qXFX';
-	$twitter_access_token_secret    = '7NVIEwXODgcK6hB46UheZG9bPkFT63Ck8Fbwi4UaKzl1T';
+	$twitter_customer_key = 'w6jdx2IiW59vScHvUyYR6LJ5i';
+	$twitter_customer_secret = '4kYwLxdDXyIPi5ndLAht3Ln1oFX3iRTHxYqakghmeAGEVglTpY';
+	$twitter_access_token = '4343711140-4bb6E3bLjnIChxGwtD71disJm3C6H3Oo2u4qXFX';
+	$twitter_access_token_secret = '7NVIEwXODgcK6hB46UheZG9bPkFT63Ck8Fbwi4UaKzl1T';
 
 	$connection = new TwitterOAuth($twitter_customer_key, $twitter_customer_secret, $twitter_access_token, $twitter_access_token_secret);
 
@@ -1074,6 +1087,44 @@ function get_tweets( $count ) {
 
 	echo '</div>';
 	echo '</div>';
+}
+
+function embed_vimeo( $id ) {
+	$width = '640';
+	$height = '360';		
+	echo '<iframe src="http://player.vimeo.com/video/'.$id.'?title=0&amp;byline=0&amp;portrait=0&amp;badge=0&amp;color=ffffff" width="'.$width.'" height="'.$height.'" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>';
+}
+
+function get_insta() {
+	// $about = get_page_by_path( 'about' );
+	// $handle = get_field( 'instagram', $about );
+ //    $client_id = '562c31d1a21644339b465563af5c2901';
+ //    $url = 'https://api.instagram.com/v1/users/self/media/recent?client_id='.$client_id;
+ // 	echo $url;
+ //    $all_result  = processURL($url);
+ //    $decoded_results = json_decode($all_result, true);
+ 
+    // echo '<pre>';
+    // print_r($decoded_results);
+    // exit;
+    // foreach($decoded_results['data'] as $item){
+        // $image_link = $item['images']['thumbnail']['url'];
+        // echo $image_link;
+        // echo '<img src="'.$image_link.'" />';
+    // }
+}
+function processURL($url) {
+    // $ch = curl_init();
+    // curl_setopt_array($ch, array(
+    // CURLOPT_URL => $url,
+    // CURLOPT_RETURNTRANSFER => true,
+    // CURLOPT_SSL_VERIFYPEER => false,
+    // CURLOPT_SSL_VERIFYHOST => 2
+    // ));
+
+    // $result = curl_exec($ch);
+    // curl_close($ch);
+    // return $result;
 }
 
 function get_event_date( $id ) {
@@ -1229,6 +1280,13 @@ function pretty_url( $url ) {
 	$url = preg_replace( '#^www\.(.+\.)#i', '$1', $url );
 	$url = preg_replace( '{/$}', '', $url );
 	return $url;
+}
+
+function http($url) {
+  if (!preg_match("~^(?:f|ht)tps?://~i", $url)) {
+      $url = "http://" . $url;
+  }
+  return $url;
 }
 
 function label_art() {
@@ -1666,6 +1724,7 @@ function reorder_menu_items( $menu_order ) {
         'edit.php?post_type=contributor',
         'edit.php?post_type=country',
         'edit.php?post_type=page',
+        'edit.php?post_type=critic',
         'upload.php'
     );
 }
@@ -1762,3 +1821,14 @@ function get_meta_description( $id ) {
 		echo $value;
 	endif;
 }
+
+function custom_style_options($arr){
+    $arr['block_formats'] = 'Subheading=h4;';
+    return $arr;
+}
+add_filter('tiny_mce_before_init', 'custom_style_options');
+
+function add_editor_stylesheet() {
+    add_editor_style( 'assets/styles/editor.css' );
+}
+add_action( 'init', 'add_editor_stylesheet' );
