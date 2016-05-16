@@ -355,7 +355,7 @@ function event_column_select() {
   	global $pagenow;
   	if ( is_admin() && $_GET['post_type'] == 'event' && $pagenow == 'edit.php' ) {
 
-	    $event_types = array( 'iscp-talk', 'exhibition', 'open-studios', 'event', 'off-site-project' );
+	    $event_types = array( 'iscp-talk', 'exhibition', 'open-studios', 'event', 'offsite-project' );
 	    echo '<select name="event_type">';
 	      echo '<option value="">' . __( 'Event Type', 'textdomain' ) . '</option>';
 	    foreach( $event_types as $value ) {
@@ -1269,8 +1269,8 @@ function pretty( $string ) {
 		case 'open-studios':
 			return 'Open Studios';
 			break;
-		case 'off-site-project':
-			return 'Off-Site Project';
+		case 'offsite-project':
+			return 'Offsite Project';
 			break;
 	}
 }

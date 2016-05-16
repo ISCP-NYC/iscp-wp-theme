@@ -6,7 +6,7 @@ $year_param = $query_vars['date'];
 <div class="filter-list type <?php echo $slug ?>" data-filter="type">
 	<div class="options">
 		<?php
-		$event_types = array( 'exhibition', 'off-site-project', 'iscp-talk', 'open-studios', 'events' );
+		$event_types = array( 'exhibition', 'offsite-project', 'iscp-talk', 'open-studios', 'events' );
 		foreach( $event_types as $event_type ):
 			$event_type_count = get_event_count( 'type', $event_type );
 			if( $event_type_count ):

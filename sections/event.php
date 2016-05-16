@@ -18,6 +18,7 @@ $rsvp = get_field( 'rsvp', $id );
 $venue = get_field( 'venue_name', $id );
 $location = get_field( 'venue_location', $id );
 $time = get_field( 'time', $id );
+$open_hours = get_field( 'open_hours', $id );
 $opening_reception = new DateTime( get_field( 'opening_reception', $id ) );
 $opening_reception = $opening_reception->format('M d, Y');
 $opening_reception_hours = get_field( 'opening_reception_hours', $id );
@@ -127,7 +128,7 @@ $today = $today->format('Y-m-d H:i:s');
 			?>
 			<div class="bullets">	
 				<?php
-				if( $event_type == 'exhibition' || $event_type == 'open-studios' || $event_type == 'off-site-project' ):
+				if( $event_type == 'exhibition' || $event_type == 'open-studios' || $event_type == 'offsite-project' ):
 					if( $opening_reception ):
 						echo '<div class="bullet">Opening Reception: ';
 						echo $opening_reception;
@@ -140,7 +141,10 @@ $today = $today->format('Y-m-d H:i:s');
 				if( $time ):
 					echo '<div class="bullet">' . $time . '</div>';
 				endif;
-				if( $event_type == 'off-site-project' ):
+				if( $open_hours ):
+					echo '<div class="bullet">Open Hours: ' . $open_hours . '</div>';
+				endif;
+				if( $event_type == 'offsite-project' ):
 					if( $venue ):
 						echo '<div class="bullet">' . $venue . '</div>';
 					endif;

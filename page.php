@@ -5,7 +5,7 @@
 	$parent = $post->post_parent;
 	$parent_slug = get_post( $parent )->post_name;
 	$resident_types = array( 'current-residents', 'past-residents' );
-	$event_types = array( 'events', 'exhbitions', 'iscp-talks', 'off-site-projects', 'open-studios' );
+	$event_types = array( 'events', 'exhbitions', 'iscp-talks', 'offsite-projects', 'open-studios' );
 	
 	if( $page_slug == 'current-residents' ):
 
