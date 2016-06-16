@@ -139,9 +139,9 @@
 
 		get_template_part( 'sections/faq' );
 
-	elseif( $page_slug == 'internships' ):
+	elseif( $parent_slug == 'about' ):
 
-		get_template_part( 'sections/internships' );
+		get_template_part( 'sections/page' );
 
 	elseif( $page_slug == 'greenroom'):
 

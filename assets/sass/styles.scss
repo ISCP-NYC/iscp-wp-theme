@@ -395,6 +395,10 @@ h4 {
 .mobileOnly {
 	display: none;
 }
+.aligncenter {
+	display: table;
+	margin: auto;
+}
 section.login {
 	background: $orange;
 	.login {
