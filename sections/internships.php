@@ -3,15 +3,10 @@ global $post;
 $id = $post->ID;
 $title = $post->post_title;
 $slug = $post->post_name;
+$content = $post->post_content;
 $description = get_field( 'description', $id );
-if( !$description ):
-	$description = get_post( $id )->post_content;
-	// $content = $content_post;
-	$description = apply_filters('the_content', $description);
-	// $description = str_replace(']]>', ']]&gt;', $content);
-endif;
 ?>
-<section  <?php section_attr( $id, $slug, $slug ); ?>>
+<section  <?php section_attr( $id, $slug, 'internships' ); ?>>
 	<?php get_template_part('partials/nav') ?>
 	<?php get_template_part('partials/side') ?>
 	<div class="content">

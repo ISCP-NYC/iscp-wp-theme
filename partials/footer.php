@@ -114,6 +114,7 @@
 							<div class="title">Site Credits</div>
 		    			<div class="sub-menu">
 		    				<div>Design by <a href="http://othermeans.us" target="_blank">Other Means</a></div>
+		    				<div>Development by <a href="http://coreytegeler.com" target="_blank">Corey Tegeler</a></div>
 		    			</div>
 		    		</div>
 		    	</div>

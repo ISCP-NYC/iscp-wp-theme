@@ -210,9 +210,10 @@ $today = $today->format('Y-m-d H:i:s');
 				echo '<div class="cursor"></div>';
 				echo '<div class="images slides">';
 			    while ( have_rows( 'gallery' ) ) : the_row();
-						$media_type = get_sub_field( 'media_type', $home_id );
+						$media_type = get_sub_field( 'media_type' );
+						$external_link = get_sub_field( 'external_link' );
 		        if( $media_type == 'video' ):
-		        	$video = get_sub_field( 'vimeo_id', $home_id );
+		        	$video = get_sub_field( 'vimeo_id' );
 			      	$orientation = 'landscape';
 			      else:
 			      	$image = get_sub_field( 'image' );
@@ -227,7 +228,13 @@ $today = $today->format('Y-m-d H:i:s');
 		        if( $media_type == 'video' ):
 		        	echo embed_vimeo( $video );
 		        else:
-		        	echo '<img src="' . $image_url . '"/>';
+		        	if( $external_link ):
+		        		echo '<a href="' . $external_link . '" target="_blank">';
+			        		echo '<img src="' . $image_url . '"/>';
+			        	echo '</a>';
+		        	else:
+			        	echo '<img src="' . $image_url . '"/>';
+			        endif;
 		       	endif;
 		        echo '<div class="caption">';
 		        echo $caption;

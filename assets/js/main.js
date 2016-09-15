@@ -1072,12 +1072,12 @@ function getParam(paramType, url) {
     return decodeURIComponent(results[2].replace(/\+/g, " "));
 }
 function getParams(url) {
-	if (!url) url = window.location.href;
-    var params = {}, hash;
-    var hashes = url.slice(url.indexOf('?') + 1).split('&');
+	if (!url) url = window.location.href
+    var params = {}, hash
+    var hashes = url.slice(url.indexOf('?') + 1).split('&')
     for(var i = 0; i < hashes.length; i++) {
-        hash = hashes[i].split('=');
-        params[hash[0]] = hash[1];
+      hash = hashes[i].split('=')
+      params[hash[0]] = hash[1]
     }
     return params;
 }
@@ -1381,6 +1381,9 @@ $('body').on('click', '.gallery:not(.full) img', function() {
 	var index = $(this).parents('.slide').index();
 	var gallery = $(this).parents('.gallery');
 	var thisImage = this;
+	if($(thisImage).parent().is('a')) {
+		return;
+	}
 	$(thisImage).addClass('clicked').transition({opacity:0}, 500, function() {
 		$(gallery).attr('data-show', index).addClass('full resizing image_slider').css({'cursor':'none'});
 		var cursor = $(gallery).find('.cursor');

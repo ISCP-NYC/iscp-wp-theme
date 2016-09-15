@@ -63,7 +63,13 @@
 				</div>
 				<div class="half right">
 					<a class="bullet" href="<?php echo $directions ?>" target="_blank">Map &amp; Directions</a>
-					<a class="bullet" href="<?php echo $internships_permalink ?>">Internships</a>
+					
+					<?php
+					$children = query_posts(array('post_parent' => $id, 'post_type' => 'page'));
+					foreach( $children as $child ):
+						echo '<a class="bullet" href="' . get_permalink( $child->ID ) . '">' . $child->post_title . '</a>';
+					endforeach;
+					?>					
 				</div>
 			</div>
 

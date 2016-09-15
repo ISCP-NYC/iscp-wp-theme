@@ -23,6 +23,10 @@
         }
     }
     &:not(.full) {
+        a {
+            display: table;
+            margin: auto;
+        }
         img {
             cursor: none !important;
         }
@@ -107,6 +111,10 @@
             .image {
                 width: auto;
                 width: 100%;
+                a {
+                    display: table;
+                    margin: auto;
+                }
                 img {
                     width: auto;
                     height: auto;

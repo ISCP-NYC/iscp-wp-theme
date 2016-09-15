@@ -110,10 +110,15 @@ endif;
 
 if( $sponsor_param ):
 	$sponsor_query = array(
-		'key' => 'residency_dates_0_sponsors',
-		'value' => '"' . $sponsor_id . '"',
-		'compare' => 'LIKE'
+		'relation' => 'OR'
 	);
+	for($i = 0; $i < 10; $i++) {
+		$sponsor_query[] = array(
+			'key' => 'residency_dates_' . $i . '_sponsors',
+			'value' => '"' . $sponsor_id . '"',
+			'compare' => 'LIKE'
+		);
+	}
 endif;
 
 if( $type_param ):
@@ -128,10 +133,15 @@ endif;
 if( $post_type == 'sponsor' || $page_type == 'sponsor' ):
 	$sponsor_id = get_page_by_path( $slug, OBJECT, 'sponsor' )->ID;
 	$sponsor_query = array(
-		'key' => 'residency_dates_0_sponsors',
-		'value' => '"' . $sponsor_id . '"',
-		'compare' => 'LIKE'
+		'relation' => 'OR'
 	);
+	for($i = 0; $i < 10; $i++) {
+		$sponsor_query[] = array(
+			'key' => 'residency_dates_' . $i . '_sponsors',
+			'value' => '"' . $sponsor_id . '"',
+			'compare' => 'LIKE'
+		);
+	}
 endif;
 $query = array(
 	'post_type' => 'resident',

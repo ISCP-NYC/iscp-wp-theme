@@ -26,6 +26,13 @@ if( $events_section == 'past' ):
 		$year_end = $year_param . '1231';
 		$year_range = array( $year_begin, $year_end );
 		$year_query = array(
+			'relation' => 'OR',
+			array(
+				'key' => 'start_date',
+				'type' => 'DATE',
+				'value' => $year_range,
+				'compare' => 'BETWEEN'
+			),
 			array(
 				'key' => 'end_date',
 				'type' => 'DATE',
@@ -87,7 +94,6 @@ $events_query = array(
 		$filter_query
 	)
 );
-
 $upcoming_ids = array();
 $events = new WP_Query( $events_query );
 $GLOBALS['wp_query'] = $events;

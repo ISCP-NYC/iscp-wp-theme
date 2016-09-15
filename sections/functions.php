@@ -1,27 +1,61 @@
 <?php
+/**
+ * Twenty Fifteen functions and definitions
+ *
+ * Set up the theme and provides some helper functions, which are used in the
+ * theme as custom template tags. Others are attached to action and filter
+ * hooks in WordPress to change core functionality.
+ *
+ * When using a child theme you can override certain functions (those wrapped
+ * in a function_exists() call) by defining them first in your child theme's
+ * functions.php file. The child theme's functions.php file is included before
+ * the parent theme's file, so the child theme functions would be used.
+ *
+ * @link https://codex.wordpress.org/Theme_Development
+ * @link https://codex.wordpress.org/Child_Themes
+ *
+ * Functions that are not pluggable (not wrapped in function_exists()) are
+ * instead attached to a filter or action hook.
+ *
+ * For more information on hooks, actions, and filters,
+ * {@link https://codex.wordpress.org/Plugin_API}
+ *
+ */
+
+/**
+ * JavaScript Detection.
+ *
+ * Adds a `js` class to the root `<html>` element when JavaScript is detected.
+ *
+ * @since Twenty Fifteen 1.1
+ */
 function twentyfifteen_javascript_detection() {
 	echo "<script>(function(html){html.className = html.className.replace(/\bno-js\b/,'js')})(document.documentElement);</script>\n";
 }
 add_action( 'wp_head', 'twentyfifteen_javascript_detection', 0 );
 
+/**
+ * Enqueue scripts and styles.
+ *
+ * @since Twenty Fifteen 1.0
+ */
 function iscp_scripts() {
-	global $post;
 	wp_enqueue_style( 'style', get_template_directory_uri() . '/assets/css/styles.css' );
 	wp_register_script( 'transit', get_template_directory_uri() . '/assets/js/jquery.transit.min.js', array( 'jquery' ) );
 	wp_register_script( 'jquery-ui', get_template_directory_uri() . '/assets/js/jquery-ui.min.js', array( 'jquery' ) );
-	wp_register_script( 'masonry', get_template_directory_uri() . '/assets/js/masonry.pkgd.min.js', array( 'jquery' ) );
 	wp_register_script( 'imagesloaded', get_template_directory_uri() . '/assets/js/imagesloaded.pkgd.min.js', array( 'jquery' ) );
-	wp_register_script( 'clipboard', get_template_directory_uri() . '/assets/js/clipboard.min.js', array( 'jquery' ) );
+	wp_register_script( 'masonry', get_template_directory_uri() . '/assets/js/masonry.pkgd.min.js', array( 'jquery' ) );
 	wp_register_script( 'main', get_template_directory_uri() . '/assets/js/main.js', array( 'jquery', 'masonry', 'transit', 'jquery-ui' ) );
 	wp_enqueue_script( 'webglearth', 'http://www.webglearth.com/v2/api.js' );
 	wp_enqueue_script( 'transit' );
 	wp_enqueue_script( 'jquery-ui' );
 	wp_enqueue_script( 'masonry' );
 	wp_enqueue_script( 'imagesloaded' );
-	wp_enqueue_script( 'clipboard' );
 	wp_enqueue_script( 'main' );
+	global $post;
 	$page_slug = $post->post_name;
-	if( $page_slug == 'map' ):
+	$with_map = array('map', 'past-residents', 'current-residents');
+	if(in_array( $page_slug, $with_map ) ):
 		$countries_query = array(
 			'post_type' => 'country',
 			'posts_per_page' => -1,
@@ -112,8 +146,6 @@ function load_more() {
     	$post_type = 'residents';
     elseif( $post_type == 'journal' ):
     	$post_type .= 's';
-    elseif( $post_type == 'visiting-critics' ):
-    	$post_type = 'critics';
     endif;
     include( locate_template( 'sections/loops/' . $post_type . '.php' ) );
     die();
@@ -175,8 +207,7 @@ function filter_items() {
     elseif( $post_type == 'journal' ):
     	$post_type .= 's';
     endif;
-    $template = locate_template( 'sections/loops/' . $post_type . '.php' );
-		include( $template );
+    include( locate_template( 'sections/loops/' . $post_type . '.php' ) );
     die();
 }
 add_action( 'wp_ajax_nopriv_filter_items', 'filter_items' );
@@ -318,7 +349,7 @@ function event_column_select() {
   	global $pagenow;
   	if ( is_admin() && $_GET['post_type'] == 'event' && $pagenow == 'edit.php' ) {
 
-	    $event_types = array( 'iscp-talk', 'exhibition', 'open-studios', 'event', 'offsite-project' );
+	    $event_types = array( 'iscp-talk', 'exhibition', 'open-studios', 'event', 'off-site-project' );
 	    echo '<select name="event_type">';
 	      echo '<option value="">' . __( 'Event Type', 'textdomain' ) . '</option>';
 	    foreach( $event_types as $value ) {
@@ -533,7 +564,7 @@ function is_current( $id ) {
 	$resident = get_post( $id );
 	$end_date = get_resident_end_date( $id );
 	if($end_date):
-		if($end_date >= $today):
+		if($end_date > $today):
 			return true;
 		else:
 			return false;
@@ -581,88 +612,18 @@ function get_event_status( $id ) {
 	$today = $today->format('Ymd');
 	$start_date = get_field( 'start_date', $id );
 	$end_date = get_field( 'end_date', $id );
-	if( $start_date >= $today || $end_date >= $today ):
+	if( $start_date > $today || $end_date > $today ):
 		$status = 'upcoming';
 	else:
 		$status = 'past';
 	endif;
 	return $status;
 }
-function sort_upcoming_events() {
-	$today = date('Ymd');
-	$next_week = date('Ymd', strtotime('+1 week'));
-	$events_query = array(
-		'post_type' => 'event',
-		'posts_per_page' => -1,
-		'orderby' => 'meta_value post_title',
-		'order' => 'ASC',
-		'post_status' => 'publish',
-		'meta_query' => array(
-			array( 'key' => 'start_date' ),
-			array(
-				'relation' => 'OR',
-				array(
-					'key' => 'start_date',
-					'compare' => '>=',
-					'value' => $today
-				),
-				array(
-					'key' => 'end_date',
-					'compare' => '>=',
-					'value' => $today
-				)
-			)
-		)
-	);
-	$upcoming_events_query = new WP_Query( $events_query );
-	$upcoming_events_posts = $upcoming_events_query->posts;
-	$current_events = array();
-	$events = array();
-	$sorted_events = array();
-	$upcoming_events = array();
-	$later_events = array();
-
-	foreach( $upcoming_events_posts as $event ):
-		$event_id = $event->ID;
-		$event_sd = get_field( 'start_date', $event_id );
-		if( ( $event_sd >= $today ) && ( $event_sd <= $next_week ) ):
-			array_push( $sorted_events, $event );
-		else:
-			array_push( $later_events, $event );
-		endif;
-	endforeach;
-
-	foreach( $later_events as $event ):
-		$event_id = $event->ID;
-		$event_ed = get_field( 'end_date', $event_id );
-		$event_sd = get_field( 'start_date', $event_id );
-		if( $event_ed && $event_sd < $today ):
-			array_push( $current_events, $event );
-		else:
-			array_push( $events, $event );
-		endif;
-	endforeach;
-
-	usort($current_events, function($a, $b) {
-	   return strcasecmp( 
-        	get_field( 'end_date', $a->ID ), 
-        	get_field( 'end_date', $b->ID ) 
-    	);
-	});
-
-	foreach( $current_events as $current_event ):
-		array_push( $sorted_events, $current_event );
-	endforeach;
-
-	foreach( $events as $event ):
-		array_push( $sorted_events, $event );
-	endforeach;
-
-	return $sorted_events;
-}
-
 function section_attr( $id, $slug, $classes, $title = null ) {
 	$classes .= ' static';
+	echo 'class="' . $slug . ' ' . $classes . '"';
+	echo 'id="' . $slug . '" '; 
+	echo 'data-slug="' . $slug . '" ';
 	if( $id ):
 		echo 'data-id="' . $id . '" ';
 		$permalink = get_the_permalink( $id );
@@ -671,28 +632,14 @@ function section_attr( $id, $slug, $classes, $title = null ) {
 			$permalink .= '?filter=current';
 		elseif( $slug === 'past-residents' ):
 			$permalink .= '?filter=past';
-		elseif( $slug === 'residents' ):
-			$permalink .= '?filter=all';
-			$classes .= ' past';
-		elseif( $slug === 'home' ):
-			$permalink = site_url();
 		endif;
 
 		if( !$title ):
 			$title = get_the_title( $id );
 		endif;
 		echo 'data-permalink="' . $permalink . '" ';
-	elseif( $slug === 'home' ):
-		$permalink = site_url();
-		echo 'data-permalink="' . $permalink . '" ';
+		echo 'data-title="' . $title . '"';
 	endif;
-	echo 'class="' . $slug . ' ' . $classes . '"';
-	echo 'id="' . $slug . '" '; 
-	echo 'data-slug="' . $slug . '" ';
-	if( $slug == 'search'):
-		$title = 'Search results for "' . $title . '"';
-	endif;
-	echo 'data-title="' . $title . '"';
 }
 function get_start_date_value( $id ) {
 	$post_type = get_post_type( $id );
@@ -746,21 +693,22 @@ function get_neighbor_journal_posts() {
 add_action( 'wp_ajax_nopriv_get_neighbor_journal_posts', 'get_neighbor_journal_posts' );
 add_action( 'wp_ajax_get_neighbor_journal_posts', 'get_neighbor_journal_posts' );
 
-function insert_neighbor_journal_posts( $post_id, $direction, $count = 1 ) {
+function insert_neighbor_journal_posts( $post_id, $direction, $count = 3 ) {
 	$post = get_post( $post_id );
 	$post_date = $post->post_date;
 
 	if( $direction == 'new' ):
+		$compare = '>';
 		$order = 'ASC';
 		$when = 'after';
 	elseif ( $direction == 'old' ):
+		$compare = '<';
 		$order = 'DESC';
 		$when = 'before';
 	endif;
 
 	$posts_args = array(
 		'post_type' => 'journal',
-		'post_status' => 'publish',
 		'posts_per_page' => $count,
 		'type' => 'DATE',
 		'date_query' => array( $when => $post_date ),
@@ -788,57 +736,60 @@ function insert_neighbor_journal_posts( $post_id, $direction, $count = 1 ) {
 	wp_reset_query();
 }
 
-function get_neighbor_events() {
-	$query_vars = json_decode( stripslashes( $_POST['query_vars'] ), true );
-    $post_id = $query_vars['id'];
-    $direction = $query_vars['direction'];
-    $not_in = $query_vars['not_in'];
-    $count = 1;
-	insert_neighbor_events( $post_id, $direction, $count, $not_in );   	
-    die();
-}
-add_action( 'wp_ajax_nopriv_get_neighbor_events', 'get_neighbor_events' );
-add_action( 'wp_ajax_get_neighbor_events', 'get_neighbor_events' );
 
-
-function insert_neighbor_events( $event_id, $direction, $count = 1, $not_in = array() ) {
-	$event = get_post( $event_id );
+function insert_neighbor_events( $event_id, $direction, $count = 3 ) {
+	$post = get_post( $event_id );
 	$event_date = get_post_meta( $event_id , 'start_date', true );
 	$today = new DateTime();
 	$today = $today->format( 'Ymd' );
-	$not_in[] = $event_id;
-	if( $direction == 'prev' ):
-		$compare = '>';
-		$order = 'ASC';
-	elseif ( $direction == 'next' ):
-		$compare = '<=';
+	if( $direction == 'new' ):
+		// $compare = '>=';
+		// $order = 'ASC';
+		// $when = 'after';
+	elseif ( $direction == 'old' ):
+		// $compare = '<=';
 		$order = 'DESC';
+		$when = 'before';
 	endif;
 
-	$events_args = array(
-		'post_type' => 'event',
-		'posts_per_page' => $count,
-		'meta_key' => 'start_date',
-		'orderby' => 'meta_value_num post_title',
-		'order' => $order,
-		'post__not_in' => $not_in,
-		'meta_query' => array(
-			'type' => 'DATE',
+	$date_query = array(
+		'relation' => 'AND',
+		array(
 			'key' => 'start_date',
-			'compare' => $compare,
-			'value' => $event_date
+			'compare' => '<',
+			'value' => $today
+		),
+		array(
+			'key' => 'end_date',
+			'compare' => '<',
+			'value' => $today
 		)
 	);
 
-	$events = new WP_Query( $events_args );
-	$last_page = $events->max_num_pages;
+	$posts_args = array(
+		'post_type' => 'event',
+		'posts_per_page' => $count,
+		'type' => 'DATE',
+		'date_query' => array( $when => $event_date ),
+		'post__not_in' => array( $event_id ),
+		'orderby' => 'meta_value post_title',
+		'order' => $order,
+		'post_status' => 'publish',
+		'meta_query' => array(
+			array( 'key'=>'start_date' ),
+			$date_query
+		)
+	);
+	$posts = new WP_Query( $posts_args );
+	$last_page = $posts->max_num_pages;
 
-	if ( $direction == 'prev' ):
-		$reverse_events = array_reverse( $events->posts );
-		$events->posts = $reverse_events;
+	if ( $direction == 'new' ):
+		$reverse_posts = array_reverse( $posts->posts );
+		$posts->posts = $reverse_posts;
 	endif;
-	if( $events->have_posts() ):
-		while ( $events->have_posts() ) : $events->the_post();
+
+	if( $posts->have_posts() ):
+		while ( $posts->have_posts() ) : $posts->the_post();
 			global $post;
 			setup_postdata( $post );
 			get_template_part( 'sections/event' );
@@ -856,29 +807,28 @@ function get_neighbor_residents() {
 	$query_vars = json_decode( stripslashes( $_POST['query_vars'] ), true );
     $resident_id = $query_vars['id'];
     $direction = $query_vars['direction'];
-    $not_in = $query_vars['not_in'];
     $count = 1;
-	insert_neighbor_residents( $resident_id, $direction, $count, $not_in );   	
+	insert_neighbor_residents( $resident_id, $direction, $count, $not );   	
     die();
 }
 add_action( 'wp_ajax_nopriv_get_neighbor_residents', 'get_neighbor_residents' );
 add_action( 'wp_ajax_get_neighbor_residents', 'get_neighbor_residents' );
 
-function insert_neighbor_residents( $resident_id, $direction, $count, $not_in = array() ) {
+function insert_neighbor_residents( $resident_id, $direction, $count ) {
 	$resident_name = get_the_title( $resident_id );
 	$resident_end_date = get_post_meta( $resident_id , 'residency_dates_0_end_date', true );
 	$resident_start_date = get_post_meta( $resident_id , 'residency_dates_0_start_date', true );
 	$resident_studio = get_field( 'studio_number', $resident_id );
 	$today = new DateTime();
 	$today = $today->format( 'Ymd' );
-	$not_in[] = $resident_id;
 
 	if( is_current( $resident_id ) ):
 
-		$date_compare = '>=';
+		$date_compare = '>';
 		$direction_type = 'NUMERIC';
 		$direction_key = 'studio_number';
 		$direction_value = $resident_studio;
+		$resident_orderby = 'meta_value_num post_title';
 		$resident_meta_key = 'studio_number';
 
 		if( $direction == 'prev' ):
@@ -889,47 +839,30 @@ function insert_neighbor_residents( $resident_id, $direction, $count, $not_in = 
 			$order = 'ASC';
 		endif;
 
-		$resident_orderby = array(
-			'meta_value_num' => $order,
-			'post_title' => $order
-		);
-
 	else:
 
-		if( $direction == 'prev' ):
-			$direction_compare = '>';
-			$date_order = 'ASC';
-			$alpha_order = 'DESC';
-		elseif ( $direction == 'next' ):
-			$direction_compare = '<=';
-			$date_order = 'DESC';
-			$alpha_order = 'ASC';
-		endif;
-
-		$date_compare = '<';
+		$date_compare = '<=';
 		$direction_type = 'DATE';
 		$direction_key = 'residency_dates_0_end_date';
 		$direction_value = $resident_end_date;
-		$resident_orderby = array(
-			'meta_value_num' => $date_order,
-			'post_title' => $alpha_order
-		);
+		$resident_orderby = 'meta_value_num post_title';
 		$resident_meta_key = 'residency_dates_0_end_date';
+
+		if( $direction == 'prev' ):
+			$direction_compare = '>=';
+			$order = 'ASC';
+		elseif ( $direction == 'next' ):
+			// $direction_compare = '>=';
+			// $order = 'DESC';
+		endif;
 
 	endif;
 
 	$date_args = array(
-		'key' => 'residency_dates_0_end_date',
 		'type' => 'DATE',
+		'key' => 'residency_dates_0_end_date',
 		'compare' => $date_compare,
 		'value' => $today
-	);
-
-	$title_args = array(
-		'key' => 'post_title',
-		'type' => 'CHAR',
-		'compare' => $direction_compare,
-		'value' => $resident_name
 	);
 
 	$has_bio = array(
@@ -948,16 +881,15 @@ function insert_neighbor_residents( $resident_id, $direction, $count, $not_in = 
 	$resident_args = array(
 		'post_type' => 'resident',
 		'posts_per_page' => $count,
+		'order' => $order,
 		'orderby' => $resident_orderby,
 		'meta_key' => $resident_meta_key,
-		'post__not_in' => $not_in,
-		'meta_query' => array(
-			array( 
-				'relation' => 'AND',
-				$has_bio,
-				$date_args,
-				$direction_args
-			)
+		'post__not_in' => array( $resident_id ),
+		'meta_query' => array( 
+			'relation' => 'AND',
+			$has_bio,
+			$date_args,
+			$direction_args
 		)
 	);
 	$residents = new WP_Query( $resident_args );
@@ -1008,11 +940,13 @@ function makeClickableLinks( $s ) {
 function get_tweets( $count ) {
 	$about = get_page_by_path( 'about' );
 	$handle = get_field( 'twitter', $about );
+
 	include_once( get_template_directory() . '/libraries/twitteroauth/twitteroauth.php' );
-	$twitter_customer_key = 'w6jdx2IiW59vScHvUyYR6LJ5i';
-	$twitter_customer_secret = '4kYwLxdDXyIPi5ndLAht3Ln1oFX3iRTHxYqakghmeAGEVglTpY';
-	$twitter_access_token = '4343711140-4bb6E3bLjnIChxGwtD71disJm3C6H3Oo2u4qXFX';
-	$twitter_access_token_secret = '7NVIEwXODgcK6hB46UheZG9bPkFT63Ck8Fbwi4UaKzl1T';
+
+	$twitter_customer_key           = 'w6jdx2IiW59vScHvUyYR6LJ5i';
+	$twitter_customer_secret        = '4kYwLxdDXyIPi5ndLAht3Ln1oFX3iRTHxYqakghmeAGEVglTpY';
+	$twitter_access_token           = '4343711140-4bb6E3bLjnIChxGwtD71disJm3C6H3Oo2u4qXFX';
+	$twitter_access_token_secret    = '7NVIEwXODgcK6hB46UheZG9bPkFT63Ck8Fbwi4UaKzl1T';
 
 	$connection = new TwitterOAuth($twitter_customer_key, $twitter_customer_secret, $twitter_access_token, $twitter_access_token_secret);
 
@@ -1039,7 +973,7 @@ function get_tweets( $count ) {
 		    $url = 'http://twitter.com/' . $handle . '/status/' . $id;
 		    echo '<div class="tweet">';
 		    echo '<div class="text">';
-			echo $text;
+			echo utf8_encode( $text );
 			echo '</div>';
 			echo '<a href="' . $url . '" target="_blank" class="timestamp">';
 			echo $elapsed;
@@ -1050,44 +984,6 @@ function get_tweets( $count ) {
 
 	echo '</div>';
 	echo '</div>';
-}
-
-function embed_vimeo( $id ) {
-	$width = '640';
-	$height = '360';		
-	echo '<iframe src="http://player.vimeo.com/video/'.$id.'?title=0&amp;byline=0&amp;portrait=0&amp;badge=0&amp;color=ffffff" width="'.$width.'" height="'.$height.'" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>';
-}
-
-function get_insta() {
-	// $about = get_page_by_path( 'about' );
-	// $handle = get_field( 'instagram', $about );
- //    $client_id = '562c31d1a21644339b465563af5c2901';
- //    $url = 'https://api.instagram.com/v1/users/self/media/recent?client_id='.$client_id;
- // 	echo $url;
- //    $all_result  = processURL($url);
- //    $decoded_results = json_decode($all_result, true);
- 
-    // echo '<pre>';
-    // print_r($decoded_results);
-    // exit;
-    // foreach($decoded_results['data'] as $item){
-        // $image_link = $item['images']['thumbnail']['url'];
-        // echo $image_link;
-        // echo '<img src="'.$image_link.'" />';
-    // }
-}
-function processURL($url) {
-    // $ch = curl_init();
-    // curl_setopt_array($ch, array(
-    // CURLOPT_URL => $url,
-    // CURLOPT_RETURNTRANSFER => true,
-    // CURLOPT_SSL_VERIFYPEER => false,
-    // CURLOPT_SSL_VERIFYHOST => 2
-    // ));
-
-    // $result = curl_exec($ch);
-    // curl_close($ch);
-    // return $result;
 }
 
 function get_event_date( $id ) {
@@ -1136,9 +1032,9 @@ function get_event_date( $id ) {
 	return $date_format;
 }
 
-function get_thumb( $id, $size = null ) {
+function get_thumb( $id, $size = undefined ) {
 	$thumbnail = get_display_image( $id );
-	if($size == null):
+	if($size == undefined):
 		$size = 'thumb';
 	endif;
 	if( !$thumbnail ):
@@ -1174,18 +1070,18 @@ function get_sponsors( $id, $index = 0 ) {
 
 function get_countries( $id ) {
 	$country_list = '';
-	$residents_id = get_page_by_path( 'residents' )->ID;
+	$residents_id = get_page_by_path( 'past-residents' )->ID;
 	$residents_url = get_permalink( $residents_id );
 	if( have_rows( 'country', $id ) ):
 		$countries = get_field( 'country', $id );
 		if( $countries ):
 			foreach ($countries as $index=>$country):
 				if( $index != 0 ):
-					$country_list .= '<span>,&nbsp;</span>';
+					$country_list .= ', ';
 				endif;
 				$country_name = $country->post_title;
 				$country_slug = $country->post_name;
-				$url = $residents_url . '?filter=all&from=' . $country_slug;
+				$url = $residents_url . '?filter=past&from=' . $country_slug;
 				if($url):
 					$country_list .= '<a href="' . $url . '">' . $country_name . '</a>';
 				else:
@@ -1232,8 +1128,8 @@ function pretty( $string ) {
 		case 'open-studios':
 			return 'Open Studios';
 			break;
-		case 'offsite-project':
-			return 'Offsite Project';
+		case 'off-site-project':
+			return 'Off-Site Project';
 			break;
 	}
 }
@@ -1243,13 +1139,6 @@ function pretty_url( $url ) {
 	$url = preg_replace( '#^www\.(.+\.)#i', '$1', $url );
 	$url = preg_replace( '{/$}', '', $url );
 	return $url;
-}
-
-function http($url) {
-  if (!preg_match("~^(?:f|ht)tps?://~i", $url)) {
-      $url = "http://" . $url;
-  }
-  return $url;
 }
 
 function label_art() {
@@ -1420,16 +1309,12 @@ function user_is_resident() {
 	endif;
 }
 
-function query_url( $key, $value, $url, $filter = null, $remove = false ) {
+function query_url( $key, $value, $url, $filter = null ) {
 	$this_query = array( $key => $value );
-	$url = explode('#', $url)[0];
 	$parsed_url = parse_url($url);
 	parse_str($parsed_url['query'], $params);
 	$params = array_merge( $params, $this_query );
 	$url = strtok($url, '?');
-	if( $remove ):
-		unset( $params[$key] );
-	endif;
 	foreach($params as $_key => $_value):
 		if( array_key_exists( $_key, $params ) ):
 			unset( $params[$key] );
@@ -1444,17 +1329,9 @@ function query_url( $key, $value, $url, $filter = null, $remove = false ) {
 	return $url;
 }
 
-function get_resident_count( $type, $value, $query = null ) {
-	if( !$query ):
-		$query = array(
-			'post_type' => 'resident',
-			'posts_per_page' => -1,
-			'post_status' => 'publish',
-		);
-	endif;
+function get_resident_count( $type, $value, $page_query = null ) {
 	$meta_query = array();
-	unset( $query['paged'] );
-	$query['posts_per_page'] = -1;
+
 	if( $type == 'country' ):
 		$country_query = array(
 			'key' => 'country',
@@ -1497,13 +1374,15 @@ function get_resident_count( $type, $value, $query = null ) {
 		);
 		$meta_query = array_merge( $meta_query, $type_query );
 	endif;
-	if( array_key_exists( 'meta_query', $query ) ):
-		$empty_index = sizeof( $query['meta_query'] ) + 1;
-	else:
-		$empty_index = 0;
-	endif;
-	$query['meta_query'][$empty_index] = $meta_query;
-	$query = new WP_Query( $query );
+
+	$query_args = array(
+		'post_type' => 'resident',
+		'posts_per_page' => -1,
+		'post_status' => 'publish',
+		'meta_query' => array( $meta_query, $page_query )
+	);
+
+	$query = new WP_Query( $query_args );
 	$count = $query->found_posts;
 	return $count;
 }
@@ -1579,20 +1458,23 @@ function get_event_count( $type, $value ) {
 }
 
 
-function get_sponsor_count( $type, $value ) {
+function get_sponsor_count( $type, $value, $page_query ) {
+	$meta_query = array();
+
 	if( $type == 'country' ):
 		$country_query = array(
 			'key' => 'country',
 			'value' => '"' . $value . '"',
 			'compare' => 'LIKE'
 		);
+		$meta_query = array_merge( $meta_query, $country_query );
 	endif;
 
 	$query_args = array(
 		'post_type' => 'sponsor',
 		'posts_per_page' => -1,
 		'post_status' => 'publish',
-		'meta_query' => array( $country_query )
+		'meta_query' => array( $meta_query, $page_query )
 	);
 	$query = new WP_Query( $query_args );
 	$count = $query->found_posts;
@@ -1620,23 +1502,6 @@ function get_contributor_count( $type, $value, $page_query ) {
 	$query = new WP_Query( $query_args );
 	$count = $query->found_posts;
 	return $count;
-}
-
-function unsetRepeat( $query = null, $value ) {
-	if( $query['meta_query'] ):
-		foreach( $query['meta_query'] as $index=>$array ):
-			if( is_array( $array ) ):			
-				if( array_key_exists( 'key', $array ) ):
-					foreach( $array as $key=>$nestedValue ):
-						if( $key == 'key' && $nestedValue == $value ):
-							unset( $query['meta_query'][$index] );
-						endif;
-					endforeach;
-				endif;
-			endif;
-		endforeach;
-		return $query;
-	endif;
 }
 
 add_filter( 'posts_orderby', function( $orderby, \WP_Query $q ) {
@@ -1687,7 +1552,6 @@ function reorder_menu_items( $menu_order ) {
         'edit.php?post_type=contributor',
         'edit.php?post_type=country',
         'edit.php?post_type=page',
-        'edit.php?post_type=critic',
         'upload.php'
     );
 }
@@ -1743,55 +1607,3 @@ function wpdocs_register_my_custom_menu_page() {
     );
 }
 add_action( 'admin_menu', 'wpdocs_register_my_custom_menu_page' );
-
-function greenroom_login_redirect( $redirect_to, $request, $user ) {
-	global $user;
-	if ( isset( $user->roles ) && is_array( $user->roles ) ) {
-		if ( in_array( 'resident', $user->roles ) ) {
-			$greenroom_id = get_page_by_path( 'greenroom' )->ID;
-			$greenroom_url = get_permalink( $greenroom_id );
-			return $greenroom_url;
-		} else {
-			return $redirect_to;
-		}
-	} else {
-		return $redirect_to;
-	}
-}
-
-add_filter( 'login_redirect', 'greenroom_login_redirect', 10, 3 );
-
-
-function search_broken_link() {
-	$search_value = null;
-	if( sizeof( $_SERVER['REQUEST_URI'] ) ):
-		$url = $_SERVER['REQUEST_URI'];
-		$url = trim( chop( $url, '.html' ) );
-		$search_value = explode( '/', $url )[1];
-		return $search_value;
-	endif;
-	return $search_value;
-}
-
-function get_meta_description( $id ) {
-	$type = get_post_type( $post_id );
-	if( $type == 'event' ):
-		$value = trim(rtrim(substr(strip_tags(get_field( 'description', $id)), 0, 200))) . '...';
-	else:
-		$value = bloginfo('description');
-	endif;
-	if( $value ):
-		echo $value;
-	endif;
-}
-
-function custom_style_options($arr){
-    $arr['block_formats'] = 'Subheading=h4;';
-    return $arr;
-}
-add_filter('tiny_mce_before_init', 'custom_style_options');
-
-function add_editor_stylesheet() {
-    add_editor_style( 'assets/styles/editor.css' );
-}
-add_action( 'init', 'add_editor_stylesheet' );
