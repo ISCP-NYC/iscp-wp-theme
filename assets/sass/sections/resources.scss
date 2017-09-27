@@ -1,0 +1,131 @@
+section.greenroom,
+section.resource,
+section.resident-resource {
+	@include medium-fs;
+	background-color: $light;
+	aside.main {
+		.icon, .label {
+			background-color: $light;
+		}
+	}
+	.content {
+		position: relative;	
+	}
+	table {
+		width: 100%;
+	}
+	.user-info {
+		position: absolute;
+		right: 30px;
+    	top: 145px;
+		@include small-fs;
+	}
+	header.main {
+		background-color: $light !important;
+		nav {
+			background-color: $light !important;
+			.overlay, .placeholder, .cell {
+				background-color: $light !important;
+			}	
+		}
+	}
+	.hello {
+		@include large-fs;
+		border: 0 !important;
+	}
+	.dashboard {
+		display: flex;
+		.half {
+			float: left;
+			width: calc(50% - 15px);
+			&.left {
+				margin-right: 15px;
+			}
+			&.right {
+				margin-left: 15px;
+			}
+			.resource-list {
+				margin-bottom: 10px;
+			}
+		}
+		@include medium {
+			display: block;
+			.half {
+				width: 100% !important;
+				margin: 0 !important;
+			}
+		}
+	}
+	ul {
+		li {
+			@extend .bullet;
+			background-position: left 7px;
+			padding: 0;
+			text-indent: 25px;
+		}
+	}
+	h4 {
+		width: 100%;
+	    padding: 20px 0;
+	    font-size: 20px;
+	    text-align: center;
+	    @include small-fs;
+	}
+	.welcome {
+
+	}
+	.contact {
+
+	}
+	.staff {
+		.members {
+		    display: flex;
+		    flex-wrap: wrap;
+			.staff-member {
+				width: calc(100% / 3 - 20px);
+			    display: flex;
+				float: left;
+				margin-bottom: 60px;
+				.name {
+					padding: 10px 0;
+					text-align: center;
+				}
+				.image {
+					width: 100%;
+					img {
+						width: 100%;
+						vertical-align: bottom;
+					}
+				}
+				&:nth-child(3n+2) {
+					margin: 0 30px;
+				}
+				@include medium {
+					width: calc(50% - 20px);
+					&:nth-child(odd) {
+						margin: 0 20px 0 0;
+					}
+					&:nth-child(even) {
+						margin: 0 0 0 20px;
+					}
+				}
+				@include xsmall {
+					width: 100% !important;
+					margin: 0 !important;
+				}
+				.info {
+					@include small-fs;
+					padding-top: 10px;
+					.role {
+						width: 100%;
+					}
+					.email {
+					}
+					.description {
+						padding-top: 10px;
+					}
+				}
+			}
+		}			
+	}
+}

@@ -13,14 +13,14 @@
 				else:
 					echo '<div class="bar hide">';
 				endif;
-				echo '<span>Tagged: </span>';
-				echo '<span class="select tag link">';
-				echo '<span>"' . $tag_name . '"</span>';
-				echo '<div class="swap">';
-				echo '<div class="icon default"></div>';
-				echo '<div class="icon hover"></div>';
-				echo '</div>';
-				echo '</span>';
+					echo '<span>Tagged: </span>';
+					echo '<span class="select tag link">';
+						echo '<span>"' . $tag_name . '"</span>';
+						echo '<div class="swap">';
+							echo '<div class="icon default"></div>';
+							echo '<div class="icon hover"></div>';
+						echo '</div>';
+					echo '</span>';
 				echo '</div>';
 				?>
 			</div>

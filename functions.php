@@ -7,13 +7,14 @@ add_action( 'wp_head', 'twentyfifteen_javascript_detection', 0 );
 function iscp_scripts() {
 	global $post;
 	wp_enqueue_style( 'style', get_template_directory_uri() . '/assets/css/styles.css' );
+	wp_register_script( 'webglearth', get_template_directory_uri() . '/assets/js/webglearth.js' );
 	wp_register_script( 'transit', get_template_directory_uri() . '/assets/js/jquery.transit.min.js', array( 'jquery' ) );
 	wp_register_script( 'jquery-ui', get_template_directory_uri() . '/assets/js/jquery-ui.min.js', array( 'jquery' ) );
 	wp_register_script( 'masonry', get_template_directory_uri() . '/assets/js/masonry.pkgd.min.js', array( 'jquery' ) );
 	wp_register_script( 'imagesloaded', get_template_directory_uri() . '/assets/js/imagesloaded.pkgd.min.js', array( 'jquery' ) );
 	wp_register_script( 'clipboard', get_template_directory_uri() . '/assets/js/clipboard.min.js', array( 'jquery' ) );
-	wp_register_script( 'main', get_template_directory_uri() . '/assets/js/main.js', array( 'jquery', 'masonry', 'transit', 'jquery-ui' ) );
-	wp_enqueue_script( 'webglearth', 'http://www.webglearth.com/v2/api.js' );
+	wp_register_script( 'main', get_template_directory_uri() . '/assets/js/main.js?version=2.1', array( 'jquery', 'masonry', 'transit', 'jquery-ui' ) );
+	wp_enqueue_script( 'webglearth' );
 	wp_enqueue_script( 'transit' );
 	wp_enqueue_script( 'jquery-ui' );
 	wp_enqueue_script( 'masonry' );
@@ -21,31 +22,6 @@ function iscp_scripts() {
 	wp_enqueue_script( 'clipboard' );
 	wp_enqueue_script( 'main' );
 	$page_slug = $post->post_name;
-	if( $page_slug == 'map' ):
-		$countries_query = array(
-			'post_type' => 'country',
-			'posts_per_page' => -1,
-			'post_status' => 'publish'
-		);
-		$countries = new WP_Query( $countries_query );
-		$countries_array = array();
-		while ( $countries->have_posts() ) : $countries->the_post(); 
-			global $post;
-			setup_postdata( $post );
-			$country_id = $post->ID;
-		    $country = array(
-		       'name' => $post->post_title,
-		       'slug' => $post->post_name,
-		       'lat' => get_field( 'latitude', $country_id ),
-		       'lng' => get_field( 'longitude', $country_id ),
-		       'count' => get_resident_count( 'country', $country_id )
-		    );
-		    $countries_array[] = $country;
-		    wp_reset_postdata();
-		endwhile;
-		$json = json_decode( json_encode( $countries_array ), true );
-	    wp_localize_script( 'main', 'countries', $json );
-	endif;
 	global $wp_query;
 	wp_localize_script( 'main', 'ajaxpagination', array(
 		'ajaxurl' => admin_url( 'admin-ajax.php' ),
@@ -57,7 +33,7 @@ function iscp_scripts() {
 }
 add_action( 'wp_enqueue_scripts', 'iscp_scripts' );
 
-show_admin_bar(false);
+show_admin_bar( false );
 add_theme_support( 'post-thumbnails' ); 
 add_image_size( 'thumb', 500, 350, true );
 add_image_size( 'slider', 9999, 500, false );
@@ -81,7 +57,6 @@ function add_lat_lng( $post_id ) {
 }
 add_action( 'save_post', 'add_lat_lng' );
 
-
 function add_ground_floor_studio_num( $post_id ) {
 	$post_type = get_post_type( $post_id );
 	if( $post_type == 'resident' ):
@@ -104,36 +79,36 @@ add_action( 'save_post', 'add_ground_floor_studio_num' );
 
 function load_more() {
 	$query_vars = json_decode( stripslashes( $_POST['query_vars'] ), true );
-    $query_vars['paged'] = $_POST['page'];
-    $slug = $query_vars['pagename'];
-    $page_type = $query_vars['pagetype'];
-    $post_type = $slug;
-    if( strstr( $slug, 'residents' ) || $page_type == 'sponsor' ):
-    	$post_type = 'residents';
-    elseif( $post_type == 'journal' ):
-    	$post_type .= 's';
-    elseif( $post_type == 'visiting-critics' ):
-    	$post_type = 'critics';
-    endif;
-    include( locate_template( 'sections/loops/' . $post_type . '.php' ) );
-    die();
+  $query_vars['paged'] = $_POST['page'];
+  $slug = $query_vars['pagename'];
+  $page_type = $query_vars['pagetype'];
+  $post_type = $slug;
+  if( strstr( $slug, 'residents' ) || $page_type == 'sponsor' ):
+  	$post_type = 'residents';
+  elseif( $post_type == 'journal' ):
+  	$post_type .= 's';
+  elseif( $post_type == 'visiting-critics' ):
+  	$post_type = 'critics';
+  endif;
+  include( locate_template( 'sections/loops/' . $post_type . '.php' ) );
+  die();
 }
 add_action( 'wp_ajax_nopriv_load_more', 'load_more' );
 add_action( 'wp_ajax_load_more', 'load_more' );
 
 function insert_filter_list() {
 	$query_vars = json_decode( stripslashes( $_POST['query_vars'] ), true );
-    $query_vars['paged'] = $_POST['page'];
-    $slug = $query_vars['pagename'];
-    $page_type = $query_vars['pagetype'];
-    $post_type = $slug;
-    if( strstr( $slug, 'residents' ) || $page_type == 'sponsor' ):
-    	$post_type = 'residents';
-    elseif( $post_type == 'journal' ):
-    	$post_type .= 's';
-    endif;
-    include( locate_template( 'sections/filters/' . $post_type . '.php' ) );
-    die();
+  $query_vars['paged'] = $_POST['page'];
+  $slug = $query_vars['pagename'];
+  $page_type = $query_vars['pagetype'];
+  $post_type = $slug;
+  if( strstr( $slug, 'residents' ) || $page_type == 'sponsor' ):
+  	$post_type = 'residents';
+  elseif( $post_type == 'journal' ):
+  	$post_type .= 's';
+  endif;
+  include( locate_template( 'sections/filters/' . $post_type . '.php' ) );
+  die();
 }
 add_action( 'wp_ajax_nopriv_insert_filter_list', 'insert_filter_list' );
 add_action( 'wp_ajax_insert_filter_list', 'insert_filter_list' );
@@ -157,12 +132,41 @@ add_action( 'wp_ajax_update_search_results', 'update_search_results' );
 
 function get_map_list() {
 	$query_vars = json_decode( stripslashes( $_POST['query_vars'] ), true );
-    $country_slug = $query_vars['pagename'];
-    include( locate_template( 'other/map-list.php' ) );
-    die();
+  $country_slug = $query_vars['pagename'];
+  include( locate_template( 'other/map-list.php' ) );
+  die();
 }
 add_action( 'wp_ajax_nopriv_get_map_list', 'get_map_list' );
 add_action( 'wp_ajax_get_map_list', 'get_map_list' );
+
+function get_map_countries() {
+	$countries_query = array(
+		'post_type' => 'country',
+		'posts_per_page' => -1,
+		'post_status' => 'publish'
+	);
+	$countries = new WP_Query( $countries_query );
+	$countries_array = array();
+	while ( $countries->have_posts() ) : $countries->the_post(); 
+		global $post;
+		setup_postdata( $post );
+		$country_id = $post->ID;
+    $country = array(
+			'name' => $post->post_title,
+			'slug' => $post->post_name,
+			'lat' => get_field( 'latitude', $country_id ),
+			'lng' => get_field( 'longitude', $country_id ),
+			'count' => get_resident_count( 'country', $country_id )
+    );
+    $countries_array[] = $country;
+    wp_reset_postdata();
+	endwhile;
+	$json = json_encode( $countries_array );
+	echo $json;
+	die();
+}
+add_action( 'wp_ajax_nopriv_get_map_countries', 'get_map_countries' );
+add_action( 'wp_ajax_get_map_countries', 'get_map_countries' );
 
 function filter_items() {
 	$query_vars = json_decode( stripslashes( $_POST['query_vars'] ), true );
@@ -258,7 +262,7 @@ function custom_event_column( $column, $post_id ) {
 			$start_date = get_post_meta( $post_id , 'start_date' , true );
 			if($start_date && $start_date != '-' && $start_date != 'Invalid date'):
 				$start_date = new DateTime($start_date);
-				echo $start_date->format('m/n/Y');
+				echo $start_date->format('m/j/Y');
 			else:
 				echo '';
 			endif;
@@ -268,7 +272,7 @@ function custom_event_column( $column, $post_id ) {
 			$end_date = get_post_meta( $post_id , 'end_date' , true );
 			if($end_date && $end_date != '-' && $end_date != 'Invalid date'):  
 				$end_date = new DateTime($end_date);
-				echo $end_date->format('m/n/Y');
+				echo $end_date->format('m/j/Y');
 			else:
 				echo '';
 			endif;
@@ -644,10 +648,10 @@ function sort_upcoming_events() {
 	endforeach;
 
 	usort($current_events, function($a, $b) {
-	   return strcasecmp( 
-        	get_field( 'end_date', $a->ID ), 
-        	get_field( 'end_date', $b->ID ) 
-    	);
+   return strcasecmp( 
+    	get_field( 'end_date', $a->ID ), 
+    	get_field( 'end_date', $b->ID ) 
+  	);
 	});
 
 	foreach( $current_events as $current_event ):
@@ -737,11 +741,11 @@ function get_display_image( $id ) {
 
 function get_neighbor_journal_posts() {
 	$query_vars = json_decode( stripslashes( $_POST['query_vars'] ), true );
-    $post_id = $query_vars['id'];
-    $direction = $query_vars['direction'];
-    $count = 1;
+  $post_id = $query_vars['id'];
+  $direction = $query_vars['direction'];
+  $count = 1;
 	insert_neighbor_journal_posts( $post_id, $direction, $count );   	
-    die();
+  die();
 }
 add_action( 'wp_ajax_nopriv_get_neighbor_journal_posts', 'get_neighbor_journal_posts' );
 add_action( 'wp_ajax_get_neighbor_journal_posts', 'get_neighbor_journal_posts' );
@@ -750,10 +754,10 @@ function insert_neighbor_journal_posts( $post_id, $direction, $count = 1 ) {
 	$post = get_post( $post_id );
 	$post_date = $post->post_date;
 
-	if( $direction == 'new' ):
+	if( $direction == 'next' ):
 		$order = 'ASC';
 		$when = 'after';
-	elseif ( $direction == 'old' ):
+	elseif ( $direction == 'prev' ):
 		$order = 'DESC';
 		$when = 'before';
 	endif;
@@ -772,17 +776,20 @@ function insert_neighbor_journal_posts( $post_id, $direction, $count = 1 ) {
 	$posts = new WP_Query( $posts_args );
 	$last_page = $posts->max_num_pages;
 
-	if ( $direction == 'new' ):
+	if ( $direction == 'next' ):
 		$reverse_posts = array_reverse( $posts->posts );
 		$posts->posts = $reverse_posts;
 	endif;
+
 	if( $posts->have_posts() ):
+		
 		while ( $posts->have_posts() ) : $posts->the_post();
 			global $post;
 			setup_postdata( $post );
 			get_template_part( 'sections/journal' );
 			wp_reset_postdata();
 		endwhile;
+
 	endif;
 
 	wp_reset_query();
@@ -1009,10 +1016,10 @@ function get_tweets( $count ) {
 	$about = get_page_by_path( 'about' );
 	$handle = get_field( 'twitter', $about );
 	include_once( get_template_directory() . '/libraries/twitteroauth/twitteroauth.php' );
-	$twitter_customer_key = 'w6jdx2IiW59vScHvUyYR6LJ5i';
-	$twitter_customer_secret = '4kYwLxdDXyIPi5ndLAht3Ln1oFX3iRTHxYqakghmeAGEVglTpY';
-	$twitter_access_token = '4343711140-4bb6E3bLjnIChxGwtD71disJm3C6H3Oo2u4qXFX';
-	$twitter_access_token_secret = '7NVIEwXODgcK6hB46UheZG9bPkFT63Ck8Fbwi4UaKzl1T';
+	$twitter_customer_key = 'w84XEX5nmjGTyeSqu1x81elRz';
+	$twitter_customer_secret = 'RMfQR9mzU09dgLEdapvpZUbuxlvY8IYRZYcjfObV5vbMJZoNE7';
+	$twitter_access_token = '326246243-X0bIkrnd8WCWbDpUAkN3yaSEU4jRLIo6QyiSPxfR';
+	$twitter_access_token_secret = 'W8YiXMlcSFOz2JHGJD069Zz3RDSI2Rbaw5J51CJAPo5di';
 
 	$connection = new TwitterOAuth($twitter_customer_key, $twitter_customer_secret, $twitter_access_token, $twitter_access_token_secret);
 
@@ -1198,11 +1205,14 @@ function get_countries( $id ) {
 }
 
 function get_orientation( $id ) {
-	$imgmeta = wp_get_attachment_metadata( $id );
-	if ($imgmeta['width'] > $imgmeta['height']):
-		return 'landscape';
+	if( $imgmeta = wp_get_attachment_metadata( $id ) ):
+		if ($imgmeta['width'] > $imgmeta['height']):
+			return 'landscape';
+		else:
+			return 'portait';
+		endif;
 	else:
-		return 'portait';
+		return false;
 	endif;
 }
 
@@ -1767,7 +1777,8 @@ function search_broken_link() {
 	if( sizeof( $_SERVER['REQUEST_URI'] ) ):
 		$url = $_SERVER['REQUEST_URI'];
 		$url = trim( chop( $url, '.html' ) );
-		$search_value = explode( '/', $url )[1];
+		$search_value_array = explode( '/', $url );
+		$search_value = $search_value_array[sizeof($search_value_array)-1];
 		return $search_value;
 	endif;
 	return $search_value;

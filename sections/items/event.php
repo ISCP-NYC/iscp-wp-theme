@@ -12,8 +12,11 @@ $event_date_format = get_event_date( $event_id );
 $event_thumb = get_thumb( $event_id, 'thumb' );
 $today = date('Ymd');
 if( get_field( 'opening_reception', $event_id ) >= $today ):
-	$opening = new DateTime( get_field( 'opening_reception', $event_id ) );
-	$opening = $opening->format('M d, Y');
+	$opening = get_field( 'opening_reception', $event_id );
+	if( $opening ) {
+		$opening = new DateTime( $opening );
+		$opening = $opening->format('M d, Y');
+	}
 	$opening_hours = get_field( 'opening_reception_hours', $event_id );
 	if( $opening_hours ):
 		$opening .= ', ' . $opening_hours;

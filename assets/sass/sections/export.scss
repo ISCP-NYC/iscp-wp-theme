@@ -1,0 +1,14 @@
+main[data-center-slug="export"] {
+	width: 94% !important;
+	height: 94% !important;
+	padding: 3%;
+	overflow: scroll;
+	table {
+		td {
+			padding: 0 3px;
+			font-family: Arial;
+			font-size: 13px;
+			line-height: 14px;
+		}
+	}
+}

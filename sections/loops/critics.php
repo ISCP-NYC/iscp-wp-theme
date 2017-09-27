@@ -6,8 +6,9 @@ endif;
 $critics_query = array(
 	'post_type' => 'critic',
 	'posts_per_page' => 36,
-	'orderby' => 'last_name',
-	'order' => 'ASC',
+	'meta_key' => 'years_0_year',
+	'orderby' => 'meta_value',
+	'order' => 'DESC',
 	'paged' => $paged,
 	'post_status' => 'publish'
 );
@@ -26,7 +27,9 @@ if( have_posts() ):
 		$years = get_field( 'years', $critic_id );
 		echo '<div class="critic shelf-item border-bottom">';
 		echo '<div class="inner">';
-		echo '<h3 class="name">' . $name . '</h3>';
+		echo '<div class="value title">';
+			echo '<h3>' . $name . '</h3>';
+		echo '</div>';
 		echo '<div class="value title">' . $title . '</div>';
 		echo '<div class="value institution">' . $institution;
 		if( $city ):

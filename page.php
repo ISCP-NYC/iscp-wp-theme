@@ -56,8 +56,6 @@
 		get_template_part( 'sections/residents' );
 		wp_reset_postdata();
 
-
-
 	elseif( $page_slug == 'events' ):
 
 		$post->delay = 0;
@@ -139,10 +137,6 @@
 
 		get_template_part( 'sections/faq' );
 
-	elseif( $parent_slug == 'about' ):
-
-		get_template_part( 'sections/page' );
-
 	elseif( $page_slug == 'greenroom'):
 
 		if (user_is_resident()):
@@ -177,6 +171,14 @@
 	elseif ( $page_slug == 'map' ):
 
 		get_template_part( 'sections/map' );
+
+	elseif ( $page_slug == 'export' ):
+
+		get_template_part( 'sections/export' );
+
+	elseif ( $parent_slug ):
+
+		get_template_part( 'sections/page' );
 
 	else:
 

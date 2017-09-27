@@ -17,7 +17,7 @@ if( have_posts() ):
 		$pretty_website = pretty_url( $website );
 		echo '<div class="contributor shelf-item border-bottom"><div class="inner">';
 		echo '<div class="value name">';
-		echo '<h3>' . $title . '</h3>';
+			echo '<h3>' . $title . '</h3>';
 		echo '</div>';
 		echo '<div class="value country"><a href="' . $country_permalink . '">' . $country . '</a></div>';
 		if($website):

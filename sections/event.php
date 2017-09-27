@@ -19,8 +19,11 @@ $venue = get_field( 'venue_name', $id );
 $location = get_field( 'venue_location', $id );
 $time = get_field( 'time', $id );
 $open_hours = get_field( 'open_hours', $id );
-$opening_reception = new DateTime( get_field( 'opening_reception', $id ) );
-$opening_reception = $opening_reception->format('M d, Y');
+$opening_reception = get_field( 'opening_reception', $id );
+if( $opening_reception ) {
+	$opening_reception = new DateTime( $opening_reception );
+	$opening_reception = $opening_reception->format('M d, Y');
+}
 $opening_reception_hours = get_field( 'opening_reception_hours', $id );
 $logos = get_field( 'logos', $id );
 if( $page_columns ):

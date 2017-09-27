@@ -3,8 +3,6 @@ Theme Name: ISCPT
 */
 @font-face {font-family: 'Life Italic';src: url('../fonts/3095D6_0_0.eot');src: url('../fonts/3095D6_0_0.eot?#iefix') format('embedded-opentype'),url('../fonts/3095D6_0_0.woff2') format('woff2'),url('../fonts/3095D6_0_0.woff') format('woff'),url('../fonts/3095D6_0_0.ttf') format('truetype');}
 @font-face {font-family: 'Life Rounded';src: url('../fonts/3095D6_1_0.eot');src: url('../fonts/3095D6_1_0.eot?#iefix') format('embedded-opentype'),url('../fonts/3095D6_1_0.woff2') format('woff2'),url('../fonts/3095D6_1_0.woff') format('woff'),url('../fonts/3095D6_1_0.ttf') format('truetype');}
-@import 'compass';
-@import 'compass/reset';
 @import 'vars';
 @import 'mixins';
 @import 'extends';
@@ -26,7 +24,9 @@ body {
 #mfPreviewBar, #mfPreviewBarShow {
 	display: none !important;
 }
-
+h1, h2, h3, h4 {
+	font-weight: normal !important;
+}
 a, .link {
 	text-decoration: none;
 	color: $orange;
@@ -442,6 +442,7 @@ section.login {
 @import 'sections/supporters';
 @import 'sections/sponsor';
 @import 'sections/visit';
+@import 'sections/export';
 
 ::-webkit-scrollbar {display:none;}
 ::-moz-scrollbar {display:none;}

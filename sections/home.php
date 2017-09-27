@@ -9,7 +9,7 @@ $home_id = get_page_by_path( 'home' )->ID;
 			International Studio &amp; Curatorial Program
 		</h2>
 		<?php 
-		$sorted_events = array_slice( sort_upcoming_events(), 0, 3 );
+		$sorted_events = sort_upcoming_events();
 		$count = sizeof( $sorted_events );
 		$count_class = 'cols_' . $count;
 		if ( $count ):
@@ -20,6 +20,13 @@ $home_id = get_page_by_path( 'home' )->ID;
 			echo '</h3>';
 			echo '<div class="events module shelves grid upcoming ' . $count_class . '">';
 			echo '<div class="eventsWrap">';
+			foreach( $sorted_events as $event ):
+				$et = get_field( 'event_type', $event->ID );
+				if( $et == 'open-studios' ):
+					array_unshift( $sorted_events, $event );
+				endif;
+			endforeach;
+			$sorted_events = array_slice( $sorted_events, 0, 3 );
 			foreach( $sorted_events as $event ):
 				$post = $event;
 				global $post;

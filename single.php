@@ -91,7 +91,7 @@ switch($post_type) {
 		$this_post_id = $this_post->ID;
 
 		//newer journal posts
-		insert_neighbor_journal_posts( $this_post_id, 'new', 1 );
+		insert_neighbor_journal_posts( $this_post_id, 'prev', 1 );
 
 		//opened journal post
 		setup_postdata( $this_post );
@@ -99,7 +99,14 @@ switch($post_type) {
 		wp_reset_postdata();
 
 		//older journal posts
-		insert_neighbor_journal_posts( $this_post_id, 'old', 1 );
+		insert_neighbor_journal_posts( $this_post_id, 'next', 1 );
+
+		//all journal posts
+		$journal_page_id = get_page_by_path('journal')->ID;
+		$post = get_post( $journal_page_id, OBJECT );
+		setup_postdata( $post );
+		get_template_part( 'sections/journals' );
+		wp_reset_postdata();
 		break;
 
 	default:

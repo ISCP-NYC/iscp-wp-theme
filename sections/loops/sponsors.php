@@ -16,11 +16,11 @@ if( have_posts() ):
 		$website = get_field('website', $sponsor_id );
 		$pretty_website = explode( '/', pretty_url( $website ) )[0];
 		echo '<div class="sponsor shelf-item border-bottom"><div class="inner">';
-		echo '<h2 class="value link name">';
-		echo '<a href="' . $permalink . '">';
-		echo $title;
-		echo '</a>';
-		echo '</h2>';
+			echo '<div class="value link name">';
+				echo '<a href="' . $permalink . '">';
+					echo '<h3>' . $title . '</h3>';
+				echo '</a>';
+			echo '</div>';
 		echo '<div class="value country"><a href="' . $country_permalink . '">' . $country . '</a></div>';
 		if($website):
 			echo '<div class="value website">';

@@ -1,0 +1,27 @@
+{
+  "name": "iscpt",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "sass": "sass -w assets/sass/styles.scss:assets/css/prestyles.css",
+    "prefix" : "postcss -w -u autoprefixer assets/css/prestyles.css -o assets/css/styles.css",
+    "go": "npm run sass & npm run prefix"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/OtherMeans/iscp-wp-theme.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/OtherMeans/iscp-wp-theme/issues"
+  },
+  "homepage": "https://github.com/OtherMeans/iscp-wp-theme#readme",
+  "dependencies": {
+    "coffee-script": "1.10.0",
+    "node-sass": "3.8.0",
+    "autoprefixer": "^6.5.1",
+    "cssnano": "^3.8.0"
+  }
+}

@@ -126,6 +126,7 @@
             width: 200px;
             display: inline-flex;
             margin: 0 0 2px 0;
+            float: left;
             @include small-fs;
             a {
                 padding-right: $small-fs;
