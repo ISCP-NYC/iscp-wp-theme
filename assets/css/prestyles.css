@@ -305,6 +305,8 @@ section {
       margin-bottom: 0px;
       margin-top: 5px;
       display: table; }
+      section .content .module img {
+        max-width: 100%; }
       @media (max-width: 768px) {
         section .content .module {
           width: calc(100% - 60px);
