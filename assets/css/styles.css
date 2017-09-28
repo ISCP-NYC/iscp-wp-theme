@@ -312,7 +312,8 @@ section {
       margin-top: 5px;
       display: table; }
       section .content .module img {
-        max-width: 100%; }
+        max-width: 100%;
+        height: auto; }
       @media (max-width: 768px) {
         section .content .module {
           width: calc(100% - 60px);
