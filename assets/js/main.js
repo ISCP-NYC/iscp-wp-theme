@@ -1114,7 +1114,7 @@ function removeParam(paramType, url) {
 /////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////
 function buildMasonry() {
-	$('.journal.grid').each(function(i, grid) {
+	$('.masonry.grid').each(function(i, grid) {
 		if($(grid).attr('data-masonry')) {return;}
 		$(grid).attr('data-masonry', i)
 		$masonry = $(grid).masonry({
@@ -1868,7 +1868,7 @@ function isSmall() {
 $(window).resize(function() {
 	setUp();
 	setImageSliderSize();
-	$('.journal.grid').each(function(i, grid) {
+	$('.masonry.grid').each(function(i, grid) {
 		masonries[i].masonry('layout');
 	});
 });

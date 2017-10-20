@@ -25,7 +25,7 @@
 				?>
 			</div>
 		</div>
-		<div class="journal filter-this grid items" data-delay="<?php echo $delay ?>">
+		<div class="journal filter-this masonry grid items" data-delay="<?php echo $delay ?>">
 			<div class="sizer"></div>
 		</div>
 	</div>

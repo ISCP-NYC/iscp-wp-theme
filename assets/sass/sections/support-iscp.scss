@@ -1,0 +1,25 @@
+section.support-iscp {
+	.content {
+		.bullets {
+			column-count: 2;
+			column-gap: 10px;
+			.bullet {
+				break-inside: avoid;
+			}
+		}
+		.grid {
+			.item {
+				margin-bottom: 50px;
+				.inner {
+					a.donate {
+						background-color: $orange;
+						color: $white;
+						padding: .5em;
+						margin: auto;
+						display: table;
+					}
+				}
+			}
+		}
+	}
+}

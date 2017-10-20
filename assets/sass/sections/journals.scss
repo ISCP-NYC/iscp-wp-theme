@@ -19,53 +19,41 @@ section.journal {
 			}
 		}
 		.journal {
-		    position: relative;
-		    overflow: hidden;
-		    clear: both;
-		    width: calc(100% - 40px);
-		    margin: 0 20px;
-		    .journal-post {
-		    	margin-bottom: 30px;
-		    	padding-bottom: 30px;
+	    position: relative;
+	    overflow: hidden;
+	    clear: both;
+	    width: calc(100% - 40px);
+	    margin: 0 20px;
+	    .journal-post {
+	    	margin-bottom: 30px;
+	    	padding-bottom: 30px;
+	    	a {
+	    		display: table;
+	    		&.image {
+	    			margin: auto;
+	    		}
+	    	}
+	    	h2.name {
+	    		display: table;
+	    		margin-bottom: 4px;
+	    	}
+		    header {
+		    	margin-bottom: 10px;
+		    }
+		    .image {
+		    	margin-bottom: 10px;
+		    	img {
+		    		width: 100%;
+		    		display: table;
+		    		margin: auto;
+		    	}
+		    }
+		    .tags {
+		    	margin-top: 5px;
 		    	a {
-		    		display: table;
-		    		&.image {
-		    			margin: auto;
-		    		}
+		    		display: inline-table;
 		    	}
-		    	h2.name {
-		    		display: table;
-		    		margin-bottom: 4px;
-		    	}
-			    header {
-			    	margin-bottom: 10px;
-			    }
-			    .image {
-			    	margin-bottom: 10px;
-			    	img {
-			    		width: 100%;
-			    		display: table;
-			    		margin: auto;
-			    	}
-			    }
-			    .tags {
-			    	margin-top: 5px;
-			    	a {
-			    		display: inline-table;
-			    	}
-			    }
-			}
-			.journal-post, .sizer {
-				width: calc(33.333% - 20px);
-				@include large {
-					width: calc(50% - 15px);
-				}
-				@include medium {
-					width: 100%;
-				}
-			}
-			.sizer {
-
+		    }
 			}
 			.size {
 				display: none;

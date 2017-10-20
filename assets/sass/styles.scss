@@ -230,6 +230,7 @@ section {
 			height: auto;
 		}
 	}
+	@import 'partials/columns';
 	@import 'partials/filter';
 	@import 'partials/footer';
 	@import 'partials/loader';
@@ -444,6 +445,7 @@ section.login {
 @import 'sections/greenroom';
 @import 'sections/search';
 @import 'sections/supporters';
+@import 'sections/support-iscp';
 @import 'sections/sponsor';
 @import 'sections/visit';
 @import 'sections/export';

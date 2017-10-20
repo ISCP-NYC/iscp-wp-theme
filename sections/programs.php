@@ -35,11 +35,11 @@ $programs = array_reverse( get_pages( $programs_query ) );
 				if( $image ):
 					echo '<div class="image">';
 					echo '<div class="inner">';
-		        	echo '<img src="' . $image . '"/>';
-			        echo '<div class="caption">' . $caption  . '</div>';
-			        echo '</div>';
-			        echo '</div>';
-			    endif;
+							echo '<img src="' . $image . '"/>';
+							echo '<div class="caption">' . $caption  . '</div>';
+							echo '</div>';
+							echo '</div>';
+					endif;
 			endwhile;
 			echo '</div>';
 			endif;
@@ -56,37 +56,38 @@ $programs = array_reverse( get_pages( $programs_query ) );
 			endif;
 			echo '<div class="description">' . $program_description . '</div>';
 			if( have_rows( 'image_columns', $program ) ):
-			echo '<div class="columns">';
-			    while ( have_rows( 'image_columns', $program ) ) : the_row();
-			    	echo '<div class="column">';
-			    	echo '<div class="inner">';
-				        $col_image = get_sub_field( 'image' )['sizes']['thumb'];
-				        $col_title = get_sub_field( 'title' );
-				        $col_description = get_sub_field( 'description' );
-				        if( $col_image ):
-					        echo '<div class="image">';
-					        echo '<img src="' . $col_image . '"/>';
-					        echo '</div>';
-					    endif;
-				        echo '<h3 class="title">' . $col_title . '</h3>';
-				        echo '<div class="description">' . $col_description . '</div>';
+			echo '<div class="grid masonry items">';
+				echo '<div class="sizer"></div>';
+					while ( have_rows( 'image_columns', $program ) ) : the_row();
+						echo '<div class="item">';
+						echo '<div class="inner">';
+								$col_image = get_sub_field( 'image' )['sizes']['thumb'];
+								$col_title = get_sub_field( 'title' );
+								$col_description = get_sub_field( 'description' );
+								if( $col_image ):
+									echo '<div class="image">';
+									echo '<img src="' . $col_image . '"/>';
+									echo '</div>';
+							endif;
+								echo '<h3 class="title">' . $col_title . '</h3>';
+								echo '<div class="description">' . $col_description . '</div>';
 
-				        if( have_rows( 'links', $program ) ):
-				        echo '<div class="links">';
-				       	while ( have_rows( 'links', $program ) ) : the_row();
-				       		$link_title = get_sub_field( 'title' );
-				       		$link = get_sub_field( 'link' );
-				     		echo '<a href="' . $link . '">' . $link_title . '</a>';
-			     		endwhile;
-				     	echo '</div>';
-				     	endif;
+								if( have_rows( 'links', $program ) ):
+								echo '<div class="links">';
+								while ( have_rows( 'links', $program ) ) : the_row();
+									$link_title = get_sub_field( 'title' );
+									$link = get_sub_field( 'link' );
+								echo '<a href="' . $link . '">' . $link_title . '</a>';
+							endwhile;
+							echo '</div>';
+							endif;
 
-			        echo '</div>';
-			        echo '</div>';
-			    endwhile;
-		    echo '</div>';
-		    endif;
-		    echo '</div>';
+							echo '</div>';
+							echo '</div>';
+					endwhile;
+				echo '</div>';
+				endif;
+				echo '</div>';
 
 		endforeach;
 		?>

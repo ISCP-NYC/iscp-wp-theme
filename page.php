@@ -149,6 +149,10 @@
 
 		get_template_part( 'sections/critics' );
 
+	elseif( $page_slug == 'support-iscp'):
+
+		get_template_part( 'sections/support-iscp' );
+
 	elseif( in_array( $page_slug, array( 'at-iscp', 'in-nyc', 'staff-messages', 'to-do' ) ) ):
 
 		if (user_is_resident()):

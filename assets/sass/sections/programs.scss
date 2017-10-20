@@ -13,12 +13,12 @@ section.programs {
 			img {
 				width: 100%;
 			}
-            @include small {
-            	&:first-child {
-            		margin-bottom: 20px;
-            	}
-                width: 100%;
-            }
+	    @include small {
+	    	&:first-child {
+	    		margin-bottom: 20px;
+	    	}
+	        width: 100%;
+	    }
 		}
 		.caption {
 			margin-top: 10px;
@@ -40,68 +40,18 @@ section.programs {
 		.deadline-notes {
 			@include small-fs;
 		}
-		.columns {
-			width: 100%;
-			margin: 50px 0 0 0;
-			display: flex;
-    		flex-wrap: wrap;
-			.column {
-				width: calc(33% - 20px);
-		        float: left;
-		        padding-bottom: 50px;
-				&:nth-of-type(3n+1) {
-					margin: 0 20px 0 0;
+		.columns .column .inner {
+			.image img {
+				filter: grayscale(100%);
+				mix-blend-mode: screen;
+			}
+			.links {
+				padding: 20px 0;
+				a {
+					@include medium-fs;
+					display: block;
+					margin-bottom: 5px;
 				}
-				&:nth-of-type(3n+2) {
-					margin: 0 10px 0 10px;
-				}
-				&:nth-of-type(3n+3) {
-					margin: 0 0 0 20px;
-				}
-		        .inner {
-		        	.background {
-		        		width: 100%;
-						display: table;
-		        	}
-					.image {
-						background-color: $orange;
-						img {
-							width: 100%;
-							display: table;
-							filter: grayscale(100%);
-							mix-blend-mode: screen;
-						}
-					}
-					h3.title {
-						width: 100%;
-						padding: 20px 0;
-						text-align: center;
-					}
-					.description  {
-
-					}
-					.links {
-						padding: 20px 0;
-						a {
-							@include medium-fs;
-							display: block;
-							margin-bottom: 5px;
-						}
-					}
-				}
-			  	@include large {
-			  		width: calc(50% - 15px);
-			  		&:nth-of-type(2n+1) {
-						margin: 0 15px 0 0 !important;
-					}
-					&:nth-of-type(2n+2) {
-						margin: 0 0 0 15px !important;
-					}
-	            }
-	            @include small {
-	                width: 100%;
-	                margin: 0 !important;
-	            }
 			}
 		}
 	}
