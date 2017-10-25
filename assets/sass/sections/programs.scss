@@ -2,29 +2,6 @@ section.programs {
 	.program-links {
 		margin-top: 30px;
 	}
-	.images {
-		margin-top: 50px;
-		display: flex;
-		justify-content: space-between;
-		flex-wrap: wrap;
-		.image {
-			width: calc(50% - 15px);
-			float: left;
-			img {
-				width: 100%;
-			}
-	    @include small {
-	    	&:first-child {
-	    		margin-bottom: 20px;
-	    	}
-	        width: 100%;
-	    }
-		}
-		.caption {
-			margin-top: 10px;
-			@include small-fs;
-		}
-	}
 	.program {
 		margin-top: 30px;
 		h3.title {

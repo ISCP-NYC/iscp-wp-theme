@@ -27,12 +27,6 @@ section.journal {
 	    .journal-post {
 	    	margin-bottom: 30px;
 	    	padding-bottom: 30px;
-	    	a {
-	    		display: table;
-	    		&.image {
-	    			margin: auto;
-	    		}
-	    	}
 	    	h2.name {
 	    		display: table;
 	    		margin-bottom: 4px;
@@ -40,8 +34,9 @@ section.journal {
 		    header {
 		    	margin-bottom: 10px;
 		    }
-		    .image {
-		    	margin-bottom: 10px;
+		    a.image {
+		    	display: table;
+		    	margin: 0 auto 10px auto;
 		    	img {
 		    		width: 100%;
 		    		display: table;

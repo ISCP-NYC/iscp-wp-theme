@@ -169,6 +169,30 @@ a.bullet {
           font-size: 24px !important;
           line-height: 28px !important; } }
 
+section .content .module.images {
+  margin-top: 50px;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap; }
+  section .content .module.images .image {
+    width: calc(50% - 15px);
+    float: left; }
+    section .content .module.images .image img {
+      width: 100%; }
+    @media (max-width: 768px) {
+      section .content .module.images .image {
+        width: 100%; }
+        section .content .module.images .image:first-child {
+          margin-bottom: 20px; } }
+  section .content .module.images .caption {
+    margin-top: 10px;
+    font-size: 18px;
+    line-height: 21px; }
+    @media (max-width: 900px) {
+      section .content .module.images .caption {
+        font-size: 16px !important;
+        line-height: 20px !important; } }
+
 form {
   position: relative; }
   form .placeholder {
@@ -1249,6 +1273,9 @@ section {
         display: -webkit-flex;
         display: -ms-flexbox;
         display: flex; }
+        section .shelves.list .shelf-item .inner h2 {
+          text-align: left;
+          margin: 0; }
         section .shelves.list .shelf-item .inner h3 {
           width: 100%;
           text-align: left;
@@ -3420,18 +3447,15 @@ section.journal .content .journal {
   section.journal .content .journal .journal-post {
     margin-bottom: 30px;
     padding-bottom: 30px; }
-    section.journal .content .journal .journal-post a {
-      display: table; }
-      section.journal .content .journal .journal-post a.image {
-        margin: auto; }
     section.journal .content .journal .journal-post h2.name {
       display: table;
       margin-bottom: 4px; }
     section.journal .content .journal .journal-post header {
       margin-bottom: 10px; }
-    section.journal .content .journal .journal-post .image {
-      margin-bottom: 10px; }
-      section.journal .content .journal .journal-post .image img {
+    section.journal .content .journal .journal-post a.image {
+      display: table;
+      margin: 0 auto 10px auto; }
+      section.journal .content .journal .journal-post a.image img {
         width: 100%;
         display: table;
         margin: auto; }
@@ -3479,29 +3503,6 @@ section.journal-post .content .inner {
 
 section.programs .program-links {
   margin-top: 30px; }
-section.programs .images {
-  margin-top: 50px;
-  display: flex;
-  justify-content: space-between;
-  flex-wrap: wrap; }
-  section.programs .images .image {
-    width: calc(50% - 15px);
-    float: left; }
-    section.programs .images .image img {
-      width: 100%; }
-    @media (max-width: 768px) {
-      section.programs .images .image {
-        width: 100%; }
-        section.programs .images .image:first-child {
-          margin-bottom: 20px; } }
-  section.programs .images .caption {
-    margin-top: 10px;
-    font-size: 18px;
-    line-height: 21px; }
-    @media (max-width: 900px) {
-      section.programs .images .caption {
-        font-size: 16px !important;
-        line-height: 20px !important; } }
 section.programs .program {
   margin-top: 30px; }
   section.programs .program h3.title {
@@ -3822,18 +3823,21 @@ section#search .content .no, section#error .content .no {
   margin-top: 20px;
   text-align: center; }
 
-section.sponsors .shelves .value, section.contributors .shelves .value {
+section.sponsors .shelves .value, section.contributors .shelves .value, section.supporters .shelves .value {
   margin-right: 5px; }
-  section.sponsors .shelves .value.name, section.contributors .shelves .value.name {
+  section.sponsors .shelves .value.name, section.contributors .shelves .value.name, section.supporters .shelves .value.name {
     width: calc(50% - 5px) !important; }
-  section.sponsors .shelves .value.country, section.contributors .shelves .value.country {
+  section.sponsors .shelves .value.country, section.sponsors .shelves .value.middle, section.contributors .shelves .value.country, section.contributors .shelves .value.middle, section.supporters .shelves .value.country, section.supporters .shelves .value.middle {
     width: calc(25% - 5px) !important; }
-  section.sponsors .shelves .value.website, section.contributors .shelves .value.website {
+  section.sponsors .shelves .value.website, section.contributors .shelves .value.website, section.supporters .shelves .value.website {
     width: calc(25% - 5px) !important;
-    justify-content: flex-end; }
-    section.sponsors .shelves .value.website a, section.contributors .shelves .value.website a {
+    justify-content: flex-end;
+    flex: 1; }
+    section.sponsors .shelves .value.website a, section.contributors .shelves .value.website a, section.supporters .shelves .value.website a {
       float: right;
       text-align: right; }
+section.sponsors .module.images, section.contributors .module.images, section.supporters .module.images {
+  border: 0; }
 
 section.support-iscp .content .bullets {
   column-count: 2;

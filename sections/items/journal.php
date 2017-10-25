@@ -28,9 +28,7 @@ echo '<h3 class="author">by ' . $author . '</h3>';
 echo '</header>';
 if ($thumb != ''):
 echo '<a class="image" href="' . $url . '">';
-echo '<div class="image">';
 echo '<img src="' . $thumb . '"/>';
-echo '</div>';
 echo '</a>';
 endif;
 echo '<div class="excerpt">';

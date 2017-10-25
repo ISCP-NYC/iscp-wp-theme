@@ -1692,11 +1692,12 @@ function reorder_menu_items( $menu_order ) {
     return array(
         'edit.php?post_type=resident',
         'edit.php?post_type=event',
+        'edit.php?post_type=page',
         'edit.php?post_type=journal',
         'edit.php?post_type=sponsor',
         'edit.php?post_type=contributor',
+        'edit.php?post_type=supporter',
         'edit.php?post_type=country',
-        'edit.php?post_type=page',
         'edit.php?post_type=critic',
         'upload.php'
     );

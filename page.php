@@ -77,7 +77,11 @@
 
 	elseif( $page_slug == 'contributors' ):
 
-		get_template_part( 'sections/contributors' );		
+		get_template_part( 'sections/contributors' );	
+
+	elseif( $page_slug == 'supporters' ):
+
+		get_template_part( 'sections/supporters' );		
 
 	elseif( $parent_slug == 'residency-programs' ):
 
