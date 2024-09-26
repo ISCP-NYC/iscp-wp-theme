@@ -5,7 +5,7 @@ on:
   # push:
   #   branches: [ staging ]
   #   paths:
-  #     - 'wp/**'
+  #     - '/**'
 
 jobs:
   deploy-craft:
