@@ -69,7 +69,7 @@ $today = $today->format('Y-m-d H:i:s');
 			        $image_url = $image['url'];
 			        $orientation = get_orientation( $image['id'] );
 			      endif;
-			      $caption = label_art( $the_ID );
+			      $caption = label_art( the_row() );
 		        echo '<div class="piece slide">';
 		        echo '<div class="image ' . $orientation . '">';
 		        echo '<div class="captionWrap">';
@@ -158,13 +158,15 @@ $today = $today->format('Y-m-d H:i:s');
 				if( $rsvp ):
 					echo '<a href="' . $rsvp . '" class="link bullet" target="_blank">RSVP</a>';
 				endif;
-				foreach( $attachments as $index => $attachment ):
-					$attachment_name = $attachment['name'];
-					$attachment_url = $attachment['file']['url'];
-					echo '<a href="' . $attachment_url . '" class="link bullet" target="_blank">';
-					echo $attachment_name;
-					echo'</a>';
-				endforeach;
+				if( $attachments ):
+					foreach( $attachments as $index => $attachment ):
+						$attachment_name = $attachment['name'];
+						$attachment_url = $attachment['file'] ? $attachment['file']['url'] : null;
+						echo '<a href="' . $attachment_url . '" class="link bullet" target="_blank">';
+						echo $attachment_name;
+						echo'</a>';
+					endforeach;
+				endif;
 				?>
 				<div class="share bullet link">
 					<span class="toggle">Share</span>
@@ -220,11 +222,11 @@ $today = $today->format('Y-m-d H:i:s');
 			      	$orientation = 'landscape';
 			      else:
 			      	$image = get_sub_field( 'image' );
-			      	$image_id = $image['id'];
-			        $image_url = $image['url'];
-			        $orientation = get_orientation( $image['id'] );
+			      	$image_id = $image ? $image['id'] : null;
+			        $image_url = $image ? $image['url'] : null;
+			        $orientation = $image ? get_orientation( $image['id'] ) : null;
 			      endif;
-			      $caption = label_art( $the_ID );
+			      $caption = label_art( the_row() );
 		        echo '<div class="piece slide">';
 		        echo '<div class="image ' . $orientation . '">';
 		        echo '<div class="captionWrap">';
@@ -266,9 +268,9 @@ $today = $today->format('Y-m-d H:i:s');
 		$upcoming_events = array_slice( sort_upcoming_events(), 0, 3 );
 		if( $related || $upcoming_events ):
 			echo '<div class="bottom-modules">';
-			$count = sizeof( $upcoming_events );
+			$count = isset($upcoming_events) ? sizeof( $upcoming_events ) : null;
 			if ( $count ):
-				echo '<div class="events module shelves grid upcoming ' . $count_class . '">';
+				echo '<div class="events module shelves grid upcoming">';
 				echo '<h3 class="title">Current and Upcoming Events &amp; Exhibitions</h3>';
 				echo '<div class="eventsWrap">';
 				foreach( $upcoming_events as $event ):

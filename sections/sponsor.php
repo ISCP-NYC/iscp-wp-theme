@@ -11,8 +11,8 @@ $today = $today->format( 'Ymd' );
 
 $country_param = get_query_var( 'from' );
 $country_param_obj = get_page_by_path( $country_param, OBJECT, 'country' );
-$country_param_title = $country_param_obj->post_title;
-$country_param_id = $country_param_obj->ID;
+$country_param_title = $country_param_obj ? $country_param_obj->post_title : null;
+$country_param_id = $country_param_obj ? $country_param_obj->ID : null;
 $year_param = get_query_var( 'date' );
 
 $program_param = get_query_var( 'residency_program' );
@@ -83,7 +83,7 @@ $paged = 1;
 				<div class="bar">
 					<div class="select link dropdown country" data-filter="country" data-slug="<?php echo $sponsor_slug ?>">
 						<?php
-						if( $country_param ):
+						if( isset($country_param) ):
 							$selected = ': ' . $country_param_title;
 						else:
 							$selected = null;
@@ -97,7 +97,7 @@ $paged = 1;
 					</div>
 					<div class="select link dropdown date" data-filter="date" data-slug="<?php echo $sponsor_slug ?>">
 						<?php
-						if( $year_param ):
+						if( isset($year_param) ):
 							$selected = ': ' . $year_param;
 						else:
 							$selected = null;
@@ -111,7 +111,7 @@ $paged = 1;
 					</div>
 					<div class="select link dropdown program" data-filter="program" data-slug="<?php echo $sponsor_slug ?>">
 						<?php
-						if( $program_param ):
+						if( isset($program_param) && isset($program) ):
 							$selected = ': ' . get_program_title( $program );
 						else:
 							$selected = null;
@@ -125,7 +125,7 @@ $paged = 1;
 					</div>
 					<div class="select link dropdown type" data-filter="type" data-slug="<?php echo $sponsor_slug ?>">
 						<?php
-						if( $type_param ):
+						if( isset($type_param) ):
 							$selected = ': ' . ucwords( $type_param );
 						else:
 							$selected = null;
@@ -163,7 +163,7 @@ $paged = 1;
 			</div>
 		</div>
 		
-		<div class="residents shelves filter-this grid items sponsor <?php echo $sponsor_slug ?>" data-delay="<?php echo $delay ?>">
+		<div class="residents shelves filter-this grid items sponsor <?php echo $sponsor_slug ?>" data-delay="<?= isset($delay) ? $delay : null ?>">
 		</div>
 	</div>
 	<?php get_template_part('partials/footer'); ?>

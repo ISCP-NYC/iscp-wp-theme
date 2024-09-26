@@ -1,4 +1,5 @@
 <?php
+
 function twentyfifteen_javascript_detection() {
 	echo "<script>(function(html){html.className = html.className.replace(/\bno-js\b/,'js')})(document.documentElement);</script>\n";
 }
@@ -79,10 +80,11 @@ add_action( 'save_post', 'add_ground_floor_studio_num' );
 
 function load_more() {
 	$query_vars = json_decode( stripslashes( $_POST['query_vars'] ), true );
-  $query_vars['paged'] = $_POST['page'];
-  $slug = $query_vars['pagename'];
-  $page_type = $query_vars['pagetype'];
-  $post_type = $slug;
+  // $query_vars['paged'] = $_POST['page'];
+  // error_log( print_r( $query_vars, true ) );
+  $slug = $query_vars['pagename'] ? $query_vars['pagename'] : null;
+  $page_type = array_key_exists('post_type', $query_vars) ? $query_vars['post_type'] : ( array_key_exists('pagetype', $query_vars) ? $query_vars['pagetype'] : null );
+  $post_type = $slug ? $slug : null;
   if( strstr( $slug, 'residents' ) || $page_type == 'sponsor' ):
   	$post_type = 'residents';
   elseif( $post_type == 'journal' ):
@@ -98,10 +100,10 @@ add_action( 'wp_ajax_load_more', 'load_more' );
 
 function insert_filter_list() {
 	$query_vars = json_decode( stripslashes( $_POST['query_vars'] ), true );
-  $query_vars['paged'] = $_POST['page'];
-  $slug = $query_vars['pagename'];
-  $page_type = $query_vars['pagetype'];
-  $post_type = $slug;
+  // $query_vars['paged'] = $_POST['page'];
+  $slug = $query_vars['pagename'] ? $query_vars['pagename'] : null;
+  $page_type = array_key_exists('post_type', $query_vars) ? $query_vars['post_type'] : ( array_key_exists('pagetype', $query_vars) ? $query_vars['pagetype'] : null );
+  $post_type = $slug ? $slug : null;
   if( strstr( $slug, 'residents' ) || $page_type == 'sponsor' ):
   	$post_type = 'residents';
   elseif( $post_type == 'journal' ):
@@ -221,11 +223,11 @@ add_filter( 'query_vars', 'add_query_vars_filter' );
 /////////////////////////////////////
 
 function event_order( $wp_query ) {
-	global $pagenow;
-  	if ( is_admin() && 'edit.php' == $pagenow && !isset( $_GET['orderby'] )) {
-  		$screen = get_current_screen();
-  		$post_type = $screen->post_type;
-  		if( $post_type == 'event' ):
+	global $typenow;
+  	if ( is_admin() && 'edit.php' == $typenow && !isset( $_GET['orderby'] )) {
+  		// $screen = get_current_screen();
+  		// $post_type = $screen->post_type;
+  		if( $typenow == 'event' ):
 	    	$wp_query->set( 'order', 'DESC' );
 	    	$wp_query->set( 'meta_key', 'start_date' );
 	    	$wp_query->set( 'orderby',  'meta_value_num' );
@@ -233,7 +235,6 @@ function event_order( $wp_query ) {
   	}
 }
 add_filter('pre_get_posts', 'event_order' );
-
 
 function add_event_columns($columns) {
 	unset(
@@ -518,7 +519,12 @@ add_filter('manage_sponsor_posts_columns' , 'add_sponsor_columns');
 function custom_sponsor_column( $column, $post_id ) {
     switch ( $column ) {
 		case 'country':
-			$country = get_field( 'country', $post_id )[0]->post_title;
+			if ( get_field( 'country', $post_id ) ){
+				$country = get_field( 'country', $post_id )[0]->post_title;
+			}
+			else {
+				$country = null;
+			}
 			echo $country;
 			break;
     }
@@ -733,7 +739,7 @@ function get_display_image( $id ) {
 		$thumb_url = $thumb_url_array[0];
 		return $thumb_url;
 	elseif( have_rows('gallery') ):
-		return get_sub_field( 'image', $id )['url'];
+		return get_sub_field( 'image', $id ) ? get_sub_field( 'image', $id )['url'] : null;
 	else:
 		return '';
 	endif;
@@ -1012,52 +1018,52 @@ function makeClickableLinks( $s ) {
   return preg_replace('@(https?://([-\w\.]+[-\w])+(:\d+)?(/([\w/_\.#-]*(\?\S+)?[^\.\s])?)?)@', '<a target="blank" rel="nofollow" href="$1" target="_blank">$1</a>', $s);
 }
 
-function get_tweets( $count ) {
-	$about = get_page_by_path( 'about' );
-	$handle = get_field( 'twitter', $about );
-	include_once( get_template_directory() . '/libraries/twitteroauth/twitteroauth.php' );
-	$twitter_customer_key = 'w84XEX5nmjGTyeSqu1x81elRz';
-	$twitter_customer_secret = 'RMfQR9mzU09dgLEdapvpZUbuxlvY8IYRZYcjfObV5vbMJZoNE7';
-	$twitter_access_token = '326246243-X0bIkrnd8WCWbDpUAkN3yaSEU4jRLIo6QyiSPxfR';
-	$twitter_access_token_secret = 'W8YiXMlcSFOz2JHGJD069Zz3RDSI2Rbaw5J51CJAPo5di';
+// function get_tweets( $count ) {
+// 	$about = get_page_by_path( 'about' );
+// 	$handle = get_field( 'twitter', $about );
+// 	include_once( get_template_directory() . '/libraries/twitteroauth/twitteroauth.php' );
+// 	$twitter_customer_key = 'w84XEX5nmjGTyeSqu1x81elRz';
+// 	$twitter_customer_secret = 'RMfQR9mzU09dgLEdapvpZUbuxlvY8IYRZYcjfObV5vbMJZoNE7';
+// 	$twitter_access_token = '326246243-X0bIkrnd8WCWbDpUAkN3yaSEU4jRLIo6QyiSPxfR';
+// 	$twitter_access_token_secret = 'W8YiXMlcSFOz2JHGJD069Zz3RDSI2Rbaw5J51CJAPo5di';
 
-	$connection = new TwitterOAuth($twitter_customer_key, $twitter_customer_secret, $twitter_access_token, $twitter_access_token_secret);
+// 	$connection = new TwitterOAuth($twitter_customer_key, $twitter_customer_secret, $twitter_access_token, $twitter_access_token_secret);
 
-	$raw_tweets = $connection->get('statuses/user_timeline', array('screen_name' => $handle, 'count' => $count ) );
-	$tweets = new ArrayObject();
-	$twitter_url = 'http://twitter.com/'.$handle;
-	echo '<div class="twitter">';
-	echo '<div class="follow">';
-	echo '<h3 class="title">';
-	echo '<a href="'.$twitter_url.'" target="_blank">Follow us on Twitter @' . $handle . '</a>';
-	echo '</h3>';
-	echo '</div>';
-	echo '<div class="tweets">';
+// 	$raw_tweets = $connection->get('statuses/user_timeline', array('screen_name' => $handle, 'count' => $count ) );
+// 	$tweets = new ArrayObject();
+// 	$twitter_url = 'http://twitter.com/'.$handle;
+// 	echo '<div class="twitter">';
+// 	echo '<div class="follow">';
+// 	echo '<h3 class="title">';
+// 	echo '<a href="'.$twitter_url.'" target="_blank">Follow us on Twitter @' . $handle . '</a>';
+// 	echo '</h3>';
+// 	echo '</div>';
+// 	echo '<div class="tweets">';
 
-	$counter = 0;
-	foreach ( $raw_tweets as $tweet ):
-		if( isset( $tweet->errors ) ):           
-		    // $tweet = 'Error :'. $raw_tweets[$counter]->errors[0]->code. ' - '. $raw_tweets[$counter]->errors[0]->message;
-		else:
-		    $text = makeClickableLinks( $tweet->text );
-		    $timestamp = strtotime( $tweet->created_at );
-		    $elapsed = humanTiming( $timestamp );
-		    $id = $tweet->id;
-		    $url = 'http://twitter.com/' . $handle . '/status/' . $id;
-		    echo '<div class="tweet">';
-		    echo '<div class="text">';
-			echo $text;
-			echo '</div>';
-			echo '<a href="' . $url . '" target="_blank" class="timestamp">';
-			echo $elapsed;
-			echo '</a>';
-			echo '</div>';
-		endif;
-	endforeach;
+// 	$counter = 0;
+// 	foreach ( $raw_tweets as $tweet ):
+// 		if( isset( $tweet->errors ) ):           
+// 		    // $tweet = 'Error :'. $raw_tweets[$counter]->errors[0]->code. ' - '. $raw_tweets[$counter]->errors[0]->message;
+// 		else:
+// 		    $text = makeClickableLinks( $tweet->text );
+// 		    $timestamp = strtotime( $tweet->created_at );
+// 		    $elapsed = humanTiming( $timestamp );
+// 		    $id = $tweet->id;
+// 		    $url = 'http://twitter.com/' . $handle . '/status/' . $id;
+// 		    echo '<div class="tweet">';
+// 		    echo '<div class="text">';
+// 			echo $text;
+// 			echo '</div>';
+// 			echo '<a href="' . $url . '" target="_blank" class="timestamp">';
+// 			echo $elapsed;
+// 			echo '</a>';
+// 			echo '</div>';
+// 		endif;
+// 	endforeach;
 
-	echo '</div>';
-	echo '</div>';
-}
+// 	echo '</div>';
+// 	echo '</div>';
+// }
 
 function embed_vimeo( $id ) {
 	$width = '640';
@@ -1109,6 +1115,7 @@ function get_event_date( $id ) {
 		$start_day_word = $start_date->format('l');
 		$start_day = $start_date->format('j');
 		$start_year = $start_date->format('Y');
+	else: ( $start_date = null );
 	endif;
 
 	if ( $_end_date && $_end_date != '-' ):
@@ -1117,6 +1124,7 @@ function get_event_date( $id ) {
 		$end_day_word = $end_date->format('l');
 		$end_day = $end_date->format('j');
 		$end_year = $end_date->format('Y');
+	else: ( $end_date = null );
 	endif;
 
 	$time = get_field('time', $id);
@@ -1145,11 +1153,12 @@ function get_event_date( $id ) {
 
 function get_thumb( $id, $size = null ) {
 	$thumbnail = get_display_image( $id );
+	$thumbnail_gallery = get_field( 'gallery', $id );
 	if($size == null):
 		$size = 'thumb';
 	endif;
-	if( !$thumbnail ):
-		$thumbnail = get_field( 'gallery', $id )[0]['image']['sizes'][$size];
+	if( !$thumbnail && $thumbnail_gallery ):
+		$thumbnail = $thumbnail_gallery[0]['image'] ? $thumbnail_gallery[0]['image']['sizes'][$size] : null;
 	endif;
 	if( !$thumbnail ):
 		$thumbnail = false;
@@ -1219,7 +1228,7 @@ function get_orientation( $id ) {
 function get_program_title( $program_slug ) {
 	$program_slug = str_replace( '_', '-', $program_slug );
 	$program_obj = get_page_by_path( 'residency-programs/' . $program_slug, OBJECT, 'page' );
-	if($program_obj->post_parent != 0):
+	if($program_obj && $program_obj->post_parent != 0):
 		$program_title = $program_obj->post_title;
 		$program_id = $program_obj->ID;
 		return $program_title;
@@ -1308,6 +1317,8 @@ function get_dimensions() {
     $height = get_sub_field( 'height' );
     $depth = get_sub_field( 'depth' );
     $units = get_sub_field( 'units' );
+    $ins = null;
+    $cms = null;
     if( (!$width && !$height) || (!$width && !$depth) || (!$height && !$depth) ):
     	return $dimensions;
     endif;
@@ -1434,7 +1445,12 @@ function query_url( $key, $value, $url, $filter = null, $remove = false ) {
 	$this_query = array( $key => $value );
 	$url = explode('#', $url)[0];
 	$parsed_url = parse_url($url);
-	parse_str($parsed_url['query'], $params);
+	if (!empty($parsed_url['query'])){
+		parse_str($parsed_url['query'], $params);
+	}
+	else{
+		$params = [];
+	}
 	$params = array_merge( $params, $this_query );
 	$url = strtok($url, '?');
 	if( $remove ):
@@ -1632,7 +1648,7 @@ function get_contributor_count( $type, $value, $page_query ) {
 	return $count;
 }
 
-function unsetRepeat( $query = null, $value ) {
+function unsetRepeat(?string $query, $value ) {
 	if( $query['meta_query'] ):
 		foreach( $query['meta_query'] as $index=>$array ):
 			if( is_array( $array ) ):			
@@ -1708,8 +1724,10 @@ add_filter( 'menu_order', 'reorder_menu_items' );
 function wpdocs_register_my_custom_menu_page() {
 	$lock_icon = get_template_directory_uri() . '/assets/images/lock-white-small.svg';
 
+	$to_do = get_page_by_path( 'greenroom/to-do' );
 
-	$to_do_id = get_page_by_path( 'greenroom/to-do' )->ID;
+	if($to_do){
+		$to_do_id = $to_do->ID;
     add_menu_page(
         __( 'To-Do', 'textdomain' ),
         'To-Do',
@@ -1719,8 +1737,12 @@ function wpdocs_register_my_custom_menu_page() {
         $lock_icon,
         10
     );
+	}
 
-    $staff_messages_id = get_page_by_path( 'greenroom/staff-messages' )->ID;
+	$staff_messages = get_page_by_path( 'greenroom/staff-messages' );
+
+	if($staff_messages){
+		$staff_messages_id = $staff_messages->ID;
     add_menu_page(
         __( 'Staff Messages', 'textdomain' ),
         'Staff Messages',
@@ -1730,8 +1752,12 @@ function wpdocs_register_my_custom_menu_page() {
         $lock_icon,
         11
     );
+	}
 
-    $at_iscp_id = get_page_by_path( 'greenroom/at-iscp' )->ID;
+	$at_iscp = get_page_by_path( 'greenroom/at-iscp' );
+
+	if($at_iscp){
+    $at_iscp_id = $at_iscp->ID;
     add_menu_page(
         __( 'At ISCP', 'textdomain' ),
         'At ISCP',
@@ -1741,8 +1767,12 @@ function wpdocs_register_my_custom_menu_page() {
         $lock_icon,
         12
     );
+	}
 
-    $in_nyc_id = get_page_by_path( 'greenroom/in-nyc' )->ID;
+	$in_nyc = get_page_by_path( 'greenroom/in-nyc' );
+
+	if($in_nyc){
+    $in_nyc_id = $in_nyc->ID;
     add_menu_page(
         __( 'In NYC', 'textdomain' ),
         'In NYC',
@@ -1752,6 +1782,7 @@ function wpdocs_register_my_custom_menu_page() {
         $lock_icon,
         13
     );
+	}
 }
 add_action( 'admin_menu', 'wpdocs_register_my_custom_menu_page' );
 
@@ -1786,7 +1817,7 @@ function search_broken_link() {
 }
 
 function get_meta_description( $id ) {
-	$type = get_post_type( $post_id );
+	$type = get_post_type( $id );
 	if( $type == 'event' ):
 		$value = trim(rtrim(substr(strip_tags(get_field( 'description', $id)), 0, 200))) . '...';
 	else:

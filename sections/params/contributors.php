@@ -1,4 +1,5 @@
 <?php
+global $post;
 $title = get_the_title();
 $slug = $post->post_name;
 $id = $post->ID;

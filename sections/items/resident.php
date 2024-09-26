@@ -11,6 +11,7 @@ $studio_number = get_field( 'studio_number', $resident_id );
 $residency_program = get_field( 'residency_program', $resident_id );
 $sponsors = get_sponsors( $resident_id );
 $url = get_permalink();
+$no_link = null;
 if( $bio ):
 	if( have_rows( 'residency_dates', $resident_id ) ):
 		while ( have_rows( 'residency_dates' ) ) : the_row();

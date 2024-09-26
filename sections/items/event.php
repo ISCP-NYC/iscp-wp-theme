@@ -11,6 +11,7 @@ $event_status = get_event_status( $event_id );
 $event_date_format = get_event_date( $event_id );
 $event_thumb = get_thumb( $event_id, 'thumb' );
 $today = date('Ymd');
+$opening = null;
 if( get_field( 'opening_reception', $event_id ) >= $today ):
 	$opening = get_field( 'opening_reception', $event_id );
 	if( $opening ) {

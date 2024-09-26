@@ -187,17 +187,17 @@ endif;
 			echo '<div class="cursor"></div>';
 			echo '<div class="images slides">';
 		    while ( have_rows( 'gallery' ) ) : the_row();
-					$media_type = get_sub_field( 'media_type', $home_id );
+				$media_type = get_sub_field( 'media_type', $resident_id );
 	        if( $media_type == 'video' ):
-	        	$video = get_sub_field( 'vimeo_id', $home_id );
+	        	$video = get_sub_field( 'vimeo_id', $resident_id );
 		      	$orientation = 'landscape';
 		      else:
 		      	$image = get_sub_field( 'image' );
-		      	$image_id = $image['id'];
-		        $image_url = $image['url'];
-		        $orientation = get_orientation( $image['id'] );
+		      	$image_id = $image ? $image['id'] : null;
+		        $image_url = $image ? $image['url'] : null;
+		        $orientation = $image ? get_orientation( $image['id'] ) : null;
 		      endif;
-		      $caption = label_art( $the_ID );
+		      $caption = label_art( the_row() );
 	        echo '<div class="piece slide">';
 	        echo '<div class="image ' . $orientation . '">';
 	        echo '<div class="captionWrap">';
@@ -226,15 +226,19 @@ endif;
 				'value' => 'ground_floor',
 				'compare' => 'LIKE'
 			) );
-		elseif( $countries_array ):
+		elseif( isset($countries_array) ):
+		  	// error_log( print_r( $countries_array, true ) );
 			$rand_index = array_rand( $countries_array, 1 );
 			$country = $countries_array[$rand_index];
 			$meta_query = array(
 				'relation' => 'OR'
 			);
 			$country_name = $country->post_title;
+			$country_names = null;
+			$country_ids = null;
+			$key = null;
 			$country_id = $country->ID;
-			$country_ids[] .= $country_id;
+			$country_ids .= $country_id;
 			if( $key != 0 ):
 				$country_names .= ', ';
 			endif;

@@ -1,5 +1,11 @@
 <?php
-$home_id = get_page_by_path( 'home' )->ID;
+$home = get_page_by_path( 'home' );
+if($home){
+	$home_id = get_page_by_path( 'home' )->ID;
+}
+else {
+	$home_id = get_option('page_on_front');
+}
 ?>
 <section <?php section_attr( null, 'home', null, 'International Studio &amp; Curatorial Program' ); ?> data-title="Home">
 	<?php get_template_part('partials/nav') ?>
@@ -72,7 +78,7 @@ $home_id = get_page_by_path( 'home' )->ID;
 			echo '<div class="slides">';
 			while ( have_rows( 'image_slider', $home_id ) ) : the_row();
 				$media_type = get_sub_field( 'media_type', $home_id );
-				$caption = label_art( $the_ID );
+				$caption = label_art( the_row() );
 
         if( $media_type == 'video' ):
         	$video = get_sub_field( 'vimeo_id', $home_id );
@@ -123,7 +129,7 @@ $home_id = get_page_by_path( 'home' )->ID;
 
 		<div class="module social">
 			<?php
-			get_tweets( 3 );
+			// get_tweets( 3 );
 			$facebook_url = 'http://facebook.com/' . get_field( 'facebook', $about_id );
 			$instagram_handle = str_replace('@', '', get_field( 'instagram', $about_id ) );
 			$instagram_url = 'http://instagram.com/' . $instagram_handle;

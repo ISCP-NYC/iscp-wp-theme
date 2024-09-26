@@ -68,7 +68,7 @@ $residency_programs = get_pages( $residency_programs_query );
 					echo '<div class="rows">';
 					foreach( $sponsors as $sponsor ):
 						setup_postdata($sponsor);
-						$country = get_field( 'country', $sponsor )[0]->post_title;
+						$country = get_field( 'country', $sponsor ) ? get_field( 'country', $sponsor )[0]->post_title : null;
 						$sponsor_id = $sponsor->ID;
 						$sponsor_title = get_the_title( $sponsor );
 						$sponsor_website = get_field( 'website', $sponsor_id );

@@ -7,6 +7,7 @@
 		<div class="top">
 			<div class="filter">
 				<?php
+				$tag_name = null;
 				if( $tag_param ):
 					$tag_name = get_term_by('slug', $tag_param, 'post_tag')->name;
 					echo '<div class="bar">';
@@ -25,7 +26,7 @@
 				?>
 			</div>
 		</div>
-		<div class="journal filter-this masonry grid items" data-delay="<?php echo $delay ?>">
+		<div class="journal filter-this masonry grid items" data-delay="<?= isset($delay) ? $delay : '' ?>">
 			<div class="sizer"></div>
 		</div>
 	</div>

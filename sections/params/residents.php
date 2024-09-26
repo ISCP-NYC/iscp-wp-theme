@@ -1,31 +1,39 @@
 <?php
+global $post;
+// error_log( print_r( $post, true ) );
 $title = get_the_title();
-$slug = $post->post_name;
-$id = $post->ID;
+$slug = $post ? $post->post_name : null;
+$id = $post ? $post->ID : null;
 $today = new DateTime();
 $today = $today->format( 'Ymd' );
 $paged = 1;
-$post_type = $post->post_type;
-$delay = $post->delay;
+$post_type = $post ? $post->post_type : null;
+$page_type = null;
+$country_query = null;
+$program_query = null;
+$sponsor_query = null;
+$type_query = null;
+$year_query = null;
+$delay = $post ? $post->delay : null;
 $page_query = array(
 	'key' => 'residency_dates_0_end_date',
 	'type' => 'DATE',
 	'value' => $today,
 );
 $filter_query = array();
-if( $query_vars ):
+if( isset($query_vars) && $query_vars ):
 	$slug = $query_vars['pagename'];
-	$filter_param = $query_vars['filter'];
+	$filter_param = array_key_exists('filter', $query_vars) ? $query_vars['filter'] : null;
 	$page_param = $filter_param . '-residents';
-	$page_type = $query_vars['pagetype'];
+  	$page_type = array_key_exists('post_type', $query_vars) ? $query_vars['post_type'] : ( array_key_exists('pagetype', $query_vars) ? $query_vars['pagetype'] : null );
 	if( $page_param == $slug || $page_type == 'sponsor' || $page_param == 'all-'.$slug ):
-		$paged = $query_vars['paged'];
+		$paged = array_key_exists('paged', $query_vars) ? $query_vars['paged'] : null;
 		$post = get_page_by_path( $slug, OBJECT, 'page' );
 		$page_param = $slug;
-		$country_param = $query_vars['from'];
-		$year_param = $query_vars['date'];
-		$program_param = $query_vars['program'];
-		$type_param = $query_vars['type'];
+		// $country_param = $query_vars['from'];
+		$year_param = array_key_exists('date', $query_vars) ? $query_vars['date'] : null;
+		$program_param = array_key_exists('program', $query_vars) ? $query_vars['program'] : null;
+		$type_param = array_key_exists('type', $query_vars) ? $query_vars['type'] : null;
 	endif;
 else:
 	$filter_param = get_query_var( 'filter' );
@@ -76,7 +84,7 @@ elseif( $post_type == 'sponsor' || $page_type == 'sponsor' || $post_type == 'res
 	);
 endif;
 
-if( $country_param ):
+if( isset($country_param) && $country_param ):
 	$country_param_obj = get_page_by_path( $country_param, OBJECT, 'country' );
 	$country_param_title = $country_param_obj->post_title;
 	$country_param_id = $country_param_obj->ID;
@@ -87,7 +95,7 @@ if( $country_param ):
 	);
 endif;
 
-if( $year_param ):
+if( isset($year_param) && $year_param ):
 	$year_begin = $year_param . '0101';
 	$year_end = $year_param . '1231';
 	$year_range = array( $year_begin, $year_end );
@@ -99,7 +107,7 @@ if( $year_param ):
 	);
 endif;
 
-if( $program_param ):
+if( isset($program_param) && $program_param ):
 	$program_query = array(
 		'key' => 'residency_program',
 		'type' => 'CHAR',
@@ -108,7 +116,7 @@ if( $program_param ):
 	);
 endif;
 
-if( $sponsor_param ):
+if( isset($sponsor_param) && $sponsor_param ):
 	$sponsor_query = array(
 		'relation' => 'OR'
 	);
@@ -121,7 +129,7 @@ if( $sponsor_param ):
 	}
 endif;
 
-if( $type_param ):
+if( isset($type_param) && $type_param ):
 	$type_query = array(
 		'key' => 'resident_type',
 		'type' => 'CHAR',
