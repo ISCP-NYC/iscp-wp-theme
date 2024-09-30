@@ -1,7 +1,7 @@
 <?php
 $page_url = $query_vars['url'];
-$type_param = $query_vars['type'];
-$year_param = $query_vars['date'];
+$type_param = array_key_exists('type', $query_vars) ? $query_vars['type'] : null;
+$year_param = array_key_exists('date', $query_vars) ? $query_vars['date'] : null;
 ?>
 <div class="filter-list type <?php echo $slug ?>" data-filter="type">
 	<div class="options">

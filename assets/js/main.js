@@ -1825,10 +1825,10 @@ function scrollToResourceItem() {
 /////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////
-var copyLink = new Clipboard('.share .copy');
-$('body').on('click touchstart', '.share .copy', function() {
-	var permalink = $(this).attr('data-clipboard-text');
-});
+// var copyLink = new Clipboard('.share .copy');
+// $('body').on('click touchstart', '.share .copy', function() {
+// 	var permalink = $(this).attr('data-clipboard-text');
+// });
 
 function updateFavicons(newColor) {
 	$('link[data-update]').each(function() {

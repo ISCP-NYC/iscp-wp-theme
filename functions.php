@@ -171,10 +171,10 @@ add_action( 'wp_ajax_nopriv_get_map_countries', 'get_map_countries' );
 add_action( 'wp_ajax_get_map_countries', 'get_map_countries' );
 
 function filter_items() {
-	$query_vars = json_decode( stripslashes( $_POST['query_vars'] ), true );
+		$query_vars = json_decode( stripslashes( $_POST['query_vars'] ), true );
     $query_vars['paged'] = $_POST['page'];
-    $slug = $query_vars['pagename'];
-    $page_type = $query_vars['pagetype'];
+    $slug = array_key_exists('pagename', $query_vars) ? $query_vars['pagename'] : null;
+    $page_type = array_key_exists('pagetype', $query_vars) ? $query_vars['pagetype'] : null;
     $post_type = $slug;
     if( strstr( $slug, 'residents' ) || $page_type == 'sponsor' ):
     	$post_type = 'residents';

@@ -4,6 +4,7 @@ if(!$events_section):
 	$events_section = $GLOBALS['events_section'];
 endif;
 $today = date('Ymd');
+$filter_query = [];
 
 if( $events_section == 'past' ):
 	$order = 'DESC';

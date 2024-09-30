@@ -10,7 +10,7 @@ include( locate_template( 'sections/params/residents.php' ) );
 		<?php
 		if($slug == 'residents'):
 			if( $program_param ):
-				if( $program_param == 'ground_floor' ):
+				if( $program_param == 'ground_floor'):
 					echo 'Ground Floor ';
 				else:
 					echo 'International ';
@@ -22,10 +22,10 @@ include( locate_template( 'sections/params/residents.php' ) );
 				echo 'Residents';
 			endif;
 
-			if( isset($country_param) ):
+			if( isset($country_param) && isset($resident_title) ):
 				echo $resident_title . ' from ' . $country_param_title;
 			endif;
-			if( $year_param ):
+			if( isset($year_param) && isset($resident_title) ):
 				echo $resident_title . ' in ' . $year_param;
 			endif;
 		else:

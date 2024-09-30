@@ -2,7 +2,7 @@
 include(locate_template('sections/params/events.php'));
 $page_url = get_the_permalink();
 ?>
-<section <?php section_attr( $id, $slug, $events_classes ); ?> data-page="<?php echo $paged ?>">
+<section <?php section_attr( $id, $slug, $event_classes ); ?> data-page="<?php echo $paged ?>">
 	<?php get_template_part('partials/nav') ?>
 	<?php get_template_part('partials/side') ?>
 	<div class="content">
@@ -31,7 +31,7 @@ $page_url = get_the_permalink();
 				<div class="bar">
 					<div class="select link dropdown type" data-filter="type" data-slug="<?php echo $slug ?>">
 						<?php
-						if( $event_type_param ):
+						if( isset($event_type_param) ):
 							$selected = ': ' . $event_type_param_title;
 						else:
 							$selected = null;
@@ -45,7 +45,7 @@ $page_url = get_the_permalink();
 					</div>
 					<div class="select link dropdown year" data-filter="year" data-slug="<?php echo $slug ?>">
 						<?php
-						if( $year_param ):
+						if( isset($year_param) ):
 							$selected = ': ' . $year_param;
 						else:
 							$selected = null;
