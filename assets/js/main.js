@@ -860,6 +860,8 @@ function filterQuery(vars, section, url, option) {
 			if($(section).is('#residents')) {
 				updateResidentsTitle(JSON.parse(vars));
 			}
+			console.log('filter query before send');
+			console.log('Vars: ' + vars);
 		},
 		success: function(response) {
 			$(section).one(transitionEnd, function(e) {
@@ -885,6 +887,8 @@ function filterQuery(vars, section, url, option) {
 				}
 				// fixScroll(section, content);
 			});
+			console.log('Response: ' + response);
+			console.log('filter query success');
 		}
 	});
 }
