@@ -865,6 +865,7 @@ function filterQuery(vars, section, url, option) {
 		},
 		success: function(response) {
 			$(section).one(transitionEnd, function(e) {
+				console.log('transition end');
 				$(container).removeClass('removing');
 				if($(section).is('.journal')) {
 					$(container).masonry('remove', items);
