@@ -864,8 +864,9 @@ function filterQuery(vars, section, url, option) {
 			console.log('Vars: ' + vars);
 		},
 		success: function(response) {
-			$(section).delay(1000).one(transitionEnd, function(e) {
-				console.log('transition end');
+			setTimeout(function() {
+			// $(section).one(transitionEnd, function(e) {
+				// console.log('transition end');
 				$(container).removeClass('removing');
 				if($(section).is('.journal')) {
 					$(container).masonry('remove', items);
@@ -888,7 +889,8 @@ function filterQuery(vars, section, url, option) {
 					$(section).animate({ scrollTop: 0 }, 300, 'easeOutQuart');
 				}
 				// fixScroll(section, content);
-			});
+			// });
+			}, 500);
 			console.log('Response: ' + response);
 			console.log('filter query success');
 		}
