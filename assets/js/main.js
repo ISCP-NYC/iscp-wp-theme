@@ -940,6 +940,7 @@ function filterThis(html, vars) {
 			$(content).scrollTop(scrollHeight);
 		}
 		fixScroll(section, content);
+		console.log('filter this');
 	}
 }
 
@@ -960,6 +961,7 @@ function updateFilterLinks(option) {
 		}
 		$(this).attr('href', url);
 	});
+	console.log('update filter links');
 }
 
 function renameFilterType(filterType) {
@@ -1035,6 +1037,7 @@ $('body').on('click', '.filter .select:not(.tag)', function() {
 				$(loadingText).addClass('show');
 			});
 			$(filter).on('loaded', function() {
+				console.log('loaded');
 				$(loadingText).one(transitionEnd, function() {
 					dropDown(property, slug);
 					$(filter).off('loaded');
