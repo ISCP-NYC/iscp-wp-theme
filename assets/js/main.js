@@ -874,6 +874,7 @@ function filterQuery(vars, section, url, option) {
 				} else {
 					$(container).html('');
 					if($(option).length) {
+						console.log('option: ' + $(option).length);
 						updateFilterLinks(option, vars);
 					}
 					filterThis(response, vars);
