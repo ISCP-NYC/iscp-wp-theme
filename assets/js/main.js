@@ -864,7 +864,7 @@ function filterQuery(vars, section, url, option) {
 			console.log('Vars: ' + vars);
 		},
 		success: function(response) {
-			$(section).one(transitionEnd, function(e) {
+			$(section).delay(1000).one(transitionEnd, function(e) {
 				console.log('transition end');
 				$(container).removeClass('removing');
 				if($(section).is('.journal')) {
