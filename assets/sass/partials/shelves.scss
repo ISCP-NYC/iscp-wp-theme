@@ -11,10 +11,6 @@
 			float: left;
 			padding-bottom: 55px;
 			margin-bottom: 50px;
-			@include small {
-			  padding-bottom: 34px;
-			  margin-bottom: 17px;
-			}
 			transition: color 150ms ease-in-out, opacity 300ms ease-in-out;
 			* {
 				transition: color 150ms ease-in-out;
@@ -119,6 +115,8 @@
 				}
 			}
 			@include small {
+				padding-bottom: 34px;
+			  margin-bottom: 17px;
 				.inner {
 					width: calc(100% - 45px);
 				}
@@ -162,8 +160,8 @@
 				.value {
 					float:left;
 					text-align: left;
-					@include small-fs;
 					word-break: break-word;
+					@include small-fs;
 				}
 			}
 		  @include small {

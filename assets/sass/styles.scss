@@ -1,8 +1,9 @@
 /*
 Theme Name: ISCPT
 */
-@font-face {font-family: 'Life Italic';src: url('../fonts/3095D6_0_0.eot');src: url('../fonts/3095D6_0_0.eot?#iefix') format('embedded-opentype'),url('../fonts/3095D6_0_0.woff2') format('woff2'),url('../fonts/3095D6_0_0.woff') format('woff'),url('../fonts/3095D6_0_0.ttf') format('truetype');}
-@font-face {font-family: 'Life Rounded';src: url('../fonts/3095D6_1_0.eot');src: url('../fonts/3095D6_1_0.eot?#iefix') format('embedded-opentype'),url('../fonts/3095D6_1_0.woff2') format('woff2'),url('../fonts/3095D6_1_0.woff') format('woff'),url('../fonts/3095D6_1_0.ttf') format('truetype');}
+@font-face {font-family: 'Life Italic';src: url('../fonts/3095D6_0_0.eot');src: url('../fonts/3095D6_0_0.eot?#iefix') format('embedded-opentype'),url('../fonts/3095D6_0_0.woff2') format('woff2'),url('../fonts/3095D6_0_0.woff') format('woff');}
+@font-face {font-family: 'Life Rounded';src: url('../fonts/3095D6_1_0.eot');src: url('../fonts/3095D6_1_0.eot?#iefix') format('embedded-opentype'),url('../fonts/3095D6_1_0.woff2') format('woff2'),url('../fonts/3095D6_1_0.woff') format('woff');}
+@font-face {font-family: 'Din Round';src: url('../fonts/ff_dinround-bold.woff2') format('woff2');}
 @import 'vars';
 @import 'mixins';
 @import 'extends';
@@ -15,11 +16,17 @@ body {
 	overflow: hidden;
 	font-family: 'Life Rounded', Times;
 	color: $black;
-	@include medium-fs;
+	-webkit-text-size-adjust:100%;
 	* {
 		font-family: 'Life Rounded', Times;
 	}
-	-webkit-text-size-adjust:100%
+	@include medium-fs;
+}
+.din {
+	font-family: 'Din Round', sans-serif;
+}
+.no-wrap {
+	white-space: nowrap;
 }
 #mfPreviewBar, #mfPreviewBarShow {
 	display: none !important;
@@ -93,6 +100,7 @@ section {
 		border-width: 0 10px;
 		border-color: $orange;
 		transition: border-color 150ms ease-in-out;
+		-webkit-overflow-scrolling: touch;
 		@include small {
 			width: calc(100% - 20px) !important;
 			padding: 130px 0px;
@@ -135,7 +143,6 @@ section {
 				margin-bottom: 0;
 			}
 		}
-		-webkit-overflow-scrolling: touch;
 	}
 	&.ready {
 		opacity: 1;
@@ -147,12 +154,12 @@ section {
 	h2.head {
 		width: 100%;
 		padding: 10px 0 30px;
-		@include small {
-			padding: 16px 0 42px;
-		}
 		text-align: center;
 		color: $orange;
 		margin-bottom: 20px;
+		@include small {
+			padding: 16px 0 42px;
+		}
 	}
 	&:not(.center) {
 		pointer-events: none;
@@ -326,9 +333,9 @@ h3, .small {
 	}
 }
 h4 {
-	@include medium-fs;
 	text-align: center;
 	padding: 5px 0 40px 0;
+	@include medium-fs;
 	@include small {
 		padding: 5px 0 10px 0;
 		font-size: $small-fs !important;
@@ -416,13 +423,13 @@ section.login {
 			text-align: center;
 			h1 {
 				color: $white;
-				@include large-fs;
 				margin-bottom: 20px;
+				@include large-fs;
 			}
 			a {
-				@include medium-fs;
 				color: $white;
 				margin: 0 25px;
+				@include medium-fs;
 			}
 		}
 	}
@@ -449,6 +456,7 @@ section.login {
 @import 'sections/sponsor';
 @import 'sections/visit';
 @import 'sections/export';
+@import 'sections/slideshow';
 
 ::-webkit-scrollbar {display:none;}
 ::-moz-scrollbar {display:none;}

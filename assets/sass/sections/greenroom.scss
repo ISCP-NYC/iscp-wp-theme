@@ -1,8 +1,8 @@
 section.greenroom,
 section.resource,
 section.resident-resource {
-	@include medium-fs;
 	background-color: $light;
+	@include medium-fs;
 	aside.main {
 		.icon, .label {
 			background-color: $light;
@@ -30,8 +30,8 @@ section.resident-resource {
 		}
 	}
 	.hello {
-		@include large-fs;
 		border: 0 !important;
+		@include large-fs;
 	}
 	.dashboard {
 		display: flex;
@@ -99,6 +99,18 @@ section.resident-resource {
 				&:nth-child(3n+2) {
 					margin: 0 30px;
 				}
+				.info {
+					padding-top: 10px;
+					.role {
+						width: 100%;
+					}
+					.email {
+					}
+					.description {
+						padding-top: 10px;
+					}
+					@include small-fs;
+				}
 				@include medium {
 					width: calc(50% - 20px);
 					&:nth-child(odd) {
@@ -111,18 +123,6 @@ section.resident-resource {
 				@include xsmall {
 					width: 100% !important;
 					margin: 0 !important;
-				}
-				.info {
-					@include small-fs;
-					padding-top: 10px;
-					.role {
-						width: 100%;
-					}
-					.email {
-					}
-					.description {
-						padding-top: 10px;
-					}
 				}
 			}
 		}			

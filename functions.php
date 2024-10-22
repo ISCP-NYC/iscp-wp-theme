@@ -8,12 +8,14 @@ add_action( 'wp_head', 'twentyfifteen_javascript_detection', 0 );
 function iscp_scripts() {
 	global $post;
 	wp_enqueue_style( 'style', get_template_directory_uri() . '/assets/css/styles.css?version=2.5' );
+	wp_enqueue_style( 'swiper-style', get_template_directory_uri() . '/assets/css/swiper-bundle.min.css' );
 	wp_register_script( 'webglearth', get_template_directory_uri() . '/assets/js/webglearth.js' );
 	wp_register_script( 'transit', get_template_directory_uri() . '/assets/js/jquery.transit.min.js', array( 'jquery' ) );
 	wp_register_script( 'jquery-ui', get_template_directory_uri() . '/assets/js/jquery-ui.min.js', array( 'jquery' ) );
 	wp_register_script( 'masonry', get_template_directory_uri() . '/assets/js/masonry.pkgd.min.js', array( 'jquery' ) );
 	wp_register_script( 'imagesloaded', get_template_directory_uri() . '/assets/js/imagesloaded.pkgd.min.js', array( 'jquery' ) );
 	wp_register_script( 'clipboard', get_template_directory_uri() . '/assets/js/clipboard.min.js', array( 'jquery' ) );
+	wp_register_script( 'swiper', get_template_directory_uri() . '/assets/js/swiper-bundle.min.js' );
 	wp_register_script( 'main', get_template_directory_uri() . '/assets/js/main.js?version=2.5', array( 'jquery', 'masonry', 'transit', 'jquery-ui' ) );
 	wp_enqueue_script( 'webglearth' );
 	wp_enqueue_script( 'transit' );
@@ -21,6 +23,7 @@ function iscp_scripts() {
 	wp_enqueue_script( 'masonry' );
 	wp_enqueue_script( 'imagesloaded' );
 	wp_enqueue_script( 'clipboard' );
+	wp_enqueue_script( 'swiper' );
 	wp_enqueue_script( 'main' );
 	$page_slug = $post->post_name;
 	global $wp_query;
@@ -1690,7 +1693,7 @@ function new_excerpt_more($more) {
 add_filter('excerpt_more', 'new_excerpt_more');
 
 function add_favicon() {
-  	$favicon_url = get_template_directory_uri() . '/assets/images/favicons/favicon.ico';
+  $favicon_url = get_template_directory_uri() . '/assets/images/favicons/blue/favicon.ico';
 	echo '<link rel="shortcut icon" href="' . $favicon_url . '" />';
 }
 add_action('login_head', 'add_favicon');

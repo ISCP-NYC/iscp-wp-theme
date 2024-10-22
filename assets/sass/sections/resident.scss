@@ -39,8 +39,8 @@ section.single.resident {
 		width: 100%;
 		margin: 50px 0;
 		color: $orange;
-		@include large-fs;
 		text-align: center;
+		@include large-fs;
 	}
 	.caption {
 		@include small-fs;
@@ -80,11 +80,11 @@ section.single.resident {
 			}
 			&.events {
 				a.event {
-					@include medium-fs;
 					display: table;
 					.date {
 						margin-bottom: 25px;
 					}
+					@include medium-fs;
 				}
 			}
 		}

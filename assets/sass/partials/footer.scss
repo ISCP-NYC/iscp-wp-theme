@@ -21,9 +21,6 @@ footer {
 	    margin-left: 120px;
 	    overflow-y: hidden;
 	    padding: 0 10px;
-			@include xsmall {
-				padding: 0px;
-			}
 	    border-width: 0 10px;
 	    border-color: #fff;
 	    border-style: solid;
@@ -173,6 +170,9 @@ footer {
 					}
 				}
 			}
+		}
+		@include xsmall {
+			padding: 0px;
 		}
 	}
 }
