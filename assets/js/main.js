@@ -7,7 +7,11 @@ mobileCheck();
 setUp();
 setImageSliderSize();
 buildMasonry();
+swiperInit();
 
+if($('#counter').length) {
+	countUp();
+}
 if($('.image_slider').length > 0) {
 	setUpImageSlider();
 }
@@ -860,13 +864,9 @@ function filterQuery(vars, section, url, option) {
 			if($(section).is('#residents')) {
 				updateResidentsTitle(JSON.parse(vars));
 			}
-			console.log('filter query before send');
-			console.log('Vars: ' + vars);
 		},
 		success: function(response) {
-			setTimeout(function() {
-			// $(section).one(transitionEnd, function(e) {
-				// console.log('transition end');
+			$(section).one(transitionEnd, function(e) {
 				$(container).removeClass('removing');
 				if($(section).is('.journal')) {
 					$(container).masonry('remove', items);
@@ -876,7 +876,6 @@ function filterQuery(vars, section, url, option) {
 				} else {
 					$(container).html('');
 					if($(option).length) {
-						console.log('option: ' + $(option).length);
 						updateFilterLinks(option, vars);
 					}
 					filterThis(response, vars);
@@ -889,10 +888,7 @@ function filterQuery(vars, section, url, option) {
 					$(section).animate({ scrollTop: 0 }, 300, 'easeOutQuart');
 				}
 				// fixScroll(section, content);
-			// });
-			}, 500);
-			console.log('Response: ' + response);
-			console.log('filter query success');
+			});
 		}
 	});
 }
@@ -944,7 +940,6 @@ function filterThis(html, vars) {
 			$(content).scrollTop(scrollHeight);
 		}
 		fixScroll(section, content);
-		console.log('filter this');
 	}
 }
 
@@ -965,7 +960,6 @@ function updateFilterLinks(option) {
 		}
 		$(this).attr('href', url);
 	});
-	console.log('update filter links');
 }
 
 function renameFilterType(filterType) {
@@ -1041,7 +1035,6 @@ $('body').on('click', '.filter .select:not(.tag)', function() {
 				$(loadingText).addClass('show');
 			});
 			$(filter).on('loaded', function() {
-				console.log('loaded');
 				$(loadingText).one(transitionEnd, function() {
 					dropDown(property, slug);
 					$(filter).off('loaded');
@@ -1837,9 +1830,9 @@ function scrollToResourceItem() {
 /////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////
 // var copyLink = new Clipboard('.share .copy');
-// $('body').on('click touchstart', '.share .copy', function() {
-// 	var permalink = $(this).attr('data-clipboard-text');
-// });
+$('body').on('click touchstart', '.share .copy', function() {
+	var permalink = $(this).attr('data-clipboard-text');
+});
 
 function updateFavicons(newColor) {
 	$('link[data-update]').each(function() {
@@ -1875,6 +1868,35 @@ function isSmall() {
 	}
 }
 
+function countUp() {
+	var obj = document.getElementById("counter");
+	var startTimestamp = null;
+  var step = (timestamp) => {
+    if (!startTimestamp) startTimestamp = timestamp;
+    var progress = Math.min((timestamp - startTimestamp) / 1000, 1);
+    obj.innerHTML = Math.floor(progress * 30);
+    if (progress < 1) {
+      window.requestAnimationFrame(step);
+    }
+  };
+  window.requestAnimationFrame(step);
+}
+
+function swiperInit() {
+	const swiper = new Swiper('.swiper', {
+		slidesPerView: 1,
+		loop: true,
+		autoplay: {
+			delay: 400000
+		},
+		keyboard: true,
+		speed: 800,
+		navigation: {
+			nextEl: '.right.arrow',
+			prevEl: '.left.arrow',
+		}
+	});	
+}
 
 $(window).resize(function() {
 	setUp();

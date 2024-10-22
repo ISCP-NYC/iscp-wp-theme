@@ -19,6 +19,9 @@ section.apply {
 				margin-top: 30px;
 			}
 		}
+		&#international {
+			border: 0 !important;
+		}
 		@include small {
 			.links, .info {
 				width: calc(100% - 40px);
@@ -28,9 +31,6 @@ section.apply {
 			.links {
 				margin-top: 20px;
 			}
-		}
-		&#international {
-			border: 0 !important;
 		}
 	}
 	.applications {
@@ -48,7 +48,6 @@ section.apply {
 				width: calc(100% - 35px);
 				display: table;
 				padding: 0 15px 30px 20px;
-				@include small-fs;
 				color: $orange;
 				float: left;
 				.date {
@@ -59,7 +58,6 @@ section.apply {
 					width: 25%;
 				}
 				.brief {
-					@include small-fs;
 					color: $black;
 					padding-top: 17px;
 					float: none;
@@ -68,7 +66,9 @@ section.apply {
 					p {
 						margin-bottom: 15px;
 					}
+					@include small-fs;
 				}
+				@include small-fs;
 			}
 		}
 	}
@@ -78,8 +78,8 @@ section.apply {
 		margin: 20px 0 0 0;
 		display: table;
 		span {
-			@include small-fs;
 			float: left;
+			@include small-fs;
 		}
 	}
 }

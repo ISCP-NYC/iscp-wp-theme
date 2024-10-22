@@ -1,0 +1,38 @@
+section .content .events.module {
+  display: block;
+  padding-bottom: 20px;
+  margin-left: -30px;
+  width: calc(100% + 20px);
+  .swiper.image_slider {
+    height: auto;
+    width: 100%;
+    margin-top: -40px;
+    display: block;
+    .swiper-wrapper {
+      .inner {
+        padding: 0 60px 0;
+      }
+      .event.item {
+        .image {
+          display: block;
+        }
+        img {
+          max-height: 50svh;
+          margin: 0 auto;
+          display: block;
+        }
+        .value {
+          text-align: center;
+          @include small-fs;
+        }
+      }
+    }
+  }
+  .wrap {
+    &:hover {
+      .link {
+        color: $black;
+      }
+    }
+  }
+}

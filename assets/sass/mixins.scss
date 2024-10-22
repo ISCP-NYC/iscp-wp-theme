@@ -83,29 +83,35 @@ $xlarge-width: 1600px;
 // }
 
 @mixin small-fs {
-  font-size: $small-fs;
-  line-height: $small-lh;
   @include medium {
     font-size: $xsmall-fs !important;
     line-height: $xsmall-lh !important;
   }
+  & {
+    font-size: $small-fs;
+    line-height: $small-lh;
+  }
 }
 
 @mixin medium-fs {
-  font-size: $medium-fs;
-  line-height: $medium-lh;
   @include medium {
     font-size: $small-fs !important;
     line-height: $small-lh !important;
   }
+  & {
+    font-size: $medium-fs;
+    line-height: $medium-lh;
+  }
 }
 
 @mixin large-fs {
-  font-size: $large-fs;
-  line-height: $large-lh;
   @include medium {
     font-size: $medium-fs !important;
     line-height: $medium-lh !important;
+  }
+  & {
+    font-size: $large-fs;
+    line-height: $large-lh;
   }
 }
 

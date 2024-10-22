@@ -25,9 +25,9 @@ section.programs {
 			.links {
 				padding: 20px 0;
 				a {
-					@include medium-fs;
 					display: block;
 					margin-bottom: 5px;
+					@include medium-fs;
 				}
 			}
 		}

@@ -35,20 +35,19 @@ section#about {
 		}
 		.history {
 			.text {
-				@include medium-fs;
 				display: block;
 				column-count: 2;
 				column-gap: 2em;
 				p {
 					display: inline-block;
 				}
+				@include medium-fs;
 				@include medium {
 					column-count: 1;
 				}
 			}
 		}
 		.list {
-			@include medium-fs;
 			&.staff {
 				li {
 					margin-bottom: 15px;
@@ -57,6 +56,7 @@ section#about {
 					}
 				}
 			}
+			@include medium-fs;
 		}
 	}
 }
