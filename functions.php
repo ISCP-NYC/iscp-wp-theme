@@ -15,15 +15,15 @@ function iscp_scripts() {
 	wp_register_script( 'masonry', get_template_directory_uri() . '/assets/js/masonry.pkgd.min.js', array( 'jquery' ) );
 	wp_register_script( 'imagesloaded', get_template_directory_uri() . '/assets/js/imagesloaded.pkgd.min.js', array( 'jquery' ) );
 	wp_register_script( 'clipboard', get_template_directory_uri() . '/assets/js/clipboard.min.js', array( 'jquery' ) );
-	wp_register_script( 'swiper', get_template_directory_uri() . '/assets/js/swiper-bundle.min.js' );
-	wp_register_script( 'main', get_template_directory_uri() . '/assets/js/main.js?version=2.5', array( 'jquery', 'masonry', 'swiper', 'transit', 'jquery-ui' ) );
+	wp_register_script( 'swiper-js', get_template_directory_uri() . '/assets/js/swiper-bundle.min.js', array( 'jquery') );
+	wp_register_script( 'main', get_template_directory_uri() . '/assets/js/main.js?version=2.5', array( 'jquery', 'masonry', 'swiper-js', 'transit', 'jquery-ui' ) );
 	wp_enqueue_script( 'webglearth' );
 	wp_enqueue_script( 'transit' );
+	wp_enqueue_script( 'swiper-js' );
 	wp_enqueue_script( 'jquery-ui' );
 	wp_enqueue_script( 'masonry' );
 	wp_enqueue_script( 'imagesloaded' );
 	wp_enqueue_script( 'clipboard' );
-	wp_enqueue_script( 'swiper' );
 	wp_enqueue_script( 'main' );
 	$page_slug = $post->post_name;
 	global $wp_query;
