@@ -41,21 +41,16 @@ else {
 			$events_permalink = get_the_permalink( $events_id );
 			echo '<a href="' . $events_permalink . '">Programs &amp; Exhibitions</a>';
 			echo '</h3>';
-			if ( $count > 1 ):
-				echo '<div class="swiper image_slider">';
-				echo '<div class="left arrow swap">';
-				echo '<div class="icon default"></div>';
-				echo '<div class="icon hover"></div>';
-				echo '</div>';
-				echo '<div class="right arrow swap">';
-				echo '<div class="icon default"></div>';
-				echo '<div class="icon hover"></div>';
-				echo '</div>';
-				echo '<div class="swiper-wrapper eventsWrap">';
-			else:
-				echo '<div class="eventsWrap">';
-				echo '<div>';
-			endif;
+			echo '<div class="swiper image_slider">';
+			echo '<div class="left arrow swap">';
+			echo '<div class="icon default"></div>';
+			echo '<div class="icon hover"></div>';
+			echo '</div>';
+			echo '<div class="right arrow swap">';
+			echo '<div class="icon default"></div>';
+			echo '<div class="icon hover"></div>';
+			echo '</div>';
+			echo '<div class="swiper-wrapper eventsWrap">';
 			foreach( $sorted_events as $event ):
 				$et = get_field( 'event_type', $event->ID );
 				if( $et == 'open-studios' ):
