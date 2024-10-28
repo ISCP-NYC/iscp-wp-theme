@@ -1161,24 +1161,24 @@ function buildMasonry() {
 //////////////////////////SEARCH/////////////////////////////
 /////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////
-// $('body').on('mouseenter click touchstart', 'form', function() {
-// 	var input = $(this).find('input:not(.no)');
-// 	var value = $(input).attr('value');
-// 	var placeholder = $(this).find('.placeholder');
-// 	// $(placeholder).css({'opacity':0});
-// 	$(input).focus();
-// }).on('mouseleave','form', function() {
-// 	var input = $(this).find('input:not(.no)');
-// 	var value = $(input).attr('value');
-// 	var placeholder = $(this).find('.placeholder');
-// 	if (!/\S/.test(value)) {
-// 		// $(placeholder).css({'opacity':1});
-// 		$(input).siblings('.counter').html('');
-// 	}
-// 	if(!$(input).is('.main-search')) {
-// 		$(input).blur();
-// 	}
-// });
+$('body').on('mouseenter click touchstart', '.newsletter form', function() {
+	var input = $(this).find('input:not(.no)');
+	var value = $(input).attr('value');
+	var placeholder = $(this).find('.placeholder');
+	$(placeholder).css({'opacity':0});
+	$(input).focus();
+}).on('mouseleave','form', function() {
+	var input = $(this).find('input:not(.no)');
+	var value = $(input).attr('value');
+	var placeholder = $(this).find('.placeholder');
+	if (!/\S/.test(value)) {
+		$(placeholder).css({'opacity':1});
+		$(input).siblings('.counter').html('');
+	}
+	if(!$(input).is('.main-search')) {
+		$(input).blur();
+	}
+});
 
 $('body').on('click touchstart', '.placeholder', function() {
 	var input = $(this).parent().find('input:not(.no)');

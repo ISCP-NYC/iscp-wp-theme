@@ -183,6 +183,8 @@ a.bullet:hover {
   padding: 0 0 8px;
 }
 .module.newsletter form .placeholder {
+  top: 0.4em;
+  position: absolute;
   color: #ff5000;
   background: #fff;
 }
