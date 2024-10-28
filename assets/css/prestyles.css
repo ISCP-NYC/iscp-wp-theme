@@ -299,17 +299,6 @@ section .content .module.images .caption {
 form {
   position: relative;
 }
-form .placeholder {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  top: 0;
-  left: 0;
-  display: flex;
-  align-items: center;
-  transition: opacity 150ms ease-in-out;
-  pointer-events: none;
-}
 
 .share {
   display: table;
@@ -508,6 +497,9 @@ section .content .module:last-of-type {
 section.ready {
   opacity: 1;
   transition: opacity 400ms cubic-bezier(0.77, 0, 0.175, 1);
+}
+section.ready.hide-shelves .nav-toggle {
+  opacity: 0;
 }
 section h2.head {
   width: 100%;
@@ -1527,11 +1519,113 @@ section .mobile.logo .icon.hover {
     display: none;
   }
 }
+section .nav-extras {
+  height: 100px;
+  right: 170px;
+  position: absolute;
+  top: 0;
+  z-index: 101;
+  display: flex;
+  align-items: center;
+  opacity: 1;
+  transition: opacity 150ms ease-in-out, transform 600ms cubic-bezier(0.645, 0.045, 0.355, 1);
+}
+section .nav-extras .donate {
+  height: 28px;
+  position: relative;
+  font-size: 16px;
+  border: solid #ff5000 2px;
+  border-radius: 2px;
+  padding: 0 10px;
+  transition: all 150ms ease-in-out;
+  transition-delay: 600ms;
+  margin-right: 20px;
+}
+section .nav-extras .donate:hover {
+  border: solid #13172F 2px;
+}
+section .nav-extras.search-enabled .donate {
+  opacity: 0;
+  pointer-events: none;
+  transition-delay: 0ms;
+}
+section .nav-extras.search-enabled form[role=search] {
+  width: calc(100svw - 335px);
+}
+section .nav-extras.search-enabled form[role=search] input {
+  color: #ff5000;
+  visibility: visible;
+  opacity: 1;
+  width: 100%;
+  transition-delay: 500ms;
+}
+section .nav-extras form[role=search] {
+  width: 30px;
+  transition: width 300ms ease-in-out;
+  transition-delay: 150ms;
+}
+section .nav-extras form[role=search] input {
+  visibility: hidden;
+  opacity: 0;
+  width: 0;
+  height: 30px;
+  text-align: center;
+  border: none;
+  transition-delay: 0ms;
+}
+@media (max-width: 900px) {
+  section .nav-extras form[role=search] input {
+    font-size: 18px !important;
+    line-height: 21px !important;
+  }
+}
+section .nav-extras form[role=search] input {
+  font-size: 24px;
+  line-height: 28px;
+}
+section .nav-extras form[role=search] .placeholder {
+  width: 30px;
+  height: 30px;
+  position: absolute;
+  right: 0;
+  top: 2px;
+  cursor: pointer;
+}
+section .nav-extras form[role=search] .placeholder:before, section .nav-extras form[role=search] .placeholder:after {
+  content: "";
+  display: block;
+  position: absolute;
+  transition: all 150ms ease-in-out;
+}
+section .nav-extras form[role=search] .placeholder:hover:before {
+  border: solid #13172F 7px;
+}
+section .nav-extras form[role=search] .placeholder:hover:after {
+  background-color: #13172F;
+}
+section .nav-extras form[role=search] .placeholder:before {
+  position: absolute;
+  height: 14px;
+  width: 14px;
+  top: -2px;
+  border-radius: 5rem;
+  border: solid #ff5000 7px;
+}
+section .nav-extras form[role=search] .placeholder:after {
+  position: absolute;
+  height: 14px;
+  width: 7px;
+  border-radius: 6px;
+  background-color: #ff5000;
+  right: 4px;
+  bottom: -3px;
+  rotate: -35deg;
+}
 section .nav-toggle {
   width: 30px;
   height: 30px;
   position: absolute;
-  right: 175px;
+  right: 1.85rem;
   top: 35px;
   z-index: 101;
   cursor: pointer;
@@ -1581,6 +1675,10 @@ section.tease-nav .nav-toggle .default {
 section.tease-nav .nav-toggle .hover {
   opacity: 1;
 }
+section.open-nav .nav-extras {
+  opacity: 0;
+  pointer-events: none;
+}
 section.open-nav header.main {
   transition-duration: 600ms;
   transform: translateY(0) !important;
@@ -1607,7 +1705,7 @@ section.open-nav .nav-toggle .icon {
 section.hide-header header.main:not(.static) {
   transform: translateY(calc(-100% - 50px)) !important;
 }
-section.hide-header .nav-toggle {
+section.hide-header .nav-toggle, section.hide-header .nav-extras {
   transform: translateY(-250px) !important;
 }
 section.hide-header .mobile.logo {

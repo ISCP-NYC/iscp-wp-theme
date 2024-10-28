@@ -69,6 +69,13 @@
 	<div class="icon default"></div>
 	<div class="icon hover"></div>
 </a>
+<div class="nav-extras search">
+	<a href="../support/donate" class="donate">Donate</a>
+	<form role="search" method="get" class="searchform" class="searchform" autocomplete="off" action="<?php echo esc_url( home_url( '/' ) ); ?>">
+		<div class="placeholder"></div>
+		<input type="text" name="s" class="s nav-search"/>
+	</form>
+</div>
 <div class="nav-toggle nav-hover swap">
 	<div class="icon default"></div>
 	<div class="icon hover"></div>

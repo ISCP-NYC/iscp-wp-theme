@@ -150,6 +150,11 @@ section {
 		.content > * {
 			// opacity: 1;
 		}
+		&.hide-shelves {
+			.nav-toggle {
+				opacity: 0;
+			}
+		}
 	}
 	h2.head {
 		width: 100%;
