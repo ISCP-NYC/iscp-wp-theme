@@ -173,7 +173,6 @@ $('body').on('mouseenter', '.shelf-item .wrap', function() {
 	$(this).parents('.shelf-item').removeClass('hover');
 });
 
-
 $('body').on('wheel', 'section', function(e) {
 	var section = $(this);
 	if(!$(section).hasClass('show-footer')) {
@@ -184,9 +183,32 @@ $('body').on('wheel', 'section', function(e) {
 		}
 		var content = $(section).find('.content');
 		var scrollTop = $(content).scrollTop();
+		var scrollTopParent = $(section).parent().scrollTop();
 		var scrollTo = scrollTop + delta;
+		var contentHeight = 0;
+		$(content).children().each(function(){
+			contentHeight += $(this).outerHeight();
+		});
 		$(content).scrollTop(scrollTo);
+		console.log('scrollTopParent: ' + scrollTopParent + ' scrollTop: ' + scrollTop + ' contentHeight: ' + contentHeight);
+		if(scrollTop >= contentHeight - 600){
+			// $(content).parent().scrollTop(scrollTo - 900);
+			// $(content).parent().scrollTop(200);
+		}
 	}
+	else {
+		var scrollTopParent = $(section).scrollTop();
+		console.log(scrollTopParent);
+	}
+	// if($(section).hasClass('show-footer')) {
+	// 	var e = window.event || e;
+	// 	var delta = e.deltaY;
+	// 	console.log('holler: ' + delta);
+	// 	if(delta == undefined) {
+	// 		 delta = e.originalEvent.deltaY;
+	// 		 $(section).scrollTop += delta;
+	// 	}
+	// }
 });
 
 /////////////////////////////////////////////////////////////
@@ -288,9 +310,12 @@ function sectionContentScrollListener(content) {
 	var scrollHeight = content.scrollHeight;
 	var contentHeight = content.clientHeight;
 	var scrollTop = content.scrollTop;
+	// console.log('top: ' + scrollTop + ' last: ' + lastContentScrollTop + ' scroll: ' + scrollHeight + ' content: ' + contentHeight);
 	//scrolled to end of content -> scroll to footer
+	// if(scrollHeight - scrollTop == contentHeight && scrollTop > lastContentScrollTop) {
 	if(scrollHeight - scrollTop == contentHeight && scrollTop > lastContentScrollTop) {
-		$(section).addClass('show-footer');
+			$(section).addClass('show-footer');
+			// console.log('show');
 	}
 	if(scrollTop > lastContentScrollTop + 10 && scrollTop > 100) {
 		$(section).addClass('hide-header');
@@ -1136,23 +1161,31 @@ function buildMasonry() {
 //////////////////////////SEARCH/////////////////////////////
 /////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////
-$('body').on('mouseenter click touchstart', 'form', function() {
-	var input = $(this).find('input:not(.no)');
-	var value = $(input).attr('value');
-	var placeholder = $(this).find('.placeholder');
-	$(placeholder).css({'opacity':0});
-	$(input).focus();
-}).on('mouseleave','form', function() {
-	var input = $(this).find('input:not(.no)');
-	var value = $(input).attr('value');
-	var placeholder = $(this).find('.placeholder');
-	if (!/\S/.test(value)) {
-		$(placeholder).css({'opacity':1});
-		$(input).siblings('.counter').html('');
-	}
-	if(!$(input).is('.main-search')) {
-		$(input).blur();
-	}
+// $('body').on('mouseenter click touchstart', 'form', function() {
+// 	var input = $(this).find('input:not(.no)');
+// 	var value = $(input).attr('value');
+// 	var placeholder = $(this).find('.placeholder');
+// 	// $(placeholder).css({'opacity':0});
+// 	$(input).focus();
+// }).on('mouseleave','form', function() {
+// 	var input = $(this).find('input:not(.no)');
+// 	var value = $(input).attr('value');
+// 	var placeholder = $(this).find('.placeholder');
+// 	if (!/\S/.test(value)) {
+// 		// $(placeholder).css({'opacity':1});
+// 		$(input).siblings('.counter').html('');
+// 	}
+// 	if(!$(input).is('.main-search')) {
+// 		$(input).blur();
+// 	}
+// });
+
+$('body').on('click touchstart', '.placeholder', function() {
+	var input = $(this).parent().find('input:not(.no)');
+	$(this).parent().parent().toggleClass('search-enabled');
+	setTimeout(function(){
+		$(input).focus();
+	}, 600);
 });
 
 var navTimer;
@@ -1166,7 +1199,7 @@ $('body').on('keydown', 'form input:not(.no)', function() {
 	}
 });
 
-$('body').on('keyup', 'nav .search input:not(.no)', function() {
+$('body').on('keyup', '.nav-extras.search input:not(.no)', function() {
 	clearTimeout(navTimer);
 	var input = this;
 	var form = $(input).parents('form');

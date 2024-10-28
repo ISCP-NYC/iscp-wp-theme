@@ -73,14 +73,14 @@ $xlarge-width: 1600px;
   }
 }
 
-// @mixin xsmall-fs {
-//   font-size: $xsmall-fs;
-//   line-height: $xsmall-lh;
-//   @include medium {
-//     font-size: $xxsmall-fs;
-//     line-height: $xxsmall-lh;
-//   }
-// }
+@mixin xsmall-fs {
+  font-size: $xsmall-fs;
+  line-height: $xsmall-lh;
+  // @include medium {
+  //   font-size: $xxsmall-fs;
+  //   line-height: $xxsmall-lh;
+  // }
+}
 
 @mixin small-fs {
   @include medium {
