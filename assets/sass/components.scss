@@ -38,6 +38,8 @@
         display: table;
         padding: 0 0 8px;
         .placeholder {
+            top: .4em;
+            position: absolute;
             color: #ff5000;
             background: $white;
             span {

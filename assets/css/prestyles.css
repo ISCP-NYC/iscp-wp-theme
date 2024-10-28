@@ -183,6 +183,8 @@ a.bullet:hover {
   padding: 0 0 8px;
 }
 .module.newsletter form .placeholder {
+  top: 0.4em;
+  position: absolute;
   color: #ff5000;
   background: #fff;
 }
@@ -1537,8 +1539,7 @@ section .nav-extras .donate {
   border: solid #ff5000 2px;
   border-radius: 2px;
   padding: 0 10px;
-  transition: all 150ms ease-in-out;
-  transition-delay: 600ms;
+  transition: color 150ms ease-in-out, border 150ms ease-in-out, opacity 150ms ease-in-out 600ms;
   margin-right: 20px;
 }
 section .nav-extras .donate:hover {
