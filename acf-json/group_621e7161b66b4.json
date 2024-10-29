@@ -23,6 +23,48 @@
             "delay": 0
         },
         {
+            "key": "field_672131095ab4a",
+            "label": "DEIA",
+            "name": "deia",
+            "aria-label": "",
+            "type": "wysiwyg",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "allow_in_bindings": 0,
+            "tabs": "all",
+            "toolbar": "full",
+            "media_upload": 0,
+            "delay": 0
+        },
+        {
+            "key": "field_6721313d5ab4b",
+            "label": "Land Acknowledgement",
+            "name": "land_acknowledgement",
+            "aria-label": "",
+            "type": "wysiwyg",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "allow_in_bindings": 0,
+            "tabs": "all",
+            "toolbar": "full",
+            "media_upload": 0,
+            "delay": 0
+        },
+        {
             "key": "field_5637f0ff1c55b",
             "label": "Address",
             "name": "address",
@@ -57,11 +99,11 @@
                 "id": ""
             },
             "default_value": "",
+            "maxlength": "",
+            "allow_in_bindings": 1,
             "placeholder": "",
             "prepend": "",
-            "append": "",
-            "formatting": "html",
-            "maxlength": ""
+            "append": ""
         },
         {
             "key": "field_565de4a7ad6c9",
@@ -83,6 +125,27 @@
             "append": "",
             "formatting": "html",
             "maxlength": ""
+        },
+        {
+            "key": "field_67214209b2ceb",
+            "label": "Contact",
+            "name": "contact",
+            "aria-label": "",
+            "type": "wysiwyg",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "allow_in_bindings": 0,
+            "tabs": "all",
+            "toolbar": "basic",
+            "media_upload": 0,
+            "delay": 0
         },
         {
             "key": "field_5638f200ddcdc",
@@ -436,7 +499,7 @@
             }
         ]
     ],
-    "menu_order": 0,
+    "menu_order": 1,
     "position": "normal",
     "style": "seamless",
     "label_placement": "top",
@@ -456,5 +519,5 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1729627330
+    "modified": 1730232873
 }

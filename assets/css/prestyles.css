@@ -508,6 +508,16 @@ section .content .module h3.title {
   text-align: center;
   color: #ff5000;
 }
+@media (max-width: 900px) {
+  section .content .module h3.title {
+    font-size: 24px !important;
+    line-height: 28px !important;
+  }
+}
+section .content .module h3.title {
+  font-size: 32px;
+  line-height: 36px;
+}
 section .content .module:last-of-type {
   margin-bottom: 0;
 }
@@ -2553,7 +2563,7 @@ h3, .small {
 }
 h3.title, .small.title {
   text-align: center;
-  padding: 5px 0 40px 0;
+  padding: 5px 0 36px 0;
 }
 @media (max-width: 768px) {
   h3.title, .small.title {
@@ -2926,14 +2936,14 @@ body.mobile .gallery.full .arrow {
 }
 
 section#about .half {
-  width: calc(50% - 15px);
+  width: calc(50% - 20px);
   float: left;
 }
 section#about .half.left {
-  margin-right: 15px;
+  padding-right: 15px;
 }
 section#about .half.right {
-  margin-left: 15px;
+  padding-left: 15px;
 }
 @media (max-width: 768px) {
   section#about .half {
@@ -2944,6 +2954,10 @@ section#about .half.right {
   section#about .half.right {
     margin: 10px 0 0 0;
   }
+}
+section#about .info {
+  display: flex;
+  padding: 10px 20px;
 }
 @media (max-width: 900px) {
   section#about .info {
@@ -2961,6 +2975,35 @@ section.resource ul section#about .info li,
 section#about .info section.resident-resource ul li,
 section.resident-resource ul section#about .info li {
   display: table;
+}
+section#about .info .half {
+  padding-bottom: 1em;
+}
+section#about .info .half p {
+  margin-top: 0;
+}
+section#about .info .half.left {
+  border-right: 5px solid #ff5000;
+}
+@media (max-width: 900px) {
+  section#about .info .half.left {
+    border-right: none;
+  }
+}
+section#about .info .half.right {
+  padding-left: 20px;
+  border-left: 5px solid #ff5000;
+}
+@media (max-width: 900px) {
+  section#about .info .half.right {
+    border-left: none;
+  }
+}
+section#about .info h3.title {
+  text-align: left;
+  margin-bottom: 0;
+  padding-bottom: 1em;
+  margin-top: 0.25em;
 }
 @media (max-width: 900px) {
   section#about .main .description {
@@ -2999,21 +3042,45 @@ section#about .main .history .text {
     column-count: 1;
   }
 }
+section#about .main .list h3.title {
+  text-align: left;
+  padding-left: 1.7rem;
+  padding-bottom: 0;
+}
+@media (max-width: 900px) {
+  section#about .main .list h3.title {
+    font-size: 24px !important;
+    line-height: 28px !important;
+  }
+}
+section#about .main .list h3.title {
+  font-size: 32px;
+  line-height: 36px;
+}
+section#about .main .list.staff ul {
+  columns: 2;
+}
+@media (max-width: 900px) {
+  section#about .main .list.staff ul {
+    columns: 1;
+  }
+}
 section#about .main .list.staff li {
-  margin-bottom: 15px;
+  margin-bottom: 21px;
+  break-inside: avoid-column;
 }
 section#about .main .list.staff li em {
   display: block;
 }
 @media (max-width: 900px) {
   section#about .main .list {
-    font-size: 18px !important;
-    line-height: 21px !important;
+    font-size: 16px !important;
+    line-height: 20px !important;
   }
 }
 section#about .main .list {
-  font-size: 24px;
-  line-height: 28px;
+  font-size: 18px;
+  line-height: 21px;
 }
 
 section.apply .program-links {

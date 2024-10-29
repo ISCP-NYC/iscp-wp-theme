@@ -43,6 +43,12 @@ $xlarge-width: 1600px;
 //   }
 // }
 
+@mixin xmedium {
+	@media (max-width: #{$xmedium-width}) {
+    @content;
+  }
+}
+
 @mixin medium {
 	@media (max-width: #{$medium-width}) {
     @content;
@@ -101,6 +107,17 @@ $xlarge-width: 1600px;
   & {
     font-size: $medium-fs;
     line-height: $medium-lh;
+  }
+}
+
+@mixin subtitle-fs {
+  @include medium {
+    font-size: $medium-fs !important;
+    line-height: $medium-lh !important;
+  }
+  & {
+    font-size: $subtitle-fs;
+    line-height: $subtitle-lh;
   }
 }
 
