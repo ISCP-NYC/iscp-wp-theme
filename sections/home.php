@@ -98,7 +98,7 @@ else {
 			</div>
 		</div>
 
-		<div class="module newsletter">
+		<div class="module newsletter mouse-enter">
 			<h3 class="title">Stay Connected</h3>
 			<?php get_template_part('partials/newsletter') ?>
 		</div>

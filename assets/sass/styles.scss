@@ -162,6 +162,7 @@ section {
 		text-align: center;
 		color: $orange;
 		margin-bottom: 20px;
+		@include large-fs;
 		@include small {
 			padding: 16px 0 42px;
 		}
@@ -314,6 +315,7 @@ h1, .large {
 h2, .medium {
 	@include medium-fs;
 	&.title {
+		@include large-fs;
 		text-align: center;
 		padding: 0 0 3px 0;
 		color: $orange;

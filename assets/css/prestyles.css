@@ -181,6 +181,7 @@ a.bullet:hover {
   height: 100%;
   display: table;
   padding: 0 0 8px;
+  position: relative;
 }
 .module.newsletter form .placeholder {
   top: 0.4em;
@@ -298,8 +299,22 @@ section .content .module.images .caption {
   line-height: 21px;
 }
 
-form {
+footer form {
   position: relative;
+}
+footer form .placeholder {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  display: flex;
+  align-items: center;
+  transition: opacity 150ms ease-in-out;
+  pointer-events: none;
+}
+footer form input[type=submit] {
+  display: none;
 }
 
 .share {
@@ -509,6 +524,16 @@ section h2.head {
   text-align: center;
   color: #ff5000;
   margin-bottom: 20px;
+}
+@media (max-width: 900px) {
+  section h2.head {
+    font-size: 24px !important;
+    line-height: 28px !important;
+  }
+}
+section h2.head {
+  font-size: 42px;
+  line-height: 46px;
 }
 @media (max-width: 768px) {
   section h2.head {
@@ -941,11 +966,10 @@ section footer .wrapper .inner nav .cell .cell-inner form {
   position: relative;
 }
 section footer .wrapper .inner nav .cell .cell-inner form input[type=text], section footer .wrapper .inner nav .cell .cell-inner form input[type=email] {
-  width: calc(100% - 12px);
-  padding-left: 10px;
+  width: 100%;
+  margin-left: -2px;
   outline: none;
-  border: solid #fff;
-  border-width: 0 0 0 2px;
+  border: none;
   background-color: transparent;
   color: #fff;
 }
@@ -960,10 +984,47 @@ section footer .wrapper .inner nav .cell .cell-inner form input[type=text], sect
   line-height: 21px;
 }
 section footer .wrapper .inner nav .cell .cell-inner form .placeholder {
-  width: calc(100% - 12px);
-  left: 2px;
-  padding-left: 10px;
-  background-color: #ff5000;
+  width: 100%;
+  height: 30px;
+  position: absolute;
+  right: 0;
+  cursor: pointer;
+}
+section footer .wrapper .inner nav .cell .cell-inner form .placeholder span {
+  position: absolute;
+  display: block;
+  top: 2px;
+  left: 20px;
+}
+section footer .wrapper .inner nav .cell .cell-inner form .placeholder:before, section footer .wrapper .inner nav .cell .cell-inner form .placeholder:after {
+  content: "";
+  display: block;
+  position: absolute;
+  transition: all 150ms ease-in-out;
+}
+section footer .wrapper .inner nav .cell .cell-inner form .placeholder:hover:before {
+  border: solid #13172F 2px;
+}
+section footer .wrapper .inner nav .cell .cell-inner form .placeholder:hover:after {
+  background-color: #13172F;
+}
+section footer .wrapper .inner nav .cell .cell-inner form .placeholder:before {
+  position: absolute;
+  height: 7px;
+  width: 7px;
+  top: 4px;
+  border-radius: 5rem;
+  border: solid white 2px;
+}
+section footer .wrapper .inner nav .cell .cell-inner form .placeholder:after {
+  position: absolute;
+  height: 7px;
+  width: 2px;
+  border-radius: 6px;
+  background-color: white;
+  left: 8px;
+  top: 12px;
+  rotate: -35deg;
 }
 section footer .wrapper .inner nav .cell.greenroom .login .swap {
   width: calc(18px - 5px);
@@ -1589,7 +1650,6 @@ section .nav-extras form[role=search] .placeholder {
   height: 30px;
   position: absolute;
   right: 0;
-  top: 2px;
   cursor: pointer;
 }
 section .nav-extras form[role=search] .placeholder:before, section .nav-extras form[role=search] .placeholder:after {
@@ -2434,6 +2494,16 @@ h2.title, .medium.title {
   text-align: center;
   padding: 0 0 3px 0;
   color: #ff5000;
+}
+@media (max-width: 900px) {
+  h2.title, .medium.title {
+    font-size: 24px !important;
+    line-height: 28px !important;
+  }
+}
+h2.title, .medium.title {
+  font-size: 42px;
+  line-height: 46px;
 }
 @media (max-width: 768px) {
   h2.title, .medium.title {
