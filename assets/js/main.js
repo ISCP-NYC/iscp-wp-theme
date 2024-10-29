@@ -310,13 +310,14 @@ function sectionContentScrollListener(content) {
 	var header = $(section).find('header.main');
 	var scrollHeight = content.scrollHeight;
 	var contentHeight = content.clientHeight;
-	var scrollTop = content.scrollTop;
+	var scrollTop = Math.floor(content.scrollTop);
 	// console.log('top: ' + scrollTop + ' last: ' + lastContentScrollTop + ' scroll: ' + scrollHeight + ' content: ' + contentHeight);
 	//scrolled to end of content -> scroll to footer
 	// if(scrollHeight - scrollTop == contentHeight && scrollTop > lastContentScrollTop) {
+	// console.log( 'scrollHeight: ' + scrollHeight + ' scollTop: ' + scrollTop + ' contentHeight: ' + contentHeight );
 	if(scrollHeight - scrollTop == contentHeight && scrollTop > lastContentScrollTop) {
 			$(section).addClass('show-footer');
-			// console.log('show');
+			console.log('show');
 	}
 	if(scrollTop > lastContentScrollTop + 10 && scrollTop > 100) {
 		$(section).addClass('hide-header');
