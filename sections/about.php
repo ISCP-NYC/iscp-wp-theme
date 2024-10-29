@@ -3,19 +3,45 @@
 	$id = $post->ID;
 	$title = $post->post_title;
 	$slug = $post->post_name;
+	$intro_image = get_field( 'intro_image', $id );
+	$intro_text = get_field( 'intro_text', $id );
 ?>
 <section  <?php section_attr( $id, $slug, 'about' ); ?>>
 	<?php get_template_part('partials/nav') ?>
 	<?php get_template_part('partials/side') ?>
 	<div class="content">
 		<h2 class="head"><?php echo $title ?></h2>
-
-		<?php $description = get_field( 'description', $id ); ?>
+		<?php if ( $intro_image || $intro_text ):
+			echo '<div class="intro module">';
+			if ( !empty($intro_image) ):
+				echo '<figure class="hero">';
+				echo wp_get_attachment_image( $intro_image, 'full' );
+				echo '<figcaption>' . wp_get_attachment_caption( $intro_image ) . '</figcaption>';
+				echo '</figure>';
+			endif;
+			if ( !empty($intro_text) ):
+				echo $intro_text;
+			endif;
+			echo '</div>';
+		endif; ?>
+		<?php 
+			$description = get_field( 'description', $id ); 
+			$deia = get_field( 'deia', $id );
+			$land_acknowledgement = get_field( 'land_acknowledgement', $id );
+		?>
 
 		<div class="main">
+			<?php if( !empty($description) ): ?>
 			<div class="module description">
 				<?php echo $description ?>
 			</div>
+			<?php endif; ?>
+			<?php if( !empty($deia) ): ?>
+			<div class="module description">
+				<h3 class="orange title">Diversity, Equity, Accessibility and Inclusion</h3>
+				<?php echo $deia ?>
+			</div>
+			<?php endif; ?>
 			<?php
 				$address = get_field( 'address', $id );
 				$directions_base = 'https://www.google.com/maps/dir//';
@@ -33,88 +59,74 @@
 			?>
 			<div class="info module" id="contact">
 				<div class="half left">
-					<div class="bullet address">
-						<?php echo $address ?>
-					</div>
-					<div class="bullet phone">
-						<?php echo '<a href="tel:' . $phone . '">' . $phone . '</a>'; ?>
-					</div>
-					<div class="bullet email">
-						<?php echo '<a href="mailto:' . $email . '">' . $email . '</a>'; ?>
-					</div>
-					<div class="bullet facebook">
-						Facebook
-						<a href="<?php echo $facebook_url ?>" target="_blank">
-							<?php echo $facebook ?>
-						</a>
-					</div>
-					<div class="bullet twitter">
-						Twitter 
-						<a href="<?php echo $twitter_url ?>" target="_blank">
-							&commat;<?php echo $twitter ?>
-						</a>
-					</div>
-					<div class="bullet instagram">
-						Instagram
-						 <a href="<?php echo $instagram_url ?>" target="_blank">
-						 	&commat;<?php echo $instagram ?>
-						</a>
-					</div>
+					<h3 class="title orange">Address</h3>
+					<p><?php echo $address ?><br /></p>
+					<a href="<?php echo $directions ?>" target="_blank">Map &amp; Directions</a>
 				</div>
 				<div class="half right">
-					<a class="bullet" href="<?php echo $directions ?>" target="_blank">Map &amp; Directions</a>
-					
+					<h3 class="title orange">Contact</h3>
 					<?php
-					$children = query_posts(array('post_parent' => $id, 'post_type' => 'page'));
-					foreach( $children as $child ):
-						echo '<a class="bullet" href="' . get_permalink( $child->ID ) . '">' . $child->post_title . '</a>';
-					endforeach;
+						$contact = get_field( 'contact', $id );
+						if( !empty($contact) ):
+							echo $contact;
+						endif;
+					// $children = query_posts(array('post_parent' => $id, 'post_type' => 'page'));
+					// foreach( $children as $child ):
+					// 	echo '<a class="bullet" href="' . get_permalink( $child->ID ) . '">' . $child->post_title . '</a>';
+					// endforeach;
 					?>					
 				</div>
 			</div>
+
+			<?php if( !empty($land_acknowledgement) ): ?>
+			<div class="module description">
+				<h3 class="orange title">Land Acknowledgement</h3>
+				<?php echo $land_acknowledgement ?>
+			</div>
+			<?php endif; ?>
 
 			<?php 
 			$history = get_field( 'history', $id );
 			if( $history ):
 				echo '<div class="module history" id="history">';
 				echo '<h3 class="title orange">History</h3>';
-				echo '<div class="text">';
-				echo $history;
-				echo '</div>';
-				echo '</div>';
-			endif;
 			
-			$image_slider = get_field( 'image_slider', $id );
-			if( $image_slider ):
-				echo '<div class="module image_slider gallery">';
-				echo '<div class="cursor"></div>';
-				if( count( $image_slider ) > 1 ):
-					echo '<div class="left arrow swap">';
-					echo '<div class="icon default"></div>';
-					echo '<div class="icon hover"></div>';
+				$image_slider = get_field( 'image_slider', $id );
+				if( $image_slider ):
+					echo '<div class="image_slider gallery">';
+					echo '<div class="cursor"></div>';
+					if( count( $image_slider ) > 1 ):
+						echo '<div class="left arrow swap">';
+						echo '<div class="icon default"></div>';
+						echo '<div class="icon hover"></div>';
+						echo '</div>';
+						echo '<div class="right arrow swap">';
+						echo '<div class="icon default"></div>';
+						echo '<div class="icon hover"></div>';
+						echo '</div>';
+					endif;
+					echo '<div class="slides">';
+					while( has_sub_field( 'image_slider', $id ) ):
+						$image = get_sub_field( 'image', $id );
+								$image_url = $image['url'];
+								$caption = get_sub_field( 'caption', $id );
+								$orientation = get_orientation( $image['id'] );
+								echo '<div class="piece slide">';
+								echo '<div class="image ' . $orientation . '">';
+								echo '<div class="captionWrap">';
+								echo '<img src="' . $image_url . '"/>';
+								echo '<div class="caption">';
+								echo $caption;
+								echo '</div>';
+								echo '</div>';
+								echo '</div>';
+								echo '</div>';
+					endwhile;
 					echo '</div>';
-					echo '<div class="right arrow swap">';
-					echo '<div class="icon default"></div>';
-					echo '<div class="icon hover"></div>';
 					echo '</div>';
 				endif;
-				echo '<div class="slides">';
-				while( has_sub_field( 'image_slider', $id ) ):
-					$image = get_sub_field( 'image', $id );
-			        $image_url = $image['url'];
-			        $caption = get_sub_field( 'caption', $id );
-			        $orientation = get_orientation( $image['id'] );
-			        echo '<div class="piece slide">';
-			        echo '<div class="image ' . $orientation . '">';
-			        echo '<div class="captionWrap">';
-			        echo '<img src="' . $image_url . '"/>';
-			        echo '<div class="caption">';
-			        echo $caption;
-			        echo '</div>';
-			        echo '</div>';
-			        echo '</div>';
-			        echo '</div>';
-				endwhile;
+				echo '<div class="text">';
+				echo $history;
 				echo '</div>';
 				echo '</div>';
 			endif;
