@@ -15,12 +15,27 @@ $residency_programs_query = array(
 	'sort_order' => 'desc',
 );
 $residency_programs = get_pages( $residency_programs_query );
+$intro_image = get_field( 'intro_image', $id );
+$intro_text = get_field( 'intro_text', $id );
 ?>
 <section <?php section_attr( $id, $slug, 'apply' ); ?>>
 	<?php get_template_part('partials/nav') ?>
 	<?php get_template_part('partials/side') ?>
 	<div class="content">
 		<h2 class="title"><?php echo $title ?></h2>
+		<?php if ( $intro_image || $intro_text ):
+			echo '<div class="intro module">';
+			if ( !empty($intro_image) ):
+				echo '<figure class="hero">';
+				echo wp_get_attachment_image( $intro_image, 'full' );
+				echo '<figcaption>' . wp_get_attachment_caption( $intro_image ) . '</figcaption>';
+				echo '</figure>';
+			endif;
+			if ( !empty($intro_text) ):
+				echo $intro_text;
+			endif;
+			echo '</div>';
+		endif; ?>
 		<?php foreach( $residency_programs as $program ):
 		setup_postdata($program);
 		$title = get_post( $program )->post_title;
@@ -31,16 +46,25 @@ $residency_programs = get_pages( $residency_programs_query );
 		<div class="program module" id="<?php echo $slug ?>">
 			<h3 class="title"><?php echo $title ?></h3>
 			<div class="info">
-				<?php $intro = get_field( 'intro', $program ); ?>
+				<?php 
+					$intro = get_field( 'intro', $id ); 
+					$linkrows = get_field( 'links', $id );
+				?>
 				<div class="intro">
 					<?php echo $intro ?>
 				</div>
 			</div>
 			<div class="links">
-				<?php if( $slug == 'international' ): ?>
-					<a class="bullet small" href="<?php echo $faq_link ?>">Application FAQ</a>
-				<?php endif; ?>
-				<a class="bullet small" href="<?php echo $programs_link . '#' . $slug ?>">Read more about this Residency Program</a>
+				<?php 
+					if( !empty($linkrows) ):
+					foreach( $linkrows as $row ): 
+					$link = $row['page_link'];
+					$link_url = $link['url'];
+					$link_title = $link['title'];
+					$link_target = $link['target'] ? $link['target'] : '_self';
+				?>
+					<a class="bullet small" href="<?php echo esc_url( $link_url ); ?>" target="<?php echo esc_attr( $link_target ); ?>"><?php echo esc_html( $link_title ); ?></a>
+				<?php endforeach; endif; ?>
 			</div>
 		</div>
 		<?php if($slug == 'international'): ?>

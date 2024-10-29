@@ -78,6 +78,7 @@ function setUp() {
 		var section = $('section').eq(i);
 		var asideShift = i * asideWidth;
 		var left = i * pageWidth - asideShift;
+		console.log('here: ' + left);
 		if($(section).is('#map')) {
 			left += asideShift;
 		}
