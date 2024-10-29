@@ -49,6 +49,7 @@
 									echo '<div class="icon default"></div>';
 									echo '<div class="icon hover"></div>';
 									echo '</div>';
+									echo '&nbsp;';
 							    endif;
 					    		echo $child_title;
 					    		echo '</a>';
@@ -64,11 +65,11 @@
 				<div class="cell search">
 		    		<div class="cell-inner">
 	    				<div class="title">Search</div>
-		    			<div class="sub-menu">
+		    			<div class="sub-menu mouse-enter">
 		    				<form role="search" method="get" class="searchform" class="searchform" autocomplete="off" action="<?php echo esc_url( home_url( '/' ) ); ?>">
-		    					<div class="placeholder"><span>Type here</span></div>
-								<input type="text" name="s" class="s" spellcheck="false"/>
-								<div class="counter"></div>
+		    					<div class="placeholder"><span>Search</span></div>
+									<input type="text" name="s" class="s" spellcheck="false"/>
+									<div class="counter"></div>
 							</form>
 		    			</div>
 		    		</div>
@@ -80,7 +81,7 @@
 					$facebook_url = 'http://facebook.com/' . get_field( 'facebook', $about_id );
 					$instagram_handle = str_replace('@', '', get_field( 'instagram', $about_id ) );
 					$instagram_url = 'http://instagram.com/' . $instagram_handle;
-					$newsletter_url = get_field( 'newsletter', $about_id );
+					// $newsletter_url = get_field( 'newsletter', $about_id );
 				?>
 
 		    	<div class="cell connect">
@@ -96,15 +97,6 @@
 		    				<div class="child-item instagram">
 		    					<a href="<?php echo $instagram_url ?>" target="_blank">Instagram</a>
 		    				</div>
-		    			</div>
-		    		</div>
-		    	</div>
-
-		    	<div class="cell newsletter">
-		    		<div class="cell-inner">
-		    			<div class="title">Newsletter</div>
-		    			<div class="sub-menu">
-		    				<?php get_template_part('partials/newsletter') ?>
 		    			</div>
 		    		</div>
 		    	</div>

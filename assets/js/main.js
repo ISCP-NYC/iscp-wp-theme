@@ -1161,7 +1161,7 @@ function buildMasonry() {
 //////////////////////////SEARCH/////////////////////////////
 /////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////
-$('body').on('mouseenter click touchstart', '.newsletter form', function() {
+$('body').on('mouseenter click touchstart', '.mouse-enter form', function() {
 	var input = $(this).find('input:not(.no)');
 	var value = $(input).attr('value');
 	var placeholder = $(this).find('.placeholder');
@@ -1169,9 +1169,9 @@ $('body').on('mouseenter click touchstart', '.newsletter form', function() {
 	$(input).focus();
 }).on('mouseleave','form', function() {
 	var input = $(this).find('input:not(.no)');
-	var value = $(input).attr('value');
+	var value = $(input).val();
 	var placeholder = $(this).find('.placeholder');
-	if (!/\S/.test(value)) {
+	if (!value.length) {
 		$(placeholder).css({'opacity':1});
 		$(input).siblings('.counter').html('');
 	}
