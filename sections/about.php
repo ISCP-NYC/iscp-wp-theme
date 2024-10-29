@@ -115,9 +115,9 @@
 								echo '<div class="image ' . $orientation . '">';
 								echo '<div class="captionWrap">';
 								echo '<img src="' . $image_url . '"/>';
-								echo '<div class="caption">';
+								echo '<figcaption class="caption">';
 								echo $caption;
-								echo '</div>';
+								echo '</figcaption>';
 								echo '</div>';
 								echo '</div>';
 								echo '</div>';
