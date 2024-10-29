@@ -301,6 +301,28 @@ p {
 	span {
 		line-height: inherit !important;
 	}
+	&:last-child {
+		margin-bottom: 0;
+	}
+}
+figure {
+	&.hero {
+		max-width: 50svw;
+		width: fit-content;
+		margin: 0 auto 2rem;
+		img {
+			margin: auto;
+			width: auto;
+			height: auto;
+			max-height: 50svh;
+		}
+	}
+}
+hr {
+	border: 5px solid $orange;
+}
+figcaption {
+	@include small-fs;
 }
 strong, b {
 	font-weight: normal !important;

@@ -1837,6 +1837,12 @@ function custom_style_options($arr){
 }
 add_filter('tiny_mce_before_init', 'custom_style_options');
 
+function add_mce_buttons($buttons){
+	$buttons[] = 'hr';
+	return $buttons;
+}
+add_filter( 'mce_buttons', 'add_mce_buttons' );
+
 function add_editor_stylesheet() {
     add_editor_style( 'assets/styles/editor.css' );
 }
