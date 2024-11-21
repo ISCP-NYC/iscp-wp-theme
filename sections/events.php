@@ -62,7 +62,7 @@ $page_url = get_the_permalink();
 			endif;
 			wp_reset_query();
 			?>
-		<div class="wrapper past module">
+		<div class="wrapper past">
 			<h3 class="title">Past Programs &amp; Exhibitions</h3>
 			<div class="filter">
 				<div class="bar">

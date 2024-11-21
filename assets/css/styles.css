@@ -3804,6 +3804,16 @@ section#events .content .wrapper.upcoming.module {
 section#events .content .wrapper.upcoming.module h3.title {
   padding-bottom: 0;
 }
+@media (max-width: 900px) {
+  section#events .content .wrapper.past h3.title {
+    font-size: 24px !important;
+    line-height: 28px !important;
+  }
+}
+section#events .content .wrapper.past h3.title {
+  font-size: 32px;
+  line-height: 36px;
+}
 
 section.single.event header.sub {
   width: 100%;
