@@ -3,6 +3,7 @@ global $visit;
 $title = $post->post_title;
 $slug = $post->post_name;
 $id = $post->ID;
+$intro_image = get_field( 'intro_image', $id );
 $about = get_page_by_path( 'about' );
 ?>
 
@@ -27,7 +28,12 @@ $about = get_page_by_path( 'about' );
 
 		<div class="info map module">
 			<div class="inner" id="map"></div>
-			<h3 class="orange title">Office Hours: <?php echo $office_hours; ?></h3>
+			<!-- <h3 class="orange title">
+				Office Hours:  -->
+				<?php 
+					// echo $office_hours; 
+				?>
+			<!-- </h3> -->
 			<h3 class="orange title">Exhibition Hours: <?php echo $exhibition_hours; ?></h3>
 			<h3 class="orange title"><?php echo $address ?></h3>
 		</div>
@@ -186,6 +192,46 @@ $about = get_page_by_path( 'about' );
 		echo '</div>';
 		echo '</div>';
 		?>
+
+		<?php if ( $intro_image || $intro_text ):
+			echo '<div class="intro module">';
+			if ( !empty($intro_image) ):
+				echo '<figure class="hero">';
+				echo wp_get_attachment_image( $intro_image, 'full' );
+				echo '<figcaption>' . wp_get_attachment_caption( $intro_image ) . '</figcaption>';
+				echo '</figure>';
+			endif;
+			if ( !empty($intro_text) ):
+				echo $intro_text;
+			endif;
+			echo '</div>';
+		endif; ?>
+
+		<?php if( get_field( 'group_visits', $visit ) || get_field( 'bloomberg_connects', $visit ) ): ?>
+			<div class="module visits">
+				<?php if( get_field( 'group_visits', $visit ) ): ?>
+					<div class="section">
+						<h3 class="title">Group Visits</h3>
+						<?php the_field( 'group_visits', $visit ); ?>
+					</div>
+				<?php endif; ?>
+				<?php if( get_field( 'bloomberg_connects', $visit ) ): ?>
+					<div class="section">
+						<h3 class="title">Bloomberg Connects</h3>
+						<?php the_field( 'bloomberg_connects', $visit ); ?>
+					</div>
+				<?php endif; ?>
+			</div>
+		<?php endif; ?>
+
+		<?php if( get_field( 'accessibility', $visit ) ): ?>
+			<div class="module accessibility directions">
+				<h3 class="title">Accessibility</h3>
+				<div class="text-wrapper">
+					<?php the_field( 'accessibility', $visit ); ?>
+				</div>
+			</div>
+		<?php endif; ?>
 
 		<div class="module newsletter">
 			<?php get_template_part('partials/newsletter') ?>

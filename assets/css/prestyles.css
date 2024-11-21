@@ -5401,6 +5401,7 @@ section#visit .module.info h1 {
 }
 section#visit .module.map {
   height: 500px;
+  padding-bottom: 0;
 }
 section#visit .module.map .inner {
   height: 500px;
@@ -5454,6 +5455,33 @@ section#visit .module.directions .footnote {
 section#visit .module.directions .footnote {
   font-size: 18px;
   line-height: 21px;
+}
+section#visit .module.intro {
+  margin-top: 60px;
+  padding-bottom: 20px;
+}
+section#visit .module.visits {
+  display: flex;
+  padding-top: 5px;
+  padding-bottom: 10px;
+}
+section#visit .module.visits .section {
+  padding-bottom: 40px;
+  flex-grow: 1;
+  flex-basis: 0;
+}
+section#visit .module.visits .section h3.title {
+  padding-bottom: 20px;
+}
+section#visit .module.visits .section:nth-of-type(2) {
+  border-left: 10px solid #ff5000;
+  padding-left: 40px;
+  margin-left: 30px;
+}
+section#visit .module.accessibility .text-wrapper {
+  width: 100%;
+  max-width: 600px;
+  margin: auto;
 }
 section#visit .module.newsletter {
   margin-top: 60px;
