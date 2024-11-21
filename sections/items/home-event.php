@@ -32,7 +32,7 @@ endif;
       <figure class="image">
         <img src="<?= $event_thumb ?>"/>
       </figure>
-      <h2 class="link name title"><?=  $event_title ?></h2>
+      <h3 class="link name title"><?=  $event_title ?></h3>
     </a>
     <div class="value event-type">
       <a href="<?= $type_url . '/events' ?>">

@@ -1,11 +1,11 @@
 section .content .events.module {
   display: block;
   padding-bottom: 20px;
-  margin-left: -30px;
-  width: calc(100% + 20px);
   .swiper.image_slider {
     height: auto;
-    width: 100%;
+    // width: 100%;
+    width: calc(100% + 60px);
+    margin-left: -30px;
     margin-top: -40px;
     display: block;
     .swiper-wrapper {

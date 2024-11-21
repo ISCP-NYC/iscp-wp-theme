@@ -502,7 +502,7 @@ section .content .module img {
 }
 section .content .module h2.title {
   padding: 0;
-  margin-bottom: 20px;
+  margin-bottom: 40px;
 }
 section .content .module h3.title {
   text-align: center;
@@ -533,6 +533,7 @@ section h2.head {
   padding: 10px 0 30px;
   text-align: center;
   color: #ff5000;
+  margin-top: 0;
   margin-bottom: 20px;
 }
 @media (max-width: 900px) {
@@ -1816,6 +1817,16 @@ section .shelves.grid .shelf-item .inner h2 {
   text-align: center;
   margin-bottom: 10px;
 }
+@media (max-width: 900px) {
+  section .shelves.grid .shelf-item .inner h2 {
+    font-size: 18px !important;
+    line-height: 21px !important;
+  }
+}
+section .shelves.grid .shelf-item .inner h2 {
+  font-size: 24px;
+  line-height: 28px;
+}
 section .shelves.grid .shelf-item .inner .image {
   width: 100%;
   margin-bottom: 14px;
@@ -1933,6 +1944,16 @@ section .shelves.list .shelf-item .inner h2 {
   text-align: left;
   margin: 0;
 }
+@media (max-width: 900px) {
+  section .shelves.list .shelf-item .inner h2 {
+    font-size: 18px !important;
+    line-height: 21px !important;
+  }
+}
+section .shelves.list .shelf-item .inner h2 {
+  font-size: 24px;
+  line-height: 28px;
+}
 section .shelves.list .shelf-item .inner h3 {
   width: 100%;
   text-align: left;
@@ -1952,6 +1973,8 @@ section .shelves.list .shelf-item .inner .image {
   display: none;
 }
 section .shelves.list .shelf-item .inner .value {
+  display: flex;
+  align-items: flex-end;
   float: left;
   text-align: left;
   word-break: break-word;
@@ -2068,21 +2091,6 @@ section.hide-shelves .shelves {
 }
 section.filtering .filter-this {
   opacity: 0;
-}
-section .module .shelf-item.item, section .module.shelves .shelf-item.item {
-  width: 33.333% !important;
-}
-section .module .shelf-item.item .inner, section .module.shelves .shelf-item.item .inner {
-  width: calc(100% - 20px) !important;
-}
-section .module .shelf-item.item:nth-child(3n+1) .inner, section .module.shelves .shelf-item.item:nth-child(3n+1) .inner {
-  margin: 0 !important;
-}
-section .module .shelf-item.item:nth-child(3n+2) .inner, section .module.shelves .shelf-item.item:nth-child(3n+2) .inner {
-  margin: 0 10px !important;
-}
-section .module .shelf-item.item:nth-child(3n+3) .inner, section .module.shelves .shelf-item.item:nth-child(3n+3) .inner {
-  margin: 0 0 0 20px !important;
 }
 @media (max-width: 900px) {
   section .module .shelf-item.item:nth-child(n), section .module .shelf-item.item:first-child, section .module .shelf-item.item:last-child, section .module.shelves .shelf-item.item:nth-child(n), section .module.shelves .shelf-item.item:first-child, section .module.shelves .shelf-item.item:last-child {
@@ -3788,6 +3796,13 @@ section#events .content .events.list .event .event-type a {
 section#events .content .wrapper.upcoming {
   margin-bottom: 20px;
 }
+section#events .content .wrapper.upcoming.module {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+section#events .content .wrapper.upcoming.module h3.title {
+  padding-bottom: 0;
+}
 
 section.single.event header.sub {
   width: 100%;
@@ -5456,12 +5471,11 @@ main[data-center-slug=export] table td {
 section .content .events.module {
   display: block;
   padding-bottom: 20px;
-  margin-left: -30px;
-  width: calc(100% + 20px);
 }
 section .content .events.module .swiper.image_slider {
   height: auto;
-  width: 100%;
+  width: calc(100% + 60px);
+  margin-left: -30px;
   margin-top: -40px;
   display: block;
 }

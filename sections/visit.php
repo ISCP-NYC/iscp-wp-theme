@@ -25,23 +25,16 @@ $about = get_page_by_path( 'about' );
 		$directions_footnote = get_field( 'directions_footnote', $visit );
 		?>
 
-		<div class="info module">
-			<h1>Office Hours: <?php echo $office_hours; ?></h1>
-			<h1>Exhibition Hours: <?php echo $exhibition_hours; ?></h1>
-			<h1><?php echo $address ?></h1>
+		<div class="info map module">
+			<div class="inner" id="map"></div>
+			<h3 class="orange title">Office Hours: <?php echo $office_hours; ?></h3>
+			<h3 class="orange title">Exhibition Hours: <?php echo $exhibition_hours; ?></h3>
+			<h3 class="orange title"><?php echo $address ?></h3>
 		</div>
-
+<!-- 
 		<div class="map module">
 			<div class="inner" id="map"></div>
-			<div class="contact">
-				<h1>
-					<a href="call:<?php echo $phone ?>"><?php echo $phone ?></a>
-				</h1>
-				<h1>
-					<a href="mailto:<?php echo $email ?>"><?php echo $email ?></a>
-				</h1>
-			</div>
-		</div>
+		</div> -->
 
 		
 		<script type="text/javascript">
@@ -178,7 +171,7 @@ $about = get_page_by_path( 'about' );
 	    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyApM4iQyAfb0hbmkeXc_zs58aA_Jy0SIac&callback=initMap"></script>
 		<?php
 		echo '<div class="module directions">';
-		echo '<h3 class="title">Directions by Subway</h3>';
+		echo '<h3 class="title">How to Get to ISCP</h3>';
 		if( get_field( 'directions', $visit ) ):
 			echo '<ul class="steps">';
 			$home = get_page_by_path( 'home' )->ID;

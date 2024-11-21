@@ -131,7 +131,7 @@ section {
 			@extend .border-bottom;
 			h2.title {
 				padding: 0;
-				margin-bottom: 20px;
+				margin-bottom: 40px;
 			}
 			h3.title {
 				@include subtitle-fs;
@@ -162,6 +162,7 @@ section {
 		padding: 10px 0 30px;
 		text-align: center;
 		color: $orange;
+		margin-top: 0;
 		margin-bottom: 20px;
 		@include large-fs;
 		@include small {
