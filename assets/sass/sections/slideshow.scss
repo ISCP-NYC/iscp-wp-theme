@@ -3,16 +3,19 @@ section .content .events.module {
   padding-bottom: 20px;
   .swiper.image_slider {
     height: auto;
-    // width: 100%;
     width: calc(100% + 60px);
     margin-left: -30px;
-    margin-top: -40px;
+    margin-top: -60px;
     display: block;
     .swiper-wrapper {
       .inner {
         padding: 0 60px 0;
       }
       .event.item {
+        h3.name {
+          padding-bottom: 20px;
+          margin-bottom: 5px;
+        }
         .image {
           display: block;
         }
