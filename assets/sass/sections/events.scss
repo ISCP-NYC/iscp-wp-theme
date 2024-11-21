@@ -58,4 +58,9 @@ section#events .content {
 			}
 		}
 	}
+	.wrapper.past {
+		h3.title {
+			@include subtitle-fs;
+		}
+	}
 }
