@@ -27,9 +27,17 @@ section.journal {
 	    .journal-post {
 	    	margin-bottom: 30px;
 	    	padding-bottom: 30px;
+				.title-wrapper {
+					.tags {
+						padding-left: 20px;
+					}
+					display: flex;
+					align-items: baseline;
+				}
 	    	h2.name {
 	    		display: table;
 	    		margin-bottom: 4px;
+					@include subtitle-fs;
 	    	}
 		    header {
 		    	margin-bottom: 10px;

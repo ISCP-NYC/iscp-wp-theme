@@ -17,22 +17,41 @@ $show_featured_image = get_field( 'show_featured_image' );
 if( get_field( 'author' ) ):
   $author = get_field( 'author' );
 endif;
+$tags = get_the_tags();
 ?>
 <section <?php section_attr( $id, $slug, $event_classes ); ?>>
 	<?php get_template_part('partials/nav') ?>
 	<?php get_template_part('partials/side') ?>
 
 	<div class="content">
+		<?php
+			$tags_count = $tags ? count( $tags ) - 1 : null;
+			$tag_index = 0;
+			if( $tags ):
+				echo '<div class="tags">';
+				foreach( $tags as $tag ):
+					$tag_name = $tag->name;
+					$tag_slug = $tag->slug;
+					$tag_url = site_url( '/journal/?tag=' . $tag_slug );
+					echo '<a href="' . $tag_url . '">' . $tag_name . '</a>';
+					if( $tag_index < $tags_count ):
+						echo ', ';
+					endif;
+					$tag_index++;
+				endforeach;
+				echo '</div>';
+			endif;
+		?>
+		<h2 class="title head"><?php echo $title ?></h2>
 		<div class="inner">
 			<div class="header">
-				<h3 class="title date"><?php echo $date ?></h3>	
-				<h2 class="title head"><?php echo $title ?></h2>
-				<h3 class="title author">by <?php echo $author ?></h3>
 				<?php if ($featured_image && $show_featured_image): ?>
 					<div class="image">
 						<img src="<?php echo $featured_image ?>"/>
 					</div>
 				<?php endif; ?>
+				<h3 class="title date"><?php echo $date ?></h3>	
+				<h3 class="title author">by <?php echo $author ?></h3>
 			</div>
 			<div class="text">
 				<?php echo $content; ?>

@@ -4842,9 +4842,26 @@ section.journal .content .journal .journal-post {
   margin-bottom: 30px;
   padding-bottom: 30px;
 }
+section.journal .content .journal .journal-post .title-wrapper {
+  display: flex;
+  align-items: baseline;
+}
+section.journal .content .journal .journal-post .title-wrapper .tags {
+  padding-left: 20px;
+}
 section.journal .content .journal .journal-post h2.name {
   display: table;
   margin-bottom: 4px;
+}
+@media (max-width: 900px) {
+  section.journal .content .journal .journal-post h2.name {
+    font-size: 24px !important;
+    line-height: 28px !important;
+  }
+}
+section.journal .content .journal .journal-post h2.name {
+  font-size: 32px;
+  line-height: 36px;
 }
 section.journal .content .journal .journal-post header {
   margin-bottom: 10px;
@@ -4872,6 +4889,14 @@ section.journal .content .journal .load-more {
   bottom: 0;
 }
 
+section.journal-post .content .tags {
+  text-align: center;
+  padding: 40px;
+}
+section.journal-post .content h2.title.head {
+  padding: 0 40px 40px;
+  width: auto;
+}
 section.journal-post .content .inner {
   width: 50%;
   display: block;
@@ -4884,14 +4909,20 @@ section.journal-post .content .inner {
 }
 section.journal-post .content .inner .header {
   width: 100%;
-  margin-bottom: 20px;
+  margin-bottom: 40px;
+}
+section.journal-post .content .inner .header h3.title {
+  padding-bottom: 0;
+  margin-top: 0;
+  margin-bottom: 0;
 }
 section.journal-post .content .inner .header h2.head {
-  margin-bottom: 0;
+  margin-bottom: 20px;
 }
 section.journal-post .content .inner .header .image {
   width: 100%;
   display: block;
+  margin-bottom: 40px;
 }
 section.journal-post .content .inner .header .image img {
   margin-bottom: 0;
