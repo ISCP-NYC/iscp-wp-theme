@@ -8,6 +8,7 @@ section#visit {
 		}
 		&.map {
 			height: 500px;
+			padding-bottom: 0;
 			.inner {
 				height: 500px;
 			}
@@ -30,7 +31,7 @@ section#visit {
 				display: table;
 				margin: auto;
 				.step {
-					list-style-type:decimal;
+					list-style-type:disc;
 					padding-left: 20px;
 					margin: 0 0 20px 30px;
 					@include medium-fs;
@@ -43,6 +44,38 @@ section#visit {
 				margin: 10px auto 0 auto;
 				@include small-fs;
 			}
+		}
+		&.intro {
+			margin-top: 60px;
+			padding-bottom: 20px;
+		}
+		&.visits {
+			display: flex;
+			padding-top: 5px;
+			padding-bottom: 10px;
+			.section {
+				padding-bottom: 40px;
+				h3.title {
+					padding-bottom: 20px;
+				}
+				flex-grow: 1;
+    		flex-basis: 0;
+				&:nth-of-type(2) {
+					border-left: 10px solid $orange;
+					padding-left: 40px;
+					margin-left: 30px;
+				}
+			}
+		}
+		&.accessibility {
+			.text-wrapper {
+				width: 100%;
+				max-width: 600px;
+				margin: auto;
+			}
+		}
+		&.newsletter {
+			margin-top: 60px;
 		}
 	}
 }
