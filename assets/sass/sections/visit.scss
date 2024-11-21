@@ -30,7 +30,7 @@ section#visit {
 				display: table;
 				margin: auto;
 				.step {
-					list-style-type:decimal;
+					list-style-type:disc;
 					padding-left: 20px;
 					margin: 0 0 20px 30px;
 					@include medium-fs;
@@ -43,6 +43,9 @@ section#visit {
 				margin: 10px auto 0 auto;
 				@include small-fs;
 			}
+		}
+		&.newsletter {
+			margin-top: 60px;
 		}
 	}
 }

@@ -2469,6 +2469,7 @@ ul li {
 p {
   word-wrap: break-word;
   margin-bottom: 28px;
+  margin-top: 0;
 }
 @media (max-width: 768px) {
   p {
@@ -5424,7 +5425,7 @@ section#visit .module.directions .steps {
   margin: auto;
 }
 section#visit .module.directions .steps .step {
-  list-style-type: decimal;
+  list-style-type: disc;
   padding-left: 20px;
   margin: 0 0 20px 30px;
 }
@@ -5453,6 +5454,9 @@ section#visit .module.directions .footnote {
 section#visit .module.directions .footnote {
   font-size: 18px;
   line-height: 21px;
+}
+section#visit .module.newsletter {
+  margin-top: 60px;
 }
 
 main[data-center-slug=export] {
