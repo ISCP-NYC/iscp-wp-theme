@@ -46,7 +46,7 @@ if( $tags ):
   echo '</div>';
 endif;
 echo '</div>';
-echo '<h3 class="date">' . $date . '</h3>';
+// echo '<h3 class="date">' . $date . '</h3>';
 echo '<h3 class="author">by ' . $author . '</h3>';
 echo '</header>';
 echo '<div class="excerpt">';
