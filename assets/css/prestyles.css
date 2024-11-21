@@ -5442,7 +5442,6 @@ section#visit .module.info h1 {
 }
 section#visit .module.map {
   height: 500px;
-  padding-bottom: 0;
 }
 section#visit .module.map .inner {
   height: 500px;
@@ -5467,7 +5466,7 @@ section#visit .module.directions .steps {
   margin: auto;
 }
 section#visit .module.directions .steps .step {
-  list-style-type: disc;
+  list-style-type: decimal;
   padding-left: 20px;
   margin: 0 0 20px 30px;
 }
@@ -5497,36 +5496,6 @@ section#visit .module.directions .footnote {
   font-size: 18px;
   line-height: 21px;
 }
-section#visit .module.intro {
-  margin-top: 60px;
-  padding-bottom: 20px;
-}
-section#visit .module.visits {
-  display: flex;
-  padding-top: 5px;
-  padding-bottom: 10px;
-}
-section#visit .module.visits .section {
-  padding-bottom: 40px;
-  flex-grow: 1;
-  flex-basis: 0;
-}
-section#visit .module.visits .section h3.title {
-  padding-bottom: 20px;
-}
-section#visit .module.visits .section:nth-of-type(2) {
-  border-left: 10px solid #ff5000;
-  padding-left: 40px;
-  margin-left: 30px;
-}
-section#visit .module.accessibility .text-wrapper {
-  width: 100%;
-  max-width: 600px;
-  margin: auto;
-}
-section#visit .module.newsletter {
-  margin-top: 60px;
-}
 
 main[data-center-slug=export] {
   width: 94% !important;
@@ -5549,11 +5518,15 @@ section .content .events.module .swiper.image_slider {
   height: auto;
   width: calc(100% + 60px);
   margin-left: -30px;
-  margin-top: -40px;
+  margin-top: -60px;
   display: block;
 }
 section .content .events.module .swiper.image_slider .swiper-wrapper .inner {
   padding: 0 60px 0;
+}
+section .content .events.module .swiper.image_slider .swiper-wrapper .event.item h3.name {
+  padding-bottom: 20px;
+  margin-bottom: 5px;
 }
 section .content .events.module .swiper.image_slider .swiper-wrapper .event.item .image {
   display: block;
