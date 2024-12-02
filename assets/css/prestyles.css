@@ -4844,7 +4844,7 @@ section.journal .content .journal .journal-post {
 }
 section.journal .content .journal .journal-post .title-wrapper {
   display: flex;
-  align-items: baseline;
+  align-items: start;
 }
 section.journal .content .journal .journal-post .title-wrapper .tags {
   padding-left: 20px;
@@ -4852,6 +4852,7 @@ section.journal .content .journal .journal-post .title-wrapper .tags {
 section.journal .content .journal .journal-post h2.name {
   display: table;
   margin-bottom: 4px;
+  margin-top: 0;
 }
 @media (max-width: 900px) {
   section.journal .content .journal .journal-post h2.name {
@@ -4863,12 +4864,49 @@ section.journal .content .journal .journal-post h2.name {
   font-size: 32px;
   line-height: 36px;
 }
+@media (max-width: 1040px) and (max-width: 900px) {
+  section.journal .content .journal .journal-post h2.name {
+    font-size: 18px !important;
+    line-height: 21px !important;
+  }
+}
+@media (max-width: 1040px) {
+  section.journal .content .journal .journal-post h2.name {
+    font-size: 24px;
+    line-height: 28px;
+  }
+}
+@media (max-width: 900px) and (max-width: 900px) {
+  section.journal .content .journal .journal-post h2.name {
+    font-size: 24px !important;
+    line-height: 28px !important;
+  }
+}
+@media (max-width: 900px) {
+  section.journal .content .journal .journal-post h2.name {
+    font-size: 32px;
+    line-height: 36px;
+  }
+}
+@media (max-width: 1040px) and (max-width: 900px) {
+  section.journal .content .journal .journal-post h3.author, section.journal .content .journal .journal-post .excerpt p, section.journal .content .journal .journal-post .excerpt a {
+    font-size: 16px !important;
+    line-height: 20px !important;
+  }
+}
+@media (max-width: 1040px) {
+  section.journal .content .journal .journal-post h3.author, section.journal .content .journal .journal-post .excerpt p, section.journal .content .journal .journal-post .excerpt a {
+    font-size: 18px;
+    line-height: 21px;
+  }
+}
 section.journal .content .journal .journal-post header {
   margin-bottom: 10px;
 }
 section.journal .content .journal .journal-post a.image {
   display: table;
   margin: 0 auto 10px auto;
+  background-color: gray;
 }
 section.journal .content .journal .journal-post a.image img {
   width: 100%;
@@ -4876,10 +4914,20 @@ section.journal .content .journal .journal-post a.image img {
   margin: auto;
 }
 section.journal .content .journal .journal-post .tags {
-  margin-top: 5px;
+  margin-top: 0;
 }
 section.journal .content .journal .journal-post .tags a {
   display: inline-table;
+}
+@media (max-width: 900px) {
+  section.journal .content .journal .journal-post .tags a {
+    font-size: 16px !important;
+    line-height: 20px !important;
+  }
+}
+section.journal .content .journal .journal-post .tags a {
+  font-size: 18px;
+  line-height: 21px;
 }
 section.journal .content .journal .size {
   display: none;
@@ -5442,6 +5490,7 @@ section#visit .module.info h1 {
 }
 section#visit .module.map {
   height: 500px;
+  padding-bottom: 0;
 }
 section#visit .module.map .inner {
   height: 500px;
@@ -5466,7 +5515,7 @@ section#visit .module.directions .steps {
   margin: auto;
 }
 section#visit .module.directions .steps .step {
-  list-style-type: decimal;
+  list-style-type: disc;
   padding-left: 20px;
   margin: 0 0 20px 30px;
 }
@@ -5495,6 +5544,36 @@ section#visit .module.directions .footnote {
 section#visit .module.directions .footnote {
   font-size: 18px;
   line-height: 21px;
+}
+section#visit .module.intro {
+  margin-top: 60px;
+  padding-bottom: 20px;
+}
+section#visit .module.visits {
+  display: flex;
+  padding-top: 5px;
+  padding-bottom: 10px;
+}
+section#visit .module.visits .section {
+  padding-bottom: 40px;
+  flex-grow: 1;
+  flex-basis: 0;
+}
+section#visit .module.visits .section h3.title {
+  padding-bottom: 20px;
+}
+section#visit .module.visits .section:nth-of-type(2) {
+  border-left: 10px solid #ff5000;
+  padding-left: 40px;
+  margin-left: 30px;
+}
+section#visit .module.accessibility .text-wrapper {
+  width: 100%;
+  max-width: 600px;
+  margin: auto;
+}
+section#visit .module.newsletter {
+  margin-top: 60px;
 }
 
 main[data-center-slug=export] {

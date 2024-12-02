@@ -32,19 +32,32 @@ section.journal {
 						padding-left: 20px;
 					}
 					display: flex;
-					align-items: baseline;
+					align-items: start;
 				}
 	    	h2.name {
 	    		display: table;
 	    		margin-bottom: 4px;
+					margin-top: 0;
 					@include subtitle-fs;
+					@include xmedium {
+						@include medium-fs;
+					}
+					@include medium {
+						@include subtitle-fs;
+					}
 	    	}
+				h3.author, .excerpt p, .excerpt a {
+					@include xmedium {
+						@include small-fs;
+					}
+				}
 		    header {
 		    	margin-bottom: 10px;
 		    }
 		    a.image {
 		    	display: table;
 		    	margin: 0 auto 10px auto;
+					background-color: gray;
 		    	img {
 		    		width: 100%;
 		    		display: table;
@@ -52,9 +65,10 @@ section.journal {
 		    	}
 		    }
 		    .tags {
-		    	margin-top: 5px;
+		    	margin-top: 0;
 		    	a {
 		    		display: inline-table;
+						@include small-fs;
 		    	}
 		    }
 			}
