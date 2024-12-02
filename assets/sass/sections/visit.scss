@@ -9,6 +9,10 @@ section#visit {
 		&.map {
 			height: 500px;
 			padding-bottom: 0;
+			iframe {
+				margin: auto;
+				width: 100%;
+			}
 			.inner {
 				height: 500px;
 			}

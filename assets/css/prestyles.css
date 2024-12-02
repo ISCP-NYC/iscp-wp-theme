@@ -5492,6 +5492,10 @@ section#visit .module.map {
   height: 500px;
   padding-bottom: 0;
 }
+section#visit .module.map iframe {
+  margin: auto;
+  width: 100%;
+}
 section#visit .module.map .inner {
   height: 500px;
 }

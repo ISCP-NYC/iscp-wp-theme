@@ -27,7 +27,8 @@ $about = get_page_by_path( 'about' );
 		?>
 
 		<div class="info map module">
-			<div class="inner" id="map"></div>
+		<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3024.1674297921663!2d-73.93702212397416!3d40.71433057139324!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c25eacbb754da1%3A0x9a0bf8aa98b5bc06!2sInternational%20Studio%20%26%20Curatorial%20Program!5e0!3m2!1sen!2sus!4v1733174899306!5m2!1sen!2sus" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+			<!-- <div class="inner" id="map"></div> -->
 			<!-- <h3 class="orange title">
 				Office Hours:  -->
 				<?php 
@@ -43,7 +44,7 @@ $about = get_page_by_path( 'about' );
 		</div> -->
 
 		
-		<script type="text/javascript">
+		<!-- <script type="text/javascript">
 		function initMap() {
 			var mapStyle = new google.maps.StyledMapType([
 			    {
@@ -173,8 +174,8 @@ $about = get_page_by_path( 'about' );
 			    map.setCenter(location);
 			});
 		}
-	    </script>
-	    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyApM4iQyAfb0hbmkeXc_zs58aA_Jy0SIac&callback=initMap"></script>
+	    </script> -->
+	    <!-- <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyApM4iQyAfb0hbmkeXc_zs58aA_Jy0SIac&callback=initMap"></script> -->
 		<?php
 		echo '<div class="module directions">';
 		echo '<h3 class="title">How to Get to ISCP</h3>';
