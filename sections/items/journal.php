@@ -21,7 +21,7 @@ echo '<div class="journal-post item border-bottom ' . $joural_post_status . '">'
 echo '<div class="inner">';
 echo '<header>';
 if ($thumb != ''):
-	echo '<a class="name" href="' . $url . '">';
+	echo '<a class="name image" href="' . $url . '">';
 	echo '<img src="' . $thumb . '"/>';
 	echo '</a>';
 endif;
