@@ -1,18 +1,18 @@
 <?php
 global $post;
 $title = get_the_title();
-$slug = $post->post_name;
-$id = $post->ID;
+$slug = $post ? $post->post_name : null;
+$id = $post ? $post->ID : null;
 $paged = 1;
 $page_url = get_the_permalink();
 $page_param = $slug;
 $page_query = null;
-if( $query_vars ):
+if( isset($query_vars) && $query_vars ):
 	$slug = $query_vars['pagename'];
 	$paged = $query_vars['paged'];
 	$post = get_page_by_path( $slug, OBJECT, 'page' );
 endif;
-if( $type_slug ):
+if( isset($type_slug) && $type_slug ):
 	$filter_query = array(
 		'key' => 'type',
 		'value' => $type_slug,
