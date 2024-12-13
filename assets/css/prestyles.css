@@ -171,6 +171,10 @@ a.bullet:hover {
   padding: 0 0 60px 0;
 }
 
+.module-intro .hero {
+  max-height: 67svh;
+}
+
 .module.newsletter {
   display: table;
   padding: 0px 20px 0px 20px;
@@ -502,11 +506,21 @@ section .content .module img {
 }
 section .content .module h2.title {
   padding: 0;
-  margin-bottom: 20px;
+  margin-bottom: 40px;
 }
 section .content .module h3.title {
   text-align: center;
   color: #ff5000;
+}
+@media (max-width: 900px) {
+  section .content .module h3.title {
+    font-size: 24px !important;
+    line-height: 28px !important;
+  }
+}
+section .content .module h3.title {
+  font-size: 32px;
+  line-height: 36px;
 }
 section .content .module:last-of-type {
   margin-bottom: 0;
@@ -523,6 +537,7 @@ section h2.head {
   padding: 10px 0 30px;
   text-align: center;
   color: #ff5000;
+  margin-top: 0;
   margin-bottom: 20px;
 }
 @media (max-width: 900px) {
@@ -1806,6 +1821,16 @@ section .shelves.grid .shelf-item .inner h2 {
   text-align: center;
   margin-bottom: 10px;
 }
+@media (max-width: 900px) {
+  section .shelves.grid .shelf-item .inner h2 {
+    font-size: 18px !important;
+    line-height: 21px !important;
+  }
+}
+section .shelves.grid .shelf-item .inner h2 {
+  font-size: 24px;
+  line-height: 28px;
+}
 section .shelves.grid .shelf-item .inner .image {
   width: 100%;
   margin-bottom: 14px;
@@ -1923,6 +1948,16 @@ section .shelves.list .shelf-item .inner h2 {
   text-align: left;
   margin: 0;
 }
+@media (max-width: 900px) {
+  section .shelves.list .shelf-item .inner h2 {
+    font-size: 18px !important;
+    line-height: 21px !important;
+  }
+}
+section .shelves.list .shelf-item .inner h2 {
+  font-size: 24px;
+  line-height: 28px;
+}
 section .shelves.list .shelf-item .inner h3 {
   width: 100%;
   text-align: left;
@@ -1942,6 +1977,8 @@ section .shelves.list .shelf-item .inner .image {
   display: none;
 }
 section .shelves.list .shelf-item .inner .value {
+  display: flex;
+  align-items: flex-end;
   float: left;
   text-align: left;
   word-break: break-word;
@@ -2058,21 +2095,6 @@ section.hide-shelves .shelves {
 }
 section.filtering .filter-this {
   opacity: 0;
-}
-section .module .shelf-item.item, section .module.shelves .shelf-item.item {
-  width: 33.333% !important;
-}
-section .module .shelf-item.item .inner, section .module.shelves .shelf-item.item .inner {
-  width: calc(100% - 20px) !important;
-}
-section .module .shelf-item.item:nth-child(3n+1) .inner, section .module.shelves .shelf-item.item:nth-child(3n+1) .inner {
-  margin: 0 !important;
-}
-section .module .shelf-item.item:nth-child(3n+2) .inner, section .module.shelves .shelf-item.item:nth-child(3n+2) .inner {
-  margin: 0 10px !important;
-}
-section .module .shelf-item.item:nth-child(3n+3) .inner, section .module.shelves .shelf-item.item:nth-child(3n+3) .inner {
-  margin: 0 0 0 20px !important;
 }
 @media (max-width: 900px) {
   section .module .shelf-item.item:nth-child(n), section .module .shelf-item.item:first-child, section .module .shelf-item.item:last-child, section .module.shelves .shelf-item.item:nth-child(n), section .module.shelves .shelf-item.item:first-child, section .module.shelves .shelf-item.item:last-child {
@@ -2426,7 +2448,11 @@ ul li {
   list-style: none;
 }
 
-.description ul li, .info ul li {
+.description ul, .info ul, .directions ul {
+  padding-left: 0;
+}
+
+.description ul li, .info ul li, .directions ul li {
   margin: 0 0 25px 0;
   background-image: url(../images/bullet-black.svg);
   background-position: left 7px;
@@ -2436,12 +2462,12 @@ ul li {
   padding: 1px 0 1px 25px;
 }
 @media (max-width: 900px) {
-  .description ul li, .info ul li {
+  .description ul li, .info ul li, .directions ul li {
     background-position: left 4px;
   }
 }
 @media (max-width: 768px) {
-  .description ul li, .info ul li {
+  .description ul li, .info ul li, .directions ul li {
     background-position: left 6px;
     margin: 0 0 14px 0;
     background-size: 12px;
@@ -2451,6 +2477,7 @@ ul li {
 p {
   word-wrap: break-word;
   margin-bottom: 28px;
+  margin-top: 0;
 }
 @media (max-width: 768px) {
   p {
@@ -2459,6 +2486,36 @@ p {
 }
 p span {
   line-height: inherit !important;
+}
+p:last-child {
+  margin-bottom: 0;
+}
+
+figure.hero {
+  max-width: 50svw;
+  width: fit-content;
+  margin: 0 auto 2rem;
+}
+figure.hero img {
+  margin: auto;
+  width: auto;
+  height: auto;
+  max-height: 50svh;
+}
+
+hr {
+  border: 5px solid #ff5000;
+}
+
+@media (max-width: 900px) {
+  figcaption {
+    font-size: 16px !important;
+    line-height: 20px !important;
+  }
+}
+figcaption {
+  font-size: 18px;
+  line-height: 21px;
 }
 
 strong, b {
@@ -2523,7 +2580,7 @@ h3, .small {
 }
 h3.title, .small.title {
   text-align: center;
-  padding: 5px 0 40px 0;
+  padding: 5px 0 36px 0;
 }
 @media (max-width: 768px) {
   h3.title, .small.title {
@@ -2896,14 +2953,14 @@ body.mobile .gallery.full .arrow {
 }
 
 section#about .half {
-  width: calc(50% - 15px);
+  width: calc(50% - 20px);
   float: left;
 }
 section#about .half.left {
-  margin-right: 15px;
+  padding-right: 15px;
 }
 section#about .half.right {
-  margin-left: 15px;
+  padding-left: 15px;
 }
 @media (max-width: 768px) {
   section#about .half {
@@ -2914,6 +2971,10 @@ section#about .half.right {
   section#about .half.right {
     margin: 10px 0 0 0;
   }
+}
+section#about .info {
+  display: flex;
+  padding: 10px 20px;
 }
 @media (max-width: 900px) {
   section#about .info {
@@ -2931,6 +2992,35 @@ section.resource ul section#about .info li,
 section#about .info section.resident-resource ul li,
 section.resident-resource ul section#about .info li {
   display: table;
+}
+section#about .info .half {
+  padding-bottom: 1em;
+}
+section#about .info .half p {
+  margin-top: 0;
+}
+section#about .info .half.left {
+  border-right: 5px solid #ff5000;
+}
+@media (max-width: 900px) {
+  section#about .info .half.left {
+    border-right: none;
+  }
+}
+section#about .info .half.right {
+  padding-left: 20px;
+  border-left: 5px solid #ff5000;
+}
+@media (max-width: 900px) {
+  section#about .info .half.right {
+    border-left: none;
+  }
+}
+section#about .info h3.title {
+  text-align: left;
+  margin-bottom: 0;
+  padding-bottom: 1em;
+  margin-top: 0.25em;
 }
 @media (max-width: 900px) {
   section#about .main .description {
@@ -2969,21 +3059,45 @@ section#about .main .history .text {
     column-count: 1;
   }
 }
+section#about .main .list h3.title {
+  text-align: left;
+  padding-left: 1.7rem;
+  padding-bottom: 0;
+}
+@media (max-width: 900px) {
+  section#about .main .list h3.title {
+    font-size: 24px !important;
+    line-height: 28px !important;
+  }
+}
+section#about .main .list h3.title {
+  font-size: 32px;
+  line-height: 36px;
+}
+section#about .main .list.staff ul {
+  columns: 2;
+}
+@media (max-width: 900px) {
+  section#about .main .list.staff ul {
+    columns: 1;
+  }
+}
 section#about .main .list.staff li {
-  margin-bottom: 15px;
+  margin-bottom: 21px;
+  break-inside: avoid-column;
 }
 section#about .main .list.staff li em {
   display: block;
 }
 @media (max-width: 900px) {
   section#about .main .list {
-    font-size: 18px !important;
-    line-height: 21px !important;
+    font-size: 16px !important;
+    line-height: 20px !important;
   }
 }
 section#about .main .list {
-  font-size: 24px;
-  line-height: 28px;
+  font-size: 18px;
+  line-height: 21px;
 }
 
 section.apply .program-links {
@@ -2999,7 +3113,7 @@ section.apply .program .links a {
 }
 section.apply .program .info {
   width: calc(75% - 35px);
-  padding: 0 15px 30px 20px;
+  padding: 0 15px 30px 0;
   float: left;
 }
 section.apply .program .info h3.title {
@@ -3073,7 +3187,7 @@ section.apply .applications .rows .application.row {
 }
 section.apply .filter {
   width: calc(100% - 35px);
-  padding: 0 15px 0 20px;
+  padding: 0 15px 0 0;
   margin: 20px 0 0 0;
   display: table;
 }
@@ -3690,6 +3804,23 @@ section#events .content .events.list .event .event-type a {
 }
 section#events .content .wrapper.upcoming {
   margin-bottom: 20px;
+}
+section#events .content .wrapper.upcoming.module {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+section#events .content .wrapper.upcoming.module h3.title {
+  padding-bottom: 0;
+}
+@media (max-width: 900px) {
+  section#events .content .wrapper.past h3.title {
+    font-size: 24px !important;
+    line-height: 28px !important;
+  }
+}
+section#events .content .wrapper.past h3.title {
+  font-size: 32px;
+  line-height: 36px;
 }
 
 section.single.event header.sub {
@@ -4719,9 +4850,63 @@ section.journal .content .journal .journal-post {
   margin-bottom: 30px;
   padding-bottom: 30px;
 }
+section.journal .content .journal .journal-post .title-wrapper {
+  display: flex;
+  align-items: start;
+}
+section.journal .content .journal .journal-post .title-wrapper .tags {
+  padding-left: 20px;
+}
 section.journal .content .journal .journal-post h2.name {
   display: table;
   margin-bottom: 4px;
+  margin-top: 0;
+}
+@media (max-width: 900px) {
+  section.journal .content .journal .journal-post h2.name {
+    font-size: 24px !important;
+    line-height: 28px !important;
+  }
+}
+section.journal .content .journal .journal-post h2.name {
+  font-size: 32px;
+  line-height: 36px;
+}
+@media (max-width: 1040px) and (max-width: 900px) {
+  section.journal .content .journal .journal-post h2.name {
+    font-size: 18px !important;
+    line-height: 21px !important;
+  }
+}
+@media (max-width: 1040px) {
+  section.journal .content .journal .journal-post h2.name {
+    font-size: 24px;
+    line-height: 28px;
+  }
+}
+@media (max-width: 900px) and (max-width: 900px) {
+  section.journal .content .journal .journal-post h2.name {
+    font-size: 24px !important;
+    line-height: 28px !important;
+  }
+}
+@media (max-width: 900px) {
+  section.journal .content .journal .journal-post h2.name {
+    font-size: 32px;
+    line-height: 36px;
+  }
+}
+@media (max-width: 1040px) and (max-width: 900px) {
+  section.journal .content .journal .journal-post h3.author, section.journal .content .journal .journal-post .excerpt p, section.journal .content .journal .journal-post .excerpt a {
+    font-size: 16px !important;
+    line-height: 20px !important;
+  }
+}
+@media (max-width: 1040px) {
+  section.journal .content .journal .journal-post h3.author, section.journal .content .journal .journal-post .excerpt p, section.journal .content .journal .journal-post .excerpt a {
+    font-size: 18px;
+    line-height: 21px;
+  }
 }
 section.journal .content .journal .journal-post header {
   margin-bottom: 10px;
@@ -4729,6 +4914,7 @@ section.journal .content .journal .journal-post header {
 section.journal .content .journal .journal-post a.image {
   display: table;
   margin: 0 auto 10px auto;
+  background-color: gray;
 }
 section.journal .content .journal .journal-post a.image img {
   width: 100%;
@@ -4736,10 +4922,20 @@ section.journal .content .journal .journal-post a.image img {
   margin: auto;
 }
 section.journal .content .journal .journal-post .tags {
-  margin-top: 5px;
+  margin-top: 0;
 }
 section.journal .content .journal .journal-post .tags a {
   display: inline-table;
+}
+@media (max-width: 900px) {
+  section.journal .content .journal .journal-post .tags a {
+    font-size: 16px !important;
+    line-height: 20px !important;
+  }
+}
+section.journal .content .journal .journal-post .tags a {
+  font-size: 18px;
+  line-height: 21px;
 }
 section.journal .content .journal .size {
   display: none;
@@ -4749,6 +4945,14 @@ section.journal .content .journal .load-more {
   bottom: 0;
 }
 
+section.journal-post .content .tags {
+  text-align: center;
+  padding: 40px;
+}
+section.journal-post .content h2.title.head {
+  padding: 0 40px 40px;
+  width: auto;
+}
 section.journal-post .content .inner {
   width: 50%;
   display: block;
@@ -4761,14 +4965,20 @@ section.journal-post .content .inner {
 }
 section.journal-post .content .inner .header {
   width: 100%;
-  margin-bottom: 20px;
+  margin-bottom: 40px;
+}
+section.journal-post .content .inner .header h3.title {
+  padding-bottom: 0;
+  margin-top: 0;
+  margin-bottom: 0;
 }
 section.journal-post .content .inner .header h2.head {
-  margin-bottom: 0;
+  margin-bottom: 20px;
 }
 section.journal-post .content .inner .header .image {
   width: 100%;
   display: block;
+  margin-bottom: 40px;
 }
 section.journal-post .content .inner .header .image img {
   margin-bottom: 0;
@@ -5288,6 +5498,11 @@ section#visit .module.info h1 {
 }
 section#visit .module.map {
   height: 500px;
+  padding-bottom: 0;
+}
+section#visit .module.map iframe {
+  margin: auto;
+  width: 100%;
 }
 section#visit .module.map .inner {
   height: 500px;
@@ -5312,7 +5527,7 @@ section#visit .module.directions .steps {
   margin: auto;
 }
 section#visit .module.directions .steps .step {
-  list-style-type: decimal;
+  list-style-type: disc;
   padding-left: 20px;
   margin: 0 0 20px 30px;
 }
@@ -5342,6 +5557,36 @@ section#visit .module.directions .footnote {
   font-size: 18px;
   line-height: 21px;
 }
+section#visit .module.intro {
+  margin-top: 60px;
+  padding-bottom: 20px;
+}
+section#visit .module.visits {
+  display: flex;
+  padding-top: 5px;
+  padding-bottom: 10px;
+}
+section#visit .module.visits .section {
+  padding-bottom: 40px;
+  flex-grow: 1;
+  flex-basis: 0;
+}
+section#visit .module.visits .section h3.title {
+  padding-bottom: 20px;
+}
+section#visit .module.visits .section:nth-of-type(2) {
+  border-left: 10px solid #ff5000;
+  padding-left: 40px;
+  margin-left: 30px;
+}
+section#visit .module.accessibility .text-wrapper {
+  width: 100%;
+  max-width: 600px;
+  margin: auto;
+}
+section#visit .module.newsletter {
+  margin-top: 60px;
+}
 
 main[data-center-slug=export] {
   width: 94% !important;
@@ -5359,17 +5604,20 @@ main[data-center-slug=export] table td {
 section .content .events.module {
   display: block;
   padding-bottom: 20px;
-  margin-left: -30px;
-  width: calc(100% + 20px);
 }
 section .content .events.module .swiper.image_slider {
   height: auto;
-  width: 100%;
-  margin-top: -40px;
+  width: calc(100% + 60px);
+  margin-left: -30px;
+  margin-top: -60px;
   display: block;
 }
 section .content .events.module .swiper.image_slider .swiper-wrapper .inner {
   padding: 0 60px 0;
+}
+section .content .events.module .swiper.image_slider .swiper-wrapper .event.item h3.name {
+  padding-bottom: 20px;
+  margin-bottom: 5px;
 }
 section .content .events.module .swiper.image_slider .swiper-wrapper .event.item .image {
   display: block;

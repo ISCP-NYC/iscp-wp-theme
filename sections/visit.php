@@ -4,6 +4,7 @@ $title = $post->post_title;
 $slug = $post->post_name;
 $id = $post->ID;
 $intro_image = get_field( 'intro_image', $id );
+$intro_text = get_field( 'intro_text', $id );
 $about = get_page_by_path( 'about' );
 ?>
 

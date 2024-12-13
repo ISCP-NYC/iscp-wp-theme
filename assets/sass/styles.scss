@@ -277,7 +277,10 @@ em, i, em *, i * {
 ul li {
 	list-style: none;
 }
-.description ul li, .info ul li {
+.description ul, .info ul, .directions ul {
+	padding-left: 0;
+}
+.description ul li, .info ul li, .directions ul li {
 	margin: 0 0 25px 0;
 	background-image: url(../images/bullet-black.svg);
 	background-position: left 7px;
