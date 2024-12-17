@@ -10,7 +10,7 @@
 	<?php get_template_part('partials/nav') ?>
 	<?php get_template_part('partials/side') ?>
 	<div class="content">
-		<h2 class="head"><?php echo $title ?></h2>
+		<h1 class="head"><?php echo $title ?></h1>
 		<?php if ( $intro_image || $intro_text ):
 			echo '<div class="intro module">';
 			if ( !empty($intro_image) ):
@@ -59,12 +59,13 @@
 			?>
 			<div class="info module" id="contact">
 				<div class="half left">
-					<h3 class="title orange">Address</h3>
+					<h3 class="title orange">Address & Phone</h3>
 					<p><?php echo $address ?><br /></p>
+					<p><?= $phone ?></p>
 					<a href="<?php echo $directions ?>" target="_blank">Map &amp; Directions</a>
 				</div>
 				<div class="half right">
-					<h3 class="title orange">Contact</h3>
+					<h3 class="title orange">Inquiries</h3>
 					<?php
 						$contact = get_field( 'contact', $id );
 						if( !empty($contact) ):
@@ -88,13 +89,14 @@
 			<?php 
 			$history = get_field( 'history', $id );
 			if( $history ):
-				echo '<div class="module history" id="history">';
+				echo '<div class="module history slideshow" id="history">';
 				echo '<h3 class="title orange">History</h3>';
 			
 				$image_slider = get_field( 'image_slider', $id );
 				if( $image_slider ):
-					echo '<div class="image_slider gallery">';
-					echo '<div class="cursor"></div>';
+					// echo '<div class="image_slider gallery">';
+					echo '<div class="swiper image_slider">';
+					// echo '<div class="cursor"></div>';
 					if( count( $image_slider ) > 1 ):
 						echo '<div class="left arrow swap">';
 						echo '<div class="icon default"></div>';
@@ -105,20 +107,24 @@
 						echo '<div class="icon hover"></div>';
 						echo '</div>';
 					endif;
-					echo '<div class="slides">';
+					// echo '<div class="slides">';
+					echo '<div class="swiper-wrapper">';
 					while( has_sub_field( 'image_slider', $id ) ):
 						$image = get_sub_field( 'image', $id );
 								$image_url = $image['url'];
 								$caption = get_sub_field( 'caption', $id );
 								$orientation = get_orientation( $image['id'] );
-								echo '<div class="piece slide">';
-								echo '<div class="image ' . $orientation . '">';
-								echo '<div class="captionWrap">';
+								// echo '<div class="piece slide">';
+								echo '<div class="piece slide item swiper-slide">';
+								echo '<div class="inner">';
+								echo '<figure class="image ' . $orientation . '" style="width: fit-content;">';
+								// echo '<div class="captionWrap">';
 								echo '<img src="' . $image_url . '"/>';
 								echo '<figcaption class="caption">';
 								echo $caption;
 								echo '</figcaption>';
-								echo '</div>';
+								// echo '</div>';
+								echo '</figure>';
 								echo '</div>';
 								echo '</div>';
 					endwhile;

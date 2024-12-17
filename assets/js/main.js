@@ -1925,7 +1925,7 @@ function swiperInit() {
 			delay: 400000
 		},
 		keyboard: true,
-		speed: 800,
+		speed: 1000,
 		navigation: {
 			nextEl: '.right.arrow',
 			prevEl: '.left.arrow',

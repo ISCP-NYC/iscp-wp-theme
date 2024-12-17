@@ -15,12 +15,11 @@
 	}
 	h3.title {
 		color: $orange;
-		font-size: $medium-fs;
-		line-height: $medium-lh;
+		@include medium-fs;
 	}
 	.introduction-text {
-		font-size: $large-fs;
-		line-height: $large-lh;
+		padding-top: 20px;
+		@include subtitle-fs;
 		text-align: center;
 		strong {
 			@extend .din;

@@ -35,7 +35,7 @@ else {
 		$count = sizeof( $sorted_events );
 		$count_class = 'cols_' . $count;
 		if ( $count ):
-			echo '<div class="events module shelves grid upcoming ' . $count_class . '">';
+			echo '<div class="slideshow module shelves grid upcoming ' . $count_class . '">';
 			echo '<h3 class="title">';
 			$events_id = get_page_by_path( 'events' )->ID;
 			$events_permalink = get_the_permalink( $events_id );
