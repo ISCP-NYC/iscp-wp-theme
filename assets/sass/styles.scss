@@ -157,9 +157,9 @@ section {
 			}
 		}
 	}
-	h2.head {
+	h1.head, h2.head {
 		width: 100%;
-		padding: 10px 0 30px;
+		padding: 1rem 0 .5rem;
 		text-align: center;
 		color: $orange;
 		margin-top: 0;
@@ -277,10 +277,10 @@ em, i, em *, i * {
 ul li {
 	list-style: none;
 }
-.description ul, .info ul, .directions ul {
+.description ul, .info ul, .directions ul, .intro ul {
 	padding-left: 0;
 }
-.description ul li, .info ul li, .directions ul li {
+.description ul li, .info ul li, .directions ul li, .intro ul li {
 	margin: 0 0 25px 0;
 	background-image: url(../images/bullet-black.svg);
 	background-position: left 7px;
@@ -356,7 +356,7 @@ h3, .small {
 	@include medium-fs;
 	&.title {
 		text-align: center;
-		padding: 5px 0 36px 0;
+		padding: .2rem 0 1rem 0;
 		@include small {
 			padding: 5px 0 10px 0;
 			font-size: $small-fs !important;

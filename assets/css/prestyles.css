@@ -186,6 +186,7 @@ a.bullet:hover {
   display: table;
   padding: 0 0 8px;
   position: relative;
+  border-bottom: 2px solid #ff5000;
 }
 .module.newsletter form .placeholder {
   top: 0.4em;
@@ -532,26 +533,26 @@ section.ready {
 section.ready.hide-shelves .nav-toggle {
   opacity: 0;
 }
-section h2.head {
+section h1.head, section h2.head {
   width: 100%;
-  padding: 10px 0 30px;
+  padding: 1rem 0 0.5rem;
   text-align: center;
   color: #ff5000;
   margin-top: 0;
   margin-bottom: 20px;
 }
 @media (max-width: 900px) {
-  section h2.head {
+  section h1.head, section h2.head {
     font-size: 24px !important;
     line-height: 28px !important;
   }
 }
-section h2.head {
+section h1.head, section h2.head {
   font-size: 42px;
-  line-height: 46px;
+  line-height: 44px;
 }
 @media (max-width: 768px) {
-  section h2.head {
+  section h1.head, section h2.head {
     padding: 16px 0 42px;
   }
 }
@@ -594,7 +595,7 @@ section .load-more {
 }
 section .load-more {
   font-size: 42px;
-  line-height: 46px;
+  line-height: 44px;
 }
 section .load-more a {
   display: table;
@@ -1307,7 +1308,7 @@ section header.main nav .cell .inner .overlay a h1 {
 }
 section header.main nav .cell .inner .overlay a h1 {
   font-size: 42px;
-  line-height: 46px;
+  line-height: 44px;
 }
 section header.main nav .cell.parent:hover .inner .overlay, section header.main nav .cell.search:hover .inner .overlay {
   opacity: 0;
@@ -1347,7 +1348,7 @@ section header.main nav .cell .sub-menu .child-item {
 }
 section header.main nav .cell .sub-menu .child-item {
   font-size: 42px;
-  line-height: 46px;
+  line-height: 44px;
 }
 section header.main nav .cell .sub-menu .child-item:hover {
   background-image: url(../images/bullet-black.svg);
@@ -1412,7 +1413,7 @@ section header.main nav .cell.search .inner form .placeholder span {
 }
 section header.main nav .cell.search .inner form .placeholder {
   font-size: 42px;
-  line-height: 46px;
+  line-height: 44px;
 }
 section header.main nav .cell.search .inner form input.s {
   width: 80%;
@@ -1433,7 +1434,7 @@ section header.main nav .cell.search .inner form input.s {
 }
 section header.main nav .cell.search .inner form input.s {
   font-size: 42px;
-  line-height: 46px;
+  line-height: 44px;
 }
 section header.main nav .cell.search .counter {
   width: 100%;
@@ -1450,7 +1451,7 @@ section header.main nav .cell.search .counter {
 }
 section header.main nav .cell.search .counter {
   font-size: 42px;
-  line-height: 46px;
+  line-height: 44px;
 }
 section header.main nav .cell.greenroom .iconWrap {
   display: table;
@@ -1611,7 +1612,7 @@ section .nav-extras {
 section .nav-extras .donate {
   height: 28px;
   position: relative;
-  font-size: 16px;
+  font-size: 18px;
   border: solid #ff5000 2px;
   border-radius: 2px;
   padding: 0 10px;
@@ -2448,11 +2449,11 @@ ul li {
   list-style: none;
 }
 
-.description ul, .info ul, .directions ul {
+.description ul, .info ul, .directions ul, .intro ul {
   padding-left: 0;
 }
 
-.description ul li, .info ul li, .directions ul li {
+.description ul li, .info ul li, .directions ul li, .intro ul li {
   margin: 0 0 25px 0;
   background-image: url(../images/bullet-black.svg);
   background-position: left 7px;
@@ -2462,12 +2463,12 @@ ul li {
   padding: 1px 0 1px 25px;
 }
 @media (max-width: 900px) {
-  .description ul li, .info ul li, .directions ul li {
+  .description ul li, .info ul li, .directions ul li, .intro ul li {
     background-position: left 4px;
   }
 }
 @media (max-width: 768px) {
-  .description ul li, .info ul li, .directions ul li {
+  .description ul li, .info ul li, .directions ul li, .intro ul li {
     background-position: left 6px;
     margin: 0 0 14px 0;
     background-size: 12px;
@@ -2534,7 +2535,7 @@ p:first-child {
 }
 h1, .large {
   font-size: 42px;
-  line-height: 46px;
+  line-height: 44px;
 }
 
 @media (max-width: 900px) {
@@ -2560,7 +2561,7 @@ h2.title, .medium.title {
 }
 h2.title, .medium.title {
   font-size: 42px;
-  line-height: 46px;
+  line-height: 44px;
 }
 @media (max-width: 768px) {
   h2.title, .medium.title {
@@ -2580,7 +2581,7 @@ h3, .small {
 }
 h3.title, .small.title {
   text-align: center;
-  padding: 5px 0 36px 0;
+  padding: 0.2rem 0 1rem 0;
 }
 @media (max-width: 768px) {
   h3.title, .small.title {
@@ -2742,7 +2743,7 @@ section.login .login .wrap h1 {
 }
 section.login .login .wrap h1 {
   font-size: 42px;
-  line-height: 46px;
+  line-height: 44px;
 }
 section.login .login .wrap a {
   color: #fff;
@@ -3020,7 +3021,7 @@ section#about .info h3.title {
   text-align: left;
   margin-bottom: 0;
   padding-bottom: 1em;
-  margin-top: 0.25em;
+  margin-top: 0.5rem;
 }
 @media (max-width: 900px) {
   section#about .main .description {
@@ -3063,6 +3064,7 @@ section#about .main .list h3.title {
   text-align: left;
   padding-left: 1.7rem;
   padding-bottom: 0;
+  margin-bottom: 2rem;
 }
 @media (max-width: 900px) {
   section#about .main .list h3.title {
@@ -3860,7 +3862,7 @@ section.single.event h1.title {
 }
 section.single.event h1.title {
   font-size: 42px;
-  line-height: 46px;
+  line-height: 44px;
 }
 @media (max-width: 768px) {
   section.single.event h1.title {
@@ -4044,7 +4046,7 @@ section.single.event.cols_1 .gallery {
 
 .home h2.head {
   font-size: 42px;
-  line-height: 46px;
+  line-height: 44px;
   color: #ff5000;
   margin-bottom: 12px;
   padding-top: 0;
@@ -4057,13 +4059,30 @@ section.single.event.cols_1 .gallery {
 }
 .home h3.title {
   color: #ff5000;
+}
+@media (max-width: 900px) {
+  .home h3.title {
+    font-size: 18px !important;
+    line-height: 21px !important;
+  }
+}
+.home h3.title {
   font-size: 24px;
   line-height: 28px;
 }
 .home .introduction-text {
-  font-size: 42px;
-  line-height: 46px;
+  padding-top: 20px;
   text-align: center;
+}
+@media (max-width: 900px) {
+  .home .introduction-text {
+    font-size: 24px !important;
+    line-height: 28px !important;
+  }
+}
+.home .introduction-text {
+  font-size: 32px;
+  line-height: 36px;
 }
 .home .introduction-text p:last-of-type {
   margin-bottom: 0;
@@ -4097,7 +4116,7 @@ section.single.event.cols_1 .gallery {
 }
 .home .introduction .text {
   font-size: 42px;
-  line-height: 46px;
+  line-height: 44px;
 }
 @media (max-width: 768px) {
   .home .introduction .text {
@@ -4130,7 +4149,7 @@ section.single.event.cols_1 .gallery {
 }
 .home .residency_program .text {
   font-size: 42px;
-  line-height: 46px;
+  line-height: 44px;
 }
 .home .social.module {
   margin-bottom: 0 !important;
@@ -4655,7 +4674,7 @@ section.single.resident h1.title {
 }
 section.single.resident h1.title {
   font-size: 42px;
-  line-height: 46px;
+  line-height: 44px;
 }
 @media (max-width: 900px) {
   section.single.resident .caption {
@@ -5149,7 +5168,7 @@ section.greenroom .hello,
 section.resource .hello,
 section.resident-resource .hello {
   font-size: 42px;
-  line-height: 46px;
+  line-height: 44px;
 }
 section.greenroom .dashboard,
 section.resource .dashboard,
@@ -5329,7 +5348,7 @@ section#search .content form.searchform input.s, section#error .content form.sea
 }
 section#search .content form.searchform input.s, section#error .content form.searchform input.s {
   font-size: 42px;
-  line-height: 46px;
+  line-height: 44px;
 }
 section#search .content form.searchform .placeholder, section#error .content form.searchform .placeholder {
   height: calc(100% - 10px);
@@ -5348,7 +5367,7 @@ section#search .content form.searchform .placeholder span, section#error .conten
 }
 section#search .content form.searchform .placeholder, section#error .content form.searchform .placeholder {
   font-size: 42px;
-  line-height: 46px;
+  line-height: 44px;
 }
 section#search .content .list, section#error .content .list {
   position: relative;
@@ -5604,46 +5623,65 @@ main[data-center-slug=export] table td {
   line-height: 14px;
 }
 
-section .content .events.module {
+section .content .slideshow.module {
   display: block;
   padding-bottom: 20px;
 }
-section .content .events.module .swiper.image_slider {
+section .content .slideshow.module .swiper.image_slider {
   height: auto;
   width: calc(100% + 60px);
   margin-left: -30px;
-  margin-top: -60px;
+  margin-top: -1rem;
   display: block;
 }
-section .content .events.module .swiper.image_slider .swiper-wrapper .inner {
+section .content .slideshow.module .swiper.image_slider .swiper-wrapper .inner {
   padding: 0 60px 0;
 }
-section .content .events.module .swiper.image_slider .swiper-wrapper .event.item h3.name {
+section .content .slideshow.module .swiper.image_slider .swiper-wrapper .slide.item {
+  opacity: 0;
+  transition: opacity 0.2s ease-in-out;
+}
+section .content .slideshow.module .swiper.image_slider .swiper-wrapper .slide.item.swiper-slide-active {
+  opacity: 1;
+}
+section .content .slideshow.module .swiper.image_slider .swiper-wrapper .slide.item figure.image {
+  display: flex;
+  flex-direction: column;
+  max-width: 100%;
+  max-height: 100%;
+  margin: auto;
+}
+section .content .slideshow.module .swiper.image_slider .swiper-wrapper .slide.item h3.name, section .content .slideshow.module .swiper.image_slider .swiper-wrapper .slide.item figcaption {
   padding-bottom: 20px;
   margin-bottom: 5px;
+  flex-shrink: 0;
+  width: 0;
+  min-width: 100%;
 }
-section .content .events.module .swiper.image_slider .swiper-wrapper .event.item .image {
-  display: block;
+section .content .slideshow.module .swiper.image_slider .swiper-wrapper .slide.item figcaption {
+  margin-top: 0.5rem;
 }
-section .content .events.module .swiper.image_slider .swiper-wrapper .event.item img {
-  max-height: 50svh;
+section .content .slideshow.module .swiper.image_slider .swiper-wrapper .slide.item img {
   margin: 0 auto;
   display: block;
+  width: auto;
+  max-width: 100%;
+  max-height: 50svh;
 }
-section .content .events.module .swiper.image_slider .swiper-wrapper .event.item .value {
+section .content .slideshow.module .swiper.image_slider .swiper-wrapper .slide.item .value {
   text-align: center;
 }
 @media (max-width: 900px) {
-  section .content .events.module .swiper.image_slider .swiper-wrapper .event.item .value {
+  section .content .slideshow.module .swiper.image_slider .swiper-wrapper .slide.item .value {
     font-size: 16px !important;
     line-height: 20px !important;
   }
 }
-section .content .events.module .swiper.image_slider .swiper-wrapper .event.item .value {
+section .content .slideshow.module .swiper.image_slider .swiper-wrapper .slide.item .value {
   font-size: 18px;
   line-height: 21px;
 }
-section .content .events.module .wrap:hover .link {
+section .content .slideshow.module .wrap:hover .link {
   color: #13172F;
 }
 

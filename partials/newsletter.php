@@ -1,4 +1,4 @@
-<form action="//iscp-nyc.us3.list-manage.com/subscribe/post?u=780d3377050d6453df5848235&amp;id=1e8ba4c406" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate border-bottom" target="_blank" novalidate autocomplete="off">
+<form action="//iscp-nyc.us3.list-manage.com/subscribe/post?u=780d3377050d6453df5848235&amp;id=1e8ba4c406" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate autocomplete="off">
 	<div class="placeholder">
 		<span>Join our Newsletter</span>
 	</div>
