@@ -25,7 +25,7 @@ $programs = array_reverse( get_pages( $programs_query ) );
 	<?php get_template_part( 'partials/nav' ) ?>
 	<?php get_template_part( 'partials/side' ) ?>
 	<div class="content">
-		<h2 class="head"><?php echo $title ?></h2>
+		<h1 class="head"><?php echo $title ?></h1>
 		<?php
 			if( have_rows( 'images', $programs_id ) ):
 			echo '<div class="images module">';
