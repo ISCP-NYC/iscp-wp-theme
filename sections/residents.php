@@ -6,7 +6,7 @@ include( locate_template( 'sections/params/residents.php' ) );
 	<?php get_template_part('partials/nav') ?>
 	<?php get_template_part('partials/side') ?>
 	<div class="content">
-		<h2 class="head">
+		<h1 class="head">
 		<?php
 		if($slug == 'residents'):
 			if( $program_param ):

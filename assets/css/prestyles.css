@@ -3832,6 +3832,13 @@ section#events .content .wrapper.upcoming.module {
 section#events .content .wrapper.upcoming.module h3.title {
   padding-bottom: 0;
 }
+section#events .content .events.module {
+  margin-top: 0;
+  padding-top: 0;
+}
+section#events .content .wrapper.past h3.title {
+  padding: 1rem 0 1.5rem;
+}
 @media (max-width: 900px) {
   section#events .content .wrapper.past h3.title {
     font-size: 24px !important;
@@ -4527,6 +4534,9 @@ section#map .residents .close .icon.hover {
   }
 }
 
+section.residents .content h1.head {
+  padding-bottom: 2rem;
+}
 @media (max-width: 768px) {
   section.residents .content h2.title {
     padding-bottom: 4px;
@@ -5646,65 +5656,65 @@ main[data-center-slug=export] table td {
   line-height: 14px;
 }
 
-section .content .slideshow.module {
+section .content .slideshow.module, section .content .events.module {
   display: block;
   padding-bottom: 20px;
 }
-section .content .slideshow.module .swiper.image_slider {
+section .content .slideshow.module .swiper.image_slider, section .content .events.module .swiper.image_slider {
   height: auto;
   width: calc(100% + 60px);
   margin-left: -30px;
   margin-top: -1rem;
   display: block;
 }
-section .content .slideshow.module .swiper.image_slider .swiper-wrapper .inner {
+section .content .slideshow.module .swiper.image_slider .swiper-wrapper .inner, section .content .events.module .swiper.image_slider .swiper-wrapper .inner {
   padding: 0 60px 0;
 }
-section .content .slideshow.module .swiper.image_slider .swiper-wrapper .slide.item {
+section .content .slideshow.module .swiper.image_slider .swiper-wrapper .slide.item, section .content .events.module .swiper.image_slider .swiper-wrapper .slide.item {
   opacity: 0;
   transition: opacity 0.2s ease-in-out;
 }
-section .content .slideshow.module .swiper.image_slider .swiper-wrapper .slide.item.swiper-slide-active {
+section .content .slideshow.module .swiper.image_slider .swiper-wrapper .slide.item.swiper-slide-active, section .content .events.module .swiper.image_slider .swiper-wrapper .slide.item.swiper-slide-active {
   opacity: 1;
 }
-section .content .slideshow.module .swiper.image_slider .swiper-wrapper .slide.item figure.image {
+section .content .slideshow.module .swiper.image_slider .swiper-wrapper .slide.item figure.image, section .content .events.module .swiper.image_slider .swiper-wrapper .slide.item figure.image {
   display: flex;
   flex-direction: column;
   max-width: 100%;
   max-height: 100%;
   margin: auto;
 }
-section .content .slideshow.module .swiper.image_slider .swiper-wrapper .slide.item h3.name, section .content .slideshow.module .swiper.image_slider .swiper-wrapper .slide.item figcaption {
+section .content .slideshow.module .swiper.image_slider .swiper-wrapper .slide.item h3.name, section .content .slideshow.module .swiper.image_slider .swiper-wrapper .slide.item figcaption, section .content .events.module .swiper.image_slider .swiper-wrapper .slide.item h3.name, section .content .events.module .swiper.image_slider .swiper-wrapper .slide.item figcaption {
   padding-bottom: 20px;
   margin-bottom: 5px;
   flex-shrink: 0;
   width: 0;
   min-width: 100%;
 }
-section .content .slideshow.module .swiper.image_slider .swiper-wrapper .slide.item figcaption {
+section .content .slideshow.module .swiper.image_slider .swiper-wrapper .slide.item figcaption, section .content .events.module .swiper.image_slider .swiper-wrapper .slide.item figcaption {
   margin-top: 0.5rem;
 }
-section .content .slideshow.module .swiper.image_slider .swiper-wrapper .slide.item img {
+section .content .slideshow.module .swiper.image_slider .swiper-wrapper .slide.item img, section .content .events.module .swiper.image_slider .swiper-wrapper .slide.item img {
   margin: 0 auto;
   display: block;
   width: auto;
   max-width: 100%;
   max-height: 50svh;
 }
-section .content .slideshow.module .swiper.image_slider .swiper-wrapper .slide.item .value {
+section .content .slideshow.module .swiper.image_slider .swiper-wrapper .slide.item .value, section .content .events.module .swiper.image_slider .swiper-wrapper .slide.item .value {
   text-align: center;
 }
 @media (max-width: 900px) {
-  section .content .slideshow.module .swiper.image_slider .swiper-wrapper .slide.item .value {
+  section .content .slideshow.module .swiper.image_slider .swiper-wrapper .slide.item .value, section .content .events.module .swiper.image_slider .swiper-wrapper .slide.item .value {
     font-size: 16px !important;
     line-height: 20px !important;
   }
 }
-section .content .slideshow.module .swiper.image_slider .swiper-wrapper .slide.item .value {
+section .content .slideshow.module .swiper.image_slider .swiper-wrapper .slide.item .value, section .content .events.module .swiper.image_slider .swiper-wrapper .slide.item .value {
   font-size: 18px;
   line-height: 21px;
 }
-section .content .slideshow.module .wrap:hover .link {
+section .content .slideshow.module .wrap:hover .link, section .content .events.module .wrap:hover .link {
   color: #13172F;
 }
 
