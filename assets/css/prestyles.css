@@ -3113,6 +3113,24 @@ section.apply .program .links {
 section.apply .program .links a {
   display: block;
 }
+section.apply .program .block {
+  width: calc(33.3333333333% - 6px);
+  float: left;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  text-align: center;
+}
+@media (max-width: 900px) {
+  section.apply .program .block {
+    font-size: 18px !important;
+    line-height: 21px !important;
+  }
+}
+section.apply .program .block {
+  font-size: 24px;
+  line-height: 28px;
+}
 section.apply .program .info {
   width: calc(75% - 35px);
   padding: 0 15px 30px 0;
@@ -3121,8 +3139,8 @@ section.apply .program .info {
 section.apply .program .info h3.title {
   margin-top: 30px;
 }
-section.apply .program#international {
-  border: 0 !important;
+section.apply .program#current-open-calls .info, section.apply .program#ground-floor .info {
+  width: 100%;
 }
 @media (max-width: 768px) {
   section.apply .program .links, section.apply .program .info {
