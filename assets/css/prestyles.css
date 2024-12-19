@@ -1613,14 +1613,14 @@ section .nav-extras .donate {
   height: 28px;
   position: relative;
   font-size: 18px;
-  border: solid #ff5000 2px;
-  border-radius: 2px;
+  border: solid #ff5000 6px;
+  border-radius: 0.6em;
   padding: 0 10px;
   transition: color 150ms ease-in-out, border 150ms ease-in-out, opacity 150ms ease-in-out 600ms;
   margin-right: 20px;
 }
 section .nav-extras .donate:hover {
-  border: solid #13172F 2px;
+  border: solid #13172F 6px;
 }
 section .nav-extras.search-enabled .donate {
   opacity: 0;
