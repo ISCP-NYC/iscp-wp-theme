@@ -36,12 +36,13 @@ $intro_text = get_field( 'intro_text', $id );
 			endif;
 			echo '</div>';
 		endif; ?>
+
 		<?php foreach( $residency_programs as $program ):
-		setup_postdata($program);
-		$title = get_post( $program )->post_title;
-		$slug = get_post( $program )->post_name;
-		$id = get_post( $program )->ID;
-		if($id!=$faq_id):
+			setup_postdata($program);
+			$title = get_post( $program )->post_title;
+			$slug = get_post( $program )->post_name;
+			$id = get_post( $program )->ID;
+			if($id!=$faq_id):
 		?>
 		<div class="program module" id="<?php echo $slug ?>">
 			<h3 class="title"><?php echo $title ?></h3>
@@ -54,9 +55,9 @@ $intro_text = get_field( 'intro_text', $id );
 					<?php echo $intro ?>
 				</div>
 			</div>
+			<?php if( !empty($linkrows) ): ?>
 			<div class="links">
 				<?php 
-					if( !empty($linkrows) ):
 					foreach( $linkrows as $row ): 
 					$link = $row['page_link'];
 					$link_url = $link['url'];
@@ -64,129 +65,42 @@ $intro_text = get_field( 'intro_text', $id );
 					$link_target = $link['target'] ? $link['target'] : '_self';
 				?>
 					<a class="bullet small" href="<?php echo esc_url( $link_url ); ?>" target="<?php echo esc_attr( $link_target ); ?>"><?php echo esc_html( $link_title ); ?></a>
-				<?php endforeach; endif; ?>
+				<?php endforeach; ?>
 			</div>
-		</div>
-		<?php if($slug == 'international'): ?>
-			<div class="applications module <?php echo $slug ?>">
-				<h3 class="title">Upcoming Application Deadlines</h3>
-				<?php
-				$today = new DateTime();
-				$sponsors = get_posts( array(
-					'posts_per_page' => -1,
-					'post_type' => 'sponsor',
-					'post_status' => 'publish',
-					'orderby' => 'title',
-					'sort_order' => 'asc',
-					'meta_query' => array(
-						'relation' => 'AND',
-					    array(
-					        'key' => 'applications',
-					        'compare' => 'NOT IN',
-					        'value'   => array('')
-					    )
-					)
-				) );
-
-				if( sizeof( $sponsors ) != 0 ):
-					echo '<div class="rows">';
-					foreach( $sponsors as $sponsor ):
-						setup_postdata($sponsor);
-						$country = get_field( 'country', $sponsor ) ? get_field( 'country', $sponsor )[0]->post_title : null;
-						$sponsor_id = $sponsor->ID;
-						$sponsor_title = get_the_title( $sponsor );
-						$sponsor_website = get_field( 'website', $sponsor_id );
-						$sponsor_permalink = get_permalink( $sponsor_id );
-						if( have_rows( 'applications', $sponsor ) ):
-						    while ( have_rows( 'applications', $sponsor ) ) : the_row();
-								$application_title = get_sub_field( 'title' );
-						        $deadline_date = new DateTime( get_sub_field( 'deadline' ) );
-								$deadline = $deadline_date->format( 'M j, Y' );
-								$attachment = get_sub_field( 'attachment' );
-								if( $deadline_date >= $today ):
-									$brief = get_sub_field( 'brief' );
-									echo '<div class="application row">';
-										echo '<div class="date">';
-											echo $deadline;
-										echo '</div>';
-										echo '<div class="cell title">';
-											echo $application_title;
-										echo '</div>';
-										echo '<div class="cell country">';
-											echo $country;
-										echo '</div>';
-										echo '<div class="cell sponsors">';
-											echo '<a href="' . $sponsor_permalink . '">';
-												echo $sponsor_title;
-											echo '</a>';
-										echo '</div>';
-										if($attachment):
-											echo '<div class="links">';
-											echo '<a class="bullet small" href="' . $attachment . '" class="attachment">Download Application</a>';
-											echo '</div>';
-										endif;
-										echo '<div class="brief">';
-											echo $brief;
-										echo '</div>';
-									echo '</div>';
+			<?php endif; ?>
+			<?php if( $slug == 'current-open-calls'): ?>
+			<div class="block deadline">
+				<div class="horizontal-align">
+				<?php 
+					if( have_rows( 'applications', $id ) ):
+			    		while ( have_rows( 'applications' ) ) : the_row();
+							$app_title = get_sub_field( 'title', $id );
+							$app_deadline = get_sub_field( 'deadline', $id );
+							$app_deadline_dt = new DateTime( $app_deadline );
+							$app_deadline_format = $app_deadline_dt->format('F d, Y');
+							$app_brief = get_sub_field( 'brief', $id );
+							$app_link = get_sub_field( 'link', $id );
+							if( $app_deadline > $today ):
+								if( $app_link ):
+									echo '<a href="' . $app_link . '">';
 								endif;
-							endwhile;
-						endif;
-						wp_reset_postdata();
-					endforeach;
-					echo '</div>';
-				else:
-					echo 'No upcoming applications available.';
-				endif;
+								echo '<div>' . $app_title . '</div>';
+								echo '<div>Deadline: ' . $app_deadline_format . '</div>';
+								if( $app_link ):
+									echo '</a>';
+								endif;
+							endif;
+						endwhile;
+					else:
+						echo 'No applications available';
+					endif;
 				?>
-
-				<div class="filter">
-					<div class="bar">
-						<div class="select link dropdown country" data-filter="country" data-slug="apply">
-							<?php
-							echo '<span>Browse other sponsors from this country</span>';
-							?>
-							</span>
-							<div class="swap">
-								<div class="icon default"></div>
-								<div class="icon hover"></div>
-							</div>
-						</div>
-					</div>
-					<div class="filter-lists">
-						<div class="filter-list country <?php echo $slug ?>" data-filter="country">
-							<div class="options">
-							<?php
-							$countries = get_posts( array(
-								'posts_per_page'	=> -1,
-								'post_type'			=> 'country',
-								'orderby' 			=> 'title',
-								'order' 			=> 'ASC',
-								'post_status' 		=> 'publish'
-							) );
-							foreach( $countries as $country ):
-								$country_id = $country->ID;
-								$country_slug = $country->post_name;
-								$country_title = $country->post_title;
-								$page_url = get_permalink( get_page_by_path('support/sponsors')->ID );
-								$filter_url = query_url( 'from', $country_slug, $page_url );
-								echo '<div class="option">';
-								echo '<a href="' . $filter_url . '" data-value="' . $country_slug . '">';
-								echo $country_title;
-								echo '<div class="swap">';
-								echo '<div class="icon default"></div>';
-								echo '<div class="icon hover"></div>';
-								echo '</div>';
-								echo '</a>';
-								echo '</div>';
-							endforeach;
-							?>
-							</div>
-						</div>
-					</div>
 				</div>
 			</div>
-		<?php endif; ?>
+			<?php endif; ?>
+		</div>
+
+
 		<?php wp_reset_postdata(); ?>
 		<?php endif; ?>
 		<?php endforeach; ?>

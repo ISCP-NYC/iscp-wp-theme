@@ -48,35 +48,35 @@ $paged = 1;
 					</a>
 				</div>
 			</div>
-			<div class="block deadline">
-				<div class="horizontal-align">
+			<!-- <div class="block deadline">
+				<div class="horizontal-align"> -->
 					<?php 
-					if( have_rows( 'applications', $sponsor_id ) ):
-			    		while ( have_rows( 'applications' ) ) : the_row();
-							$app_title = get_sub_field( 'title', $sponsor_id );
-							$app_deadline = get_sub_field( 'deadline', $sponsor_id );
-							$app_deadline_dt = new DateTime( $app_deadline );
-							$app_deadline_format = $app_deadline_dt->format('F d, Y');
-							$app_brief = get_sub_field( 'brief', $sponsor_id );
-							$app_link = get_sub_field( 'link', $sponsor_id );
-							if( $app_deadline > $today ):
-								if( $app_link ):
-									echo '<a href="' . $app_link . '">';
-								endif;
-								echo '<div>' . $app_title . '</div>';
-								echo '<div>Deadline: ' . $app_deadline_format . '</div>';
-								if( $app_link ):
-									echo '</a>';
-								endif;
-							endif;
-						endwhile;
-					else:
-						echo 'No applications available';
-					endif;
+					// if( have_rows( 'applications', $sponsor_id ) ):
+			    // 		while ( have_rows( 'applications' ) ) : the_row();
+					// 		$app_title = get_sub_field( 'title', $sponsor_id );
+					// 		$app_deadline = get_sub_field( 'deadline', $sponsor_id );
+					// 		$app_deadline_dt = new DateTime( $app_deadline );
+					// 		$app_deadline_format = $app_deadline_dt->format('F d, Y');
+					// 		$app_brief = get_sub_field( 'brief', $sponsor_id );
+					// 		$app_link = get_sub_field( 'link', $sponsor_id );
+					// 		if( $app_deadline > $today ):
+					// 			if( $app_link ):
+					// 				echo '<a href="' . $app_link . '">';
+					// 			endif;
+					// 			echo '<div>' . $app_title . '</div>';
+					// 			echo '<div>Deadline: ' . $app_deadline_format . '</div>';
+					// 			if( $app_link ):
+					// 				echo '</a>';
+					// 			endif;
+					// 		endif;
+					// 	endwhile;
+					// else:
+					// 	echo 'No applications available';
+					// endif;
 					?>
 
-				</div>
-			</div>
+				<!-- </div>
+			</div> -->
 		</div>
 		<div class="top">
 			<div class="filter">
