@@ -9,9 +9,13 @@ section#visit {
 		&.map {
 			height: 500px;
 			padding-bottom: 0;
+			.address {
+				margin-top: -.5rem;
+			}
 			iframe {
 				margin: auto;
 				width: 100%;
+				padding-bottom: .5rem;
 			}
 			.inner {
 				height: 500px;
@@ -60,6 +64,7 @@ section#visit {
 			.section {
 				padding-bottom: 40px;
 				h3.title {
+					padding-top: .75rem;
 					padding-bottom: 20px;
 				}
 				flex-grow: 1;

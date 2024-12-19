@@ -5522,9 +5522,13 @@ section#visit .module.map {
   height: 500px;
   padding-bottom: 0;
 }
+section#visit .module.map .address {
+  margin-top: -0.5rem;
+}
 section#visit .module.map iframe {
   margin: auto;
   width: 100%;
+  padding-bottom: 0.5rem;
 }
 section#visit .module.map .inner {
   height: 500px;
@@ -5594,6 +5598,7 @@ section#visit .module.visits .section {
   flex-basis: 0;
 }
 section#visit .module.visits .section h3.title {
+  padding-top: 0.75rem;
   padding-bottom: 20px;
 }
 section#visit .module.visits .section:nth-of-type(2) {

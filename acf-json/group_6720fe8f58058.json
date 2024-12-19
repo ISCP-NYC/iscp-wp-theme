@@ -73,6 +73,13 @@
                 "operator": "==",
                 "value": "2567"
             }
+        ],
+        [
+            {
+                "param": "page",
+                "operator": "==",
+                "value": "34719"
+            }
         ]
     ],
     "menu_order": 0,
@@ -86,5 +93,5 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1732214678
+    "modified": 1734585354
 }
