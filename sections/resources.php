@@ -5,7 +5,7 @@
 	$title = get_the_title();
 
 	global $current_user;
-    get_currentuserinfo();
+		wp_get_current_user();
     $name = $current_user->user_firstname . ' ' . $current_user->user_lastname;
 ?>
 

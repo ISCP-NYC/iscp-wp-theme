@@ -1922,7 +1922,7 @@ function swiperInit() {
 		slidesPerView: 1,
 		loop: true,
 		autoplay: {
-			delay: 400000
+			delay: 4000
 		},
 		keyboard: true,
 		speed: 1000,
