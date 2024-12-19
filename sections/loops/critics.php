@@ -1,5 +1,7 @@
 <?php
-$paged = $query_vars['paged'];
+if( isset($query_vars) ):
+	$paged = $query_vars['paged'];
+endif;
 if( !$paged ):
 	$paged = 1;
 endif;
@@ -19,7 +21,7 @@ $last_page = $critics->max_num_pages;
 if( have_posts() ):
 	while( have_posts() ) :
 		the_post();
-		$critic_id = $the_ID;
+		$critic_id = $post->ID;
 		$name = get_the_title( $critic_id );
 		$title = get_field( 'title', $critic_id );
 		$institution = get_field( 'institution', $critic_id );

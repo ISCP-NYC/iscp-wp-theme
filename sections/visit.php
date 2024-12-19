@@ -37,7 +37,7 @@ $about = get_page_by_path( 'about' );
 				?>
 			<!-- </h3> -->
 			<h3 class="orange title">Exhibition Hours: <?php echo $exhibition_hours; ?></h3>
-			<h3 class="orange title"><?php echo $address ?></h3>
+			<h3 class="orange title address"><?php echo $address ?></h3>
 		</div>
 <!-- 
 		<div class="map module">
@@ -180,6 +180,15 @@ $about = get_page_by_path( 'about' );
 		<?php
 		echo '<div class="module directions">';
 		echo '<h3 class="title">How to Get to ISCP</h3>';
+		if ( !empty($intro_image) ):
+			echo '<figure class="hero">';
+			echo wp_get_attachment_image( $intro_image, 'full' );
+			echo '<figcaption>' . wp_get_attachment_caption( $intro_image ) . '</figcaption>';
+			echo '</figure>';
+		endif;
+		if ( !empty($intro_text) ):
+			echo $intro_text;
+		endif;
 		if( get_field( 'directions', $visit ) ):
 			echo '<ul class="steps">';
 			$home = get_page_by_path( 'home' )->ID;
@@ -196,17 +205,9 @@ $about = get_page_by_path( 'about' );
 		?>
 
 		<?php if ( $intro_image || $intro_text ):
-			echo '<div class="intro module">';
-			if ( !empty($intro_image) ):
-				echo '<figure class="hero">';
-				echo wp_get_attachment_image( $intro_image, 'full' );
-				echo '<figcaption>' . wp_get_attachment_caption( $intro_image ) . '</figcaption>';
-				echo '</figure>';
-			endif;
-			if ( !empty($intro_text) ):
-				echo $intro_text;
-			endif;
-			echo '</div>';
+			// echo '<div class="intro module">';
+
+			// echo '</div>';
 		endif; ?>
 
 		<?php if( get_field( 'group_visits', $visit ) || get_field( 'bloomberg_connects', $visit ) ): ?>
