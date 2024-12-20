@@ -1645,11 +1645,12 @@ function setUpEarth() {
 	earth = new WE.map('mapWrap');
 	canvas = earth.canvas;
   earth.setView([46.8011, 8.2266], 1.6);
-  WE.tileLayer('http://data.webglearth.com/natural-earth-color/{z}/{x}/{y}.jpg', {
+  WE.tileLayer('../wp-content/themes/iscp/assets/js/webgl/{z}/{x}/{y}.jpg', {
     tileSize: 256,
     bounds: [[-85, -180], [85, 180]],
     tms: true,
-    atmosphere: true
+    atmosphere: true,
+		crossOrigin: null
   }).addTo(earth);
   $(canvas).on('mousedown', function() {
   	$(this).addClass('grabbing');
