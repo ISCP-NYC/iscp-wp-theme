@@ -3,6 +3,57 @@ section.apply {
 		margin-top: 30px;
 	}
 	.program {
+		.applications {
+			.rows {
+				.links {
+					width: calc(25% - 35px);
+					padding: 0 20px 0 15px;
+					float: left;
+					margin-top: -3px;
+					a {
+						display: block;
+					}
+				}
+				.application.row {
+					// width: calc(100% - 35px);
+					// padding: 0 15px 30px 20px;
+					padding: 0 0 1rem;
+					color: $orange;
+					// float: left;
+					a.bullet {
+						padding-left: .75rem;
+					}
+					h4 {
+						text-align: left;
+						padding: 0rem;
+						margin-bottom: .75rem;
+					}
+					.date {
+						color: $black;
+						text-align: left;
+					}
+					.cell {
+						float: left;
+						width: 25%;
+					}
+					.brief {
+						color: $black;
+						padding-top: 17px;
+						float: none;
+						clear: both;
+						// width: calc(75% - 35px);
+						p {
+							margin-bottom: 15px;
+						}
+						@include medium-fs;
+					}
+					@include small-fs;
+					&:last-of-type {
+						border-bottom: 0;
+					}
+				}
+			}
+		}
 		.links {
 			width: calc(25% - 35px);
 			padding: 0 20px 0 15px;
@@ -23,7 +74,7 @@ section.apply {
 		.info {
 			width: calc(75% - 35px);
 			padding: 0 15px 30px 0;
-			float: left;
+			// float: left;
 			h3.title {
 				margin-top: 30px;
 			}
@@ -44,45 +95,6 @@ section.apply {
 			}
 			.links {
 				margin-top: 20px;
-			}
-		}
-	}
-	.applications {
-		.rows {
-			.links {
-				width: calc(25% - 35px);
-				padding: 0 20px 0 15px;
-				float: left;
-				margin-top: -3px;
-				a {
-					display: block;
-				}
-			}
-			.application.row {
-				width: calc(100% - 35px);
-				display: table;
-				padding: 0 15px 30px 20px;
-				color: $orange;
-				float: left;
-				.date {
-					padding-bottom: 15px;
-				}
-				.cell {
-					float: left;
-					width: 25%;
-				}
-				.brief {
-					color: $black;
-					padding-top: 17px;
-					float: none;
-					clear: both;
-					width: calc(75% - 35px);
-					p {
-						margin-bottom: 15px;
-					}
-					@include small-fs;
-				}
-				@include small-fs;
 			}
 		}
 	}
