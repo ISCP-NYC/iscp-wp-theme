@@ -1042,21 +1042,21 @@ section footer .wrapper .inner nav .cell .cell-inner form .placeholder:after {
   top: 12px;
   rotate: -35deg;
 }
-section footer .wrapper .inner nav .cell.greenroom .login .swap {
+section footer .wrapper .inner nav .cell.greenroom .child-item.greenroom .swap {
   width: calc(18px - 5px);
   height: calc(18px - 5px);
   display: inline-block;
 }
-section footer .wrapper .inner nav .cell.greenroom .login .swap .icon.default {
+section footer .wrapper .inner nav .cell.greenroom .child-item.greenroom .swap .icon.default {
   background-image: url(../images/lock-white.svg);
 }
-section footer .wrapper .inner nav .cell.greenroom .login .swap .icon.hover {
+section footer .wrapper .inner nav .cell.greenroom .child-item.greenroom .swap .icon.hover {
   background-image: url(../images/lock-black.svg);
 }
-section footer .wrapper .inner nav .cell.greenroom .login a:hover .icon.default {
+section footer .wrapper .inner nav .cell.greenroom .child-item.greenroom a:hover .icon.default {
   opacity: 0;
 }
-section footer .wrapper .inner nav .cell.greenroom .login a:hover .icon.hover {
+section footer .wrapper .inner nav .cell.greenroom .child-item.greenroom a:hover .icon.hover {
   opacity: 1;
 }
 section footer .wrapper .inner nav .cell:nth-child(6) {
@@ -3105,6 +3105,67 @@ section#about .main .list {
 section.apply .program-links {
   margin-top: 30px;
 }
+section.apply .program .applications .rows .links {
+  width: calc(25% - 35px);
+  padding: 0 20px 0 15px;
+  float: left;
+  margin-top: -3px;
+}
+section.apply .program .applications .rows .links a {
+  display: block;
+}
+section.apply .program .applications .rows .application.row {
+  padding: 0 0 1rem;
+  color: #ff5000;
+}
+section.apply .program .applications .rows .application.row a.bullet {
+  padding-left: 0.75rem;
+}
+section.apply .program .applications .rows .application.row h4 {
+  text-align: left;
+  padding: 0rem;
+  margin-bottom: 0.75rem;
+}
+section.apply .program .applications .rows .application.row .date {
+  color: #13172F;
+  text-align: left;
+}
+section.apply .program .applications .rows .application.row .cell {
+  float: left;
+  width: 25%;
+}
+section.apply .program .applications .rows .application.row .brief {
+  color: #13172F;
+  padding-top: 17px;
+  float: none;
+  clear: both;
+}
+section.apply .program .applications .rows .application.row .brief p {
+  margin-bottom: 15px;
+}
+@media (max-width: 900px) {
+  section.apply .program .applications .rows .application.row .brief {
+    font-size: 18px !important;
+    line-height: 21px !important;
+  }
+}
+section.apply .program .applications .rows .application.row .brief {
+  font-size: 24px;
+  line-height: 28px;
+}
+@media (max-width: 900px) {
+  section.apply .program .applications .rows .application.row {
+    font-size: 16px !important;
+    line-height: 20px !important;
+  }
+}
+section.apply .program .applications .rows .application.row {
+  font-size: 18px;
+  line-height: 21px;
+}
+section.apply .program .applications .rows .application.row:last-of-type {
+  border-bottom: 0;
+}
 section.apply .program .links {
   width: calc(25% - 35px);
   padding: 0 20px 0 15px;
@@ -3134,7 +3195,6 @@ section.apply .program .block {
 section.apply .program .info {
   width: calc(75% - 35px);
   padding: 0 15px 30px 0;
-  float: left;
 }
 section.apply .program .info h3.title {
   margin-top: 30px;
@@ -3151,59 +3211,6 @@ section.apply .program#current-open-calls .info, section.apply .program#ground-f
   section.apply .program .links {
     margin-top: 20px;
   }
-}
-section.apply .applications .rows .links {
-  width: calc(25% - 35px);
-  padding: 0 20px 0 15px;
-  float: left;
-  margin-top: -3px;
-}
-section.apply .applications .rows .links a {
-  display: block;
-}
-section.apply .applications .rows .application.row {
-  width: calc(100% - 35px);
-  display: table;
-  padding: 0 15px 30px 20px;
-  color: #ff5000;
-  float: left;
-}
-section.apply .applications .rows .application.row .date {
-  padding-bottom: 15px;
-}
-section.apply .applications .rows .application.row .cell {
-  float: left;
-  width: 25%;
-}
-section.apply .applications .rows .application.row .brief {
-  color: #13172F;
-  padding-top: 17px;
-  float: none;
-  clear: both;
-  width: calc(75% - 35px);
-}
-section.apply .applications .rows .application.row .brief p {
-  margin-bottom: 15px;
-}
-@media (max-width: 900px) {
-  section.apply .applications .rows .application.row .brief {
-    font-size: 16px !important;
-    line-height: 20px !important;
-  }
-}
-section.apply .applications .rows .application.row .brief {
-  font-size: 18px;
-  line-height: 21px;
-}
-@media (max-width: 900px) {
-  section.apply .applications .rows .application.row {
-    font-size: 16px !important;
-    line-height: 20px !important;
-  }
-}
-section.apply .applications .rows .application.row {
-  font-size: 18px;
-  line-height: 21px;
 }
 section.apply .filter {
   width: calc(100% - 35px);

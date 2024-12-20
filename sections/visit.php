@@ -28,7 +28,7 @@ $about = get_page_by_path( 'about' );
 		?>
 
 		<div class="info map module">
-		<iframe src="https://www.google.com/maps/embed/v1/view?key=AIzaSyApM4iQyAfb0hbmkeXc_zs58aA_Jy0SIac&center=40.714229,-73.934692&zoom=17&maptype=roadmap" width="600" height="500" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+		<iframe src="https://www.google.com/maps/embed/v1/place?key=AIzaSyApM4iQyAfb0hbmkeXc_zs58aA_Jy0SIac&q=International+Studio+%26+Curatorial+Program&zoom=16&maptype=roadmap" width="600" height="500" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
 			<!-- <div class="inner" id="map"></div> -->
 			<!-- <h3 class="orange title">
 				Office Hours:  -->

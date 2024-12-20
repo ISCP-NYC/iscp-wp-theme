@@ -17,6 +17,8 @@ $residency_programs_query = array(
 $residency_programs = get_pages( $residency_programs_query );
 $intro_image = get_field( 'intro_image', $id );
 $intro_text = get_field( 'intro_text', $id );
+$today = new DateTime();
+$today = $today->format( 'Ymd' );
 ?>
 <section <?php section_attr( $id, $slug, 'apply' ); ?>>
 	<?php get_template_part('partials/nav') ?>
@@ -69,27 +71,35 @@ $intro_text = get_field( 'intro_text', $id );
 			</div>
 			<?php endif; ?>
 			<?php if( $slug == 'current-open-calls'): ?>
-			<div class="block deadline">
-				<div class="horizontal-align">
+			<div class="applications border-top">
+				<div class="rows">
 				<?php 
 					if( have_rows( 'applications', $id ) ):
-			    		while ( have_rows( 'applications' ) ) : the_row();
-							$app_title = get_sub_field( 'title', $id );
-							$app_deadline = get_sub_field( 'deadline', $id );
+			    		while ( have_rows( 'applications', $id ) ) : the_row();
+							$app_title = get_sub_field( 'title' );
+							$app_deadline = get_sub_field( 'deadline' );
 							$app_deadline_dt = new DateTime( $app_deadline );
 							$app_deadline_format = $app_deadline_dt->format('F d, Y');
-							$app_brief = get_sub_field( 'brief', $id );
-							$app_link = get_sub_field( 'link', $id );
-							if( $app_deadline > $today ):
-								if( $app_link ):
-									echo '<a href="' . $app_link . '">';
+							$app_brief = get_sub_field( 'brief' );
+							$app_link = get_sub_field( 'link' );
+							$app_attachment = get_sub_field( 'attachment' );
+							echo '<div class="application row border-bottom">';
+							if( $app_deadline >= $today ):
+								echo '<h4>' . $app_title . '</h4>';
+								echo '<div class="date">Deadline: ' . $app_deadline_format . '</div>';
+								if( $app_brief ):
+									echo '<div class="brief">' . $app_brief . '</div>'; 
 								endif;
-								echo '<div>' . $app_title . '</div>';
-								echo '<div>Deadline: ' . $app_deadline_format . '</div>';
 								if( $app_link ):
-									echo '</a>';
+									echo '<a class="bullet small" href="' . $app_link . '">Application Link</a>';
+								endif;
+								if( $app_attachment ):
+									echo '<div class="attachment">';
+									echo '<a class="bullet small" href="' . $app_attachment . '" >Download Application</a>';
+									echo '</div>';
 								endif;
 							endif;
+							echo '</div>';
 						endwhile;
 					else:
 						echo 'No applications available';
