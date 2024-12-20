@@ -2475,6 +2475,21 @@ ul li {
   }
 }
 
+.module.description h4 {
+  margin-bottom: 0;
+  color: #ff5000;
+}
+@media (max-width: 900px) {
+  .module.description h4 {
+    font-size: 24px !important;
+    line-height: 28px !important;
+  }
+}
+.module.description h4 {
+  font-size: 32px;
+  line-height: 36px;
+}
+
 p {
   word-wrap: break-word;
   margin-bottom: 28px;

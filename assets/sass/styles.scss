@@ -297,6 +297,13 @@ ul li {
 		background-size: 12px;
 	}
 }
+.module.description {
+	h4 {
+		@include subtitle-fs;
+		margin-bottom: 0;
+		color: $orange;
+	}
+}
 p {
 	word-wrap: break-word;
 	margin-bottom: 28px;
