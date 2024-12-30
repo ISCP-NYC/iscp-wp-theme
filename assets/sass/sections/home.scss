@@ -19,6 +19,9 @@
 	}
 	.introduction-text {
 		padding-top: 20px;
+		@include small {
+			padding-top: 1.5rem;
+		}
 		@include subtitle-fs;
 		text-align: center;
 		strong {
@@ -183,6 +186,12 @@
 			gap: 30px;
 			.cols_2 {
 				width: calc(50% - 15px);
+				@include small {
+					width: 100%;
+				}
+			}
+			@include small {
+				flex-direction: column;
 			}
 		}
 		.video {
@@ -240,6 +249,12 @@
 					padding-left: 5px;
 					display: table;
 					margin: auto;
+					@include small {
+						display: flex;
+						flex-direction: column;
+						justify-content: center;
+						align-items: center;
+					}
 					.swap {
 						width: 24px;
 						height: 24px;
@@ -253,8 +268,8 @@
 					}
 					@include medium {
 						.swap {
-							width: 18px;
-							height: 18px;
+							width: 1.5rem;
+							height: 1.5rem;
 						}
 					}
 				}
