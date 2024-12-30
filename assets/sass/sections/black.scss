@@ -19,6 +19,27 @@ section.error {
 			color: $black;
 		}
 	}
+	.nav-extras.search {
+		a.donate {
+			&:hover {
+				border-color: $orange !important;
+			}
+		}
+		.placeholder:before {
+			border-color: $black;
+		}
+		.placeholder:after {
+			background-color: $black;
+		}
+		form:hover {
+			.placeholder:before {
+				border-color: $orange;
+			}
+			.placeholder:after {
+				background-color: $orange;
+			}
+		}
+	}
 	aside.main {
 		border-color: $black !important;
 	 	.icon.default {

@@ -191,15 +191,23 @@ $('body').on('wheel', 'section', function(e) {
 			contentHeight += $(this).outerHeight();
 		});
 		$(content).scrollTop(scrollTo);
-		console.log('scrollTopParent: ' + scrollTopParent + ' scrollTop: ' + scrollTop + ' contentHeight: ' + contentHeight);
+		// console.log('scrollTopParent: ' + scrollTopParent + ' scrollTop: ' + scrollTop + ' contentHeight: ' + contentHeight);
 		if(scrollTop >= contentHeight - 600){
+			// console.log('it is');
 			// $(content).parent().scrollTop(scrollTo - 900);
 			// $(content).parent().scrollTop(200);
 		}
 	}
 	else {
+		var e = window.event || e;
+		var delta = e.deltaY;
+		if(delta == undefined) {
+			 delta = e.originalEvent.deltaY;
+		}
 		var scrollTopParent = $(section).scrollTop();
-		console.log(scrollTopParent);
+		console.log('overflow');
+		var scrollTo = scrollTopParent + delta;
+		$(section).scrollTop(scrollTo);
 	}
 	// if($(section).hasClass('show-footer')) {
 	// 	var e = window.event || e;
@@ -314,8 +322,8 @@ function sectionContentScrollListener(content) {
 	// console.log('top: ' + scrollTop + ' last: ' + lastContentScrollTop + ' scroll: ' + scrollHeight + ' content: ' + contentHeight);
 	//scrolled to end of content -> scroll to footer
 	// if(scrollHeight - scrollTop == contentHeight && scrollTop > lastContentScrollTop) {
-	// console.log( 'scrollHeight: ' + scrollHeight + ' scollTop: ' + scrollTop + ' contentHeight: ' + contentHeight );
-	if(scrollHeight - scrollTop == contentHeight && scrollTop > lastContentScrollTop) {
+	console.log( 'scrollHeight: ' + scrollHeight + ' scollTop: ' + scrollTop + ' contentHeight: ' + contentHeight );
+	if(scrollHeight - scrollTop <= (contentHeight + 1) && scrollTop > lastContentScrollTop) {
 			$(section).addClass('show-footer');
 			console.log('show');
 	}
