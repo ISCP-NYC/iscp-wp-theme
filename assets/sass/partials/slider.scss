@@ -65,6 +65,9 @@
         }
         &.left {
             left: 20px;
+            @include medium {
+                left: -5px;
+            }
             .icon {
                 background-position: 0 -60px;
                 &.default {
@@ -77,6 +80,9 @@
         }
         &.right {
             right: 20px;
+            @include medium {
+                right: -5px;
+            }
             .icon {
                 background-position: 0 -90px;
                 &.default {

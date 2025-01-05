@@ -43,6 +43,9 @@ section#visit {
 					padding-left: 20px;
 					margin: 0 0 20px 30px;
 					@include medium-fs;
+					@include medium {
+						margin-left: 0;
+					}
 				}
 			}
 			.footnote {
@@ -61,6 +64,9 @@ section#visit {
 			display: flex;
 			padding-top: 5px;
 			padding-bottom: 10px;
+			@include medium {
+				flex-direction: column;
+			}
 			.section {
 				padding-bottom: 40px;
 				h3.title {
@@ -73,6 +79,12 @@ section#visit {
 					border-left: 10px solid $orange;
 					padding-left: 40px;
 					margin-left: 30px;
+					@include medium {
+						border-top: 8px solid $orange;
+						border-left: 0;
+						padding-left: 0;
+						margin-left: 0;
+					}
 				}
 			}
 		}
