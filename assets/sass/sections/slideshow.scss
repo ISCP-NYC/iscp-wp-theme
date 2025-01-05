@@ -11,8 +11,14 @@ section .content .slideshow.module, section .content .events.module {
     margin-top: -1rem;
     display: block;
     .swiper-wrapper {
+      @include medium {
+        align-items: center;
+      }
       .inner {
         padding: 0 60px 0;
+        @include medium {
+          padding: 0 40px 0;
+        }
       }
       .slide.item {
         opacity: 0;

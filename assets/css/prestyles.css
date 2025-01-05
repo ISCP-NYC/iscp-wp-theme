@@ -1126,7 +1126,7 @@ section footer .wrapper .bottom .half h3 a {
   }
   section footer .wrapper .bottom {
     height: auto;
-    padding: 0.75rem 0 0.75rem;
+    padding: 1.5rem 0 1.5rem;
     border-top: 8px solid #fff;
     width: calc(100% - 20px);
     margin: auto;
@@ -1625,6 +1625,7 @@ section .nav-extras .donate {
   height: 28px;
   position: relative;
   font-size: 18px;
+  line-height: 1.6;
   border: solid #ff5000 6px;
   border-radius: 0.6em;
   padding: 0 10px;
@@ -2885,6 +2886,11 @@ section.login .login .wrap a {
 .image_slider .arrow.left {
   left: 20px;
 }
+@media (max-width: 900px) {
+  .image_slider .arrow.left {
+    left: -5px;
+  }
+}
 .image_slider .arrow.left .icon {
   background-position: 0 -60px;
 }
@@ -2896,6 +2902,11 @@ section.login .login .wrap a {
 }
 .image_slider .arrow.right {
   right: 20px;
+}
+@media (max-width: 900px) {
+  .image_slider .arrow.right {
+    right: -5px;
+  }
 }
 .image_slider .arrow.right .icon {
   background-position: 0 -90px;
@@ -3019,7 +3030,7 @@ section#about .half.left {
 section#about .half.right {
   padding-left: 15px;
 }
-@media (max-width: 768px) {
+@media (max-width: 900px) {
   section#about .half {
     width: 100%;
     float: none;
@@ -3027,6 +3038,7 @@ section#about .half.right {
   }
   section#about .half.right {
     margin: 10px 0 0 0;
+    padding-left: 0;
   }
 }
 section#about .info {
@@ -3042,6 +3054,11 @@ section#about .info {
 section#about .info {
   font-size: 24px;
   line-height: 28px;
+}
+@media (max-width: 900px) {
+  section#about .info {
+    flex-direction: column;
+  }
 }
 section#about .info .bullet, section#about .info section.greenroom ul li, section.greenroom ul section#about .info li,
 section#about .info section.resource ul li,
@@ -3071,6 +3088,7 @@ section#about .info .half.right {
 @media (max-width: 900px) {
   section#about .info .half.right {
     border-left: none;
+    padding-left: 0;
   }
 }
 section#about .info h3.title {
@@ -3137,12 +3155,18 @@ section#about .main .list h3.title {
     padding-left: 0;
   }
 }
+@media (max-width: 900px) {
+  section#about .main .list.board ul {
+    padding-left: 0;
+  }
+}
 section#about .main .list.staff ul {
   columns: 2;
 }
 @media (max-width: 900px) {
   section#about .main .list.staff ul {
     columns: 1;
+    padding-left: 0;
   }
 }
 section#about .main .list.staff li {
@@ -5721,6 +5745,11 @@ section#visit .module.directions .steps .step {
   font-size: 24px;
   line-height: 28px;
 }
+@media (max-width: 900px) {
+  section#visit .module.directions .steps .step {
+    margin-left: 0;
+  }
+}
 section#visit .module.directions .footnote {
   width: 100%;
   max-width: 600px;
@@ -5746,6 +5775,11 @@ section#visit .module.visits {
   padding-top: 5px;
   padding-bottom: 10px;
 }
+@media (max-width: 900px) {
+  section#visit .module.visits {
+    flex-direction: column;
+  }
+}
 section#visit .module.visits .section {
   padding-bottom: 40px;
   flex-grow: 1;
@@ -5759,6 +5793,14 @@ section#visit .module.visits .section:nth-of-type(2) {
   border-left: 10px solid #ff5000;
   padding-left: 40px;
   margin-left: 30px;
+}
+@media (max-width: 900px) {
+  section#visit .module.visits .section:nth-of-type(2) {
+    border-top: 8px solid #ff5000;
+    border-left: 0;
+    padding-left: 0;
+    margin-left: 0;
+  }
 }
 section#visit .module.accessibility .text-wrapper {
   width: 100%;
@@ -5798,8 +5840,18 @@ section .content .slideshow.module .swiper.image_slider, section .content .event
     margin-left: 0;
   }
 }
+@media (max-width: 900px) {
+  section .content .slideshow.module .swiper.image_slider .swiper-wrapper, section .content .events.module .swiper.image_slider .swiper-wrapper {
+    align-items: center;
+  }
+}
 section .content .slideshow.module .swiper.image_slider .swiper-wrapper .inner, section .content .events.module .swiper.image_slider .swiper-wrapper .inner {
   padding: 0 60px 0;
+}
+@media (max-width: 900px) {
+  section .content .slideshow.module .swiper.image_slider .swiper-wrapper .inner, section .content .events.module .swiper.image_slider .swiper-wrapper .inner {
+    padding: 0 40px 0;
+  }
 }
 section .content .slideshow.module .swiper.image_slider .swiper-wrapper .slide.item, section .content .events.module .swiper.image_slider .swiper-wrapper .slide.item {
   opacity: 0;

@@ -8,12 +8,13 @@ section#about {
 		&.right {
 			padding-left: 15px;
 		}
-		@include small {
+		@include medium {
 			width: 100%;
 			float: none;
 			margin: 0;
 			&.right {
 				margin: 10px 0 0 0;
+				padding-left: 0;
 			}
 		}
 	}
@@ -21,6 +22,9 @@ section#about {
 		display: flex;
 		padding: 10px 20px;
 		@include medium-fs;
+		@include medium {
+			flex-direction: column;
+		}
 		.bullet {
 			display: table;
 		}
@@ -40,6 +44,7 @@ section#about {
 				border-left: 5px solid $orange;
 				@include medium {
 					border-left: none;
+					padding-left: 0;
 				}
 			}
 		}
@@ -85,11 +90,17 @@ section#about {
 					padding-left: 0;
 				}
 			}
+			&.board ul {
+				@include medium {
+					padding-left: 0;
+				}
+			}
 			&.staff {
 				ul { 
 					columns: 2;
 					@include medium {
 						columns: 1;
+						padding-left: 0;
 					}
 				}
 				li {

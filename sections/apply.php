@@ -71,7 +71,7 @@ $today = $today->format( 'Ymd' );
 			</div>
 			<?php endif; ?>
 			<?php if( $slug == 'current-open-calls'): ?>
-			<div class="applications border-top">
+			<div class="applications">
 				<div class="rows">
 				<?php 
 					if( have_rows( 'applications', $id ) ):
