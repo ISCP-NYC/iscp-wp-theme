@@ -23,8 +23,9 @@ section.single.event {
 		}
 	}
 	h1.title {
-		width: 100%;
-		margin: 50px 0;
+		width: calc(100% - 1.5rem);
+		margin: 1rem 0 2rem;
+		padding: 0 .75rem;
 		color: $orange;
 		text-align: center;
 		@include large-fs;
@@ -85,6 +86,9 @@ section.single.event {
 					margin-bottom: 5px;
 				}
 				@include medium-fs;
+			}
+			&.upcoming.module {
+				border-bottom: 0;
 			}
 		}
 	}

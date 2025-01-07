@@ -4001,8 +4001,9 @@ section.single.event header.sub .right {
   text-align: right;
 }
 section.single.event h1.title {
-  width: 100%;
-  margin: 50px 0;
+  width: calc(100% - 1.5rem);
+  margin: 1rem 0 2rem;
+  padding: 0 0.75rem;
   color: #ff5000;
   text-align: center;
 }
@@ -4094,6 +4095,9 @@ section.single.event .info .events a.event div {
 section.single.event .info .events a.event {
   font-size: 24px;
   line-height: 28px;
+}
+section.single.event .info .events.upcoming.module {
+  border-bottom: 0;
 }
 @media (max-width: 900px) {
   section.single.event .caption {
