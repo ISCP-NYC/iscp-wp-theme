@@ -43,13 +43,13 @@ $today = $today->format('Y-m-d H:i:s');
 	<?php get_template_part('partials/side') ?>
 
 	<div class="content">
-		<h2 class="title">
+		<h3 class="title">
 			<?php
 			echo $event_type_name;
 			echo '</br>';
 			echo $date;
 			?>
-		</h2>	
+		</h3>	
 
 		<h1 class="title"><?php echo $title ?></h1>
 		<?php 
