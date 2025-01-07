@@ -22,9 +22,12 @@ section.single.event {
 			text-align: right;
 		}
 	}
+	h3.title {
+		color: $orange;
+	}
 	h1.title {
 		width: calc(100% - 1.5rem);
-		margin: 1rem 0 2rem;
+		margin: 1rem 0 2.5rem;
 		padding: 0 .75rem;
 		color: $orange;
 		text-align: center;
