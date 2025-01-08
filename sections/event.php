@@ -215,36 +215,34 @@ $today = $today->format('Y-m-d H:i:s');
 				echo '<div class="cursor"></div>';
 				echo '<div class="images slides">';
 			    while ( have_rows( 'gallery', $post->ID ) ) : the_row();
-						// $media_type = get_sub_field( 'media_type' );
-						// $external_link = get_sub_field( 'external_link' );
-		        // if( $media_type == 'video' ):
-		        // 	$video = get_sub_field( 'vimeo_id' );
-			      // 	$orientation = 'landscape';
-			      // else:
-			      // 	$image = get_sub_field( 'image' );
-			      // 	$image_id = $image ? $image['id'] : null;
-			      //   $image_url = $image ? $image['url'] : null;
-			      //   $orientation = $image ? get_orientation( $image['id'] ) : null;
-			      // endif;
+						$media_type = get_sub_field( 'media_type' );
+						$external_link = get_sub_field( 'external_link' );
+		        if( $media_type == 'video' ):
+		        	$video = get_sub_field( 'vimeo_id' );
+			      	$orientation = 'landscape';
+			      else:
+			      	$image = get_sub_field( 'image' );
+			      	$image_id = $image ? $image['id'] : null;
+			        $image_url = $image ? $image['url'] : null;
+			        $orientation = $image ? get_orientation( $image['id'] ) : null;
+			      endif;
 			      $caption = label_art( the_row() );
 		        echo '<div class="piece slide">';
-		        // echo '<div class="image ' . $orientation . '">';
-		        // echo '<div class="captionWrap">';
-		        // if( $media_type == 'video' ):
-		        // 	echo embed_vimeo( $video );
-		        // else:
-		        // 	if( $external_link ):
-		        // 		echo '<a href="' . $external_link . '" target="_blank">';
-			      //   		echo '<img src="' . $image_url . '"/>';
-			      //   	echo '</a>';
-		        // 	else:
-			      //   	echo '<img src="' . $image_url . '"/>';
-			      //   endif;
-		       	// endif;
+		        echo '<div class="image ' . $orientation . '">';
+		        echo '<div class="captionWrap">';
+		        if( $media_type == 'video' ):
+		        	echo embed_vimeo( $video );
+		        else:
+		        	if( $external_link ):
+		        		echo '<a href="' . $external_link . '" target="_blank">';
+			        		echo '<img src="' . $image_url . '"/>';
+			        	echo '</a>';
+		        	else:
+			        	echo '<img src="' . $image_url . '"/>';
+			        endif;
+		       	endif;
 		        echo '<div class="caption">';
 		        echo $caption;
-						$title = get_sub_field( 'title' );
-						echo $title;
 		        echo '</div>';
 		        echo '</div>';
 		        echo '</div>';
