@@ -15,7 +15,11 @@ section.single.resident {
 		}
 		.left, .center, .right {
 			float: left;
-		  	flex-wrap: wrap;
+		  flex-wrap: wrap;
+			padding-top: .5rem;
+			h2 {
+				margin: 0;
+			}
 		}
 		.left {
 			width: 20%;

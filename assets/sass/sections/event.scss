@@ -90,9 +90,6 @@ section.single.event {
 				}
 				@include medium-fs;
 			}
-			&.upcoming.module {
-				border-bottom: 0;
-			}
 		}
 	}
 	.caption {
@@ -184,7 +181,9 @@ section.single.event {
 		width: 100%;
 		@extend .border-top;
 		margin-bottom: 30px;
-
+		.events.upcoming.module {
+			border-bottom: 0;
+		}
 	}
 	&.one_col {
 

@@ -214,7 +214,7 @@ $today = $today->format('Y-m-d H:i:s');
 				echo '<div class="gallery stack">';
 				echo '<div class="cursor"></div>';
 				echo '<div class="images slides">';
-			    while ( have_rows( 'gallery' ) ) : the_row();
+			    while ( have_rows( 'gallery', $post->ID ) ) : the_row();
 						$media_type = get_sub_field( 'media_type' );
 						$external_link = get_sub_field( 'external_link' );
 		        if( $media_type == 'video' ):
