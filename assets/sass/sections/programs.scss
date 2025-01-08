@@ -17,6 +17,15 @@ section.programs {
 		.deadline-notes {
 			@include small-fs;
 		}
+		.grid.masonry {
+			margin-top: .5rem;
+			.item {
+				padding: 1.5rem 0 0;
+				h3.title {
+					padding: .5rem 0;
+				}
+			}
+		} 
 		.columns .column .inner {
 			.image img {
 				filter: grayscale(100%);

@@ -32,7 +32,7 @@ section#about {
 			p {
 				margin-top: 0;
 			}
-			padding-bottom: 1em;
+			padding-bottom: 1.5em;
 			&.left {
 				border-right: 5px solid $orange;
 				@include medium {
@@ -51,8 +51,8 @@ section#about {
 		h3.title {
 			text-align: left;
 			margin-bottom: 0;
-			padding-bottom: 1em;
-			margin-top: .5rem;
+			padding-bottom: 1.5em;
+			// margin-top: .5rem;
 		}
 	}
 	.main {

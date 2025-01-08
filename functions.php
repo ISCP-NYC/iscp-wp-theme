@@ -25,7 +25,7 @@ function iscp_scripts() {
 	wp_enqueue_script( 'imagesloaded' );
 	wp_enqueue_script( 'clipboard' );
 	wp_enqueue_script( 'main' );
-	$page_slug = $post->post_name;
+	// $page_slug = $post->post_name;
 	global $wp_query;
 	wp_localize_script( 'main', 'ajaxpagination', array(
 		'ajaxurl' => admin_url( 'admin-ajax.php' ),
@@ -1277,10 +1277,10 @@ function http($url) {
 function label_art() {
 	$artist = get_sub_field( 'artist' );
 	$title = get_sub_field( 'title' );
-    $year = get_sub_field( 'year' );
-    $medium = get_sub_field( 'medium' );
-    $credit = get_sub_field( 'credit' );
-    $photo_credit = get_sub_field( 'photo_credit' );
+	$year = get_sub_field( 'year' );
+	$medium = get_sub_field( 'medium' );
+	$credit = get_sub_field( 'credit' );
+	$photo_credit = get_sub_field( 'photo_credit' );
 	$post_type = get_post_type();
 	$dimensions = get_dimensions();
 

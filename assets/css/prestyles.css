@@ -270,7 +270,7 @@ a.bullet:hover {
 }
 
 section .content .module.images {
-  margin-top: 50px;
+  margin-top: 1rem;
   display: flex;
   justify-content: space-between;
   flex-wrap: wrap;
@@ -3068,7 +3068,7 @@ section.resident-resource ul section#about .info li {
   display: table;
 }
 section#about .info .half {
-  padding-bottom: 1em;
+  padding-bottom: 1.5em;
 }
 section#about .info .half p {
   margin-top: 0;
@@ -3094,8 +3094,7 @@ section#about .info .half.right {
 section#about .info h3.title {
   text-align: left;
   margin-bottom: 0;
-  padding-bottom: 1em;
-  margin-top: 0.5rem;
+  padding-bottom: 1.5em;
 }
 @media (max-width: 900px) {
   section#about .main .description {
@@ -4099,9 +4098,6 @@ section.single.event .info .events a.event {
   font-size: 24px;
   line-height: 28px;
 }
-section.single.event .info .events.upcoming.module {
-  border-bottom: 0;
-}
 @media (max-width: 900px) {
   section.single.event .caption {
     font-size: 16px !important;
@@ -4194,6 +4190,9 @@ section.single.event .bottom-modules {
   width: 100%;
   margin-bottom: 30px;
 }
+section.single.event .bottom-modules .events.upcoming.module {
+  border-bottom: 0;
+}
 section.single.event.cols_1 .gallery {
   display: none;
 }
@@ -4281,6 +4280,8 @@ section.single.event.cols_1 .gallery {
 .home .introduction .video iframe {
   overflow: hidden;
   max-width: 100%;
+  width: 100%;
+  aspect-ratio: 16/9;
 }
 @media (max-width: 900px) {
   .home .introduction .text {
@@ -4827,6 +4828,10 @@ section.single.resident header.sub {
 section.single.resident header.sub .left, section.single.resident header.sub .center, section.single.resident header.sub .right {
   float: left;
   flex-wrap: wrap;
+  padding-top: 0.5rem;
+}
+section.single.resident header.sub .left h2, section.single.resident header.sub .center h2, section.single.resident header.sub .right h2 {
+  margin: 0;
 }
 section.single.resident header.sub .left {
   width: 20%;
@@ -5237,6 +5242,15 @@ section.programs .program .apply {
 section.programs .program .deadline-notes {
   font-size: 18px;
   line-height: 21px;
+}
+section.programs .program .grid.masonry {
+  margin-top: 0.5rem;
+}
+section.programs .program .grid.masonry .item {
+  padding: 1.5rem 0 0;
+}
+section.programs .program .grid.masonry .item h3.title {
+  padding: 0.5rem 0;
 }
 section.programs .program .columns .column .inner .image img {
   filter: grayscale(100%);
