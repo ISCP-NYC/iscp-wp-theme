@@ -79,7 +79,7 @@
 				$role = get_sub_field( 'role' );
 				$email = get_sub_field( 'email' );
 				$description = get_sub_field( 'description' );
-				$thumbnail = get_sub_field( 'image' )['sizes']['thumb'];
+				$thumbnail = get_sub_field( 'image' )['sizes']['thumb-crop'];
 				if( !$thumbnail ) {
 					$thumbnail = get_template_directory_uri() . '/assets/images/placeholder.svg';
 				}
