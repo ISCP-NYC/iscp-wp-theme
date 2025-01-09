@@ -8,8 +8,11 @@ $description = apply_filters('the_content', $description);
 $intro_image = get_field( 'intro_image', $id );
 $intro_text = get_field( 'intro_text', $id );
 $closing = get_field('closing', $id);
+$supporters_post = get_page_by_path('support/support-iscp');
+$supporters_id = $supporters_post ? $supporters_post->ID : null;
+$supporters_description = $supporters_id ? get_field('description', $supporters_id) : null;
 ?>
-<section  <?php section_attr( $id, $slug, $slug ); ?>>
+<section <?php section_attr( $id, $slug, $slug ); ?>>
 	<?php get_template_part('partials/nav') ?>
 	<?php get_template_part('partials/side') ?>
 	<div class="content">
@@ -85,6 +88,32 @@ $closing = get_field('closing', $id);
 
 		<div class="module">
 			<?php echo $closing; ?>
+		</div>
+
+		<div class="module description">
+			<h2 class="head">Supporters</h2>
+			<?= $supporters_description; ?>
+		</div>
+		<div class="module supporters">
+			<?php 
+				$types = array(
+					'found-trust' => 'Foundations &amp; Trusts',
+					'individual' => 'Individual',
+					'gov' => 'Government',
+					'corp' => 'Corporations',
+					'probono' => 'In-kind & Pro-Bono Support'
+				);
+				foreach( $types as $type_slug => $type ) {
+					include( locate_template( 'sections/params/supporters.php' ) );
+					$supporters = new WP_Query( $supporters_query );
+					if( $supporters->post_count ) {
+						echo '<h2 class="head">' . $type . '</h2>';
+						echo '<div class="supporters shelves filter-this list items">';
+							include( locate_template( 'sections/loops/supporters.php' ) );
+						echo '</div>';
+					}
+				}
+			?>
 		</div>
 	</div>
 	<?php get_template_part('partials/footer') ?>

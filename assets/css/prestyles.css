@@ -494,6 +494,10 @@ section .content .module {
   margin-top: 5px;
   display: table;
 }
+section .content .module.supporters {
+  width: 100%;
+  padding: 20px 0 52px 0;
+}
 section .content .module img {
   max-width: 100%;
   height: auto;
@@ -5633,28 +5637,28 @@ section#search .content .no, section#error .content .no {
   text-align: center;
 }
 
-section.sponsors .content h2.head, section.contributors .content h2.head, section.supporters .content h2.head {
+section.sponsors .content h2.head, section.contributors .content h2.head, section.supporters .content h2.head, .module.supporters .content h2.head {
   margin-top: 1rem;
 }
-section.sponsors .shelves .value, section.contributors .shelves .value, section.supporters .shelves .value {
+section.sponsors .shelves .value, section.contributors .shelves .value, section.supporters .shelves .value, .module.supporters .shelves .value {
   margin-right: 5px;
 }
-section.sponsors .shelves .value.name, section.contributors .shelves .value.name, section.supporters .shelves .value.name {
+section.sponsors .shelves .value.name, section.contributors .shelves .value.name, section.supporters .shelves .value.name, .module.supporters .shelves .value.name {
   width: calc(50% - 5px) !important;
 }
-section.sponsors .shelves .value.country, section.sponsors .shelves .value.middle, section.contributors .shelves .value.country, section.contributors .shelves .value.middle, section.supporters .shelves .value.country, section.supporters .shelves .value.middle {
+section.sponsors .shelves .value.country, section.sponsors .shelves .value.middle, section.contributors .shelves .value.country, section.contributors .shelves .value.middle, section.supporters .shelves .value.country, section.supporters .shelves .value.middle, .module.supporters .shelves .value.country, .module.supporters .shelves .value.middle {
   width: calc(25% - 5px) !important;
 }
-section.sponsors .shelves .value.website, section.contributors .shelves .value.website, section.supporters .shelves .value.website {
+section.sponsors .shelves .value.website, section.contributors .shelves .value.website, section.supporters .shelves .value.website, .module.supporters .shelves .value.website {
   width: calc(25% - 5px) !important;
   justify-content: flex-end;
   flex: 1;
 }
-section.sponsors .shelves .value.website a, section.contributors .shelves .value.website a, section.supporters .shelves .value.website a {
+section.sponsors .shelves .value.website a, section.contributors .shelves .value.website a, section.supporters .shelves .value.website a, .module.supporters .shelves .value.website a {
   float: right;
   text-align: right;
 }
-section.sponsors .module.images, section.contributors .module.images, section.supporters .module.images {
+section.sponsors .module.images, section.contributors .module.images, section.supporters .module.images, .module.supporters .module.images {
   border: 0;
 }
 
