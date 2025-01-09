@@ -16,7 +16,7 @@ $supporters_title = get_the_title();
 		if( have_rows( 'images', $id ) ):
 			echo '<div class="images module">';
 				while ( have_rows( 'images', $id ) ) : the_row();
-					$image = get_sub_field( 'image' )['sizes']['thumb'];
+					$image = get_sub_field( 'image' )['sizes']['thumb-crop'];
 					$caption = get_sub_field( 'caption' );
 					if( $image ):
 						echo '<div class="image">';
