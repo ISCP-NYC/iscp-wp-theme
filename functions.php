@@ -39,7 +39,7 @@ add_action( 'wp_enqueue_scripts', 'iscp_scripts' );
 
 show_admin_bar( false );
 add_theme_support( 'post-thumbnails' ); 
-add_image_size( 'thumb', 500, 350, true );
+add_image_size( 'thumb-crop', 500, 350, true );
 add_image_size( 'slider', 9999, 500, false );
 
 function add_lat_lng( $post_id ) {
@@ -738,8 +738,8 @@ function get_resident_end_date( $id ) {
 function get_display_image( $id ) {
 	if( has_post_thumbnail( $id ) ):
 		$thumb_id = get_post_thumbnail_id( $id );
-		$thumb_url_array = wp_get_attachment_image_src($thumb_id, '', true);
-		$thumb_url = $thumb_url_array[0];
+		$thumb_url_array = wp_get_attachment_image_url($thumb_id, 'thumb-crop', true);
+		$thumb_url = $thumb_url_array;
 		return $thumb_url;
 	elseif( have_rows('gallery') ):
 		return get_sub_field( 'image', $id ) ? get_sub_field( 'image', $id )['url'] : null;
@@ -1158,7 +1158,7 @@ function get_thumb( $id, $size = null ) {
 	$thumbnail = get_display_image( $id );
 	$thumbnail_gallery = get_field( 'gallery', $id );
 	if($size == null):
-		$size = 'thumb';
+		$size = 'thumb-crop';
 	endif;
 	if( !$thumbnail && $thumbnail_gallery ):
 		$thumbnail = $thumbnail_gallery[0]['image'] ? $thumbnail_gallery[0]['image']['sizes'][$size] : null;

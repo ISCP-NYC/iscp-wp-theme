@@ -20,6 +20,8 @@ $location = get_field( 'venue_location', $id );
 $time = get_field( 'time', $id );
 $open_hours = get_field( 'open_hours', $id );
 $opening_reception = get_field( 'opening_reception', $id );
+$featured_image = get_thumb( $id, null );
+$featured_image_id = get_post_thumbnail_id();
 if( $opening_reception ) {
 	$opening_reception = new DateTime( $opening_reception );
 	$opening_reception = $opening_reception->format('M d, Y');
@@ -29,7 +31,7 @@ $logos = get_field( 'logos', $id );
 if( $page_columns ):
 	$event_classes .= ' ' . $page_columns;
 else:
-	if( have_rows('gallery') ):
+	if( have_rows('gallery') || $featured_image ):
 		$event_classes .= ' cols_2';
 	else:
 		$event_classes .= ' cols_1';
@@ -58,7 +60,7 @@ $today = $today->format('Y-m-d H:i:s');
 				echo '<div class="gallery image_slider">';
 				echo '<div class="cursor"></div>';
 				echo '<div class="images slides">';
-			    while ( have_rows( 'gallery' ) ) : the_row();
+			    while ( have_rows( 'gallery' ) ) : $row = the_row();
 						$media_type = get_sub_field( 'media_type', $home_id );
 		        if( $media_type == 'video' ):
 		        	$video = get_sub_field( 'vimeo_id', $home_id );
@@ -69,7 +71,7 @@ $today = $today->format('Y-m-d H:i:s');
 			        $image_url = $image['url'];
 			        $orientation = get_orientation( $image['id'] );
 			      endif;
-			      $caption = label_art( the_row() );
+			      $caption = label_art( $row );
 		        echo '<div class="piece slide">';
 		        echo '<div class="image ' . $orientation . '">';
 		        echo '<div class="captionWrap">';
@@ -214,7 +216,7 @@ $today = $today->format('Y-m-d H:i:s');
 				echo '<div class="gallery stack">';
 				echo '<div class="cursor"></div>';
 				echo '<div class="images slides">';
-			    while ( have_rows( 'gallery', $post->ID ) ) : the_row();
+			    while ( have_rows( 'gallery', $post->ID ) ) : $row = the_row();
 						$media_type = get_sub_field( 'media_type' );
 						$external_link = get_sub_field( 'external_link' );
 		        if( $media_type == 'video' ):
@@ -226,7 +228,7 @@ $today = $today->format('Y-m-d H:i:s');
 			        $image_url = $image ? $image['url'] : null;
 			        $orientation = $image ? get_orientation( $image['id'] ) : null;
 			      endif;
-			      $caption = label_art( the_row() );
+			      $caption = label_art( $row );
 		        echo '<div class="piece slide">';
 		        echo '<div class="image ' . $orientation . '">';
 		        echo '<div class="captionWrap">';
@@ -235,10 +237,10 @@ $today = $today->format('Y-m-d H:i:s');
 		        else:
 		        	if( $external_link ):
 		        		echo '<a href="' . $external_link . '" target="_blank">';
-			        		echo '<img src="' . $image_url . '"/>';
+									echo wp_get_attachment_image( $image_id, 'full' );
 			        	echo '</a>';
 		        	else:
-			        	echo '<img src="' . $image_url . '"/>';
+								echo wp_get_attachment_image( $image_id, 'full' );
 			        endif;
 		       	endif;
 		        echo '<div class="caption">';
@@ -250,6 +252,23 @@ $today = $today->format('Y-m-d H:i:s');
 			    endwhile;
 		    echo '</div>';
 		    echo '</div>';
+			elseif( $featured_image ):
+				echo '<div class="gallery stack">';
+				echo '<div class="cursor"></div>';
+				echo '<div class="images slides">';
+				echo '<div class="piece slide">';
+				$orientation = get_orientation( $featured_image_id );
+				echo '<div class="image ' . $orientation . '">';
+				echo wp_get_attachment_image( $featured_image_id, 'full' );
+				echo '<div class="captionWrap">';
+				echo '<div class="caption">';
+				echo wp_get_attachment_caption( $featured_image_id );
+				echo '</div>';
+				echo '</div>';
+				echo '</div>';
+				echo '</div>';
+				echo '</div>';
+				echo '</div>';
 			endif;
 		endif; ?>
 		

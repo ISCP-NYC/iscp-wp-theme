@@ -186,7 +186,7 @@ endif;
 			echo '<div class="gallery stack">';
 			echo '<div class="cursor"></div>';
 			echo '<div class="images slides">';
-		    while ( have_rows( 'gallery' ) ) : the_row();
+		    while ( have_rows( 'gallery' ) ) : $row = the_row();
 				$media_type = get_sub_field( 'media_type', $resident_id );
 	        if( $media_type == 'video' ):
 	        	$video = get_sub_field( 'vimeo_id', $resident_id );
@@ -197,15 +197,15 @@ endif;
 		        $image_url = $image ? $image['url'] : null;
 		        $orientation = $image ? get_orientation( $image['id'] ) : null;
 		      endif;
-		      $caption = label_art( the_row() );
+		      $caption = label_art( $row );
 	        echo '<div class="piece slide">';
 	        echo '<div class="image ' . $orientation . '">';
 	        echo '<div class="captionWrap">';
 	        if( $media_type == 'video' ):
 	        	echo embed_vimeo( $video );
 	        else:
-	        	echo '<img src="' . $image_url . '"/>';
-	       	endif;
+						echo wp_get_attachment_image( $image_id, 'full' );
+					endif;
 	        echo '<div class="caption">';
 	        echo $caption;
 	        echo '</div>';
