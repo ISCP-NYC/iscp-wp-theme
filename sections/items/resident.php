@@ -29,7 +29,7 @@ else:
 	$end_year = $end_date_dt->format( 'Y' );
 endif;
 
-$thumb = get_thumb( $resident_id, 'thumb-crop' );
+$thumb = get_thumb( $resident_id );
 
 echo '<div class="resident item shelf-item border-bottom ' . $resident_status . ' ' . $no_link . '"><div class="inner">';
 if( $bio ):
