@@ -9,14 +9,14 @@ include( locate_template( 'sections/params/residents.php' ) );
 		<h1 class="head">
 		<?php
 		if($slug == 'residents'):
-			if( $program_param ):
+			if( isset($program_param) ):
 				if( $program_param == 'ground_floor'):
 					echo 'Ground Floor ';
 				else:
 					echo 'International ';
 				endif;
 			endif;
-			if( $type_param ):
+			if( isset($type_param) ):
 				echo ucwords( $type_param ) . 's';
 			else:
 				echo 'Residents';

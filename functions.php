@@ -1161,12 +1161,17 @@ function get_thumb( $id, $size = null ) {
 		$size = 'thumb-crop';
 	endif;
 	if( !$thumbnail && $thumbnail_gallery ):
-		$thumbnail = $thumbnail_gallery[0]['image'] ? $thumbnail_gallery[0]['image']['sizes'][$size] : null;
+		if( $thumbnail_gallery[0]['image'] ):
+			return $thumbnail_gallery[0]['image']['sizes'][$size];
+		endif;
+		// $gallery = $thumbnail_gallery[0];
+		// $thumbnail = $gallery ? $gallery['image']['sizes'][$size] : null;
 	endif;
 	if( !$thumbnail ):
 		$thumbnail = false;
 	endif;
 	return $thumbnail;
+	// return $size;
 }
 
 function get_sponsors( $id, $index = 0 ) {
