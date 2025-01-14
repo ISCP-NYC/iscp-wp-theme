@@ -98,7 +98,7 @@ $page_id = get_the_ID();
 		bloginfo('name');
 	?>" />
 	<meta property="og:description" content="<?php get_meta_description( $page_id ) ?>" />
-	<meta property="og:image" content="<?php echo get_thumb( $page_id, 'thumb' ) ?>" />
+	<meta property="og:image" content="<?php echo get_thumb( $page_id, 'thumb-crop' ) ?>" />
 	<meta property="og:image:width" content="200" />
 	<meta property="og:image:height" content="200" />
 	<meta property="fb:app_id" content="1007372126002973" />
