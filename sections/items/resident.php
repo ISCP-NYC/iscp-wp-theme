@@ -38,7 +38,7 @@ endif;
 echo '<h2 class="link title name">' . $title . '</h2>';
 echo '<div class="image">';
 if( $bio && $thumb ):
-	echo '<img src="' . $thumb . '"/>';
+	echo '<img src="' . $thumb . '">';
 endif;
 echo '</div>';
 if( $bio ):
