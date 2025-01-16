@@ -88,8 +88,8 @@ $events_query = array(
 	'orderby' => 'meta_value post_title',
 	'order' => $order,
 	'post_status' => 'publish',
-	'exclude' => $upcoming_ids,
-	// 'post__not_in' => $upcoming_ids,
+	// 'exclude' => $upcoming_ids,
+	'post__not_in' => $upcoming_ids,
 	'meta_query' => array(
 		array( 'key' => 'start_date' ),
 		$date_query,
