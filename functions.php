@@ -778,7 +778,8 @@ function insert_neighbor_journal_posts( $post_id, $direction, $count = 1 ) {
 		'posts_per_page' => $count,
 		'type' => 'DATE',
 		'date_query' => array( $when => $post_date ),
-		'post__not_in' => array( $post_id ),
+		// 'post__not_in' => array( $post_id ),
+		'exclude' => array( $post_id ),
 		'order' => $order,
 		'orderby' => 'post_date'
 	);
@@ -838,7 +839,8 @@ function insert_neighbor_events( $event_id, $direction, $count = 1, $not_in = ar
 		'meta_key' => 'start_date',
 		'orderby' => 'meta_value_num post_title',
 		'order' => $order,
-		'post__not_in' => $not_in,
+		// 'post__not_in' => $not_in,
+		'exclude' => $not_in,
 		'meta_query' => array(
 			'type' => 'DATE',
 			'key' => 'start_date',
@@ -967,7 +969,8 @@ function insert_neighbor_residents( $resident_id, $direction, $count, $not_in = 
 		'posts_per_page' => $count,
 		'orderby' => $resident_orderby,
 		'meta_key' => $resident_meta_key,
-		'post__not_in' => $not_in,
+		// 'post__not_in' => $not_in,
+		'exclude' => $not_in,
 		'meta_query' => array(
 			array( 
 				'relation' => 'AND',
@@ -1392,7 +1395,11 @@ function convert_unit( $int, $unit ) {
 }
 
 function in_to_cm( $inches = 0 ) {
+	if( is_numeric( $inches ) ):
     return dec_to_hund( $inches / 0.393701 );
+	else: 
+		return $inches;
+	endif;
 }
 
 function cm_to_in( $cm = 0 ) {
@@ -1400,7 +1407,8 @@ function cm_to_in( $cm = 0 ) {
 }
 
 function dec_to_frac( $float = 0 ) {
-	$whole = floor ( $float );
+	if( is_numeric( $float ) ):
+		$whole = floor ( $float );
     $decimal = $float - $whole;
     $leastCommonDenom = 16;
     $denominators = array ( 2, 3, 4, 8, 16 );
@@ -1418,6 +1426,9 @@ function dec_to_frac( $float = 0 ) {
     $whole = ($whole == 0 ? '' : $whole);
     $frac = '<span class="fraction"><sup>' . ($roundedDecimal * $denom) . '</sup>/<sub>' . $denom . '</sub></span>';
     return $whole . $frac;
+	else:
+		return $float;
+	endif;
 }
 
 function dec_to_hund( $float = 0 ) {
