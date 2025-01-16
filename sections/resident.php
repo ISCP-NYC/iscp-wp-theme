@@ -263,7 +263,8 @@ endif;
 			'post_type'	=> 'resident',
 			'posts_per_page' => 3,
 			'post_status' => 'publish',
-			'post__not_in' => array( $resident_id ),
+			'exclude' => array( $resident_id ),
+			// 'post__not_in' => array( $resident_id ),
 			'orderby' => 'meta_value',
 			'order' => 'DESC',
 			'meta_query' => array(
