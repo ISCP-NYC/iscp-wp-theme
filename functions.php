@@ -778,8 +778,8 @@ function insert_neighbor_journal_posts( $post_id, $direction, $count = 1 ) {
 		'posts_per_page' => $count,
 		'type' => 'DATE',
 		'date_query' => array( $when => $post_date ),
-		// 'post__not_in' => array( $post_id ),
-		'exclude' => array( $post_id ),
+		'post__not_in' => array( $post_id ),
+		// 'exclude' => array( $post_id ),
 		'order' => $order,
 		'orderby' => 'post_date'
 	);
@@ -836,11 +836,12 @@ function insert_neighbor_events( $event_id, $direction, $count = 1, $not_in = ar
 	$events_args = array(
 		'post_type' => 'event',
 		'posts_per_page' => $count,
+		'post_status' => 'publish',
 		'meta_key' => 'start_date',
 		'orderby' => 'meta_value_num post_title',
 		'order' => $order,
-		// 'post__not_in' => $not_in,
-		'exclude' => $not_in,
+		'post__not_in' => $not_in,
+		// 'exclude' => $not_in,
 		'meta_query' => array(
 			'type' => 'DATE',
 			'key' => 'start_date',
@@ -966,15 +967,15 @@ function insert_neighbor_residents( $resident_id, $direction, $count, $not_in = 
 	);
 	$resident_args = array(
 		'post_type' => 'resident',
+		'post_status' => 'publish',
 		'posts_per_page' => $count,
 		'orderby' => $resident_orderby,
 		'meta_key' => $resident_meta_key,
-		// 'post__not_in' => $not_in,
-		'exclude' => $not_in,
+		'post__not_in' => $not_in,
 		'meta_query' => array(
 			array( 
 				'relation' => 'AND',
-				$has_bio,
+				// $has_bio,
 				$date_args,
 				$direction_args
 			)
