@@ -38,6 +38,7 @@ function iscp_scripts() {
 add_action( 'wp_enqueue_scripts', 'iscp_scripts' );
 
 // show_admin_bar( false );
+
 add_theme_support( 'post-thumbnails' ); 
 add_image_size( 'thumb-crop', 500, 350, true );
 add_image_size( 'slider', 9999, 500, false );

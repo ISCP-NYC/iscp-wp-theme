@@ -114,6 +114,9 @@ $page_id = get_the_ID();
 		endif;
 		bloginfo('name');
 	?></title>
+	
+	<?php wp_footer(); ?>
+
 </head>
 <body>
 	<main data-center-slug="<?php echo $page_slug ?>" data-center-id="<?php echo $page_id ?>">
