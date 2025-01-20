@@ -965,19 +965,30 @@ function insert_neighbor_residents( $resident_id, $direction, $count, $not_in = 
 		'compare' => $direction_compare,
 		'value' => $direction_value
 	);
+
+	if( $direction == 'prev' ):
+		$sort_order = 'ASC';
+	elseif ( $direction == 'next' ):
+		$sort_order = 'DESC';
+	endif;
+
 	$resident_args = array(
 		'post_type' => 'resident',
 		'post_status' => 'publish',
 		'posts_per_page' => $count,
+		// 'orderby' => 'publish_date',
+		// 'order' => $sort_order,
 		'orderby' => $resident_orderby,
 		'meta_key' => $resident_meta_key,
+		// 'meta_key' => 'residency_dates_0_start_date',
+		// 'orderby' => 'meta_value_num',
 		'post__not_in' => $not_in,
 		'meta_query' => array(
 			array( 
 				'relation' => 'AND',
 				// $has_bio,
 				$date_args,
-				$direction_args
+				// $direction_args
 			)
 		)
 	);
@@ -988,9 +999,18 @@ function insert_neighbor_residents( $resident_id, $direction, $count, $not_in = 
 		$residents->posts = $reverse_residents;
 	endif;
 
+		// if ( $direction == 'prev' ):
+		// 	$nextResident = get_previous_post();
+		// endif;
+
+		// if ( $direction == 'next' ):
+		// 	$nextResident = get_next_post();
+		// endif;
+
 	if( $residents->have_posts() ):
 		while ( $residents->have_posts() ) : $residents->the_post();
 			global $post;
+			// $post = $nextResident;
 			setup_postdata( $post );
 			get_template_part( 'sections/resident' );
 			wp_reset_postdata();
