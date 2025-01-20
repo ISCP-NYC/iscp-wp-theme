@@ -986,9 +986,9 @@ function insert_neighbor_residents( $resident_id, $direction, $count, $not_in = 
 		'meta_query' => array(
 			array( 
 				'relation' => 'AND',
-				// $has_bio,
+				$has_bio,
 				$date_args,
-				// $direction_args
+				$direction_args
 			)
 		)
 	);

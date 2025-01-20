@@ -78,7 +78,7 @@ function setUp() {
 		var section = $('section').eq(i);
 		var asideShift = i * asideWidth;
 		var left = i * pageWidth - asideShift;
-		console.log('here: ' + left);
+		// console.log('here: ' + left);
 		if($(section).is('#map')) {
 			left += asideShift;
 		}
@@ -381,7 +381,7 @@ function slideTo(index, animate) {
 		$('section.right').removeClass('right');
 		$('section.left').removeClass('left');
 		var pageWidth = $(window).innerWidth();
-		var duration = 800;
+		var duration = 600;
 		$(section).addClass('center');
 		$(section).removeClass('hide-shelves');
 		$(section).css({
@@ -410,6 +410,7 @@ function slideTo(index, animate) {
 		$('meta[property="og:image"]').attr('content', image);
 		$('meta[property="og:url"]').attr('content', url);
 		if(animate) {
+			// console.log(index);
 			window.history.replaceState({page: index}, null, url);
 			$('main').transition({
 				left: -pageWidth * index + (index*asideWidth),
@@ -474,7 +475,7 @@ window.addEventListener('popstate', function(e) {
 	}
 });
 
-$('body').on('click', 'aside .move', function(event) {
+$('body').on('click', 'section.ready aside .move', function(event) {
 	event.preventDefault();
 	if($('main').is('.sliding')||$('main').is('.waiting')||$(this).is('.clicked')){return;}
 	var aside = $(this).parents('aside');
@@ -656,6 +657,7 @@ var click = 0;
 //query wordpress for section 'neighbor' and insert them into main wrapper
 var existingIds = [];
 function getNeighbors(direction, type, slug) {
+	console.log(direction, type, slug)
 	click++;
 	var nextSection = $('section#'+slug);
 	if(direction == 'prev') {
@@ -692,6 +694,7 @@ function getNeighbors(direction, type, slug) {
 			$('main').addClass('waiting').addClass(direction);
 		},
 		success: function(newSection) {
+			console.log('success');
 			var id = $(newSection).attr('data-id');
 			if($('section[data-id="'+id+'"]').length) {
 				$(loadingSide).on(transitionEnd, function() {
