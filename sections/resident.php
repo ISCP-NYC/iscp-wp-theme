@@ -250,11 +250,11 @@ endif;
 					'value' => $country_id,
 					'compare' => 'LIKE'
 				),
-				array(
-					'key' => 'residency_program',
-					'value' => 'international',
-					'compare' => 'LIKE'
-				)
+				// array(
+				// 	'key' => 'residency_program',
+				// 	'value' => 'international',
+				// 	'compare' => 'LIKE'
+				// )
 			);
 			array_push( $meta_query, $country_query );
 			$relation_title = 'Residents from ' . $country_names;

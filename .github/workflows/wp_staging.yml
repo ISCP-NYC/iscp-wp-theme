@@ -8,7 +8,7 @@ on:
   #     - '/**'
 
 jobs:
-  deploy-craft:
+  deploy-wp-theme:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -24,19 +24,3 @@ jobs:
           remote_host: ${{ secrets.DEPLOY_HOST }}
           remote_user: ${{ secrets.DEPLOY_USER }}
           remote_key: ${{ secrets.DEPLOY_KEY }}
-          
-      # - name: Change permissions
-      #   uses: appleboy/ssh-action@master
-      #   with:
-      #     host: ${{ secrets.DEPLOY_HOST }}
-      #     username: ${{ secrets.DEPLOY_USER }}
-      #     key: ${{ secrets.DEPLOY_KEY }}
-          # script: |
-          #   echo '--- Before ---'
-          #   cd /var/www/craft-dev.carpenter.center/public_html
-          #   ls -la
-          #   cd /var/www/
-          #   echo '--- After ---'
-          #   cd /var/www/craft-dev.carpenter.center/public_html
-          #   chown -R ${{ secrets.DEPLOY_USER }}:www-data /config/
-          #   ls -la
