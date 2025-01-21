@@ -61,15 +61,30 @@ switch($post_type) {
 			get_template_part( 'sections/residents' );
 			wp_reset_postdata();
 
+			if( $prev_resident ): 
+				$post = $prev_resident;
+				setup_postdata( $post );
+				get_template_part( 'sections/resident' );
+				wp_reset_postdata();
+			endif;
+
 			//previous past residents by studio number
-			insert_neighbor_residents( $this_resident_id, 'prev', 1 );
+			// insert_neighbor_residents( $this_resident_id, 'prev', 1 );
 
 			setup_postdata( $this_resident );
 			get_template_part( 'sections/resident' );
 			wp_reset_postdata();
 
 			//next past residents by studio number
-			insert_neighbor_residents( $this_resident_id, 'next', 1 );
+			// insert_neighbor_residents( $this_resident_id, 'next', 1 );
+
+			if( $next_resident ):
+				$post = $next_resident;
+				setup_postdata( $post );
+				get_template_part( 'sections/resident' );
+				wp_reset_postdata();
+			endif;
+			
 		endif;
 
 		break;
