@@ -1660,6 +1660,14 @@ section .nav-extras.search-enabled form[role=search] input {
   width: 100%;
   transition-delay: 500ms;
 }
+@media (max-width: 768px) {
+  section .nav-extras.search-enabled form[role=search] input {
+    width: 50svw;
+    left: -50%;
+    position: absolute;
+    top: 0;
+  }
+}
 section .nav-extras form[role=search] {
   width: 30px;
   transition: width 300ms ease-in-out;
@@ -1691,6 +1699,11 @@ section .nav-extras form[role=search] .placeholder {
   right: 0;
   cursor: pointer;
 }
+@media (max-width: 768px) {
+  section .nav-extras form[role=search] .placeholder {
+    top: 0;
+  }
+}
 section .nav-extras form[role=search] .placeholder:before, section .nav-extras form[role=search] .placeholder:after {
   content: "";
   display: block;
@@ -1699,6 +1712,11 @@ section .nav-extras form[role=search] .placeholder:before, section .nav-extras f
 }
 section .nav-extras form[role=search] .placeholder:hover:before {
   border: solid #13172F 7px;
+}
+@media (max-width: 768px) {
+  section .nav-extras form[role=search] .placeholder:hover:before {
+    border-width: 4px;
+  }
 }
 section .nav-extras form[role=search] .placeholder:hover:after {
   background-color: #13172F;
@@ -3094,6 +3112,12 @@ section#about .info .half.right {
     border-left: none;
     padding-left: 0;
   }
+}
+section#about .info .half ul {
+  margin-top: 0;
+}
+section#about .info .half ul li {
+  margin-bottom: 0;
 }
 section#about .info h3.title {
   text-align: left;

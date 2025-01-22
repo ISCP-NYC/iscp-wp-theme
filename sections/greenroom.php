@@ -20,7 +20,6 @@
 		</div>
 		<div class="module hello">
 			Hello, <?php echo $name ?>
-			<?= $slug ?>
 		</div>
 		<div class="dashboard module">
 			<div class="half left">
