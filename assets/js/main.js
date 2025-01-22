@@ -1193,12 +1193,15 @@ $('body').on('mouseenter click touchstart', '.mouse-enter form', function() {
 	}
 });
 
-$('body').on('click touchstart', '.placeholder', function() {
+$('body').on('click', '.placeholder', function(e) {
+	e.preventDefault();
 	var input = $(this).parent().find('input:not(.no)');
 	$(this).parent().parent().toggleClass('search-enabled');
+	console.log('search');
 	setTimeout(function(){
 		$(input).focus();
 	}, 600);
+	return false;
 });
 
 var navTimer;

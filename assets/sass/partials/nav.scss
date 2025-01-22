@@ -392,6 +392,12 @@ header.main {
 				opacity: 1;
 				width: 100%;
 				transition-delay: 500ms;
+				@include small {
+					width: 50svw;
+					left: -50%;
+					position: absolute;
+					top: 0;
+				}
 			}
 		}
 	}
@@ -416,6 +422,9 @@ header.main {
 			right: 0;
 			// top: 2px;
 			cursor: pointer;
+			@include small {
+				top: 0;
+			}
 			&:before, &:after {
 				content: '';
 				display: block;
@@ -425,6 +434,9 @@ header.main {
 			&:hover {
 				&:before {
 					border: solid $black 7px;
+					@include small {
+						border-width: 4px;
+					}
 				}
 				&:after {
 					background-color: $black;
