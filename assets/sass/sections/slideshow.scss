@@ -1,0 +1,68 @@
+section .content .slideshow.module, section .content .events.module {
+  display: block;
+  padding-bottom: 20px;
+  .swiper.image_slider {
+    height: auto;
+    width: calc(100% + 60px);
+    margin-left: -30px;
+    @include small {
+      margin-left: 0;
+    }
+    margin-top: -1rem;
+    display: block;
+    .swiper-wrapper {
+      @include medium {
+        align-items: center;
+      }
+      .inner {
+        padding: 0 60px 0;
+        @include medium {
+          padding: 0 40px 0;
+        }
+      }
+      .slide.item {
+        opacity: 0;
+        transition: opacity .2s ease-in-out;
+        &.swiper-slide-active {
+          opacity: 1;
+        }
+        figure.image {
+          display: flex;
+          flex-direction: column;
+          // width: max-content;
+          max-width: 100%;
+          max-height: 100%;
+          margin: auto;
+        }
+        h3.name, figcaption {
+          padding-bottom: 20px;
+          margin-bottom: 5px;
+          flex-shrink: 0;
+          width: 0;
+          min-width: 100%;
+        }
+        figcaption {
+          margin-top: .5rem;
+        }
+        img {
+          margin: 0 auto;
+          display: block;
+          width: auto;
+          max-width: 100%;
+          max-height: 50svh;
+        }
+        .value {
+          text-align: center;
+          @include small-fs;
+        }
+      }
+    }
+  }
+  .wrap {
+    &:hover {
+      .link {
+        color: $black;
+      }
+    }
+  }
+}

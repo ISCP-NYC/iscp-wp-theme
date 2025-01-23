@@ -41,10 +41,10 @@
         }
     }
     &.small {
-        @include small-fs;
         background-position: left 3px;
         background-size: 12px;
         text-indent: 15px;
+        @include small-fs;
     }
     @include medium {
         background-position: left 3px;

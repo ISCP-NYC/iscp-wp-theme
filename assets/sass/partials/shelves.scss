@@ -11,10 +11,6 @@
 			float: left;
 			padding-bottom: 55px;
 			margin-bottom: 50px;
-			@include small {
-			  padding-bottom: 34px;
-			  margin-bottom: 17px;
-			}
 			transition: color 150ms ease-in-out, opacity 300ms ease-in-out;
 			* {
 				transition: color 150ms ease-in-out;
@@ -32,6 +28,7 @@
 					text-align: center;
 				}
 				h2 {
+					@include medium-fs;
 					@extend .yesselect;
 					text-align: center;
 					margin-bottom: 10px;
@@ -119,6 +116,8 @@
 				}
 			}
 			@include small {
+				padding-bottom: 34px;
+			  margin-bottom: 17px;
 				.inner {
 					width: calc(100% - 45px);
 				}
@@ -151,6 +150,7 @@
 				h2 {
 					text-align: left;
 					margin: 0;
+					@include medium-fs;
 				}
 				h3 {
 					width: 100%;
@@ -160,10 +160,12 @@
 				}
 				.image {display: none;}
 				.value {
+					display: flex;
+					align-items: flex-end;
 					float:left;
 					text-align: left;
-					@include small-fs;
 					word-break: break-word;
+					@include small-fs;
 				}
 			}
 		  @include small {
@@ -174,18 +176,18 @@
 				width: 100% !important;
 			  }
 			  .value {
-				display: block !important;
-				float: none !important;
-				clear: both !important;
-				text-align: left !important;
-				padding: 0 0 12px 0 !important;
-				width: 100% !important;
-				font-size: $small-fs !important;
-				line-height: $small-lh !important;
-				a {
+					display: block !important;
 					float: none !important;
+					clear: both !important;
 					text-align: left !important;
-				}
+					padding: 0 0 12px 0 !important;
+					width: 100% !important;
+					font-size: $small-fs !important;
+					line-height: $small-lh !important;
+					a {
+						float: none !important;
+						text-align: left !important;
+					}
 			  }
 			  h2 {
 				text-align: center;
@@ -290,19 +292,19 @@
 }
 .module, .module.shelves {
 	.shelf-item.item {
-		width: 33.333% !important;
-		.inner {
-			width: calc(100% - 20px) !important;
-		}
-		&:nth-child(3n+1) .inner {
-			margin: 0 !important;
-		}
-		&:nth-child(3n+2) .inner {
-			margin: 0 10px !important;
-		}
-		&:nth-child(3n+3) .inner {
-			margin: 0 0 0 20px !important;
-		}
+		// width: 33.333% !important;
+		// .inner {
+		// 	width: calc(100% - 20px) !important;
+		// }
+		// &:nth-child(3n+1) .inner {
+		// 	margin: 0 !important;
+		// }
+		// &:nth-child(3n+2) .inner {
+		// 	margin: 0 10px !important;
+		// }
+		// &:nth-child(3n+3) .inner {
+		// 	margin: 0 0 0 20px !important;
+		// }
 		@include medium {
 			&:nth-child(n),
 			&:first-child,

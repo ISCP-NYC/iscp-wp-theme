@@ -50,5 +50,22 @@ section#events .content {
 	}
 	.wrapper.upcoming {
 		margin-bottom: 20px;
+		&.module {
+			border-bottom: none;
+			padding-bottom: 0;
+			h3.title {
+				padding-bottom: 0;
+			}
+		}
+	}
+	.events.module {
+		margin-top: 0;
+		padding-top: 0;
+	}
+	.wrapper.past {
+		h3.title {
+			padding: 1rem 0 1.5rem;
+			@include subtitle-fs;
+		}
 	}
 }

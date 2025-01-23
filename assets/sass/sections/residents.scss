@@ -1,5 +1,8 @@
 section.residents {
 	.content {
+		h1.head {
+			padding-bottom: 2rem;
+		}
 		h2.title {
 			@include small {
 				padding-bottom: 4px;

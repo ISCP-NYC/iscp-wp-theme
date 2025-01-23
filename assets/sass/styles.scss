@@ -1,8 +1,9 @@
 /*
 Theme Name: ISCPT
 */
-@font-face {font-family: 'Life Italic';src: url('../fonts/3095D6_0_0.eot');src: url('../fonts/3095D6_0_0.eot?#iefix') format('embedded-opentype'),url('../fonts/3095D6_0_0.woff2') format('woff2'),url('../fonts/3095D6_0_0.woff') format('woff'),url('../fonts/3095D6_0_0.ttf') format('truetype');}
-@font-face {font-family: 'Life Rounded';src: url('../fonts/3095D6_1_0.eot');src: url('../fonts/3095D6_1_0.eot?#iefix') format('embedded-opentype'),url('../fonts/3095D6_1_0.woff2') format('woff2'),url('../fonts/3095D6_1_0.woff') format('woff'),url('../fonts/3095D6_1_0.ttf') format('truetype');}
+@font-face {font-family: 'Life Italic';src: url('../fonts/3095D6_0_0.eot');src: url('../fonts/3095D6_0_0.eot?#iefix') format('embedded-opentype'),url('../fonts/3095D6_0_0.woff2') format('woff2'),url('../fonts/3095D6_0_0.woff') format('woff');}
+@font-face {font-family: 'Life Rounded';src: url('../fonts/3095D6_1_0.eot');src: url('../fonts/3095D6_1_0.eot?#iefix') format('embedded-opentype'),url('../fonts/3095D6_1_0.woff2') format('woff2'),url('../fonts/3095D6_1_0.woff') format('woff');}
+@font-face {font-family: 'Din Round';src: url('../fonts/ff_dinround-bold.woff2') format('woff2');}
 @import 'vars';
 @import 'mixins';
 @import 'extends';
@@ -15,11 +16,20 @@ body {
 	overflow: hidden;
 	font-family: 'Life Rounded', Times;
 	color: $black;
-	@include medium-fs;
+	-webkit-text-size-adjust:100%;
 	* {
 		font-family: 'Life Rounded', Times;
 	}
-	-webkit-text-size-adjust:100%
+	@include medium-fs;
+	@include small {
+		margin: 0;
+	}
+}
+.din {
+	font-family: 'Din Round', sans-serif;
+}
+.no-wrap {
+	white-space: nowrap;
 }
 #mfPreviewBar, #mfPreviewBarShow {
 	display: none !important;
@@ -54,7 +64,7 @@ main {
 	top: 0;
 	overflow: hidden;
 	@include small {
-		width: 100% !important;
+		width: 100svw !important;
 		left: 0 !important;
 	}
 	&.waiting {
@@ -93,9 +103,10 @@ section {
 		border-width: 0 10px;
 		border-color: $orange;
 		transition: border-color 150ms ease-in-out;
+		-webkit-overflow-scrolling: touch;
 		@include small {
 			width: calc(100% - 20px) !important;
-			padding: 130px 0px;
+			padding: 6rem 0px;
 			margin-left: 10px;
 			border-width: 0;
 		}
@@ -105,13 +116,17 @@ section {
 			margin-bottom: 0px;
 			margin-top: 5px;
 	    display: table;
+			&.supporters {
+				width: 100%;
+				padding: 20px 0 52px 0;
+			}
 	    img {
 	    	max-width: 100%;
 	    	height: auto;
 	    }
 	    @include small {
-	    	width: calc(100% - 60px);
-  			padding: 13px 30px 23px 30px;
+	    	width: calc(100% - 40px);
+  			padding: 13px 20px 23px 20px;
 				&.newsletter {
 					width: 100%;
 					padding-left: 0px !important;
@@ -123,9 +138,10 @@ section {
 			@extend .border-bottom;
 			h2.title {
 				padding: 0;
-				margin-bottom: 20px;
+				margin-bottom: 40px;
 			}
 			h3.title {
+				@include subtitle-fs;
 				text-align: center;
 				// padding: 0;
 				// margin-bottom: 20px;
@@ -135,7 +151,6 @@ section {
 				margin-bottom: 0;
 			}
 		}
-		-webkit-overflow-scrolling: touch;
 	}
 	&.ready {
 		opacity: 1;
@@ -143,16 +158,23 @@ section {
 		.content > * {
 			// opacity: 1;
 		}
-	}
-	h2.head {
-		width: 100%;
-		padding: 10px 0 30px;
-		@include small {
-			padding: 16px 0 42px;
+		&.hide-shelves {
+			.nav-toggle {
+				opacity: 0;
+			}
 		}
+	}
+	h1.head, h2.head {
+		width: 100%;
+		padding: 1rem 0 .5rem;
 		text-align: center;
 		color: $orange;
+		margin-top: 0;
 		margin-bottom: 20px;
+		@include large-fs;
+		@include small {
+			padding: .5rem 0 .75rem;
+		}
 	}
 	&:not(.center) {
 		pointer-events: none;
@@ -262,7 +284,10 @@ em, i, em *, i * {
 ul li {
 	list-style: none;
 }
-.description ul li, .info ul li {
+.description ul, .info ul, .directions ul, .intro ul {
+	padding-left: 0;
+}
+.description ul li, .info ul li, .directions ul li, .intro ul li {
 	margin: 0 0 25px 0;
 	background-image: url(../images/bullet-black.svg);
 	background-position: left 7px;
@@ -279,15 +304,45 @@ ul li {
 		background-size: 12px;
 	}
 }
+.module.description {
+	h4 {
+		@include subtitle-fs;
+		margin-bottom: 0;
+		color: $orange;
+	}
+}
 p {
 	word-wrap: break-word;
 	margin-bottom: 28px;
+	margin-top: 0;
 	@include small {
 		margin-bottom: 16px;
 	}
 	span {
 		line-height: inherit !important;
 	}
+	&:last-child {
+		margin-bottom: 0;
+	}
+}
+figure {
+	&.hero {
+		max-width: 50svw;
+		width: fit-content;
+		margin: 0 auto 2rem;
+		img {
+			margin: auto;
+			width: auto;
+			height: auto;
+			max-height: 50svh;
+		}
+	}
+}
+hr {
+	border: 5px solid $orange;
+}
+figcaption {
+	@include small-fs;
 }
 strong, b {
 	font-weight: normal !important;
@@ -302,6 +357,7 @@ h1, .large {
 h2, .medium {
 	@include medium-fs;
 	&.title {
+		@include large-fs;
 		text-align: center;
 		padding: 0 0 3px 0;
 		color: $orange;
@@ -314,9 +370,9 @@ h3, .small {
 	@include medium-fs;
 	&.title {
 		text-align: center;
-		padding: 5px 0 40px 0;
+		padding: .2rem 0 1rem 0;
 		@include small {
-			padding: 5px 0 10px 0;
+			padding: 0 0 10px 0;
 			font-size: $small-fs !important;
 			line-height: $small-lh !important;
 		}
@@ -326,9 +382,9 @@ h3, .small {
 	}
 }
 h4 {
-	@include medium-fs;
 	text-align: center;
 	padding: 5px 0 40px 0;
+	@include medium-fs;
 	@include small {
 		padding: 5px 0 10px 0;
 		font-size: $small-fs !important;
@@ -416,13 +472,13 @@ section.login {
 			text-align: center;
 			h1 {
 				color: $white;
-				@include large-fs;
 				margin-bottom: 20px;
+				@include large-fs;
 			}
 			a {
-				@include medium-fs;
 				color: $white;
 				margin: 0 25px;
+				@include medium-fs;
 			}
 		}
 	}
@@ -449,6 +505,7 @@ section.login {
 @import 'sections/sponsor';
 @import 'sections/visit';
 @import 'sections/export';
+@import 'sections/slideshow';
 
 ::-webkit-scrollbar {display:none;}
 ::-moz-scrollbar {display:none;}

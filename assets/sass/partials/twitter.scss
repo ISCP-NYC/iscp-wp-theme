@@ -19,24 +19,24 @@
 				margin: 0 15px;
 			}
 			.text {
+				padding: 1px 0 1px 25px;
+				background-image: url(../images/bullet-black.svg);
+				background-position: left 8px;
+				background-size: 15px;
+				background-repeat: no-repeat;
+				word-wrap: break-word;
 				@include medium-fs;
-			    padding: 1px 0 1px 25px;
-			    background-image: url(../images/bullet-black.svg);
-			    background-position: left 8px;
-					@include small {
-						padding: 1px 0 1px 20px;
-						background-position: left 4px;
-						background-size: 12px;
-					}
-			    background-size: 15px;
-			    background-repeat: no-repeat;
-			    word-wrap: break-word;
+				@include small {
+					padding: 1px 0 1px 20px;
+					background-position: left 4px;
+					background-size: 12px;
+				}
 			}
 			.timestamp {
 				display: block;
 				padding: 5px 0 0 25px;
-				@include small-fs;
 				color: $orange;
+				@include small-fs;
 			}
 		}
 	}

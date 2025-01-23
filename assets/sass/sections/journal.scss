@@ -1,5 +1,13 @@
 section.journal-post {
 	.content {
+		.tags {
+			text-align: center;
+			padding: 40px;
+		}
+		h2.title.head {
+			padding: 0 40px 40px;
+			width: auto;
+		}
 		.inner {
 			width: 50%;
 			display: block;
@@ -9,13 +17,19 @@ section.journal-post {
 			}
 			.header {
 				width: 100%;
-				margin-bottom: 20px;
-				h2.head {
+				margin-bottom: 40px;
+				h3.title {
+					padding-bottom: 0;
+					margin-top: 0;
 					margin-bottom: 0;
+				}
+				h2.head {
+					margin-bottom: 20px;
 				}
 				.image {
 					width: 100%;
 					display: block;
+					margin-bottom: 40px;
 					img {
 						margin-bottom: 0;
 					}

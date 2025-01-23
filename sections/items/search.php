@@ -4,7 +4,7 @@ setup_postdata( $post );
 $id = $post->ID;
 $title = $post->post_title;
 $slug = $post->post_name;
-$thumb = get_thumb( $resident_id, 'thumbnail' );
+$thumb = get_thumb( $resident_id, 'thumb-crop' );
 $post_type = $post->post_type;
 $permalink = get_permalink( $id );
 $classes = $slug . ' ' . $post_type;

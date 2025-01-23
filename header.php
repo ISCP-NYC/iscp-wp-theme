@@ -85,9 +85,20 @@ $page_id = get_the_ID();
 	<meta name="theme-color" content="#ff5000">
 	<meta property="description" content="<?php get_meta_description( $page_id ) ?>" />
 	<meta property="og:type" content="website" />
-	<meta property="og:title" content="<?php rtrim( wp_title('',true) ) ?>" />
+	<meta property="og:title" content="
+	<?php
+		if(is_search()):
+			echo 'Search results for ';
+			the_search_query();
+			echo ' | ';
+		elseif($page_slug != 'home'):
+			wp_title('',true);
+			echo ' | ';
+		endif;
+		bloginfo('name');
+	?>" />
 	<meta property="og:description" content="<?php get_meta_description( $page_id ) ?>" />
-	<meta property="og:image" content="<?php echo get_thumb( $page_id, 'thumb' ) ?>" />
+	<meta property="og:image" content="<?php echo get_thumb( $page_id, 'thumb-crop' ) ?>" />
 	<meta property="og:image:width" content="200" />
 	<meta property="og:image:height" content="200" />
 	<meta property="fb:app_id" content="1007372126002973" />
@@ -103,6 +114,9 @@ $page_id = get_the_ID();
 		endif;
 		bloginfo('name');
 	?></title>
+	
+	<?php wp_footer(); ?>
+
 </head>
 <body>
 	<main data-center-slug="<?php echo $page_slug ?>" data-center-id="<?php echo $page_id ?>">

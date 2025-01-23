@@ -7,10 +7,11 @@ $last_page = $sponsors->max_num_pages;
 if( have_posts() ):
 	while( have_posts() ) :
 		the_post();
-		$sponsor_id = $the_ID;
+		// $sponsor_id = $the_ID;
+		$sponsor_id = $post->ID;
 		$title = get_the_title( $sponsor_id );
-		$country = get_field('country', $sponsor_id )[0]->post_title;
-		$country_slug = get_field('country', $sponsor_id )[0]->post_name;
+		$country = get_field('country', $sponsor_id ) ? get_field('country', $sponsor_id )[0]->post_title : null;
+		$country_slug = get_field('country', $sponsor_id ) ? get_field('country', $sponsor_id )[0]->post_name : null;
 		$country_permalink = query_url( 'from', $country_slug, $url );
 		$permalink = get_permalink();
 		$website = get_field('website', $sponsor_id );

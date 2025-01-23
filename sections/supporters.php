@@ -3,19 +3,20 @@ global $post;
 $id = $post->ID;
 $slug = $post->post_name;
 $description = get_field( 'description' );
+$supporters_title = get_the_title();
 ?>
 <section <?php section_attr( $id, $slug, 'supporters' ); ?> data-page="<?php echo $paged ?>">
 	<?php get_template_part( 'partials/nav' ) ?>
 	<?php get_template_part( 'partials/side' ) ?>
 	<div class="content">
 		<h2 class="head">
-			2016 Supporters
+			<?php echo $supporters_title; ?>
 		</h2>
 		<?php
 		if( have_rows( 'images', $id ) ):
 			echo '<div class="images module">';
 				while ( have_rows( 'images', $id ) ) : the_row();
-					$image = get_sub_field( 'image' )['sizes']['thumb'];
+					$image = get_sub_field( 'image' )['sizes']['thumb-crop'];
 					$caption = get_sub_field( 'caption' );
 					if( $image ):
 						echo '<div class="image">';

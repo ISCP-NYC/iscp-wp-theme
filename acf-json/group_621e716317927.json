@@ -1,0 +1,115 @@
+{
+    "key": "group_621e716317927",
+    "title": "No Fields",
+    "fields": [
+        {
+            "key": "field_66f5b9f59fb81",
+            "label": "",
+            "name": "",
+            "aria-label": "",
+            "type": "text",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "maxlength": "",
+            "allow_in_bindings": 0,
+            "placeholder": "",
+            "prepend": "",
+            "append": ""
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "page",
+                "operator": "==",
+                "value": "2579"
+            }
+        ],
+        [
+            {
+                "param": "page",
+                "operator": "==",
+                "value": "4716"
+            }
+        ],
+        [
+            {
+                "param": "page",
+                "operator": "==",
+                "value": "4722"
+            }
+        ],
+        [
+            {
+                "param": "page",
+                "operator": "==",
+                "value": "2565"
+            }
+        ],
+        [
+            {
+                "param": "page",
+                "operator": "==",
+                "value": "2569"
+            }
+        ],
+        [
+            {
+                "param": "page",
+                "operator": "==",
+                "value": "2561"
+            }
+        ],
+        [
+            {
+                "param": "page",
+                "operator": "==",
+                "value": "24467"
+            }
+        ],
+        [
+            {
+                "param": "page",
+                "operator": "==",
+                "value": "2575"
+            }
+        ],
+        [
+            {
+                "param": "page",
+                "operator": "==",
+                "value": "34719"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "seamless",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": [
+        "permalink",
+        "the_content",
+        "excerpt",
+        "discussion",
+        "comments",
+        "revisions",
+        "author",
+        "format",
+        "featured_image",
+        "categories",
+        "tags",
+        "send-trackbacks"
+    ],
+    "active": true,
+    "description": "",
+    "show_in_rest": 0,
+    "modified": 1727379963
+}

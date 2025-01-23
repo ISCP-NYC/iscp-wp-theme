@@ -9,8 +9,10 @@ $event_type = get_field( 'event_type' );
 $event_type_name = pretty( $event_type );
 $event_status = get_event_status( $event_id );
 $event_date_format = get_event_date( $event_id );
-$event_thumb = get_thumb( $event_id, 'thumb' );
+$event_thumb = get_thumb( $event_id, 'thumb-crop' );
+$args_class = isset($args['class']) ? $args['class'] : '';
 $today = date('Ymd');
+$opening = null;
 if( get_field( 'opening_reception', $event_id ) >= $today ):
 	$opening = get_field( 'opening_reception', $event_id );
 	if( $opening ) {
@@ -22,7 +24,7 @@ if( get_field( 'opening_reception', $event_id ) >= $today ):
 		$opening .= ', ' . $opening_hours;
 	endif;
 endif;
-echo '<div class="event item shelf-item border-bottom ' . $event_status . '" data-id="' . $event_id . '">';
+echo '<div class="event item shelf-item border-bottom ' . $args_class  . ' ' . $event_status . '" data-id="' . $event_id . '">';
 echo '<div class="inner">';
 echo '<a class="wrap value date" href="' . $event_url . '">';
 echo '<h2 class="link name title">' . $event_title . '</h2>';

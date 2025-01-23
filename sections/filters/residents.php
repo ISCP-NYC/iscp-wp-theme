@@ -25,7 +25,7 @@ include( locate_template( 'sections/params/residents.php' ) );
 			$country_slug = $country->post_name;
 			$country_title = $country->post_title;
 			$classes = $country_slug;
-			if( $country_param == $country_slug ):
+			if( isset($country_param) && $country_param == $country_slug ):
 				$classes .= ' selected';
 				$remove = true;
 			else:
@@ -62,7 +62,7 @@ if( $short_slug == 'past' || $page_type == 'sponsor' || $slug == 'residents' ): 
 		endif;
 		if( $year_count ):
 			$classes = 'year';
-			if( $year_param == $year ):
+			if( isset($year_param) && $year_param == $year ):
 				$classes .= ' selected';
 				$remove = true;
 			else:
@@ -100,7 +100,7 @@ if( $short_slug == 'past' || $page_type == 'sponsor' || $slug == 'residents' ): 
 			endif;
 			if( $program_count ):
 				$classes = $program;
-				if( $program_param == $program ):
+				if( isset($program_param) && $program_param == $program ):
 					$classes .= ' selected';
 					$remove = true;
 				else:
@@ -138,7 +138,7 @@ if( $short_slug == 'past' || $page_type == 'sponsor' || $slug == 'residents' ): 
 			endif;
 			if( $type_count ):
 				$classes = $type;
-				if( $type_param == $type ):
+				if( isset($type_param) && $type_param == $type ):
 					$classes .= ' selected';
 					$remove = true;
 				else:

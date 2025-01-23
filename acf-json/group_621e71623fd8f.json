@@ -1,0 +1,986 @@
+{
+    "key": "group_621e71623fd8f",
+    "title": "Event",
+    "fields": [
+        {
+            "key": "field_56313a4458b03",
+            "label": "Event Type",
+            "name": "event_type",
+            "aria-label": "",
+            "type": "select",
+            "instructions": "",
+            "required": 1,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "choices": {
+                "event": "Event",
+                "iscp-talk": "ISCP Talk",
+                "exhibition": "Exhibition",
+                "open-studios": "Open Studios",
+                "offsite-project": "Offsite Project"
+            },
+            "default_value": false,
+            "allow_null": 0,
+            "multiple": 0,
+            "ui": 0,
+            "ajax": 0,
+            "placeholder": "",
+            "return_format": "value"
+        },
+        {
+            "key": "field_56313b1658b04",
+            "label": "Description",
+            "name": "description",
+            "aria-label": "",
+            "type": "wysiwyg",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "toolbar": "full",
+            "media_upload": 1,
+            "tabs": "all",
+            "delay": 0
+        },
+        {
+            "key": "field_56c23c3a1ed36",
+            "label": "Start Date",
+            "name": "start_date",
+            "aria-label": "",
+            "type": "date_picker",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "display_format": "m\/d\/Y",
+            "first_day": 0,
+            "return_format": "d\/m\/Y",
+            "save_format": "yymmdd"
+        },
+        {
+            "key": "field_56313b7158b07",
+            "label": "End Date",
+            "name": "end_date",
+            "aria-label": "",
+            "type": "date_picker",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "display_format": "m\/d\/Y",
+            "first_day": 0,
+            "return_format": "d\/m\/Y",
+            "save_format": "yymmdd"
+        },
+        {
+            "key": "field_56ce3b569c566",
+            "label": "Time",
+            "name": "time",
+            "aria-label": "",
+            "type": "text",
+            "instructions": "e.g. 7–9:30pm",
+            "required": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_56313a4458b03",
+                        "operator": "==",
+                        "value": "iscp-talk"
+                    }
+                ],
+                [
+                    {
+                        "field": "field_56313a4458b03",
+                        "operator": "==",
+                        "value": "off-site-project"
+                    }
+                ],
+                [
+                    {
+                        "field": "field_56313a4458b03",
+                        "operator": "==",
+                        "value": "event"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": "",
+            "formatting": "html",
+            "maxlength": ""
+        },
+        {
+            "key": "field_5642175402622",
+            "label": "Opening Reception Date",
+            "name": "opening_reception",
+            "aria-label": "",
+            "type": "date_picker",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_56313a4458b03",
+                        "operator": "==",
+                        "value": "exhibition"
+                    }
+                ],
+                [
+                    {
+                        "field": "field_56313a4458b03",
+                        "operator": "==",
+                        "value": "open-studios"
+                    }
+                ],
+                [
+                    {
+                        "field": "field_56313a4458b03",
+                        "operator": "==",
+                        "value": "off-site-project"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "display_format": "m\/d\/Y",
+            "first_day": 0,
+            "return_format": "d\/m\/Y",
+            "save_format": "yymmdd"
+        },
+        {
+            "key": "field_564217d802624",
+            "label": "Opening Reception Hours",
+            "name": "opening_reception_hours",
+            "aria-label": "",
+            "type": "text",
+            "instructions": "e.g. 7–9:30pm",
+            "required": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_56313a4458b03",
+                        "operator": "==",
+                        "value": "exhibition"
+                    }
+                ],
+                [
+                    {
+                        "field": "field_56313a4458b03",
+                        "operator": "==",
+                        "value": "open-studios"
+                    }
+                ],
+                [
+                    {
+                        "field": "field_56313a4458b03",
+                        "operator": "==",
+                        "value": "off-site-project"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": "",
+            "formatting": "html",
+            "maxlength": ""
+        },
+        {
+            "key": "field_56421a9e4eb67",
+            "label": "Open Hours",
+            "name": "open_hours",
+            "aria-label": "",
+            "type": "textarea",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_56313a4458b03",
+                        "operator": "==",
+                        "value": "exhibition"
+                    }
+                ],
+                [
+                    {
+                        "field": "field_56313a4458b03",
+                        "operator": "==",
+                        "value": "open-studios"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": "",
+            "maxlength": "",
+            "rows": 2,
+            "new_lines": "br"
+        },
+        {
+            "key": "field_56421ca9cb257",
+            "label": "Venue Name",
+            "name": "venue_name",
+            "aria-label": "",
+            "type": "text",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_56313a4458b03",
+                        "operator": "==",
+                        "value": "off-site-project"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": "",
+            "formatting": "html",
+            "maxlength": ""
+        },
+        {
+            "key": "field_56421cd2cb258",
+            "label": "Venue Location",
+            "name": "venue_location",
+            "aria-label": "",
+            "type": "text",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_56313a4458b03",
+                        "operator": "==",
+                        "value": "off-site-project"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": "",
+            "formatting": "html",
+            "maxlength": ""
+        },
+        {
+            "key": "field_56d5d99830eb3",
+            "label": "RSVP",
+            "name": "rsvp",
+            "aria-label": "",
+            "type": "text",
+            "instructions": "Be sure link begins with 'http:\/\/' or 'https:\/\/'",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": "",
+            "formatting": "html",
+            "maxlength": ""
+        },
+        {
+            "key": "field_5643b1e56b1b5",
+            "label": "Gallery",
+            "name": "gallery",
+            "aria-label": "",
+            "type": "repeater",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "row_min": "",
+            "row_limit": "",
+            "layout": "row",
+            "button_label": "Add Media",
+            "min": 0,
+            "max": 0,
+            "collapsed": "",
+            "sub_fields": [
+                {
+                    "key": "field_5730e34f609ee",
+                    "label": "Media Type",
+                    "name": "media_type",
+                    "aria-label": "",
+                    "type": "radio",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "choices": {
+                        "image": "Image",
+                        "video": "Video"
+                    },
+                    "other_choice": 0,
+                    "save_other_choice": 0,
+                    "default_value": "image",
+                    "layout": "horizontal",
+                    "allow_null": 0,
+                    "return_format": "value",
+                    "parent_repeater": "field_5643b1e56b1b5"
+                },
+                {
+                    "key": "field_5643b1f96b1b6",
+                    "label": "Image",
+                    "name": "image",
+                    "aria-label": "",
+                    "type": "image",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": [
+                        [
+                            {
+                                "field": "field_5730e34f609ee",
+                                "operator": "==",
+                                "value": "image"
+                            }
+                        ]
+                    ],
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "preview_size": "thumbnail",
+                    "library": "all",
+                    "return_format": "array",
+                    "min_width": 0,
+                    "min_height": 0,
+                    "min_size": 0,
+                    "max_width": 0,
+                    "max_height": 0,
+                    "max_size": 0,
+                    "mime_types": "",
+                    "parent_repeater": "field_5643b1e56b1b5"
+                },
+                {
+                    "key": "field_5730e387609ef",
+                    "label": "Vimeo ID",
+                    "name": "vimeo_id",
+                    "aria-label": "",
+                    "type": "text",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": [
+                        [
+                            {
+                                "field": "field_5730e34f609ee",
+                                "operator": "==",
+                                "value": "video"
+                            }
+                        ]
+                    ],
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "placeholder": "",
+                    "prepend": "",
+                    "append": "",
+                    "formatting": "html",
+                    "maxlength": "",
+                    "parent_repeater": "field_5643b1e56b1b5"
+                },
+                {
+                    "key": "field_5643b3916b1bb",
+                    "label": "Artist",
+                    "name": "artist",
+                    "aria-label": "",
+                    "type": "text",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "40",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "placeholder": "",
+                    "prepend": "",
+                    "append": "",
+                    "formatting": "html",
+                    "maxlength": "",
+                    "parent_repeater": "field_5643b1e56b1b5"
+                },
+                {
+                    "key": "field_5643b2266b1b7",
+                    "label": "Title",
+                    "name": "title",
+                    "aria-label": "",
+                    "type": "text",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "placeholder": "",
+                    "prepend": "",
+                    "append": "",
+                    "formatting": "html",
+                    "maxlength": "",
+                    "parent_repeater": "field_5643b1e56b1b5"
+                },
+                {
+                    "key": "field_5643b3cb6b1bc",
+                    "label": "Year",
+                    "name": "year",
+                    "aria-label": "",
+                    "type": "text",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "10",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "placeholder": "",
+                    "prepend": "",
+                    "append": "",
+                    "formatting": "html",
+                    "maxlength": "",
+                    "parent_repeater": "field_5643b1e56b1b5"
+                },
+                {
+                    "key": "field_5643b3d66b1bd",
+                    "label": "Medium",
+                    "name": "medium",
+                    "aria-label": "",
+                    "type": "text",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "50",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "placeholder": "",
+                    "prepend": "",
+                    "append": "",
+                    "formatting": "html",
+                    "maxlength": "",
+                    "parent_repeater": "field_5643b1e56b1b5"
+                },
+                {
+                    "key": "field_5643bb43bc6fd",
+                    "label": "Dimensions",
+                    "name": "dimensions",
+                    "aria-label": "",
+                    "type": "text",
+                    "instructions": "height × width × depth inches (height × width × depth cm)",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "placeholder": "",
+                    "prepend": "",
+                    "append": "",
+                    "formatting": "html",
+                    "maxlength": "",
+                    "parent_repeater": "field_5643b1e56b1b5"
+                },
+                {
+                    "key": "field_56c49f511fa46",
+                    "label": "Width",
+                    "name": "width",
+                    "aria-label": "",
+                    "type": "text",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "placeholder": "",
+                    "prepend": "",
+                    "append": "",
+                    "formatting": "html",
+                    "maxlength": "",
+                    "parent_repeater": "field_5643b1e56b1b5"
+                },
+                {
+                    "key": "field_56c49f4c1fa45",
+                    "label": "Height",
+                    "name": "height",
+                    "aria-label": "",
+                    "type": "text",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "placeholder": "",
+                    "prepend": "",
+                    "append": "",
+                    "formatting": "html",
+                    "maxlength": "",
+                    "parent_repeater": "field_5643b1e56b1b5"
+                },
+                {
+                    "key": "field_56c49f561fa47",
+                    "label": "Depth",
+                    "name": "depth",
+                    "aria-label": "",
+                    "type": "text",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "placeholder": "",
+                    "prepend": "",
+                    "append": "",
+                    "formatting": "html",
+                    "maxlength": "",
+                    "parent_repeater": "field_5643b1e56b1b5"
+                },
+                {
+                    "key": "field_56c49f681fa48",
+                    "label": "Units",
+                    "name": "units",
+                    "aria-label": "",
+                    "type": "select",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "choices": {
+                        "in": "Inches",
+                        "cm": "Centimeters"
+                    },
+                    "default_value": false,
+                    "allow_null": 0,
+                    "multiple": 0,
+                    "ui": 0,
+                    "ajax": 0,
+                    "placeholder": "",
+                    "return_format": "value",
+                    "parent_repeater": "field_5643b1e56b1b5"
+                },
+                {
+                    "key": "field_5643bb5fbc6fe",
+                    "label": "Credit",
+                    "name": "credit",
+                    "aria-label": "",
+                    "type": "text",
+                    "instructions": "e.g. Courtesy of the artist and Luhring Augustine Gallery, New York",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "placeholder": "",
+                    "prepend": "",
+                    "append": "",
+                    "formatting": "html",
+                    "maxlength": "",
+                    "parent_repeater": "field_5643b1e56b1b5"
+                },
+                {
+                    "key": "field_56c49f731fa49",
+                    "label": "Photo Credit",
+                    "name": "photo_credit",
+                    "aria-label": "",
+                    "type": "text",
+                    "instructions": "e.g. Photo by ______",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "placeholder": "",
+                    "prepend": "",
+                    "append": "",
+                    "formatting": "html",
+                    "maxlength": "",
+                    "parent_repeater": "field_5643b1e56b1b5"
+                },
+                {
+                    "key": "field_57daaf154c4f1",
+                    "label": "External Link",
+                    "name": "external_link",
+                    "aria-label": "",
+                    "type": "text",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "placeholder": "",
+                    "prepend": "",
+                    "append": "",
+                    "formatting": "html",
+                    "maxlength": "",
+                    "parent_repeater": "field_5643b1e56b1b5"
+                }
+            ],
+            "rows_per_page": 20
+        },
+        {
+            "key": "field_563a5dd0ed921",
+            "label": "Resident(s)",
+            "name": "residents",
+            "aria-label": "",
+            "type": "relationship",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "return_format": "object",
+            "post_type": [
+                "resident"
+            ],
+            "taxonomy": [],
+            "filters": [
+                "search"
+            ],
+            "max": "",
+            "min": 0,
+            "elements": "",
+            "bidirectional_target": []
+        },
+        {
+            "key": "field_5642172102621",
+            "label": "Related Event(s)",
+            "name": "related",
+            "aria-label": "",
+            "type": "relationship",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "return_format": "object",
+            "post_type": [
+                "event"
+            ],
+            "taxonomy": [],
+            "filters": [
+                "search"
+            ],
+            "max": "",
+            "min": 0,
+            "elements": "",
+            "bidirectional_target": []
+        },
+        {
+            "key": "field_56421e53777ea",
+            "label": "Attachment(s)",
+            "name": "attachments",
+            "aria-label": "",
+            "type": "repeater",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "row_min": "",
+            "row_limit": "",
+            "layout": "table",
+            "button_label": "Add Attachment",
+            "min": 0,
+            "max": 0,
+            "collapsed": "",
+            "sub_fields": [
+                {
+                    "key": "field_56421e66777eb",
+                    "label": "Name",
+                    "name": "name",
+                    "aria-label": "",
+                    "type": "text",
+                    "instructions": "ie. 'Download Press Release (PDF)'",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "60",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "placeholder": "",
+                    "prepend": "",
+                    "append": "",
+                    "formatting": "none",
+                    "maxlength": "",
+                    "parent_repeater": "field_56421e53777ea"
+                },
+                {
+                    "key": "field_56421e81777ec",
+                    "label": "File",
+                    "name": "file",
+                    "aria-label": "",
+                    "type": "file",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "40",
+                        "class": "",
+                        "id": ""
+                    },
+                    "library": "uploadedTo",
+                    "return_format": "array",
+                    "min_size": 0,
+                    "max_size": 0,
+                    "mime_types": "",
+                    "parent_repeater": "field_56421e53777ea"
+                }
+            ],
+            "rows_per_page": 20
+        },
+        {
+            "key": "field_56d5d1c68c3ba",
+            "label": "Contributor(s)",
+            "name": "contributors",
+            "aria-label": "",
+            "type": "relationship",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "return_format": "object",
+            "post_type": [
+                "contributor"
+            ],
+            "taxonomy": [],
+            "filters": [
+                "search"
+            ],
+            "max": "",
+            "min": 0,
+            "elements": "",
+            "bidirectional_target": []
+        },
+        {
+            "key": "field_56d5d1f98c3bb",
+            "label": "Additional Credits",
+            "name": "credits",
+            "aria-label": "",
+            "type": "wysiwyg",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "toolbar": "basic",
+            "media_upload": 0,
+            "tabs": "all",
+            "delay": 0
+        },
+        {
+            "key": "field_56f9786a82d59",
+            "label": "Logo(s)",
+            "name": "logos",
+            "aria-label": "",
+            "type": "repeater",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "row_min": "",
+            "row_limit": "",
+            "layout": "table",
+            "button_label": "Add Logo",
+            "min": 0,
+            "max": 0,
+            "collapsed": "",
+            "sub_fields": [
+                {
+                    "key": "field_56f9787882d5a",
+                    "label": "Logo",
+                    "name": "logo",
+                    "aria-label": "",
+                    "type": "file",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "library": "all",
+                    "return_format": "url",
+                    "min_size": 0,
+                    "max_size": 0,
+                    "mime_types": "",
+                    "parent_repeater": "field_56f9786a82d59"
+                }
+            ],
+            "rows_per_page": 20
+        },
+        {
+            "key": "field_5669e5bbe2ac7",
+            "label": "Page Columns",
+            "name": "page_columns",
+            "aria-label": "",
+            "type": "select",
+            "instructions": "1) Images go in slider at top of page. 2) Images stack along right side",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "choices": {
+                "one_col": "1",
+                "two_col": "2"
+            },
+            "default_value": "two_col",
+            "allow_null": 0,
+            "multiple": 0,
+            "ui": 0,
+            "ajax": 0,
+            "placeholder": "",
+            "return_format": "value"
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "post_type",
+                "operator": "==",
+                "value": "event"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "acf_after_title",
+    "style": "seamless",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": [
+        "excerpt",
+        "discussion",
+        "comments",
+        "author",
+        "format",
+        "categories",
+        "tags"
+    ],
+    "active": true,
+    "description": "",
+    "show_in_rest": 0,
+    "modified": 1727380002
+}

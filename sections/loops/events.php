@@ -4,6 +4,7 @@ if(!$events_section):
 	$events_section = $GLOBALS['events_section'];
 endif;
 $today = date('Ymd');
+$filter_query = [];
 
 if( $events_section == 'past' ):
 	$order = 'DESC';
@@ -87,6 +88,7 @@ $events_query = array(
 	'orderby' => 'meta_value post_title',
 	'order' => $order,
 	'post_status' => 'publish',
+	// 'exclude' => $upcoming_ids,
 	'post__not_in' => $upcoming_ids,
 	'meta_query' => array(
 		array( 'key' => 'start_date' ),

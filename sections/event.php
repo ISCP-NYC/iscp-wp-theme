@@ -20,6 +20,8 @@ $location = get_field( 'venue_location', $id );
 $time = get_field( 'time', $id );
 $open_hours = get_field( 'open_hours', $id );
 $opening_reception = get_field( 'opening_reception', $id );
+$featured_image = get_thumb( $id, null );
+$featured_image_id = get_post_thumbnail_id();
 if( $opening_reception ) {
 	$opening_reception = new DateTime( $opening_reception );
 	$opening_reception = $opening_reception->format('M d, Y');
@@ -29,7 +31,7 @@ $logos = get_field( 'logos', $id );
 if( $page_columns ):
 	$event_classes .= ' ' . $page_columns;
 else:
-	if( have_rows('gallery') ):
+	if( have_rows('gallery') || $featured_image ):
 		$event_classes .= ' cols_2';
 	else:
 		$event_classes .= ' cols_1';
@@ -43,13 +45,13 @@ $today = $today->format('Y-m-d H:i:s');
 	<?php get_template_part('partials/side') ?>
 
 	<div class="content">
-		<h2 class="title">
+		<h3 class="title">
 			<?php
 			echo $event_type_name;
 			echo '</br>';
 			echo $date;
 			?>
-		</h2>	
+		</h3>	
 
 		<h1 class="title"><?php echo $title ?></h1>
 		<?php 
@@ -58,7 +60,7 @@ $today = $today->format('Y-m-d H:i:s');
 				echo '<div class="gallery image_slider">';
 				echo '<div class="cursor"></div>';
 				echo '<div class="images slides">';
-			    while ( have_rows( 'gallery' ) ) : the_row();
+			    while ( have_rows( 'gallery' ) ) : $row = the_row();
 						$media_type = get_sub_field( 'media_type', $home_id );
 		        if( $media_type == 'video' ):
 		        	$video = get_sub_field( 'vimeo_id', $home_id );
@@ -69,7 +71,7 @@ $today = $today->format('Y-m-d H:i:s');
 			        $image_url = $image['url'];
 			        $orientation = get_orientation( $image['id'] );
 			      endif;
-			      $caption = label_art( $the_ID );
+			      $caption = label_art( $row );
 		        echo '<div class="piece slide">';
 		        echo '<div class="image ' . $orientation . '">';
 		        echo '<div class="captionWrap">';
@@ -158,13 +160,15 @@ $today = $today->format('Y-m-d H:i:s');
 				if( $rsvp ):
 					echo '<a href="' . $rsvp . '" class="link bullet" target="_blank">RSVP</a>';
 				endif;
-				foreach( $attachments as $index => $attachment ):
-					$attachment_name = $attachment['name'];
-					$attachment_url = $attachment['file']['url'];
-					echo '<a href="' . $attachment_url . '" class="link bullet" target="_blank">';
-					echo $attachment_name;
-					echo'</a>';
-				endforeach;
+				if( $attachments ):
+					foreach( $attachments as $index => $attachment ):
+						$attachment_name = $attachment['name'];
+						$attachment_url = $attachment['file'] ? $attachment['file']['url'] : null;
+						echo '<a href="' . $attachment_url . '" class="link bullet" target="_blank">';
+						echo $attachment_name;
+						echo'</a>';
+					endforeach;
+				endif;
 				?>
 				<div class="share bullet link">
 					<span class="toggle">Share</span>
@@ -212,7 +216,7 @@ $today = $today->format('Y-m-d H:i:s');
 				echo '<div class="gallery stack">';
 				echo '<div class="cursor"></div>';
 				echo '<div class="images slides">';
-			    while ( have_rows( 'gallery' ) ) : the_row();
+			    while ( have_rows( 'gallery', $post->ID ) ) : $row = the_row();
 						$media_type = get_sub_field( 'media_type' );
 						$external_link = get_sub_field( 'external_link' );
 		        if( $media_type == 'video' ):
@@ -220,11 +224,11 @@ $today = $today->format('Y-m-d H:i:s');
 			      	$orientation = 'landscape';
 			      else:
 			      	$image = get_sub_field( 'image' );
-			      	$image_id = $image['id'];
-			        $image_url = $image['url'];
-			        $orientation = get_orientation( $image['id'] );
+			      	$image_id = $image ? $image['id'] : null;
+			        $image_url = $image ? $image['url'] : null;
+			        $orientation = $image ? get_orientation( $image['id'] ) : null;
 			      endif;
-			      $caption = label_art( $the_ID );
+			      $caption = label_art( $row );
 		        echo '<div class="piece slide">';
 		        echo '<div class="image ' . $orientation . '">';
 		        echo '<div class="captionWrap">';
@@ -233,10 +237,10 @@ $today = $today->format('Y-m-d H:i:s');
 		        else:
 		        	if( $external_link ):
 		        		echo '<a href="' . $external_link . '" target="_blank">';
-			        		echo '<img src="' . $image_url . '"/>';
+									echo wp_get_attachment_image( $image_id, 'full' );
 			        	echo '</a>';
 		        	else:
-			        	echo '<img src="' . $image_url . '"/>';
+								echo wp_get_attachment_image( $image_id, 'full' );
 			        endif;
 		       	endif;
 		        echo '<div class="caption">';
@@ -248,6 +252,23 @@ $today = $today->format('Y-m-d H:i:s');
 			    endwhile;
 		    echo '</div>';
 		    echo '</div>';
+			elseif( $featured_image ):
+				echo '<div class="gallery stack">';
+				echo '<div class="cursor"></div>';
+				echo '<div class="images slides">';
+				echo '<div class="piece slide">';
+				$orientation = get_orientation( $featured_image_id );
+				echo '<div class="image ' . $orientation . '">';
+				echo wp_get_attachment_image( $featured_image_id, 'full' );
+				echo '<div class="captionWrap">';
+				echo '<div class="caption">';
+				echo wp_get_attachment_caption( $featured_image_id );
+				echo '</div>';
+				echo '</div>';
+				echo '</div>';
+				echo '</div>';
+				echo '</div>';
+				echo '</div>';
 			endif;
 		endif; ?>
 		
@@ -266,9 +287,9 @@ $today = $today->format('Y-m-d H:i:s');
 		$upcoming_events = array_slice( sort_upcoming_events(), 0, 3 );
 		if( $related || $upcoming_events ):
 			echo '<div class="bottom-modules">';
-			$count = sizeof( $upcoming_events );
+			$count = isset($upcoming_events) ? sizeof( $upcoming_events ) : null;
 			if ( $count ):
-				echo '<div class="events module shelves grid upcoming ' . $count_class . '">';
+				echo '<div class="events module shelves grid upcoming">';
 				echo '<h3 class="title">Current and Upcoming Events &amp; Exhibitions</h3>';
 				echo '<div class="eventsWrap">';
 				foreach( $upcoming_events as $event ):

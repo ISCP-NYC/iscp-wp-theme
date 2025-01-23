@@ -2,6 +2,7 @@
 	get_header();
 	global $post;
 	$page_slug = get_post( $post )->post_name;
+	$slug_part = substr($page_slug, strpos($page_slug, "-") + 1);
 	$parent = $post->post_parent;
 	$parent_slug = get_post( $parent )->post_name;
 	$resident_types = array( 'current-residents', 'past-residents' );
@@ -79,7 +80,7 @@
 
 		get_template_part( 'sections/contributors' );	
 
-	elseif( $page_slug == 'supporters' ):
+	elseif( $page_slug == 'supporters' || $slug_part == 'supporters' ):
 
 		get_template_part( 'sections/supporters' );		
 

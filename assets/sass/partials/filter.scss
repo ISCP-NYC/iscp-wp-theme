@@ -94,7 +94,6 @@
             float: left;
         }
         .loading {
-            @include small-fs;
             position: absolute;
             top: calc(100% + 10px);
             left: 0px;
@@ -104,6 +103,7 @@
             &.show {
                 opacity: 1;
             }
+            @include small-fs;
         }
     }
 }

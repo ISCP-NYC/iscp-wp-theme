@@ -1,4 +1,5 @@
 <?php
+
 function twentyfifteen_javascript_detection() {
 	echo "<script>(function(html){html.className = html.className.replace(/\bno-js\b/,'js')})(document.documentElement);</script>\n";
 }
@@ -7,21 +8,24 @@ add_action( 'wp_head', 'twentyfifteen_javascript_detection', 0 );
 function iscp_scripts() {
 	global $post;
 	wp_enqueue_style( 'style', get_template_directory_uri() . '/assets/css/styles.css?version=2.5' );
+	wp_enqueue_style( 'swiper-style', get_template_directory_uri() . '/assets/css/swiper-bundle.min.css' );
 	wp_register_script( 'webglearth', get_template_directory_uri() . '/assets/js/webglearth.js' );
 	wp_register_script( 'transit', get_template_directory_uri() . '/assets/js/jquery.transit.min.js', array( 'jquery' ) );
 	wp_register_script( 'jquery-ui', get_template_directory_uri() . '/assets/js/jquery-ui.min.js', array( 'jquery' ) );
 	wp_register_script( 'masonry', get_template_directory_uri() . '/assets/js/masonry.pkgd.min.js', array( 'jquery' ) );
 	wp_register_script( 'imagesloaded', get_template_directory_uri() . '/assets/js/imagesloaded.pkgd.min.js', array( 'jquery' ) );
 	wp_register_script( 'clipboard', get_template_directory_uri() . '/assets/js/clipboard.min.js', array( 'jquery' ) );
-	wp_register_script( 'main', get_template_directory_uri() . '/assets/js/main.js?version=2.5', array( 'jquery', 'masonry', 'transit', 'jquery-ui' ) );
+	wp_register_script( 'swiper-js', get_template_directory_uri() . '/assets/js/swiper-bundle.min.js', array(), NULL, false );
+	wp_register_script( 'main', get_template_directory_uri() . '/assets/js/main.js?version=2.5', array( 'jquery', 'masonry', 'swiper-js', 'transit', 'jquery-ui' ) );
 	wp_enqueue_script( 'webglearth' );
 	wp_enqueue_script( 'transit' );
+	wp_enqueue_script( 'swiper-js' );
 	wp_enqueue_script( 'jquery-ui' );
 	wp_enqueue_script( 'masonry' );
 	wp_enqueue_script( 'imagesloaded' );
 	wp_enqueue_script( 'clipboard' );
 	wp_enqueue_script( 'main' );
-	$page_slug = $post->post_name;
+	// $page_slug = $post->post_name;
 	global $wp_query;
 	wp_localize_script( 'main', 'ajaxpagination', array(
 		'ajaxurl' => admin_url( 'admin-ajax.php' ),
@@ -33,9 +37,10 @@ function iscp_scripts() {
 }
 add_action( 'wp_enqueue_scripts', 'iscp_scripts' );
 
-show_admin_bar( false );
+// show_admin_bar( false );
+
 add_theme_support( 'post-thumbnails' ); 
-add_image_size( 'thumb', 500, 350, true );
+add_image_size( 'thumb-crop', 500, 350, true );
 add_image_size( 'slider', 9999, 500, false );
 
 function add_lat_lng( $post_id ) {
@@ -79,10 +84,11 @@ add_action( 'save_post', 'add_ground_floor_studio_num' );
 
 function load_more() {
 	$query_vars = json_decode( stripslashes( $_POST['query_vars'] ), true );
-  $query_vars['paged'] = $_POST['page'];
-  $slug = $query_vars['pagename'];
-  $page_type = $query_vars['pagetype'];
-  $post_type = $slug;
+  // $query_vars['paged'] = $_POST['page'];
+  // error_log( print_r( $query_vars, true ) );
+  $slug = $query_vars['pagename'] ? $query_vars['pagename'] : null;
+  $page_type = array_key_exists('post_type', $query_vars) ? $query_vars['post_type'] : ( array_key_exists('pagetype', $query_vars) ? $query_vars['pagetype'] : null );
+  $post_type = $slug ? $slug : null;
   if( strstr( $slug, 'residents' ) || $page_type == 'sponsor' ):
   	$post_type = 'residents';
   elseif( $post_type == 'journal' ):
@@ -98,10 +104,10 @@ add_action( 'wp_ajax_load_more', 'load_more' );
 
 function insert_filter_list() {
 	$query_vars = json_decode( stripslashes( $_POST['query_vars'] ), true );
-  $query_vars['paged'] = $_POST['page'];
-  $slug = $query_vars['pagename'];
-  $page_type = $query_vars['pagetype'];
-  $post_type = $slug;
+  // $query_vars['paged'] = $_POST['page'];
+  $slug = $query_vars['pagename'] ? $query_vars['pagename'] : null;
+  $page_type = array_key_exists('post_type', $query_vars) ? $query_vars['post_type'] : ( array_key_exists('pagetype', $query_vars) ? $query_vars['pagetype'] : null );
+  $post_type = $slug ? $slug : null;
   if( strstr( $slug, 'residents' ) || $page_type == 'sponsor' ):
   	$post_type = 'residents';
   elseif( $post_type == 'journal' ):
@@ -169,10 +175,10 @@ add_action( 'wp_ajax_nopriv_get_map_countries', 'get_map_countries' );
 add_action( 'wp_ajax_get_map_countries', 'get_map_countries' );
 
 function filter_items() {
-	$query_vars = json_decode( stripslashes( $_POST['query_vars'] ), true );
+		$query_vars = json_decode( stripslashes( $_POST['query_vars'] ), true );
     $query_vars['paged'] = $_POST['page'];
-    $slug = $query_vars['pagename'];
-    $page_type = $query_vars['pagetype'];
+    $slug = array_key_exists('pagename', $query_vars) ? $query_vars['pagename'] : null;
+    $page_type = array_key_exists('pagetype', $query_vars) ? $query_vars['pagetype'] : null;
     $post_type = $slug;
     if( strstr( $slug, 'residents' ) || $page_type == 'sponsor' ):
     	$post_type = 'residents';
@@ -221,11 +227,11 @@ add_filter( 'query_vars', 'add_query_vars_filter' );
 /////////////////////////////////////
 
 function event_order( $wp_query ) {
-	global $pagenow;
-  	if ( is_admin() && 'edit.php' == $pagenow && !isset( $_GET['orderby'] )) {
-  		$screen = get_current_screen();
-  		$post_type = $screen->post_type;
-  		if( $post_type == 'event' ):
+	global $typenow;
+  	if ( is_admin() && 'edit.php' == $typenow && !isset( $_GET['orderby'] )) {
+  		// $screen = get_current_screen();
+  		// $post_type = $screen->post_type;
+  		if( $typenow == 'event' ):
 	    	$wp_query->set( 'order', 'DESC' );
 	    	$wp_query->set( 'meta_key', 'start_date' );
 	    	$wp_query->set( 'orderby',  'meta_value_num' );
@@ -233,7 +239,6 @@ function event_order( $wp_query ) {
   	}
 }
 add_filter('pre_get_posts', 'event_order' );
-
 
 function add_event_columns($columns) {
 	unset(
@@ -518,7 +523,12 @@ add_filter('manage_sponsor_posts_columns' , 'add_sponsor_columns');
 function custom_sponsor_column( $column, $post_id ) {
     switch ( $column ) {
 		case 'country':
-			$country = get_field( 'country', $post_id )[0]->post_title;
+			if ( get_field( 'country', $post_id ) ){
+				$country = get_field( 'country', $post_id )[0]->post_title;
+			}
+			else {
+				$country = null;
+			}
 			echo $country;
 			break;
     }
@@ -729,11 +739,11 @@ function get_resident_end_date( $id ) {
 function get_display_image( $id ) {
 	if( has_post_thumbnail( $id ) ):
 		$thumb_id = get_post_thumbnail_id( $id );
-		$thumb_url_array = wp_get_attachment_image_src($thumb_id, '', true);
-		$thumb_url = $thumb_url_array[0];
+		$thumb_url_array = wp_get_attachment_image_url($thumb_id, 'thumb-crop', true);
+		$thumb_url = $thumb_url_array;
 		return $thumb_url;
 	elseif( have_rows('gallery') ):
-		return get_sub_field( 'image', $id )['url'];
+		return get_sub_field( 'image', $id ) ? get_sub_field( 'image', $id )['url'] : null;
 	else:
 		return '';
 	endif;
@@ -769,6 +779,7 @@ function insert_neighbor_journal_posts( $post_id, $direction, $count = 1 ) {
 		'type' => 'DATE',
 		'date_query' => array( $when => $post_date ),
 		'post__not_in' => array( $post_id ),
+		// 'exclude' => array( $post_id ),
 		'order' => $order,
 		'orderby' => 'post_date'
 	);
@@ -825,10 +836,12 @@ function insert_neighbor_events( $event_id, $direction, $count = 1, $not_in = ar
 	$events_args = array(
 		'post_type' => 'event',
 		'posts_per_page' => $count,
+		'post_status' => 'publish',
 		'meta_key' => 'start_date',
 		'orderby' => 'meta_value_num post_title',
 		'order' => $order,
 		'post__not_in' => $not_in,
+		// 'exclude' => $not_in,
 		'meta_query' => array(
 			'type' => 'DATE',
 			'key' => 'start_date',
@@ -952,11 +965,23 @@ function insert_neighbor_residents( $resident_id, $direction, $count, $not_in = 
 		'compare' => $direction_compare,
 		'value' => $direction_value
 	);
+
+	if( $direction == 'prev' ):
+		$sort_order = 'ASC';
+	elseif ( $direction == 'next' ):
+		$sort_order = 'DESC';
+	endif;
+
 	$resident_args = array(
 		'post_type' => 'resident',
+		'post_status' => 'publish',
 		'posts_per_page' => $count,
+		// 'orderby' => 'publish_date',
+		// 'order' => $sort_order,
 		'orderby' => $resident_orderby,
 		'meta_key' => $resident_meta_key,
+		// 'meta_key' => 'residency_dates_0_start_date',
+		// 'orderby' => 'meta_value_num',
 		'post__not_in' => $not_in,
 		'meta_query' => array(
 			array( 
@@ -974,9 +999,18 @@ function insert_neighbor_residents( $resident_id, $direction, $count, $not_in = 
 		$residents->posts = $reverse_residents;
 	endif;
 
+		// if ( $direction == 'prev' ):
+		// 	$nextResident = get_previous_post();
+		// endif;
+
+		// if ( $direction == 'next' ):
+		// 	$nextResident = get_next_post();
+		// endif;
+
 	if( $residents->have_posts() ):
 		while ( $residents->have_posts() ) : $residents->the_post();
 			global $post;
+			// $post = $nextResident;
 			setup_postdata( $post );
 			get_template_part( 'sections/resident' );
 			wp_reset_postdata();
@@ -1012,52 +1046,52 @@ function makeClickableLinks( $s ) {
   return preg_replace('@(https?://([-\w\.]+[-\w])+(:\d+)?(/([\w/_\.#-]*(\?\S+)?[^\.\s])?)?)@', '<a target="blank" rel="nofollow" href="$1" target="_blank">$1</a>', $s);
 }
 
-function get_tweets( $count ) {
-	$about = get_page_by_path( 'about' );
-	$handle = get_field( 'twitter', $about );
-	include_once( get_template_directory() . '/libraries/twitteroauth/twitteroauth.php' );
-	$twitter_customer_key = 'w84XEX5nmjGTyeSqu1x81elRz';
-	$twitter_customer_secret = 'RMfQR9mzU09dgLEdapvpZUbuxlvY8IYRZYcjfObV5vbMJZoNE7';
-	$twitter_access_token = '326246243-X0bIkrnd8WCWbDpUAkN3yaSEU4jRLIo6QyiSPxfR';
-	$twitter_access_token_secret = 'W8YiXMlcSFOz2JHGJD069Zz3RDSI2Rbaw5J51CJAPo5di';
+// function get_tweets( $count ) {
+// 	$about = get_page_by_path( 'about' );
+// 	$handle = get_field( 'twitter', $about );
+// 	include_once( get_template_directory() . '/libraries/twitteroauth/twitteroauth.php' );
+// 	$twitter_customer_key = 'w84XEX5nmjGTyeSqu1x81elRz';
+// 	$twitter_customer_secret = 'RMfQR9mzU09dgLEdapvpZUbuxlvY8IYRZYcjfObV5vbMJZoNE7';
+// 	$twitter_access_token = '326246243-X0bIkrnd8WCWbDpUAkN3yaSEU4jRLIo6QyiSPxfR';
+// 	$twitter_access_token_secret = 'W8YiXMlcSFOz2JHGJD069Zz3RDSI2Rbaw5J51CJAPo5di';
 
-	$connection = new TwitterOAuth($twitter_customer_key, $twitter_customer_secret, $twitter_access_token, $twitter_access_token_secret);
+// 	$connection = new TwitterOAuth($twitter_customer_key, $twitter_customer_secret, $twitter_access_token, $twitter_access_token_secret);
 
-	$raw_tweets = $connection->get('statuses/user_timeline', array('screen_name' => $handle, 'count' => $count ) );
-	$tweets = new ArrayObject();
-	$twitter_url = 'http://twitter.com/'.$handle;
-	echo '<div class="twitter">';
-	echo '<div class="follow">';
-	echo '<h3 class="title">';
-	echo '<a href="'.$twitter_url.'" target="_blank">Follow us on Twitter @' . $handle . '</a>';
-	echo '</h3>';
-	echo '</div>';
-	echo '<div class="tweets">';
+// 	$raw_tweets = $connection->get('statuses/user_timeline', array('screen_name' => $handle, 'count' => $count ) );
+// 	$tweets = new ArrayObject();
+// 	$twitter_url = 'http://twitter.com/'.$handle;
+// 	echo '<div class="twitter">';
+// 	echo '<div class="follow">';
+// 	echo '<h3 class="title">';
+// 	echo '<a href="'.$twitter_url.'" target="_blank">Follow us on Twitter @' . $handle . '</a>';
+// 	echo '</h3>';
+// 	echo '</div>';
+// 	echo '<div class="tweets">';
 
-	$counter = 0;
-	foreach ( $raw_tweets as $tweet ):
-		if( isset( $tweet->errors ) ):           
-		    // $tweet = 'Error :'. $raw_tweets[$counter]->errors[0]->code. ' - '. $raw_tweets[$counter]->errors[0]->message;
-		else:
-		    $text = makeClickableLinks( $tweet->text );
-		    $timestamp = strtotime( $tweet->created_at );
-		    $elapsed = humanTiming( $timestamp );
-		    $id = $tweet->id;
-		    $url = 'http://twitter.com/' . $handle . '/status/' . $id;
-		    echo '<div class="tweet">';
-		    echo '<div class="text">';
-			echo $text;
-			echo '</div>';
-			echo '<a href="' . $url . '" target="_blank" class="timestamp">';
-			echo $elapsed;
-			echo '</a>';
-			echo '</div>';
-		endif;
-	endforeach;
+// 	$counter = 0;
+// 	foreach ( $raw_tweets as $tweet ):
+// 		if( isset( $tweet->errors ) ):           
+// 		    // $tweet = 'Error :'. $raw_tweets[$counter]->errors[0]->code. ' - '. $raw_tweets[$counter]->errors[0]->message;
+// 		else:
+// 		    $text = makeClickableLinks( $tweet->text );
+// 		    $timestamp = strtotime( $tweet->created_at );
+// 		    $elapsed = humanTiming( $timestamp );
+// 		    $id = $tweet->id;
+// 		    $url = 'http://twitter.com/' . $handle . '/status/' . $id;
+// 		    echo '<div class="tweet">';
+// 		    echo '<div class="text">';
+// 			echo $text;
+// 			echo '</div>';
+// 			echo '<a href="' . $url . '" target="_blank" class="timestamp">';
+// 			echo $elapsed;
+// 			echo '</a>';
+// 			echo '</div>';
+// 		endif;
+// 	endforeach;
 
-	echo '</div>';
-	echo '</div>';
-}
+// 	echo '</div>';
+// 	echo '</div>';
+// }
 
 function embed_vimeo( $id ) {
 	$width = '640';
@@ -1109,6 +1143,7 @@ function get_event_date( $id ) {
 		$start_day_word = $start_date->format('l');
 		$start_day = $start_date->format('j');
 		$start_year = $start_date->format('Y');
+	else: ( $start_date = null );
 	endif;
 
 	if ( $_end_date && $_end_date != '-' ):
@@ -1117,6 +1152,7 @@ function get_event_date( $id ) {
 		$end_day_word = $end_date->format('l');
 		$end_day = $end_date->format('j');
 		$end_year = $end_date->format('Y');
+	else: ( $end_date = null );
 	endif;
 
 	$time = get_field('time', $id);
@@ -1145,16 +1181,22 @@ function get_event_date( $id ) {
 
 function get_thumb( $id, $size = null ) {
 	$thumbnail = get_display_image( $id );
+	$thumbnail_gallery = get_field( 'gallery', $id );
 	if($size == null):
-		$size = 'thumb';
+		$size = 'thumb-crop';
 	endif;
-	if( !$thumbnail ):
-		$thumbnail = get_field( 'gallery', $id )[0]['image']['sizes'][$size];
+	if( !$thumbnail && $thumbnail_gallery ):
+		if( $thumbnail_gallery[0]['image'] ):
+			return $thumbnail_gallery[0]['image']['sizes'][$size];
+		endif;
+		// $gallery = $thumbnail_gallery[0];
+		// $thumbnail = $gallery ? $gallery['image']['sizes'][$size] : null;
 	endif;
 	if( !$thumbnail ):
 		$thumbnail = false;
 	endif;
 	return $thumbnail;
+	// return $size;
 }
 
 function get_sponsors( $id, $index = 0 ) {
@@ -1219,7 +1261,7 @@ function get_orientation( $id ) {
 function get_program_title( $program_slug ) {
 	$program_slug = str_replace( '_', '-', $program_slug );
 	$program_obj = get_page_by_path( 'residency-programs/' . $program_slug, OBJECT, 'page' );
-	if($program_obj->post_parent != 0):
+	if($program_obj && $program_obj->post_parent != 0):
 		$program_title = $program_obj->post_title;
 		$program_id = $program_obj->ID;
 		return $program_title;
@@ -1265,10 +1307,10 @@ function http($url) {
 function label_art() {
 	$artist = get_sub_field( 'artist' );
 	$title = get_sub_field( 'title' );
-    $year = get_sub_field( 'year' );
-    $medium = get_sub_field( 'medium' );
-    $credit = get_sub_field( 'credit' );
-    $photo_credit = get_sub_field( 'photo_credit' );
+	$year = get_sub_field( 'year' );
+	$medium = get_sub_field( 'medium' );
+	$credit = get_sub_field( 'credit' );
+	$photo_credit = get_sub_field( 'photo_credit' );
 	$post_type = get_post_type();
 	$dimensions = get_dimensions();
 
@@ -1308,6 +1350,8 @@ function get_dimensions() {
     $height = get_sub_field( 'height' );
     $depth = get_sub_field( 'depth' );
     $units = get_sub_field( 'units' );
+    $ins = null;
+    $cms = null;
     if( (!$width && !$height) || (!$width && !$depth) || (!$height && !$depth) ):
     	return $dimensions;
     endif;
@@ -1372,7 +1416,11 @@ function convert_unit( $int, $unit ) {
 }
 
 function in_to_cm( $inches = 0 ) {
+	if( is_numeric( $inches ) ):
     return dec_to_hund( $inches / 0.393701 );
+	else: 
+		return $inches;
+	endif;
 }
 
 function cm_to_in( $cm = 0 ) {
@@ -1380,7 +1428,8 @@ function cm_to_in( $cm = 0 ) {
 }
 
 function dec_to_frac( $float = 0 ) {
-	$whole = floor ( $float );
+	if( is_numeric( $float ) ):
+		$whole = floor ( $float );
     $decimal = $float - $whole;
     $leastCommonDenom = 16;
     $denominators = array ( 2, 3, 4, 8, 16 );
@@ -1398,6 +1447,9 @@ function dec_to_frac( $float = 0 ) {
     $whole = ($whole == 0 ? '' : $whole);
     $frac = '<span class="fraction"><sup>' . ($roundedDecimal * $denom) . '</sup>/<sub>' . $denom . '</sub></span>';
     return $whole . $frac;
+	else:
+		return $float;
+	endif;
 }
 
 function dec_to_hund( $float = 0 ) {
@@ -1434,7 +1486,12 @@ function query_url( $key, $value, $url, $filter = null, $remove = false ) {
 	$this_query = array( $key => $value );
 	$url = explode('#', $url)[0];
 	$parsed_url = parse_url($url);
-	parse_str($parsed_url['query'], $params);
+	if (!empty($parsed_url['query'])){
+		parse_str($parsed_url['query'], $params);
+	}
+	else{
+		$params = [];
+	}
 	$params = array_merge( $params, $this_query );
 	$url = strtok($url, '?');
 	if( $remove ):
@@ -1632,7 +1689,7 @@ function get_contributor_count( $type, $value, $page_query ) {
 	return $count;
 }
 
-function unsetRepeat( $query = null, $value ) {
+function unsetRepeat(?string $query, $value ) {
 	if( $query['meta_query'] ):
 		foreach( $query['meta_query'] as $index=>$array ):
 			if( is_array( $array ) ):			
@@ -1674,7 +1731,7 @@ function new_excerpt_more($more) {
 add_filter('excerpt_more', 'new_excerpt_more');
 
 function add_favicon() {
-  	$favicon_url = get_template_directory_uri() . '/assets/images/favicons/favicon.ico';
+  $favicon_url = get_template_directory_uri() . '/assets/images/favicons/blue/favicon.ico';
 	echo '<link rel="shortcut icon" href="' . $favicon_url . '" />';
 }
 add_action('login_head', 'add_favicon');
@@ -1708,8 +1765,10 @@ add_filter( 'menu_order', 'reorder_menu_items' );
 function wpdocs_register_my_custom_menu_page() {
 	$lock_icon = get_template_directory_uri() . '/assets/images/lock-white-small.svg';
 
+	$to_do = get_page_by_path( 'greenroom/to-do' );
 
-	$to_do_id = get_page_by_path( 'greenroom/to-do' )->ID;
+	if($to_do){
+		$to_do_id = $to_do->ID;
     add_menu_page(
         __( 'To-Do', 'textdomain' ),
         'To-Do',
@@ -1719,8 +1778,12 @@ function wpdocs_register_my_custom_menu_page() {
         $lock_icon,
         10
     );
+	}
 
-    $staff_messages_id = get_page_by_path( 'greenroom/staff-messages' )->ID;
+	$staff_messages = get_page_by_path( 'greenroom/staff-messages' );
+
+	if($staff_messages){
+		$staff_messages_id = $staff_messages->ID;
     add_menu_page(
         __( 'Staff Messages', 'textdomain' ),
         'Staff Messages',
@@ -1730,8 +1793,12 @@ function wpdocs_register_my_custom_menu_page() {
         $lock_icon,
         11
     );
+	}
 
-    $at_iscp_id = get_page_by_path( 'greenroom/at-iscp' )->ID;
+	$at_iscp = get_page_by_path( 'greenroom/at-iscp' );
+
+	if($at_iscp){
+    $at_iscp_id = $at_iscp->ID;
     add_menu_page(
         __( 'At ISCP', 'textdomain' ),
         'At ISCP',
@@ -1741,8 +1808,12 @@ function wpdocs_register_my_custom_menu_page() {
         $lock_icon,
         12
     );
+	}
 
-    $in_nyc_id = get_page_by_path( 'greenroom/in-nyc' )->ID;
+	$in_nyc = get_page_by_path( 'greenroom/in-nyc' );
+
+	if($in_nyc){
+    $in_nyc_id = $in_nyc->ID;
     add_menu_page(
         __( 'In NYC', 'textdomain' ),
         'In NYC',
@@ -1752,6 +1823,7 @@ function wpdocs_register_my_custom_menu_page() {
         $lock_icon,
         13
     );
+	}
 }
 add_action( 'admin_menu', 'wpdocs_register_my_custom_menu_page' );
 
@@ -1786,7 +1858,7 @@ function search_broken_link() {
 }
 
 function get_meta_description( $id ) {
-	$type = get_post_type( $post_id );
+	$type = get_post_type( $id );
 	if( $type == 'event' ):
 		$value = trim(rtrim(substr(strip_tags(get_field( 'description', $id)), 0, 200))) . '...';
 	else:
@@ -1803,7 +1875,27 @@ function custom_style_options($arr){
 }
 add_filter('tiny_mce_before_init', 'custom_style_options');
 
+function add_mce_buttons($buttons){
+	$buttons[] = 'hr';
+	return $buttons;
+}
+add_filter( 'mce_buttons', 'add_mce_buttons' );
+
 function add_editor_stylesheet() {
     add_editor_style( 'assets/styles/editor.css' );
 }
 add_action( 'init', 'add_editor_stylesheet' );
+
+function my_customize_rest_cors() {
+	remove_filter( 'rest_pre_serve_request', 'rest_send_cors_headers' );
+	add_filter( 'rest_pre_serve_request', function( $value ) {
+		header( 'Access-Control-Allow-Origin: *' );
+		header( 'Access-Control-Allow-Methods: GET' );
+		header( 'Access-Control-Allow-Credentials: true' );
+		header( 'Access-Control-Expose-Headers: Link', false );
+		header( 'Access-Control-Allow-Headers: X-Requested-With' );
+		return $value;
+	} );
+}
+
+add_action( 'rest_api_init', 'my_customize_rest_cors', 15 );

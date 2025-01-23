@@ -6,26 +6,26 @@ include( locate_template( 'sections/params/residents.php' ) );
 	<?php get_template_part('partials/nav') ?>
 	<?php get_template_part('partials/side') ?>
 	<div class="content">
-		<h2 class="head">
+		<h1 class="head">
 		<?php
 		if($slug == 'residents'):
-			if( $program_param ):
-				if( $program_param == 'ground_floor' ):
+			if( isset($program_param) ):
+				if( $program_param == 'ground_floor'):
 					echo 'Ground Floor ';
 				else:
 					echo 'International ';
 				endif;
 			endif;
-			if( $type_param ):
+			if( isset($type_param) ):
 				echo ucwords( $type_param ) . 's';
 			else:
 				echo 'Residents';
 			endif;
 
-			if( $country_param ):
+			if( isset($country_param) && isset($resident_title) ):
 				echo $resident_title . ' from ' . $country_param_title;
 			endif;
-			if( $year_param ):
+			if( isset($year_param) && isset($resident_title) ):
 				echo $resident_title . ' in ' . $year_param;
 			endif;
 		else:
@@ -38,7 +38,7 @@ include( locate_template( 'sections/params/residents.php' ) );
 				<div class="bar">
 					<div class="select link dropdown country" data-filter="country" data-slug="<?php echo $slug ?>">
 						<?php
-						if( $country_param ):
+						if( isset($country_param) && isset($country_param_title) ):
 							$selected = ': ' . $country_param_title;
 						else:
 							$selected = null;
@@ -53,7 +53,7 @@ include( locate_template( 'sections/params/residents.php' ) );
 					<?php if($slug != 'current-residents'): ?>
 						<div class="select link dropdown date" data-filter="date" data-slug="<?php echo $slug ?>">
 							<?php
-							if( $year_param ):
+							if( isset($year_param) ):
 								$selected = ': ' . $year_param;
 							else:
 								$selected = null;
@@ -68,7 +68,7 @@ include( locate_template( 'sections/params/residents.php' ) );
 					<?php endif; ?>
 					<div class="select link dropdown program" data-filter="program" data-slug="<?php echo $slug ?>">
 						<?php
-						if( $program_param ):
+						if( isset($program_param) && isset($program) ):
 							$selected = ': ' . get_program_title( $program );
 						else:
 							$selected = null;
@@ -82,7 +82,7 @@ include( locate_template( 'sections/params/residents.php' ) );
 					</div>
 					<div class="select link dropdown type" data-filter="type" data-slug="<?php echo $slug ?>">
 						<?php
-						if( $type_param ):
+						if( isset($type_param) ):
 							$selected = ': ' . ucwords( $type_param );
 						else:
 							$selected = null;

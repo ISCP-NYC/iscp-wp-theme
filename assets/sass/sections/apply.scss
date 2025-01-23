@@ -3,6 +3,57 @@ section.apply {
 		margin-top: 30px;
 	}
 	.program {
+		.applications {
+			.rows {
+				.links {
+					width: calc(25% - 35px);
+					padding: 0 20px 0 15px;
+					float: left;
+					margin-top: -3px;
+					a {
+						display: block;
+					}
+				}
+				.application.row {
+					// width: calc(100% - 35px);
+					// padding: 0 15px 30px 20px;
+					padding: 0 0 1rem;
+					color: $orange;
+					// float: left;
+					a.bullet {
+						padding-left: .75rem;
+					}
+					h4 {
+						text-align: left;
+						padding: 0rem;
+						margin-bottom: .75rem;
+					}
+					.date {
+						color: $black;
+						text-align: left;
+					}
+					.cell {
+						float: left;
+						width: 25%;
+					}
+					.brief {
+						color: $black;
+						padding-top: 17px;
+						float: none;
+						clear: both;
+						// width: calc(75% - 35px);
+						p {
+							margin-bottom: 15px;
+						}
+						@include medium-fs;
+					}
+					@include small-fs;
+					&:last-of-type {
+						border-bottom: 0;
+					}
+				}
+			}
+		}
 		.links {
 			width: calc(25% - 35px);
 			padding: 0 20px 0 15px;
@@ -11,13 +62,30 @@ section.apply {
 				display: block;
 			}
 		}
+		.block {
+			width: calc(100%/3 - 6px);
+			float: left;
+			display: -webkit-flex;
+						display: -ms-flexbox;
+						display: flex;
+			text-align: center;
+			@include medium-fs;
+		}
 		.info {
 			width: calc(75% - 35px);
-			padding: 0 15px 30px 20px;
-			float: left;
+			padding: 0 15px 30px 0;
+			// float: left;
 			h3.title {
 				margin-top: 30px;
 			}
+		}
+		&#current-open-calls, &#ground-floor {
+			.info {
+				width: 100%;
+			}
+		}
+		&#international {
+			// border: 0 !important;
 		}
 		@include small {
 			.links, .info {
@@ -29,57 +97,15 @@ section.apply {
 				margin-top: 20px;
 			}
 		}
-		&#international {
-			border: 0 !important;
-		}
-	}
-	.applications {
-		.rows {
-			.links {
-				width: calc(25% - 35px);
-				padding: 0 20px 0 15px;
-				float: left;
-				margin-top: -3px;
-				a {
-					display: block;
-				}
-			}
-			.application.row {
-				width: calc(100% - 35px);
-				display: table;
-				padding: 0 15px 30px 20px;
-				@include small-fs;
-				color: $orange;
-				float: left;
-				.date {
-					padding-bottom: 15px;
-				}
-				.cell {
-					float: left;
-					width: 25%;
-				}
-				.brief {
-					@include small-fs;
-					color: $black;
-					padding-top: 17px;
-					float: none;
-					clear: both;
-					width: calc(75% - 35px);
-					p {
-						margin-bottom: 15px;
-					}
-				}
-			}
-		}
 	}
 	.filter {
 		width: calc(100% - 35px);
-		padding: 0 15px 0 20px;
+		padding: 0 15px 0 0;
 		margin: 20px 0 0 0;
 		display: table;
 		span {
-			@include small-fs;
 			float: left;
+			@include small-fs;
 		}
 	}
 }

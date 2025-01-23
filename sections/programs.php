@@ -25,12 +25,12 @@ $programs = array_reverse( get_pages( $programs_query ) );
 	<?php get_template_part( 'partials/nav' ) ?>
 	<?php get_template_part( 'partials/side' ) ?>
 	<div class="content">
-		<h2 class="head"><?php echo $title ?></h2>
+		<h1 class="head"><?php echo $title ?></h1>
 		<?php
 			if( have_rows( 'images', $programs_id ) ):
 			echo '<div class="images module">';
 			while ( have_rows( 'images', $programs_id ) ) : the_row();
-				$image = get_sub_field( 'image' )['sizes']['thumb'];
+				$image = get_sub_field( 'image' ) ? get_sub_field( 'image' )['sizes']['thumb-crop']: null;
 				$caption = get_sub_field( 'caption' );
 				if( $image ):
 					echo '<div class="image">';
@@ -61,7 +61,7 @@ $programs = array_reverse( get_pages( $programs_query ) );
 					while ( have_rows( 'image_columns', $program ) ) : the_row();
 						echo '<div class="item">';
 						echo '<div class="inner">';
-								$col_image = get_sub_field( 'image' )['sizes']['thumb'];
+								$col_image = get_sub_field( 'image' ) ? get_sub_field( 'image' )['sizes']['thumb-crop'] : null;
 								$col_title = get_sub_field( 'title' );
 								$col_description = get_sub_field( 'description' );
 								if( $col_image ):

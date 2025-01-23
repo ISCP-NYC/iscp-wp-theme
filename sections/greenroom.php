@@ -1,11 +1,12 @@
 <?php 
 	global $post;
+	setup_postdata( $post );
 	$id = get_the_ID();
-	$slug = get_post( $post )->post_name;
+	$slug = $post->post_name;
 	$title = get_the_title();
 
 	global $current_user;
-    get_currentuserinfo();
+		wp_get_current_user();
     $name = $current_user->user_firstname . ' ' . $current_user->user_lastname;
 ?>
 
@@ -22,27 +23,33 @@
 		</div>
 		<div class="dashboard module">
 			<div class="half left">
+			<div class="text">
+			<h3 class="title">Welcome!</h3>
+				<?php $welcome = get_field( 'welcome' ); ?>
+				<?php echo $welcome; ?>
+			</div>
 				<?php 
-				$sign_up = get_field( 'sign_up', $id );
-				echo '<div class="resource-list signup">';
-				echo '<h2>';
-				echo '<a target="_blank" href="' . $sign_up . '">';
-				echo 'Sign Up';
-				echo '</a>';
-				echo '</h2>';
-				echo '</div>';
+				// $sign_up = get_field( 'sign_up', $id );
+				// echo '<div class="resource-list signup">';
+				// echo '<h2>';
+				// echo '<a target="_blank" href="' . $sign_up . '">';
+				// echo 'Sign Up';
+				// echo '</a>';
+				// echo '</h2>';
+				// echo '</div>';
 				
-				$to_do_page_id = get_page_by_path( $slug . '/to-do' )->ID;
-				$post = get_post( $to_do_page_id, OBJECT );
-				setup_postdata( $post );
-				get_template_part( 'sections/loops/resources' );
-				wp_reset_postdata();
+				// $
+				// $to_do_page_id = get_page_by_path( $slug . '/to-do' )->ID;
+				// $post = get_post( $to_do_page_id, OBJECT );
+				// setup_postdata( $post );
+				// get_template_part( 'sections/loops/resources' );
+				// wp_reset_postdata();
 
-				$staff_messages_page_id = get_page_by_path( $slug . '/staff-messages' )->ID;
-				$post = get_post( $staff_messages_page_id, OBJECT );
-				setup_postdata( $post );
-				get_template_part( 'sections/loops/resources' );
-				wp_reset_postdata();
+				// $staff_messages_page_id = get_page_by_path( $slug . '/staff-messages' )->ID;
+				// $post = get_post( $staff_messages_page_id, OBJECT );
+				// setup_postdata( $post );
+				// get_template_part( 'sections/loops/resources' );
+				// wp_reset_postdata();
 				?>
 			</div>
 			<div class="half right">
@@ -59,13 +66,6 @@
 				get_template_part( 'sections/loops/resources' );
 				wp_reset_postdata();
 				?>
-			</div>
-		</div>
-		<div class="welcome module">
-			<h3 class="title">Welcome!</h3>
-			<div class="text">
-				<?php $welcome = get_field( 'welcome' ); ?>
-				<?php echo $welcome; ?>
 			</div>
 		</div>
 		<div class="contact module">
@@ -88,7 +88,7 @@
 				$role = get_sub_field( 'role' );
 				$email = get_sub_field( 'email' );
 				$description = get_sub_field( 'description' );
-				$thumbnail = get_sub_field( 'image' )['sizes']['thumb'];
+				$thumbnail = get_sub_field( 'image' ) ? get_sub_field( 'image' )['sizes']['thumb-crop'] : null;
 				if( !$thumbnail ) {
 					$thumbnail = get_template_directory_uri() . '/assets/images/placeholder.svg';
 				}

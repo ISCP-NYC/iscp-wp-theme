@@ -3,6 +3,8 @@ global $visit;
 $title = $post->post_title;
 $slug = $post->post_name;
 $id = $post->ID;
+$intro_image = get_field( 'intro_image', $id );
+$intro_text = get_field( 'intro_text', $id );
 $about = get_page_by_path( 'about' );
 ?>
 
@@ -25,26 +27,25 @@ $about = get_page_by_path( 'about' );
 		$directions_footnote = get_field( 'directions_footnote', $visit );
 		?>
 
-		<div class="info module">
-			<h1>Office Hours: <?php echo $office_hours; ?></h1>
-			<h1>Exhibition Hours: <?php echo $exhibition_hours; ?></h1>
-			<h1><?php echo $address ?></h1>
+		<div class="info map module">
+		<iframe src="https://www.google.com/maps/embed/v1/place?key=AIzaSyApM4iQyAfb0hbmkeXc_zs58aA_Jy0SIac&q=International+Studio+%26+Curatorial+Program&zoom=16&maptype=roadmap" width="600" height="500" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+			<!-- <div class="inner" id="map"></div> -->
+			<!-- <h3 class="orange title">
+				Office Hours:  -->
+				<?php 
+					// echo $office_hours; 
+				?>
+			<!-- </h3> -->
+			<h3 class="orange title">Exhibition Hours: <?php echo $exhibition_hours; ?></h3>
+			<h3 class="orange title address"><?php echo $address ?></h3>
 		</div>
-
+<!-- 
 		<div class="map module">
 			<div class="inner" id="map"></div>
-			<div class="contact">
-				<h1>
-					<a href="call:<?php echo $phone ?>"><?php echo $phone ?></a>
-				</h1>
-				<h1>
-					<a href="mailto:<?php echo $email ?>"><?php echo $email ?></a>
-				</h1>
-			</div>
-		</div>
+		</div> -->
 
 		
-		<script type="text/javascript">
+		<!-- <script type="text/javascript">
 		function initMap() {
 			var mapStyle = new google.maps.StyledMapType([
 			    {
@@ -174,11 +175,20 @@ $about = get_page_by_path( 'about' );
 			    map.setCenter(location);
 			});
 		}
-	    </script>
-	    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyApM4iQyAfb0hbmkeXc_zs58aA_Jy0SIac&callback=initMap"></script>
+	    </script> -->
+	    <!-- <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyApM4iQyAfb0hbmkeXc_zs58aA_Jy0SIac&callback=initMap"></script> -->
 		<?php
 		echo '<div class="module directions">';
-		echo '<h3 class="title">Directions by Subway</h3>';
+		echo '<h3 class="title">How to Get to ISCP</h3>';
+		if ( !empty($intro_image) ):
+			echo '<figure class="hero">';
+			echo wp_get_attachment_image( $intro_image, 'full' );
+			echo '<figcaption>' . wp_get_attachment_caption( $intro_image ) . '</figcaption>';
+			echo '</figure>';
+		endif;
+		if ( !empty($intro_text) ):
+			echo $intro_text;
+		endif;
 		if( get_field( 'directions', $visit ) ):
 			echo '<ul class="steps">';
 			$home = get_page_by_path( 'home' )->ID;
@@ -193,6 +203,38 @@ $about = get_page_by_path( 'about' );
 		echo '</div>';
 		echo '</div>';
 		?>
+
+		<?php if ( $intro_image || $intro_text ):
+			// echo '<div class="intro module">';
+
+			// echo '</div>';
+		endif; ?>
+
+		<?php if( get_field( 'group_visits', $visit ) || get_field( 'bloomberg_connects', $visit ) ): ?>
+			<div class="module visits">
+				<?php if( get_field( 'group_visits', $visit ) ): ?>
+					<div class="section">
+						<h3 class="title">Group Visits</h3>
+						<?php the_field( 'group_visits', $visit ); ?>
+					</div>
+				<?php endif; ?>
+				<?php if( get_field( 'bloomberg_connects', $visit ) ): ?>
+					<div class="section">
+						<h3 class="title">Bloomberg Connects</h3>
+						<?php the_field( 'bloomberg_connects', $visit ); ?>
+					</div>
+				<?php endif; ?>
+			</div>
+		<?php endif; ?>
+
+		<?php if( get_field( 'accessibility', $visit ) ): ?>
+			<div class="module accessibility directions">
+				<h3 class="title">Accessibility</h3>
+				<div class="text-wrapper">
+					<?php the_field( 'accessibility', $visit ); ?>
+				</div>
+			</div>
+		<?php endif; ?>
 
 		<div class="module newsletter">
 			<?php get_template_part('partials/newsletter') ?>

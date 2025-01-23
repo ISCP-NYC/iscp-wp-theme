@@ -22,15 +22,19 @@ section.single.event {
 			text-align: right;
 		}
 	}
+	h3.title {
+		color: $orange;
+	}
 	h1.title {
-		width: 100%;
-		margin: 50px 0;
+		width: calc(100% - 1.5rem);
+		margin: 1rem 0 2.5rem;
+		padding: 0 .75rem;
+		color: $orange;
+		text-align: center;
+		@include large-fs;
 		@include small {
 			margin: 0 0 45px;
 		}
-		color: $orange;
-		@include large-fs;
-		text-align: center;
 	}
 	.info {
 		width: calc(66.666% - 35px);
@@ -38,7 +42,6 @@ section.single.event {
 		float: left;
 		.description {
 			word-wrap: break-word;
-			@include medium-fs;
 			a  {
 				text-decoration: underline;
 			}
@@ -49,9 +52,10 @@ section.single.event {
 			}
 			iframe {
 				max-width: 100%;
-	    		display: table;
-	    		margin: auto;
-	    	}
+				display: table;
+				margin: auto;
+			}
+			@include medium-fs;
 		}
 		.contributors, .credits, .logos {
 			margin-top: 30px;
@@ -66,11 +70,11 @@ section.single.event {
 		}
 		.bullets {
 			margin-top: 30px;
-			@include small {
-				margin-top: 20px;
-			}
 			a {
 				display: table;
+			}
+			@include small {
+				margin-top: 20px;
 			}
 		}
 		.events {
@@ -79,12 +83,12 @@ section.single.event {
 				margin: 40px 0;
 			}
 			a.event {
-				@include medium-fs;
 				display: table;
 				margin-bottom: 40px;
 				div {
 					margin-bottom: 5px;
 				}
+				@include medium-fs;
 			}
 		}
 	}
@@ -108,8 +112,8 @@ section.single.event {
 				.description {
 					text-align: left;
 					margin: 5px 0 0 0;
-					@include small-fs;
 					color: $orange;
+					@include small-fs;
 				}
 				&:last-child {
 					margin-bottom: 0;
@@ -177,7 +181,9 @@ section.single.event {
 		width: 100%;
 		@extend .border-top;
 		margin-bottom: 30px;
-
+		.events.upcoming.module {
+			border-bottom: 0;
+		}
 	}
 	&.one_col {
 

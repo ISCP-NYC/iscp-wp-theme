@@ -3,7 +3,7 @@ $title = get_the_title();
 $slug = $post->post_name;
 $id = $post->ID;
 $paged = 1;
-if( $query_vars ):
+if( isset($query_vars) ):
 	$slug = $query_vars['pagename'];
 	$paged = $query_vars['paged'];
 	$post = get_page_by_path( $slug, OBJECT, 'page' );
