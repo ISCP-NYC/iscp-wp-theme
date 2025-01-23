@@ -1,0 +1,26 @@
+name: 'Deploy WP Production'
+
+on:
+  workflow_dispatch:
+  # push:
+  #   branches: [ master ]
+  #   paths:
+  #     - '/**'
+
+jobs:
+  deploy-wp-theme:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        
+      - name: Run rsync
+        uses: burnett01/rsync-deployments@7.0.1
+        with:
+          switches: -avzr --delete-after --chown=www-data:www-data
+          # dry run
+          # switches: --dry-run -avzr --delete-after --chown=www-data:www-data --include='web/.htaccess' --include='web/web.config' --include='web/index.php' --exclude='.env' --exclude='vendor' --exclude='storage' --exclude='web/**'
+          path: /
+          remote_path: /var/www/iscp-nyc.org/wp-content/themes/iscp/
+          remote_host: ${{ secrets.DEPLOY_HOST }}
+          remote_user: ${{ secrets.DEPLOY_USER }}
+          remote_key: ${{ secrets.DEPLOY_KEY }}
