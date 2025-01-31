@@ -30,7 +30,7 @@ if( isset($query_vars) && $query_vars ):
 		$paged = array_key_exists('paged', $query_vars) ? $query_vars['paged'] : null;
 		$post = get_page_by_path( $slug, OBJECT, 'page' );
 		$page_param = $slug;
-		// $country_param = $query_vars['from'];
+		$country_param = $query_vars['from'];
 		$year_param = array_key_exists('date', $query_vars) ? $query_vars['date'] : null;
 		$program_param = array_key_exists('program', $query_vars) ? $query_vars['program'] : null;
 		$type_param = array_key_exists('type', $query_vars) ? $query_vars['type'] : null;
