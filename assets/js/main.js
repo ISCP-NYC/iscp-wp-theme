@@ -205,7 +205,7 @@ $('body').on('wheel', 'section', function(e) {
 			 delta = e.originalEvent.deltaY;
 		}
 		var scrollTopParent = $(section).scrollTop();
-		console.log('overflow');
+		// console.log('overflow');
 		var scrollTo = scrollTopParent + delta;
 		$(section).scrollTop(scrollTo);
 	}
@@ -322,10 +322,10 @@ function sectionContentScrollListener(content) {
 	// console.log('top: ' + scrollTop + ' last: ' + lastContentScrollTop + ' scroll: ' + scrollHeight + ' content: ' + contentHeight);
 	//scrolled to end of content -> scroll to footer
 	// if(scrollHeight - scrollTop == contentHeight && scrollTop > lastContentScrollTop) {
-	console.log( 'scrollHeight: ' + scrollHeight + ' scollTop: ' + scrollTop + ' contentHeight: ' + contentHeight );
+	// console.log( 'scrollHeight: ' + scrollHeight + ' scollTop: ' + scrollTop + ' contentHeight: ' + contentHeight );
 	if(scrollHeight - scrollTop <= (contentHeight + 1) && scrollTop > lastContentScrollTop) {
 			$(section).addClass('show-footer');
-			console.log('show');
+			// console.log('show');
 	}
 	if(scrollTop > lastContentScrollTop + 10 && scrollTop > 100) {
 		$(section).addClass('hide-header');
@@ -657,7 +657,7 @@ var click = 0;
 //query wordpress for section 'neighbor' and insert them into main wrapper
 var existingIds = [];
 function getNeighbors(direction, type, slug) {
-	console.log(direction, type, slug)
+	// console.log(direction, type, slug)
 	click++;
 	var nextSection = $('section#'+slug);
 	if(direction == 'prev') {
@@ -694,7 +694,7 @@ function getNeighbors(direction, type, slug) {
 			$('main').addClass('waiting').addClass(direction);
 		},
 		success: function(newSection) {
-			console.log('success');
+			// console.log('success');
 			var id = $(newSection).attr('data-id');
 			if($('section[data-id="'+id+'"]').length) {
 				$(loadingSide).on(transitionEnd, function() {
@@ -1197,7 +1197,7 @@ $('body').on('click', '.placeholder', function(e) {
 	e.preventDefault();
 	var input = $(this).parent().find('input:not(.no)');
 	$(this).parent().parent().toggleClass('search-enabled');
-	console.log('search');
+	// console.log('search');
 	setTimeout(function(){
 		$(input).focus();
 	}, 600);

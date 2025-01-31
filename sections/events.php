@@ -46,7 +46,7 @@ $page_url = get_the_permalink();
 						array_unshift( $sorted_events, $event );
 					endif;
 				endforeach;
-				$sorted_events = array_slice( $sorted_events, 0, 3 );
+				$sorted_events = array_slice( $sorted_events, 0, 6 );
 				foreach( $sorted_events as $event ):
 					$post = $event;
 					global $post;
